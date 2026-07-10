@@ -4524,93 +4524,7 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 </script>
 
 
-<style id="dc-prof-anchor-css">
-#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
- align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
- color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
- box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
-#dcProfPill:hover{border-color:#fda4af}
-#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
- align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
- font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
-#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
-#dcProfBar button:hover{border-color:#fb7185}
-#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
-</style>
-<div id="dcProfPill"></div>
-<div id="dcProfBar">
-  <button id="dcpPlay">&#9654;&#65038; Play</button>
-  <button id="dcpBack">&#171; 10s</button>
-  <button id="dcpFwd">10s &#187;</button>
-  <span style="color:#64748b">speed</span>
-  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
-  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
-  <span class="lbl" id="dcpLbl"></span>
-  <span id="dcpTime" style="color:#94a3b8">0:00</span>
-  <button id="dcpClose">&times;</button>
-</div>
-<script id="dc-prof-anchor-engine">
-(function(){
-  var ANCHORS = [["the brachial plexus is formed from the ventral rami of which spinal ne", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 218, "l": "Cervical Triangles & Vessels"}], ["the cervical plexus is formed from the ventral rami of which spinal ne", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 218, "l": "Cervical Triangles & Vessels"}], ["the cervical plexus is related to which vein within the carotid sheath", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 984, "l": "Neck Vessels & Viscera"}], ["which cutaneous branch of the cervical plexus passes upward toward the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 386, "l": "Cervical Triangles & Vessels"}], ["the four superficial cervical plexus branches all emerge from a common", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 342, "l": "Cervical Triangles & Vessels"}], ["what is the root value of the phrenic nerve a muscular branch of the c", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 461, "l": "Cervical Triangles & Vessels"}], ["sternocleidomastoid and trapezius receive their motor supply from the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 461, "l": "Cervical Triangles & Vessels"}], ["the inferior root of the ansa cervicalis is made up mainly of fibers f", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 713, "l": "Cervical Triangles & Vessels"}], ["through which opening does the hypoglossal nerve which carries the c1", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 598, "l": "Cervical Triangles & Vessels"}], ["what are the boundaries of the anterior triangle of the neck", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1519, "l": "Cervical Triangles & Vessels"}], ["which of the following is a content of the submental triangle", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1258, "l": "Cervical Triangles & Vessels"}], ["which salivary gland is a principal content of the digastric submandib", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1335, "l": "Cervical Triangles & Vessels"}], ["what are the boundaries of the carotid triangle", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1519, "l": "Cervical Triangles & Vessels"}], ["the muscular triangle is so named because it contains which muscle gro", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 940, "l": "Neck Vessels & Viscera"}], ["what is the shared action of the suprahyoid muscles", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1736, "l": "Cervical Triangles & Vessels"}], ["the posterior belly of the digastric originates from which bony landma", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1821, "l": "Cervical Triangles & Vessels"}], ["which muscle is she describing originates from the temporal bone of th", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1821, "l": "Cervical Triangles & Vessels"}], ["the anterior belly of the digastric inserts onto which structure", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1821, "l": "Cervical Triangles & Vessels"}], ["the nerve to mylohyoid is a branch of the inferior alveolar nerve whic", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2126, "l": "Cervical Triangles & Vessels"}], ["the stylohyoid muscle originates from which bony landmark", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2327, "l": "Cervical Triangles & Vessels"}], ["the mylohyoid muscle originates from which line and what structure doe", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2481, "l": "Cervical Triangles & Vessels"}], ["the anterior fibers of the mylohyoid insert onto which midline structu", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2571, "l": "Cervical Triangles & Vessels"}], ["the geniohyoid muscle originates from which landmark of the mandible", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2789, "l": "Cervical Triangles & Vessels"}], ["what is the positional relationship of the geniohyoid to the mylohyoid", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2789, "l": "Cervical Triangles & Vessels"}], ["the nerves to the digastric develop with the muscle from the pharyngea", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2261, "l": "Cervical Triangles & Vessels"}], ["which infrahyoid muscle uniquely has an attachment to the scapula", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3058, "l": "Cervical Triangles & Vessels"}], ["the intermediate tendon of the omohyoid is held in position by a fasci", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3083, "l": "Cervical Triangles & Vessels"}], ["the sternothyroid muscle inserts onto which structure and therefore do", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2789, "l": "Cervical Triangles & Vessels"}], ["the right common carotid artery arises from which vessel", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3803, "l": "Cervical Triangles & Vessels"}], ["the left common carotid artery arises directly from which structure", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3803, "l": "Cervical Triangles & Vessels"}], ["through which opening does the internal carotid artery enter the skull", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4321, "l": "Cervical Triangles & Vessels"}], ["the carotid sinus a localized dilatation is found at which location", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3965, "l": "Cervical Triangles & Vessels"}], ["the carotid sinus contains which type of receptor", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4180, "l": "Cervical Triangles & Vessels"}], ["which cranial nerve carries impulses from the carotid sinus and caroti", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4094, "l": "Cervical Triangles & Vessels"}], ["the carotid body contains chemoreceptors that primarily sense which ch", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4260, "l": "Cervical Triangles & Vessels"}], ["how many branches does the external carotid artery have and how are th", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4426, "l": "Cervical Triangles & Vessels"}], ["the lingual artery arises from the external carotid at the level of wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4650, "l": "Cervical Triangles & Vessels"}], ["the superficial temporal artery can be palpated where and which nerve", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4775, "l": "Cervical Triangles & Vessels"}], ["the transverse facial artery is a branch of which artery a classic poi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4448, "l": "Cervical Triangles & Vessels"}], ["the anterior scalene muscle divides the subclavian artery into how man", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5034, "l": "Cervical Triangles & Vessels"}], ["which three branches arise from the first part of the subclavian arter", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5485, "l": "Cervical Triangles & Vessels"}], ["the vertebral artery ascends through which structures to reach the bra", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5051, "l": "Cervical Triangles & Vessels"}], ["which branch arises from the second part of the subclavian artery", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5485, "l": "Cervical Triangles & Vessels"}], ["the third part of the subclavian artery usually gives which branch", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5485, "l": "Cervical Triangles & Vessels"}], ["while the subclavian artery lies posterior to the anterior scalene whi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1042, "l": "Neck Vessels & Viscera"}], ["in thoracic outlet scalene syndrome which structures may be compressed", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5401, "l": "Cervical Triangles & Vessels"}], ["the subclavian vein is a continuation of which vein", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 150, "l": "Neck Vessels & Viscera"}], ["the internal jugular vein begins at the jugular foramen as a continuat", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 228, "l": "Neck Vessels & Viscera"}], ["the internal jugular vein descends within the carotid sheath alongside", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 303, "l": "Neck Vessels & Viscera"}], ["the internal jugular vein receives blood primarily from which regions", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["the external jugular vein is superficial and has essentially a single", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["into which vein do the superior and middle thyroid veins drain", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["into which vein does the inferior thyroid vein drain unlike the superi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["which of the following is a tributary of the internal jugular vein", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["lymphatic vessels of the head and neck ultimately join to form which t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 440, "l": "Neck Vessels & Viscera"}], ["the jugular lymph trunks drain into which structures", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 486, "l": "Neck Vessels & Viscera"}], ["on palpation which lymph node finding is more worrisome eg for cancer", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 562, "l": "Neck Vessels & Viscera"}], ["the lesser supraclavicular fossa is the surface depression located bet", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 631, "l": "Neck Vessels & Viscera"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
-  var PROF = "Dr. Maini";
-  var audio = new Audio(); audio.preload='none';
-  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
-  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
-  var cur=null;
-  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
-  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
 
-  function findAnchor(){
-    var txt = norm(document.body.innerText||'');
-    if(!txt) return null;
-    // the displayed question stem will appear verbatim in the page text
-    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
-    return null;
-  }
-  var scanning=false;
-  function scan(){
-    if(scanning) return; scanning=true;
-    setTimeout(function(){
-      scanning=false;
-      var a=findAnchor();
-      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
-        cur=a;
-        if(bar.style.display!=='flex'){
-          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
-          pill.style.display='flex';
-        }
-      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
-    }, 180);
-  }
-  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
-  scan();
-
-  function open(){
-    if(!cur) return;
-    if(audio.src!==cur.a){ audio.src=cur.a; }
-    audio.currentTime=cur.s; audio.play().catch(function(){});
-    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
-    playBtn.innerHTML='&#10073;&#10073; Pause';
-  }
-  pill.addEventListener('click', open);
-  playBtn.addEventListener('click', function(){
-    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
-    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
-  });
-  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
-  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
-  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
-  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
-    b.addEventListener('click', function(){
-      audio.playbackRate=parseFloat(b.dataset.r);
-      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
-      b.classList.add('on');
-    });
-  });
-  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
-})();
-</script>
 
 <!--dc-drill-telemetry-v1-->
 <script>
@@ -4799,5 +4713,99 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["the brachial plexus is formed from the ventral rami of which spinal ne", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 218, "l": "Cervical Triangles & Vessels"}], ["the cervical plexus is formed from the ventral rami of which spinal ne", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 218, "l": "Cervical Triangles & Vessels"}], ["the cervical plexus is related to which vein within the carotid sheath", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 984, "l": "Neck Vessels & Viscera"}], ["which cutaneous branch of the cervical plexus passes upward toward the", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 386, "l": "Cervical Triangles & Vessels"}], ["the four superficial cervical plexus branches all emerge from a common", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 342, "l": "Cervical Triangles & Vessels"}], ["what is the root value of the phrenic nerve a muscular branch of the c", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 461, "l": "Cervical Triangles & Vessels"}], ["sternocleidomastoid and trapezius receive their motor supply from the", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 461, "l": "Cervical Triangles & Vessels"}], ["the inferior root of the ansa cervicalis is made up mainly of fibers f", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 713, "l": "Cervical Triangles & Vessels"}], ["through which opening does the hypoglossal nerve which carries the c1", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 598, "l": "Cervical Triangles & Vessels"}], ["what are the boundaries of the anterior triangle of the neck", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 1519, "l": "Cervical Triangles & Vessels"}], ["which of the following is a content of the submental triangle", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 1258, "l": "Cervical Triangles & Vessels"}], ["which salivary gland is a principal content of the digastric submandib", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 1335, "l": "Cervical Triangles & Vessels"}], ["what are the boundaries of the carotid triangle", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 1519, "l": "Cervical Triangles & Vessels"}], ["the muscular triangle is so named because it contains which muscle gro", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 940, "l": "Neck Vessels & Viscera"}], ["what is the shared action of the suprahyoid muscles", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 1736, "l": "Cervical Triangles & Vessels"}], ["the posterior belly of the digastric originates from which bony landma", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 1821, "l": "Cervical Triangles & Vessels"}], ["which muscle is she describing originates from the temporal bone of th", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 1821, "l": "Cervical Triangles & Vessels"}], ["the anterior belly of the digastric inserts onto which structure", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 1821, "l": "Cervical Triangles & Vessels"}], ["the nerve to mylohyoid is a branch of the inferior alveolar nerve whic", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 2126, "l": "Cervical Triangles & Vessels"}], ["the stylohyoid muscle originates from which bony landmark", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 2327, "l": "Cervical Triangles & Vessels"}], ["the mylohyoid muscle originates from which line and what structure doe", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 2481, "l": "Cervical Triangles & Vessels"}], ["the anterior fibers of the mylohyoid insert onto which midline structu", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 2571, "l": "Cervical Triangles & Vessels"}], ["the geniohyoid muscle originates from which landmark of the mandible", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 2789, "l": "Cervical Triangles & Vessels"}], ["what is the positional relationship of the geniohyoid to the mylohyoid", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 2789, "l": "Cervical Triangles & Vessels"}], ["the nerves to the digastric develop with the muscle from the pharyngea", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 2261, "l": "Cervical Triangles & Vessels"}], ["which infrahyoid muscle uniquely has an attachment to the scapula", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 3058, "l": "Cervical Triangles & Vessels"}], ["the intermediate tendon of the omohyoid is held in position by a fasci", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 3083, "l": "Cervical Triangles & Vessels"}], ["the sternothyroid muscle inserts onto which structure and therefore do", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 2789, "l": "Cervical Triangles & Vessels"}], ["the right common carotid artery arises from which vessel", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 3803, "l": "Cervical Triangles & Vessels"}], ["the left common carotid artery arises directly from which structure", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 3803, "l": "Cervical Triangles & Vessels"}], ["through which opening does the internal carotid artery enter the skull", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 4321, "l": "Cervical Triangles & Vessels"}], ["the carotid sinus a localized dilatation is found at which location", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 3965, "l": "Cervical Triangles & Vessels"}], ["the carotid sinus contains which type of receptor", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 4180, "l": "Cervical Triangles & Vessels"}], ["which cranial nerve carries impulses from the carotid sinus and caroti", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 4094, "l": "Cervical Triangles & Vessels"}], ["the carotid body contains chemoreceptors that primarily sense which ch", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 4260, "l": "Cervical Triangles & Vessels"}], ["how many branches does the external carotid artery have and how are th", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 4426, "l": "Cervical Triangles & Vessels"}], ["the lingual artery arises from the external carotid at the level of wh", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 4650, "l": "Cervical Triangles & Vessels"}], ["the superficial temporal artery can be palpated where and which nerve", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 4775, "l": "Cervical Triangles & Vessels"}], ["the transverse facial artery is a branch of which artery a classic poi", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 4448, "l": "Cervical Triangles & Vessels"}], ["the anterior scalene muscle divides the subclavian artery into how man", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 5034, "l": "Cervical Triangles & Vessels"}], ["which three branches arise from the first part of the subclavian arter", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 5485, "l": "Cervical Triangles & Vessels"}], ["the vertebral artery ascends through which structures to reach the bra", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 5051, "l": "Cervical Triangles & Vessels"}], ["which branch arises from the second part of the subclavian artery", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 5485, "l": "Cervical Triangles & Vessels"}], ["the third part of the subclavian artery usually gives which branch", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 5485, "l": "Cervical Triangles & Vessels"}], ["while the subclavian artery lies posterior to the anterior scalene whi", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1042, "l": "Neck Vessels & Viscera"}], ["in thoracic outlet scalene syndrome which structures may be compressed", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l03-neck-lecture.mp3", "s": 5401, "l": "Cervical Triangles & Vessels"}], ["the subclavian vein is a continuation of which vein", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 150, "l": "Neck Vessels & Viscera"}], ["the internal jugular vein begins at the jugular foramen as a continuat", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 228, "l": "Neck Vessels & Viscera"}], ["the internal jugular vein descends within the carotid sheath alongside", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 303, "l": "Neck Vessels & Viscera"}], ["the internal jugular vein receives blood primarily from which regions", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["the external jugular vein is superficial and has essentially a single", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["into which vein do the superior and middle thyroid veins drain", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["into which vein does the inferior thyroid vein drain unlike the superi", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["which of the following is a tributary of the internal jugular vein", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["lymphatic vessels of the head and neck ultimately join to form which t", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 440, "l": "Neck Vessels & Viscera"}], ["the jugular lymph trunks drain into which structures", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 486, "l": "Neck Vessels & Viscera"}], ["on palpation which lymph node finding is more worrisome eg for cancer", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 562, "l": "Neck Vessels & Viscera"}], ["the lesser supraclavicular fossa is the surface depression located bet", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l05-neck-viscera-lecture.mp3", "s": 631, "l": "Neck Vessels & Viscera"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    var go=function(){ try{audio.currentTime=cur.s;}catch(e){} audio.play().catch(function(){}); };
+    if(audio.src!==cur.a){ audio.src=cur.a; audio.addEventListener('loadedmetadata', function h(){ audio.removeEventListener('loadedmetadata',h); go(); }); try{audio.load();}catch(e){} }
+    else if(audio.readyState>=1){ go(); }
+    else { audio.addEventListener('loadedmetadata', function h(){ audio.removeEventListener('loadedmetadata',h); go(); }); }
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

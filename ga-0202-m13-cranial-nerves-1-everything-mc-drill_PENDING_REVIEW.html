@@ -2730,93 +2730,7 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 
 
 
-<style id="dc-prof-anchor-css">
-#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
- align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
- color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
- box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
-#dcProfPill:hover{border-color:#fda4af}
-#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
- align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
- font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
-#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
-#dcProfBar button:hover{border-color:#fb7185}
-#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
-</style>
-<div id="dcProfPill"></div>
-<div id="dcProfBar">
-  <button id="dcpPlay">&#9654;&#65038; Play</button>
-  <button id="dcpBack">&#171; 10s</button>
-  <button id="dcpFwd">10s &#187;</button>
-  <span style="color:#64748b">speed</span>
-  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
-  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
-  <span class="lbl" id="dcpLbl"></span>
-  <span id="dcpTime" style="color:#94a3b8">0:00</span>
-  <button id="dcpClose">&times;</button>
-</div>
-<script id="dc-prof-anchor-engine">
-(function(){
-  var ANCHORS = [["dr maini stresses that the pharyngeal plexus  the network on the side", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2189, "l": "Cranial Nerves"}], ["maini describes the cranial part of the accessory nerve xi as doing wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2189, "l": "Cranial Nerves"}], ["in mainis sensory map of the pharynx the oropharynx mucosa is supplied", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3493, "l": "Cranial Nerves"}], ["maini says the mucosa around the entrance into the larynx laryngophary", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["what functional fibre type does dr maini assign to the olfactory nerve", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 833, "l": "Cranial Nerves"}], ["the receptor cells for smell olfactory neurons are located where accor", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 890, "l": "Cranial Nerves"}], ["maini describes the olfactory neuron as bearing what on its apical bor", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 833, "l": "Cranial Nerves"}], ["in the olfactory epithelium what is the function of the basal cells pe", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 890, "l": "Cranial Nerves"}], ["through which bony opening do the olfactory nerve fascicles pass to re", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 901, "l": "Cranial Nerves"}], ["in the olfactory bulb the olfactory receptor axons synapse with which", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 901, "l": "Cranial Nerves"}], ["maini emphasizes there is no single olfactory nerve trunk how does she", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 862, "l": "Cranial Nerves"}], ["maini defines anosmia as which of the following and adds an encouragin", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4790, "l": "Cranial Nerves"}], ["a patient reports smelling something that is not actually present  an", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4766, "l": "Cranial Nerves"}], ["maini explains that after entering a smelly room you soon stop noticin", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1648, "l": "Cranial Nerves"}], ["what functional fibre type does maini assign to the optic nerve and wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1879, "l": "Cranial Nerves"}], ["maini calls this a frequently asked board question the optic nerve is", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2306, "l": "Cranial Nerves"}], ["after leaving the eyeball the optic nerve exits the orbit through whic", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 158, "l": "Cranial Nerves"}], ["at the optic chiasma which fibres cross to the opposite side per maini", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 811, "l": "Cranial Nerves"}], ["what visual loss does maini describe for a complete lesion of one opti", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4056, "l": "Cranial Nerves"}], ["why does a pituitary adenoma classically cause the chiasmal bitemporal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3083, "l": "Cranial Nerves"}], ["a lesion of the left optic tract behind the chiasma produces what patt", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3974, "l": "Cranial Nerves"}], ["beyond the level she stops at maini mentions the pathway continues aft", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 833, "l": "Cranial Nerves"}], ["maini says the oculomotor nerve carries motor fibres to muscles plus a", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3473, "l": "Cranial Nerves"}], ["the oculomotor nerve splits into superior and inferior divisions and e", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 158, "l": "Cranial Nerves"}], ["besides the downandout eye which lid sign appears in third nerve palsy", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4253, "l": "Cranial Nerves"}], ["what happens to the pupil in third nerve palsy and what is the correct", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 354, "l": "Cranial Nerves"}], ["why is the accommodation reflex lost in third nerve palsy per maini", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3985, "l": "Cranial Nerves"}], ["maini calls the pupil the best thing to look at to separate horner syn", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1067, "l": "Cranial Nerves"}], ["maini notes that one sign is shared by both horner syndrome and third", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3746, "l": "Cranial Nerves"}], ["the key trap why is there no squint strabismus in horner syndrome per", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2327, "l": "Cranial Nerves"}], ["which additional features does maini attribute to horner syndrome beyo", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3410, "l": "Cranial Nerves"}], ["how many prevertebral muscles does maini say to know for origin insert", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1242, "l": "Cranial Nerves"}], ["longus colli has three parts which set does maini name", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2823, "l": "Cranial Nerves"}], ["rectus capitis lateralis attaches inferiorly to which structure and wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4790, "l": "Cranial Nerves"}], ["what type of neuron cell bodies do the cervical sympathetic ganglia co", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3746, "l": "Cranial Nerves"}], ["the preganglionic fibres that ascend to end in the cervical ganglia or", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2476, "l": "Cranial Nerves"}], ["maini describes the extent of the cervical sympathetic trunk as runnin", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2360, "l": "Cranial Nerves"}], ["what is the relationship of the cervical sympathetic chain to the caro", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["between which two fascial layers is the cervical sympathetic chain emb", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["maini emphasizes a highyield fact about 99 of head and neck structures", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3707, "l": "Cranial Nerves"}], ["the superior cervical ganglion supplies gray rami communicantes to whi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2476, "l": "Cranial Nerves"}], ["maini reviews why every spinal nerve carries gray rami to deliver symp", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3746, "l": "Cranial Nerves"}], ["maini contrasts the two autonomic divisions in the body wall which sta", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3473, "l": "Cranial Nerves"}], ["where does maini locate the superior cervical ganglion and what are it", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3096, "l": "Cranial Nerves"}], ["which is a named branch of the superior cervical ganglion per maini", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2717, "l": "Cranial Nerves"}], ["maini explains that cardiac pain is referred to the neck and side of t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2360, "l": "Cranial Nerves"}], ["the inferior cervical ganglion is most often fused with which ganglion", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2255, "l": "Cranial Nerves"}], ["where is the inferior cervical ganglion located and which arteries rec", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2717, "l": "Cranial Nerves"}], ["maini lists four layers of the deep cervical fascia which set is corre", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3299, "l": "Cranial Nerves"}], ["which two muscles does the investing layer of deep cervical fascia enc", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2607, "l": "Cranial Nerves"}], ["maini says the investing layer thickens between the styloid process an", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 262, "l": "Cranial Nerves"}], ["the investing layer also forms the roof of which structures and attach", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2105, "l": "Cranial Nerves"}], ["which three structures are enclosed by the carotid sheath per maini", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2219, "l": "Cranial Nerves"}], ["maini calls the most important feature of the laryngopharynx the pirif", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3083, "l": "Cranial Nerves"}], ["the tonsils of waldeyers ring include which set per maini", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4823, "l": "Cranial Nerves"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
-  var PROF = "Dr. Maini";
-  var audio = new Audio(); audio.preload='none';
-  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
-  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
-  var cur=null;
-  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
-  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
 
-  function findAnchor(){
-    var txt = norm(document.body.innerText||'');
-    if(!txt) return null;
-    // the displayed question stem will appear verbatim in the page text
-    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
-    return null;
-  }
-  var scanning=false;
-  function scan(){
-    if(scanning) return; scanning=true;
-    setTimeout(function(){
-      scanning=false;
-      var a=findAnchor();
-      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
-        cur=a;
-        if(bar.style.display!=='flex'){
-          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
-          pill.style.display='flex';
-        }
-      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
-    }, 180);
-  }
-  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
-  scan();
-
-  function open(){
-    if(!cur) return;
-    if(audio.src!==cur.a){ audio.src=cur.a; }
-    audio.currentTime=cur.s; audio.play().catch(function(){});
-    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
-    playBtn.innerHTML='&#10073;&#10073; Pause';
-  }
-  pill.addEventListener('click', open);
-  playBtn.addEventListener('click', function(){
-    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
-    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
-  });
-  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
-  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
-  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
-  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
-    b.addEventListener('click', function(){
-      audio.playbackRate=parseFloat(b.dataset.r);
-      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
-      b.classList.add('on');
-    });
-  });
-  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
-})();
-</script>
 
 <!--dc-drill-telemetry-v1-->
 <script>
@@ -3005,5 +2919,99 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["dr maini stresses that the pharyngeal plexus  the network on the side", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2189, "l": "Cranial Nerves"}], ["maini describes the cranial part of the accessory nerve xi as doing wh", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2189, "l": "Cranial Nerves"}], ["in mainis sensory map of the pharynx the oropharynx mucosa is supplied", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3493, "l": "Cranial Nerves"}], ["maini says the mucosa around the entrance into the larynx laryngophary", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["what functional fibre type does dr maini assign to the olfactory nerve", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 833, "l": "Cranial Nerves"}], ["the receptor cells for smell olfactory neurons are located where accor", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 890, "l": "Cranial Nerves"}], ["maini describes the olfactory neuron as bearing what on its apical bor", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 833, "l": "Cranial Nerves"}], ["in the olfactory epithelium what is the function of the basal cells pe", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 890, "l": "Cranial Nerves"}], ["through which bony opening do the olfactory nerve fascicles pass to re", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 901, "l": "Cranial Nerves"}], ["in the olfactory bulb the olfactory receptor axons synapse with which", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 901, "l": "Cranial Nerves"}], ["maini emphasizes there is no single olfactory nerve trunk how does she", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 862, "l": "Cranial Nerves"}], ["maini defines anosmia as which of the following and adds an encouragin", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4790, "l": "Cranial Nerves"}], ["a patient reports smelling something that is not actually present  an", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4766, "l": "Cranial Nerves"}], ["maini explains that after entering a smelly room you soon stop noticin", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1648, "l": "Cranial Nerves"}], ["what functional fibre type does maini assign to the optic nerve and wh", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1879, "l": "Cranial Nerves"}], ["maini calls this a frequently asked board question the optic nerve is", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2306, "l": "Cranial Nerves"}], ["after leaving the eyeball the optic nerve exits the orbit through whic", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 158, "l": "Cranial Nerves"}], ["at the optic chiasma which fibres cross to the opposite side per maini", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 811, "l": "Cranial Nerves"}], ["what visual loss does maini describe for a complete lesion of one opti", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4056, "l": "Cranial Nerves"}], ["why does a pituitary adenoma classically cause the chiasmal bitemporal", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3083, "l": "Cranial Nerves"}], ["a lesion of the left optic tract behind the chiasma produces what patt", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3974, "l": "Cranial Nerves"}], ["beyond the level she stops at maini mentions the pathway continues aft", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 833, "l": "Cranial Nerves"}], ["maini says the oculomotor nerve carries motor fibres to muscles plus a", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3473, "l": "Cranial Nerves"}], ["the oculomotor nerve splits into superior and inferior divisions and e", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 158, "l": "Cranial Nerves"}], ["besides the downandout eye which lid sign appears in third nerve palsy", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4253, "l": "Cranial Nerves"}], ["what happens to the pupil in third nerve palsy and what is the correct", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 354, "l": "Cranial Nerves"}], ["why is the accommodation reflex lost in third nerve palsy per maini", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3985, "l": "Cranial Nerves"}], ["maini calls the pupil the best thing to look at to separate horner syn", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1067, "l": "Cranial Nerves"}], ["maini notes that one sign is shared by both horner syndrome and third", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3746, "l": "Cranial Nerves"}], ["the key trap why is there no squint strabismus in horner syndrome per", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2327, "l": "Cranial Nerves"}], ["which additional features does maini attribute to horner syndrome beyo", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3410, "l": "Cranial Nerves"}], ["how many prevertebral muscles does maini say to know for origin insert", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1242, "l": "Cranial Nerves"}], ["longus colli has three parts which set does maini name", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2823, "l": "Cranial Nerves"}], ["rectus capitis lateralis attaches inferiorly to which structure and wh", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4790, "l": "Cranial Nerves"}], ["what type of neuron cell bodies do the cervical sympathetic ganglia co", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3746, "l": "Cranial Nerves"}], ["the preganglionic fibres that ascend to end in the cervical ganglia or", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2476, "l": "Cranial Nerves"}], ["maini describes the extent of the cervical sympathetic trunk as runnin", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2360, "l": "Cranial Nerves"}], ["what is the relationship of the cervical sympathetic chain to the caro", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["between which two fascial layers is the cervical sympathetic chain emb", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["maini emphasizes a highyield fact about 99 of head and neck structures", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3707, "l": "Cranial Nerves"}], ["the superior cervical ganglion supplies gray rami communicantes to whi", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2476, "l": "Cranial Nerves"}], ["maini reviews why every spinal nerve carries gray rami to deliver symp", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3746, "l": "Cranial Nerves"}], ["maini contrasts the two autonomic divisions in the body wall which sta", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3473, "l": "Cranial Nerves"}], ["where does maini locate the superior cervical ganglion and what are it", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3096, "l": "Cranial Nerves"}], ["which is a named branch of the superior cervical ganglion per maini", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2717, "l": "Cranial Nerves"}], ["maini explains that cardiac pain is referred to the neck and side of t", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2360, "l": "Cranial Nerves"}], ["the inferior cervical ganglion is most often fused with which ganglion", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2255, "l": "Cranial Nerves"}], ["where is the inferior cervical ganglion located and which arteries rec", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2717, "l": "Cranial Nerves"}], ["maini lists four layers of the deep cervical fascia which set is corre", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3299, "l": "Cranial Nerves"}], ["which two muscles does the investing layer of deep cervical fascia enc", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2607, "l": "Cranial Nerves"}], ["maini says the investing layer thickens between the styloid process an", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 262, "l": "Cranial Nerves"}], ["the investing layer also forms the roof of which structures and attach", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2105, "l": "Cranial Nerves"}], ["which three structures are enclosed by the carotid sheath per maini", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2219, "l": "Cranial Nerves"}], ["maini calls the most important feature of the laryngopharynx the pirif", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3083, "l": "Cranial Nerves"}], ["the tonsils of waldeyers ring include which set per maini", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4823, "l": "Cranial Nerves"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    var go=function(){ try{audio.currentTime=cur.s;}catch(e){} audio.play().catch(function(){}); };
+    if(audio.src!==cur.a){ audio.src=cur.a; audio.addEventListener('loadedmetadata', function h(){ audio.removeEventListener('loadedmetadata',h); go(); }); try{audio.load();}catch(e){} }
+    else if(audio.readyState>=1){ go(); }
+    else { audio.addEventListener('loadedmetadata', function h(){ audio.removeEventListener('loadedmetadata',h); go(); }); }
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

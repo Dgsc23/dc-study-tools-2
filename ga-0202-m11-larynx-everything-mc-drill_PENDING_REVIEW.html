@@ -2730,93 +2730,7 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 
 
 
-<style id="dc-prof-anchor-css">
-#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
- align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
- color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
- box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
-#dcProfPill:hover{border-color:#fda4af}
-#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
- align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
- font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
-#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
-#dcProfBar button:hover{border-color:#fb7185}
-#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
-</style>
-<div id="dcProfPill"></div>
-<div id="dcProfBar">
-  <button id="dcpPlay">&#9654;&#65038; Play</button>
-  <button id="dcpBack">&#171; 10s</button>
-  <button id="dcpFwd">10s &#187;</button>
-  <span style="color:#64748b">speed</span>
-  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
-  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
-  <span class="lbl" id="dcpLbl"></span>
-  <span id="dcpTime" style="color:#94a3b8">0:00</span>
-  <button id="dcpClose">&times;</button>
-</div>
-<script id="dc-prof-anchor-engine">
-(function(){
-  var ANCHORS = [["reviewing the skeleton of the larynx how many cartilages does dr maini", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 2974, "l": "Oral Cavity & Larynx"}], ["which cartilage does dr maini call the largest of all the laryngeal ca", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3184, "l": "Oral Cavity & Larynx"}], ["the corniculate and cuneiform cartilages are described by dr maini as", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4516, "l": "Oral Cavity & Larynx"}], ["the laryngeal prominence adams apple is formed by the midline fusion o", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3266, "l": "Oral Cavity & Larynx"}], ["how does dr maini describe the posterior aspect of the thyroid cartila", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3151, "l": "Oral Cavity & Larynx"}], ["the posterior border of each thyroid lamina projects upward and downwa", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3228, "l": "Oral Cavity & Larynx"}], ["which strap muscles does dr maini identify as attaching to the oblique", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3330, "l": "Oral Cavity & Larynx"}], ["the vocal ligament attaches the thyroid cartilage anteriorly to which", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4045, "l": "Oral Cavity & Larynx"}], ["why is the laryngeal prominence more conspicuous in males according to", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3266, "l": "Oral Cavity & Larynx"}], ["dr maini repeatedly emphasizes one cartilage as a good exam question b", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3826, "l": "Oral Cavity & Larynx"}], ["what everyday object does dr maini use to describe the shape of the cr", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3782, "l": "Oral Cavity & Larynx"}], ["in the cricoid cartilage which part is narrow and which is broad", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3782, "l": "Oral Cavity & Larynx"}], ["the cricoid cartilage articulates with the thyroid at the cricothyroid", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4065, "l": "Oral Cavity & Larynx"}], ["what geometric shape does dr maini use for the arytenoid cartilage", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3981, "l": "Oral Cavity & Larynx"}], ["the arytenoid cartilage has a base an apex and which two named process", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4045, "l": "Oral Cavity & Larynx"}], ["the corniculate cartilages are best described by dr maini as what", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4494, "l": "Oral Cavity & Larynx"}], ["dr maini warns that the triticeal triticeous cartilages are a common d", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4516, "l": "Oral Cavity & Larynx"}], ["which shape does dr maini use for the epiglottis", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4279, "l": "Oral Cavity & Larynx"}], ["what does dr maini say about the functional importance of the epiglott", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4298, "l": "Oral Cavity & Larynx"}], ["which of the following is an extrinsic laryngeal ligamentmembrane", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3005, "l": "Oral Cavity & Larynx"}], ["dr maini lists the three extrinsic ligamentsmembranes of the larynx as", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 919, "l": "The Larynx"}], ["between which two structures does the quadrangular membrane extend", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2252, "l": "The Larynx"}], ["the superior border of the quadrangular membrane is thickened to form", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1053, "l": "The Larynx"}], ["the inferior border of the quadrangular membrane is thickened to form", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 919, "l": "The Larynx"}], ["the vocal ligament is essentially another name for which ligament and", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 812, "l": "The Larynx"}], ["the conus elasticus is a coneshaped complex made up of which three com", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 907, "l": "The Larynx"}], ["where is the median cricothyroid ligament located", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 797, "l": "The Larynx"}], ["despite its name the lateral cricothyroid ligament actually attaches s", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 797, "l": "The Larynx"}], ["which key functional difference does dr maini draw between the vocal f", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1489, "l": "The Larynx"}], ["what protective function do the vestibular false vocal folds serve", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1584, "l": "The Larynx"}], ["when mucous membrane covers the vocal ligament the resulting structure", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 907, "l": "The Larynx"}], ["in a superior view of the larynx how are the vestibular and vocal fold", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 3042, "l": "The Larynx"}], ["dr maini compares the vocal cord to a guitar string what changes the t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 591, "l": "The Larynx"}], ["which two small muscles lie within the vocal folds themselves and how", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2401, "l": "The Larynx"}], ["which fold forms the boundary of the laryngeal inlet laterally", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1053, "l": "The Larynx"}], ["the laryngeal ventricle has an anterior extension called the saccule w", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1288, "l": "The Larynx"}], ["the slitlike space between the two vestibular folds is called what", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2667, "l": "The Larynx"}], ["the laryngeal inlet is bounded posteriorly by which structures", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1030, "l": "The Larynx"}], ["during quiet normal respiration in what position is the rima glottidis", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2644, "l": "The Larynx"}], ["during phonation how are the vocal cords positioned", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2667, "l": "The Larynx"}], ["dr maini calls the cricothyroid the chief or only tensor of the vocal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2382, "l": "The Larynx"}], ["which single intrinsic muscle is the sole abductor of the vocal cords", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2238, "l": "The Larynx"}], ["the transverse and oblique arytenoid muscles run between the two aryte", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2252, "l": "The Larynx"}], ["the lateral cricoarytenoid muscle produces which action on the vocal c", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2275, "l": "The Larynx"}], ["what action do the thyroarytenoid and vocalis muscles have on the voca", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2421, "l": "The Larynx"}], ["what is the origin and insertion of the thyroarytenoid muscle", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2315, "l": "The Larynx"}], ["which muscle in particular adjusts the tension of the vocal ligament a", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2382, "l": "The Larynx"}], ["which muscle group produces the adduction needed to close the rima glo", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2421, "l": "The Larynx"}], ["the internal laryngeal nerve is purely sensory which membrane does it", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 3042, "l": "The Larynx"}], ["the external laryngeal nerve carries which fiber type and to which mus", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2847, "l": "The Larynx"}], ["the recurrent laryngeal nerve supplies which muscles and which mucosa", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 3028, "l": "The Larynx"}], ["sensory innervation of the laryngeal mucosa is split at the vocal fold", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 3066, "l": "The Larynx"}], ["the internal laryngeal nerve carries which fiber type consistent with", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2847, "l": "The Larynx"}], ["in the neck the recurrent laryngeal nerve characteristically runs in w", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2937, "l": "The Larynx"}], ["the superior thyroid artery parent of the superior laryngeal artery is", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 3203, "l": "The Larynx"}], ["the inferior thyroid artery parent of the inferior laryngeal artery ar", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 3203, "l": "The Larynx"}], ["the superior laryngeal artery enters the larynx by piercing which memb", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2703, "l": "The Larynx"}], ["the superior laryngeal vein drains into the internal jugular vein via", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 1661, "l": "Oral Cavity & Larynx"}], ["a patient develops a monotonous voice  able to speak but unable to var", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2747, "l": "The Larynx"}], ["damage to the internal laryngeal nerve would most directly cause which", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 3135, "l": "The Larynx"}], ["if the posterior cricoarytenoid muscles are bilaterally paralyzed what", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 2222, "l": "The Larynx"}], ["during thyroidectomy the surgeon must ligate the superior thyroid arte", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 3007, "l": "The Larynx"}], ["why is the larynx elevated during swallowing via the extrinsic muscles", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1864, "l": "The Larynx"}], ["which muscle group elevates the larynx and which group depresses it", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1964, "l": "The Larynx"}], ["dr maini opens the discussion noting that a change in the quality of t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l25-oral-larynx-lecture.mp3", "s": 93, "l": "Oral Cavity & Larynx"}], ["because the human epiglottis is somewhat degenerate which structures p", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l26-larynx-lecture.mp3", "s": 1598, "l": "The Larynx"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
-  var PROF = "Dr. Maini";
-  var audio = new Audio(); audio.preload='none';
-  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
-  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
-  var cur=null;
-  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
-  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
 
-  function findAnchor(){
-    var txt = norm(document.body.innerText||'');
-    if(!txt) return null;
-    // the displayed question stem will appear verbatim in the page text
-    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
-    return null;
-  }
-  var scanning=false;
-  function scan(){
-    if(scanning) return; scanning=true;
-    setTimeout(function(){
-      scanning=false;
-      var a=findAnchor();
-      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
-        cur=a;
-        if(bar.style.display!=='flex'){
-          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
-          pill.style.display='flex';
-        }
-      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
-    }, 180);
-  }
-  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
-  scan();
-
-  function open(){
-    if(!cur) return;
-    if(audio.src!==cur.a){ audio.src=cur.a; }
-    audio.currentTime=cur.s; audio.play().catch(function(){});
-    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
-    playBtn.innerHTML='&#10073;&#10073; Pause';
-  }
-  pill.addEventListener('click', open);
-  playBtn.addEventListener('click', function(){
-    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
-    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
-  });
-  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
-  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
-  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
-  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
-    b.addEventListener('click', function(){
-      audio.playbackRate=parseFloat(b.dataset.r);
-      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
-      b.classList.add('on');
-    });
-  });
-  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
-})();
-</script>
 
 <!--dc-drill-telemetry-v1-->
 <script>
@@ -3005,5 +2919,99 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["reviewing the skeleton of the larynx how many cartilages does dr maini", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 2974, "l": "Oral Cavity & Larynx"}], ["which cartilage does dr maini call the largest of all the laryngeal ca", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3184, "l": "Oral Cavity & Larynx"}], ["the corniculate and cuneiform cartilages are described by dr maini as", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4516, "l": "Oral Cavity & Larynx"}], ["the laryngeal prominence adams apple is formed by the midline fusion o", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3266, "l": "Oral Cavity & Larynx"}], ["how does dr maini describe the posterior aspect of the thyroid cartila", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3151, "l": "Oral Cavity & Larynx"}], ["the posterior border of each thyroid lamina projects upward and downwa", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3228, "l": "Oral Cavity & Larynx"}], ["which strap muscles does dr maini identify as attaching to the oblique", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3330, "l": "Oral Cavity & Larynx"}], ["the vocal ligament attaches the thyroid cartilage anteriorly to which", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4045, "l": "Oral Cavity & Larynx"}], ["why is the laryngeal prominence more conspicuous in males according to", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3266, "l": "Oral Cavity & Larynx"}], ["dr maini repeatedly emphasizes one cartilage as a good exam question b", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3826, "l": "Oral Cavity & Larynx"}], ["what everyday object does dr maini use to describe the shape of the cr", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3782, "l": "Oral Cavity & Larynx"}], ["in the cricoid cartilage which part is narrow and which is broad", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3782, "l": "Oral Cavity & Larynx"}], ["the cricoid cartilage articulates with the thyroid at the cricothyroid", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4065, "l": "Oral Cavity & Larynx"}], ["what geometric shape does dr maini use for the arytenoid cartilage", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3981, "l": "Oral Cavity & Larynx"}], ["the arytenoid cartilage has a base an apex and which two named process", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4045, "l": "Oral Cavity & Larynx"}], ["the corniculate cartilages are best described by dr maini as what", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4494, "l": "Oral Cavity & Larynx"}], ["dr maini warns that the triticeal triticeous cartilages are a common d", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4516, "l": "Oral Cavity & Larynx"}], ["which shape does dr maini use for the epiglottis", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4279, "l": "Oral Cavity & Larynx"}], ["what does dr maini say about the functional importance of the epiglott", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 4298, "l": "Oral Cavity & Larynx"}], ["which of the following is an extrinsic laryngeal ligamentmembrane", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 3005, "l": "Oral Cavity & Larynx"}], ["dr maini lists the three extrinsic ligamentsmembranes of the larynx as", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 919, "l": "The Larynx"}], ["between which two structures does the quadrangular membrane extend", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2252, "l": "The Larynx"}], ["the superior border of the quadrangular membrane is thickened to form", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1053, "l": "The Larynx"}], ["the inferior border of the quadrangular membrane is thickened to form", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 919, "l": "The Larynx"}], ["the vocal ligament is essentially another name for which ligament and", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 812, "l": "The Larynx"}], ["the conus elasticus is a coneshaped complex made up of which three com", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 907, "l": "The Larynx"}], ["where is the median cricothyroid ligament located", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 797, "l": "The Larynx"}], ["despite its name the lateral cricothyroid ligament actually attaches s", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 797, "l": "The Larynx"}], ["which key functional difference does dr maini draw between the vocal f", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1489, "l": "The Larynx"}], ["what protective function do the vestibular false vocal folds serve", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1584, "l": "The Larynx"}], ["when mucous membrane covers the vocal ligament the resulting structure", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 907, "l": "The Larynx"}], ["in a superior view of the larynx how are the vestibular and vocal fold", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 3042, "l": "The Larynx"}], ["dr maini compares the vocal cord to a guitar string what changes the t", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 591, "l": "The Larynx"}], ["which two small muscles lie within the vocal folds themselves and how", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2401, "l": "The Larynx"}], ["which fold forms the boundary of the laryngeal inlet laterally", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1053, "l": "The Larynx"}], ["the laryngeal ventricle has an anterior extension called the saccule w", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1288, "l": "The Larynx"}], ["the slitlike space between the two vestibular folds is called what", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2667, "l": "The Larynx"}], ["the laryngeal inlet is bounded posteriorly by which structures", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1030, "l": "The Larynx"}], ["during quiet normal respiration in what position is the rima glottidis", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2644, "l": "The Larynx"}], ["during phonation how are the vocal cords positioned", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2667, "l": "The Larynx"}], ["dr maini calls the cricothyroid the chief or only tensor of the vocal", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2382, "l": "The Larynx"}], ["which single intrinsic muscle is the sole abductor of the vocal cords", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2238, "l": "The Larynx"}], ["the transverse and oblique arytenoid muscles run between the two aryte", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2252, "l": "The Larynx"}], ["the lateral cricoarytenoid muscle produces which action on the vocal c", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2275, "l": "The Larynx"}], ["what action do the thyroarytenoid and vocalis muscles have on the voca", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2421, "l": "The Larynx"}], ["what is the origin and insertion of the thyroarytenoid muscle", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2315, "l": "The Larynx"}], ["which muscle in particular adjusts the tension of the vocal ligament a", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2382, "l": "The Larynx"}], ["which muscle group produces the adduction needed to close the rima glo", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2421, "l": "The Larynx"}], ["the internal laryngeal nerve is purely sensory which membrane does it", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 3042, "l": "The Larynx"}], ["the external laryngeal nerve carries which fiber type and to which mus", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2847, "l": "The Larynx"}], ["the recurrent laryngeal nerve supplies which muscles and which mucosa", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 3028, "l": "The Larynx"}], ["sensory innervation of the laryngeal mucosa is split at the vocal fold", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 3066, "l": "The Larynx"}], ["the internal laryngeal nerve carries which fiber type consistent with", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2847, "l": "The Larynx"}], ["in the neck the recurrent laryngeal nerve characteristically runs in w", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2937, "l": "The Larynx"}], ["the superior thyroid artery parent of the superior laryngeal artery is", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 3203, "l": "The Larynx"}], ["the inferior thyroid artery parent of the inferior laryngeal artery ar", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 3203, "l": "The Larynx"}], ["the superior laryngeal artery enters the larynx by piercing which memb", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2703, "l": "The Larynx"}], ["the superior laryngeal vein drains into the internal jugular vein via", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 1661, "l": "Oral Cavity & Larynx"}], ["a patient develops a monotonous voice  able to speak but unable to var", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2747, "l": "The Larynx"}], ["damage to the internal laryngeal nerve would most directly cause which", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 3135, "l": "The Larynx"}], ["if the posterior cricoarytenoid muscles are bilaterally paralyzed what", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 2222, "l": "The Larynx"}], ["during thyroidectomy the surgeon must ligate the superior thyroid arte", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 3007, "l": "The Larynx"}], ["why is the larynx elevated during swallowing via the extrinsic muscles", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1864, "l": "The Larynx"}], ["which muscle group elevates the larynx and which group depresses it", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1964, "l": "The Larynx"}], ["dr maini opens the discussion noting that a change in the quality of t", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l25-oral-larynx-lecture.mp3", "s": 93, "l": "Oral Cavity & Larynx"}], ["because the human epiglottis is somewhat degenerate which structures p", {"a": "https://dgsc23.github.io/dc-realvoice/ga-0202-l26-larynx-lecture.mp3", "s": 1598, "l": "The Larynx"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    var go=function(){ try{audio.currentTime=cur.s;}catch(e){} audio.play().catch(function(){}); };
+    if(audio.src!==cur.a){ audio.src=cur.a; audio.addEventListener('loadedmetadata', function h(){ audio.removeEventListener('loadedmetadata',h); go(); }); try{audio.load();}catch(e){} }
+    else if(audio.readyState>=1){ go(); }
+    else { audio.addEventListener('loadedmetadata', function h(){ audio.removeEventListener('loadedmetadata',h); go(); }); }
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>
