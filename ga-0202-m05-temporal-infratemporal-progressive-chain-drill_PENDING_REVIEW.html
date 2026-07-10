@@ -2792,5 +2792,180 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 try{ _ensureAudioAttached = function(){}; }catch(e){}
 try{ if(window._audioBar && _audioBar.parentNode){_audioBar.parentNode.removeChild(_audioBar);} _audioBar=null; }catch(e){}
 </script>
+<!--dc-drill-telemetry-v1-->
+<script>
+/* DC Drill Telemetry v1
+ *
+ * Wraps the two globals every DC MC-drill engine exposes — pick(i) and
+ * showSummary() — and reports three events through the analytics helper:
+ *   drill_started    once, on the first answered question
+ *   q_answered       {h, stem, c, t_ms}  first attempt per question per load
+ *   drill_completed  {answered, correct, pct, duration_s}
+ *
+ * Correct/wrong is read back off the option element AFTER the engine marks it,
+ * so this never re-implements (or can disagree with) the engine's own scoring.
+ * Counters are kept here rather than scraped from the summary markup, which
+ * differs between drill families.
+ *
+ * Families covered:
+ *   A  .opt-btn  + picked-correct / picked-wrong  + stem in .q-text
+ *   B  .option   + correct        / wrong         + stem in .question
+ *
+ * No-ops safely if the helper or the engine globals are absent.
+ */
+(function () {
+  'use strict';
+  if (window.__dcDrillTelemetry) return;
+  window.__dcDrillTelemetry = true;
+
+  var OPT_SEL = '.opt-btn, .option';
+  var STEM_SEL = '.q-text, .question';
+  var OK_CLASSES = ['picked-correct', 'correct'];
+  var BAD_CLASSES = ['picked-wrong', 'wrong'];
+
+  var started = false;
+  var completed = false;
+  var startTs = Date.now();
+  var shownTs = Date.now();
+  var seen = {};            // stem-hash -> true; first attempt only
+  var answered = 0;
+  var correct = 0;
+  var totalQ = null;
+
+  function send(type, payload) {
+    try {
+      if (window.__dcAnalytics && window.__dcAnalytics.send) {
+        window.__dcAnalytics.send(type, payload);
+      }
+    } catch (e) {}
+  }
+
+  // djb2. Case/punctuation/whitespace-insensitive so the id survives the
+  // engine's shuffling and re-rendering.
+  function stemHash(s) {
+    var h = 5381;
+    var t = (s || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    for (var i = 0; i < t.length; i++) { h = ((h << 5) + h + t.charCodeAt(i)) >>> 0; }
+    return ('00000000' + h.toString(16)).slice(-8);
+  }
+
+  // Family A prefixes the stem with "Q3 of 217: " — strip it, or the same
+  // question hashes differently depending on where the shuffle put it.
+  function readStem() {
+    var el = document.querySelector(STEM_SEL);
+    if (!el) return '';
+    var raw = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    var m = raw.match(/^Q(\d+)\s+of\s+(\d+)\s*:\s*/i);
+    if (m) { totalQ = parseInt(m[2], 10); raw = raw.slice(m[0].length); }
+    return raw.trim();
+  }
+
+  // djb2 over the exact string (no normalization) — used to fingerprint image
+  // bytes, where case and punctuation are significant.
+  function rawHash(s) {
+    var h = 5381;
+    for (var i = 0; i < s.length; i++) { h = ((h << 5) + h + s.charCodeAt(i)) >>> 0; }
+    return ('00000000' + h.toString(16)).slice(-8);
+  }
+
+  // Visual drills reuse one generic stem ("Identify the indicated structure.")
+  // across every plate — the image is what distinguishes them. Fold an image
+  // id into the hash so those questions don't collapse into one row.
+  //
+  // Plates are usually inlined as base64 data: URIs, where a "filename" is
+  // meaningless (and its tail is a 1-2 char near-collision). For those,
+  // fingerprint the bytes: length + head + tail, since same-encoder JPEGs can
+  // share a long common prefix.
+  function readImg() {
+    var el = document.querySelector(STEM_SEL);
+    if (!el) return '';
+    var scope = (el.closest && el.closest('.card')) || el.parentElement;
+    var img = scope && scope.querySelector ? scope.querySelector('img') : null;
+    var src = img ? (img.getAttribute('src') || '') : '';
+    if (!src) return '';
+    if (/^data:/i.test(src)) {
+      return 'd:' + rawHash(src.length + '|' + src.slice(0, 2000) + '|' + src.slice(-2000));
+    }
+    return src.split('?')[0].split('/').pop().slice(0, 60);
+  }
+
+  function hasToken(el, names) {
+    for (var i = 0; i < names.length; i++) {
+      if (el.classList.contains(names[i])) return true;
+    }
+    return false;
+  }
+
+  // A third engine family exists whose handler is pick(optionIndex, isCorrect)
+  // and which has no showSummary(). Its marking semantics differ, so refuse to
+  // wrap anything that isn't the single-argument pick(i) contract rather than
+  // guess and mis-score it.
+  var origPick = window.pick;
+  if (typeof origPick === 'function' && origPick.length === 1) {
+    window.pick = function (i) {
+      var opts = document.querySelectorAll(OPT_SEL);
+      // The engine early-returns when the question is already answered
+      // (options carry .disabled). Mirror that test so a second click on an
+      // answered question doesn't log a phantom attempt.
+      var alreadyAnswered = !!(opts[0] && opts[0].classList.contains('disabled'));
+      var stem = readStem();
+      var img = readImg();
+
+      var ret = origPick.apply(this, arguments);
+
+      try {
+        var el = opts[i];
+        if (!alreadyAnswered && el && stem) {
+          var isOk = hasToken(el, OK_CLASSES);
+          var isBad = hasToken(el, BAD_CLASSES);
+          if (isOk || isBad) {
+            var h = stemHash(stem + '|' + img);
+            if (!seen[h]) {
+              seen[h] = true;
+              answered++;
+              if (isOk) correct++;
+              if (!started) {
+                started = true;
+                send('drill_started', { total_q: totalQ });
+              }
+              send('q_answered', {
+                h: h,
+                stem: stem.slice(0, 80),
+                img: img || undefined,
+                c: isOk ? 1 : 0,
+                t_ms: Math.min(Date.now() - shownTs, 600000)
+              });
+            }
+            shownTs = Date.now();
+          }
+        }
+      } catch (e) {}
+      return ret;
+    };
+  }
+
+  var origSummary = window.showSummary;
+  if (typeof origSummary === 'function') {
+    window.showSummary = function () {
+      var ret = origSummary.apply(this, arguments);
+      try {
+        if (!completed && answered > 0) {
+          completed = true;
+          send('drill_completed', {
+            answered: answered,
+            correct: correct,
+            pct: Math.round(100 * correct / answered),
+            total_q: totalQ,
+            duration_s: Math.min(Math.round((Date.now() - startTs) / 1000), 36000)
+          });
+        }
+      } catch (e) {}
+      return ret;
+    };
+  }
+})();
+
+</script>
+<!--/dc-drill-telemetry-v1-->
 </body>
 </html>
