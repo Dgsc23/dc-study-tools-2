@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 &middot; The Skull &mdash; Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 - MODULE 1 - THE SKULL (Osteology) - Dr. Maini. Cram Coach. PENDING REVIEW.
+   Built ONLY from Dr. Maini's GA skull lectures:
+     - Lecture 01: Osteology of the Skull
+     - Lecture 02: Mandible, Skull Development & Week 1 Lab
+   Grounded in the AUDITED "Everything-MC" skull bank (136 Q, anti-fab verified).
+   Voiced, hands-free walkthrough via Web Speech. Original phrasing, in her style.
+   THEME: violet. Correct keys taught plainly; answer positions balanced.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html";
+
+const TABS = [
+  { id: "cram", label: "Cram (read aloud)" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (12 TOPICS) ===== */
+/* Each card: display facts + a Maini high-yield flag + a clean spoken script (say). */
+const cram = [
+  {
+    n: 1, title: "Two divisions of the skull, and the bones", src: "Maini · The Skull",
+    facts: [
+      "Maini splits the skull into the NEUROCRANIUM (the 8 cranial bones that surround and enclose the brain) and the VISCEROCRANIUM (the facial bones supporting the nasal and oral cavities).",
+      "The 8 cranial bones: frontal, two parietals, two temporals, occipital, ethmoid, and sphenoid. The ethmoid and sphenoid still count as cranial even though they sit deep inside.",
+      "Face must-knows: zygomatic is the cheekbone, nasal bones form the bridge of the nose, lacrimal is a tiny bone in the medial orbital wall, vomer is the lower nasal septum, and the perpendicular plate of the ethmoid is the upper septum.",
+      "Hard palate = maxilla in front (anterior two-thirds) and palatine behind (posterior one-third). The inferior nasal concha is its own separate bone, while the superior and middle conchae belong to the ethmoid.",
+    ],
+    flag: "Neurocranium = 8 brain-box bones (ethmoid and sphenoid included). Viscerocranium = the face. Traps: the maxilla is NOT cranial; the inferior concha is its OWN bone while the superior and middle conchae are ethmoid.",
+    say: "Let's start big picture. Dr. Maini splits the skull into two groups. The neurocranium is the eight cranial bones that surround and enclose the brain. The viscerocranium is the facial bones that support the nasal and oral cavities. The eight cranial bones are the frontal, two parietals, two temporals, the occipital, the ethmoid, and the sphenoid. Watch her trap: the ethmoid and sphenoid still count as cranial even though they sit deep inside, and the maxilla is a facial bone, not a cranial one. For the face, the zygomatic is the cheekbone, the nasal bones form the bridge of the nose, the vomer is the lower nasal septum, and the perpendicular plate of the ethmoid is the upper septum. One more trap: the inferior nasal concha is its own separate bone, while the superior and middle conchae belong to the ethmoid.",
+  },
+  {
+    n: 2, title: "Sutures, the fibrous joints", src: "Maini · The Skull",
+    facts: [
+      "Sutures are FIBROUS joints, the most stable and least mobile in the body, and each is named after the two bones it lies between.",
+      "Sagittal = the two parietals; coronal = frontal and parietal; lambdoid = parietal and occipital (it resembles the letter lambda); squamous = temporal and parietal; occipitomastoid = occipital and temporal.",
+      "The cruciform (cross-shaped) suture of the hard palate = the intermaxillary, palatomaxillary, and interpalatine sutures meeting.",
+      "A metopic suture in an adult is a remnant of the frontal (interfrontal) suture between the two developing halves of the frontal bone.",
+    ],
+    flag: "Sutures = the most stable, least mobile joints in the body, named for the bones they join. Sagittal (two parietals), coronal (frontal and parietal), lambdoid (parietal and occipital, the lambda shape), squamous (temporal and parietal).",
+    say: "Now the sutures. Maini describes them as fibrous joints, the most stable and least mobile joints in the whole body, and each one is named after the two bones it lies between. The sagittal suture runs between the two parietal bones. The coronal is between the frontal and the parietals. The lambdoid, which looks like the Greek letter lambda, is between the parietals and the occipital. The squamous is between the temporal and parietal, and the occipitomastoid is between the occipital and the temporal. Two more to know: the cross-shaped cruciform suture of the hard palate, and the metopic suture, which is a leftover of the frontal suture between the two developing halves of the frontal bone.",
+  },
+  {
+    n: 3, title: "Cranial landmark points (pterion!)", src: "Maini · The Skull",
+    facts: [
+      "Maini emphasizes the named points because several sutures meet there, making them fragile, fracture-prone spots.",
+      "Bregma = coronal meets sagittal; lambda = sagittal meets lambdoid; asterion = squamous, lambdoid, and occipitomastoid; nasion = internasal meets frontonasal.",
+      "Vertex = the highest point, just behind bregma; inion = the external occipital protuberance; gonion = the angle of the mandible; glabella = the smooth prominence, part of the FRONTAL bone.",
+      "PTERION = four bones (frontal, parietal, temporal, and the greater wing of the sphenoid) with the MIDDLE MENINGEAL ARTERY running deep to it.",
+    ],
+    flag: "PTERION = 4 bones (frontal, parietal, temporal, sphenoid) with the middle meningeal artery deep to it. Glabella = FRONTAL bone (a boards favorite). Bregma = coronal and sagittal; lambda = sagittal and lambdoid; asterion = 3 sutures.",
+    say: "These are the named points of the skull, and Maini stresses them because several sutures meet there, which makes them fragile, fracture-prone spots. Bregma is where the coronal meets the sagittal. Lambda is where the sagittal meets the lambdoid. Asterion is where three sutures meet: the squamous, lambdoid, and occipitomastoid. Nasion sits where the internasal meets the frontonasal. Vertex is the highest point of the skull, just behind bregma. Inion is the external occipital protuberance, gonion is the angle of the mandible, and glabella, the smooth prominence between the brows, is part of the frontal bone, which she says is a boards favorite. And the big one: the pterion. Four bones meet there, the frontal, parietal, temporal, and the greater wing of the sphenoid, and the middle meningeal artery runs right underneath, so a hard blow to the side of the head can tear it.",
+  },
+  {
+    n: 4, title: "Anterior and lateral view features", src: "Maini · The Skull",
+    facts: [
+      "Supraorbital foramen = the supraorbital nerve, artery, and vein. Bone traps: the infraorbital foramen is on the MAXILLA and the mental foramen is on the MANDIBLE.",
+      "Anterior nasal aperture = the piriform (pear-shaped) aperture; the anterior nasal spine = where the two maxillae meet in the midline.",
+      "Zygomatic arch = the temporal process of the zygomatic bone plus the zygomatic process of the temporal bone.",
+      "Trap: the superior and inferior temporal LINES are on the PARIETAL bone. The external acoustic meatus and styloid process are on the TEMPORAL bone.",
+    ],
+    flag: "Infraorbital foramen = maxilla. Mental foramen = mandible. The temporal LINES sit on the PARIETAL, not the temporal, bone. Zygomatic arch = zygomatic's temporal process plus temporal's zygomatic process.",
+    say: "Anterior and lateral features. The supraorbital foramen carries the supraorbital nerve, artery, and vein. Watch the bone traps here: the infraorbital foramen is on the maxilla, and the mental foramen is on the mandible. The anterior nasal aperture is also called the piriform, or pear-shaped, aperture, and the anterior nasal spine is where the two maxillae meet in the midline. The zygomatic arch is built from two processes: the temporal process of the zygomatic bone and the zygomatic process of the temporal bone. One classic trap: the superior and inferior temporal lines are on the parietal bone, not the temporal bone. And the external acoustic meatus and the styloid process both belong to the temporal bone.",
+  },
+  {
+    n: 5, title: "Posterior and superior view, and the inner calvaria", src: "Maini · The Skull",
+    facts: [
+      "Mastoid process (behind the ear) = temporal bone; the nuchal lines are neck-muscle attachments.",
+      "Emissary veins (through the parietal emissary foramina) connect extracranial and intracranial veins.",
+      "Wormian (sutural) bones are accessory bones that ossify within the suture lines.",
+      "Inside the calvaria: the midline groove houses the SUPERIOR SAGITTAL SINUS, and the small pits beside it are impressions for arachnoid granulations.",
+    ],
+    flag: "Emissary veins connect extracranial and intracranial veins. Wormian bones = extra bones inside the sutures. Inner midline groove = superior sagittal sinus; the flanking pits = arachnoid granulations.",
+    say: "Posterior and superior views, plus the inside of the skull cap. The mastoid process behind the ear is temporal bone, and the nuchal lines are where neck muscles attach. Emissary veins, which pass through the parietal emissary foramina, connect the veins outside the skull with the veins inside, which matters for the spread of infection. Wormian bones are little extra bones that ossify within the suture lines. On the inner surface of the calvaria, the midline groove houses the superior sagittal sinus, and the small pits flanking it are impressions for the arachnoid granulations.",
+  },
+  {
+    n: 6, title: "The three fossae, and the anterior cranial fossa", src: "Maini · The Skull",
+    facts: [
+      "The interior base has THREE cranial fossae: anterior, middle, and posterior.",
+      "Anterior fossa floor = the frontal orbital plate, the ethmoid cribriform plate, and the lesser wing of the sphenoid.",
+      "The cribriform plate (Maini's C-like filter) transmits the fascicles of the olfactory nerve; the crista galli is the midline ethmoid ridge.",
+      "The foramen cecum is a blind foramen, so no structure passes through it.",
+    ],
+    flag: "Three fossae: anterior, middle, posterior. Anterior floor = frontal orbital plate, ethmoid cribriform plate, and sphenoid lesser wing. Cribriform plate = olfactory nerve (a C-like filter). Crista galli = ethmoid. Foramen cecum = blind.",
+    say: "Now the base of the skull, divided into three cranial fossae: anterior, middle, and posterior. The floor of the anterior fossa is made of three things: the orbital plate of the frontal bone, the cribriform plate of the ethmoid, and the lesser wing of the sphenoid. The cribriform plate, which Maini compares to a C-shaped filter, transmits the fascicles of the olfactory nerve. The crista galli is the midline ridge of the ethmoid sticking up in the middle. And the foramen cecum is a blind foramen, so nothing passes through it, just like the foramen cecum of the tongue.",
+  },
+  {
+    n: 7, title: "The middle fossa and the foramina arch", src: "Maini · The Skull",
+    facts: [
+      "The sella turcica sits on the body of the sphenoid and holds the pituitary like a secure pocket. Maini says she will NOT test its sub-parts.",
+      "Carotid sulcus = the internal carotid artery; the optic canal (sphenoid) carries the optic nerve; the superior orbital fissure lies between the greater and lesser wings.",
+      "Maini's arch, front to back: superior orbital fissure, foramen rotundum, foramen ovale, foramen spinosum.",
+      "Trap: of that arch, the foramen ROTUNDUM is the one you do NOT see in the inferior view.",
+    ],
+    flag: "Middle-fossa arch, front to back: superior orbital fissure, rotundum, ovale, spinosum. Foramen ROTUNDUM is the one NOT seen from below. Sella turcica = sphenoid body, holds the pituitary (parts not tested). Optic canal = optic nerve.",
+    say: "The middle cranial fossa is dominated by the sphenoid. The sella turcica sits on the body of the sphenoid and cradles the pituitary gland like a secure pocket. Good news: Maini says she will not test the individual parts of the sella. The carotid sulcus lodges the internal carotid artery, and the optic canal carries the optic nerve. Here is her big pattern, the arch of openings running from front to back: superior orbital fissure, then foramen rotundum, then foramen ovale, then foramen spinosum. Learn the order, and remember her trap: of those four, the foramen rotundum is the one you cannot see in the inferior view of the skull.",
+  },
+  {
+    n: 8, title: "Base of skull: foramina and their contents", src: "Maini · The Skull",
+    facts: [
+      "Foramen magnum = the medulla and spinal-cord junction; the occipital condyles beside it articulate with the atlas (C1); the hypoglossal canal hides in the thick wall of the foramen magnum.",
+      "Carotid canal = the internal carotid artery; jugular foramen (internal jugular vein) = between the temporal and occipital bones; foramen lacerum is bounded by three bones (sphenoid, temporal, occipital).",
+      "The facial nerve exits the STYLOMASTOID foramen, between the styloid and mastoid processes.",
+      "Maini's orientation rule: in the INFERIOR view the neighbor of the jugular foramen is the CAROTID CANAL; in the INTERNAL base view the neighbor is the INTERNAL ACOUSTIC MEATUS.",
+    ],
+    flag: "Foramen magnum = medulla and cord; condyles meet C1. Jugular foramen = temporal and occipital (internal jugular vein). Foramen lacerum = 3 bones. Facial nerve = stylomastoid foramen. Rule: inferior view carotid canal by the jugular; internal base internal acoustic meatus by the jugular.",
+    say: "The foramina of the base and what runs through each. The foramen magnum transmits the junction of the medulla and the spinal cord, and the occipital condyles beside it articulate with the atlas, the first cervical vertebra. The carotid canal carries the internal carotid artery. The jugular foramen, which transmits the internal jugular vein, forms between the temporal and occipital bones. Foramen lacerum is unusual because three bones bound it: the sphenoid, temporal, and occipital. The facial nerve exits through the stylomastoid foramen, between the styloid and mastoid processes. And here is Maini's orientation rule: in the inferior view, the foramen next to the jugular foramen is the carotid canal, but in the internal view of the base, the opening next to the jugular foramen is the internal acoustic meatus.",
+  },
+  {
+    n: 9, title: "Posterior fossa, the deep bones, and sinuses", src: "Maini · The Skull",
+    facts: [
+      "Clivus = the sloping internal surface of the basilar occiput; the S-shaped groove = the sigmoid sinus; the groove on the top ridge of the petrous temporal = the superior petrosal sinus.",
+      "Sphenoid = lesser wing, greater wing, and the downward pterygoid process (medial and lateral plates), plus its own sinus under the sella (the trans-sphenoidal route to the pituitary).",
+      "Maini: the ethmoid is everywhere, giving the cribriform plate, perpendicular plate, and superior and middle conchae, but NOT the lower septum (that is the vomer).",
+      "Four bones carry paranasal air sinuses: frontal, maxillary, ethmoid, and sphenoid; they lighten the skull and add resonance. The mastoid air cells are a closed system, and air reads black on X-ray.",
+    ],
+    flag: "Sigmoid sinus = S-shaped groove; superior petrosal = petrous top ridge. Sphenoid = two wings plus the pterygoid process (medial and lateral plates) plus a sinus under the sella. Ethmoid is everywhere EXCEPT the lower septum (vomer). Sinus bones: frontal, maxillary, ethmoid, sphenoid.",
+    say: "The posterior fossa and the deep bones. The clivus is the sloping internal surface of the basilar part of the occipital bone. The S-shaped groove is for the sigmoid sinus, and the groove along the top ridge of the petrous temporal bone is for the superior petrosal sinus. The sphenoid has a lesser wing, a greater wing, and a downward pterygoid process that splits into medial and lateral plates, plus its own sinus tucked under the sella, which is the route surgeons use to reach the pituitary. Maini says the ethmoid is everywhere: it gives the cribriform plate, the perpendicular plate, and the superior and middle conchae, but not the lower septum, which is the vomer. And four bones carry paranasal air sinuses: the frontal, maxillary, ethmoid, and sphenoid. They lighten the skull and add resonance to the voice. The mastoid air cells, by contrast, are a closed system.",
+  },
+  {
+    n: 10, title: "The mandible", src: "Maini · The Skull",
+    facts: [
+      "Maini divides the mandible into the body, the ramus, and the angle.",
+      "The condylar process (a head and a neck) forms the TMJ in the mandibular fossa of the temporal bone; the pterygoid fovea on the neck is for the lateral pterygoid muscle.",
+      "The mandibular foramen transmits the INFERIOR ALVEOLAR nerve; the tongue-shaped lingula is the landmark for blocking it. The nerve exits the mental foramen as the MENTAL nerve (lower lip and chin).",
+      "The mylohyoid line gives attachment to the mylohyoid muscle, which forms the floor of the oral cavity; the sublingual and submandibular fossae hold the glands of the same name.",
+    ],
+    flag: "Mandible = body, ramus, angle. Condylar process (head and neck) makes the TMJ. Mandibular foramen = inferior alveolar nerve; the tongue-shaped lingula guides its block; it exits the mental foramen as the mental nerve. Mylohyoid muscle = floor of the mouth.",
+    say: "The mandible. Maini divides it into three parts: the body, the ramus, and the angle. The condylar process, made of a head and a neck, forms the temporomandibular joint by sitting in the mandibular fossa of the temporal bone. On the neck is a little pit, the pterygoid fovea, for the lateral pterygoid muscle. The mandibular foramen transmits the inferior alveolar nerve, and the tongue-shaped lingula beside it is the landmark dentists use to block that nerve. The nerve runs through the bone and exits the mental foramen, where it is renamed the mental nerve, supplying the lower lip and chin. On the inner surface, the mylohyoid line gives attachment to the mylohyoid muscle, which forms the floor of the mouth.",
+  },
+  {
+    n: 11, title: "Development, ossification, and fontanelles", src: "Maini · The Skull",
+    facts: [
+      "Flat skull bones (frontal, parietal) form by INTRAMEMBRANOUS ossification; the base and irregular bones form by ENDOCHONDRAL ossification.",
+      "The viscerocranium (face) comes from the first two pharyngeal arches; the sutures stay fibrous so the brain can grow.",
+      "The two frontal halves fuse by about age 8; the calvaria keeps expanding until about age 16.",
+      "Anterior fontanelle = diamond-shaped, the future bregma, closing by about 18 months (last to close, most palpated). Posterior = triangular, future lambda. Anterolateral becomes pterion; posterolateral (mastoid) becomes asterion.",
+    ],
+    flag: "Flat bones = intramembranous; base and irregular bones = endochondral; the face = first two pharyngeal arches. Anterior fontanelle = diamond, future bregma, closes about 18 months, most palpated. Posterior = triangular, future lambda. Anterolateral = pterion; posterolateral (mastoid) = asterion.",
+    say: "Development and the fontanelles. The flat bones of the skull cap form by intramembranous ossification, while the base and irregular bones form by endochondral ossification. The face, the viscerocranium, comes from the first two pharyngeal arches. The sutures stay fibrous in infancy so the brain can keep growing. The two halves of the frontal bone fuse by about age eight, and the skull cap keeps expanding until about age sixteen. Now the fontanelles: the anterior fontanelle is diamond-shaped, becomes the future bregma, and closes by about eighteen months. It is the last to close and the one the pediatrician palpates. The posterior fontanelle is triangular and becomes lambda. The anterolateral becomes pterion, and the posterolateral, or mastoid, fontanelle becomes asterion.",
+  },
+  {
+    n: 12, title: "Anomalies and clinical correlations", src: "Maini · The Skull",
+    facts: [
+      "Fontanelle signs: SUNKEN = dehydration; BULGING = raised intracranial pressure; delayed closure = rickets (vitamin D or calcium deficiency).",
+      "Scaphocephaly = a boat-shaped head from early sagittal fusion (scapha means boat); plagiocephaly = asymmetric, one-sided fusion; oxycephaly (turricephaly) = early coronal closure.",
+      "Acrania = the skull cap fails to form, leaving the brain exposed; microcephaly = abnormal brain (CNS) development.",
+      "Clinical: a pterion fracture tears the middle meningeal artery, causing an EPIDURAL hemorrhage; the glabellar tap sign can point to Parkinsonism; a pituitary tumor can be reached trans-nasally through the sphenoid sinus.",
+    ],
+    flag: "Sunken fontanelle = dehydration; bulging = raised ICP; delayed = rickets. Scaphocephaly (sagittal, boat), plagiocephaly (one-sided), oxycephaly (coronal), acrania (no cap), microcephaly (brain). Pterion fracture, middle meningeal artery, epidural hemorrhage.",
+    say: "Finally, the clinical picture. A sunken anterior fontanelle suggests dehydration. A bulging one suggests raised intracranial pressure. And a fontanelle that fails to close on time can point to rickets, a vitamin D or calcium deficiency. For the shape anomalies: scaphocephaly is a long, boat-shaped head from early fusion of the sagittal suture, and Maini notes that scapha means boat. Plagiocephaly is an asymmetric head from one-sided premature fusion. Oxycephaly comes from early closure of the coronal suture. Acrania means the skull cap fails to form, leaving the brain exposed, and microcephaly reflects abnormal brain development. And tie it together clinically: a fracture at the pterion tears the middle meningeal artery and causes an epidural hemorrhage. The glabellar tap sign can point to Parkinsonism, though she reminds you never to diagnose on a single sign. And to reach a pituitary tumor, surgeons can go trans-nasally through the sphenoid sinus.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "PTERION: four bones meet there (frontal, parietal, temporal, and the greater wing of the sphenoid) and the MIDDLE MENINGEAL ARTERY runs right underneath. A lateral blow can fracture it and tear the artery, causing an epidural hemorrhage.", why: "Maini calls it a very important landmark and returns to the boxing-blow story. Expect 'how many bones,' 'what is deep to it,' and the hemorrhage type.", src: "Maini · L01/L02" },
+  { tag: "★★ Heavy", text: "The middle-fossa arch, anterior to posterior: superior orbital fissure, foramen rotundum, foramen ovale, foramen spinosum. The foramen ROTUNDUM is the one NOT seen in the inferior view.", why: "She walks this arch in order and quizzes which opening disappears from below. A near-guaranteed item.", src: "Maini · L01/L02" },
+  { tag: "★★ Heavy", text: "The base-of-skull orientation rule: in the INFERIOR view the carotid canal sits next to the jugular foramen; in the INTERNAL base view the internal acoustic meatus sits next to the jugular foramen.", why: "Her 'which is the neighbor of the jugular foramen' trap depends entirely on which view you are given.", src: "Maini · L01/L02" },
+  { tag: "Divisions", text: "Neurocranium = 8 cranial bones (frontal, two parietals, two temporals, occipital, ethmoid, sphenoid); viscerocranium = the facial skeleton. The maxilla is facial, the ethmoid and sphenoid are cranial, and the inferior concha is its own bone while the superior and middle conchae are ethmoid.", why: "Her opening 'which of the following is NOT' questions live right here.", src: "Maini · L01/L02" },
+  { tag: "Sutures", text: "Sutures are the most stable, least mobile joints in the body, named for the bones they join: sagittal (two parietals), coronal (frontal and parietal), lambdoid (parietal and occipital), squamous (temporal and parietal). Bregma, lambda, and asterion are where they meet.", why: "She defines sutures as joints and links each named point to the sutures that cross there.", src: "Maini · L01" },
+  { tag: "Foramina", text: "Foramen magnum = medulla and cord (condyles meet C1); jugular foramen = temporal + occipital (internal jugular vein); foramen lacerum = three bones; rotundum, ovale, spinosum = sphenoid; carotid canal = internal carotid; the facial nerve exits the stylomastoid foramen.", why: "Her foramen-by-foramen table (bone of origin plus contents) is dense and heavily tested.", src: "Maini · L01/L02" },
+  { tag: "Deep bones", text: "Sphenoid (bat-shaped) = lesser wing + greater wing + pterygoid process (medial and lateral plates) + a sinus under the sella (the trans-sphenoidal route). The ethmoid is everywhere (cribriform plate, perpendicular plate, superior and middle conchae) but NOT the lower septum (vomer).", why: "She spends real time on 'what belongs to the sphenoid' and 'what belongs to the ethmoid.'", src: "Maini · L01/L02" },
+  { tag: "Fontanelles", text: "Anterior fontanelle = diamond, future bregma, closes about 18 months, last to close and most palpated; posterior = triangular, future lambda; anterolateral becomes pterion; posterolateral (mastoid) becomes asterion. Sunken = dehydration; bulging = raised ICP; delayed = rickets.", why: "The fontanelle-to-landmark map plus the three clinical signs is a classic cluster.", src: "Maini · L02" },
+  { tag: "Development", text: "Flat bones form by intramembranous ossification; the base and irregular bones by endochondral. The face comes from the first two pharyngeal arches. The frontal halves fuse by about 8 years; calvarial capacity increases to about 16 years.", why: "She ties ossification type to bone shape and gives the fusion ages directly.", src: "Maini · L02" },
+  { tag: "Clinical", text: "Scaphocephaly (early sagittal fusion, boat-shaped), plagiocephaly (one-sided fusion, asymmetric), oxycephaly/turricephaly (coronal), acrania (skull cap fails), microcephaly (abnormal brain). Glabellar tap sign points to Parkinsonism; a pituitary tumor is reached through the sphenoid sinus.", why: "Each anomaly is tied to a specific suture or process, and she stresses correlating clinically.", src: "Maini · L02" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+/* Maini's OWN analogies, mnemonics, and word-roots, taken straight from the lectures. */
+const tips = [
+  { kind: "Analogy", title: "The sphenoid is a bat", text: "Maini literally says the sphenoid is bat-shaped and looks like a bat. Picture the greater and lesser wings spread out to the sides and the pterygoid processes hanging down like legs.", helps: "Fixes 'which bone is bat-shaped' and helps you keep the sphenoid's wings and processes straight.", src: "Maini · L01" },
+  { kind: "Analogy", title: "Cribriform means a C, like a filter", text: "She says cribriform means something like a C, like a filter. The cribriform plate is a sieve that the olfactory nerve fascicles pass up through to reach the nose.", helps: "Links the name to its job: the cribriform plate transmits the olfactory nerve (cranial nerve one).", src: "Maini · L01" },
+  { kind: "Mnemonic", title: "The lambdoid suture is the letter lambda", text: "Maini points out the lambdoid suture resembles the Greek letter lambda. The point where it meets the sagittal suture is even named lambda.", helps: "One image locks in both the lambdoid suture and the lambda landmark.", src: "Maini · L01" },
+  { kind: "Clinical", title: "Pterion is the boxing-blow danger point", text: "She describes a hard blow to the lateral side of the skull, most commonly in boxing, fracturing the pterion and rupturing the middle meningeal artery, which leads to a hemorrhage.", helps: "Ties the landmark to why it matters and to the epidural (extradural) bleed.", src: "Maini · L01" },
+  { kind: "Word root", title: "Fovea means a pit; scapha means a boat", text: "Maini decodes the Latin: fovea means a pit (the pterygoid fovea is a little pit on the mandible's condylar neck), and scapha means a boat (scaphocephaly is a boat-shaped head).", helps: "Decoding the root tells you the shape before you memorize the fact.", src: "Maini · L02" },
+  { kind: "Analogy", title: "The lingula is a little tongue", text: "She calls the lingula a tongue-shaped process flanking the mandibular foramen. Picture a small tongue of bone guarding the doorway of the inferior alveolar nerve.", helps: "Anchors the landmark used for the inferior alveolar nerve block.", src: "Maini · L02" },
+  { kind: "Tip", title: "Foramen cecum is blind", text: "Maini notes the foramen cecum is blind, so no structure passes through it, just like the foramen cecum of the tongue that you will meet later.", helps: "Stops you from hunting for a nerve or vessel that simply is not there.", src: "Maini · L01" },
+  { kind: "Tip", title: "She will NOT test the parts of the sella turcica", text: "Maini says outright that she is not going to test you on the individual parts of the sella turcica. Just know it sits on the body of the sphenoid and holds the pituitary.", helps: "Tells you exactly where NOT to spend your study time.", src: "Maini · L01/L02" },
+  { kind: "Tip", title: "Glabella is a boards favorite", text: "She flags that a very commonly asked question, even on the boards, is which bone the glabella belongs to. The answer is the frontal bone.", helps: "Locks in glabella = frontal bone, a point she says shows up again and again.", src: "Maini · L01" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Original-phrasing items built on Maini's skull lectures and grounded in the
+   audited Everything-MC skull bank. Answer positions balanced (11 each A/B/C/D). */
+const questions = [
+  { id: 1, topic: "Divisions", src: "Maini · L01", q: "Dr. Maini splits the skull into two groups. Which group is made of the bones that surround and enclose the brain?", opts: ["The viscerocranium", "The facial skeleton", "The neurocranium (cranial bones)", "The pharyngeal skeleton"], a: 2, h1: "One group boxes in the brain; the other supports the face.", h2: "Neuro means brain.", exp: "The NEUROCRANIUM is the set of cranial bones that surround and enclose the brain; the viscerocranium is the facial skeleton." },
+  { id: 2, topic: "Divisions", src: "Maini · L01", q: "Which of these is NOT one of the eight cranial (neurocranium) bones?", opts: ["The maxilla", "The ethmoid", "The sphenoid", "The occipital"], a: 0, h1: "The cranial eight box in the brain.", h2: "This one holds the upper teeth.", exp: "The MAXILLA is a facial bone. The eight cranial bones are the frontal, two parietals, two temporals, occipital, ethmoid, and sphenoid." },
+  { id: 3, topic: "Divisions", src: "Maini · L01", q: "Maini stresses that two deep bones are still cranial even though they sit inside. Which pair, one of them bat-shaped?", opts: ["Vomer and palatine", "Maxilla and zygomatic", "Nasal and lacrimal", "Ethmoid and sphenoid"], a: 3, h1: "One of them is her bat-shaped bone.", h2: "Both sit deep in the skull.", exp: "The ETHMOID and SPHENOID stay in the cranial group despite lying deep; the sphenoid is her bat-shaped bone." },
+  { id: 4, topic: "Divisions", src: "Maini · L01/L02", q: "The lower part of the bony nasal septum is formed by which bone?", opts: ["The perpendicular plate of the ethmoid", "The vomer", "The palatine bone", "The inferior concha"], a: 1, h1: "The upper septum is ethmoid; this is the lower one.", h2: "A single midline plough-shaped bone.", exp: "The VOMER forms the lower nasal septum; the perpendicular plate of the ethmoid forms the upper part." },
+  { id: 5, topic: "Divisions", src: "Maini · L02", q: "The superior and middle nasal conchae are parts of which bone (while the inferior concha is a separate bone)?", opts: ["The maxilla", "The ethmoid", "The sphenoid", "The vomer"], a: 1, h1: "Same bone as the crista galli and cribriform plate.", h2: "Maini says it is everywhere.", exp: "The superior and middle conchae belong to the ETHMOID; the inferior nasal concha is a separate bone in its own right." },
+  { id: 6, topic: "Divisions", src: "Maini · L01", q: "The hard palate is the maxilla in front. Which bone forms its posterior one-third?", opts: ["The vomer", "The sphenoid", "The maxilla again", "The palatine bone"], a: 3, h1: "A small L-shaped facial bone at the back.", h2: "It shares its name with the roof of the mouth.", exp: "The hard palate = maxilla anteriorly (two-thirds) and the PALATINE bone posteriorly (one-third)." },
+  { id: 7, topic: "Sutures", src: "Maini · L01", q: "How does Maini describe the skull sutures as joints?", opts: ["Fibrous joints, the most stable and least mobile in the body", "Synovial joints allowing gliding", "Cartilaginous joints", "Saddle joints"], a: 0, h1: "Think of the tissue between the plates.", h2: "They barely move.", exp: "Sutures are FIBROUS joints, the most stable and least mobile in the body, each named after the two bones it joins." },
+  { id: 8, topic: "Sutures", src: "Maini · L01", q: "The lambdoid suture, which resembles the Greek letter lambda, lies between which two bones?", opts: ["Frontal and parietal", "Temporal and parietal", "Parietal and occipital", "Occipital and temporal"], a: 2, h1: "It is at the back of the skull.", h2: "Between the parietals and the bone below them.", exp: "Lambdoid = parietal + occipital (it looks like the letter lambda). Coronal = frontal + parietal; squamous = temporal + parietal." },
+  { id: 9, topic: "Sutures", src: "Maini · L01", q: "The coronal suture lies between which two bones?", opts: ["Frontal and parietal", "The two parietals", "Parietal and occipital", "Temporal and parietal"], a: 0, h1: "It runs across the top like a crown.", h2: "In front of the parietals.", exp: "Coronal = frontal + parietal. The sagittal suture is between the two parietals." },
+  { id: 10, topic: "Sutures", src: "Maini · L01/L02", q: "The cross-shaped (cruciform) suture of the hard palate is formed by which three sutures meeting?", opts: ["Coronal, sagittal, lambdoid", "Frontonasal, internasal, intermaxillary", "Intermaxillary, palatomaxillary, and interpalatine", "Squamous, lambdoid, occipitomastoid"], a: 2, h1: "All three are palate-region sutures.", h2: "Between the maxillae and the palatine bones.", exp: "The cruciform suture = intermaxillary + palatomaxillary + interpalatine sutures meeting in a cross." },
+  { id: 11, topic: "Landmarks", src: "Maini · L01/L02", q: "Pterion is Maini's danger point. How many bones meet there, and which?", opts: ["Two: frontal and parietal", "Three: parietal, temporal, occipital", "Four: frontal, parietal, occipital, sphenoid", "Four: frontal, parietal, temporal, and greater wing of the sphenoid"], a: 3, h1: "A lateral landmark where several bones meet.", h2: "Frontal, parietal, temporal, sphenoid.", exp: "Pterion = FOUR bones: frontal, parietal, temporal, and the greater wing of the sphenoid." },
+  { id: 12, topic: "Landmarks", src: "Maini · L01/L02", q: "Which artery lies deep to the pterion, making it a dangerous fracture site?", opts: ["The internal carotid artery", "The middle meningeal artery", "The superficial temporal artery", "The maxillary artery"], a: 1, h1: "A hard blow to the side of the head tears it.", h2: "It supplies the dura.", exp: "The MIDDLE MENINGEAL ARTERY runs deep to the pterion; a fracture there can tear it and cause an epidural hemorrhage." },
+  { id: 13, topic: "Landmarks", src: "Maini · L01", q: "On the boards, Maini says the glabella is part of which bone?", opts: ["The nasal bone", "The ethmoid", "The sphenoid", "The frontal bone"], a: 3, h1: "The smooth prominence between the brows.", h2: "Same bone as the forehead.", exp: "GLABELLA is part of the FRONTAL bone, a point Maini says is commonly asked." },
+  { id: 14, topic: "Landmarks", src: "Maini · L01", q: "Bregma is the meeting point of which two sutures?", opts: ["Sagittal and lambdoid", "Coronal and sagittal", "Internasal and frontonasal", "Squamous and lambdoid"], a: 1, h1: "It is near the front of the skull cap.", h2: "Where the crown suture meets the midline one.", exp: "Bregma = coronal + sagittal. Lambda = sagittal + lambdoid; nasion = internasal + frontonasal." },
+  { id: 15, topic: "Landmarks", src: "Maini · L01", q: "Asterion marks the meeting of which three sutures?", opts: ["Coronal, sagittal, lambdoid", "Internasal, frontonasal, intermaxillary", "Squamous, lambdoid, and occipitomastoid", "Sagittal, coronal, squamous"], a: 2, h1: "It is a back-and-side (posterolateral) point.", h2: "Its future fontanelle is the mastoid one.", exp: "Asterion = squamous + lambdoid + occipitomastoid; it is the future site of the posterolateral (mastoid) fontanelle." },
+  { id: 16, topic: "Landmarks", src: "Maini · L01/L02", q: "Inion is another name for which structure?", opts: ["The external occipital protuberance", "The angle of the mandible", "The highest point of the skull", "The greater wing of the sphenoid"], a: 0, h1: "You can feel it at the back of your head.", h2: "A midline occipital bump.", exp: "Inion = the external occipital protuberance. Gonion = the angle of the mandible; vertex = the highest point." },
+  { id: 17, topic: "Anterior/Lateral", src: "Maini · L01", q: "The superior and inferior temporal lines are a trap. Which bone bears them?", opts: ["The temporal bone", "The frontal bone", "The parietal bone", "The sphenoid bone"], a: 2, h1: "Named 'temporal' but not on the temporal bone.", h2: "They arc across the side of the skull cap.", exp: "The temporal LINES are on the PARIETAL bone, not the temporal bone." },
+  { id: 18, topic: "Anterior/Lateral", src: "Maini · L01", q: "The infraorbital foramen is a feature of which bone?", opts: ["The maxilla", "The frontal bone", "The zygomatic bone", "The sphenoid bone"], a: 0, h1: "Just below the orbit, in the cheek region.", h2: "Same bone as the upper teeth.", exp: "The infraorbital foramen is on the MAXILLA. The supraorbital foramen is on the frontal bone; the mental foramen is on the mandible." },
+  { id: 19, topic: "Anterior/Lateral", src: "Maini · L01/L02", q: "The zygomatic arch is formed by the union of which two processes?", opts: ["Two processes of the maxilla", "The temporal process of the zygomatic bone and the zygomatic process of the temporal bone", "The frontal process of the maxilla and the zygomatic process of the frontal bone", "The styloid and mastoid processes"], a: 1, h1: "Each bone lends a process named for the other.", h2: "Zygomatic and temporal reach toward each other.", exp: "Zygomatic arch = the temporal process of the zygomatic bone plus the zygomatic process of the temporal bone." },
+  { id: 20, topic: "Anterior/Lateral", src: "Maini · L01", q: "The external acoustic meatus and the styloid process both belong to which bone?", opts: ["The sphenoid", "The parietal", "The occipital", "The temporal bone"], a: 3, h1: "The bone around the ear.", h2: "Same bone as the mastoid and petrous parts.", exp: "Both the external acoustic meatus and the styloid process are parts of the TEMPORAL bone; so are the mastoid process and petrous part." },
+  { id: 21, topic: "Posterior/Inner", src: "Maini · L01/L02", q: "Parietal emissary foramina transmit emissary veins. What do emissary veins do?", opts: ["Drain the paranasal sinuses", "Connect extracranial veins with intracranial veins", "Supply the scalp with blood", "Carry cerebrospinal fluid"], a: 1, h1: "Think about how infection can spread inward.", h2: "They bridge outside and inside.", exp: "Emissary veins CONNECT extracranial and intracranial veins, a route by which surface infection can reach the interior." },
+  { id: 22, topic: "Posterior/Inner", src: "Maini · L01", q: "On the inner surface of the calvaria, the midline groove houses which structure?", opts: ["The middle meningeal artery", "The sigmoid sinus", "The transverse sinus", "The superior sagittal sinus"], a: 3, h1: "A large midline venous channel.", h2: "The little side pits are for arachnoid granulations.", exp: "The midline calvarial groove houses the SUPERIOR SAGITTAL SINUS; the flanking pits are for arachnoid granulations." },
+  { id: 23, topic: "Fossae", src: "Maini · L01", q: "The interior base of the skull is divided into how many cranial fossae?", opts: ["Three: anterior, middle, and posterior", "Two: anterior and posterior", "Four", "Five"], a: 0, h1: "Front, middle, back.", h2: "One more than two.", exp: "THREE cranial fossae: anterior, middle, and posterior." },
+  { id: 24, topic: "Fossae", src: "Maini · L01", q: "The floor of the anterior cranial fossa is formed by the frontal orbital plate, the ethmoid cribriform plate, and which third structure?", opts: ["The greater wing of the sphenoid", "The petrous temporal bone", "The lesser wing of the sphenoid", "The basilar occiput"], a: 2, h1: "A sphenoid contribution, but not the greater one.", h2: "The smaller, more anterior wing.", exp: "Anterior fossa floor = frontal orbital plate + ethmoid cribriform plate + the LESSER wing of the sphenoid." },
+  { id: 25, topic: "Fossae", src: "Maini · L01/L02", q: "The cribriform plate of the ethmoid, which Maini compares to a filter, transmits which structures?", opts: ["Fascicles of the olfactory nerve", "The optic nerve", "The maxillary nerve", "The internal carotid artery"], a: 0, h1: "Cribriform means a C, like a filter.", h2: "This is the nerve of smell.", exp: "The cribriform plate transmits the OLFACTORY nerve fascicles (cranial nerve one). Maini calls cribriform a C, like a filter." },
+  { id: 26, topic: "Middle fossa", src: "Maini · L01/L02", q: "The sella turcica, which cradles the pituitary like a secure pocket, is part of which bone?", opts: ["The occipital bone", "The ethmoid", "The body of the sphenoid", "The petrous temporal"], a: 2, h1: "The central bat-shaped bone.", h2: "Maini says she will not test its sub-parts.", exp: "The sella turcica sits on the BODY of the SPHENOID and holds the pituitary. Maini said she will not test the individual parts of the sella." },
+  { id: 27, topic: "Middle fossa", src: "Maini · L01/L02", q: "Maini's middle-fossa arch runs anterior to posterior as: superior orbital fissure, foramen rotundum, foramen ovale, and then which opening?", opts: ["Foramen magnum", "Foramen lacerum", "Jugular foramen", "Foramen spinosum"], a: 3, h1: "It is named for the spine of the sphenoid.", h2: "Last in the arch, most posterior.", exp: "The arch is superior orbital fissure, rotundum, ovale, then SPINOSUM (named for the spine of the sphenoid)." },
+  { id: 28, topic: "Middle fossa", src: "Maini · L01/L02", q: "Of that four-opening arch, which one is NOT seen in the inferior view of the skull?", opts: ["Foramen ovale", "Foramen rotundum", "Foramen spinosum", "The superior orbital fissure"], a: 1, h1: "It opens toward the orbit, not straight down.", h2: "Ovale and spinosum are visible from below.", exp: "Foramen ROTUNDUM is not seen from below; the foramen ovale and foramen spinosum are." },
+  { id: 29, topic: "Base foramina", src: "Maini · L01", q: "What passes through the foramen magnum?", opts: ["The internal carotid artery", "The optic nerve", "The internal jugular vein", "The junction of the medulla oblongata and the spinal cord"], a: 3, h1: "The biggest opening in the base.", h2: "Where the brainstem becomes the cord.", exp: "The foramen magnum transmits the medulla and spinal-cord junction; the occipital condyles beside it meet the atlas (C1)." },
+  { id: 30, topic: "Base foramina", src: "Maini · L01/L02", q: "The jugular foramen, which transmits the internal jugular vein, forms between which two bones?", opts: ["The sphenoid and temporal bones", "The temporal and occipital bones", "The occipital and parietal bones", "The sphenoid and occipital bones"], a: 1, h1: "One bone holds the ear, the other the foramen magnum.", h2: "Temporal plus occipital.", exp: "Jugular foramen = between the TEMPORAL and OCCIPITAL bones, transmitting the internal jugular vein." },
+  { id: 31, topic: "Base foramina", src: "Maini · L01/L02", q: "Foramen lacerum is unusual because it is bounded by three bones. Which three?", opts: ["Frontal, sphenoid, ethmoid", "Temporal, occipital, parietal", "Sphenoid, temporal, and occipital", "Sphenoid, ethmoid, occipital"], a: 2, h1: "Three bones meet at this ragged opening.", h2: "Sphenoid, temporal, occipital.", exp: "Foramen lacerum = sphenoid + temporal + occipital." },
+  { id: 32, topic: "Base foramina", src: "Maini · L01", q: "The facial nerve exits the skull through which foramen?", opts: ["The stylomastoid foramen", "The jugular foramen", "The foramen ovale", "The foramen spinosum"], a: 0, h1: "Named for two nearby processes.", h2: "Between the styloid and the mastoid.", exp: "The facial nerve exits the STYLOMASTOID foramen, between the styloid and mastoid processes." },
+  { id: 33, topic: "Base foramina", src: "Maini · L01/L02", q: "Maini's orientation rule: in the INFERIOR view, the foramen right beside the jugular foramen is the:", opts: ["Foramen ovale", "Internal acoustic meatus", "Carotid canal", "Hypoglossal canal"], a: 2, h1: "A different neighbor than in the internal base view.", h2: "It carries the internal carotid artery.", exp: "In the INFERIOR view, the CAROTID CANAL sits next to the jugular foramen; in the INTERNAL base view, the internal acoustic meatus is the neighbor." },
+  { id: 34, topic: "Posterior fossa", src: "Maini · L01/L02", q: "In the posterior cranial fossa, the S-shaped groove carries which venous sinus?", opts: ["The sigmoid sinus", "The superior sagittal sinus", "The superior petrosal sinus", "The cavernous sinus"], a: 0, h1: "Its name means S-shaped.", h2: "It curves toward the jugular foramen.", exp: "The S-shaped groove = the SIGMOID sinus. The groove on the top ridge of the petrous temporal is the superior petrosal sinus." },
+  { id: 35, topic: "Deep bones", src: "Maini · L01/L02", q: "Maini says the ethmoid is everywhere. Which of these is NOT an ethmoid contribution?", opts: ["The cribriform plate (roof of the nasal cavity)", "The lower part of the nasal septum", "The perpendicular plate (upper septum)", "The superior and middle nasal conchae"], a: 1, h1: "The lower septum belongs to a single plough-shaped bone.", h2: "That is the vomer.", exp: "The ethmoid gives the cribriform plate, perpendicular plate, and superior and middle conchae. The LOWER septum is the vomer, not the ethmoid." },
+  { id: 36, topic: "Mandible", src: "Maini · L02", q: "Maini divides the mandible into which three main parts?", opts: ["Head, neck, and shaft", "Base, arch, and condyle", "Coronoid, condyle, and notch", "Body, ramus, and angle"], a: 3, h1: "Horizontal part, vertical part, and the corner.", h2: "Body plus ramus plus the angle between them.", exp: "The mandible = body, ramus, and angle." },
+  { id: 37, topic: "Mandible", src: "Maini · L02", q: "The mandibular foramen transmits which nerve, and the lingula beside it guides its anesthetic block?", opts: ["The inferior alveolar nerve", "The mental nerve", "The mylohyoid nerve", "The lingual nerve"], a: 0, h1: "The lingula is a tongue-shaped landmark for the block.", h2: "It later exits as the mental nerve.", exp: "The mandibular foramen transmits the INFERIOR ALVEOLAR nerve; the tongue-shaped lingula is the landmark for blocking it." },
+  { id: 38, topic: "Mandible", src: "Maini · L02", q: "After running through the mandible, the inferior alveolar nerve exits the mental foramen and is renamed the:", opts: ["Mylohyoid nerve", "Lingual nerve", "Mental nerve", "Buccal nerve"], a: 2, h1: "Named for the opening it exits.", h2: "It supplies the lower lip and chin.", exp: "At the mental foramen the inferior alveolar nerve becomes the MENTAL nerve, sensory to the lower lip and chin." },
+  { id: 39, topic: "Fontanelles", src: "Maini · L02", q: "The anterior fontanelle is diamond-shaped and becomes which future landmark, closing by about 18 months?", opts: ["Lambda", "Bregma", "Pterion", "Asterion"], a: 1, h1: "It sits at the front of the skull cap.", h2: "Coronal meets sagittal there.", exp: "The anterior fontanelle is diamond-shaped, the future BREGMA, and closes by about 18 months. It is the last to close and the one most palpated." },
+  { id: 40, topic: "Clinical", src: "Maini · L01/L02", q: "A hard blow fractures the pterion and tears the middle meningeal artery. Which hemorrhage results?", opts: ["Subarachnoid hemorrhage", "Subdural hemorrhage", "Intracerebral hemorrhage", "Epidural (extradural) hemorrhage"], a: 3, h1: "The bleed is between the skull and the dura.", h2: "It is an arterial, extradural bleed.", exp: "A pterion fracture tearing the MIDDLE MENINGEAL artery causes an EPIDURAL (extradural) hemorrhage." },
+  { id: 41, topic: "Sinuses", src: "Maini · L01", q: "Which FOUR bones contain paranasal air sinuses?", opts: ["Frontal, maxillary, ethmoid, and sphenoid", "Frontal, parietal, temporal, occipital", "Maxillary, palatine, vomer, nasal", "Ethmoid, sphenoid, temporal, occipital"], a: 0, h1: "They lighten the skull and add vocal resonance.", h2: "Two cranial (ethmoid, sphenoid) and two others.", exp: "Paranasal sinuses are in the FRONTAL, MAXILLARY, ETHMOID, and SPHENOID bones. They lighten the skull and add resonance to the voice." },
+  { id: 42, topic: "Development", src: "Maini · L01/L02", q: "The flat bones of the calvaria, like the frontal and parietal, form by which type of ossification?", opts: ["Endochondral ossification", "Intramembranous ossification", "Perichondral ossification", "Appositional growth only"], a: 1, h1: "Flat bones form in a membrane, not cartilage.", h2: "The base is the one that is endochondral.", exp: "Flat skull bones form by INTRAMEMBRANOUS ossification; the base and irregular bones form by endochondral ossification." },
+  { id: 43, topic: "Fontanelles", src: "Maini · L02", q: "A SUNKEN anterior fontanelle in an infant most suggests:", opts: ["Raised intracranial pressure", "Rickets", "Dehydration", "Hydrocephalus"], a: 2, h1: "Sunken versus bulging point in opposite directions.", h2: "Think fluid loss.", exp: "A SUNKEN fontanelle suggests DEHYDRATION; a BULGING one suggests raised intracranial pressure; delayed closure suggests rickets." },
+  { id: 44, topic: "Clinical", src: "Maini · L02", q: "Premature fusion of the sagittal suture gives a long, narrow, boat-shaped head called:", opts: ["Plagiocephaly", "Oxycephaly", "Microcephaly", "Scaphocephaly"], a: 3, h1: "Scapha means a boat.", h2: "Early sagittal fusion, long and narrow.", exp: "Scaphocephaly = a boat-shaped head from early sagittal fusion. Maini notes that scapha means boat." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.edge-note{font-size:12.5px;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:12px 0 0;display:block;max-width:720px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.speakbar{position:sticky;top:52px;z-index:15;display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:14px;padding:12px 14px;margin:8px 0 14px;box-shadow:0 14px 34px -24px var(--accent-deep)}
+.speakbtn{border:none;background:rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:700;font-size:14px;padding:9px 14px;border-radius:10px;cursor:pointer;transition:.14s;display:inline-flex;align-items:center;gap:6px}
+.speakbtn:hover{background:rgba(255,255,255,.30)}
+.speakbtn.primary{background:#fff;color:var(--accent-deep)}
+.speakbtn:disabled{opacity:.45;cursor:default}
+.rate-wrap{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:#fff}
+.rate-wrap input[type=range]{accent-color:#fff;width:118px}
+.voice-wrap{display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff}
+.voice-wrap select{font:inherit;font-size:12.5px;border-radius:8px;border:none;padding:6px 8px;max-width:180px;background:#fff;color:var(--ink)}
+.speak-status{font-size:12px;font-weight:600;color:#fff;opacity:.92;margin-left:auto}
+.nospeech{font-size:13px;color:var(--bad);background:var(--bad-bg);border:1px solid var(--bad-line);border-radius:10px;padding:10px 13px;margin:8px 0}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);transition:outline .15s,box-shadow .15s}
+.obj.speaking{outline:3px solid var(--accent);outline-offset:2px;box-shadow:0 18px 40px -20px rgba(124,58,237,.6)}
+.obj.speaking .obj-num{color:var(--accent)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.playicon{font-size:12px;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:6px;padding:2px 7px;white-space:nowrap}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"\\2691 Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ============================================== SPEECH HELPERS ============= */
+function speakClean(t){
+  return String(t)
+    .replace(/→/g," to ")
+    .replace(/&/g," and ")
+    .replace(/°/g," degrees")
+    .replace(/·/g,". ")
+    .replace(/\s+/g," ")
+    .trim();
+}
+function splitSentences(t){
+  const clean = speakClean(t);
+  const parts = clean.split(/(?<=[.?!])\s+/);
+  const out = [];
+  parts.forEach((p) => {
+    p = p.trim();
+    if (!p) return;
+    if (p.length <= 200) { out.push(p); return; }
+    let buf = "";
+    p.split(/,\s+/).forEach((seg) => {
+      if (buf && (buf + ", " + seg).length > 200) { out.push(buf); buf = seg; }
+      else { buf = buf ? buf + ", " + seg : seg; }
+    });
+    if (buf) out.push(buf);
+  });
+  return out;
+}
+function buildSegments(cards){
+  const segs = [];
+  cards.forEach((c, ci) => { splitSentences(c.say).forEach((s) => segs.push({ card: ci, text: s })); });
+  return segs;
+}
+function useVoices(){
+  const [voices, setVoices] = useState([]);
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const load = () => { const v = window.speechSynthesis.getVoices(); if (v && v.length) setVoices(v); };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => { try { window.speechSynthesis.onvoiceschanged = null; } catch (e) {} };
+  }, []);
+  return voices;
+}
+function pickDefaultVoice(voices){
+  if (!voices || !voices.length) return "";
+  const pref = ["Ava", "Emma", "Andrew", "Aria", "Jenny", "Michelle", "Guy", "Christopher"];
+  const en = voices.filter((v) => /^en/i.test(v.lang || ""));
+  const pool = en.length ? en : voices;
+  for (const name of pref) {
+    const m = pool.find((v) => v.name && v.name.indexOf(name) >= 0);
+    if (m) return m.voiceURI;
+  }
+  const us = pool.find((v) => /US/i.test(v.lang || ""));
+  return (us || pool[0]).voiceURI;
+}
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 1 · Head &amp; Neck · Dr. Maini</span>
+          <h1 className="title serif">GA 0202 · The <em>Skull</em></h1>
+          <p className="subtitle">A voiced, hands-free cram walkthrough of Dr. Maini&apos;s skull osteology — the two divisions and the bones, the sutures, the landmark points (pterion!), the three fossae and their foramina, the sphenoid and ethmoid, the mandible, and development and fontanelles. Grounded in the audited skull question bank, with a drill in her style and her own analogies. Press Play and it reads itself aloud.</p>
+          <p className="edge-note">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+          <div className="pill-row">
+            <span className="pill-date">🗣️ Voiced cram · The Skull (Lectures 1 &amp; 2) · lecture + lab</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA 0202 skull lectures (Osteology of the Skull; Mandible &amp; Skull Development) and grounded in the audited Everything-MC skull bank. Questions are original, in her style, source-tagged per item. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  const voices = useVoices();
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+  const segs = useMemo(() => buildSegments(cram), []);
+
+  const [rate, setRate] = useState(1);
+  const [voiceURI, setVoiceURI] = useState("");
+  const [cur, setCur] = useState(-1);
+  const [playing, setPlaying] = useState(false);
+
+  const rateRef = useRef(1); rateRef.current = rate;
+  const voiceRef = useRef(""); voiceRef.current = voiceURI;
+  const voicesRef = useRef([]); voicesRef.current = voices;
+  const playingRef = useRef(false);
+  const segIdxRef = useRef(0);
+  const cardRefs = useRef({});
+
+  useEffect(() => { if (!voiceURI && voices.length) setVoiceURI(pickDefaultVoice(voices)); }, [voices, voiceURI]);
+  useEffect(() => () => { if (supported) { try { window.speechSynthesis.cancel(); } catch (e) {} } }, []);
+
+  const speakSeg = (k) => {
+    if (!supported) return;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    if (k >= segs.length) { playingRef.current = false; setPlaying(false); setCur(-1); segIdxRef.current = 0; return; }
+    segIdxRef.current = k;
+    const seg = segs[k];
+    setCur(seg.card);
+    const el = cardRefs.current[seg.card];
+    if (el && el.scrollIntoView) { try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {} }
+    const u = new SpeechSynthesisUtterance(seg.text);
+    u.rate = Math.max(0.5, Math.min(3, rateRef.current));
+    const v = (voicesRef.current || []).find((x) => x.voiceURI === voiceRef.current);
+    if (v) u.voice = v;
+    u.onend = () => { if (!playingRef.current) return; speakSeg(k + 1); };
+    try { window.speechSynthesis.speak(u); } catch (e) {}
+  };
+
+  const play = () => {
+    if (!supported) return;
+    playingRef.current = true; setPlaying(true);
+    if (window.speechSynthesis.paused) { try { window.speechSynthesis.resume(); return; } catch (e) {} }
+    speakSeg(segIdxRef.current || 0);
+  };
+  const pause = () => {
+    if (!supported) return;
+    playingRef.current = false; setPlaying(false);
+    try { window.speechSynthesis.pause(); } catch (e) {}
+  };
+  const stop = () => {
+    if (!supported) return;
+    playingRef.current = false; setPlaying(false); setCur(-1); segIdxRef.current = 0;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+  };
+  const jumpCard = (ci) => {
+    if (!supported) return;
+    const k = segs.findIndex((s) => s.card === ci);
+    if (k < 0) return;
+    playingRef.current = true; setPlaying(true);
+    speakSeg(k);
+  };
+  const step = (dir) => {
+    const base = cur < 0 ? 0 : cur;
+    const target = Math.max(0, Math.min(cram.length - 1, base + dir));
+    jumpCard(target);
+  };
+  const changeRate = (v) => {
+    setRate(v); rateRef.current = v;
+    if (playingRef.current) speakSeg(segIdxRef.current || 0);
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s skull essentials, read aloud</div>
+        <p>Press ▶ Play and it walks the whole module hands-free, in her lecture order: divisions and bones → sutures → landmark points → views → the three fossae → foramina → deep bones → mandible → development → clinical. The ⚑ flags are the high-yield hooks. Tap any card to start reading from there.</p>
+      </div>
+
+      {!supported && <div className="nospeech">Your browser does not support speech synthesis, so the read-aloud controls are hidden. The full cram content still reads on screen below (Microsoft Edge gives the best voices).</div>}
+
+      {supported && (
+        <div className="speakbar">
+          <button className="speakbtn primary" onClick={playing ? pause : play}>{playing ? "⏸ Pause" : (cur >= 0 ? "▶ Resume" : "▶ Play all")}</button>
+          <button className="speakbtn" onClick={() => step(-1)}>⏮ Prev</button>
+          <button className="speakbtn" onClick={() => step(1)}>⏭ Next</button>
+          <button className="speakbtn" onClick={stop}>⏹ Stop</button>
+          <div className="rate-wrap">Speed <input type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => changeRate(parseFloat(e.target.value))} /> <b>{rate.toFixed(1)}x</b></div>
+          <div className="voice-wrap">Voice
+            <select value={voiceURI} onChange={(e) => setVoiceURI(e.target.value)}>
+              {voices.length === 0 && <option value="">Default</option>}
+              {voices.map((v) => <option key={v.voiceURI} value={v.voiceURI}>{v.name}</option>)}
+            </select>
+          </div>
+          <span className="speak-status">{playing ? ("Reading card " + (cur + 1) + " / " + cram.length) : (cur >= 0 ? ("Paused on card " + (cur + 1)) : "Ready")}</span>
+        </div>
+      )}
+
+      {cram.map((c, ci) => (
+        <div className={"obj" + (cur === ci ? " speaking" : "")} key={c.n}
+             ref={(el) => { cardRefs.current[ci] = el; }}
+             onClick={() => jumpCard(ci)}
+             style={{ cursor: supported ? "pointer" : "default" }}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            {supported && <span className="playicon">{cur === ci && playing ? "🔊 reading" : "▶ tap to read"}</span>}
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, weighted by what Dr. Maini stresses and the way she writes questions. The ★★ Heavy items are the ones she circles back to.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Dr. Maini&apos;s own mnemonics, analogies, and word-roots pulled straight from the skull lectures — the retention hooks to lean on when a fact will not stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the skull</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Maini, teaching GA 0202 Gross Anatomy, running a review of THE SKULL (osteology; Lectures 1 and 2). Teach ONLY from this content; do not invent bones, foramina, contents, sutures, ages, or numbers. You are warm and encouraging; you say "right?", "okay?", and "alright?"; you call the class "you guys"; and you push students to correlate clinically and reason it out rather than memorize blindly. Keep answers tight (3-6 sentences) and quiz the student back.
+
+DIVISIONS: neurocranium = the 8 cranial bones that surround and enclose the brain (frontal, 2 parietal, 2 temporal, occipital, ethmoid, sphenoid); the ethmoid and sphenoid are cranial even though they sit deep. Viscerocranium = the facial skeleton (maxilla, zygomatic = cheekbone, nasal bones = bridge, lacrimal = medial orbital wall, vomer = lower nasal septum, palatine, inferior nasal concha = its own bone). The maxilla is NOT a cranial bone. Superior and middle conchae = ethmoid; inferior concha = separate. Perpendicular plate of ethmoid = upper septum; vomer = lower septum. Hard palate = maxilla (anterior 2/3) + palatine (posterior 1/3). The sphenoid is bat-shaped.
+
+SUTURES: fibrous joints, the most stable/least mobile, named for the bones they join. Sagittal (2 parietals), coronal (frontal+parietal), lambdoid (parietal+occipital, looks like lambda), squamous (temporal+parietal), occipitomastoid (occipital+temporal), frontonasal (nasal+frontal). Cruciform palate suture = intermaxillary+palatomaxillary+interpalatine. Metopic = remnant of the frontal (interfrontal) suture.
+
+LANDMARK POINTS: nasion (internasal+frontonasal), bregma (coronal+sagittal), lambda (sagittal+lambdoid), asterion (squamous+lambdoid+occipitomastoid), vertex (highest point, just behind bregma), inion (external occipital protuberance), gonion (angle of mandible), glabella (frontal bone; a boards favorite). PTERION = 4 bones (frontal, parietal, temporal, greater wing of sphenoid) with the MIDDLE MENINGEAL ARTERY deep to it; a lateral blow (boxing) can fracture it and cause an epidural hemorrhage. These points are fragile because several sutures meet there.
+
+ANTERIOR/LATERAL: supraorbital foramen (supraorbital nerve/artery/vein), infraorbital foramen (maxilla), mental foramen (mandible, mental nerve), anterior nasal aperture = piriform (pear-shaped), anterior nasal spine (the two maxillae), frontal eminence = primary ossification center of the frontal bone, zygomatic arch = temporal process of zygomatic + zygomatic process of temporal, temporal LINES = parietal bone (trap), external acoustic meatus + styloid process = temporal bone.
+
+POSTERIOR/SUPERIOR + INNER CALVARIA: mastoid process = temporal, nuchal lines = neck muscles, emissary veins connect extracranial and intracranial veins, wormian (sutural) bones = extra bones within sutures. Inner midline groove = superior sagittal sinus; side pits = arachnoid granulations.
+
+FOSSAE: 3 (anterior, middle, posterior). Anterior floor = frontal orbital plate + ethmoid cribriform + sphenoid lesser wing; the cribriform plate (a C, like a filter) transmits the olfactory nerve fascicles; crista galli = ethmoid; foramen cecum = blind, nothing passes. MIDDLE: sella turcica on the body of the sphenoid holds the pituitary (I do not test the sub-parts); carotid sulcus = internal carotid; chiasmatic sulcus = optic chiasm; optic canal (sphenoid) = optic nerve; superior orbital fissure between greater and lesser wings. Arch anterior-to-posterior: superior orbital fissure, foramen rotundum, foramen ovale, foramen spinosum; rotundum is NOT seen inferiorly. Posterior boundary = crest of the petrous temporal. POSTERIOR fossa: clivus = internal basilar occiput; sigmoid sinus = S-shaped groove; superior petrosal sinus = top ridge of petrous temporal; internal acoustic meatus leads to the internal ear.
+
+BASE FORAMINA: foramen magnum = medulla/spinal-cord junction, condyles articulate with the atlas (C1); carotid canal = internal carotid; jugular foramen = temporal+occipital, internal jugular vein; rotundum/ovale/spinosum = sphenoid; foramen lacerum = sphenoid+temporal+occipital; foramen spinosum named for the spine of the sphenoid; the facial nerve exits the STYLOMASTOID foramen (between styloid and mastoid). Orientation rule: INFERIOR view, the carotid canal is next to the jugular foramen; INTERNAL base view, the internal acoustic meatus is next to the jugular foramen; the hypoglossal canal sits in the wall of the foramen magnum. Incisive foramen (in the incisive fossa, behind the incisors), greater/lesser palatine foramina (palatine vessels/nerve), pharyngeal tubercle (basilar occiput), pterygoid hamulus (sphenoid), mandibular fossa (temporal, receives the condyle), digastric notch (digastric muscle).
+
+DEEP BONES + SINUSES: sphenoid = lesser wing + greater wing + pterygoid process (medial & lateral plates) + sphenoid sinus under the sella (the trans-sphenoidal route to the pituitary). The ethmoid is everywhere: cribriform roof, perpendicular plate, superior & middle conchae, but NOT the lower septum (vomer). Petrous temporal = dense part housing the internal ear. Paranasal sinuses in 4 bones: frontal, maxillary, ethmoid, sphenoid; they lighten the skull and add resonance. Mastoid air cells = a closed system. Air is black (radiolucent) on X-ray.
+
+MANDIBLE: body, ramus, angle. The condylar process (head + neck) forms the TMJ in the mandibular fossa; the pterygoid fovea (a pit on the neck) = lateral pterygoid. Mandibular foramen = inferior alveolar nerve; the tongue-shaped lingula is the landmark for its block; the nerve exits the mental foramen as the mental nerve (lower lip and chin). Mylohyoid line = mylohyoid muscle (floor of the mouth); sublingual fossa = sublingual gland; submandibular fossa = submandibular gland; mental spine (genial tubercle) inner midline; digastric fossa = anterior belly of digastric. Maxilla and mandible carry the alveolar arches (teeth).
+
+DEVELOPMENT: flat bones = intramembranous ossification; base/irregular bones = endochondral. Neurocranium mostly neural crest; chondrocranium (base) = neural crest + occipital somites; viscerocranium = first two pharyngeal arches. Sutures stay fibrous in infancy to let the brain grow; the two frontal halves fuse by ~8 years; calvarial capacity increases to ~16 years. FONTANELLES: anterior = diamond, future bregma, closes ~18 months, last to close, most palpated; posterior = triangular, future lambda; anterolateral becomes pterion; posterolateral (mastoid) becomes asterion. Sunken = dehydration; bulging = raised intracranial pressure; delayed closure = rickets (vitamin D/calcium). ANOMALIES: scaphocephaly (boat, early sagittal), plagiocephaly (asymmetric, one-sided), oxycephaly/turricephaly (coronal), acrania (skull cap fails, brain exposed), microcephaly (abnormal CNS). CLINICAL: pterion fracture tears the middle meningeal artery causing an epidural hemorrhage; glabellar tap sign points to Parkinsonism (always correlate, never diagnose on one sign); trans-sphenoidal (trans-nasal through the sphenoid sinus) approach to a pituitary tumor.
+
+Open by offering to drill the pterion and its artery, the base foramina and their contents, the middle-fossa arch, the deep bones (sphenoid & ethmoid), the mandible, or the fontanelles and anomalies. When the student is wrong, name the rule and have them reason it out step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay you guys, the skull. Two things I really want you to nail: the PTERION, where four bones meet and the middle meningeal artery runs right underneath, so a hard blow there can cause a bleed, right? And the foramina of the base and what passes through each. Want me to drill the pterion and its artery, the base foramina and their contents, the middle-fossa arch (superior orbital fissure, rotundum, ovale, spinosum), the deep bones (sphenoid and ethmoid), the mandible, or the fontanelles and the developmental anomalies? Where do you want to start?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the pterion and the middle meningeal artery",
+    "Quiz the base foramina and their contents",
+    "The middle-fossa arch, front to back",
+    "The sphenoid and ethmoid: what belongs to each?",
+    "The mandible: parts, foramina, and the nerve block",
+    "Fontanelles and the developmental anomalies",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her skull lectures. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

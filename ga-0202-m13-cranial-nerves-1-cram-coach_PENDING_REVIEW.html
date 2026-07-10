@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · Cranial Nerves (part 1) - Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 13 — CRANIAL NERVES (PART 1)
+   Dr. Seema Maini. Cram Coach. PENDING REVIEW.
+   Built ONLY from Dr. Maini's GA lecture 28:
+     • Pharynx, Prevertebral Region & Cranial Nerves I-III
+   Original phrasing, in her style; grounded in the audited Everything-MC bank. Source-tagged.
+   THEME: violet. Correct keys taught plainly; answer positions shuffled/balanced.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m13-cranial-nerves-1-hub_PENDING_REVIEW.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (9 TOPICS) ===== */
+const cram = [
+  {
+    "n": 1,
+    "title": "Pharynx review - Waldeyer's ring & swallowing",
+    "src": "Maini · L28",
+    "facts": [
+      "The pharynx has THREE parts: nasopharynx, oropharynx, and laryngopharynx. The key feature of the laryngopharynx is the PIRIFORM FOSSA, a groove on each side of the laryngeal inlet: the internal laryngeal nerve runs just under its mucosa, so a sharp swallowed object (a fish bone) lodged there can injure it.",
+      "The INTERNAL LARYNGEAL nerve is a branch of the VAGUS (via the superior laryngeal nerve) and is SENSORY to the larynx ABOVE the vocal cords.",
+      "WALDEYER'S RING of tonsils = 1 pharyngeal (clinically the ADENOIDS, in the nasopharyngeal roof) + 2 tubal + 2 palatine + 1 lingual. Tonsils are SECONDARY lymphatic tissue; the PRIMARY lymphatic tissues are the bone marrow and thymus.",
+      "The inferior constrictor's two parts are thyropharyngeus (upper) and CRICOPHARYNGEUS, which rings the esophageal opening as the UPPER ESOPHAGEAL SPHINCTER. Swallowing has three stages - only the ORAL (buccal) stage is voluntary; the deglutition centre sits in the PONS and MEDULLA, and the reflex motor nerves are V, IX, X, and XII."
+    ],
+    "flag": "Piriform fossa = a fish bone can injure the internal laryngeal nerve (vagus, sensory above the cords). Waldeyer's ring = 1 pharyngeal (adenoids) + 2 tubal + 2 palatine + 1 lingual; tonsils = secondary lymphatic tissue. Cricopharyngeus = upper esophageal sphincter. Only the ORAL swallowing stage is voluntary; deglutition centre = pons + medulla; nerves = 5, 9, 10, 12."
+  },
+  {
+    "n": 2,
+    "title": "Cranial nerves of the pharynx - the plexus & the cranial accessory",
+    "src": "Maini · L28",
+    "facts": [
+      "The PHARYNGEAL PLEXUS on the side and back of the pharynx is formed by CN IX (glossopharyngeal) and CN X (vagus).",
+      "Every pharyngeal muscle is supplied by the VAGUS except one: STYLOPHARYNGEUS (a 3rd-arch muscle) is supplied by CN IX.",
+      "The motor (SVE) fibres the vagus delivers to the pharyngeal, palatine, and laryngeal muscles are really the CRANIAL part of the accessory nerve (XI): those cranial fibres join the vagus inside the skull, so only the SPINAL fibres of XI leave as the 11th nerve to trapezius and sternocleidomastoid.",
+      "Sensory map of the pharyngeal mucosa: NASOPHARYNX = maxillary nerve (V2, from trigeminal); OROPHARYNX = glossopharyngeal (IX, tracking the posterior third of the tongue); the laryngeal inlet = internal laryngeal branch of the vagus. The superior cervical ganglion also sends cranial sympathetic branches to CN IX, X, and XII."
+    ],
+    "flag": "Pharyngeal plexus = IX + X. All pharyngeal muscles = vagus EXCEPT stylopharyngeus = IX. The vagus's motor fibres are really the CRANIAL accessory that joined it. Sensory: nasopharynx V2, oropharynx IX, laryngeal inlet internal laryngeal."
+  },
+  {
+    "n": 3,
+    "title": "The four prevertebral muscles",
+    "src": "Maini · L28",
+    "facts": [
+      "Know four muscles by origin, insertion, action, and nerve: LONGUS CAPITIS, LONGUS COLLI, RECTUS CAPITIS ANTERIOR, RECTUS CAPITIS LATERALIS.",
+      "LONGUS CAPITIS: superiorly to the inferior surface of the BASILAR part of the occipital bone; inferiorly to the anterior tubercles of the transverse processes of C3-C6; nerve = ventral rami C1-C3; flexes the head.",
+      "LONGUS COLLI (three parts): SUPERIOR OBLIQUE runs from the anterior tubercles of the transverse processes of C3-C5 to the anterior tubercle of the ATLAS; VERTICAL (intermediate) runs bodies-to-bodies, C5-T3 up to C2-C4; INFERIOR OBLIQUE runs from the bodies of T1-T3 to the transverse processes of C5-C7. Nerve = ventral rami C2-C6; it flexes the neck, the oblique parts add ipsilateral lateral flexion, and the inferior oblique rotates the neck to the OPPOSITE side.",
+      "RECTUS CAPITIS ANTERIOR attaches to the BASILAR part of the occiput (anterior to the condyle), from the atlas lateral mass, and flexes the head; RECTUS CAPITIS LATERALIS attaches to the JUGULAR process, from the atlas transverse process, and laterally flexes the head. Both recti = ventral rami C1-C2. Memory: anterior = basilar, lateralis = jugular."
+    ],
+    "flag": "4 prevertebral muscles. Longus capitis: basilar occiput to C3-C6 tubercles, ventral rami C1-C3. Longus colli: superior oblique (TP C3-5 to atlas), vertical (bodies C5-T3 to C2-4), inferior oblique (bodies T1-3 to TP C5-7). Rectus capitis ANTERIOR = BASILAR part, LATERALIS = JUGULAR process; both C1-C2."
+  },
+  {
+    "n": 4,
+    "title": "The cervical sympathetic trunk - three ganglia",
+    "src": "Maini · L28",
+    "facts": [
+      "It is the upward continuation of the thoracic sympathetic trunk, running from the neck of the FIRST RIB to the BASE OF THE SKULL, lying BEHIND the common and internal carotid arteries (an aneurysm there can compress it), embedded between the CAROTID SHEATH and the PREVERTEBRAL fascia with the vagus medial. It holds POSTGANGLIONIC cell bodies; the preganglionics climb up from the lateral horn of T1-T2 (there is no cervical lateral horn).",
+      "Three ganglia: SUPERIOR (the longest, opposite C2-C3, behind the internal carotid, anterior to longus capitis), MIDDLE (opposite C6, on the inferior thyroid artery), and INFERIOR (between the C7 transverse process and the neck of the first rib; usually fused with the T1 ganglion as the STELLATE ganglion).",
+      "Gray rami communicantes: superior gives C1-C4, middle gives C5-C6, inferior gives C7-C8. Gray rami put sympathetic fibres on EVERY spinal nerve to reach three body-wall targets - SWEAT GLANDS, ARRECTOR PILI muscles, and BLOOD VESSELS; parasympathetic is reserved for internal organs.",
+      "About 99% of head-and-neck structures get their postganglionic sympathetic supply from the SUPERIOR cervical ganglion; its internal carotid nerve forms the ICA plexus. Cardiac branches run from the neck to the heart, and GVA pain fibres follow them back, which is why cardiac pain refers to the neck and side of the head."
+    ],
+    "flag": "Extent = first rib to skull base, BEHIND the carotids. Postganglionic bodies; preganglionics ascend from T1-T2. Superior (C2-3, longest, gray rami C1-4, ~99% of head/neck), middle (C6, inferior thyroid artery, C5-6), inferior (C7-first rib, + T1 = stellate, C7-8). Gray rami targets = sweat glands, arrector pili, blood vessels."
+  },
+  {
+    "n": 5,
+    "title": "The four layers of deep cervical fascia",
+    "src": "Maini · L28",
+    "facts": [
+      "The four layers are the INVESTING layer, the PRETRACHEAL layer, the PREVERTEBRAL layer, and the CAROTID SHEATH.",
+      "The INVESTING layer splits to enclose sternocleidomastoid (anteriorly) and trapezius (posteriorly); it forms the ROOF of the anterior and posterior triangles, attaches posteriorly to the ligamentum nuchae, and thickens between the styloid process and the ANGLE of the mandible to form the STYLOMANDIBULAR ligament.",
+      "The PRETRACHEAL fascia encloses the THYROID gland and the infrahyoid (strap) muscles; inferiorly it spreads into the thorax and merges with the FIBROUS PERICARDIUM. The PREVERTEBRAL fascia encloses the prevertebral muscles and inferiorly blends with the ANTERIOR LONGITUDINAL LIGAMENT.",
+      "The CAROTID SHEATH encloses three structures: the common/internal carotid artery, the internal jugular vein, and the vagus nerve."
+    ],
+    "flag": "4 layers = investing, pretracheal, prevertebral, carotid sheath. Investing = SCM + trapezius (+ stylomandibular ligament, triangle roofs). Pretracheal = thyroid + strap muscles, blends with fibrous pericardium. Prevertebral = prevertebral muscles, blends with ALL. Carotid sheath = carotid + IJV + vagus."
+  },
+  {
+    "n": 6,
+    "title": "CN I - Olfactory nerve",
+    "src": "Maini · L28",
+    "facts": [
+      "Functional component = SVA (special visceral afferent) - the special sense of smell. There is no single olfactory nerve; it is MULTIPLE FASCICLES of axons.",
+      "The receptors are olfactory neurons in the OLFACTORY EPITHELIUM near the ROOF of the nasal cavity. Each is a CHEMORECEPTOR with multiple CILIA on its apical border; dissolved chemicals stimulate them. The BASAL cells act as STEM cells that replace worn-out receptors.",
+      "Pathway: the axons pass through the foramina of the CRIBRIFORM PLATE of the ETHMOID, synapse in the olfactory bulb with MITRAL cells and association neurons, and their axons form the olfactory tract, which ends in the primary olfactory cortex of the TEMPORAL LOBE.",
+      "Clinical: ANOSMIA = loss of smell (aging, trauma, inflammation such as COVID) - but the neurons REGENERATE. PHANTOSMIA = smelling something that is not there (an olfactory hallucination). OLFACTORY ADAPTATION = continuous stimulation makes the receptors stop responding (you stop noticing a room's smell)."
+    ],
+    "flag": "CN I = SVA, multiple fascicles. Receptors = ciliated chemoreceptor olfactory neurons in the roof-of-nose epithelium; basal cells = stem cells. Pathway: cribriform plate (ethmoid) to mitral cells to the TEMPORAL-lobe cortex. Anosmia (regenerates) vs phantosmia (phantom smell) vs adaptation."
+  },
+  {
+    "n": 7,
+    "title": "CN II - Optic nerve",
+    "src": "Maini · L28",
+    "facts": [
+      "Functional component = SSA (special somatic afferent); Maini reasons the eye develops from ECTODERM, so the input is somatic, not visceral. A frequently-asked board point: the optic nerve is made of the axons of the GANGLION cells, NOT of the rods and cones.",
+      "Photoreceptors: CONES = colour vision, concentrated CENTRALLY; RODS respond to very little light, are more PERIPHERAL, sense no colour, and use a photopigment derived from VITAMIN A. DARK ADAPTATION takes about 20 minutes because the rods must resynthesize the pigment bright light bleached. Signal flow: rods/cones to BIPOLAR cells to GANGLION cells (whose axons make the nerve).",
+      "The optic nerve leaves the orbit through the OPTIC CANAL (in the SPHENOID). At the OPTIC CHIASMA only the NASAL retinal fibres cross; temporal fibres stay. The lens flips the field map, so the TEMPORAL field lands on the NASAL retina.",
+      "Lesions: one optic NERVE cut = total blindness of that eye; at the CHIASMA (crossing nasal fibres) = BITEMPORAL HEMIANOPIA, classically from a PITUITARY ADENOMA (patients often see an ophthalmologist first for the field change); one optic TRACT = loss of the OPPOSITE field of both eyes (homonymous). After the midbrain the pathway continues as the optic RADIATION to the occipital lobe."
+    ],
+    "flag": "CN II = SSA (eye from ectoderm). Optic nerve = GANGLION-cell axons, not rods/cones. Cones = colour/central; rods = dim light/peripheral/vitamin A; dark adaptation ~20 min. Optic canal (sphenoid); chiasma crosses only NASAL fibres. Lesions: nerve = whole eye, chiasma = bitemporal (pituitary adenoma), tract = contralateral homonymous."
+  },
+  {
+    "n": 8,
+    "title": "CN III - Oculomotor nerve",
+    "src": "Maini · L28",
+    "facts": [
+      "Components = somatic motor PLUS PREGANGLIONIC PARASYMPATHETIC (GVE). It emerges from the ANTERIOR surface of the midbrain at the INTERPEDUNCULAR FOSSA, splits into superior and inferior divisions, and enters the orbit through the SUPERIOR ORBITAL FISSURE.",
+      "EXTRAOCULAR muscles (5): superior rectus, inferior rectus, medial rectus, inferior oblique, and LEVATOR PALPEBRAE SUPERIORIS. It does NOT supply lateral rectus (CN VI) or superior oblique (CN IV). INTRAOCULAR (parasympathetic) muscles: the CILIARY muscle and the SPHINCTER (constrictor) pupillae.",
+      "The accommodation (near) reflex is all CN III: CONVERGENCE by the medial rectus, PUPIL CONSTRICTION by the sphincter, and the CILIARY muscle contracts so the LENS becomes more CONVEX.",
+      "THIRD NERVE PALSY: the surviving superior oblique and lateral rectus pull the eye DOWN and OUT (squint); PTOSIS from loss of levator palpebrae superioris; the pupil DILATES (MYDRIASIS) from loss of the sphincter; ACCOMMODATION is lost. Light reflex: the affected eye has NO direct response, but the other eye's consensual response is INTACT (its CN III still works)."
+    ],
+    "flag": "CN III = motor + PREGANGLIONIC parasympathetic; interpeduncular fossa; superior orbital fissure. 5 extraocular (SR, IR, MR, IO, LPS) - NOT lateral rectus (VI) or superior oblique (IV); intraocular = ciliary + sphincter pupillae. Palsy = down-and-out, ptosis, MYDRIASIS, lost accommodation; direct reflex gone, the other eye's consensual intact."
+  },
+  {
+    "n": 9,
+    "title": "Horner vs CN III - the pupil rule (no-sympathetic trap)",
+    "src": "Maini · L28",
+    "facts": [
+      "The single best sign to separate them is the PUPIL. HORNER = MIOSIS (sympathetic failure denervates the DILATOR pupillae, so the pupil is small). THIRD NERVE PALSY = MYDRIASIS (parasympathetic failure denervates the SPHINCTER, so the pupil is large).",
+      "The ONE shared sign is PTOSIS - mild in Horner (superior tarsal / Muller's muscle) and marked in CN III palsy (levator palpebrae superioris).",
+      "THE TRAP: there is NO squint in Horner syndrome, because SYMPATHETIC fibres do not innervate ANY extraocular muscle, so a sympathetic lesion cannot misalign the eye. CN III palsy DOES cause squint (down-and-out).",
+      "Horner also brings ANHIDROSIS and FLUSHING of the affected side of the face. Put it together: small pupil + mild ptosis + no squint + dry face = Horner; big pupil + ptosis + down-and-out squint = CN III palsy."
+    ],
+    "flag": "The PUPIL is the tiebreaker. Horner = MIOSIS (dilator fails) + mild ptosis + anhidrosis + NO squint (sympathetic moves no eye muscle). CN III = MYDRIASIS (sphincter fails) + ptosis + down-and-out squint. Shared sign = ptosis only."
+  }
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  {
+    "tag": "★★ Heavy",
+    "text": "Horner vs a third nerve palsy comes down to the PUPIL: miosis = Horner (the sympathetic dilator pupillae fails), mydriasis = CN III palsy (the parasympathetic sphincter fails). The shared sign is ptosis; the giveaway is that Horner has NO squint.",
+    "why": "She says outright that the pupil is the best thing to look at, and builds the trap that sympathetic fibres move no eye muscle - so no squint in Horner.",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "★★ Heavy",
+    "text": "Optic pathway lesions: one optic NERVE = total blindness of that eye; the CHIASMA = bitemporal hemianopia (crossing nasal fibres), commonest cause a pituitary adenoma; one optic TRACT = loss of the opposite field in both eyes (homonymous).",
+    "why": "She works each lesion out loud and ties the chiasmal pattern to the pituitary adenoma pressing on the crossing fibres.",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "Trap",
+    "text": "The optic nerve is made of the axons of the GANGLION cells, NOT of the rods and cones. Signal flows rods/cones to bipolar cells to ganglion cells, whose axons form the nerve.",
+    "why": "She flags this as a frequently asked board question and warns students not to pick rods and cones.",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "Sympathetic",
+    "text": "The three cervical ganglia and their gray rami: superior (opposite C2-C3, the longest, gray rami C1-C4, ~99% of head-and-neck supply), middle (opposite C6, on the inferior thyroid artery, C5-C6), inferior (C7 to first rib, fused with T1 as the stellate, C7-C8).",
+    "why": "She says the ganglion relations and gray-rami levels turn up on board exams, and lists them level by level.",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "CN III",
+    "text": "CN III supplies five extraocular muscles - SR, IR, MR, inferior oblique, and levator palpebrae superioris - but NOT lateral rectus (VI) or superior oblique (IV); its parasympathetic fibres run the ciliary muscle and sphincter pupillae. A full palsy = down-and-out eye, ptosis, mydriasis, lost accommodation.",
+    "why": "She names every muscle and reasons the down-and-out palsy from the two survivors (SO and LR).",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "Prevertebral",
+    "text": "The four prevertebral muscles by attachments, action, and nerve: longus capitis (C1-C3), longus colli (three parts, C2-C6), and the two recti capitis (C1-C2). Contrast: rectus capitis anterior = basilar part, rectus capitis lateralis = jugular process.",
+    "why": "She dictates origin/insertion/action/nerve for each and stresses the basilar-vs-jugular contrast.",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "CN I",
+    "text": "The olfactory pathway: SVA fibres from ciliated chemoreceptor neurons in the roof-of-nose epithelium, through the cribriform plate of the ethmoid, synapsing on mitral cells, then via the olfactory tract to the temporal-lobe cortex. Clinical: anosmia (regenerates), phantosmia, olfactory adaptation.",
+    "why": "She walks the whole pathway and drills the three clinical terms with everyday examples.",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "Fascia",
+    "text": "The four deep-fascia layers and their contents: investing (SCM + trapezius, plus the stylomandibular ligament), pretracheal (thyroid + strap muscles), prevertebral (prevertebral muscles), and the carotid sheath (carotid artery + internal jugular vein + vagus).",
+    "why": "She says to skip the long bony attachments but to nail which structures each layer encloses.",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "Pharynx nerves",
+    "text": "Pharyngeal plexus = IX + X; every pharyngeal muscle is vagus-supplied except stylopharyngeus (IX). Sensory map: nasopharynx V2, oropharynx IX, laryngeal inlet internal laryngeal (vagus).",
+    "why": "She reviews the plexus, the lone IX exception, and the shared-cavity logic of the sensory map.",
+    "src": "Maini · L28"
+  },
+  {
+    "tag": "Swallowing",
+    "text": "Three stages, only the ORAL stage voluntary; the deglutition centre is in the pons and medulla, and the reflex motor nerves are V, IX, X, and XII. Cricopharyngeus forms the upper esophageal sphincter.",
+    "why": "She lists the stages, the centre, and the exact motor-nerve set for the pharyngeal stage.",
+    "src": "Maini · L28"
+  }
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  {
+    "kind": "Analogy",
+    "title": "The 11th nerve 'goes to Vegas'",
+    "text": "Maini jokes that the cranial part of the accessory nerve does not like the name accessory, so its motor fibres change their party and jump onto the vagus. Only the spinal fibres stay behind as the 11th nerve to trapezius and sternocleidomastoid.",
+    "helps": "Anchors why the vagus, not the accessory, is credited with the pharyngeal and laryngeal muscles.",
+    "src": "Maini · L28"
+  },
+  {
+    "kind": "Rule",
+    "title": "The pupil is the best thing to look at",
+    "text": "To split Horner syndrome from a third nerve palsy, go straight to the pupil: if it is miosis (small), it is Horner; if it is mydriasis (large), it is a third nerve palsy. Ptosis is shared, so it will not decide it - the pupil will.",
+    "helps": "Turns a confusing overlap into a one-look decision.",
+    "src": "Maini · L28"
+  },
+  {
+    "kind": "Trick",
+    "title": "The optic nerve is ganglion cells, not rods and cones",
+    "text": "Maini flags this as a favourite board trap: the optic nerve is built from the axons of the retinal ganglion cells. Rods and cones are the receptors, but they feed bipolar cells first - they do not form the nerve.",
+    "helps": "Stops the reflex wrong answer of rods and cones.",
+    "src": "Maini · L28"
+  },
+  {
+    "kind": "Analogy",
+    "title": "Peristalsis = a ball in a rubber tube",
+    "text": "To picture peristalsis, imagine pushing a ball down a rubber tube of the same diameter: you make a constriction ring behind the ball and move it along, and the ball travels forward. That is the wave that carries the bolus down the esophagus.",
+    "helps": "Makes the swallowing wave concrete and memorable.",
+    "src": "Maini · L28"
+  },
+  {
+    "kind": "Analogy",
+    "title": "The gut has its own brain",
+    "text": "Maini says the gut has its own brain - millions of neurons in the wall of the whole gastrointestinal tract (the enteric nervous system) that run the peristaltic movement, including the local secondary-peristalsis reflex.",
+    "helps": "Explains why esophageal peristalsis keeps going without conscious control.",
+    "src": "Maini · L28"
+  },
+  {
+    "kind": "Analogy",
+    "title": "Why people wear a lot of perfume",
+    "text": "With aging the olfactory receptors degenerate, so smell fades - which, Maini quips, is why people wear a lot of perfume: they cannot smell enough themselves. The good news is that the olfactory neurons regenerate.",
+    "helps": "Ties anosmia and aging to an everyday image.",
+    "src": "Maini · L28"
+  },
+  {
+    "kind": "Trick",
+    "title": "Autonomic questions are 'just there to scare you'",
+    "text": "Maini reassures the class that peripheral and autonomic-nervous-system questions look intimidating but are usually simple - do not freeze when you see one. Read it, apply the rule, and answer.",
+    "helps": "Defuses exam panic on sympathetic and cranial-nerve items.",
+    "src": "Maini · L28"
+  },
+  {
+    "kind": "Rule",
+    "title": "Verify WHY, because it will be a question",
+    "text": "Her running line: I am always right, but please verify why I am saying it - because this is going to appear as a question. Do not just memorize the fact; hold the reasoning that produced it.",
+    "helps": "Pushes you to learn the mechanism, not just the answer.",
+    "src": "Maini · L28"
+  }
+];
+
+/* =============================================================== DRILL ===== */
+/* Original-phrasing items built on Maini's GA Lecture 28 (pharynx, prevertebral, sympathetic, fascia, CN I-III).
+   Correct-answer-first authoring, then option positions balanced
+   (14 each A/B/C/D across 56 items). */
+const questions = [
+  {
+    "id": 1,
+    "topic": "Pharynx",
+    "src": "Maini · L28",
+    "q": "What are the three parts of the pharynx, in Maini's review?",
+    "opts": [
+      "Nasopharynx, oropharynx, and laryngopharynx",
+      "Nasopharynx, oropharynx, and esophagus",
+      "Vestibule, oropharynx, and glottis",
+      "Nasopharynx, laryngopharynx, and larynx"
+    ],
+    "a": 0,
+    "h1": "Three -pharynx names.",
+    "h2": "Naso, oro, laryngo.",
+    "exp": "Nasopharynx, oropharynx, and laryngopharynx; the larynx and esophagus are separate."
+  },
+  {
+    "id": 2,
+    "topic": "Pharynx",
+    "src": "Maini · L28",
+    "q": "Why is the piriform fossa of the laryngopharynx clinically important?",
+    "opts": [
+      "It is the opening of the auditory tube",
+      "The internal laryngeal nerve runs just under its mucosa, so a sharp swallowed object can injure it",
+      "It holds the pharyngeal tonsil (adenoids)",
+      "It is the site of the palatine tonsil"
+    ],
+    "a": 1,
+    "h1": "A groove beside the laryngeal inlet.",
+    "h2": "Think of a lodged fish bone.",
+    "exp": "The internal laryngeal nerve is superficial there, so a sharp foreign body (a fish bone) can injure it."
+  },
+  {
+    "id": 3,
+    "topic": "Pharynx",
+    "src": "Maini · L28",
+    "q": "The internal laryngeal nerve is a branch of which nerve, and what does it carry?",
+    "opts": [
+      "The glossopharyngeal nerve; motor to the pharynx",
+      "The trigeminal nerve (V3); sensation to the tongue",
+      "The vagus (via the superior laryngeal nerve); sensory to the larynx above the vocal cords",
+      "The vagus; motor to all intrinsic laryngeal muscles"
+    ],
+    "a": 2,
+    "h1": "It comes off the superior laryngeal nerve.",
+    "h2": "Vagus branch, sensory, above the cords.",
+    "exp": "It arises from the vagus through the superior laryngeal nerve and is sensory to the larynx above the vocal cords."
+  },
+  {
+    "id": 4,
+    "topic": "Pharynx",
+    "src": "Maini · L28",
+    "q": "Waldeyer's ring of tonsils is made up of:",
+    "opts": [
+      "Two pharyngeal, two tubal, one palatine, one lingual",
+      "One of each type of tonsil",
+      "One pharyngeal, one tubal, two palatine, two lingual",
+      "One pharyngeal, two tubal, two palatine, and one lingual tonsil"
+    ],
+    "a": 3,
+    "h1": "Only one sits in the nasopharyngeal roof.",
+    "h2": "1 + 2 + 2 + 1.",
+    "exp": "Waldeyer's ring = 1 pharyngeal (the adenoids) + 2 tubal + 2 palatine + 1 lingual."
+  },
+  {
+    "id": 5,
+    "topic": "Pharynx",
+    "src": "Maini · L28",
+    "q": "The tonsils are what class of lymphatic tissue, and what are the primary lymphatic tissues?",
+    "opts": [
+      "Secondary; the primary tissues are the bone marrow and thymus",
+      "Primary; the secondary tissues are the spleen and lymph nodes",
+      "Primary; the secondary tissues are the bone marrow and thymus",
+      "Secondary; the primary tissues are the spleen and tonsils"
+    ],
+    "a": 0,
+    "h1": "Where are lymphocytes made vs stored?",
+    "h2": "Marrow + thymus = primary.",
+    "exp": "Tonsils are secondary lymphatic tissue; the primary lymphatic tissues are the bone marrow and thymus."
+  },
+  {
+    "id": 6,
+    "topic": "Pharynx",
+    "src": "Maini · L28",
+    "q": "Which part of the inferior pharyngeal constrictor forms the upper esophageal sphincter?",
+    "opts": [
+      "Thyropharyngeus",
+      "Cricopharyngeus",
+      "Salpingopharyngeus",
+      "Stylopharyngeus"
+    ],
+    "a": 1,
+    "h1": "It forms a ring around the esophageal opening.",
+    "h2": "Crico- for the cricoid ring.",
+    "exp": "Cricopharyngeus rings the upper esophageal opening and acts as the upper esophageal sphincter."
+  },
+  {
+    "id": 7,
+    "topic": "CN components",
+    "src": "Maini · L28",
+    "q": "The pharyngeal plexus is formed by which two cranial nerves?",
+    "opts": [
+      "Vagus (X) and hypoglossal (XII)",
+      "Trigeminal (V) and facial (VII)",
+      "Glossopharyngeal (IX) and vagus (X)",
+      "Glossopharyngeal (IX) and accessory (XI)"
+    ],
+    "a": 2,
+    "h1": "Ninth and tenth.",
+    "h2": "Glossopharyngeal + vagus.",
+    "exp": "The pharyngeal plexus on the side and back of the pharynx is formed by CN IX and CN X."
+  },
+  {
+    "id": 8,
+    "topic": "CN components",
+    "src": "Maini · L28",
+    "q": "Every pharyngeal muscle is supplied by the vagus EXCEPT one. Which, and by what nerve?",
+    "opts": [
+      "Palatopharyngeus, by the hypoglossal nerve",
+      "Salpingopharyngeus, by the glossopharyngeal nerve",
+      "Cricopharyngeus, by the facial nerve",
+      "Stylopharyngeus, by the glossopharyngeal nerve (IX)"
+    ],
+    "a": 3,
+    "h1": "The one from the third pharyngeal arch.",
+    "h2": "Stylopharyngeus, CN IX.",
+    "exp": "Stylopharyngeus (a 3rd-arch muscle) is the lone exception, supplied by CN IX."
+  },
+  {
+    "id": 9,
+    "topic": "CN components",
+    "src": "Maini · L28",
+    "q": "The motor (SVE) fibres the vagus gives to pharyngeal and laryngeal muscles actually come from where?",
+    "opts": [
+      "The cranial part of the accessory nerve (XI), which joins the vagus",
+      "The spinal part of the accessory nerve",
+      "The glossopharyngeal nerve",
+      "The hypoglossal nerve"
+    ],
+    "a": 0,
+    "h1": "XI 'changes its party.'",
+    "h2": "The cranial accessory joins the vagus.",
+    "exp": "The cranial fibres of XI join the vagus inside the skull; only the spinal fibres leave as the 11th nerve to trapezius and SCM."
+  },
+  {
+    "id": 10,
+    "topic": "CN components",
+    "src": "Maini · L28",
+    "q": "In Maini's sensory map, the NASOPHARYNX mucosa is supplied by:",
+    "opts": [
+      "The glossopharyngeal nerve",
+      "The maxillary nerve (V2)",
+      "The internal laryngeal nerve",
+      "The mandibular nerve (V3)"
+    ],
+    "a": 1,
+    "h1": "Same nerve as the posterior nasal cavity.",
+    "h2": "V2.",
+    "exp": "The nasopharynx is supplied by the maxillary nerve (V2), continuing the posterior nasal-cavity pattern."
+  },
+  {
+    "id": 11,
+    "topic": "CN components",
+    "src": "Maini · L28",
+    "q": "The OROPHARYNX mucosa (like the posterior third of the tongue) is supplied by:",
+    "opts": [
+      "The maxillary nerve (V2)",
+      "The internal laryngeal nerve",
+      "The glossopharyngeal nerve (IX)",
+      "The hypoglossal nerve"
+    ],
+    "a": 2,
+    "h1": "Follows the back of the tongue.",
+    "h2": "Glossopharyngeal.",
+    "exp": "The oropharynx tracks with the posterior third of the tongue - CN IX."
+  },
+  {
+    "id": 12,
+    "topic": "CN components",
+    "src": "Maini · L28",
+    "q": "For the reflex (pharyngeal) stage of swallowing, the motor impulses are carried by which nerves?",
+    "opts": [
+      "CN III, IV, VI, and XII",
+      "CN VII, X, XI, and XII",
+      "CN V, VII, IX, and XI",
+      "CN V, IX, X, and XII"
+    ],
+    "a": 3,
+    "h1": "Not the eye-movement nerves.",
+    "h2": "5, 9, 10, 12.",
+    "exp": "Maini lists CN V, IX, X, and XII for the swallowing motor output."
+  },
+  {
+    "id": 13,
+    "topic": "CN components",
+    "src": "Maini · L28",
+    "q": "The deglutition (swallowing) centre is located in:",
+    "opts": [
+      "The pons and the medulla",
+      "The midbrain and thalamus",
+      "The cerebellum only",
+      "The hypothalamus"
+    ],
+    "a": 0,
+    "h1": "Lower brainstem.",
+    "h2": "Pons + medulla.",
+    "exp": "The deglutition centre lies in the pons and medulla."
+  },
+  {
+    "id": 14,
+    "topic": "CN components",
+    "src": "Maini · L28",
+    "q": "Which stage of swallowing is the only VOLUNTARY one?",
+    "opts": [
+      "The pharyngeal stage",
+      "The oral (buccal) stage",
+      "The esophageal stage",
+      "All three are voluntary"
+    ],
+    "a": 1,
+    "h1": "The one you control with your tongue.",
+    "h2": "The mouth phase.",
+    "exp": "Only the oral (buccal) stage is voluntary; the pharyngeal and esophageal stages are involuntary."
+  },
+  {
+    "id": 15,
+    "topic": "Prevertebral",
+    "src": "Maini · L28",
+    "q": "How many prevertebral muscles does Maini have you learn (origin, insertion, action, nerve)?",
+    "opts": [
+      "Three",
+      "Five",
+      "Four",
+      "Six"
+    ],
+    "a": 2,
+    "h1": "Two longus + two rectus capitis.",
+    "h2": "Four.",
+    "exp": "Four: longus capitis, longus colli, rectus capitis anterior, and rectus capitis lateralis."
+  },
+  {
+    "id": 16,
+    "topic": "Prevertebral",
+    "src": "Maini · L28",
+    "q": "Longus capitis attaches SUPERIORLY to:",
+    "opts": [
+      "The jugular process of the occipital bone",
+      "The anterior tubercle of the atlas",
+      "The body of the axis",
+      "The inferior surface of the basilar part of the occipital bone"
+    ],
+    "a": 3,
+    "h1": "Capitis = to the head.",
+    "h2": "Basilar part of the occiput.",
+    "exp": "Longus capitis reaches the head at the basilar part of the occipital bone."
+  },
+  {
+    "id": 17,
+    "topic": "Prevertebral",
+    "src": "Maini · L28",
+    "q": "The three parts of longus colli are:",
+    "opts": [
+      "Superior oblique, vertical (intermediate), and inferior oblique",
+      "Anterior, middle, and posterior",
+      "Ascending, transverse, and descending",
+      "Deep, superficial, and intermediate"
+    ],
+    "a": 0,
+    "h1": "Two obliques and one straight part.",
+    "h2": "Superior oblique, vertical, inferior oblique.",
+    "exp": "Superior oblique, vertical (intermediate, bodies-to-bodies), and inferior oblique."
+  },
+  {
+    "id": 18,
+    "topic": "Prevertebral",
+    "src": "Maini · L28",
+    "q": "The INFERIOR OBLIQUE part of longus colli runs from:",
+    "opts": [
+      "The transverse processes of C3-C5 to the anterior tubercle of the atlas",
+      "The bodies of T1-T3 to the transverse processes of C5-C7",
+      "The bodies of C5-T3 to the bodies of C2-C4",
+      "The atlas to the occipital bone"
+    ],
+    "a": 1,
+    "h1": "Body to transverse process.",
+    "h2": "T1-T3 up to C5-C7 tubercles.",
+    "exp": "The inferior oblique runs from the bodies of T1-T3 to the transverse processes of C5-C7."
+  },
+  {
+    "id": 19,
+    "topic": "Prevertebral",
+    "src": "Maini · L28",
+    "q": "Rectus capitis ANTERIOR attaches to the occiput at the ___, while rectus capitis LATERALIS attaches at the ___.",
+    "opts": [
+      "Jugular process; basilar part",
+      "Occipital condyle; foramen magnum",
+      "Basilar part (anterior to the condyle); jugular process",
+      "Superior nuchal line; basilar part"
+    ],
+    "a": 2,
+    "h1": "Anterior/basilar; lateralis/jugular.",
+    "h2": "Basilar vs jugular.",
+    "exp": "Anterior = basilar part; lateralis = jugular process - the key contrast."
+  },
+  {
+    "id": 20,
+    "topic": "Prevertebral",
+    "src": "Maini · L28",
+    "q": "The nerve supply of the two recti capitis (anterior and lateralis) is:",
+    "opts": [
+      "Ventral rami of C2-C6",
+      "The cervical sympathetic trunk",
+      "Ventral rami of C1-C3",
+      "Ventral rami of C1-C2"
+    ],
+    "a": 3,
+    "h1": "The two shortest muscles share a supply.",
+    "h2": "C1-C2.",
+    "exp": "Both rectus capitis anterior and lateralis are supplied by the ventral rami of C1-C2."
+  },
+  {
+    "id": 21,
+    "topic": "Sympathetic",
+    "src": "Maini · L28",
+    "q": "How many ganglia are in the cervical sympathetic trunk?",
+    "opts": [
+      "Three - superior, middle, and inferior",
+      "Two",
+      "Four",
+      "One continuous ganglion"
+    ],
+    "a": 0,
+    "h1": "Top, middle, bottom.",
+    "h2": "Three.",
+    "exp": "Three: the superior, middle, and inferior cervical ganglia."
+  },
+  {
+    "id": 22,
+    "topic": "Sympathetic",
+    "src": "Maini · L28",
+    "q": "The cell bodies in the cervical sympathetic ganglia are:",
+    "opts": [
+      "Preganglionic sympathetic neurons",
+      "Postganglionic sympathetic neurons",
+      "Postganglionic parasympathetic neurons",
+      "Sensory neurons"
+    ],
+    "a": 1,
+    "h1": "The synapse has already happened here.",
+    "h2": "Postganglionic.",
+    "exp": "Chain ganglia hold postganglionic sympathetic cell bodies; the preganglionics climb up from T1-T2."
+  },
+  {
+    "id": 23,
+    "topic": "Sympathetic",
+    "src": "Maini · L28",
+    "q": "The preganglionic fibres that end in the cervical ganglia originate from:",
+    "opts": [
+      "The lateral horn of C1-C4",
+      "The sacral segments S2-S4",
+      "The lateral horn of T1-T2",
+      "The lumbar segments L1-L2"
+    ],
+    "a": 2,
+    "h1": "No cervical lateral horn - climb up.",
+    "h2": "T1-T2.",
+    "exp": "There is no cervical lateral horn, so the fibres ascend from the lateral horn of T1-T2."
+  },
+  {
+    "id": 24,
+    "topic": "Sympathetic",
+    "src": "Maini · L28",
+    "q": "About 99% of head-and-neck structures get their postganglionic sympathetic fibres from:",
+    "opts": [
+      "The middle cervical ganglion",
+      "The inferior (stellate) ganglion",
+      "The T1 thoracic ganglion",
+      "The superior cervical ganglion"
+    ],
+    "a": 3,
+    "h1": "The longest, highest one.",
+    "h2": "Superior cervical ganglion.",
+    "exp": "The superior cervical ganglion (the longest, opposite C2-C3) supplies nearly all of the head and neck."
+  },
+  {
+    "id": 25,
+    "topic": "Sympathetic",
+    "src": "Maini · L28",
+    "q": "Gray rami communicantes come from the three ganglia to which spinal-nerve levels?",
+    "opts": [
+      "Superior to C1-C4, middle to C5-C6, inferior to C7-C8",
+      "Superior to C5-C6, middle to C7-C8, inferior to C1-C4",
+      "All three to C1-C8 equally",
+      "Superior to C7-C8, inferior to C1-C4"
+    ],
+    "a": 0,
+    "h1": "Top ganglion, top nerves.",
+    "h2": "C1-4 / C5-6 / C7-8.",
+    "exp": "Superior gives C1-C4, middle gives C5-C6, and inferior gives C7-C8."
+  },
+  {
+    "id": 26,
+    "topic": "Sympathetic",
+    "src": "Maini · L28",
+    "q": "Gray rami carry sympathetic fibres onto every spinal nerve to reach which three body-wall targets?",
+    "opts": [
+      "Skeletal muscle, tendons, and periosteum",
+      "Sweat glands, arrector pili muscles, and blood vessels",
+      "Salivary, lacrimal, and mucous glands",
+      "Cardiac muscle, gut smooth muscle, and airway glands"
+    ],
+    "a": 1,
+    "h1": "The three skin/body-wall targets.",
+    "h2": "Sweat, arrector pili, vessels.",
+    "exp": "The three body-wall sympathetic targets are the sweat glands, arrector pili muscles, and blood vessels."
+  },
+  {
+    "id": 27,
+    "topic": "Sympathetic",
+    "src": "Maini · L28",
+    "q": "The inferior cervical ganglion is most often fused with the T1 ganglion to form the:",
+    "opts": [
+      "Vertebral ganglion",
+      "Carotid ganglion",
+      "Stellate ganglion",
+      "Nodose ganglion"
+    ],
+    "a": 2,
+    "h1": "A star-shaped name.",
+    "h2": "Stellate.",
+    "exp": "Inferior cervical + T1 = the stellate ganglion, between the C7 transverse process and the first rib."
+  },
+  {
+    "id": 28,
+    "topic": "Fascia",
+    "src": "Maini · L28",
+    "q": "The four layers of deep cervical fascia are:",
+    "opts": [
+      "Superficial, investing, buccopharyngeal, and pretracheal",
+      "Investing, pretracheal, alar, and prevertebral",
+      "Platysma, investing, prevertebral, and pericardial",
+      "Investing, pretracheal, prevertebral, and the carotid sheath"
+    ],
+    "a": 3,
+    "h1": "The sheath counts as the fourth.",
+    "h2": "Investing, pretracheal, prevertebral, carotid sheath.",
+    "exp": "The four layers are the investing, pretracheal, and prevertebral layers plus the carotid sheath."
+  },
+  {
+    "id": 29,
+    "topic": "Fascia",
+    "src": "Maini · L28",
+    "q": "The INVESTING layer splits to enclose which two muscles?",
+    "opts": [
+      "Sternocleidomastoid and trapezius",
+      "The infrahyoid muscles and the thyroid",
+      "The prevertebral muscles",
+      "The omohyoid and platysma"
+    ],
+    "a": 0,
+    "h1": "The two big superficial neck muscles.",
+    "h2": "SCM + trapezius.",
+    "exp": "The investing layer wraps sternocleidomastoid (anteriorly) and trapezius (posteriorly)."
+  },
+  {
+    "id": 30,
+    "topic": "Fascia",
+    "src": "Maini · L28",
+    "q": "The PRETRACHEAL fascia encloses ___ and inferiorly merges with ___.",
+    "opts": [
+      "The prevertebral muscles; the ALL",
+      "The thyroid and infrahyoid muscles; the fibrous pericardium",
+      "SCM and trapezius; the ligamentum nuchae",
+      "The carotid vessels; the pleura"
+    ],
+    "a": 1,
+    "h1": "In front of the trachea.",
+    "h2": "Thyroid + straps; fibrous pericardium.",
+    "exp": "Pretracheal encloses the thyroid and strap muscles and blends inferiorly with the fibrous pericardium."
+  },
+  {
+    "id": 31,
+    "topic": "Fascia",
+    "src": "Maini · L28",
+    "q": "Which three structures are enclosed by the carotid sheath?",
+    "opts": [
+      "External carotid, facial vein, and hypoglossal nerve",
+      "Internal carotid, external jugular vein, and phrenic nerve",
+      "Common/internal carotid artery, internal jugular vein, and vagus nerve",
+      "Subclavian artery, subclavian vein, and vagus nerve"
+    ],
+    "a": 2,
+    "h1": "Artery, vein, nerve.",
+    "h2": "Carotid, IJV, vagus.",
+    "exp": "The carotid sheath holds the carotid artery, the internal jugular vein, and the vagus nerve."
+  },
+  {
+    "id": 32,
+    "topic": "CN I",
+    "src": "Maini · L28",
+    "q": "Maini assigns the olfactory nerve which functional fibre type?",
+    "opts": [
+      "SSA - special somatic afferent",
+      "GSA - general somatic afferent",
+      "GVE - general visceral efferent",
+      "SVA - special visceral afferent (smell)"
+    ],
+    "a": 3,
+    "h1": "Special sense, visceral input.",
+    "h2": "SVA.",
+    "exp": "Smell is a special sense of a chemical input, so CN I is SVA."
+  },
+  {
+    "id": 33,
+    "topic": "CN I",
+    "src": "Maini · L28",
+    "q": "The olfactory receptor neurons are located:",
+    "opts": [
+      "In the olfactory epithelium near the roof of the nasal cavity",
+      "In the olfactory bulb on the cribriform plate",
+      "In the primary olfactory cortex",
+      "In the vomeronasal organ"
+    ],
+    "a": 0,
+    "h1": "High in the nose.",
+    "h2": "Roof of the nasal cavity.",
+    "exp": "They sit in the olfactory epithelium high in the nose, near the roof of the nasal cavity."
+  },
+  {
+    "id": 34,
+    "topic": "CN I",
+    "src": "Maini · L28",
+    "q": "In the olfactory epithelium, the basal cells act as:",
+    "opts": [
+      "The cells that secrete mucus",
+      "Stem cells that replace worn-out olfactory receptors",
+      "The cells that myelinate the axons",
+      "The supporting cells that insulate each neuron"
+    ],
+    "a": 1,
+    "h1": "The regeneration reservoir.",
+    "h2": "Stem cells.",
+    "exp": "Basal cells are stem cells that divide to replace damaged olfactory receptors."
+  },
+  {
+    "id": 35,
+    "topic": "CN I",
+    "src": "Maini · L28",
+    "q": "Olfactory nerve fascicles reach the olfactory bulb by passing through:",
+    "opts": [
+      "The optic canal",
+      "The superior orbital fissure",
+      "The foramina of the cribriform plate of the ethmoid",
+      "The jugular foramen"
+    ],
+    "a": 2,
+    "h1": "A sieve-like plate.",
+    "h2": "Cribriform plate (ethmoid).",
+    "exp": "The axons penetrate the cribriform plate of the ethmoid to reach the olfactory bulb."
+  },
+  {
+    "id": 36,
+    "topic": "CN I",
+    "src": "Maini · L28",
+    "q": "In the olfactory bulb, the receptor axons synapse with:",
+    "opts": [
+      "Ganglion and bipolar cells",
+      "Purkinje cells",
+      "Cortical pyramidal cells",
+      "Mitral cells and association neurons"
+    ],
+    "a": 3,
+    "h1": "Second-order cells of smell.",
+    "h2": "Mitral cells.",
+    "exp": "They synapse with mitral cells and association neurons, whose axons form the olfactory tract."
+  },
+  {
+    "id": 37,
+    "topic": "CN I",
+    "src": "Maini · L28",
+    "q": "A patient smells something that is not actually there (an olfactory hallucination). This is:",
+    "opts": [
+      "Phantosmia",
+      "Anosmia",
+      "Olfactory adaptation",
+      "Hyposmia"
+    ],
+    "a": 0,
+    "h1": "Phantom smell.",
+    "h2": "Phantosmia.",
+    "exp": "Phantosmia is a phantom smell; anosmia is loss of smell and adaptation is the fading of a real smell."
+  },
+  {
+    "id": 38,
+    "topic": "CN II",
+    "src": "Maini · L28",
+    "q": "Maini classifies the optic nerve as SSA. Her reason is that the eye develops from:",
+    "opts": [
+      "Endoderm",
+      "Ectoderm",
+      "Mesoderm",
+      "Neural crest only"
+    ],
+    "a": 1,
+    "h1": "Same germ layer as skin and nervous system.",
+    "h2": "Ectoderm.",
+    "exp": "The eye (and ear) arise from ectoderm, making the input somatic (SSA), not visceral."
+  },
+  {
+    "id": 39,
+    "topic": "CN II",
+    "src": "Maini · L28",
+    "q": "The optic nerve is composed of the axons of which cells (a frequently-asked board point)?",
+    "opts": [
+      "Rods and cones",
+      "Bipolar cells",
+      "Ganglion cells of the retina",
+      "Amacrine cells"
+    ],
+    "a": 2,
+    "h1": "Not the photoreceptors themselves.",
+    "h2": "Ganglion cells.",
+    "exp": "The optic nerve is made of ganglion-cell axons - not the axons of rods and cones."
+  },
+  {
+    "id": 40,
+    "topic": "CN II",
+    "src": "Maini · L28",
+    "q": "Which statement matches Maini's account of RODS?",
+    "opts": [
+      "They sense colour and cluster in the fovea",
+      "They form the optic disc",
+      "They project straight onto ganglion cells with no bipolar cells",
+      "They respond to little light, are more peripheral, and use a vitamin-A-derived pigment"
+    ],
+    "a": 3,
+    "h1": "The dim-light receptor.",
+    "h2": "Little light, peripheral, vitamin A.",
+    "exp": "Rods respond to little light, are more peripheral, sense no colour, and use a vitamin-A-derived photopigment."
+  },
+  {
+    "id": 41,
+    "topic": "CN II",
+    "src": "Maini · L28",
+    "q": "Dark adaptation takes about 20 minutes because:",
+    "opts": [
+      "The rods must resynthesize the photopigment bright light bleached",
+      "The cones migrate to the periphery",
+      "The pupil is slow to dilate",
+      "The optic nerve must remyelinate"
+    ],
+    "a": 0,
+    "h1": "Rebuild the bleached rod pigment.",
+    "h2": "Rod photopigment resynthesis.",
+    "exp": "Bright light exhausts the rod photopigment; rebuilding it takes about 20 minutes."
+  },
+  {
+    "id": 42,
+    "topic": "CN II",
+    "src": "Maini · L28",
+    "q": "The optic nerve leaves the orbit through the optic canal, which is part of which bone?",
+    "opts": [
+      "The frontal bone",
+      "The sphenoid bone",
+      "The ethmoid bone",
+      "The maxilla"
+    ],
+    "a": 1,
+    "h1": "Same bone as the sella turcica.",
+    "h2": "Sphenoid.",
+    "exp": "The optic canal is part of the sphenoid bone."
+  },
+  {
+    "id": 43,
+    "topic": "CN II",
+    "src": "Maini · L28",
+    "q": "At the optic chiasma, which fibres cross to the opposite side?",
+    "opts": [
+      "All optic fibres cross",
+      "Only the temporal retinal fibres",
+      "Only the NASAL retinal fibres; temporal fibres stay uncrossed",
+      "Only the colour-carrying fibres"
+    ],
+    "a": 2,
+    "h1": "A partial crossing.",
+    "h2": "Nasal crosses, temporal stays.",
+    "exp": "Only the nasal retinal fibres decussate at the chiasma; the temporal fibres stay uncrossed."
+  },
+  {
+    "id": 44,
+    "topic": "CN II",
+    "src": "Maini · L28",
+    "q": "A lesion AT the optic chiasma produces which defect, and what is the commonest cause?",
+    "opts": [
+      "Total blindness of one eye; optic neuritis",
+      "Homonymous hemianopia; an optic-tract stroke",
+      "Central scotoma; macular degeneration",
+      "Bitemporal hemianopia; a pituitary adenoma"
+    ],
+    "a": 3,
+    "h1": "Both temporal fields go.",
+    "h2": "Bitemporal hemianopia; pituitary adenoma.",
+    "exp": "Loss of both crossing nasal fibres removes both temporal fields = bitemporal hemianopia, classically from a pituitary adenoma."
+  },
+  {
+    "id": 45,
+    "topic": "CN II",
+    "src": "Maini · L28",
+    "q": "A lesion of the LEFT optic tract (behind the chiasma) causes:",
+    "opts": [
+      "Loss of the RIGHT (opposite) field in both eyes - a homonymous defect",
+      "Blindness of the left eye only",
+      "Loss of both temporal fields",
+      "Loss of the left field in both eyes"
+    ],
+    "a": 0,
+    "h1": "A tract carries the opposite field.",
+    "h2": "Contralateral homonymous loss.",
+    "exp": "The left tract carries the right-field information from both eyes, so its lesion loses the opposite (right) field of both eyes."
+  },
+  {
+    "id": 46,
+    "topic": "CN III",
+    "src": "Maini · L28",
+    "q": "Besides somatic motor fibres, CN III carries which autonomic component?",
+    "opts": [
+      "Postganglionic sympathetic fibres",
+      "Preganglionic parasympathetic (GVE) fibres",
+      "Preganglionic sympathetic fibres",
+      "Special visceral afferent fibres"
+    ],
+    "a": 1,
+    "h1": "Parasympathetic, and pre- the ganglion.",
+    "h2": "Preganglionic parasympathetic.",
+    "exp": "CN III carries preganglionic parasympathetic fibres (on to the ciliary ganglion)."
+  },
+  {
+    "id": 47,
+    "topic": "CN III",
+    "src": "Maini · L28",
+    "q": "CN III emerges from the brainstem at the:",
+    "opts": [
+      "Posterior midbrain, below the inferior colliculus",
+      "Post-olivary sulcus of the medulla",
+      "Anterior surface of the midbrain, at the interpeduncular fossa",
+      "Pontomedullary junction"
+    ],
+    "a": 2,
+    "h1": "Between the peduncles.",
+    "h2": "Interpeduncular fossa.",
+    "exp": "CN III emerges anteriorly at the interpeduncular fossa, between the cerebral peduncles."
+  },
+  {
+    "id": 48,
+    "topic": "CN III",
+    "src": "Maini · L28",
+    "q": "Which set of EXTRAOCULAR muscles does CN III supply?",
+    "opts": [
+      "All four recti and both obliques",
+      "Lateral rectus and superior oblique",
+      "Only the two obliques",
+      "Superior rectus, inferior rectus, medial rectus, inferior oblique, and levator palpebrae superioris"
+    ],
+    "a": 3,
+    "h1": "Everything except LR and SO, plus the lid lifter.",
+    "h2": "SR, IR, MR, IO, LPS.",
+    "exp": "CN III supplies SR, IR, MR, inferior oblique, and levator palpebrae superioris - all eye muscles except lateral rectus (VI) and superior oblique (IV)."
+  },
+  {
+    "id": 49,
+    "topic": "CN III",
+    "src": "Maini · L28",
+    "q": "Which INTRAOCULAR muscles does CN III supply, via its parasympathetic fibres?",
+    "opts": [
+      "The ciliary muscle and the sphincter (constrictor) pupillae",
+      "The dilator pupillae and ciliary muscle",
+      "The sphincter and dilator pupillae",
+      "The superior tarsal muscle and ciliary muscle"
+    ],
+    "a": 0,
+    "h1": "Focus the lens + constrict the pupil.",
+    "h2": "Ciliary + sphincter pupillae.",
+    "exp": "The parasympathetic fibres of CN III supply the ciliary muscle (focus) and the sphincter pupillae (constrict)."
+  },
+  {
+    "id": 50,
+    "topic": "CN III",
+    "src": "Maini · L28",
+    "q": "In a complete third-nerve palsy, the eye is deviated:",
+    "opts": [
+      "Up and in",
+      "Down and out, because the surviving superior oblique (IV) and lateral rectus (VI) pull it there",
+      "Straight but fixed",
+      "Medially"
+    ],
+    "a": 1,
+    "h1": "Which muscles still work?",
+    "h2": "Down and out.",
+    "exp": "With the CN III muscles paralysed, the surviving superior oblique (down/out) and lateral rectus (out) pull the eye down and out."
+  },
+  {
+    "id": 51,
+    "topic": "CN III",
+    "src": "Maini · L28",
+    "q": "In third-nerve palsy the pupil is ___, a change called ___.",
+    "opts": [
+      "Constricted; miosis",
+      "Normal; unreactive",
+      "Dilated; mydriasis",
+      "Irregular; anisocoria"
+    ],
+    "a": 2,
+    "h1": "The sphincter is gone.",
+    "h2": "Dilated (mydriasis).",
+    "exp": "Losing the parasympathetic sphincter leaves the pupil dilated - mydriasis."
+  },
+  {
+    "id": 52,
+    "topic": "Horner vs CN III",
+    "src": "Maini · L28",
+    "q": "Which pupil finding indicates HORNER syndrome rather than a third-nerve palsy?",
+    "opts": [
+      "Mydriasis (a dilated pupil)",
+      "A fixed mid-position pupil",
+      "A keyhole pupil",
+      "Miosis (a constricted pupil)"
+    ],
+    "a": 3,
+    "h1": "The sympathetic dilator fails.",
+    "h2": "Miosis.",
+    "exp": "Horner is sympathetic failure: the dilator pupillae is unopposed, so the pupil is small (miosis)."
+  },
+  {
+    "id": 53,
+    "topic": "Horner vs CN III",
+    "src": "Maini · L28",
+    "q": "The ONE sign shared by both Horner syndrome and a third-nerve palsy is:",
+    "opts": [
+      "Ptosis",
+      "Mydriasis",
+      "Strabismus",
+      "Anhidrosis"
+    ],
+    "a": 0,
+    "h1": "A lid sign.",
+    "h2": "Ptosis.",
+    "exp": "Both cause ptosis - mild in Horner (superior tarsal muscle) and marked in CN III palsy (levator palpebrae superioris)."
+  },
+  {
+    "id": 54,
+    "topic": "Horner vs CN III",
+    "src": "Maini · L28",
+    "q": "THE TRAP: why is there NO squint in Horner syndrome?",
+    "opts": [
+      "Because the optic nerve is intact",
+      "Because sympathetic fibres do not innervate any extraocular muscle",
+      "Because the medial rectus compensates",
+      "Because Horner spares the levator palpebrae"
+    ],
+    "a": 1,
+    "h1": "What does the sympathetic actually move in the eye?",
+    "h2": "No eye muscle is sympathetic.",
+    "exp": "Sympathetic fibres move no eye muscle, so a sympathetic lesion cannot misalign the globe - hence no squint."
+  },
+  {
+    "id": 55,
+    "topic": "Horner vs CN III",
+    "src": "Maini · L28",
+    "q": "A patient has a small pupil, mild ptosis, no squint, and a dry (anhidrotic) face. The diagnosis is:",
+    "opts": [
+      "Third-nerve palsy",
+      "Bitemporal hemianopia",
+      "Horner syndrome",
+      "Bell's palsy"
+    ],
+    "a": 2,
+    "h1": "Small pupil, dry face, no squint.",
+    "h2": "Horner.",
+    "exp": "Miosis + mild ptosis + no squint + anhidrosis = Horner syndrome (sympathetic failure)."
+  },
+  {
+    "id": 56,
+    "topic": "Horner vs CN III",
+    "src": "Maini · L28",
+    "q": "A patient has a dilated pupil, ptosis, a down-and-out eye, and squint. The best single distinguishing sign, and the diagnosis, are:",
+    "opts": [
+      "The anhidrosis; Horner syndrome",
+      "The squint; Horner syndrome",
+      "The constricted pupil; third-nerve palsy",
+      "The dilated pupil (mydriasis); third-nerve palsy"
+    ],
+    "a": 3,
+    "h1": "The pupil is the tiebreaker.",
+    "h2": "Big pupil = CN III palsy.",
+    "exp": "Mydriasis + ptosis + down-and-out + squint = third-nerve palsy; Maini says the pupil is the best distinguisher."
+  }
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 13 · Head and Neck · Dr. Maini</span>
+          <h1 className="title serif"><em>Cranial Nerves</em> (part 1)</h1>
+          <p className="subtitle">One-surface cram for Dr. Maini&apos;s Lecture 28 - the pharynx and its nerves, the four prevertebral muscles, the cervical sympathetic trunk, the deep cervical fascia, and cranial nerves I, II, and III - in her order, with a drill in her style and her own tips and analogies.</p>
+          <div className="pill-row">
+            <span className="pill-date">🧠 Lecture 28 · Pharynx, Prevertebral Region &amp; Cranial Nerves I-III · lecture</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA 0202 Lecture 28 - Pharynx, Prevertebral Region &amp; Cranial Nerves I-III. Questions are original, in her style, grounded in the audited Everything-MC bank and the lecture transcript. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s Lecture 28 essentials, in her order</div>
+        <p>Pharynx and its nerves, the prevertebral muscles, the cervical sympathetic trunk, the deep cervical fascia, then cranial nerves I, II, and III, and the pupil rule that separates Horner from a third nerve palsy. The ⚑ flags are the high-yield hooks.</p>
+      </div>
+      {cram.map((c) => (
+        <div className="obj" key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Maini&apos;s Lecture 28 and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Maini&apos;s own analogies, tricks, and study lines pulled straight from the Lecture 28 recording - the retention hooks to lean on when a detail won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across Lecture 28</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 (Gross Anatomy), running a review of Lecture 28 - the pharynx and its nerves, the prevertebral region, the cervical sympathetic trunk, the deep cervical fascia, and cranial nerves I, II, and III. Teach ONLY from this content; do not invent nerves, foramina, attachments, fibre types, or lesion patterns. You are warm, encouraging, and you quiz constantly; you say "right?", "okay?", "make sense?", and "are we clear, everybody?", you call the material "easy" to build confidence, and you remind students that peripheral-nervous-system questions "are just there to scare you." Keep answers tight (3-6 sentences) and push students to reason, then quiz them back.
+
+PHARYNX & ITS NERVES: three parts - nasopharynx, oropharynx, laryngopharynx. Piriform fossa (laryngopharynx): the internal laryngeal nerve (a branch of the vagus via the superior laryngeal nerve; sensory above the vocal cords) runs just under the mucosa, so a sharp swallowed foreign body can injure it. Waldeyer's ring = 1 pharyngeal (adenoids) + 2 tubal + 2 palatine + 1 lingual tonsil; tonsils are secondary lymphatic tissue (primary = bone marrow and thymus). Pharyngeal plexus = CN IX + X. All pharyngeal muscles are vagus-supplied EXCEPT stylopharyngeus (3rd arch, CN IX). The vagus's motor (SVE) fibres to pharyngeal/palatine/laryngeal muscles are really the CRANIAL part of the accessory nerve (XI), which joins the vagus; only the SPINAL fibres of XI leave as the 11th nerve to trapezius and SCM. Sensory map: nasopharynx = maxillary (V2), oropharynx = glossopharyngeal (IX), laryngeal inlet = internal laryngeal (vagus). Cricopharyngeus (part of the inferior constrictor) = upper esophageal sphincter. Swallowing = 3 stages (only the ORAL stage voluntary); deglutition centre in pons and medulla; motor nerves = V, IX, X, XII.
+
+PREVERTEBRAL MUSCLES (4 - know origin/insertion/action/nerve): longus capitis (basilar occiput to anterior tubercles of TP C3-C6; ventral rami C1-C3; flexes head), longus colli (three parts - superior oblique: TP C3-C5 to anterior tubercle of atlas; vertical: bodies C5-T3 to bodies C2-C4; inferior oblique: bodies T1-T3 to TP C5-C7; ventral rami C2-C6; flexes neck, oblique parts add ipsilateral lateral flexion, inferior oblique rotates neck to the opposite side), rectus capitis anterior (basilar occiput anterior to the condyle, from the atlas lateral mass; flexes head), rectus capitis lateralis (JUGULAR process, from the atlas transverse process; lateral flexion). Both recti: ventral rami C1-C2. Memory: anterior = basilar, lateralis = jugular.
+
+CERVICAL SYMPATHETIC TRUNK: upward continuation of the thoracic trunk, from the neck of the first rib to the base of the skull, lying BEHIND the common and internal carotid arteries (an aneurysm can compress it), embedded between the carotid sheath and prevertebral fascia. Postganglionic cell bodies; preganglionics ascend from the lateral horn of T1-T2 (no cervical lateral horn). Three ganglia: superior (longest, opposite C2-C3, behind the internal carotid, anterior to longus capitis; gray rami C1-C4; ~99% of head-and-neck sympathetic supply; internal carotid nerve to the ICA plexus), middle (opposite C6, on the inferior thyroid artery; gray rami C5-C6), inferior (between C7 TP and the first rib; usually fused with T1 as the STELLATE ganglion; gray rami C7-C8; branches to subclavian and vertebral arteries). Gray rami put sympathetic fibres on EVERY spinal nerve to reach three body-wall targets - sweat glands, arrector pili muscles, and blood vessels; parasympathetic is reserved for internal organs. Cardiac branches run from the neck to the heart, and GVA pain fibres follow them back, so cardiac pain refers to the neck and side of the head.
+
+DEEP CERVICAL FASCIA (4 layers): investing (splits around SCM anteriorly and trapezius posteriorly; roof of the anterior and posterior triangles; attaches to ligamentum nuchae; thickens between styloid process and mandibular angle as the stylomandibular ligament), pretracheal (thyroid + infrahyoid muscles; blends inferiorly with the fibrous pericardium), prevertebral (prevertebral muscles; blends inferiorly with the anterior longitudinal ligament), and the carotid sheath (common/internal carotid, internal jugular vein, vagus nerve).
+
+CN I OLFACTORY: SVA (smell); no single nerve - multiple fascicles. Receptors = ciliated chemoreceptor olfactory neurons in the olfactory epithelium near the roof of the nose; basal cells = stem cells that replace worn-out receptors. Pathway: through the cribriform plate of the ethmoid to synapse in the olfactory bulb (mitral cells + association neurons); the olfactory tract ends in the primary olfactory cortex of the TEMPORAL lobe. Clinical: anosmia = loss of smell (aging/trauma/COVID) but the neurons regenerate; phantosmia = smelling something not there; olfactory adaptation = continuous stimulation makes receptors stop responding.
+
+CN II OPTIC: SSA (the eye develops from ectoderm, so somatic). Board pearl: the optic nerve is made of GANGLION-cell axons, NOT rods and cones. Cones = colour, central; rods = little light, peripheral, no colour, vitamin-A-derived pigment; dark adaptation ~20 min to resynthesize rod pigment. Signal: rods/cones to bipolar to ganglion (axons = optic nerve). Leaves the orbit through the optic canal (sphenoid). At the chiasma only NASAL retinal fibres cross. Field mapping is flipped by the lens (temporal field to nasal retina). Lesions: one optic nerve = whole eye blind; chiasma = bitemporal hemianopia (commonest cause pituitary adenoma - they often see an ophthalmologist first); one optic tract = contralateral homonymous loss. After the midbrain the pathway continues as the optic radiation to the occipital lobe.
+
+CN III OCULOMOTOR: somatic motor + PREGANGLIONIC PARASYMPATHETIC. Emerges from the anterior midbrain at the interpeduncular fossa; splits into superior and inferior divisions; enters the orbit through the superior orbital fissure. Extraocular: SR, IR, MR, inferior oblique, and levator palpebrae superioris (NOT lateral rectus = CN VI, NOT superior oblique = CN IV). Intraocular (parasympathetic): ciliary muscle and sphincter (constrictor) pupillae. Accommodation reflex (all CN III): convergence by medial rectus, pupil constriction by sphincter, ciliary contracts so the lens becomes more convex. THIRD NERVE PALSY: eye down and out (surviving SO + LR), ptosis (levator lost), mydriasis (sphincter lost), lost accommodation (ciliary lost); no direct light reflex in that eye, but the consensual reflex in the other eye is intact.
+
+HORNER vs CN III (the pupil rule): the PUPIL is the best distinguisher. Horner = miosis (sympathetic failure denervates the dilator pupillae) + mild ptosis (superior tarsal muscle) + anhidrosis and facial flushing + NO squint (sympathetic fibres innervate no extraocular muscle, so they cannot misalign the eye). Third nerve palsy = mydriasis + ptosis + down-and-out squint. The ONE shared sign is ptosis.
+
+Open by offering to drill the pharynx & its nerves, the prevertebral muscles, the cervical sympathetic trunk, the deep cervical fascia, CN I/II/III, or the Horner-vs-third-nerve pupil rule. When a student is wrong, name the rule and have them reason it out; remind them these questions are usually easier than they look.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys, Lecture 28 - the last stretch. Two things I really want you to nail: cranial nerves I, II, and III, and the pupil rule that separates Horner syndrome (miosis, and NO squint, because sympathetic fibres move no eye muscle) from a third nerve palsy (mydriasis, ptosis, a down-and-out eye). We will also review the pharynx and its nerves, the four prevertebral muscles, the three cervical sympathetic ganglia, and the four layers of deep cervical fascia. Where do you want to start - the cranial nerves, the sympathetic trunk, the prevertebral muscles, the fascia, or the pupil rule? Right? Let us go." },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+  "Drill me on CN I - the olfactory pathway and its clinical terms",
+  "Quiz CN II - photoreceptors, the chiasma, and the lesions",
+  "CN III palsy vs Horner syndrome - the pupil rule",
+  "The four prevertebral muscles - attachments, nerves, actions",
+  "The cervical sympathetic trunk - the three ganglia and gray rami",
+  "The four layers of deep cervical fascia and their contents"
+];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her Lecture 28 - the pharynx, prevertebral region, sympathetic trunk, fascia, and cranial nerves I-III. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

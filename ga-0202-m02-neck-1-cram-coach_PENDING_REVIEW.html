@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · The Neck (part 1) — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — THE NECK (part 1) · CERVICAL TRIANGLES + BLOOD VESSELS OF THE NECK
+   Dr. Seema Maini. Cram Coach. PENDING REVIEW.
+   Built ONLY from Maini's GA lectures (L03 + L05) and the module's audited
+   Everything-MC bank. Voiced hands-free walkthrough (Web Speech).
+   Original phrasing, in her style; no captured exam items. Source-tagged.
+   THEME: violet. Correct keys taught plainly; answer positions balanced.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (12 TOPICS) ==== */
+const cram = [
+  {
+    n: 1, title: "The map of the neck — two big triangles", src: "Maini · L03",
+    facts: [
+      "The sternocleidomastoid (SCM) splits the side of the neck into an ANTERIOR triangle (in front of SCM) and a POSTERIOR triangle (behind SCM). Learn each triangle as: borders, then subdivisions, then contents.",
+      "POSTERIOR triangle borders: SCM anteriorly, TRAPEZIUS posteriorly, the CLAVICLE as the base. The INFERIOR belly of OMOHYOID splits it into a larger OCCIPITAL triangle above and a smaller SUPRACLAVICULAR (subclavian) triangle below.",
+      "ANTERIOR triangle borders: the MIDLINE of the neck in front, the ANTERIOR border of SCM behind, and the LOWER margin of the MANDIBLE on top.",
+      "Maini's advice she repeats: PRACTICE DRAWING these triangles before the quiz so you can sketch and label them in the exam.",
+    ],
+    flag: "Posterior = SCM, trapezius, clavicle (omohyoid splits it into occipital plus supraclavicular). Anterior = midline, SCM, mandible. DRAW IT before the quiz.",
+  },
+  {
+    n: 2, title: "Posterior triangle — the scalene gateway (heavy)", src: "Maini · L03",
+    facts: [
+      "The interscalene gap between the ANTERIOR and MIDDLE scalene is the gateway: the TRUNKS of the BRACHIAL PLEXUS (ventral rami C5 to T1) and the SUBCLAVIAN ARTERY pass POSTERIOR to the anterior scalene.",
+      "The SUBCLAVIAN VEIN and the two small arteries (TRANSVERSE CERVICAL and SUPRASCAPULAR) pass ANTERIOR to the anterior scalene. Maini says outright: 'In your quiz I'm going to ask which structure is anterior or posterior to anterior scalene.'",
+      "Because the artery and the plexus share the space behind the muscle, they can be compressed together in THORACIC OUTLET (scalene) SYNDROME.",
+      "The SPINAL ACCESSORY nerve (CN XI) crosses the roof of the posterior triangle. Contrast: CN IX, X and XII sit lower, down in the carotid triangle.",
+    ],
+    flag: "BEHIND the anterior scalene: brachial plexus plus subclavian ARTERY (the thoracic-outlet pair). IN FRONT: subclavian VEIN plus transverse cervical and suprascapular arteries. CN XI = posterior triangle.",
+  },
+  {
+    n: 3, title: "Cervical plexus (C1 to C4)", src: "Maini · L03",
+    facts: [
+      "Formed from the VENTRAL RAMI of C1 to C4; it relates to the internal jugular vein within the carotid sheath. It gives SUPERFICIAL (cutaneous) and MUSCULAR (motor) branches.",
+      "FOUR cutaneous branches all emerge at the NERVE POINT OF THE NECK (Erb's point), the midpoint of the POSTERIOR border of SCM: LESSER OCCIPITAL, GREATER AURICULAR (runs up toward the ear / auricle), TRANSVERSE CERVICAL, and SUPRACLAVICULAR (which fans into medial, intermediate and lateral groups).",
+      "MUSCULAR branches include the PHRENIC nerve (C3, C4, C5), branches to the prevertebral muscles, and C2 to C4 fibers that ride the spinal accessory nerve to SCM and trapezius.",
+      "The ANSA CERVICALIS is a motor loop of the plexus that runs the strap muscles (next topic).",
+    ],
+    flag: "Cervical plexus = ventral rami C1 to C4. Four cutaneous branches at the nerve point / Erb's: lesser occipital, greater auricular, transverse cervical, supraclavicular. Phrenic = C3, 4, 5. Greater auricular heads for the ear.",
+  },
+  {
+    n: 4, title: "Ansa cervicalis", src: "Maini · L03",
+    facts: [
+      "A nerve LOOP with two roots. The SUPERIOR ROOT is C1 fibers that hitchhike on the HYPOGLOSSAL nerve (CN XII) and then leave it. The INFERIOR ROOT is descending fibers mostly from C2 and C3 (some C4).",
+      "The ansa supplies MOST of the INFRAHYOID (strap) muscles: omohyoid, sternohyoid, sternothyroid.",
+      "EXCEPTION: THYROHYOID does NOT get the ansa. It is supplied by C1 fibers carried by CN XII, the same C1 / CN XII path that also runs GENIOHYOID.",
+      "The hypoglossal nerve leaves the skull through the HYPOGLOSSAL CANAL (the name matches).",
+    ],
+    flag: "Ansa = superior root (C1 via CN XII) plus inferior root (C2 and C3). It runs the straps EXCEPT thyrohyoid. Geniohyoid and thyrohyoid are the two 'C1 on CN XII' odd ones out.",
+  },
+  {
+    n: 5, title: "Anterior triangle — the 4 subdivisions and common walls (heavy)", src: "Maini · L03",
+    facts: [
+      "Two muscles carve it into four: the DIGASTRIC (its two bellies) and the SUPERIOR belly of OMOHYOID. The four subdivisions are SUBMENTAL, DIGASTRIC (submandibular), CAROTID, and MUSCULAR.",
+      "SUBMENTAL (midline, anterior belly of digastric, hyoid body): submental lymph nodes and the start of the anterior jugular vein. DIGASTRIC / submandibular (both digastric bellies, mandible): the SUBMANDIBULAR salivary gland, facial artery and vein, and CN XII.",
+      "CAROTID (posterior belly of digastric, SCM, superior belly of omohyoid): named for the COMMON CAROTID and its BIFURCATION; contains CN IX, X and XII. MUSCULAR (midline, superior belly of omohyoid, SCM): the strap muscles plus thyroid gland, larynx, trachea and esophagus.",
+      "Maini loves COMMON-BOUNDARY questions: the ANTERIOR belly of digastric is the wall between SUBMENTAL and DIGASTRIC; the POSTERIOR belly of digastric is the wall between CAROTID and DIGASTRIC; the SUPERIOR belly of omohyoid is the wall between MUSCULAR and CAROTID.",
+    ],
+    flag: "Four subdivisions carved by digastric plus omohyoid: submental, digastric, carotid, muscular. Common walls: anterior belly (submental / digastric), posterior belly (carotid / digastric), superior omohyoid (muscular / carotid). Carotid triangle holds CN IX, X, XII.",
+  },
+  {
+    n: 6, title: "Suprahyoid muscles — they ELEVATE the hyoid", src: "Maini · L03",
+    facts: [
+      "Four muscles that ELEVATE the hyoid, which matters in swallowing (lifting the hyoid lifts and closes the larynx): DIGASTRIC, STYLOHYOID, MYLOHYOID, GENIOHYOID.",
+      "DIGASTRIC is a COMPOSITE muscle with two nerves: the POSTERIOR belly (origin = mastoid notch of the TEMPORAL bone) by the FACIAL nerve (CN VII); the ANTERIOR belly (insertion = digastric fossa of the mandible) by the NERVE TO MYLOHYOID (inferior alveolar, then V3, then trigeminal).",
+      "STYLOHYOID (from the STYLOID process) is also FACIAL nerve. Maini's 'F for facial' pairs it with the posterior belly of digastric; it is pierced by the digastric's intermediate tendon. MYLOHYOID (from the mylohyoid line; forms the FLOOR of the mouth) is also nerve to mylohyoid (V3).",
+      "GENIOHYOID (from the genial tubercle; sits ON TOP of mylohyoid) is C1 via CN XII. All of these are pharyngeal-arch muscles, so they run on SVE fibers, not GSE.",
+    ],
+    flag: "Suprahyoids ELEVATE the hyoid. Digastric has two nerves: posterior belly plus stylohyoid = FACIAL ('F'); anterior belly plus mylohyoid = nerve to mylohyoid (V3). Geniohyoid = C1 via CN XII. Pharyngeal-arch muscles = SVE fibers.",
+  },
+  {
+    n: 7, title: "Infrahyoid (strap) muscles — they DEPRESS the hyoid", src: "Maini · L03",
+    facts: [
+      "Four straps that DEPRESS the hyoid and larynx: OMOHYOID, STERNOHYOID, STERNOTHYROID, THYROHYOID. Most of them live in the MUSCULAR triangle.",
+      "OMOHYOID is unique: two bellies (superior and inferior) joined by an intermediate tendon slung by fascia to the CLAVICLE and FIRST RIB, and it is the only strap that reaches the SCAPULA ('omo' means shoulder).",
+      "STERNOTHYROID stops at the OBLIQUE LINE of the THYROID CARTILAGE (it does not reach the hyoid), so it DEPRESSES THE LARYNX. THYROHYOID runs from that same oblique line UP to the hyoid.",
+      "Nerve supply: omohyoid, sternohyoid and sternothyroid all take the ANSA CERVICALIS. EXCEPTION: THYROHYOID is C1 via CN XII (the 'TH' odd one out).",
+    ],
+    flag: "Straps DEPRESS the hyoid and larynx (muscular triangle). Omohyoid is the only one on the scapula, tendon slung to the clavicle and first rib. Sternothyroid stops at the thyroid cartilage, so it depresses the larynx. Ansa runs them all EXCEPT thyrohyoid (C1 / CN XII).",
+  },
+  {
+    n: 8, title: "Common and internal carotid arteries", src: "Maini · L03",
+    facts: [
+      "The RIGHT common carotid is a branch of the BRACHIOCEPHALIC trunk; the LEFT common carotid comes directly off the AORTIC ARCH. Both climb in the carotid sheath.",
+      "Each COMMON carotid BIFURCATES at the SUPERIOR border of the THYROID CARTILAGE into the external and internal carotid arteries.",
+      "Tell them apart by BRANCHES: the EXTERNAL carotid gives branches in the neck; the INTERNAL carotid gives NO branches in the neck.",
+      "The INTERNAL carotid enters the skull through the CAROTID CANAL of the petrous temporal bone to supply the brain (the name matches).",
+    ],
+    flag: "Right common carotid = brachiocephalic trunk; left = aortic arch. Bifurcation is at the superior border of the thyroid CARTILAGE. Internal carotid gives no neck branches and enters via the carotid canal.",
+  },
+  {
+    n: 9, title: "External carotid — 8 branches (3 + 3 + 2)", src: "Maini · L03",
+    facts: [
+      "The external carotid has EIGHT branches: THREE anterior, THREE posterior, and TWO terminal.",
+      "ANTERIOR three: SUPERIOR THYROID (to the upper pole of the thyroid), LINGUAL (at the greater horn of the hyoid), and FACIAL.",
+      "POSTERIOR three: ASCENDING PHARYNGEAL, OCCIPITAL, and POSTERIOR AURICULAR. TERMINAL two: SUPERFICIAL TEMPORAL (felt in front of the tragus, running with the auriculotemporal nerve) and MAXILLARY (dives deep to the mandibular neck into the infratemporal fossa).",
+      "TRAP Maini flags: the TRANSVERSE FACIAL artery is a branch of the SUPERFICIAL TEMPORAL, NOT the facial artery, despite its name.",
+    ],
+    flag: "External carotid = 8 branches (3 + 3 + 2). Anterior: superior thyroid, lingual, facial. Posterior: ascending pharyngeal, occipital, posterior auricular. Terminal: superficial temporal and maxillary. TRAP: transverse facial comes off the superficial temporal.",
+  },
+  {
+    n: 10, title: "Carotid sinus and carotid body", src: "Maini · L03",
+    facts: [
+      "The CAROTID SINUS is a slight dilatation at the START of the INTERNAL carotid (at the bifurcation). It holds BARORECEPTORS ('baro' means pressure) that sense blood-pressure changes through arterial stretch.",
+      "The CAROTID BODY is a small nodule of CHEMORECEPTORS that sense a RISE in CO2 and hydrogen ion, and a FALL in oxygen.",
+      "BOTH the carotid sinus and the carotid body are supplied by the GLOSSOPHARYNGEAL nerve (CN IX). (The aortic bodies, by contrast, use the vagus.)",
+    ],
+    flag: "SINUS = baroreceptors (pressure), sitting at the start of the internal carotid. BODY = chemoreceptors (CO2 up, hydrogen ion up, oxygen down). BOTH are supplied by CN IX.",
+  },
+  {
+    n: 11, title: "Subclavian artery (3 parts) and the carotid sheath", src: "Maini · L03",
+    facts: [
+      "The RIGHT subclavian is a branch of the BRACHIOCEPHALIC trunk; the LEFT subclavian comes directly off the AORTIC ARCH. The ANTERIOR SCALENE divides the artery into THREE parts: part 1 MEDIAL, part 2 DEEP (behind the muscle), part 3 LATERAL.",
+      "PART 1 branches (V, I, T): VERTEBRAL (up the transverse foramina, then the foramen magnum), INTERNAL THORACIC, and the THYROCERVICAL trunk (inferior thyroid, transverse cervical, suprascapular).",
+      "PART 2 gives the COSTOCERVICAL trunk (deep cervical and superior intercostal). PART 3 usually gives NO branch.",
+      "The CAROTID SHEATH carries the 'THREE MUSKETEERS': the COMMON CAROTID artery, the INTERNAL JUGULAR vein, and the VAGUS nerve. After the bifurcation the external carotid LEAVES the sheath; the internal carotid, IJV and vagus stay inside.",
+    ],
+    flag: "Right subclavian = brachiocephalic; left = arch. Three parts by the anterior scalene (medial, deep, lateral). Part 1 = V, I, T (vertebral, internal thoracic, thyrocervical). Carotid sheath = three musketeers (common carotid, IJV, vagus).",
+  },
+  {
+    n: 12, title: "Neck veins and lymphatics", src: "Maini · L05",
+    facts: [
+      "The SUBCLAVIAN VEIN passes ANTERIOR to the anterior scalene (opposite the artery); it is the continuation of the AXILLARY vein at the outer border of the first rib. The subclavian vein plus the INTERNAL JUGULAR vein unite to form the BRACHIOCEPHALIC vein.",
+      "The INTERNAL JUGULAR vein begins at the jugular foramen as the continuation of the SIGMOID sinus, drains the BRAIN, FACE and NECK, and rides the carotid sheath with the common carotid and vagus. The EXTERNAL jugular is superficial with one tributary, the anterior jugular vein.",
+      "THYROID veins: the SUPERIOR and MIDDLE thyroid veins drain into the IJV; the INFERIOR thyroid vein is the odd one, draining into the BRACHIOCEPHALIC vein.",
+      "LYMPH: head and neck lymphatics form the RIGHT and LEFT JUGULAR TRUNKS (right into the right lymphatic duct, left into the thoracic duct). A PAINLESS, firm-to-hard, FIXED, MATTED node is more worrisome (cancer or lymphoma) than a painful, tender, mobile one.",
+    ],
+    flag: "Subclavian VEIN is anterior to the scalene; vein plus IJV forms the brachiocephalic. IJV is the sigmoid-sinus continuation, draining brain, face and neck. Superior and middle thyroid veins go to the IJV; the inferior thyroid vein goes to the brachiocephalic. Worrisome node = painless, hard, fixed, matted.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "Anterior vs posterior to the ANTERIOR SCALENE. BEHIND it: the brachial plexus and the subclavian ARTERY (the thoracic-outlet pair that gets compressed together). IN FRONT of it: the subclavian VEIN plus the transverse cervical and suprascapular arteries.", why: "Maini says it in class: 'In your quiz I'm going to ask which structure is anterior or posterior to anterior scalene.' It is the single most flagged relation of the module.", src: "Maini · L03/L05" },
+  { tag: "★★ Heavy", text: "The FOUR subdivisions of the anterior triangle (submental, digastric, carotid, muscular) and the COMMON BOUNDARY between neighbors: anterior belly of digastric (submental / digastric), posterior belly of digastric (carotid / digastric), superior belly of omohyoid (muscular / carotid).", why: "She drills these out loud: 'which muscle forms a common boundary between X and Y? ... so you're going to get questions like that.'", src: "Maini · L03" },
+  { tag: "Triangles", text: "Borders and contents of every triangle, and you should be able to DRAW them. Sketch the anterior triangle, drop in the two digastric bellies plus the superior belly of omohyoid, and the four subdivisions and their boundaries fall out.", why: "Repeated advice: 'please draw this diagram ... practice it before ... make a habit of drawing these rough sketches.'", src: "Maini · L03" },
+  { tag: "Suprahyoid", text: "Suprahyoid nerve supply. The digastric is a composite muscle: the posterior belly and stylohyoid are FACIAL (CN VII); the anterior belly and mylohyoid are nerve to mylohyoid (V3); geniohyoid is C1 via CN XII.", why: "She tests innervation muscle by muscle and builds the trigeminal 'family tree' (V3 to inferior alveolar to nerve to mylohyoid).", src: "Maini · L03" },
+  { tag: "Ansa", text: "Ansa cervicalis: superior root C1 via CN XII, inferior root C2 and C3. It runs the strap muscles EXCEPT thyrohyoid, which (like geniohyoid) is C1 via CN XII.", why: "A classic exception item: three straps on the ansa, thyrohyoid off on its own.", src: "Maini · L03" },
+  { tag: "Carotid", text: "Right common carotid off the brachiocephalic, left off the aortic arch; each bifurcates at the SUPERIOR border of the thyroid cartilage; the internal carotid gives NO branches in the neck and enters through the carotid canal.", why: "Origin, bifurcation level, and the internal-vs-external 'branches' rule are all quick, high-yield stems.", src: "Maini · L03" },
+  { tag: "ECA", text: "External carotid = 8 branches: anterior (superior thyroid, lingual, facial), posterior (ascending pharyngeal, occipital, posterior auricular), terminal (superficial temporal, maxillary). Watch the transverse-facial trap.", why: "She flags it: 'everybody confuses transverse facial as a branch of facial. No, it's a branch of superficial temporal.'", src: "Maini · L03" },
+  { tag: "Subclavian", text: "Subclavian artery in 3 parts by the anterior scalene; part 1 gives vertebral, internal thoracic and thyrocervical (V, I, T); the thyrocervical trunk gives inferior thyroid, transverse cervical and suprascapular.", why: "The three parts and the part-1 branches are a reliable diagram-and-list item.", src: "Maini · L03" },
+  { tag: "Sinus/body", text: "Carotid SINUS = baroreceptors (pressure) at the start of the internal carotid; carotid BODY = chemoreceptors (CO2 up, hydrogen ion up, oxygen down). BOTH are supplied by CN IX.", why: "Sinus vs body and their shared CN IX supply are a compact, favorite cluster.", src: "Maini · L03" },
+  { tag: "Veins", text: "Carotid sheath = three musketeers (common carotid, IJV, vagus). IJV is the continuation of the sigmoid sinus; subclavian vein plus IJV forms the brachiocephalic. Superior and middle thyroid veins drain to the IJV; the inferior thyroid vein drains to the brachiocephalic.", why: "The sheath trio and the thyroid-vein 'odd one out' are easy points if you have them cold.", src: "Maini · L03/L05" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  { kind: "Mnemonic", title: "Phrenic nerve — '3, 4, 5 keep you alive'", text: "The phrenic nerve (a muscular branch of the cervical plexus) is C3, C4, C5. It drives the diaphragm, so if it is cut you cannot breathe: 'C3, 4, 5 keep you alive.'", helps: "Locks the phrenic root value, a guaranteed cervical-plexus item.", src: "Maini · L03" },
+  { kind: "Mnemonic", title: "Carotid sheath — the 'three musketeers'", text: "Three structures travel together, wrapped in the carotid sheath: the COMMON CAROTID artery, the INTERNAL JUGULAR vein, and the VAGUS nerve. Maini calls them the three musketeers because they always ride together.", helps: "One image gives you all three sheath contents (and reminds you the external carotid leaves the sheath).", src: "Maini · L03/L05" },
+  { kind: "Mnemonic", title: "'F for facial' — two neighbors, one nerve", text: "The POSTERIOR belly of digastric and STYLOHYOID lie right next to each other and make an 'F' shape. The F stands for FACIAL nerve, which supplies both. (The anterior belly of digastric, its neighbor's opposite, is the trigeminal one.)", helps: "Pins the two suprahyoid muscles that share CN VII in one picture.", src: "Maini · L03" },
+  { kind: "Rule", title: "The NAME tells you the attachment", text: "Many neck structures decode from their name: STYLOhyoid comes off the STYLOID process; THYROhyoid runs from thyroid cartilage to hyoid; GENIOhyoid comes off the GENIAL tubercle; the HYPOGLOSSAL nerve exits the HYPOGLOSSAL canal; the INTERNAL carotid enters the CAROTID canal.", helps: "Turns rote memorization into decoding; Maini repeats 'the name itself says a lot of things.'", src: "Maini · L03" },
+  { kind: "Trick", title: "Draw the triangle, then read the answer off it", text: "For any boundary or contents question, sketch the anterior triangle, drop in the two bellies of digastric and the superior belly of omohyoid, and label the four subdivisions. The common boundaries (which muscle sits between two triangles) then read straight off your own drawing.", helps: "Her explicit exam strategy: 'please draw this diagram ... practice it before.'", src: "Maini · L03" },
+  { kind: "Trap", title: "Transverse facial artery is NOT off the facial artery", text: "Despite the name, the TRANSVERSE FACIAL artery is a branch of the SUPERFICIAL TEMPORAL artery, not the facial artery. Maini calls this out because 'everybody confuses it.'", helps: "Defuses the one external-carotid distractor she deliberately plants.", src: "Maini · L03" },
+  { kind: "Rule", title: "Vein in front, artery behind (the anterior scalene)", text: "At the anterior scalene, the subclavian VEIN sits in FRONT of the muscle, while the subclavian ARTERY and the brachial PLEXUS sit BEHIND it. That single line answers every anterior/posterior-to-scalene item and explains thoracic outlet syndrome.", helps: "Collapses her most-tested relation into four words.", src: "Maini · L03/L05" },
+  { kind: "Rule", title: "SVE = pharyngeal-arch muscles", text: "Most muscles of the head and neck develop from the pharyngeal arches, not from myotomes, so they are innervated by SVE (special visceral efferent) fibers rather than the GSE that runs ordinary skeletal muscle. That is why the digastric's nerves carry SVE.", helps: "Explains the 'which fiber type' item and why these muscles use cranial-nerve branches.", src: "Maini · L03" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Items adapted verbatim-in-meaning from the module's AUDITED Everything-MC
+   bank (already anti-fabrication verified) and Maini's L03/L05 lectures.
+   Option positions balanced across the 44 items (12 A / 7 B / 13 C / 12 D). */
+const questions = [
+  { id: 1, topic: "Post. triangle", src: "Maini · L03", q: "Which of the following structures lies POSTERIOR to the anterior scalene muscle?", opts: ["Brachial plexus", "Subclavian vein", "Suprascapular artery", "Transverse cervical artery"], a: 0, h1: "Plexus and the main subclavian artery hide behind it; the vein and its two little arteries sit in front.", h2: "Zero in on: Brachial plexus", exp: "Maini flags this as a quiz item: the brachial plexus (its trunks) lies posterior to the anterior scalene." },
+  { id: 2, topic: "Post. triangle", src: "Maini · L03", q: "What are the boundaries of the posterior triangle of the neck?", opts: ["Sternocleidomastoid anteriorly, trapezius posteriorly, clavicle as the base", "Superior belly of omohyoid, SCM, and the midline", "Anterior belly of digastric, posterior belly of digastric, and the mandible", "Midline, anterior border of SCM, and lower border of the mandible"], a: 0, h1: "SCM in front, trapezius behind, clavicle underneath.", h2: "Zero in on: Sternocleidomastoid anteriorly", exp: "These are the three borders Maini lists for the posterior triangle." },
+  { id: 3, topic: "Post. triangle", src: "Maini · L05", q: "In which triangle of the neck is the spinal accessory nerve (CN XI) found?", opts: ["Carotid triangle", "Submental triangle", "Muscular triangle", "Posterior triangle"], a: 3, h1: "CN XI crosses the roof of the posterior triangle.", h2: "Zero in on: Posterior triangle", exp: "Maini confirms the spinal accessory nerve runs in the posterior triangle." },
+  { id: 4, topic: "Cervical plexus", src: "Maini · L03", q: "The cervical plexus is formed from the ventral rami of which spinal nerves?", opts: ["C5 through T1", "C3 through C5", "C1 through C4", "C1 through C5"], a: 2, h1: "Upper four cervical rami.", h2: "Zero in on: C1 through C4", exp: "The cervical plexus is formed from the ventral rami of C1-C4." },
+  { id: 5, topic: "Cervical plexus", src: "Maini · L03", q: "The four superficial cervical plexus branches all emerge from a common point at the middle of the posterior border of the sternocleidomastoid. What is this point called?", opts: ["Lesser supraclavicular fossa", "Nerve point of the neck (Erb's point)", "Carotid triangle apex", "Jugular foramen"], a: 1, h1: "One point at the mid-posterior border of SCM launches all four cutaneous nerves.", h2: "Zero in on: Nerve point of the neck", exp: "Maini calls it the nerve point of the neck, at the midpoint of the posterior border of the SCM." },
+  { id: 6, topic: "Cervical plexus", src: "Maini · L03", q: "What is the root value of the phrenic nerve, a muscular branch of the cervical plexus?", opts: ["C1, C2, C3", "C2, C3, C4", "C5, C6, C7", "C3, C4, C5"], a: 3, h1: "'3, 4, 5 keep the diaphragm alive.'", h2: "Zero in on: C3", exp: "Maini's mnemonic: 'C3, 4, 5 keep you alive.'" },
+  { id: 7, topic: "Ansa cervicalis", src: "Maini · L03", q: "The superior root of the ansa cervicalis carries fibers from which spinal nerve, traveling with which cranial nerve?", opts: ["C3 fibers, carried by the accessory nerve (CN XI)", "C1 fibers, carried by the vagus nerve (CN X)", "C1 fibers, carried by the hypoglossal nerve (CN XII)", "C2 fibers, carried by the vagus nerve (CN X)"], a: 2, h1: "C1 hitchhikes on CN XII, then jumps off as the superior root.", h2: "Zero in on: C1 fibers", exp: "C1 fibers join the hypoglossal, then leave it to form the superior root." },
+  { id: 8, topic: "Ansa cervicalis", src: "Maini · L03", q: "Which infrahyoid muscle does NOT receive its innervation from the ansa cervicalis?", opts: ["Omohyoid", "Thyrohyoid", "Sternohyoid", "Sternothyroid"], a: 1, h1: "Three straps ride the ansa; thyroHyoid ('TH') is the odd one on C1/XII.", h2: "Zero in on: Thyrohyoid", exp: "Thyrohyoid is the exception - it is supplied by C1 fibers carried by the hypoglossal nerve." },
+  { id: 9, topic: "Ant. triangle", src: "Maini · L03", q: "What are the boundaries of the anterior triangle of the neck?", opts: ["Anterior and posterior bellies of digastric and the mandible", "SCM, trapezius, and the clavicle", "Midline of the neck, anterior border of SCM, and lower margin of the mandible", "Both bellies of omohyoid and the hyoid bone"], a: 2, h1: "Midline in front, SCM behind, mandible on top.", h2: "Zero in on: Midline of the neck", exp: "Anterior = midline, posterior = anterior border of SCM, superior = lower margin of mandible." },
+  { id: 10, topic: "Ant. triangle", src: "Maini · L03", q: "The anterior triangle is subdivided into four smaller triangles using the bellies of which two muscles?", opts: ["Stylohyoid and thyrohyoid", "Sternohyoid and sternothyroid", "Mylohyoid and geniohyoid", "Digastric and omohyoid"], a: 3, h1: "Digastric (2 bellies) + omohyoid do the carving.", h2: "Zero in on: Digastric and omohyoid", exp: "The two bellies of digastric plus the superior belly of omohyoid carve the anterior triangle into four." },
+  { id: 11, topic: "Ant. triangle", src: "Maini · L03", q: "Which of the following is one of the four subdivisions of the anterior triangle?", opts: ["Suboccipital triangle", "Supraclavicular triangle", "Carotid triangle", "Occipital triangle"], a: 2, h1: "Submental, digastric, carotid, muscular.", h2: "Zero in on: Carotid triangle", exp: "The four subdivisions are submental, digastric (submandibular), carotid, and muscular." },
+  { id: 12, topic: "Ant. triangle", src: "Maini · L03", q: "The carotid triangle is named for the presence of which structure?", opts: ["The internal jugular vein only", "The external jugular vein", "The common carotid artery and its bifurcation", "The carotid canal"], a: 2, h1: "Named for the carotid that forks inside it.", h2: "Zero in on: The common carotid artery and its bifurcation", exp: "Maini: it is named for the common carotid artery and its bifurcation lying within it." },
+  { id: 13, topic: "Ant. triangle", src: "Maini · L03", q: "Which of the following is a content of the muscular triangle?", opts: ["Submandibular gland and facial artery", "Common carotid bifurcation and CN IX", "Thyroid gland, larynx, trachea, and esophagus", "Submental lymph nodes and anterior jugular vein origin"], a: 2, h1: "Straps + midline viscera (thyroid, larynx, trachea, esophagus).", h2: "Zero in on: Thyroid gland", exp: "Maini lists the thyroid gland, larynx, trachea, esophagus and recurrent laryngeal nerve here, plus sternohyoid/sternothyroid." },
+  { id: 14, topic: "Common bounds", src: "Maini · L03", q: "Which muscle forms the common boundary between the submental and digastric triangles?", opts: ["Stylohyoid", "Posterior belly of digastric", "Superior belly of omohyoid", "Anterior belly of digastric"], a: 3, h1: "Anterior belly = wall between submental and digastric.", h2: "Zero in on: Anterior belly of digastric", exp: "The anterior belly of digastric is shared between the submental (lateral border) and digastric (medial border) triangles." },
+  { id: 15, topic: "Common bounds", src: "Maini · L03", q: "Which muscle forms the common boundary between the carotid and digastric triangles?", opts: ["Superior belly of omohyoid", "Inferior belly of omohyoid", "Anterior belly of digastric", "Posterior belly of digastric"], a: 3, h1: "Posterior belly = wall between carotid and digastric.", h2: "Zero in on: Posterior belly of digastric", exp: "The posterior belly of digastric is the shared border between the carotid and digastric triangles." },
+  { id: 16, topic: "Carotid sheath", src: "Maini · L03/L05", q: "Which three structures - the 'three musketeers' - travel together inside the carotid sheath?", opts: ["Common carotid artery, internal jugular vein, and spinal accessory nerve", "Internal carotid artery, subclavian vein, and hypoglossal nerve", "Common carotid artery, internal jugular vein, and vagus nerve", "Common carotid artery, external jugular vein, and phrenic nerve"], a: 2, h1: "Artery + vein + vagus = the sheath trio.", h2: "Zero in on: Common carotid artery", exp: "Maini's 'three musketeers': the carotid artery, IJV, and vagus nerve wrapped in the carotid sheath." },
+  { id: 17, topic: "Suprahyoid", src: "Maini · L03", q: "The posterior belly of the digastric originates from which bony landmark?", opts: ["Mastoid notch (medial surface of the mastoid process) of the temporal bone", "Styloid process of the temporal bone", "Digastric fossa of the mandible", "Mylohyoid line of the mandible"], a: 0, h1: "Posterior belly grabs the mastoid (temporal bone).", h2: "Zero in on: Mastoid notch", exp: "Maini: the posterior belly arises from the mastoid/digastric notch on the temporal bone." },
+  { id: 18, topic: "Suprahyoid", src: "Maini · L03", q: "The digastric is a 'composite' muscle with two nerves. Which nerve supplies its POSTERIOR belly?", opts: ["Hypoglossal nerve (CN XII)", "Facial nerve (CN VII)", "Nerve to mylohyoid (from V3)", "Glossopharyngeal nerve (CN IX)"], a: 1, h1: "Posterior belly + stylohyoid share the Facial nerve ('F').", h2: "Zero in on: Facial nerve", exp: "The posterior belly of digastric is supplied by the facial nerve." },
+  { id: 19, topic: "Suprahyoid", src: "Maini · L03", q: "Which nerve supplies the ANTERIOR belly of the digastric?", opts: ["Nerve to mylohyoid (a branch of the inferior alveolar, from V3)", "Hypoglossal nerve (CN XII)", "Facial nerve (CN VII)", "Vagus nerve (CN X)"], a: 0, h1: "Anterior belly rides the trigeminal (V3 to inferior alveolar to nerve to mylohyoid).", h2: "Zero in on: Nerve to mylohyoid", exp: "The anterior belly is supplied by the nerve to mylohyoid, from the inferior alveolar branch of V3." },
+  { id: 20, topic: "Suprahyoid", src: "Maini · L03", q: "The stylohyoid muscle originates from which bony landmark?", opts: ["Styloid process of the temporal bone", "Mastoid notch of the temporal bone", "Oblique line of the thyroid cartilage", "Genial tubercle of the mandible"], a: 0, h1: "STYLO-hyoid from the STYLOID process.", h2: "Zero in on: Styloid process of the temporal bone", exp: "The name says it: stylohyoid arises from the styloid process." },
+  { id: 21, topic: "Suprahyoid", src: "Maini · L03", q: "Which nerve supplies the geniohyoid muscle?", opts: ["Facial nerve (CN VII)", "C1 fibers carried by the hypoglossal nerve (CN XII)", "Ansa cervicalis", "Nerve to mylohyoid (V3)"], a: 1, h1: "Geniohyoid (and thyrohyoid) = C1 hitchhiking on CN XII.", h2: "Zero in on: C1 fibers carried by the hypoglossal nerve", exp: "Geniohyoid is supplied by C1 fibers travelling with the hypoglossal nerve." },
+  { id: 22, topic: "Suprahyoid", src: "Maini · L03", q: "The nerves to the digastric develop with the muscle from the pharyngeal arches, so they carry which functional fiber type?", opts: ["GSE (general somatic efferent) fibers", "GVA (general visceral afferent) fibers", "SVE (special visceral efferent) fibers", "GVE (general visceral efferent) fibers"], a: 2, h1: "Pharyngeal-arch muscles use Special Visceral Efferent.", h2: "Zero in on: SVE", exp: "Muscles from the pharyngeal arches are innervated by SVE fibers, as Maini emphasized." },
+  { id: 23, topic: "Infrahyoid", src: "Maini · L03", q: "Which infrahyoid muscle uniquely has an attachment to the scapula?", opts: ["Sternohyoid", "Omohyoid (inferior belly, from the superior border of the scapula)", "Thyrohyoid", "Sternothyroid"], a: 1, h1: "OMO = shoulder; omohyoid reaches the scapula.", h2: "Zero in on: Omohyoid", exp: "Omohyoid is the only infrahyoid attaching to the scapula ('omo' = shoulder)." },
+  { id: 24, topic: "Infrahyoid", src: "Maini · L03", q: "What is the action of the sternothyroid muscle?", opts: ["It depresses the larynx", "It tenses the vocal folds", "It elevates the larynx", "It elevates the hyoid"], a: 0, h1: "Anchored to the thyroid cartilage, so it pulls the larynx down.", h2: "Zero in on: It depresses the larynx", exp: "Because it attaches to the thyroid cartilage, sternothyroid depresses the larynx." },
+  { id: 25, topic: "Infrahyoid", src: "Maini · L03", q: "Which infrahyoid muscle has a unique nerve supply (NOT the ansa cervicalis)?", opts: ["Thyrohyoid - supplied by C1 fibers carried by the hypoglossal nerve (CN XII)", "Sternohyoid - supplied by V3", "Omohyoid - supplied by CN VII", "Sternothyroid - supplied by CN X"], a: 0, h1: "Remember 'TH' = thyrohyoid = the exception (C1/XII).", h2: "Zero in on: Thyrohyoid", exp: "Thyrohyoid ('TH') is the exception, supplied by C1 via CN XII like geniohyoid." },
+  { id: 26, topic: "Carotid arteries", src: "Maini · L03", q: "The RIGHT common carotid artery arises from which vessel?", opts: ["The aortic arch directly", "The external carotid artery", "The brachiocephalic trunk", "The right subclavian artery"], a: 2, h1: "Right = off the brachiocephalic trunk.", h2: "Zero in on: The brachiocephalic trunk", exp: "The right common carotid is a branch of the brachiocephalic trunk." },
+  { id: 27, topic: "Carotid arteries", src: "Maini · L03", q: "At what level does the common carotid artery bifurcate into external and internal carotid arteries?", opts: ["At the level of the hyoid bone", "At the superior border of the thyroid cartilage", "At the cricoid cartilage", "At the jugular foramen"], a: 1, h1: "Fork at the top edge of the thyroid CARTILAGE.", h2: "Zero in on: At the superior border of the thyroid cartilage", exp: "Both common carotids divide at the superior border of the thyroid cartilage." },
+  { id: 28, topic: "Carotid arteries", src: "Maini · L03", q: "How can you distinguish the internal carotid artery (ICA) from the external carotid artery (ECA) in the neck?", opts: ["The ECA gives off branches in the neck; the ICA gives no branches in the neck", "The ICA is always medial; the ECA is always deep to the mandible", "Both give equal branches, so they cannot be told apart", "The ICA gives many neck branches; the ECA gives none"], a: 0, h1: "Branches in the neck = external; no branches = internal.", h2: "Zero in on: The ECA gives off branches in the neck", exp: "The branch-giver is the ECA; the branchless one is the ICA." },
+  { id: 29, topic: "Sinus & body", src: "Maini · L03", q: "The carotid sinus contains which type of receptor?", opts: ["Thermoreceptors", "Chemoreceptors", "Photoreceptors", "Baroreceptors (pressure/stretch receptors)"], a: 3, h1: "BARO = pressure; the sinus is the pressure sensor.", h2: "Zero in on: Baroreceptors", exp: "The carotid sinus houses baroreceptors that sense blood pressure via arterial stretch." },
+  { id: 30, topic: "Sinus & body", src: "Maini · L03", q: "Which cranial nerve carries impulses from the carotid sinus and carotid body?", opts: ["Glossopharyngeal nerve (CN IX)", "Facial nerve (CN VII)", "Vagus nerve (CN X)", "Hypoglossal nerve (CN XII)"], a: 0, h1: "Carotid sinus + body = the 9th nerve's job.", h2: "Zero in on: Glossopharyngeal nerve", exp: "Both the carotid sinus and carotid body are innervated by the glossopharyngeal (9th) nerve." },
+  { id: 31, topic: "Sinus & body", src: "Maini · L03", q: "The carotid body contains chemoreceptors that primarily sense which changes in the blood?", opts: ["Increased O2 and decreased CO2", "Changes in blood glucose only", "Increased CO2, increased H+, and decreased O2", "Changes in blood pressure"], a: 2, h1: "Body = chemistry: CO2 up, H+ up, O2 down.", h2: "Zero in on: Increased CO2", exp: "The carotid body chemoreceptors detect a rise in CO2/H+ and a fall in O2." },
+  { id: 32, topic: "ECA branches", src: "Maini · L03", q: "How many branches does the external carotid artery have, and how are they grouped?", opts: ["Ten total: 4 anterior, 4 posterior, 2 terminal", "Six total: 3 anterior and 3 posterior", "Four total: 2 anterior and 2 terminal", "Eight total: 3 anterior, 3 posterior, and 2 terminal"], a: 3, h1: "3 + 3 + 2 = 8.", h2: "Zero in on: Eight total: 3 anterior", exp: "The ECA has 8 branches - three anterior, three posterior, two terminal." },
+  { id: 33, topic: "ECA branches", src: "Maini · L03", q: "Which of the following are the three ANTERIOR branches of the external carotid artery?", opts: ["Ascending pharyngeal, occipital, and posterior auricular", "Superficial temporal and maxillary", "Vertebral, internal thoracic, and thyrocervical", "Superior thyroid, lingual, and facial"], a: 3, h1: "Front three: Superior thyroid, Lingual, Facial.", h2: "Zero in on: Superior thyroid", exp: "The anterior branches are superior thyroid, lingual, and facial." },
+  { id: 34, topic: "ECA branches", src: "Maini · L03", q: "What are the two TERMINAL branches of the external carotid artery?", opts: ["Superficial temporal and maxillary", "Occipital and posterior auricular", "Superior thyroid and ascending pharyngeal", "Facial and lingual"], a: 0, h1: "The ECA ends as superficial temporal + maxillary.", h2: "Zero in on: Superficial temporal and maxillary", exp: "The ECA ends by dividing into the superficial temporal and maxillary arteries." },
+  { id: 35, topic: "ECA branches", src: "Maini · L03", q: "The transverse facial artery is a branch of which artery (a classic point of confusion)?", opts: ["Superficial temporal artery", "Lingual artery", "Maxillary artery", "Facial artery"], a: 0, h1: "Name says 'facial,' but it's a superficial TEMPORAL branch.", h2: "Zero in on: Superficial temporal artery", exp: "Maini flags the trap: transverse facial is a branch of the superficial temporal, NOT the facial artery." },
+  { id: 36, topic: "Subclavian", src: "Maini · L03", q: "The RIGHT subclavian artery arises from which vessel?", opts: ["The right common carotid artery", "The brachiocephalic trunk", "The axillary artery", "The aortic arch directly"], a: 1, h1: "Right subclavian = off the brachiocephalic trunk.", h2: "Zero in on: The brachiocephalic trunk", exp: "The right subclavian arises from the brachiocephalic trunk (the left arises from the aortic arch)." },
+  { id: 37, topic: "Subclavian", src: "Maini · L03", q: "The anterior scalene muscle divides the subclavian artery into how many parts, and how are they positioned?", opts: ["Two parts: proximal and distal to the muscle", "Three parts, all lateral to the muscle", "Three parts: part 1 medial, part 2 posterior/deep, part 3 lateral to the muscle", "Four parts, one for each branch"], a: 2, h1: "Medial (1), deep/behind (2), lateral (3) to the anterior scalene.", h2: "Zero in on: Three parts: part 1 medial", exp: "Part 1 is medial, part 2 lies behind (deep to) the muscle, part 3 is lateral." },
+  { id: 38, topic: "Subclavian", src: "Maini · L03", q: "Which three branches arise from the FIRST part of the subclavian artery?", opts: ["Costocervical trunk, deep cervical, and superior intercostal", "Superior thyroid, lingual, and facial", "Dorsal scapular and suprascapular only", "Vertebral artery, internal thoracic artery, and thyrocervical trunk"], a: 3, h1: "VIT: Vertebral, Internal thoracic, Thyrocervical trunk.", h2: "Zero in on: Vertebral artery", exp: "Part 1 gives the vertebral, internal thoracic, and thyrocervical trunk." },
+  { id: 39, topic: "Subclavian", src: "Maini · L03", q: "In thoracic outlet (scalene) syndrome, which structures may be compressed together?", opts: ["The common carotid artery and the recurrent laryngeal nerve", "The subclavian vein and the phrenic nerve", "The subclavian artery and the brachial plexus", "The internal jugular vein and the vagus nerve"], a: 2, h1: "Both hide behind the anterior scalene, so both get squeezed.", h2: "Zero in on: The subclavian artery and the brachial plexus", exp: "Because both lie posterior to the anterior scalene, they can be compressed together." },
+  { id: 40, topic: "Neck veins", src: "Maini · L05", q: "What is the relationship of the subclavian VEIN to the anterior scalene muscle?", opts: ["It pierces the anterior scalene", "It passes POSTERIOR to the anterior scalene", "It passes posterior to the middle scalene", "It passes ANTERIOR to the anterior scalene"], a: 3, h1: "Vein in FRONT, artery BEHIND the anterior scalene.", h2: "Zero in on: It passes ANTERIOR to the anterior scalene", exp: "The subclavian vein runs in front of the anterior scalene (opposite the artery)." },
+  { id: 41, topic: "Neck veins", src: "Maini · L05", q: "The subclavian vein unites with which vein to form the brachiocephalic vein?", opts: ["The vertebral vein", "The external jugular vein", "The internal jugular vein", "The anterior jugular vein"], a: 2, h1: "Subclavian + IJV = brachiocephalic (then the SVC).", h2: "Zero in on: The internal jugular vein", exp: "Subclavian + internal jugular veins unite to form the brachiocephalic vein." },
+  { id: 42, topic: "Neck veins", src: "Maini · L05", q: "The internal jugular vein begins at the jugular foramen as a continuation of which dural venous sinus?", opts: ["The cavernous sinus", "The superior sagittal sinus", "The straight sinus", "The sigmoid sinus"], a: 3, h1: "Sigmoid sinus exits the jugular foramen as the IJV.", h2: "Zero in on: The sigmoid sinus", exp: "The IJV is the continuation of the sigmoid sinus at the jugular foramen." },
+  { id: 43, topic: "Neck veins", src: "Maini · L05", q: "Into which vein does the INFERIOR thyroid vein drain (unlike the superior and middle thyroid veins)?", opts: ["The internal jugular vein", "The external jugular vein", "The vertebral vein", "The brachiocephalic vein"], a: 3, h1: "Inferior thyroid vein is the odd one, going to the brachiocephalic.", h2: "Zero in on: The brachiocephalic vein", exp: "The inferior thyroid vein drains into the brachiocephalic vein on each side." },
+  { id: 44, topic: "Lymphatics", src: "Maini · L05", q: "On palpation, which lymph node finding is MORE worrisome (e.g., for cancer or lymphoma)?", opts: ["A painless, firm-to-hard, fixed, matted node", "A soft node that fluctuates with swallowing", "A warm, red, acutely tender node", "A painful, tender, mobile node"], a: 0, h1: "Painless + hard + fixed + matted = red flag.", h2: "Zero in on: A painless", exp: "Maini: painless, firm, fixed, matted nodes are more concerning for malignancy/lymphoma." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.edge-note{font-size:12.5px;color:var(--ink-soft);background:var(--accent-wash);border:1px solid var(--line);border-radius:9px;padding:8px 12px;margin-top:12px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.player{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:0 0 16px;box-shadow:0 12px 28px -22px rgba(124,58,237,.35)}
+.player-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pbtn{border:none;background:var(--accent);color:#fff;font:inherit;font-weight:700;font-size:14px;padding:9px 15px;border-radius:10px;cursor:pointer;transition:.14s;display:inline-flex;align-items:center;gap:6px}
+.pbtn:hover{background:var(--accent-mid)}
+.pbtn.sec{background:#fff;color:var(--accent-deep);border:1px solid var(--line)}
+.pbtn.sec:hover{background:var(--accent-wash)}
+.pbtn:disabled{opacity:.4;cursor:default}
+.pctl{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+.pctl input[type=range]{accent-color:var(--accent);width:120px}
+.pctl select{font:inherit;font-size:12.5px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:#fff;color:var(--ink);max-width:190px}
+.pnow{font-size:12.5px;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:9px;padding:9px 12px;margin-top:11px}
+.pnow b{color:var(--accent-deep)}
+.pnote{font-size:11.5px;color:var(--ink-soft);margin-top:8px}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);transition:box-shadow .2s,border-color .2s}
+.obj.reading{border-left-color:var(--accent-mid);box-shadow:0 0 0 2px var(--accent-soft),0 14px 30px -22px rgba(124,58,237,.45)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.readbtn{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:11px;padding:4px 10px;border-radius:8px;cursor:pointer;white-space:nowrap}
+.readbtn:hover{background:var(--accent-wash)}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.obj-facts li.reading{color:var(--ink);font-weight:600;background:var(--accent-wash);border-radius:6px;padding:2px 6px;margin-left:-6px}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag.reading{outline:2px solid var(--accent-soft)}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ============================================= SPEECH (Web Speech API) ===== */
+const SPEAK_MAP = [
+  [/\bCN XII\b/g, "cranial nerve twelve"], [/\bCN XI\b/g, "cranial nerve eleven"],
+  [/\bCN X\b/g, "cranial nerve ten"], [/\bCN IX\b/g, "cranial nerve nine"],
+  [/\bCN VIII\b/g, "cranial nerve eight"], [/\bCN VII\b/g, "cranial nerve seven"],
+  [/\bCN VI\b/g, "cranial nerve six"], [/\bCN V\b/g, "cranial nerve five"],
+  [/\bCN IV\b/g, "cranial nerve four"], [/\bCN III\b/g, "cranial nerve three"],
+  [/\bCN II\b/g, "cranial nerve two"], [/\bCN I\b/g, "cranial nerve one"],
+  [/\bV3\b/g, "V three"], [/\bV2\b/g, "V two"], [/\bV1\b/g, "V one"],
+  [/\bC1\b/g, "C one"], [/\bC2\b/g, "C two"], [/\bC3\b/g, "C three"],
+  [/\bC4\b/g, "C four"], [/\bC5\b/g, "C five"], [/\bC6\b/g, "C six"],
+  [/\bC7\b/g, "C seven"], [/\bC8\b/g, "C eight"], [/\bT1\b/g, "T one"],
+  [/\bIJV\b/g, "internal jugular vein"], [/\bECA\b/g, "external carotid artery"],
+  [/\bICA\b/g, "internal carotid artery"], [/\bCCA\b/g, "common carotid artery"],
+  [/\bSCM\b/g, "sternocleidomastoid"], [/\bSVE\b/g, "S V E"], [/\bGSE\b/g, "G S E"],
+  [/\bGVE\b/g, "G V E"], [/\bGVA\b/g, "G V A"], [/\bSVC\b/g, "superior vena cava"],
+];
+function speechify(t) {
+  let s = t;
+  SPEAK_MAP.forEach(([re, rep]) => { s = s.replace(re, rep); });
+  return s;
+}
+
+function useVoices() {
+  const [voices, setVoices] = useState([]);
+  useEffect(() => {
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    const load = () => { const v = synth.getVoices() || []; if (v.length) setVoices(v); };
+    load();
+    synth.addEventListener("voiceschanged", load);
+    return () => { try { synth.removeEventListener("voiceschanged", load); } catch (e) {} };
+  }, []);
+  return voices;
+}
+
+// Prefer the natural Edge voices (Ava / Emma / Andrew / any "Natural"/"Online" en-US)
+function pickDefaultVoice(voices) {
+  if (!voices || !voices.length) return "";
+  const byName = (needle) => voices.find(v => v.name.toLowerCase().includes(needle));
+  const en = voices.filter(v => (v.lang || "").toLowerCase().startsWith("en"));
+  const pool = en.length ? en : voices;
+  const pref = ["ava", "emma", "andrew", "natural", "online", "aria", "jenny"];
+  for (const p of pref) {
+    const hit = pool.find(v => v.name.toLowerCase().includes(p));
+    if (hit) return hit.voiceURI;
+  }
+  return pool[0].voiceURI;
+}
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Head &amp; Neck · Dr. Maini</span>
+          <h1 className="title serif">The <em>Neck</em> (part 1)</h1>
+          <p className="subtitle">A voiced, hands-free cram for Maini&apos;s neck part-1 material — the cervical triangles and their contents, the suprahyoid &amp; infrahyoid muscles and their nerves, the carotid &amp; subclavian arteries, and the neck veins &amp; lymphatics — in her order, with a drill in her style and her own mnemonics.</p>
+          <div className="edge-note">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+          <div className="pill-row">
+            <span className="pill-date">🎧 Triangles · cervical plexus · hyoid muscles · carotid &amp; subclavian · neck veins · L03 + L05</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA lectures — Cervical Triangles (L03) and Blood Vessels of the Neck / Cervical Viscera (L05) — and the module&apos;s audited Everything-MC bank. Questions are original, in her style, source-tagged per item. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  const voices = useVoices();
+  const [voiceURI, setVoiceURI] = useState("");
+  const [rate, setRate] = useState(1.1);
+  const [playing, setPlaying] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [cur, setCur] = useState(-1);
+  const [supported] = useState(() => typeof window !== "undefined" && "speechSynthesis" in window);
+
+  // flat list of spoken segments
+  const segments = useMemo(() => {
+    const segs = [];
+    cram.forEach((c, ci) => {
+      segs.push({ ci, kind: "title", fi: -1, text: `Topic ${c.n}. ${c.title}.` });
+      c.facts.forEach((f, fi) => segs.push({ ci, kind: "fact", fi, text: f }));
+      if (c.flag) segs.push({ ci, kind: "flag", fi: -1, text: `Maini flag. ${c.flag}` });
+    });
+    return segs;
+  }, []);
+
+  const rateRef = useRef(rate); useEffect(() => { rateRef.current = rate; }, [rate]);
+  const voiceRef = useRef(voiceURI); useEffect(() => { voiceRef.current = voiceURI; }, [voiceURI]);
+  const voicesRef = useRef(voices); useEffect(() => { voicesRef.current = voices; }, [voices]);
+  const activeRef = useRef(false);
+  const tokenRef = useRef(0);
+
+  // default voice once list arrives
+  useEffect(() => {
+    if (!voiceURI && voices.length) setVoiceURI(pickDefaultVoice(voices));
+  }, [voices, voiceURI]);
+
+  const speakIdx = (i) => {
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    if (i < 0 || i >= segments.length) { activeRef.current = false; setPlaying(false); setPaused(false); setCur(-1); return; }
+    const token = ++tokenRef.current;
+    setCur(i);
+    const u = new SpeechSynthesisUtterance(speechify(segments[i].text));
+    u.rate = rateRef.current;
+    const v = (voicesRef.current || []).find(x => x.voiceURI === voiceRef.current);
+    if (v) { u.voice = v; u.lang = v.lang; }
+    u.onend = () => { if (activeRef.current && tokenRef.current === token) speakIdx(i + 1); };
+    u.onerror = () => { /* swallow; user can press play again */ };
+    synth.speak(u);
+  };
+
+  const play = () => {
+    if (!supported) return;
+    window.speechSynthesis.cancel();
+    activeRef.current = true; setPlaying(true); setPaused(false);
+    speakIdx(cur >= 0 ? cur : 0);
+  };
+  const pause = () => { if (!supported) return; window.speechSynthesis.pause(); setPaused(true); };
+  const resume = () => { if (!supported) return; window.speechSynthesis.resume(); setPaused(false); };
+  const stop = () => {
+    if (!supported) return;
+    activeRef.current = false; tokenRef.current++;
+    window.speechSynthesis.cancel();
+    setPlaying(false); setPaused(false); setCur(-1);
+  };
+  const jumpToTopic = (ci) => {
+    const start = segments.findIndex(s => s.ci === ci && s.kind === "title");
+    if (start < 0) return;
+    activeRef.current = true; setPlaying(true); setPaused(false);
+    window.speechSynthesis.cancel();
+    speakIdx(start);
+  };
+  const stepTopic = (dir) => {
+    const curCi = cur >= 0 ? segments[cur].ci : 0;
+    const next = Math.min(cram.length - 1, Math.max(0, curCi + dir));
+    jumpToTopic(next);
+  };
+
+  // stop speech when leaving the tab / unmounting
+  useEffect(() => () => {
+    activeRef.current = false;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+  }, []);
+
+  const curSeg = cur >= 0 ? segments[cur] : null;
+  const readingCi = curSeg ? curSeg.ci : -1;
+  const readingFi = curSeg && curSeg.kind === "fact" ? curSeg.fi : -2;
+  const readingFlag = curSeg && curSeg.kind === "flag";
+  const nowLabel = curSeg ? `Topic ${cram[curSeg.ci].n} — ${cram[curSeg.ci].title}` : "";
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s neck essentials, in her order</div>
+        <p>The map of the neck → posterior triangle &amp; the scalene gateway → cervical plexus &amp; ansa → the anterior triangle &amp; its four subdivisions → suprahyoid &amp; infrahyoid muscles → carotid, external carotid, sinus/body → subclavian &amp; carotid sheath → neck veins &amp; lymphatics. The ⚑ flags are the high-yield hooks. Press play to have it read aloud, hands-free.</p>
+      </div>
+
+      <div className="player">
+        <div className="player-row">
+          {!playing && <button className="pbtn" onClick={play} disabled={!supported}>▶ {cur >= 0 ? "Resume from here" : "Play walkthrough"}</button>}
+          {playing && !paused && <button className="pbtn" onClick={pause}>⏸ Pause</button>}
+          {playing && paused && <button className="pbtn" onClick={resume}>▶ Resume</button>}
+          <button className="pbtn sec" onClick={stop} disabled={!playing && cur < 0}>⏹ Stop</button>
+          <button className="pbtn sec" onClick={() => stepTopic(-1)} disabled={!supported}>⏮ Prev</button>
+          <button className="pbtn sec" onClick={() => stepTopic(1)} disabled={!supported}>⏭ Next</button>
+          <div className="pctl">
+            <label htmlFor="rate">Speed</label>
+            <input id="rate" type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => setRate(parseFloat(e.target.value))} />
+            <span>{rate.toFixed(1)}x</span>
+          </div>
+          <div className="pctl">
+            <label htmlFor="voice">Voice</label>
+            <select id="voice" value={voiceURI} onChange={(e) => setVoiceURI(e.target.value)}>
+              {!voices.length && <option value="">(loading…)</option>}
+              {voices.map((v) => <option key={v.voiceURI} value={v.voiceURI}>{v.name}{v.lang ? ` (${v.lang})` : ""}</option>)}
+            </select>
+          </div>
+        </div>
+        {curSeg && <div className="pnow">🔊 Now reading: <b>{nowLabel}</b></div>}
+        {!supported && <div className="pnow">This browser does not support the Web Speech API. Try Microsoft Edge or Chrome to hear it read aloud — the text below still works on its own.</div>}
+        <div className="pnote">Speed and voice changes take effect as it moves to the next line. Tap any topic&apos;s <b>▶ Read</b> button to start there.</div>
+      </div>
+
+      {cram.map((c, ci) => (
+        <div className={`obj ${readingCi === ci ? "reading" : ""}`} key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <button className="readbtn" onClick={() => jumpToTopic(ci)} disabled={!supported}>▶ Read</button>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">
+            {c.facts.map((f, j) => <li key={j} className={readingCi === ci && readingFi === j ? "reading" : ""}>{f}</li>)}
+          </ul>
+          {c.flag && <div className={`objflag ${readingCi === ci && readingFlag ? "reading" : ""}`}>{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Maini&apos;s framework and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Mnemonics</div>
+        <p>Maini&apos;s own mnemonics and tricks pulled straight from the neck lectures — the retention hooks to lean on when a detail won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the neck</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 Gross Anatomy, running a review of THE NECK (part 1) - the cervical triangles and their contents, the hyoid muscles, and the blood vessels of the neck (Lectures 3 and 5). Teach ONLY from this content; do not invent boundaries, contents, nerve supplies, branches, or root values. Warm and encouraging; you call students "guys," say "right?", "okay?", and "are we clear?", and you constantly tell students to DRAW the triangles and label them. Keep answers tight (3-6 sentences) and quiz the student.
+
+THE MAP: SCM splits the neck into an ANTERIOR triangle (in front of SCM) and a POSTERIOR triangle (behind SCM). POSTERIOR borders: SCM, trapezius, clavicle; the inferior belly of omohyoid splits it into occipital (larger) + supraclavicular/subclavian (smaller). ANTERIOR borders: midline, anterior border of SCM, lower margin of mandible.
+
+SCALENE GATEWAY: between anterior and middle scalene the brachial plexus trunks (C5-T1) emerge. POSTERIOR to the anterior scalene: brachial plexus + subclavian ARTERY (compressed together in thoracic outlet syndrome). ANTERIOR to the anterior scalene: subclavian VEIN + transverse cervical + suprascapular arteries. Spinal accessory nerve (CN XI) runs in the posterior triangle (CN IX, X, XII are in the carotid triangle).
+
+CERVICAL PLEXUS: ventral rami C1-C4. Four cutaneous branches emerge at the nerve point of the neck (Erb's point), mid-posterior border of SCM: lesser occipital, greater auricular (to the ear), transverse cervical, supraclavicular (medial/intermediate/lateral). Muscular branches: phrenic (C3,4,5 - "keep you alive"), prevertebral muscles, and C2-C4 fibers that ride CN XI to SCM/trapezius. ANSA CERVICALIS: superior root = C1 via hypoglossal (CN XII), inferior root = C2-C3 (some C4); supplies the strap muscles EXCEPT thyrohyoid (thyrohyoid = C1 via CN XII, like geniohyoid). Hypoglossal exits the hypoglossal canal.
+
+ANTERIOR TRIANGLE SUBDIVISIONS (carved by the two bellies of digastric + superior belly of omohyoid): submental, digastric (submandibular), carotid, muscular. Submental = midline + anterior belly of digastric + hyoid body (submental nodes, start of anterior jugular vein). Digastric = both digastric bellies + mandible (submandibular gland, facial vessels, CN XII). Carotid = posterior belly of digastric + SCM + superior belly of omohyoid (common carotid + bifurcation; CN IX, X, XII). Muscular = midline + superior belly of omohyoid + SCM (straps, thyroid gland, larynx, trachea, esophagus). COMMON BOUNDARIES you love to test: anterior belly of digastric (submental/digastric), posterior belly of digastric (carotid/digastric), superior belly of omohyoid (muscular/carotid).
+
+SUPRAHYOID (elevate the hyoid; matter in swallowing): digastric, stylohyoid, mylohyoid, geniohyoid. Digastric is COMPOSITE: posterior belly (origin mastoid notch, temporal bone) = facial nerve (CN VII); anterior belly (insertion digastric fossa) = nerve to mylohyoid (inferior alveolar -> V3 -> trigeminal). Stylohyoid (from styloid process) = facial nerve; "F for facial" pairs it with the posterior belly of digastric; it is pierced by the digastric intermediate tendon. Mylohyoid (mylohyoid line; forms floor of mouth) = nerve to mylohyoid (V3). Geniohyoid (genial tubercle; sits on top of mylohyoid) = C1 via CN XII. Pharyngeal-arch muscles = SVE fibers, not GSE.
+
+INFRAHYOID/straps (depress the hyoid/larynx; mostly in the muscular triangle): omohyoid, sternohyoid, sternothyroid, thyrohyoid. Omohyoid = only strap on the scapula, intermediate tendon slung to clavicle + first rib. Sternothyroid stops at the oblique line of the thyroid cartilage -> depresses the larynx. Ansa supplies all EXCEPT thyrohyoid (C1 via CN XII).
+
+CAROTID SYSTEM: right common carotid off the brachiocephalic trunk; left off the aortic arch. Each bifurcates at the superior border of the thyroid cartilage. External carotid gives branches in the neck; internal carotid gives NO neck branches and enters via the carotid canal. External carotid = 8 branches: anterior (superior thyroid, lingual, facial), posterior (ascending pharyngeal, occipital, posterior auricular), terminal (superficial temporal, maxillary). TRAP: transverse facial is a branch of the superficial temporal, NOT the facial artery. Carotid SINUS = baroreceptors (pressure) at the start of the internal carotid; carotid BODY = chemoreceptors (CO2 up, H+ up, O2 down); BOTH supplied by glossopharyngeal (CN IX).
+
+SUBCLAVIAN: right off the brachiocephalic, left off the arch; anterior scalene divides it into 3 parts (medial, deep, lateral). Part 1 = vertebral (up transverse foramina to foramen magnum), internal thoracic, thyrocervical trunk (inferior thyroid + transverse cervical + suprascapular). Part 2 = costocervical trunk (deep cervical + superior intercostal). Part 3 usually no branch. CAROTID SHEATH = three musketeers: common carotid, internal jugular vein, vagus; the external carotid leaves the sheath after the bifurcation.
+
+NECK VEINS/LYMPH: subclavian vein is ANTERIOR to the anterior scalene, continuation of the axillary vein at the first rib; subclavian vein + IJV = brachiocephalic vein. IJV is the continuation of the sigmoid sinus (jugular foramen), drains brain/face/neck, rides the carotid sheath. Superior + middle thyroid veins -> IJV; inferior thyroid vein -> brachiocephalic. Head/neck lymph forms right + left jugular trunks (right -> right lymphatic duct, left -> thoracic duct). Painless, firm, fixed, matted node = more worrisome (cancer/lymphoma).
+
+Open by offering to drill: the triangles and their common boundaries, anterior/posterior-to-anterior-scalene relations, the cervical plexus and ansa cervicalis, the suprahyoid/infrahyoid muscles and their nerves, the carotid and subclavian arteries, or the neck veins. When a student is wrong, tell them to draw the triangle and reason it out step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys - the neck, part one. Two things I promise to ask: which structures are anterior versus posterior to the anterior scalene (remember, subclavian VEIN in front; brachial plexus and subclavian ARTERY behind), and the common boundaries between the four anterior-triangle subdivisions. Want me to drill the triangles and their boundaries, the cervical plexus and ansa cervicalis, the suprahyoid and infrahyoid muscles and their nerves, the carotid and subclavian arteries, or the neck veins? And please, have a paper handy - we draw it out. Where do you want to start?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the triangles and their common boundaries",
+    "Quiz anterior vs posterior to the anterior scalene",
+    "The cervical plexus and ansa cervicalis",
+    "Suprahyoid & infrahyoid muscles and their nerves",
+    "The carotid arteries, sinus, and body",
+    "Subclavian branches and the carotid sheath",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her neck lectures. It quizzes you and makes you draw it out and reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

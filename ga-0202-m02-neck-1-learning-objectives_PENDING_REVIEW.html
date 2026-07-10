@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>&#127919; GA 0202 &middot; The Neck (part 1) &mdash; Learning Objectives (Master the 12)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .voices{color:#fcd34d;font-size:12px;margin:8px auto 0;max-width:720px;line-height:1.5}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="fab201-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 Neck Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 12</h1>
+  <div class="voices">&#128266; Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+  <div class="sub">GA 0202 &middot; <b>The Neck (part 1)</b> &middot; the study spine that ties every neck drill back to the points Dr. Maini flags for her quiz &mdash; cement each one, check it off, move on.</div>
+  <div class="meta-line">Dr. Maini &middot; Cervical Triangles + Blood Vessels of the Neck (Lectures 3 &amp; 5) &middot; &#129504; SCUHS GA 0202</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for <b>The Neck (part 1)</b>. Each objective is built from the module&rsquo;s <b>audited Everything-MC bank</b> and <b>Dr. Maini&rsquo;s own Lecture 3 &amp; 5 recordings</b> &mdash; she constantly flags what she&rsquo;ll test (&ldquo;in your quiz I&rsquo;m going to ask&hellip;&rdquo;). Every &ldquo;prove it&rdquo; bullet is grounded in that verified material and cited by lecture (<b>L03 / L05</b>). Quotes are cleaned from her Zoom recordings. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>Dr. Maini doesn&rsquo;t hand out a formal objective sheet &mdash; she tells you what&rsquo;s testable as she goes: &ldquo;in your quiz I&rsquo;m going to ask which structure is anterior or posterior&hellip;&rdquo;, &ldquo;which muscle forms the common boundary&hellip;&rdquo;. This page collects the <b>twelve</b> things she actually drilled across the two neck lectures, spells out <b>exactly what &ldquo;done&rdquo; looks like</b>, hangs a <b>verified Maini quote</b> on each, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: the module&rsquo;s <b>audited Everything-MC bank</b> + Dr. Maini&rsquo;s <b>Lecture 3</b> (Cervical Triangles &amp; Blood Vessels) and <b>Lecture 5</b> (Blood Vessels &amp; Cervical Viscera) recordings.</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 12 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Lay out the posterior triangle of the neck &mdash; its boundaries, its two subdivisions, and its marquee contents.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Posterior triangle</b> (+ L05 landmarks)</div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give the boundaries: <b>sternocleidomastoid</b> anteriorly, <b>trapezius</b> posteriorly, the <b>clavicle</b> as the base. <span class="cite">(L03 &middot; boundaries)</span></li>
+        <li>Split it: the <b>inferior belly of omohyoid</b> divides it into the <b>occipital</b> triangle and the <b>supraclavicular (subclavian)</b> triangle. <span class="cite">(L03 &middot; subdivisions)</span></li>
+        <li>Place the <b>brachial plexus</b>: its trunks emerge <b>between the anterior and middle scalene</b> and lie <b>POSTERIOR to the anterior scalene</b>; roots = ventral rami of <b>C5&ndash;T1</b>. <span class="cite">(L03 &middot; brachial plexus)</span></li>
+        <li>Name a marquee content: the <b>spinal accessory nerve (CN XI)</b> runs through the posterior triangle. <span class="cite">(L05 &middot; contents)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;In your quiz I&rsquo;m going to ask which structure is anterior or posterior to anterior scalene. Brachial plexus is <b>posterior</b>.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3 (Cervical Triangles &amp; Blood Vessels)</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which two muscles and which bone bound the posterior triangle, and does the brachial plexus lie anterior or posterior to the anterior scalene?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>SCM</b> (anterior), <b>trapezius</b> (posterior), <b>clavicle</b> (base). The brachial plexus lies <b>POSTERIOR</b> to the anterior scalene (its trunks emerge between the anterior &amp; middle scalene). The inferior belly of omohyoid splits the triangle into <b>occipital + supraclavicular</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the cervical plexus &mdash; its roots, the four cutaneous branches, and its muscular branches.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Cervical plexus</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the roots: ventral rami of <b>C1&ndash;C4</b>; the plexus relates to the <b>internal jugular vein</b> within the carotid sheath. <span class="cite">(L03 &middot; formation)</span></li>
+        <li>Name the <b>four cutaneous branches</b> &mdash; <b>lesser occipital, greater auricular, transverse cervical, supraclavicular</b> &mdash; all emerging from the <b>nerve point of the neck (Erb&rsquo;s point)</b> at the mid-posterior border of SCM (greater auricular heads up toward the ear). <span class="cite">(L03 &middot; cutaneous branches)</span></li>
+        <li>Break down supraclavicular into its <b>3 groups</b>: <b>medial, intermediate, lateral</b>. <span class="cite">(L03 &middot; supraclavicular)</span></li>
+        <li>Give the muscular branches: the <b>phrenic nerve (C3, C4, C5</b> &mdash; &ldquo;keep you alive&rdquo;<b>)</b>, and <b>C2&ndash;C4 fibers</b> that hitch onto CN XI to reach <b>SCM &amp; trapezius</b>. <span class="cite">(L03 &middot; muscular branches)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Phrenic nerve &hellip; root value? <b>3, 4, 5, to keep you alive</b>. It&rsquo;s a branch of cervical plexus.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the four cutaneous branches of the cervical plexus and the single point they all emerge from; give the phrenic root value.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Lesser occipital, greater auricular, transverse cervical, supraclavicular</b> &mdash; all from the <b>nerve point of the neck (Erb&rsquo;s point)</b> at the mid-posterior border of SCM. Phrenic = <b>C3, C4, C5</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the ansa cervicalis &mdash; its two roots and exactly what it innervates (with the one exception).</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Ansa cervicalis</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Trace the <b>superior root</b>: <b>C1 fibers</b> that travel with the <b>hypoglossal nerve (CN XII)</b>, then separate from it. <span class="cite">(L03 &middot; superior root)</span></li>
+        <li>Trace the <b>inferior root</b>: mostly <b>C2 and C3</b> (a few C4). <span class="cite">(L03 &middot; inferior root)</span></li>
+        <li>State what the loop does: it supplies <b>most of the infrahyoid (strap) muscles</b>. <span class="cite">(L03 &middot; function)</span></li>
+        <li>Lock in the exception: the <b>thyrohyoid</b> does NOT come from the ansa &mdash; it gets <b>C1 fibers carried by CN XII</b> directly (the hypoglossal itself exits via the <b>hypoglossal canal</b>). <span class="cite">(L03 &middot; exception)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Superior root is a branch from C1 that joins the hypoglossal nerve and then separates from it.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What fibers form the superior vs inferior root of the ansa cervicalis, and which infrahyoid muscle is the exception to ansa innervation?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Superior root = <b>C1</b> (carried by CN XII); inferior root = mostly <b>C2&ndash;C3</b>. The ansa supplies most infrahyoids; the <b>thyrohyoid</b> is the exception (C1 via CN XII).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Draw the anterior triangle and its four subdivisions &mdash; boundaries and key contents of each.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Anterior triangle</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give the boundaries: <b>midline</b> of the neck, <b>anterior border of SCM</b>, and <b>lower margin of the mandible</b>; the bellies of <b>digastric + omohyoid</b> carve it into four. <span class="cite">(L03 &middot; boundaries)</span></li>
+        <li><b>Submental:</b> midline / anterior belly of digastric / body of the hyoid &mdash; contains submental <b>lymph nodes</b> and the start of the <b>anterior jugular vein</b>. <span class="cite">(L03 &middot; submental)</span></li>
+        <li><b>Digastric (submandibular):</b> anterior belly / posterior belly of digastric / lower mandible &mdash; contains the <b>submandibular (salivary) gland</b>. <span class="cite">(L03 &middot; digastric)</span></li>
+        <li><b>Carotid:</b> posterior belly of digastric / SCM / superior belly of omohyoid &mdash; contains the <b>common carotid bifurcation</b> and <b>CN IX, X, XII</b>. <b>Muscular:</b> midline / superior belly of omohyoid / anterior SCM &mdash; contains the <b>strap muscles</b> + thyroid, larynx, trachea, esophagus. <span class="cite">(L03 &middot; carotid + muscular)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;You can actually draw an anterior triangle and divide it into <b>submental, digastric, carotid, and muscular</b>.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the four subdivisions of the anterior triangle and the gland found in the digastric triangle.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Submental, digastric (submandibular), carotid, muscular.</b> The digastric triangle contains the <b>submandibular salivary gland</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">Answer the &ldquo;common boundary&rdquo; questions &mdash; which single muscle is shared between adjacent triangles.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Common boundaries (Maini quiz items)</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Submental &amp; digastric</b> share the <b>anterior belly of digastric</b>. <span class="cite">(L03)</span></li>
+        <li><b>Carotid &amp; digastric</b> share the <b>posterior belly of digastric</b>. <span class="cite">(L03)</span></li>
+        <li><b>Muscular &amp; carotid</b> share the <b>superior belly of omohyoid</b>. <span class="cite">(L03)</span></li>
+        <li>Know why she drills these: she tells you to <b>practice drawing</b> the anterior triangle so you can answer &ldquo;which muscle forms the common boundary between X and Y?&rdquo; on the quiz. <span class="cite">(L03 &middot; study advice)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Which muscle forms a common boundary between carotid triangle and digastric triangle? <b>Posterior belly of digastric</b>.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which muscle forms the common boundary between the submental and digastric triangles, and which between the muscular and carotid triangles?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Submental/digastric = <b>anterior belly of digastric</b>; muscular/carotid = <b>superior belly of omohyoid</b>. (Carotid/digastric = <b>posterior belly of digastric</b>.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">Detail the four suprahyoid muscles &mdash; their attachments and (the graded part) their nerve supply.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Suprahyoid muscles</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the shared action: <b>elevate the hyoid</b> (key for swallowing). All develop from <b>pharyngeal arches</b>, so most carry <b>SVE</b> fibers. <span class="cite">(L03 &middot; action / fibers)</span></li>
+        <li><b>Digastric:</b> posterior belly from the <b>mastoid notch</b> (temporal bone), anterior belly to the <b>digastric fossa</b> of the mandible &mdash; a &ldquo;composite&rdquo; muscle: <b>posterior belly = facial nerve (CN VII)</b>, <b>anterior belly = nerve to mylohyoid</b> (inferior alveolar, from V3). <span class="cite">(L03 &middot; digastric)</span></li>
+        <li><b>Stylohyoid:</b> from the <b>styloid process</b>, pierced by the digastric&rsquo;s <b>intermediate tendon</b>, supplied by <b>CN VII</b> (the &ldquo;F for facial&rdquo; pair with the posterior belly of digastric). <span class="cite">(L03 &middot; stylohyoid)</span></li>
+        <li><b>Mylohyoid:</b> from the <b>mylohyoid line</b>, forms the <b>floor of the mouth</b>, anterior fibers meet at a <b>fibrous raphe</b> (symphysis menti to hyoid), <b>nerve to mylohyoid</b>. <b>Geniohyoid:</b> from the <b>genial tubercle</b>, sits on top of mylohyoid, supplied by <b>C1 via CN XII</b>. <span class="cite">(L03 &middot; mylohyoid + geniohyoid)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Posterior belly by facial nerve, the 7th nerve &hellip; anterior belly by nerve to mylohyoid.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which nerve supplies the posterior belly of the digastric, and which supplies the anterior belly?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Posterior belly = <b>facial nerve (CN VII)</b>; anterior belly = <b>nerve to mylohyoid</b> (branch of inferior alveolar, from V3). Stylohyoid is also <b>CN VII</b> (&ldquo;F for facial&rdquo;); geniohyoid = <b>C1 via CN XII</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Detail the four infrahyoid (strap) muscles &mdash; their action, the omohyoid quirk, and the thyrohyoid nerve exception.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Infrahyoid muscles</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the shared action: <b>depress the hyoid</b>; most are supplied by the <b>ansa cervicalis</b>. Sternohyoid &amp; sternothyroid sit in the <b>muscular triangle</b>. <span class="cite">(L03 &middot; action / location)</span></li>
+        <li><b>Omohyoid:</b> the <b>only</b> strap with a <b>scapular attachment</b> (superior border of scapula); its intermediate tendon is slung to the <b>clavicle and first rib</b>. <span class="cite">(L03 &middot; omohyoid)</span></li>
+        <li><b>Sternothyroid:</b> inserts on the <b>oblique line of the thyroid cartilage</b>, so it <b>depresses the larynx</b> (never reaches the hyoid); the <b>thyrohyoid</b> continues that line up to the body of the hyoid. <span class="cite">(L03 &middot; sternothyroid / thyrohyoid)</span></li>
+        <li>Lock in the exception: the <b>thyrohyoid&rsquo;s</b> nerve is <b>C1 carried by CN XII</b>, NOT the ansa cervicalis. <span class="cite">(L03 &middot; exception)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This is the only muscle in the infrahyoid group that originates from scapula.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3 (omohyoid)</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which infrahyoid muscle attaches to the scapula, and which one is NOT supplied by the ansa cervicalis?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Omohyoid</b> attaches to the scapula (inferior belly). <b>Thyrohyoid</b> is the exception &mdash; supplied by <b>C1 via the hypoglossal nerve (CN XII)</b>, not the ansa.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">Work through the carotid system &mdash; common &amp; internal carotid, the carotid sheath, and the sinus vs body.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Carotid arteries, sheath, sinus &amp; body</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give the origins: the <b>right common carotid</b> is a branch of the <b>brachiocephalic trunk</b>; the <b>left</b> arises directly from the <b>aortic arch</b>. It bifurcates at the <b>superior border of the thyroid cartilage</b>. <span class="cite">(L03 &middot; origins / bifurcation)</span></li>
+        <li>Tell ICA from ECA: only the <b>external carotid gives branches in the neck</b> &mdash; the <b>internal carotid gives none</b>, and enters the skull through the <b>carotid canal</b> (petrous temporal bone). <span class="cite">(L03 &middot; ICA vs ECA)</span></li>
+        <li>List the <b>carotid sheath &ldquo;three musketeers&rdquo;</b>: <b>common carotid, internal jugular vein, and vagus nerve</b>; after the bifurcation the <b>external carotid leaves the sheath</b>. <span class="cite">(L03/L05 &middot; sheath)</span></li>
+        <li>Split sinus from body: the <b>carotid sinus</b> (start of the ICA) holds <b>baroreceptors</b> (pressure); the <b>carotid body</b> holds <b>chemoreceptors</b> (&#8593;CO2, &#8593;H+, &#8595;O2) &mdash; both sensed via <b>CN IX (glossopharyngeal)</b>. <span class="cite">(L03 &middot; sinus / body)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Common carotid artery, internal jugular vein, and vagus &hellip; wrapped in a common sheath, the <b>three musketeers</b>.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">How do you distinguish the internal from the external carotid in the neck, and what three structures ride in the carotid sheath?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>ECA gives branches in the neck</b>; the <b>ICA gives none</b> (it enters via the carotid canal). The sheath&rsquo;s <b>three musketeers</b> = <b>common carotid artery, internal jugular vein, and vagus nerve</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">List the eight branches of the external carotid artery &mdash; grouped 3 anterior, 3 posterior, 2 terminal &mdash; plus the traps.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; External carotid branches</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give the count: <b>8</b> &mdash; <b>three anterior, three posterior, two terminal</b>. <span class="cite">(L03 &middot; overview)</span></li>
+        <li><b>Anterior 3:</b> <b>superior thyroid</b> (to the upper pole of the thyroid), <b>lingual</b> (arises at the tip of the <b>greater horn of the hyoid</b>), <b>facial</b>. <span class="cite">(L03 &middot; anterior branches)</span></li>
+        <li><b>Posterior 3:</b> <b>ascending pharyngeal, occipital, posterior auricular</b>. <span class="cite">(L03 &middot; posterior branches)</span></li>
+        <li><b>Terminal 2:</b> <b>superficial temporal</b> (palpable in front of the tragus, with the auriculotemporal nerve) and <b>maxillary</b> (deep to the neck of the mandible into the infratemporal fossa). <b>Trap:</b> the <b>transverse facial artery</b> is a branch of the <b>superficial temporal</b>, NOT the facial. <span class="cite">(L03 &middot; terminal + trap)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;<b>3 anterior, 3 posterior, and 2 terminal</b> branches &mdash; 8 branches in total.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">List the three anterior branches and the two terminal branches of the external carotid; which artery does the transverse facial branch off?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Anterior = <b>superior thyroid, lingual, facial</b>. Terminal = <b>superficial temporal, maxillary</b>. The <b>transverse facial artery</b> branches off the <b>superficial temporal</b> (a classic trap &mdash; not the facial).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Break down the subclavian artery &mdash; its three parts, the branches by part, and its relation to the anterior scalene.</div>
+        <div class="obj-src">content: <b>Lecture 3 &middot; Subclavian artery</b> (+ L05 scalene relation)</div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give the origins &amp; parts: <b>right</b> subclavian from the <b>brachiocephalic trunk</b>, <b>left</b> directly from the <b>aortic arch</b>. The anterior scalene splits it into <b>3 parts</b> (part 1 <b>medial</b>, part 2 <b>deep/posterior</b>, part 3 <b>lateral</b>) &mdash; the artery itself runs <b>POSTERIOR to the anterior scalene</b>. <span class="cite">(L03/L05 &middot; parts / scalene)</span></li>
+        <li><b>Part 1</b> gives three: <b>vertebral</b> (up the transverse foramina, then through the foramen magnum), <b>internal thoracic</b>, and <b>thyrocervical trunk</b> (= inferior thyroid + transverse cervical + suprascapular). <span class="cite">(L03 &middot; part 1)</span></li>
+        <li><b>Part 2</b> gives the <b>costocervical trunk</b> (= deep cervical + superior intercostal); <b>part 3</b> usually gives <b>no branch</b> (occasionally a dorsal scapular). <span class="cite">(L03 &middot; parts 2 &amp; 3)</span></li>
+        <li>Nail the relations trap: while the <b>artery</b> is posterior to the anterior scalene, the <b>transverse cervical</b> and <b>suprascapular</b> arteries lie <b>ANTERIOR</b> to it; in <b>thoracic outlet (scalene) syndrome</b> the subclavian artery + brachial plexus get compressed together. <span class="cite">(L03 &middot; relations / syndrome)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Part 1 gives off <b>vertebral, internal thoracic, and thyrocervical trunk</b>.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 3</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the three branches of the first part of the subclavian artery, and state the artery&rsquo;s relationship to the anterior scalene.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Part 1 = <b>vertebral, internal thoracic, thyrocervical trunk</b>. The subclavian artery lies <b>POSTERIOR</b> to the anterior scalene (its vein, plus the transverse cervical and suprascapular arteries, lie anterior).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace the venous drainage of the neck &mdash; the subclavian, internal &amp; external jugular veins, and the thyroid-vein trap.</div>
+        <div class="obj-src">content: <b>Lecture 5 &middot; Neck veins &amp; drainage</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Subclavian vein:</b> passes <b>ANTERIOR to the anterior scalene</b>; it is the continuation of the <b>axillary vein</b> (at the outer border of the first rib) and unites with the <b>IJV</b> to form the <b>brachiocephalic vein</b>. <span class="cite">(L05 &middot; subclavian vein)</span></li>
+        <li><b>Internal jugular vein:</b> begins at the <b>jugular foramen</b> as the continuation of the <b>sigmoid sinus</b>; runs in the carotid sheath with the <b>common carotid and vagus</b>; drains the <b>brain, face, and neck</b>. <span class="cite">(L05 &middot; IJV)</span></li>
+        <li><b>External jugular vein:</b> superficial, with essentially <b>one tributary</b> &mdash; the <b>anterior jugular vein</b>. <span class="cite">(L05 &middot; EJV)</span></li>
+        <li>Nail the thyroid-vein trap: <b>superior and middle thyroid veins</b> drain into the <b>IJV</b>, but the <b>inferior thyroid vein</b> drains into the <b>brachiocephalic vein</b>. <span class="cite">(L05 &middot; thyroid drainage)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Subclavian and internal jugular vein join together to form <b>brachiocephalic</b>.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 5 (Blood Vessels &amp; Cervical Viscera)</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Does the subclavian vein run anterior or posterior to the anterior scalene, and where do the superior, middle, and inferior thyroid veins drain?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The subclavian <b>VEIN</b> runs <b>ANTERIOR</b> to the anterior scalene (the artery is posterior). <b>Superior &amp; middle thyroid veins &#8594; IJV</b>; <b>inferior thyroid vein &#8594; brachiocephalic vein</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Cover the lymphatics and surface landmarks of the neck &mdash; the jugular trunks, the worrisome node, and the two supraclavicular fossae.</div>
+        <div class="obj-src">content: <b>Lecture 5 &middot; Lymphatics &amp; landmarks</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Trace the lymph: head &amp; neck lymph collects into the <b>right and left jugular trunks</b>, which drain into the <b>right lymphatic duct</b> (right side), the <b>thoracic duct</b> (left side), or directly into the <b>brachiocephalic veins</b>. <span class="cite">(L05 &middot; jugular trunks)</span></li>
+        <li>Flag the worrisome node on palpation: <b>painless, firm-to-hard, fixed, matted</b> (think cancer or lymphoma). <span class="cite">(L05 &middot; node palpation)</span></li>
+        <li><b>Lesser supraclavicular fossa</b> = the depression <b>between the two heads (sternal &amp; clavicular) of the SCM</b>. <span class="cite">(L05 &middot; landmarks)</span></li>
+        <li><b>Greater supraclavicular fossa</b> = corresponds to the <b>supraclavicular (subclavian) triangle</b>, where the <b>subclavian vessels</b> are found. <span class="cite">(L05 &middot; landmarks)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Painless lymph nodes, firm to solid, fixed, sometimes matted &hellip; more worrisome, might be cancer or lymphoma.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; Lecture 5</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html">&#128196; GA 0202 &middot; Neck Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which lymph-node qualities on palpation are the worrisome ones, and what lies in the greater supraclavicular fossa?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Painless, firm-to-hard, fixed, and matted</b> nodes are worrisome (cancer/lymphoma). The <b>greater supraclavicular fossa</b> corresponds to the <b>supraclavicular (subclavian) triangle</b>, containing the <b>subclavian vessels</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 12 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>GA 0202 Neck Hub</b> and drill exactly that topic.</p>
+    <p><b>3.</b> Dr. Maini flags her quiz items out loud (&ldquo;in your quiz I&rsquo;m going to ask&hellip;&rdquo;). The <b>triangle boundaries &amp; common boundaries</b> (Objectives 4&ndash;5) and the <b>scalene relations</b> (Objectives 1, 10&ndash;11) are where those flagged questions live &mdash; spend extra reps there and <b>practice drawing the triangles</b>.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t mix up anterior vs posterior to the anterior scalene.</b> <b>Posterior</b> = brachial plexus + subclavian <b>ARTERY</b>. <b>Anterior</b> = subclavian <b>VEIN</b>, plus the transverse cervical &amp; suprascapular arteries. And watch the odd-ones-out: the <b>thyrohyoid</b> is the strap muscle NOT supplied by the ansa (C1 via CN XII); the <b>transverse facial artery</b> branches off the <b>superficial temporal</b>, not the facial; and the <b>inferior thyroid vein</b> drains to the <b>brachiocephalic</b> while the superior &amp; middle thyroid veins drain to the <b>IJV</b>.</div>
+    <p style="margin-top:6px">When all 12 boxes are ticked, you own Dr. Maini&rsquo;s flagged objective list for <b>The Neck (part 1)</b> &mdash; the spine of the GA 0202 cervical-triangles-and-vessels material.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 &middot; The Neck (part 1) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from Dr. Maini&rsquo;s lecture recordings (Cervical Triangles &amp; Blood Vessels of the Neck, Lectures 3 &amp; 5) + the audited Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m02_neck1_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 Gross Anatomy — Dr. Maini (The Neck, part 1)
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 The-Neck-part-1 learning objectives (cervical triangles or the blood vessels of the neck).' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 12 neck (part 1) learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy or mnemonic for a neck topic like the carotid sheath three musketeers or the phrenic nerve root value.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the neck (part 1) module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 Gross Anatomy with Dr. Maini at SCUHS (Module: The Neck, part 1 — cervical triangles & blood vessels of the neck). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 &middot; The Larynx &mdash; Mnemonics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin-bottom: 8px; font-style: italic; font-size: 0.95rem; }
+.edge-note { text-align: center; color: #93c5fd; font-size: 0.82rem; margin: 0 auto 16px; max-width: 780px; line-height: 1.5; background: rgba(96,165,250,0.08); border: 1px solid rgba(96,165,250,0.28); border-radius: 8px; padding: 8px 12px; }
+.pending-wrap { text-align: center; margin-bottom: 14px; }
+.pending { display:inline-block; padding:2px 10px; background:#3a2a0a; color:#fbbf24; border:1px solid #b45309; border-radius:6px; font-size:11px; font-weight:700; letter-spacing:.03em; }
+.scope-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.35); border-radius: 8px; padding: 10px 14px; margin: 0 auto 18px; max-width: 880px; color: #a7f3d0; font-size: 0.85rem; line-height: 1.55; }
+.scope-note b { color: #34d399; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #f59e0b; }
+.card.cavity { border-left-color: #60a5fa; }
+.card.ligament { border-left-color: #a78bfa; }
+.card.muscle { border-left-color: #34d399; }
+.card.rule { border-left-color: #ef4444; }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 700; }
+.origin { display:inline-block; font-size:0.63rem; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; padding:2px 8px; border-radius:10px; margin-bottom:8px; }
+.origin.maini { background: rgba(52,211,153,0.14); color:#6ee7b7; border:1px solid rgba(52,211,153,0.5); }
+.origin.mine { background: rgba(245,158,11,0.12); color:#fcd34d; border:1px solid rgba(245,158,11,0.45); }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.cavity .hook { color: #93c5fd; }
+.card.ligament .hook { color: #c4b5fd; }
+.card.muscle .hook { color: #6ee7b7; }
+.card.rule .hook { color: #fca5a5; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .quote { margin-top: 8px; padding: 9px 11px; background: rgba(52,211,153,0.07); border-left: 3px solid #34d399; font-size: 0.88rem; color: #d1fae5; border-radius: 0 6px 6px 0; line-height: 1.55; font-style: italic; }
+.card .quote b { color: #fde68a; font-style: normal; }
+.card .quote .who { display:block; font-style: normal; font-size: 0.72rem; color:#6ee7b7; margin-top:5px; letter-spacing:0.03em; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #f59e0b; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card.cavity .like { border-left-color: #60a5fa; }
+.card.ligament .like { border-left-color: #a78bfa; }
+.card.muscle .like { border-left-color: #34d399; }
+.card.rule .like { border-left-color: #ef4444; }
+.card .like b { color: #fde68a; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 900px; color: #94a3b8; font-size: 0.78rem; line-height: 1.9; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.legend .pill { display:inline-block; padding:1px 7px; border-radius:9px; font-size:0.68rem; font-weight:800; vertical-align: middle; }
+.legend .pill.maini { background: rgba(52,211,153,0.14); color:#6ee7b7; border:1px solid rgba(52,211,153,0.5); }
+.legend .pill.mine { background: rgba(245,158,11,0.12); color:#fcd34d; border:1px solid rgba(245,158,11,0.45); }
+.legend span { margin: 0 8px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card .fact { color: #222; } .card .like { background: #fff; color: #000; } .card .quote { background: #f2fbf6; color: #063; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>&#129504; GA 0202 &middot; The Larynx &mdash; Mnemonics</h1>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s larynx: nine cartilages, the ligament families, the fold/space map, muscle actions &amp; nerves.</p>
+<p class="edge-note">&#128266; Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+<div class="pending-wrap"><span class="pending">PENDING REVIEW</span></div>
+<div class="scope-note">
+  <b>Honest framing:</b> Two kinds of hooks below, always labelled. <b>&#127908; Dr. Maini&rsquo;s own words</b> are her actual analogies from the Lecture 25 &amp; 26 transcripts, shown in quotes with a timestamp. <b>&#129513; Illustrative study hooks</b> are <b>mine</b> &mdash; creative memory aids I built to pull a fact fast. Every underlying <b>fact</b> is drawn from the audited Everything-MC bank for this module and the Maini transcripts; the invented part is only the mnemonic device, never a claim about the anatomy or about what Dr. Maini said.
+</div>
+<div class="legend">
+  <span><span class="swatch" style="background:#f59e0b;"></span>cartilage / skeleton</span>
+  <span><span class="swatch" style="background:#a78bfa;"></span>ligament / membrane</span>
+  <span><span class="swatch" style="background:#34d399;"></span>muscle</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>cavity / nerve / vessel</span>
+  <span><span class="swatch" style="background:#ef4444;"></span>clinical / trap / rule</span>
+  <br>
+  <span><span class="pill maini">&#127908; Maini&rsquo;s own</span> = quoted from lecture</span>
+  <span><span class="pill mine">&#129513; illustrative</span> = my study hook</span>
+</div>
+
+<h2>Topic 1 &mdash; The nine cartilages (the skeleton)</h2>
+<div class="topic-tagline">Three big singles, three tiny pairs. Learn the shapes and the traps.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">How many cartilages</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#128290; 9 = 3 BIG SOLOS + 3 TINY PAIRS</div>
+<div class="fact">The larynx has <b>NINE cartilages</b>: <b>3 large UNPAIRED</b> (thyroid, cricoid, epiglottis) plus <b>3 small PAIRED</b> (arytenoid, corniculate, cuneiform). <b>3 + 6 = 9.</b></div>
+<div class="quote">&#127908; &ldquo;There are 3 pairs of cartilages, and 3 unpaired cartilages&hellip; so in total, there are <b>3 plus 6, 9 cartilages</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~49:52)</span></div>
+<div class="src">Bank Q1&ndash;Q3 &middot; Maini L25 49:52</div>
+</div>
+
+<div class="card">
+<div class="label">The 3 unpaired (large)</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#127774; T-C-E: SHIELD &middot; RING &middot; LEAF</div>
+<div class="fact">The three large unpaired cartilages: <b>T</b>hyroid, <b>C</b>ricoid, <b>E</b>piglottis. Picture their shapes top to bottom: <b>thyroid = shield</b> (the &ldquo;Adam&rsquo;s apple&rdquo; front wall), <b>cricoid = signet ring</b>, <b>epiglottis = leaf</b>.</div>
+<div class="like">&#128161; &ldquo;<b>T</b>hree <b>C</b>artilages <b>E</b>ach stand alone&rdquo; &mdash; the three you can name without a partner. All three are also the biggest ones.</div>
+<div class="src">Bank Q2, Q4, Q34 &middot; Maini L25/L26</div>
+</div>
+
+<div class="card">
+<div class="label">The 3 paired (small)</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#128290; A-C-C (biggest &rarr; tiniest)</div>
+<div class="fact">The three small paired cartilages, in size order: <b>A</b>rytenoid (1st pair, the workhorse), <b>C</b>orniculate (2nd pair), <b>C</b>uneiform (3rd pair). Just march the alphabet from <b>A</b>: <b>A &rarr; C &rarr; C.</b></div>
+<div class="like">&#128161; &ldquo;<b>A C</b>op <b>C</b>alls&rdquo; &mdash; <b>A</b>rytenoid does the real work; the two <b>C</b>&rsquo;s are just little add-ons riding on it. Pairs &times; 3 = the 6 that make 9.</div>
+<div class="src">Bank Q3, Q24, Q29, Q30 &middot; Maini L25 49:52</div>
+</div>
+
+<div class="card">
+<div class="label">Cricoid cartilage</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#128141; SIGNET RING = ONLY COMPLETE RING</div>
+<div class="fact">The <b>cricoid</b> is a <b>hyaline signet ring</b>: <b>narrow anterior arch, broad posterior lamina</b>. It is the <b>ONLY</b> laryngeal cartilage that forms a <b>complete ring</b> encircling the airway, and it marks the <b>lowest limit</b> of the larynx.</div>
+<div class="quote">&#127908; &ldquo;It&rsquo;s like your ring&hellip; a ring with a <b>signet ring</b>&hellip; with a large solitaire&hellip; This is the <b>only cartilage which completely encircles the larynx, which makes a good question</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~1:02:47, 1:03:53)</span></div>
+<div class="src">Bank Q17&ndash;Q19, Q23 &middot; Maini L25 1:03:53</div>
+</div>
+
+<div class="card">
+<div class="label">Thyroid cartilage</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#128081; NECKLACE MISSING ITS BACK / ARMOR</div>
+<div class="fact">The <b>thyroid</b> is the <b>largest</b> cartilage: two laminae meeting in front at the <b>laryngeal prominence</b> (Adam&rsquo;s apple). It is <b>posteriorly deficient</b> &mdash; open behind &mdash; and sits behind everything else like a back-wall shield.</div>
+<div class="quote">&#127908; &ldquo;It&rsquo;s like that <b>necklace which doesn&rsquo;t have a posterior limb</b>&hellip;&rdquo; and later: &ldquo;There is thyroid cartilage at the back of everything&hellip; <b>like an armor</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~52:40) &amp; Lecture 26 (~7:56)</span></div>
+<div class="src">Bank Q4, Q8, Q9 &middot; Maini L25 52:40 / L26 7:56</div>
+</div>
+
+<div class="card">
+<div class="label">Arytenoid cartilage</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#128488;&#65039; 3-SIDED PYRAMID: VOCAL + MUSCULAR PROCESS</div>
+<div class="fact">Each <b>arytenoid</b> is a <b>three-sided pyramid</b> with a base, an apex, and two processes: the <b>VOCAL process</b> (holds the <b>V</b>ocal ligament) and the <b>MUSCULAR process</b> (holds the <b>M</b>uscles). It sits on the superior border of the cricoid lamina.</div>
+<div class="quote">&#127908; &ldquo;Like a four-sided pyramid&hellip; sorry, <b>three-sided pyramid</b>&hellip; with a base, an apex, and two processes. There is a <b>vocal process</b>, and there is a <b>muscular process</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~1:06:33)</span></div>
+<div class="like">&#128161; My tag for the two processes: <b>V</b>ocal process = <b>V</b>ocal cord; <b>M</b>uscular process = <b>M</b>uscles. Same first letter both times.</div>
+<div class="src">Bank Q24&ndash;Q28 &middot; Maini L25 1:06:33</div>
+</div>
+
+<div class="card">
+<div class="label">Corniculate cartilage</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#10133; THE &ldquo;OOPS, ADD A PIECE&rdquo; EXTENSION</div>
+<div class="fact">The <b>corniculate</b> cartilages are tiny <b>yellow-elastic nodules</b> sitting <b>on the apex of each arytenoid</b>, prolonging it backward and medially. They have no job of their own &mdash; they are just an extension.</div>
+<div class="quote">&#127908; &ldquo;A retinoid cartilages&hellip; came out slightly shorter than expected&hellip; <b>God added these tiny pieces on top&hellip; as an extension</b>. That happens with us&hellip; we are making something, doesn&rsquo;t come out that well, and then we add something on top.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~1:10:25)</span></div>
+<div class="src">Bank Q7, Q29, Q31 &middot; Maini L25 1:10:25</div>
+</div>
+
+<div class="card rule">
+<div class="label">Triticeal cartilage &mdash; THE TRAP</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#9888;&#65039; TRITICEAL = NOT PART OF THE LARYNX</div>
+<div class="fact">The <b>triticeal (triticeous)</b> cartilages sit in the <b>free border of the thyrohyoid membrane</b> &mdash; they are <b>NOT laryngeal cartilages</b>. Maini flags them as a pure distractor: if you see &ldquo;triticeal&rdquo; in a list of larynx cartilages, it is the wrong answer.</div>
+<div class="quote">&#127908; &ldquo;They&rsquo;re not part of larynx. They are just to confuse you. They are <b>here to come in your life as a question, as a choice, which is going to confuse you</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~1:17:51)</span></div>
+<div class="src">Bank Q32 &middot; Maini L25 1:17:51</div>
+</div>
+
+<div class="card">
+<div class="label">Epiglottis</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#127811; LEAF-SHAPED ELASTIC = &ldquo;LID TO THE GLOTTIS&rdquo;</div>
+<div class="fact">The <b>epiglottis</b> is a <b>leaf / spoon-shaped ELASTIC</b> cartilage that folds back over the inlet in swallowing. Its name is the memory device: <b>epi-glottis = the lid on top of the glottis</b>. In humans it is somewhat degenerate, so the false cords back it up.</div>
+<div class="quote">&#127908; &ldquo;It&rsquo;s a <b>leaf-shaped or spoon-shaped</b> cartilage&hellip;&rdquo; and &ldquo;your epiglottis was named after glottis. <b>Epiglottis is the lid to glottis</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~58:42) &amp; Lecture 26 (~16:16)</span></div>
+<div class="src">Bank Q6, Q34&ndash;Q37 &middot; Maini L25 58:42 / L26 16:16</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; Ligaments &amp; membranes</h2>
+<div class="topic-tagline">Extrinsic reaches OUT; intrinsic stays IN. Then the two membranes that carry the folds.</div>
+<div class="cards">
+
+<div class="card ligament">
+<div class="label">Extrinsic vs intrinsic</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#127968; OUT-of-larynx = EXTRINSIC &middot; WITHIN = INTRINSIC</div>
+<div class="fact">An <b>EXTRINSIC</b> ligament/membrane ties the larynx to a <b>non-laryngeal</b> structure (hyoid, trachea). An <b>INTRINSIC</b> one connects the <b>laryngeal cartilages to each other</b>. Ask only: does the far end land <i>outside</i> the larynx?</div>
+<div class="quote">&#127908; &ldquo;<b>Extrinsic</b> means they attach the laryngeal structures to something <b>outside</b> the larynx&hellip; <b>Intrinsic</b> is a structure that connects the two structures <b>of the larynx</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~50:18)</span></div>
+<div class="src">Bank Q42, Q52 &middot; Maini L25 50:18</div>
+</div>
+
+<div class="card ligament">
+<div class="label">The 3 EXTRINSIC connectors</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#129309; 2 GO TO HYOID, 1 GOES TO TRACHEA</div>
+<div class="fact">The three extrinsic connectors: <b>Thyrohyoid membrane</b> (thyroid&ndash;hyoid), <b>Hyoepiglottic ligament</b> (epiglottis&ndash;hyoid), <b>Cricotracheal ligament</b> (cricoid&ndash;trachea). Two anchor UP to the hyoid; one anchors DOWN to the trachea.</div>
+<div class="like">&#128161; &ldquo;<b>Two hang from the Hyoid hook, one drops to the Trachea.</b>&rdquo; Every one lands on a bone/tube <i>outside</i> the larynx &mdash; that is what makes them extrinsic.</div>
+<div class="src">Bank Q43, Q44 &middot; Maini L25 1:18:17</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Quadrangular membrane &mdash; its two edges</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#11014;&#65039; TOP = ARY-EPIGLOTTIC &middot; &#11015;&#65039; BOTTOM = VESTIBULAR</div>
+<div class="fact">The <b>quadrangular membrane</b> (a 4-sided sheet, epiglottis&nbsp;&rarr;&nbsp;arytenoid) has two named free borders: the <b>SUPERIOR</b> edge = <b>aryepiglottic</b> ligament/fold; the <b>INFERIOR</b> edge = <b>vestibular</b> ligament/fold (the <b>false vocal cord</b>).</div>
+<div class="like">&#128161; &ldquo;<b>A</b>ry on top, <b>V</b>estibular below&rdquo; &mdash; A over V, alphabetical top-to-bottom. Both edges are just the thickened rims of the same quadrangular sheet.</div>
+<div class="src">Bank Q45&ndash;Q47, Q53 &middot; Maini L26 5:11</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Conus elasticus</div>
+<span class="origin maini">&#127908; Maini&rsquo;s word + &#129513; my list hook</span>
+<div class="hook">&#128316; CONE of 3: MEDIAN CT + VOCAL CORDS + LATERAL CT</div>
+<div class="fact">The <b>conus elasticus</b> is a <b>cone</b> built from three parts: the <b>median cricothyroid ligament</b> (front midline), the <b>vocal ligaments</b> (the top edge), and the paired <b>lateral cricothyroid</b> sheets. The <b>lateral</b> part fools you &mdash; its top attaches to the vocal cords, not straight to the thyroid.</div>
+<div class="quote">&#127908; &ldquo;This looks <b>conical</b>&hellip; that is the structure, <b>conus elasticus</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 26 (~15:38)</span></div>
+<div class="like">&#128161; My count-hook: <b>Median + Vocal + Lateral = the 3 walls of the cone.</b> Cricoid ring at the base, vocal cords at the rim.</div>
+<div class="src">Bank Q49&ndash;Q51 &middot; Maini L26 13:45&ndash;15:38</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Vocal ligament</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#127925; VOCAL LIGAMENT = THYRO-ARYTENOID LIGAMENT</div>
+<div class="fact">The <b>vocal ligament</b> is the same thing as the <b>thyroarytenoid ligament</b>: it runs from the <b>vocal process of the arytenoid</b> forward to the <b>thyroid</b>. Drape mucosa over it and you get the <b>vocal fold (true cord)</b>. Both it and the quadrangular membrane are <b>intrinsic</b>.</div>
+<div class="like">&#128161; &ldquo;<b>Ligament naked, fold when dressed</b>&rdquo; &mdash; a bare ligament becomes a &ldquo;fold/cord&rdquo; only once mucosa covers it. Same trick for the vestibular and aryepiglottic edges.</div>
+<div class="src">Bank Q15, Q27, Q48, Q56 &middot; Maini L26 8:19</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; Cavity, folds &amp; the two rimas</h2>
+<div class="topic-tagline">Three floors from the top down, two folds, two gaps. Keep true vs false straight.</div>
+<div class="cards">
+
+<div class="card cavity">
+<div class="label">The 3 compartments (top &rarr; bottom)</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#127970; VESTIBULE &middot; VENTRICLE &middot; INFRAGLOTTIC</div>
+<div class="fact">Top to bottom: <b>VESTIBULE</b> (inlet&nbsp;&rarr;&nbsp;vestibular folds), <b>VENTRICLE</b> (the narrow slot <i>between</i> vestibular &amp; vocal folds), <b>INFRAGLOTTIC</b> cavity (vocal folds&nbsp;&rarr;&nbsp;lower border of cricoid).</div>
+<div class="like">&#128161; &ldquo;<b>Two V-floors, then the basement</b>&rdquo;: <b>V</b>estibule and <b>V</b>entricle up top, then drop below the cords into the <b>infra</b>-glottic basement. Each floor is bounded by a fold.</div>
+<div class="src">Bank Q61, Q62, Q64 &middot; Maini L26 18:32&ndash;23:27</div>
+</div>
+
+<div class="card cavity">
+<div class="label">Vocal cord = a tunable string</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#127928; VOCAL CORD = GUITAR STRING (arytenoid tunes it)</div>
+<div class="fact">The vocal cord runs arytenoid&nbsp;&rarr;&nbsp;thyroid like a <b>string</b>. Moving the <b>arytenoid</b> changes the string&rsquo;s <b>tension</b>, and that is how pitch/voice changes &mdash; exactly like re-tuning a guitar string.</div>
+<div class="quote">&#127908; &ldquo;If you play guitar&hellip; to play it, you have to <b>change tension in the strings</b>&hellip; this a retinoid moves&hellip; and changes the tension in the cord, and that is how we speak.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 26 (~10:01)</span></div>
+<div class="src">Bank Q58 &middot; Maini L26 10:01</div>
+</div>
+
+<div class="card cavity">
+<div class="label">True vs false folds</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#127908; VOCAL = TRUE &amp; MOBILE &middot; VESTIBULAR = FALSE &amp; FIXED</div>
+<div class="fact">The <b>vocal (true) folds</b> have muscles that <b>abduct/adduct</b> them &mdash; they move. The <b>vestibular (false) folds</b> sit above them, have <b>no muscle</b>, and normally stay put, snapping shut only as an <b>anti-choking</b> reflex backup.</div>
+<div class="quote">&#127908; &ldquo;Vestibular folds otherwise are called as <b>false vocal cords</b>&hellip; they do not have any muscle&hellip; Vocal cords are [mobile] because muscles act on them.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 26 (~6:53, 24:46)</span></div>
+<div class="src">Bank Q53&ndash;Q55, Q57, Q108 &middot; Maini L26 6:53</div>
+</div>
+
+<div class="card cavity">
+<div class="label">The two rimas</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#9878;&#65039; VESTIBULI (false gap) &middot; GLOTTIDIS (the REAL glottis)</div>
+<div class="fact"><b>Rima</b> = the gap. Between the <b>vestibular</b> folds = <b>rima vestibuli</b>; between the <b>vocal</b> folds = <b>rima glottidis</b>, which Maini calls &ldquo;your <b>actual glottis</b>.&rdquo; The <b>glottis</b> = vocal folds + rima glottidis together.</div>
+<div class="like">&#128161; Match the fold to its gap: <b>Vestibular fold &rarr; rima Vestibuli</b>; <b>vocal (Glottis) fold &rarr; rima Glottidis.</b> Same word, upper vs lower.</div>
+<div class="src">Bank Q65, Q66, Q69 &middot; Maini L26 25:42</div>
+</div>
+
+<div class="card cavity">
+<div class="label">Saccule</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#128167; SACCULE = THE OIL POCKET FOR THE CORDS</div>
+<div class="fact">The <b>saccule</b> is a mucosa-lined pocket extending <b>anteriorly off the ventricle</b>. Its <b>mucous glands</b> secrete mucus that <b>lubricates the vocal cords</b> so they don&rsquo;t dry out.</div>
+<div class="like">&#128161; &ldquo;<b>Saccule = the oil can</b>&rdquo; tucked in front of the ventricle, greasing the strings so they can keep vibrating.</div>
+<div class="src">Bank Q63 &middot; Maini L26 21:04</div>
+</div>
+
+<div class="card cavity">
+<div class="label">Laryngeal inlet boundaries</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#128682; FRONT LID &middot; BACK PILLARS &middot; SIDE FOLDS</div>
+<div class="fact">The <b>laryngeal inlet</b> is bounded <b>ANTERIORLY</b> by the <b>epiglottis</b> (the front lid), <b>POSTERIORLY</b> by the <b>arytenoid</b> cartilages + mucosa (the back pillars), and <b>LATERALLY</b> by the <b>aryepiglottic folds</b> (the side rails).</div>
+<div class="like">&#128161; Walk the doorway: <b>lid in front, two pillars in back, a fold down each side.</b> The side rails are just the top edge of the quadrangular membrane.</div>
+<div class="src">Bank Q60, Q67, Q68 &middot; Maini L26 16:14&ndash;18:26</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; Intrinsic muscles by action</h2>
+<div class="topic-tagline">All act on the cords. Learn the ONE opener, the closers, the tensor, the relaxers.</div>
+<div class="cards">
+
+<div class="card muscle">
+<div class="label">The SOLE opener</div>
+<span class="origin maini">&#127908; Maini&rsquo;s point + &#129513; my letter hook</span>
+<div class="hook">&#128682; PCA = &ldquo;PLEASE COME APART&rdquo; (only abductor)</div>
+<div class="fact">The <b>Posterior CricoArytenoid</b> is the <b>ONLY abductor</b> &mdash; the only muscle that <b>opens the rima glottidis</b> so you can breathe. Lose both and the cords stay shut. Origin: posterior cricoid lamina; insertion: muscular process of the arytenoid.</div>
+<div class="quote">&#127908; &ldquo;This is the only, the <b>sole, abductor</b> of vocal cords&hellip; <b>very important for your patient to live</b>&hellip; if it is paralyzed, vocal cords will stay approximated, <b>asphyxiation</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 26 (~37:09, 43:51)</span></div>
+<div class="like">&#128161; My letter hook: <b>P</b>osterior <b>C</b>ricoarytenoid = &ldquo;<b>P</b>lease <b>C</b>ome <b>A</b>part&rdquo; &mdash; the one that pulls the cords apart.</div>
+<div class="src">Bank Q74, Q75, Q102 &middot; Maini L26 37:09</div>
+</div>
+
+<div class="card muscle">
+<div class="label">The closers (adductors)</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#128274; LATERAL CA + TRANSVERSE &amp; OBLIQUE ARYTENOIDS</div>
+<div class="fact">Three muscles <b>ADDUCT</b> (shut the rima glottidis for phonation): the <b>Lateral cricoarytenoid</b> plus the <b>Transverse</b> and <b>Oblique arytenoids</b>. Note the flip: <b>LATERAL</b> CA closes, <b>POSTERIOR</b> CA opens.</div>
+<div class="like">&#128161; &ldquo;<b>LAT + the two arytenoid buddies slam the door.</b>&rdquo; Remember the CA pair by position: <b>P</b>osterior <b>P</b>ulls apart, <b>L</b>ateral <b>L</b>ocks together.</div>
+<div class="src">Bank Q76, Q77, Q82 &middot; Maini L26 37:47&ndash;41:08</div>
+</div>
+
+<div class="card muscle">
+<div class="label">The tensor</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#128274; CRICOTHYROID = THE CHIEF TENSOR (pitch)</div>
+<div class="fact">The <b>Cricothyroid</b> is the <b>chief/only tensor</b>: it tilts the thyroid down &amp; forward, <b>lengthening and stretching</b> the cords to raise pitch. Origin: arch of cricoid; insertion: inferior horn &amp; lower border of thyroid. Paralyze it &rarr; a flat, one-tone voice.</div>
+<div class="quote">&#127908; &ldquo;The patient will speak in monotonous&hellip; they cannot change the tone of the voice, and they will <b>speak the way I&rsquo;m speaking right now</b>.&rdquo;<span class="who">&mdash; Dr. Maini demonstrating it herself, Lecture 26 (~35:53)</span></div>
+<div class="src">Bank Q72, Q73, Q100 &middot; Maini L26 35:53</div>
+</div>
+
+<div class="card muscle">
+<div class="label">The relaxers</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#128250; &ldquo;TV&rdquo; = THYROARYTENOID + VOCALIS SLACKEN</div>
+<div class="fact">The <b>Thyroarytenoid</b> (lateral) and <b>Vocalis</b> (medial) lie <b>inside the vocal folds</b>, parallel to the cords. They <b>shorten and slacken</b> the folds &mdash; the opposite of the cricothyroid tensor.</div>
+<div class="like">&#128161; &ldquo;<b>TV = relax on the couch</b>&rdquo;: <b>T</b>hyroarytenoid + <b>V</b>ocalis kick back and <b>slacken</b> the cords. They sit <i>within</i> the fold, so they can only loosen it.</div>
+<div class="src">Bank Q59, Q78, Q79, Q81 &middot; Maini L26 38:44&ndash;41:08</div>
+</div>
+
+<div class="card muscle">
+<div class="label">One-line action map</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#128221; OPEN&middot;CLOSE&middot;TENSE&middot;SLACKEN</div>
+<div class="fact"><b>OPEN</b> = Posterior CA (sole). <b>CLOSE</b> = Lateral CA + Transverse/Oblique arytenoids. <b>TENSE</b> = Cricothyroid. <b>SLACKEN</b> = Thyroarytenoid + Vocalis. Every intrinsic muscle falls in exactly one of these four buckets.</div>
+<div class="like">&#128161; Sort any name into four boxes before you panic. Only <b>Posterior</b> opens; the rest of the &ldquo;arytenoid&rdquo; crowd closes; <b>cricothyroid</b> is the lone tensor.</div>
+<div class="src">Bank Q74, Q76&ndash;Q78, Q80, Q82 &middot; Maini L26 40:41</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; Nerves &amp; the SVE / GSE trick</h2>
+<div class="topic-tagline">All vagus. One muscle and one sensory zone break from the pack.</div>
+<div class="cards">
+
+<div class="card cavity">
+<div class="label">Motor supply</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#127897;&#65039; ALL VAGUS &mdash; CRICOTHYROID IS THE ODD ONE</div>
+<div class="fact">Every intrinsic laryngeal muscle is <b>vagus (CN X)</b>. Split: <b>Cricothyroid</b> = <b>EXTERNAL laryngeal</b> nerve (the exception); <b>all the rest</b> = <b>RECURRENT laryngeal</b> nerve.</div>
+<div class="like">&#128161; &ldquo;<b>Cri<u>C</u>othyroid catches the eXternal; everyone else Recurs.</b>&rdquo; One odd muscle out &mdash; memorize the single exception and the rest fall to the recurrent.</div>
+<div class="src">Bank Q83&ndash;Q85, Q89 &middot; Maini L26 42:16&ndash;43:16</div>
+</div>
+
+<div class="card cavity">
+<div class="label">Sensory supply</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#11014;&#65039; INTERNAL ABOVE CORDS &middot; &#11015;&#65039; RECURRENT BELOW</div>
+<div class="fact">Sensation splits <b>at the vocal folds</b>: <b>INTERNAL laryngeal</b> nerve = mucosa <b>ABOVE</b> the cords (vestibule + ventricle); <b>RECURRENT laryngeal</b> = mucosa <b>BELOW</b> the cords (infraglottic). The internal branch pierces the <b>thyrohyoid membrane</b> to get in.</div>
+<div class="like">&#128161; &ldquo;<b>Internal In from the top; Recurrent Reaches up from below.</b>&rdquo; The cords are the border; the recurrent covers both jobs it can reach from below (motor + lower sensory).</div>
+<div class="src">Bank Q87, Q90, Q92 &middot; Maini L26 50:52&ndash;52:02</div>
+</div>
+
+<div class="card rule">
+<div class="label">Maini&rsquo;s exam trick: SVE vs GSE</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#127919; PHARYNGEAL-ARCH MUSCLE &rarr; SVE (not GSE)</div>
+<div class="fact">When a head/neck motor fiber question stumps you: if the muscle is a <b>pharyngeal-arch</b> muscle (larynx &amp; pharynx, arches 4 &amp; 6) the answer is <b>SVE</b>. Only <b>myotomal</b> muscles (tongue, extraocular) are <b>GSE</b>. So the laryngeal muscles &mdash; external &amp; recurrent laryngeal &mdash; carry <b>SVE</b>.</div>
+<div class="quote">&#127908; &ldquo;Don&rsquo;t go for GSE&hellip; if that muscle belongs to <b>pharyngeal arch muscles, SVE is the right answer</b>. If it is myotomal muscles, like your tongue or extraocular muscles, it is GSE.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 26 (~48:04)</span></div>
+<div class="src">Bank Q88 &middot; Maini L26 48:04</div>
+</div>
+
+<div class="card cavity">
+<div class="label">Superior laryngeal nerve splits</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#9986;&#65039; INTERNAL = SENSORY (In) &middot; EXTERNAL = MOTOR (Exit)</div>
+<div class="fact">The <b>superior laryngeal nerve</b> (off the vagus) forks into: <b>Internal laryngeal</b> = purely <b>sensory (GSA)</b>, pierces the thyrohyoid membrane; <b>External laryngeal</b> = <b>motor (SVE)</b> to the cricothyroid. The recurrent laryngeal&rsquo;s tip is renamed the <b>inferior laryngeal</b> nerve.</div>
+<div class="like">&#128161; &ldquo;<b>Internal feels, External moves</b>&rdquo; &mdash; the internal branch senses, the external branch works the one tensor muscle.</div>
+<div class="src">Bank Q86, Q88, Q91 &middot; Maini L26 45:22&ndash;46:12</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; Arteries &amp; clinical payoffs</h2>
+<div class="topic-tagline">Top half vs bottom half; and the four nerve lesions Maini keeps testing.</div>
+<div class="cards">
+
+<div class="card cavity">
+<div class="label">Blood supply</div>
+<span class="origin maini">&#127908; Maini&rsquo;s S-L-F hook + &#129513; my top/bottom split</span>
+<div class="hook">&#129656; TOP: SUP. LARYNGEAL &larr; SUP. THYROID &larr; ECA</div>
+<div class="fact"><b>Upper half:</b> superior laryngeal artery &larr; <b>superior thyroid</b> &larr; <b>external carotid</b>. <b>Lower half:</b> inferior laryngeal artery &larr; <b>inferior thyroid</b> &larr; <b>thyrocervical trunk</b> &larr; subclavian. The superior artery pierces the thyrohyoid membrane <i>with the internal laryngeal nerve</i>.</div>
+<div class="quote">&#127908; For the ECA branches: &ldquo;<b>S, L, and F, anterior branches</b>&hellip; superior thyroid, and next was lingual, and next was facial.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 25 (~28:13)</span></div>
+<div class="like">&#128161; &ldquo;<b>Superior rides with Superior</b>&rdquo;: superior laryngeal + superior thyroid (S of S-L-F) up top from the carotid; inferior pair comes up from the subclavian side.</div>
+<div class="src">Bank Q94&ndash;Q99 &middot; Maini L25 28:13 / L26 53:03</div>
+</div>
+
+<div class="card rule">
+<div class="label">Lesion 1 &mdash; monotone voice</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#128220; MONOTONE = CRICOTHYROID / EXTERNAL LARYNGEAL</div>
+<div class="fact">Paralyze the <b>cricothyroid</b> (its nerve = <b>external laryngeal</b>) and the patient can still speak but <b>cannot change pitch</b> &mdash; a flat, monotonous voice. At-risk in thyroidectomy because the nerve runs parallel to the superior thyroid artery.</div>
+<div class="quote">&#127908; &ldquo;They cannot change the tone of the voice, and they will <b>speak the way I&rsquo;m speaking right now</b>.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 26 (~35:53)</span></div>
+<div class="src">Bank Q100, Q103 &middot; Maini L26 35:53</div>
+</div>
+
+<div class="card rule">
+<div class="label">Lesion 2 &mdash; the deadly one</div>
+<span class="origin maini">&#127908; Dr. Maini&rsquo;s own words</span>
+<div class="hook">&#9760;&#65039; BILATERAL PCA PALSY = AIRWAY SHUTS = DEATH</div>
+<div class="fact">The <b>posterior cricoarytenoid</b> is the only opener. Paralyze it on <b>both sides</b> and the cords stay <b>adducted</b> &mdash; the rima glottidis can&rsquo;t open, and the patient <b>asphyxiates</b>. This is why the &ldquo;sole abductor&rdquo; fact matters clinically.</div>
+<div class="quote">&#127908; &ldquo;Vocal cords, they will stay closed, glottis will not open up, and <b>patient will die</b>&hellip; you cannot breathe if both the vocal cords stay adducted.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 26 (~37:12)</span></div>
+<div class="src">Bank Q102 &middot; Maini L26 37:12</div>
+</div>
+
+<div class="card rule">
+<div class="label">Lesion 3 &mdash; silent aspiration</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#129380; INTERNAL LARYNGEAL CUT = NO GAG &rarr; ASPIRATION</div>
+<div class="fact">The <b>internal laryngeal</b> nerve is the <b>sensory</b> limb above the cords. Cut it and you lose the <b>gag/cough reflex</b> up there &mdash; food can slip in unnoticed, raising <b>aspiration</b> risk. Sensory limb gone = reflex gone.</div>
+<div class="like">&#128161; &ldquo;<b>No feeling above the cords, no cough to protect them.</b>&rdquo; The motor side is intact &mdash; the failure is that nothing <i>warns</i> the airway.</div>
+<div class="src">Bank Q101 &middot; Maini L26 52:12&ndash;52:38</div>
+</div>
+
+<div class="card rule">
+<div class="label">Surgery: which artery threatens which nerve</div>
+<span class="origin mine">&#129513; Illustrative study hook (mine)</span>
+<div class="hook">&#129701; SUPERIOR&rarr;EXTERNAL &middot; INFERIOR&rarr;RECURRENT</div>
+<div class="fact">In thyroidectomy: the <b>SUPERIOR thyroid artery</b> runs with the <b>EXTERNAL laryngeal</b> nerve (ligate the artery near its origin to spare the nerve); the <b>INFERIOR thyroid artery</b> runs with the <b>RECURRENT laryngeal</b> nerve in the tracheoesophageal groove.</div>
+<div class="like">&#128161; &ldquo;<b>Superior with the little external, inferior with the big recurrent.</b>&rdquo; Match top artery to top-half nerve, bottom artery to the deep recurrent.</div>
+<div class="src">Bank Q103, Q104 &middot; Maini L26 49:58&ndash;50:33</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD &middot; GA 0202 The Larynx (Dr. Maini) &middot; Mnemonics</div>
+</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m11-larynx-hub_PENDING_REVIEW.html" title="Return to the Larynx Study Hub" aria-label="Return to the Larynx Study Hub">&#128218;</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 Gross Anatomy (Dr. Maini)
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the larynx..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Larynx mnemonics question:\n\n";
+    if (ctx.question) prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

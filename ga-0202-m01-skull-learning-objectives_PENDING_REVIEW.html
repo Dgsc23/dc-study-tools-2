@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎯 GA 0202 M01 — The Skull · Learning Objectives (Master the 14)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+.header .voice-note{color:#fde68a;font-size:11.5px;margin:10px auto 0;max-width:680px;background:rgba(0,0,0,0.22);border:1px solid #b45309;border-radius:9px;padding:7px 12px;line-height:1.5}
+.header .voice-note b{color:#fcd34d}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 Skull Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 14</h1>
+  <div class="sub">GA 0202 Module 1 &middot; <b>The Skull</b> &middot; the study spine that ties every drill back to what Dr. Maini actually emphasizes across her two skull lectures &mdash; cement each one, check it off, move on.</div>
+  <div class="meta-line">Dr. Maini &middot; Osteology of the Skull + Mandible, Development &amp; Week 1 Lab &middot; &#128128; SCUHS GA 0202</div>
+  <div class="voice-note">&#128266; <b>Best voices in Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for the Skull module. Each objective is built from <b>Dr. Maini&rsquo;s two skull lectures</b> and grounded in the module&rsquo;s <b>audited Everything-MC bank</b> (136 anti-fab-verified questions); every &ldquo;prove it&rdquo; bullet traces to her transcripts, cited as <b>[L01 / L02 &middot; topic or time]</b>. Quotes are transcribed from her Zoom recordings; <span class="fix">[bracketed]</span> words are de-garbled spellings of what she said. No new facts are introduced beyond the audited bank + transcripts. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>Dr. Maini tells you exactly how she tests this module: &ldquo;<i>which one of the following is <b>not</b> a feature of this bone,</i>&rdquo; &ldquo;<i>this foramen is part of which bone,</i>&rdquo; &ldquo;<i>which structure belongs to which bone &mdash; you&rsquo;re supposed to know that.</i>&rdquo; It is about <b>bones, their landmarks, and their foramina</b>, not (yet) the structures passing through them. This page takes the fourteen things she actually drilled across the two lectures, spells out <b>exactly what &ldquo;done&rdquo; looks like</b>, hangs a <b>verbatim Maini quote</b> on each, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: Dr. Maini&rsquo;s <b>Osteology of the Skull</b> (L01) and <b>Mandible, Skull Development &amp; Week 1 Lab</b> (L02) recordings, cross-checked against the audited <b>Everything-MC bank</b>.</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 14 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Divide the skull into neurocranium vs viscerocranium, and name the bones (and which four are pneumatized).</div>
+        <div class="obj-src">content: <b>L01 &middot; Skull divisions &amp; bones</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Split the skull two ways: the <b>neurocranium</b> (cranial bones that <b>surround the brain</b>) vs the <b>viscerocranium</b> (facial skeleton that supports the visceral organs &mdash; nasal &amp; oral cavities). <span class="cite">(L01 &middot; divisions)</span></li>
+        <li>Name the <b>cranial bones</b>: <b>frontal, two parietal, two temporal, occipital, ethmoid, sphenoid</b> &mdash; and know <b>ethmoid &amp; sphenoid are cranial</b> even though they sit deep. <span class="cite">(L01 &middot; cranial bones)</span></li>
+        <li>Place the face bones: <b>zygomatic</b> = cheekbone, <b>nasal</b> = bridge, <b>lacrimal</b> = tiny bone of the medial orbital wall, <b>vomer</b> = lower nasal septum, <b>maxilla</b> = upper jaw, <b>palatine, inferior concha, mandible</b>. <span class="cite">(L01 &middot; facial bones)</span></li>
+        <li>Flag the trap-worthy ones: <b>hard palate</b> = anterior 2/3 maxilla + posterior 1/3 palatine; <b>inferior concha is its own bone</b> (superior &amp; middle conchae belong to ethmoid). <span class="cite">(L01 &middot; palate &amp; conchae)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;We divide the bones into two parts &hellip; bones which surround the brain, we call those bones as <b>neurocranium</b> &hellip; and the bones of the face, which provide support to the visceral organs of the head and neck region &hellip; those bones are called as <b>visceral cranial</b> &hellip; sphenoid is a <b>bat-shaped bone</b>, looks like a bat.&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; skull divisions</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which two &ldquo;deep&rdquo; bones are still cranial (neurocranium), and which four bones are pneumatized (have air sinuses)?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Ethmoid &amp; sphenoid</b> are cranial despite lying deep. The <b>four pneumatized bones</b> = <b>frontal, maxillary, ethmoid, sphenoid</b>. Neurocranium = brain-box (frontal, 2 parietal, 2 temporal, occipital, ethmoid, sphenoid); viscerocranium = facial skeleton.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">Name the sutures by their articulating bones, and state why a suture is the body&rsquo;s most stable joint.</div>
+        <div class="obj-src">content: <b>L01 &middot; Sutures &amp; joints</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Define a suture: a <b>fibrous joint</b> between adjoining skull bones &mdash; the <b>most stable / least mobile</b> joint in the body. <span class="cite">(L01 &middot; sutures)</span></li>
+        <li>Use the rule &mdash; <b>sutures are named after the bones they join</b>: <b>sagittal</b> (two parietals), <b>coronal</b> (frontal + parietal), <b>lambdoid</b> (parietal + occipital), <b>squamous</b> (temporal + parietal), <b>occipitomastoid</b> (occipital + temporal/mastoid), <b>frontonasal</b> (nasal + frontal). <span class="cite">(L01 &middot; named sutures)</span></li>
+        <li>Handle the two special ones: the <b>cruciform</b> suture on the hard palate = <b>intermaxillary + palatomaxillary + interpalatine</b> combined; the <b>metopic</b> suture = a <b>remnant of the frontal suture</b>. <span class="cite">(L01 &middot; cruciform; L02 &middot; metopic)</span></li>
+        <li>Answer her exam shape: &ldquo;How would you name this suture?&rdquo; &mdash; read off the two bones it lies between. <span class="cite">(L01 &middot; suture naming)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;It&rsquo;s a joint between the adjoining skull bones &hellip; sutures are the most stable kind of joints in our body. It&rsquo;s <span class="fix">[the]</span> least mobile, most stable &hellip; sutures, they are named after the articulating bones.&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; sutures</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which suture joins the temporal to the parietal, and what three sutures combine to form the cruciform suture?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>squamous suture</b> joins temporal + parietal. The <b>cruciform suture</b> = <b>intermaxillary + palatomaxillary + interpalatine</b>. Remember: coronal = frontal+parietal, sagittal = the two parietals, lambdoid = parietal+occipital.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">Locate the cranial landmark points (nasion, bregma, lambda, pterion, asterion, vertex, inion, gonion, glabella) and know why they are fragile.</div>
+        <div class="obj-src">content: <b>L01 &middot; Cranial points &amp; landmarks</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Define each junction: <b>nasion</b> (internasal meets frontonasal), <b>bregma</b> (coronal + sagittal), <b>lambda</b> (sagittal + lambdoid), <b>asterion</b> (squamous + lambdoid + occipitomastoid). <span class="cite">(L01 &middot; junction points)</span></li>
+        <li>Nail <b>pterion</b> &mdash; the meeting of <b>frontal + parietal + temporal + sphenoid</b>, with the <b>middle meningeal artery</b> running <b>deep</b> to it. <span class="cite">(L01 &middot; pterion)</span></li>
+        <li>Place the non-junction points: <b>vertex</b> = highest point (just behind bregma), <b>inion</b> = external occipital protuberance, <b>gonion</b> = angle of the mandible, <b>glabella</b> = part of the <b>frontal</b> bone. <span class="cite">(L01 &middot; vertex/inion/gonion/glabella)</span></li>
+        <li>State why they matter: these are points where <b>multiple sutures meet</b>, so they are <b>fragile fracture sites</b>. <span class="cite">(L01 &middot; fragile points)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This is a meeting point of frontal, parietal, temporal, and sphenoid<span class="fix">[al]</span> bone &hellip; that means this is a very, very fragile point &hellip; <span class="fix">[right]</span> deep to this point, you have the branches of <b>middle meningeal artery</b> &hellip; which one of the following structure is associated with <b>Pterion</b>?&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; lateral-view landmarks</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which four bones meet at the pterion, and what does &ldquo;lambda&rdquo; join? What is another name for the inion?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Pterion</b> = frontal + parietal + temporal + sphenoid (middle meningeal artery deep to it). <b>Lambda</b> = sagittal + lambdoid sutures. <b>Inion</b> = the external occipital protuberance. Bregma = coronal + sagittal; asterion = squamous + lambdoid + occipitomastoid.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Identify the anterior &amp; lateral view features &mdash; and, for each, which bone it belongs to.</div>
+        <div class="obj-src">content: <b>L01 / L02 &middot; Anterior &amp; lateral view</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Read the anterior foramina by bone: <b>supraorbital foramen</b> (supraorbital nerve/artery/vein), <b>infraorbital foramen</b> = <b>maxilla</b>, <b>mental foramen</b> = <b>mandible</b>. <span class="cite">(L01/L02 &middot; anterior foramina)</span></li>
+        <li>Name the openings/spines: <b>anterior nasal aperture</b> = <b>piriform</b> (pear-shaped); <b>anterior nasal spine</b> = the two maxillae in the midline; <b>frontal eminence</b> = a primary ossification center. <span class="cite">(L01/L02 &middot; anterior view)</span></li>
+        <li>Build the <b>zygomatic arch</b>: <b>temporal process of the zygomatic bone</b> + <b>zygomatic process of the temporal bone</b> (they meet like two hands shaking). <span class="cite">(L01 &middot; zygomatic arch)</span></li>
+        <li>Catch the classic trap: the <b>temporal lines belong to the PARIETAL bone</b>, not temporal; and <b>external acoustic meatus</b> &amp; <b>styloid process</b> both belong to the <b>temporal</b> bone. <span class="cite">(L01/L02 &middot; temporal lines / EAM / styloid)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;How is this zygomatic arch formed? &hellip; temporal process of zygomatic bone &hellip; and zygomatic process of temporal bone &hellip; it&rsquo;s like my hand and your hand when we are shaking our hands &hellip; these <b>[temporal] lines are not the part of temporal bone, they&rsquo;re the part of parietal bone</b>.&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; lateral view</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The temporal lines are part of which bone? And the zygomatic arch is built from which two processes?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>temporal lines belong to the parietal bone</b> (a favorite trap). The <b>zygomatic arch</b> = <b>temporal process of the zygomatic bone</b> + <b>zygomatic process of the temporal bone</b>. Infraorbital foramen = maxilla; mental foramen = mandible; EAM &amp; styloid = temporal.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">Identify the posterior &amp; superior (calvarial) view features &mdash; mastoid, nuchal lines, emissary/parietal foramina, wormian bones, and the sagittal sinus sulcus.</div>
+        <div class="obj-src">content: <b>L01 &middot; Posterior &amp; superior view</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Place the posterior landmarks: <b>mastoid process</b> = <b>temporal</b> bone; the <b>nuchal lines</b> (superior/inferior) = attachment sites for <b>neck muscles</b>. <span class="cite">(L01 &middot; posterior view)</span></li>
+        <li>Explain the <b>parietal (emissary) foramina</b>: they transmit <b>emissary veins</b>, which connect <b>extracranial and intracranial veins</b>. <span class="cite">(L01 &middot; emissary veins)</span></li>
+        <li>Recognize <b>wormian (sutural) bones</b> &mdash; extra bones that ossify <b>within the suture lines</b> (a normal variant). <span class="cite">(L01 &middot; wormian bones)</span></li>
+        <li>Read the inner calvaria: the <b>midline sulcus</b> = groove for the <b>superior sagittal sinus</b>; the <b>paramidline pits</b> = depressions for <b>arachnoid granulations</b>. <span class="cite">(L01 &middot; inner calvaria)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Emissary means something coming from &hellip; another place &hellip; these foramina, they are for the passage of <b>emissary veins</b>. Emissary veins actually connect <b>extracranial veins with the intracranial veins</b>.&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; posterior view</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What do the parietal foramina transmit, and what forms the midline groove on the inside of the skull cap?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>parietal foramina</b> transmit <b>emissary veins</b> (extracranial &harr; intracranial). The <b>midline calvarial sulcus</b> is the groove for the <b>superior sagittal sinus</b>; the paramidline pits are for <b>arachnoid granulations</b>. Wormian bones = extra bones within sutures.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the base-of-skull foramina to their bone and their contents &mdash; and beat the &ldquo;next to the jugular foramen&rdquo; view trap.</div>
+        <div class="obj-src">content: <b>L01 / L02 &middot; Base of skull &middot; foramina</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Match the big ones: <b>foramen magnum</b> = spinal cord / medulla junction; <b>carotid canal</b> = internal carotid artery; <b>jugular foramen</b> (temporal + occipital) = internal jugular vein; <b>stylomastoid foramen</b> (between styloid &amp; mastoid) = <b>facial nerve</b>. <span class="cite">(L01/L02 &middot; base foramina)</span></li>
+        <li>Do the bone-ownership questions: <b>rotundum / ovale / spinosum</b> = <b>sphenoid</b>; <b>foramen lacerum</b> = <b>sphenoid + temporal + occipital</b>; <b>foramen spinosum</b> is named for the <b>spine of the sphenoid</b> next to it. <span class="cite">(L01/L02 &middot; sphenoid foramina / lacerum)</span></li>
+        <li>Cover the palate &amp; posterior landmarks: <b>incisive foramen</b> (in the incisive fossa), <b>greater/lesser palatine foramina</b>, <b>pharyngeal tubercle</b> (basilar occiput), <b>pterygoid hamulus</b> (sphenoid), <b>occipital condyles</b> articulate with <b>C1 (atlas)</b>, <b>digastric notch</b> = digastric muscle. <span class="cite">(L01/L02 &middot; palate/posterior base)</span></li>
+        <li>Beat the trap: in the <b>inferior view</b>, the foramen next to the jugular foramen is the <b>carotid canal</b>; in the <b>base-of-skull (internal) view</b>, it is the <b>internal acoustic meatus</b>. <span class="cite">(L02 &middot; 00:52 &amp; 01:06)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;In the inferior view, carotid canal is lying right next to jugular foramen &hellip; please write this in <span class="fix">[bold]</span> &mdash; in the inferior view only &hellip; <span class="fix">[in the base-of-skull view]</span>, this foramen lying right next to jugular foramen &hellip; <b>internal acoustic meatus</b>. Good.&rdquo;<span class="cite">&mdash; Week 1 Lab (L02) &middot; ~00:52:50 &amp; ~01:06:00</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The foramen right next to the jugular foramen &mdash; is it the carotid canal or the internal acoustic meatus? Which nerve exits the stylomastoid foramen?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">It depends on the view: <b>inferior view &rarr; carotid canal</b>; <b>base-of-skull (internal) view &rarr; internal acoustic meatus</b>. The <b>facial nerve</b> exits the <b>stylomastoid foramen</b>. Rotundum/ovale/spinosum = sphenoid; lacerum = sphenoid + temporal + occipital.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Work through the three cranial fossae &mdash; the anterior floor, the sella turcica, and the SOF&ndash;rotundum&ndash;ovale&ndash;spinosum arch.</div>
+        <div class="obj-src">content: <b>L01 &middot; Cranial fossae</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the division: the base of the skull = <b>three cranial fossae</b> &mdash; <b>anterior, middle, posterior</b>. <span class="cite">(L01 &middot; three fossae)</span></li>
+        <li>Build the <b>anterior fossa floor</b>: <b>orbital plate of the frontal bone</b> + <b>cribriform plate of the ethmoid</b> (transmits olfactory nerve fascicles) + <b>lesser wing of the sphenoid</b>; with <b>crista galli</b> (ethmoid) and the <b>foramen cecum</b> (blind &mdash; no structure passes). <span class="cite">(L01 &middot; anterior fossa)</span></li>
+        <li>Own the <b>middle fossa</b>: the <b>sella turcica</b> sits in the <b>body of the sphenoid</b> and holds the <b>pituitary gland</b> (parts: tuberculum sellae, hypophyseal fossa, dorsum sellae); the <b>chiasmatic sulcus</b> houses the optic chiasma; the <b>carotid sulcus</b> carries the internal carotid. <span class="cite">(L01 &middot; middle fossa / sella)</span></li>
+        <li>Draw the sphenoid <b>arch</b>: <b>SOF &rarr; foramen rotundum &rarr; ovale &rarr; spinosum</b> (rotundum is NOT seen inferiorly; ovale &amp; spinosum are). Posterior fossa: <b>clivus</b> = inner basilar occiput; the <b>S-shaped groove</b> = sigmoid sinus. <span class="cite">(L01 &middot; sphenoid arch / posterior fossa)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Base of the skull is divided into 3 cranial fossae &mdash; anterior, middle, and posterior &hellip; floor is formed by orbital plate of frontal bone, cribriform plate of the ethmoid, and lesser wing of the sphenoid &hellip; all these four foramina, they make an <b>arch</b> &mdash; superior orbital fissure, foramen rotundum, ovale, foramen spinosum.&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; cranial fossae</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which three plates form the anterior cranial fossa floor, and what sits in the sella turcica? Give the order of the sphenoid arch.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Anterior floor = <b>frontal orbital plate + ethmoid cribriform plate + sphenoid lesser wing</b>. The <b>pituitary gland</b> sits in the <b>sella turcica</b> (body of the sphenoid). Arch order: <b>SOF &rarr; rotundum &rarr; ovale &rarr; spinosum</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">Break down the sphenoid and ethmoid bones &mdash; their parts, and what each one does NOT include.</div>
+        <div class="obj-src">content: <b>L01 / L02 &middot; Sphenoid &amp; ethmoid</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Split the <b>sphenoid</b> into its parts: <b>lesser wing + greater wing + pterygoid process</b>; the <b>pterygoid process</b> has a <b>medial and a lateral plate</b>; the <b>sphenoid sinus</b> lies <b>under the sella turcica</b>. <span class="cite">(L01/L02 &middot; sphenoid parts)</span></li>
+        <li>Track the <b>ethmoid</b> &mdash; &ldquo;it&rsquo;s everywhere&rdquo;: <b>cribriform plate</b> (roof of nasal cavity) + <b>perpendicular plate</b> (upper nasal septum) + <b>superior &amp; middle conchae</b>. <span class="cite">(L01/L02 &middot; ethmoid parts)</span></li>
+        <li>Guard the NOT: the ethmoid does <b>not</b> form the <b>lower</b> nasal septum (that is the <b>vomer</b>), and the <b>inferior concha is its own separate bone</b>. <span class="cite">(L02 &middot; ethmoid vs vomer/inferior concha)</span></li>
+        <li>Note the <b>petrous temporal</b> &mdash; the dense part of the temporal bone that <b>houses the internal ear</b> (ossifies by cartilage). <span class="cite">(L01 &middot; petrous temporal)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;If you look at the structure of sphenoid, there&rsquo;s a <b>lesser wing, greater wing, and pterygoid process</b> &hellip; ethmoid is everywhere &hellip; it forms a roof of the nasal cavity &hellip; a lateral wall &hellip; and the superior part of your nasal septum, the perpendicular plate.&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; sphenoid &amp; ethmoid</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the three parts of the sphenoid. Which bone forms the LOWER nasal septum, and is the inferior concha part of the ethmoid?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Sphenoid = <b>lesser wing + greater wing + pterygoid process</b> (medial + lateral plates). The <b>lower nasal septum = vomer</b> (the ethmoid&rsquo;s perpendicular plate is the upper part). The <b>inferior concha is its OWN bone</b> &mdash; only the superior &amp; middle conchae are ethmoid.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the paranasal sinuses &amp; pneumatization &mdash; the four sinus bones, their function, and the mastoid air-cell exception.</div>
+        <div class="obj-src">content: <b>L01 / L02 &middot; Paranasal sinuses</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the <b>four paranasal sinus bones</b>: <b>frontal, maxillary, ethmoid, sphenoid</b> &mdash; they are lined by mucous membrane and <b>communicate with the nasal cavity</b>. <span class="cite">(L01 &middot; paranasal sinuses)</span></li>
+        <li>State the function: sinuses <b>lighten the skull</b> and <b>add resonance to the voice</b>. <span class="cite">(L01/L02 &middot; sinus function)</span></li>
+        <li>Flag the exception: <b>mastoid air cells</b> are <b>closed</b> &mdash; they do <b>not</b> communicate with any other cavity. <span class="cite">(L01 &middot; mastoid air cells)</span></li>
+        <li>Read the radiology: <b>air appears black (radiolucent)</b> on X-ray, so a sinus reads as a dark shadow. <span class="cite">(L01 &middot; air on X-ray)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Four bones, they have sinuses, namely frontal, maxillary, ethmoid, and sphenoid &hellip; these sinuses not only make the bones lighter, they add resonance to our voice &hellip; mastoid process also has air cells, but these air cells are not connected to any other cavity.&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; pneumatization</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which four bones have paranasal sinuses, and how are the mastoid air cells different?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Paranasal sinuses = <b>frontal, maxillary, ethmoid, sphenoid</b> (they communicate with the nasal cavity, lighten the skull, add voice resonance). <b>Mastoid air cells are closed</b> &mdash; no communication with any cavity. Air = <b>black</b> on X-ray.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain skull ossification &amp; development &mdash; the two ossification types, the embryonic origins, and the growth timeline.</div>
+        <div class="obj-src">content: <b>L02 &middot; Skull ossification &amp; development</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Pair bone shape to ossification: <b>flat bones (calvaria) = intramembranous ossification</b>; <b>irregular bones / skull base = endochondral (cartilaginous) ossification</b>. <span class="cite">(L02 &middot; 00:12)</span></li>
+        <li>Give the embryonic origins: the <b>chondrocranium</b> (cartilaginous base) comes from <b>neural crest + occipital somites</b>; the <b>viscerocranium</b> (face) comes from the <b>first two pharyngeal arches</b>. <span class="cite">(L02 &middot; 00:09&ndash;00:10)</span></li>
+        <li>Explain why the base is dense: it is <b>petrous / tough to support and protect the delicate brain</b>; the <b>fibrous sutures let the brain expand</b> during infancy. <span class="cite">(L02 &middot; 00:22)</span></li>
+        <li>Give the timeline: the two <b>frontal halves fuse by ~8 years</b>; the <b>calvaria keeps growing until ~16 years</b>. <span class="cite">(L02 &middot; 00:17 &amp; 00:23)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;All the flat bones, they are formed by <b>membranous ossification</b>; all the irregular bones are formed by <b>cartilaginous</b> <span class="fix">[endochondral]</span> ossification &hellip; the fibrous sutures of the calvaria, they allow for growth of the brain during infancy and childhood.&rdquo;<span class="cite">&mdash; Skull Development (L02) &middot; ~00:12:58 &amp; ~00:22:47</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Flat skull bones form by which ossification? Where does the facial skeleton (viscerocranium) come from developmentally?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Flat bones = intramembranous ossification</b>; irregular/base bones = <b>endochondral</b>. The <b>viscerocranium</b> comes from the <b>first two pharyngeal arches</b>; the chondrocranium from neural crest + occipital somites. Frontal halves fuse ~8 yrs; calvaria grows to ~16 yrs.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Master the fontanelles &mdash; their shapes, the landmark each becomes, closure times, and what a sunken vs bulging fontanelle tells you.</div>
+        <div class="obj-src">content: <b>L02 &middot; Fontanelles</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Match each fontanelle to its future landmark: <b>anterior</b> = diamond-shaped &rarr; future <b>bregma</b>; <b>posterior</b> = triangular &rarr; future <b>lambda</b>; <b>anterolateral</b> &rarr; <b>pterion</b>; <b>posterolateral (mastoid)</b> &rarr; <b>asterion</b>. <span class="cite">(L02 &middot; 00:16&ndash;00:20)</span></li>
+        <li>Give the closure times: the <b>anterior fontanelle closes by ~18 months</b> (it is the <b>last to close</b>, so it is the one most palpated); the <b>posterior</b> closes within the first few months. <span class="cite">(L02 &middot; 00:16 &amp; 00:19)</span></li>
+        <li>Read the clinical signs: a <b>sunken/depressed</b> anterior fontanelle = <b>dehydration</b>; a <b>bulging</b> one = <b>raised intracranial pressure</b>. <span class="cite">(L02 &middot; 00:15)</span></li>
+        <li>Interpret <b>delayed closure</b> = a sign of <b>rickets / vitamin&nbsp;D or calcium deficiency</b> (slow bone growth). <span class="cite">(L02 &middot; 00:16)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Anterior fontanelle is a <b>diamond-shaped future site of bregma</b>, closes by <b>18 months</b> of age &hellip; posterior fontanelle, which is triangular &hellip; future site of lambda &hellip; if the baby is in severe dehydration, anterior fontanelle will be sunken; if there is increased intracranial pressure &hellip; this fontanelle will be bulging.&rdquo;<span class="cite">&mdash; Skull Development (L02) &middot; ~00:15:02&ndash;00:19:05</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The anterior fontanelle is what shape, becomes which landmark, and closes when? What does a bulging fontanelle mean?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Anterior fontanelle</b> = diamond-shaped &rarr; future <b>bregma</b>, closes by <b>~18 months</b> (last to close, most palpated). A <b>bulging</b> fontanelle = <b>raised intracranial pressure</b>; sunken = dehydration; delayed closure = rickets / vit-D deficiency. Posterior &rarr; lambda; anterolateral &rarr; pterion; posterolateral &rarr; asterion.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Recognize the developmental anomalies &mdash; molding, the craniosynostoses (scaphocephaly, plagiocephaly, oxycephaly), acrania, and microcephaly.</div>
+        <div class="obj-src">content: <b>L02 &middot; Developmental anomalies</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Explain <b>molding</b>: because the bones are <b>not yet fused</b>, they <b>overlap</b> to ease the head through the birth canal, then spring back. <span class="cite">(L02 &middot; 00:18&ndash;00:20)</span></li>
+        <li>Match the craniosynostoses (premature suture closure): <b>scaphocephaly</b> = <b>boat-shaped head</b> (&ldquo;scapha = boat&rdquo;); <b>plagiocephaly</b> = <b>one-sided</b> premature fusion; <b>oxycephaly / turricephaly</b> = <b>coronal suture closes early</b>. <span class="cite">(L02 &middot; 00:24&ndash;00:25)</span></li>
+        <li>Define <b>acrania</b>: the <b>skull-cap bones fail to form</b>, leaving the brain exposed (with meroanencephaly, incompatible with life). <span class="cite">(L02 &middot; 00:25&ndash;00:27)</span></li>
+        <li>Define <b>microcephaly</b>: an abnormally <b>small head</b> resulting from <b>abnormal CNS / brain development</b> (usually with severe intellectual impairment). <span class="cite">(L02 &middot; 00:26)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;<b>Scapha</b> means a boat &hellip; the child has a boat-shaped head <span class="fix">[scaphocephaly]</span> &hellip; plagiocephaly is premature closure of coronal or lambdoid suture on <b>one side only</b> &hellip; acrania means missing skull bones &hellip; microcephaly &hellip; smaller head &hellip; a result of abnormal CNS development.&rdquo;<span class="cite">&mdash; Skull Development (L02) &middot; ~00:24:14&ndash;00:26:24</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which anomaly is a boat-shaped head, and which one is a one-sided premature suture fusion? What is acrania?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Scaphocephaly</b> = boat-shaped head; <b>plagiocephaly</b> = one-sided premature fusion; <b>oxycephaly</b> = early coronal-suture closure. <b>Acrania</b> = skull-cap bones fail to form (brain exposed). Microcephaly = small head from abnormal CNS development. Molding = unfused bones overlap at birth.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 13 ===================== -->
+  <div class="lo" id="lo13">
+    <div class="lo-head">
+      <div class="lo-num">13</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the mandible &mdash; its regions, the TMJ process, and the path of the inferior alveolar nerve (with the lingula landmark).</div>
+        <div class="obj-src">content: <b>L02 &middot; The mandible</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo13"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Divide the mandible: <b>body + ramus + angle</b>, with an <b>alveolar process</b> holding the teeth and a central <b>mental protuberance</b> (chin). <span class="cite">(L02 &middot; 00:00&ndash;00:01)</span></li>
+        <li>Pick the TMJ process: the <b>condylar process</b> (head + neck) forms the <b>temporomandibular joint</b> (not the coronoid); the <b>pterygoid fovea</b> on it = <b>lateral pterygoid muscle</b>. <span class="cite">(L02 &middot; 00:01&ndash;00:02)</span></li>
+        <li>Trace the <b>inferior alveolar nerve</b>: enters the <b>mandibular foramen</b> (with the <b>lingula</b> as the <b>nerve-block landmark</b>) &rarr; runs through the body &rarr; exits the <b>mental foramen</b> as the <b>mental nerve</b>. <span class="cite">(L02 &middot; 00:02&ndash;00:05)</span></li>
+        <li>Place the inner-surface landmarks: <b>mylohyoid line</b> (mylohyoid muscle = floor of the mouth) + <b>groove</b> (mylohyoid nerve), <b>sublingual fossa</b> (sublingual gland), <b>submandibular fossa</b> (submandibular gland), <b>mental spine / genial tubercle</b>, and the <b>digastric fossa</b> (anterior belly of digastric). <span class="cite">(L02 &middot; 00:05&ndash;00:08)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;We divide mandible into the body, the ramus, and then angle &hellip; which of the two processes takes part in the formation of temporomandibular joint? Condyl<span class="fix">[ar]</span> &hellip; inferior alveolar nerve &hellip; passes through mandibular foramen &hellip; and exits through the mental foramen &hellip; your dentist is going to palpate for <b>lingula</b> &hellip; so it serves as a landmark.&rdquo;<span class="cite">&mdash; The Mandible (L02) &middot; ~00:00:13&ndash;00:04:29</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which mandibular process forms the TMJ, and what is the lingula the landmark for? Where does the inferior alveolar nerve exit?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>condylar process</b> (head + neck) forms the <b>TMJ</b>. The <b>lingula</b> is the landmark for the <b>inferior alveolar nerve block</b> at the mandibular foramen. The nerve exits the <b>mental foramen</b> as the <b>mental nerve</b>. Mandible = body + ramus + angle.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 14 ===================== -->
+  <div class="lo" id="lo14">
+    <div class="lo-head">
+      <div class="lo-num">14</div>
+      <div class="lo-obj">
+        <div class="obj-text">Apply the clinical correlations &mdash; pterion fracture &amp; epidural hemorrhage, the glabellar tap sign, and the trans-sphenoidal approach.</div>
+        <div class="obj-src">content: <b>L01 / L02 &middot; Clinical correlations</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo14"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Trace the <b>pterion</b> emergency: a hard blow to the side of the skull fractures the thin <b>pterion</b> &rarr; ruptures the <b>middle meningeal artery</b> &rarr; <b>epidural (extradural) hemorrhage</b> &mdash; the classic boxing-injury bleed. <span class="cite">(L01 &middot; pterion clinical)</span></li>
+        <li>Perform the <b>glabellar tap sign</b>: tap the glabella while the patient tries not to blink &mdash; <b>persistent blinking suggests Parkinsonism</b>. <span class="cite">(L01 &middot; glabellar tap)</span></li>
+        <li>State Maini&rsquo;s clinical rule: <b>never diagnose on a single finding</b> &mdash; correlate clinically and investigate further. <span class="cite">(L01 &middot; glabellar tap)</span></li>
+        <li>Explain the <b>trans-sphenoidal approach</b>: because the sella turcica sits on top of the <b>sphenoid sinus</b>, a pituitary tumor can be reached <b>through the nose / sphenoid sinus</b> instead of opening the skull. <span class="cite">(L02 &middot; 01:00)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;If there is a hard blow to the lateral side of the skull, and if <span class="fix">[pterion]</span> is fractured, there is rupture of <b>middle meningeal artery</b>, leading to &hellip; <b>epidural hemorrhage</b> &hellip; glabellar tap sign &hellip; if they still blink, it can be a sign of Parkinsonism &hellip; never rely on a single clinical finding to diagnose.&rdquo;<span class="cite">&mdash; Osteology of the Skull (L01) &middot; clinical correlations</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub.html">&#128220; GA 0202 &middot; Skull Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">A blow to the pterion ruptures which artery, causing which type of hemorrhage? What does a positive glabellar tap suggest?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">A pterion fracture ruptures the <b>middle meningeal artery</b> &rarr; <b>epidural (extradural) hemorrhage</b>. A positive <b>glabellar tap</b> (persistent blinking) suggests <b>Parkinsonism</b> &mdash; but never diagnose on one finding. The trans-sphenoidal approach reaches the pituitary through the <b>sphenoid sinus</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 14 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>GA 0202 Skull Hub</b> and drill exactly that topic (the audited Everything-MC bank has ~136 questions across all 14 of these).</p>
+    <p><b>3.</b> Dr. Maini tests like this: &ldquo;<i>this foramen is part of which bone,</i>&rdquo; &ldquo;<i>which one is NOT a feature of this bone.</i>&rdquo; So for every landmark, drill its <b>parent bone</b> &mdash; that is where most points live.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t fall for the &ldquo;next-to-the-jugular-foramen&rdquo; trap.</b> In the <b>inferior view</b> the neighbor is the <b>carotid canal</b>; in the <b>base-of-skull (internal) view</b> it is the <b>internal acoustic meatus</b>. And remember the two family traps: <b>temporal lines belong to the parietal bone</b>, and the <b>lower nasal septum is the vomer</b> (the ethmoid&rsquo;s perpendicular plate is only the upper part).</div>
+    <p style="margin-top:6px">When all 14 boxes are ticked, you own Dr. Maini&rsquo;s objective list for <b>The Skull</b> &mdash; the spine of the GA 0202 Module 1 material.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 1 (The Skull) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from Dr. Maini&rsquo;s lecture recordings (Osteology of the Skull; Mandible, Development &amp; Week 1 Lab), grounded in the audited Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m01_skull_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 Gross Anatomy — Dr. Maini
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Module 1 (The Skull) learning objectives.' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 14 skull learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable, dumbed-down analogy for a hard skull topic (like the base-of-skull foramina or the cranial fossae).' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the skull module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 Gross Anatomy with Dr. Maini at SCUHS (Module 1 — The Skull). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

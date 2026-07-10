@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · The Neck (part 2) — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 03 — THE NECK (PART 2) · CERVICAL VISCERA + DEVELOPMENT
+   Dr. Seema Maini. Cram Coach. PENDING REVIEW.
+   Built ONLY from Dr. Maini's GA lectures:
+     • L05 — Blood Vessels of the Neck & Cervical Viscera
+     • L06 — Cervical Viscera & the Pharyngeal Apparatus (development)
+   Grounded in the audited Everything-MC bank + the L05/L06 transcripts.
+   No new unverified facts. Analogies attributed to Maini only where she says them.
+   THEME: violet (engine CSS unchanged). Answer positions balanced (12 each A/B/C/D of 48).
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m03-neck-2-hub.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ==================================================== CRAM (10 TOPICS) ===== */
+const cram = [
+  {
+    n: 1, title: "Veins & lymphatics of the neck — the IJV is the star", src: "Maini · L05",
+    facts: [
+      "SUBCLAVIAN VEIN = the continuation of the AXILLARY vein at the outer border of the first rib. It passes ANTERIOR to the anterior scalene muscle, then unites with the internal jugular vein to form the BRACHIOCEPHALIC vein; the two brachiocephalics join to form the SUPERIOR VENA CAVA.",
+      "INTERNAL JUGULAR VEIN = the main large vein of the head and neck; it drains the BRAIN, FACE, and NECK. It begins at the JUGULAR FORAMEN as the direct continuation of the SIGMOID SINUS, descends in the carotid sheath, and ends by joining the subclavian vein.",
+      "IJV tributaries: the INFERIOR PETROSAL SINUS (the one brain sinus that leaves the skull and drains into the IJV), plus the common facial, lingual, pharyngeal, occipital, and the SUPERIOR + MIDDLE thyroid veins. The external jugular vein is superficial and drains little.",
+      "Lymph nodes sit in regional groups (submental, submandibular, deep cervical, pre-laryngeal, pre-/para-tracheal). Their vessels form the right & left jugular trunks, draining into the right lymphatic duct (right) / thoracic duct (left), or directly into the brachiocephalic veins.",
+    ],
+    flag: "IJV begins at the jugular foramen as the SIGMOID sinus (Maini's exam Q). Inferior petrosal sinus is the sinus that drains INTO the IJV. Carotid sheath = common carotid + IJV + vagus ('three musketeers'). Painless, firm, fixed, matted node = worrisome (cancer/lymphoma); painful = usually just infection.",
+  },
+  {
+    n: 2, title: "Thyroid gland — anatomy & relations", src: "Maini · L05",
+    facts: [
+      "Two LOBES (left, right) joined by a midline ISTHMUS. An inconstant PYRAMIDAL LOBE may hang off the isthmus (an embryonic variant = a remnant of the thyroglossal duct).",
+      "Levels: the UPPER pole reaches the OBLIQUE LINE of the thyroid cartilage (which also anchors sternothyroid & thyrohyoid); the LOWER pole reaches the 4th/5th tracheal ring; the ISTHMUS crosses the 2nd, 3rd, and 4th tracheal rings (Maini: this exact ring set was asked on the board exam).",
+      "Relations: ANTEROLATERAL = the infrahyoid 'strap' muscles (sternothyroid, sternohyoid, superior omohyoid) + anterior border of SCM; POSTEROLATERAL = the carotid sheath (common carotid, IJV, vagus); MEDIAL = larynx/trachea and esophagus.",
+      "The RECURRENT LARYNGEAL NERVE runs in the TRACHEOESOPHAGEAL GROOVE on the posterior surface — so a goiter enlarging posteriorly can compress it and cause HOARSENESS before any lump is even visible; anterior enlargement instead presses the trachea (dyspnea).",
+    ],
+    flag: "Isthmus = 2nd-4th tracheal rings (board trap vs '1-2-3'). Upper pole -> oblique line of the thyroid cartilage. Recurrent laryngeal nerve = tracheoesophageal groove -> a POSTERIOR goiter = HOARSENESS. Pyramidal lobe = inconstant thyroglossal-duct remnant.",
+  },
+  {
+    n: 3, title: "Thyroid — blood supply, venous drainage & function", src: "Maini · L05",
+    facts: [
+      "DUAL arterial supply: the SUPERIOR thyroid artery is the first branch of the EXTERNAL carotid artery; the INFERIOR thyroid artery is a branch of the THYROCERVICAL TRUNK (off the subclavian). (An inconstant thyroid ima artery exists in ~10%; Maini says it is NOT tested.)",
+      "Venous drainage (Maini: 'these make very good questions'): SUPERIOR and MIDDLE thyroid veins drain into the INTERNAL JUGULAR vein, but the INFERIOR thyroid vein is different — it drains into the BRACHIOCEPHALIC vein.",
+      "Function: thyroid FOLLICLES are filled with COLLOID, the source of T3 & T4 (thyroxine), which set the basal METABOLIC rate. Between follicles, PARAFOLLICULAR C CELLS secrete CALCITONIN (lowers blood calcium — minor role in humans).",
+      "Control is HORMONAL, not neural: hypothalamic TRH -> anterior-pituitary TSH -> thyroid T3/T4, with negative feedback once T3/T4 are high. Sympathetic fibers here are only vasomotor (they size the vessels, not the gland).",
+    ],
+    flag: "Superior thyroid a. = EXTERNAL carotid; inferior thyroid a. = THYROCERVICAL trunk. Veins: superior + middle -> IJV; INFERIOR -> brachiocephalic. Colloid in follicles = T3/T4; parafollicular C cells = calcitonin. Thyroid is TSH-regulated, NOT nerve-regulated.",
+  },
+  {
+    n: 4, title: "Hypo- vs hyperthyroidism (+ Graves' disease)", src: "Maini · L05",
+    facts: [
+      "HYPOthyroid (low T3/T4 = slow metabolism): weight GAIN despite low appetite, bradycardia, low respiratory rate, COLD intolerance, lethargy ('sluggish like a sloth'). Adult form with swelling = MYXEDEMA; in children it is CRETINISM (short stature, intellectual impairment, pot belly, large tongue). US newborns are screened.",
+      "HYPERthyroid (high T3/T4 = fast metabolism): weight LOSS despite a big appetite, hypertension, HEAT intolerance, tachycardia, increased respiratory rate, sweating, nervousness, fine tremors.",
+      "The classic exam confuser: 'which symptom fits a HYPERthyroid patient?' — the answer is HEAT intolerance (hyper = hot). Cold intolerance belongs to the HYPOthyroid patient.",
+      "GRAVES' DISEASE = autoimmune HYPERthyroidism. The antibody TSI (thyroid-stimulating immunoglobulin) is unusual — instead of destroying the gland it STIMULATES it, so T3/T4 rise and TSH falls (feedback). EXOPHTHALMOS (protruding eyes) and non-pitting edema come from the same antibody proliferating tissue behind the eyes — seen only in Graves.",
+    ],
+    flag: "HYPO = cold intolerance, weight gain, bradycardia, sluggish; child form = cretinism. HYPER = heat intolerance, weight loss, tachycardia, tremor. Graves = autoimmune; TSI antibody STIMULATES -> high T3/T4 + LOW TSH + exophthalmos. Watch the heat-vs-cold-intolerance trap.",
+  },
+  {
+    n: 5, title: "Parathyroid glands + calcium & tetany", src: "Maini · L05",
+    facts: [
+      "FOUR tiny pea-sized glands (2 superior, 2 inferior) embedded in the POSTERIOR surface of the thyroid. Blood supply from the superior & inferior thyroid arteries. Regulated by blood CALCIUM (not nerves — sympathetics are only vasomotor).",
+      "PARATHYROID HORMONE (PTH) RAISES blood calcium three ways: it leaches calcium from BONE, increases calcium reabsorption in the KIDNEY, and activates VITAMIN D (which boosts gut/kidney absorption). Thyroid calcitonin is its weak opposite.",
+      "HYPOparathyroidism (e.g., accidental removal during total thyroidectomy for carcinoma, autoimmune damage, or ischemia) -> severe HYPOCALCEMIA -> hypocalcemic TETANY and carpopedal spasm. TROUSSEAU sign = a BP cuff above systolic brings on carpal spasm; CHVOSTEK sign = tapping over the facial nerve makes the face twitch.",
+      "The paradox: calcium is needed FOR contraction, yet LOW calcium causes SPASM — because calcium normally STABILIZES the sodium channels; without it the membranes get hyperexcitable. Normal Ca is ~9-12 mg%; below 7 you get tetanic contractions.",
+    ],
+    flag: "4 parathyroids on the POSTERIOR thyroid; PTH RAISES calcium (bone + kidney + vitamin D). Hypoparathyroidism -> hypocalcemia -> tetany: Trousseau (BP cuff) + Chvostek (facial-nerve tap). Paradox: low Ca destabilizes Na channels -> hyperexcitable -> spasm.",
+  },
+  {
+    n: 6, title: "Trachea", src: "Maini · L05",
+    facts: [
+      "An air tube held open by C-SHAPED (incomplete) cartilage rings; the open posterior ends are bridged by the TRACHEALIS muscle. The rings are incomplete on purpose so the ESOPHAGUS behind can bulge forward and expand during swallowing.",
+      "It begins at the LOWER border of C6 and ends at the UPPER border of T5 (the sternal angle of Louis) by dividing — so it lies only in the SUPERIOR mediastinum, never the inferior.",
+      "Anterior relations: skin/fascia, sternohyoid & sternothyroid, the thyroid ISTHMUS (rings 2-4), and the brachiocephalic + inferior thyroid veins in front of it.",
+      "Posterior relation = the ESOPHAGUS, with the RECURRENT LARYNGEAL NERVE in the tracheoesophageal groove on each side. Laterally sit the thyroid lobes and the common carotid arteries.",
+    ],
+    flag: "C-shaped rings + trachealis; incomplete so the esophagus can expand when you swallow. C6 -> T5 (sternal angle), superior mediastinum only. Isthmus crosses rings 2-4; recurrent laryngeal nerve rides in the tracheoesophageal groove.",
+  },
+  {
+    n: 7, title: "Thyroid gland DEVELOPMENT — the thyroglossal duct", src: "Maini · L06",
+    facts: [
+      "The thyroid is the FIRST endocrine gland to develop. It begins as an ENDODERMAL thickening in the FLOOR of the primordial pharynx — with NO relation to the pharyngeal arches. (Maini: the exam asks 'which statement about the thyroid is TRUE/NOT true' — 'forms from the floor of the primordial pharynx' is the TRUE one.)",
+      "The thyroid diverticulum descends but stays tethered to its origin by the THYROGLOSSAL DUCT ('glossal' = tongue). It passes close to the HYOID bone, then settles ANTERIOR to the trachea; by WEEK 7 it has its definitive shape and final site (about 3 weeks of migration).",
+      "Because it leaves a trail, REMNANTS can appear along the tract: the pyramidal lobe, accessory/cervical thyroid tissue, and a thyroglossal duct CYST — a midline cyst that moves UP when the patient swallows or protrudes the tongue.",
+      "The origin point on the tongue is the FORAMEN CECUM, at the MIDPOINT of the sulcus terminalis (the V-groove separating the anterior 2/3 from the posterior 1/3). 'Cecum' means BLIND — it doesn't lead anywhere; it is the remnant of the thyroglossal duct.",
+    ],
+    flag: "Thyroid = FIRST gland; ENDODERM from the FLOOR of the primordial pharynx, NO arch relation (Maini's true/false trap). Thyroglossal duct -> close to hyoid -> anterior to trachea; definitive by WEEK 7. Foramen cecum (midpoint of sulcus terminalis) = the origin + duct remnant. Midline cyst that rides up with the tongue = thyroglossal duct cyst.",
+  },
+  {
+    n: 8, title: "Tongue development — the swellings & arches", src: "Maini · L06",
+    facts: [
+      "ANTERIOR 2/3 (body) mucosa = the FIRST arch: a midline TUBERCULUM IMPAR plus the two LATERAL LINGUAL SWELLINGS, which overgrow it and fuse. Their fusion line becomes the MEDIAN SULCUS (a fibrous septum down the midline).",
+      "POSTERIOR 1/3 (root) mucosa = mainly the THIRD arch (with the fourth): the COPULA (2nd/3rd arch, week 4) is overgrown by the HYPOBRANCHIAL EMINENCE (3rd/4th arch, week 5); the most posterior part comes from a third median swelling of the 4th arch.",
+      "The tongue MUSCLES come from OCCIPITAL SOMITES (occipital myotomes) that migrate in — so their motor nerve is CN XII carrying GENERAL SOMATIC EFFERENT (GSE) fibers, NOT branchial (SVE).",
+      "The SULCUS TERMINALIS (a V-shaped groove) separates the anterior 2/3 from the posterior 1/3, with the foramen cecum sitting at its apex.",
+    ],
+    flag: "Anterior 2/3 = 1st arch (tuberculum impar + lateral lingual swellings -> median sulcus). Posterior 1/3 = 3rd (+4th) arch (copula overgrown by the hypobranchial eminence). Muscles = occipital somites -> CN XII = GSE, not SVE.",
+  },
+  {
+    n: 9, title: "Tongue innervation — the nerve table", src: "Maini · L06",
+    facts: [
+      "ANTERIOR 2/3 general sensation (touch, GSA): the LINGUAL branch of CN V3 (mandibular, 1st arch).",
+      "ANTERIOR 2/3 TASTE (SVA): CN VII (facial) via the CHORDA TYMPANI — because 2nd-arch cells dispersed forward to build the front taste buds; the chorda tympani rides on the lingual nerve to reach them.",
+      "POSTERIOR 1/3: BOTH general sensation AND taste = CN IX (glossopharyngeal, 3rd arch). The root / most posterior part (near the epiglottis) = CN X (vagus) via the internal laryngeal nerve.",
+      "MOTOR to every tongue muscle = CN XII (hypoglossal) — EXCEPT the PALATOGLOSSUS, which is CN X (vagus, via the pharyngeal plexus) because it is functionally a palatal/pharyngeal muscle.",
+    ],
+    flag: "Ant 2/3 touch = V3; ant 2/3 taste = VII (chorda tympani); post 1/3 touch AND taste = IX; root = X; motor = XII (except palatoglossus = X). Touch lost but taste kept on the front = V3 out; taste lost but touch kept = chorda tympani (VII) out.",
+  },
+  {
+    n: 10, title: "Salivary glands, face & palate + congenital anomalies", src: "Maini · L06",
+    facts: [
+      "SALIVARY glands appear in WEEK 6: PAROTID first, then submandibular (late week 6), and SUBLINGUAL last.",
+      "FACE (primordia early week 4): FRONTONASAL prominence -> forehead, dorsum & apex of the nose; MEDIAL nasal -> nasal SEPTUM; LATERAL nasal -> sides of the nose; MAXILLARY -> upper cheek + most of the upper lip; MANDIBULAR -> chin, lower lip, lower cheek. The INTERMAXILLARY segment (fused medial nasal processes) -> philtrum, bridge of nose, the FOUR upper incisors, and the PRIMARY palate. The upper lip forms when the maxillary processes fuse with the medial nasal processes by the end of week 6.",
+      "SECONDARY palate: palatine shelves grow down beside the tongue; as the tongue descends they swing HORIZONTAL and fuse with each other + the primary palate — done by WEEK 12. The critical period for face/palate = weeks 6-12 (months 2-3).",
+      "CONGENITAL: incomplete fusion -> cleft lip / cleft palate (unilateral, bilateral, median, or oblique) -> feeding difficulty + respiratory infections, repaired at ~3-6 months. BIFID UVULA = a harmless normal variant. Tongue anomalies: ANKYLOGLOSSIA (tongue-tie, short frenulum), MACROGLOSSIA (hypothyroid/cretinism), and fissured tongue + papillae hypertrophy (Down syndrome).",
+    ],
+    flag: "Parotid first, sublingual last (all week 6). Medial nasal -> septum; lateral nasal -> sides; intermaxillary -> philtrum + 4 upper incisors + primary palate. Upper lip = maxillary + medial nasal fuse (week 6). Palate done by week 12; critical period weeks 6-12. Tongue-tie = ankyloglossia; big tongue = cretinism; fissured + papillae = Down syndrome.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "Thyroid VENOUS drainage splits: the superior + middle thyroid veins drain into the INTERNAL JUGULAR vein, but the INFERIOR thyroid vein drains into the BRACHIOCEPHALIC vein.", why: "Maini calls these 'very good questions' and stresses that the inferior vein drains differently from the other two — a clean single-fact item.", src: "Maini · L05" },
+  { tag: "★★ Heavy", text: "Thyroid ARTERIAL supply: the superior thyroid artery is the first branch of the EXTERNAL carotid; the inferior thyroid artery is a branch of the THYROCERVICAL TRUNK (off the subclavian).", why: "She drills both sources out loud and rewards the thyrocervical-trunk answer — the two-source pattern is exam-ready.", src: "Maini · L05" },
+  { tag: "Board trap", text: "The thyroid ISTHMUS crosses the 2nd, 3rd, and 4th tracheal rings — NOT the 1st-2nd-3rd.", why: "Maini: 'This question was asked in the board exams... they'll ask 1-2-3, 2-3-4, 4-5-6 — it's 2-3-4.'", src: "Maini · L05" },
+  { tag: "★★ Heavy", text: "Hypo vs hyper: HYPOthyroid = cold intolerance, weight gain, bradycardia, sluggish; HYPERthyroid = heat intolerance, weight loss, tachycardia, tremor.", why: "She warns the heat-vs-cold-intolerance stem is a classic confuser 'if you're in a hurry' — match hyper = hot.", src: "Maini · L05" },
+  { tag: "True/False", text: "The thyroid is the FIRST gland to develop; it forms as an ENDODERMAL thickening in the FLOOR of the primordial pharynx, with NO relation to the arches, and is definitive by week 7.", why: "Maini says the exam asks 'which statement about the thyroid is true/not true' — this is the TRUE statement she wants you to recognize.", src: "Maini · L06" },
+  { tag: "Nerve table", text: "Anterior 2/3 touch = V3; anterior 2/3 taste = VII (chorda tympani); posterior 1/3 touch AND taste = IX; root = X; motor = XII except palatoglossus (X).", why: "The single highest-yield table of L06 — she works it left-to-right and ties each nerve to the arch it came from.", src: "Maini · L06" },
+  { tag: "Sinus->vein", text: "The internal jugular vein begins at the jugular foramen as the continuation of the SIGMOID sinus (all other sinuses drain into the sigmoid first).", why: "She posed it verbatim: 'which one of the following sinus continues as the internal jugular vein?' — pick sigmoid.", src: "Maini · L05" },
+  { tag: "Linkage", text: "The FORAMEN CECUM sits at the midpoint of the sulcus terminalis; it marks the thyroid's origin and is a remnant of the thyroglossal duct ('cecum' = blind).", why: "It links thyroid development to tongue anatomy — a favorite crossover she returns to twice.", src: "Maini · L06" },
+  { tag: "Calcium", text: "Four parathyroids sit on the POSTERIOR thyroid; PTH RAISES calcium (bone, kidney, vitamin D). Hypoparathyroidism -> hypocalcemic tetany: Trousseau (BP cuff) + Chvostek (facial-nerve tap).", why: "She spends real time on the tetany signs and the paradox that low calcium causes spasm — expect a signs/PTH item.", src: "Maini · L05" },
+  { tag: "Clinical", text: "The recurrent laryngeal nerve sits in the tracheoesophageal groove behind the thyroid — a POSTERIOR goiter can cause HOARSENESS before any swelling is even visible.", why: "She uses this as the reason the thyroid's relations 'are very important' — a classic cause-and-effect stem.", src: "Maini · L05" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  { kind: "Mnemonic", title: "The 'three musketeers' of the carotid sheath", text: "The common carotid ARTERY, the internal jugular VEIN, and the VAGUS nerve all travel together inside the carotid sheath. Maini calls them the 'three musketeers' — name all three and you own the sheath.", helps: "Locks the three carotid-sheath contents (and the posterolateral relation of the thyroid) in one image.", src: "Maini · L05" },
+  { kind: "Mnemonic", title: "'Tyro' gives the inferior thyroid artery away", text: "The inferior thyroid artery comes off the THYROcervical trunk. Maini points out the trunk 'gets its first name, thyro' — the 'thyro' in the name is literally the hint for the source.", helps: "Stops you from guessing external carotid for the inferior thyroid artery.", src: "Maini · L05" },
+  { kind: "Trick", title: "Hyper = hot, Hypo = cold", text: "A HYPERthyroid body runs hot (heat intolerance, sweating, weight loss); a HYPOthyroid body runs cold (cold intolerance, weight gain, sluggish). Maini flags the heat-vs-cold stem as the item people miss when rushing.", helps: "Cracks the most common thyroid-symptom trap instantly.", src: "Maini · L05" },
+  { kind: "Rule", title: "A painLESS node is the scary one", text: "A PAINFUL cervical node is usually the good news — inflammation or infection. A painLESS node that is firm, fixed, and matted is the worrying one (cancer or lymphoma). Maini teaches you to note tenderness on every palpation.", helps: "Turns lymph-node palpation into a quick benign-vs-worrisome triage.", src: "Maini · L05" },
+  { kind: "Analogy", title: "Graves' is the 'backwards' antibody", text: "Most autoimmune antibodies DESTROY their target. The Graves TSI antibody does the opposite — it STIMULATES the thyroid, so T3/T4 go UP while TSH goes DOWN. Maini highlights how unusual a stimulating antibody is.", helps: "Explains why Graves gives high hormones with a low TSH plus exophthalmos.", src: "Maini · L05" },
+  { kind: "Trick", title: "Why low calcium causes SPASM, not weakness", text: "Calcium is needed to contract, so you'd expect low calcium to relax muscle — but tetany happens because calcium normally STABILIZES the sodium channels. Take the calcium away and the membranes become hyperexcitable and fire on their own.", helps: "Resolves the hypocalcemic-tetany paradox in one sentence.", src: "Maini · L05" },
+  { kind: "Rule", title: "'Cecum is blind'", text: "The foramen cecum is a BLIND pit that doesn't open on the other side. Maini repeats 'cecum is blind' — it's just the leftover mouth of the thyroglossal duct, marking where the thyroid started its journey.", helps: "Anchors what the foramen cecum is and why it's there.", src: "Maini · L06" },
+  { kind: "Analogy", title: "Hypothyroid = 'sluggish like a sloth'", text: "Maini repeats the textbook image that a hypothyroid patient is slow and sluggish 'like a sloth' — everything runs low and slow: bradycardia, low body temperature, low respiratory rate, lethargy. (She credits the books for the sloth line.)", helps: "One picture that bundles all the hypothyroid signs together.", src: "Maini · L05" },
+  { kind: "Mnemonic", title: "Bifid uvula is harmless — the sitcom hook", text: "A bifid (split) uvula is a NORMAL variant with no bad consequences. Maini uses a sitcom gag about a character with a bifid uvula to make the 'it's harmless' point stick.", helps: "Keeps you from over-calling a bifid uvula as a defect on an exam.", src: "Maini · L06" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Original-phrasing items grounded in Maini's L05/L06 lectures + the audited
+   Everything-MC bank. Answer positions balanced (12 each A/B/C/D across 48). */
+const questions = [
+  { id: 1, topic: "Neck veins", src: "Maini · L05", q: "The subclavian vein is the continuation of which vein, at the outer border of the first rib?", opts: ["Axillary vein", "Brachiocephalic vein", "Cephalic vein", "External jugular vein"], a: 0, h1: "Same landmark as the artery — the outer border of the first rib.", h2: "It comes from the upper limb.", exp: "The subclavian vein is the continuation of the AXILLARY vein at the outer border of the first rib." },
+  { id: 2, topic: "Neck veins", src: "Maini · L05", q: "The subclavian vein passes in what relation to the anterior scalene muscle?", opts: ["Posterior to it", "Deep (medial) to it", "Anterior to it", "Through its fibers"], a: 2, h1: "The vein and artery are separated by this muscle.", h2: "The vein is in front.", exp: "The subclavian VEIN passes ANTERIOR to the anterior scalene muscle (the artery passes posterior to it)." },
+  { id: 3, topic: "Neck veins", src: "Maini · L05", q: "The internal jugular vein begins at the jugular foramen as the direct continuation of which dural venous sinus?", opts: ["Superior petrosal sinus", "Transverse sinus", "Inferior petrosal sinus", "Sigmoid sinus"], a: 3, h1: "All the other sinuses drain into this one first.", h2: "It grooves the skull just before the jugular foramen.", exp: "The IJV is the continuation of the SIGMOID sinus — every other sinus drains into the sigmoid so the blood can reach the IJV." },
+  { id: 4, topic: "Neck veins", src: "Maini · L05", q: "The carotid sheath (Maini's 'three musketeers') contains:", opts: ["Common carotid artery, external jugular vein, and phrenic nerve", "Common carotid artery, internal jugular vein, and vagus nerve", "Subclavian artery, IJV, and recurrent laryngeal nerve", "Internal carotid artery, IJV, and hypoglossal nerve"], a: 1, h1: "One artery, one vein, one nerve.", h2: "The nerve is CN X.", exp: "The carotid sheath holds the COMMON CAROTID artery, the INTERNAL JUGULAR vein, and the VAGUS nerve — the 'three musketeers.'" },
+  { id: 5, topic: "Neck veins", src: "Maini · L05", q: "The internal jugular vein receives blood from:", opts: ["The upper limb", "Superficial scalp only", "The brain, face, and neck", "The thorax and abdomen"], a: 2, h1: "It is the main vein of one body region.", h2: "Head and neck, including the brain.", exp: "The IJV drains the BRAIN, FACE, and NECK — the main vein returning head-and-neck blood toward the heart." },
+  { id: 6, topic: "Neck veins", src: "Maini · L05", q: "Which brain venous sinus leaves the skull and drains directly INTO the internal jugular vein (rather than into it via the sigmoid)?", opts: ["Inferior petrosal sinus", "Sigmoid sinus", "Cavernous sinus", "Straight sinus"], a: 0, h1: "A small petrosal sinus, not the big one that becomes the IJV.", h2: "Inferior, not superior.", exp: "The INFERIOR PETROSAL SINUS is the one sinus that leaves the skull and drains into the IJV as a tributary." },
+  { id: 7, topic: "Neck veins", src: "Maini · L05", q: "The superior and middle thyroid veins drain into the:", opts: ["Brachiocephalic vein", "External jugular vein", "Superior vena cava directly", "Internal jugular vein"], a: 3, h1: "The same big vein that drains the head and neck.", h2: "Not the brachiocephalic — that's the inferior one.", exp: "The SUPERIOR and MIDDLE thyroid veins drain into the INTERNAL JUGULAR vein." },
+  { id: 8, topic: "Neck veins", src: "Maini · L05", q: "The inferior thyroid vein is different from the other two — it drains into the:", opts: ["Internal jugular vein", "Brachiocephalic vein", "External jugular vein", "Superior thyroid vein"], a: 1, h1: "Maini: 'inferior has different drainage.'", h2: "It heads for the vein behind the manubrium.", exp: "The INFERIOR thyroid vein drains into the BRACHIOCEPHALIC vein (unlike the superior + middle, which go to the IJV)." },
+  { id: 9, topic: "Lymphatics", src: "Maini · L05", q: "A cervical lymph node that is painLESS, firm/hard, fixed, and matted is MOST worrisome for:", opts: ["A resolving viral infection", "A simple reactive node", "Malignancy or lymphoma", "Normal anatomy"], a: 2, h1: "Painful is usually the reassuring one.", h2: "Painless + fixed + matted is the red flag.", exp: "A painLESS, firm, fixed, matted node is worrisome for MALIGNANCY or LYMPHOMA; a painful node usually means infection/inflammation." },
+  { id: 10, topic: "Thyroid anatomy", src: "Maini · L05", q: "The isthmus of the thyroid gland crosses which tracheal rings (a stated board-exam favorite)?", opts: ["The 2nd, 3rd, and 4th tracheal rings", "The 1st, 2nd, and 3rd rings", "The 3rd, 4th, and 5th rings", "The 4th, 5th, and 6th rings"], a: 0, h1: "Not starting at ring 1.", h2: "Two, three, four.", exp: "The isthmus crosses the 2nd, 3rd, and 4th tracheal rings — Maini flags this exact set as a board question." },
+  { id: 11, topic: "Thyroid anatomy", src: "Maini · L05", q: "The upper pole of each thyroid lobe reaches as high as the:", opts: ["Hyoid bone", "Cricoid cartilage", "4th tracheal ring", "Oblique line of the thyroid cartilage"], a: 3, h1: "A landmark on the thyroid cartilage.", h2: "Same line that anchors sternothyroid and thyrohyoid.", exp: "The upper pole reaches the OBLIQUE LINE of the thyroid cartilage; the lower pole reaches the 4th/5th tracheal ring." },
+  { id: 12, topic: "Thyroid vessels", src: "Maini · L05", q: "The superior thyroid artery is the first branch of the:", opts: ["Thyrocervical trunk", "External carotid artery", "Internal carotid artery", "Subclavian artery directly"], a: 1, h1: "The internal carotid gives no neck branches.", h2: "It is the external one, front branch.", exp: "The SUPERIOR thyroid artery is the first branch of the EXTERNAL carotid artery." },
+  { id: 13, topic: "Thyroid vessels", src: "Maini · L05", q: "The inferior thyroid artery is a branch of the:", opts: ["Thyrocervical trunk", "External carotid artery", "Common carotid artery", "Aortic arch"], a: 0, h1: "The name itself is the hint.", h2: "The 'thyro-' trunk off the subclavian.", exp: "The INFERIOR thyroid artery is a branch of the THYROCERVICAL TRUNK (off the subclavian) — the 'thyro' in the name gives it away." },
+  { id: 14, topic: "Thyroid relations", src: "Maini · L05", q: "A goiter enlarging POSTERIORLY can compress which structure, producing hoarseness before any swelling is visible?", opts: ["The phrenic nerve", "The vagus at the jugular foramen", "The recurrent laryngeal nerve in the tracheoesophageal groove", "The hypoglossal nerve"], a: 2, h1: "It sits on the posterior surface of the thyroid.", h2: "It supplies the larynx — hence the voice change.", exp: "The RECURRENT LARYNGEAL NERVE runs in the tracheoesophageal groove; posterior thyroid enlargement compresses it and causes HOARSENESS." },
+  { id: 15, topic: "Thyroid function", src: "Maini · L05", q: "The parafollicular (C) cells of the thyroid secrete:", opts: ["Thyroxine (T4)", "Parathyroid hormone", "Triiodothyronine (T3)", "Calcitonin"], a: 3, h1: "Not the follicular hormones and not PTH.", h2: "It nudges calcium down.", exp: "PARAFOLLICULAR C CELLS secrete CALCITONIN (a minor calcium-lowering hormone in humans)." },
+  { id: 16, topic: "Thyroid function", src: "Maini · L05", q: "Inside a thyroid follicle, what is the source of T3 and T4?", opts: ["The parafollicular cell", "The colloid", "The capillary plexus", "The basement membrane"], a: 1, h1: "The gel that fills the follicle.", h2: "It is the storage material for thyroid hormone.", exp: "The COLLOID that fills each follicle is the source of T3 and T4." },
+  { id: 17, topic: "Thyroid function", src: "Maini · L05", q: "Thyroid gland secretion is regulated mainly by:", opts: ["TSH from the anterior pituitary", "The vagus nerve", "Sympathetic fibers", "The recurrent laryngeal nerve"], a: 0, h1: "It is hormonal, not neural.", h2: "Hypothalamus -> pituitary -> this hormone.", exp: "The thyroid is regulated HORMONALLY by TSH from the anterior pituitary; its sympathetic fibers are only vasomotor, not secretory." },
+  { id: 18, topic: "Thyroid disorders", src: "Maini · L05", q: "Which cluster of symptoms fits a HYPERthyroid patient?", opts: ["Cold intolerance and weight gain", "Bradycardia and lethargy", "Heat intolerance and weight loss despite a good appetite", "Below-normal body temperature"], a: 2, h1: "Hyper = the body runs hot and fast.", h2: "Losing weight while still eating.", exp: "HYPERthyroid = HEAT intolerance, weight LOSS despite appetite, tachycardia, tremor (metabolism is high)." },
+  { id: 19, topic: "Thyroid disorders", src: "Maini · L05", q: "Which cluster of symptoms fits a HYPOthyroid patient?", opts: ["Weight loss despite eating", "Cold intolerance and weight gain", "Tachycardia and tremor", "Heat intolerance"], a: 1, h1: "Hypo = the body runs cold and slow.", h2: "Gaining weight even with a poor appetite.", exp: "HYPOthyroid = COLD intolerance, weight GAIN, bradycardia, lethargy ('sluggish like a sloth')." },
+  { id: 20, topic: "Thyroid disorders", src: "Maini · L05", q: "Cretinism is:", opts: ["Hyperthyroidism in adults", "An autoimmune hyperthyroidism", "A parathyroid tumor", "Hypothyroidism in children"], a: 3, h1: "It is a childhood condition.", h2: "Low thyroid hormone from birth.", exp: "CRETINISM = HYPOthyroidism in children (short stature, intellectual impairment, pot belly, large tongue)." },
+  { id: 21, topic: "Thyroid disorders", src: "Maini · L05", q: "In Graves' disease, the TSI antibody is unusual because it:", opts: ["Destroys thyroid follicles, lowering T3/T4", "Blocks TSH receptors", "Stimulates the thyroid, raising T3/T4 with a LOW TSH", "Attacks the parathyroid glands"], a: 2, h1: "Most autoimmune antibodies destroy — this one does the opposite.", h2: "It drives hormones up, so TSH falls by feedback.", exp: "In Graves', TSI STIMULATES the thyroid (instead of destroying it), so T3/T4 rise and TSH is LOW; the same antibody causes exophthalmos." },
+  { id: 22, topic: "Thyroid disorders", src: "Maini · L05", q: "Exophthalmos (protruding eyeballs) is characteristically seen in:", opts: ["Graves' disease", "Cretinism", "Hypoparathyroidism", "Simple goiter"], a: 0, h1: "An autoimmune hyperthyroid state.", h2: "Same antibody proliferates tissue behind the eyes.", exp: "EXOPHTHALMOS is seen in GRAVES' DISEASE — the TSI antibody proliferates the retro-orbital tissue." },
+  { id: 23, topic: "Parathyroid", src: "Maini · L05", q: "The parathyroid glands are how many, and where do they sit?", opts: ["Two, on the anterior surface", "Four, on the posterior surface of the thyroid", "Four, on the anterior surface", "Six, on the medial surface"], a: 1, h1: "Two superior + two inferior.", h2: "Embedded behind the thyroid.", exp: "There are FOUR parathyroid glands embedded in the POSTERIOR surface of the thyroid." },
+  { id: 24, topic: "Parathyroid", src: "Maini · L05", q: "Parathyroid hormone (PTH) does what to blood calcium?", opts: ["Lowers it", "Has no effect on it", "Only stores it in bone", "Raises it (via bone, kidney, and vitamin D)"], a: 3, h1: "It is the body's main calcium-raiser.", h2: "It leaches calcium from bone, saves it in the kidney, and activates vitamin D.", exp: "PTH RAISES blood calcium — leaching it from BONE, increasing KIDNEY reabsorption, and activating VITAMIN D." },
+  { id: 25, topic: "Parathyroid", src: "Maini · L05", q: "Chvostek's sign of hypocalcemia is elicited by:", opts: ["Inflating a BP cuff above systolic", "Tapping the patellar tendon", "Tapping over the facial nerve (causing a facial twitch)", "Flexing the neck"], a: 2, h1: "It tests the facial muscles.", h2: "Tap the nerve on the cheek.", exp: "CHVOSTEK sign = tapping over the FACIAL nerve produces a twitch of the facial muscles in hypocalcemia." },
+  { id: 26, topic: "Parathyroid", src: "Maini · L05", q: "Trousseau's sign of hypocalcemia is produced by:", opts: ["Inflating a BP cuff above systolic pressure (carpopedal spasm)", "Tapping the facial nerve", "Pressing on the carotid", "Extending the wrist"], a: 0, h1: "It obliterates the brachial artery.", h2: "A blood-pressure cuff brings on carpal spasm.", exp: "TROUSSEAU sign = a BP cuff above systolic obliterates the brachial artery and brings on CARPOPEDAL SPASM in hypocalcemia." },
+  { id: 27, topic: "Parathyroid", src: "Maini · L05", q: "Why does hypocalcemia cause tetany (SPASM) even though calcium is needed for contraction?", opts: ["Low calcium directly forces cross-bridge cycling", "Excess calcium floods the muscle", "Potassium channels stay permanently open", "Low calcium destabilizes sodium channels, making membranes hyperexcitable"], a: 3, h1: "Think about what calcium does to the membrane, not the cross-bridge.", h2: "It normally stabilizes the Na channels.", exp: "Calcium normally STABILIZES sodium channels; when it's low the channels get disorganized and hyperexcitable, so muscles fire and spasm." },
+  { id: 28, topic: "Trachea", src: "Maini · L05", q: "Tracheal cartilage rings are C-shaped (incomplete) so that:", opts: ["The trachea can collapse during expiration", "The esophagus behind can bulge forward and expand during swallowing", "The recurrent laryngeal nerve can pass through", "Blood vessels can enter the lumen"], a: 1, h1: "The gap is at the back, next to another tube.", h2: "Something needs room to expand when you swallow.", exp: "The rings are incomplete (bridged by trachealis) so the ESOPHAGUS behind can expand forward during swallowing." },
+  { id: 29, topic: "Trachea", src: "Maini · L05", q: "The trachea extends from which vertebral levels?", opts: ["Lower border of C6 to the upper border of T5 (sternal angle of Louis)", "Upper border of C4 to T2", "The hyoid bone to the carina at T7", "C7 to T10"], a: 0, h1: "It starts in the lower neck.", h2: "It ends at the sternal angle, in the superior mediastinum.", exp: "The trachea runs from the LOWER border of C6 to the UPPER border of T5 (sternal angle) — lying only in the superior mediastinum." },
+  { id: 30, topic: "Thyroid development", src: "Maini · L06", q: "The thyroid gland first develops as:", opts: ["An ectodermal bud from the first arch", "A neural-crest migration", "An endodermal thickening in the floor of the primordial pharynx", "A mesodermal condensation in the third arch"], a: 2, h1: "Tissue type = endoderm.", h2: "From the floor, with no arch relation.", exp: "The thyroid begins as an ENDODERMAL thickening in the FLOOR of the primordial pharynx — no relation to the arches (Maini's true/false point)." },
+  { id: 31, topic: "Thyroid development", src: "Maini · L06", q: "By which week has the thyroid reached its definitive shape and final site?", opts: ["Week 4", "Week 10", "Week 12", "Week 7"], a: 3, h1: "About 3 weeks of migration.", h2: "Single digit.", exp: "By WEEK 7 the thyroid has assumed its definitive shape and reached its final site." },
+  { id: 32, topic: "Thyroid development", src: "Maini · L06", q: "The developing thyroid stays connected to its origin by the:", opts: ["Pharyngeal pouch", "Thyroglossal duct", "Nasolacrimal duct", "Cervical sinus"], a: 1, h1: "'Glossal' = tongue.", h2: "It links the thyroid to the tongue's origin point.", exp: "The THYROGLOSSAL DUCT connects the descending thyroid to its origin at the developing tongue." },
+  { id: 33, topic: "Thyroid development", src: "Maini · L06", q: "During its descent, the thyroid passes closest to which bone FIRST?", opts: ["Mandible", "Cricoid cartilage", "Hyoid bone", "Sternum"], a: 2, h1: "A U-shaped bone in the neck.", h2: "Then it moves anterior to the trachea.", exp: "The thyroid migrates close to the HYOID bone first, then settles anterior to the trachea." },
+  { id: 34, topic: "Thyroid development", src: "Maini · L06", q: "The foramen cecum of the tongue:", opts: ["Marks the thyroid's origin (a thyroglossal-duct remnant) at the midpoint of the sulcus terminalis", "Is the opening of the submandibular duct", "Is where CN XII enters the tongue", "Is the gap between the two lateral lingual swellings"], a: 0, h1: "'Cecum' means blind — it leads nowhere.", h2: "It sits at the apex of the V-groove.", exp: "The FORAMEN CECUM marks where the thyroid started; it's a remnant of the thyroglossal duct, at the midpoint of the sulcus terminalis." },
+  { id: 35, topic: "Thyroid development", src: "Maini · L06", q: "A midline neck cyst that moves upward when the patient protrudes the tongue or swallows is a:", opts: ["Branchial cyst", "Thyroglossal duct cyst", "Reactive lymph node", "Sublingual ranula"], a: 1, h1: "It follows the thyroid's old descent tract.", h2: "Midline + moves with the tongue.", exp: "A midline cyst that rides up with tongue protrusion/swallowing is a THYROGLOSSAL DUCT CYST (along the thyroid's migration tract)." },
+  { id: 36, topic: "Tongue development", src: "Maini · L06", q: "The mucosa of the anterior two-thirds of the tongue develops from which pharyngeal arch?", opts: ["Second arch", "Third arch", "Fourth arch", "First arch"], a: 3, h1: "The same arch as the mandible and V3.", h2: "Arch number one.", exp: "The anterior 2/3 mucosa comes from the FIRST arch (which is why its general sensation is V3)." },
+  { id: 37, topic: "Tongue development", src: "Maini · L06", q: "The posterior one-third of the tongue develops MAINLY from which arch?", opts: ["First arch", "Second arch", "Third arch (with the fourth)", "Sixth arch"], a: 2, h1: "The same arch as CN IX.", h2: "Arch number three.", exp: "The posterior 1/3 comes mainly from the THIRD arch (with the fourth) — hence CN IX sensation." },
+  { id: 38, topic: "Tongue development", src: "Maini · L06", q: "The tuberculum impar is:", opts: ["A midline swelling of the 1st arch, part of the anterior two-thirds", "The root of the tongue", "A thyroglossal-duct remnant", "The fused lateral lingual swellings"], a: 0, h1: "A single midline bump.", h2: "Overgrown by the lateral lingual swellings.", exp: "The TUBERCULUM IMPAR is a midline swelling of the 1st arch that contributes to the anterior 2/3 (overgrown by the lateral lingual swellings)." },
+  { id: 39, topic: "Tongue development", src: "Maini · L06", q: "The skeletal muscles of the tongue arise from ___, so their motor nerve carries ___ fibers.", opts: ["First-arch mesoderm; branchial motor (SVE)", "Occipital somites; general somatic efferent (GSE) via CN XII", "Neural crest; parasympathetic (GVE)", "Second-arch mesoderm; SVE via CN VII"], a: 1, h1: "Muscles come from somites, not the arches.", h2: "Somite muscle = somatic motor.", exp: "Tongue muscles come from OCCIPITAL SOMITES, so CN XII carries GENERAL SOMATIC EFFERENT (GSE) fibers — not branchial SVE." },
+  { id: 40, topic: "Tongue innervation", src: "Maini · L06", q: "General (touch) sensation from the anterior two-thirds of the tongue is carried by:", opts: ["CN VII (chorda tympani)", "CN IX (glossopharyngeal)", "CN XII (hypoglossal)", "The lingual branch of CN V3 (mandibular)"], a: 3, h1: "Matches the first arch.", h2: "The lingual branch of the mandibular nerve.", exp: "Touch (GSA) from the anterior 2/3 = the LINGUAL branch of CN V3 (first arch)." },
+  { id: 41, topic: "Tongue innervation", src: "Maini · L06", q: "TASTE (SVA) from the anterior two-thirds of the tongue is carried by:", opts: ["CN VII via the chorda tympani", "CN V3 (lingual)", "CN IX", "CN X"], a: 0, h1: "Second-arch cells built the front taste buds.", h2: "The nerve of the second arch, via a branch that rides the lingual nerve.", exp: "Taste from the anterior 2/3 = CN VII (facial) via the CHORDA TYMPANI — second-arch cells made those taste buds." },
+  { id: 42, topic: "Tongue innervation", src: "Maini · L06", q: "Both general sensation AND taste from the posterior one-third of the tongue are carried by:", opts: ["CN V3", "CN VII", "CN IX (glossopharyngeal)", "CN X"], a: 2, h1: "One nerve does both here.", h2: "The nerve of the third arch.", exp: "The posterior 1/3 carries BOTH GSA and SVA on CN IX (glossopharyngeal)." },
+  { id: 43, topic: "Tongue innervation", src: "Maini · L06", q: "Every tongue muscle is innervated by CN XII EXCEPT the ___, which is CN X.", opts: ["Genioglossus", "Hyoglossus", "Styloglossus", "Palatoglossus"], a: 3, h1: "The exception is really a palate muscle.", h2: "Its name starts with 'palato-'.", exp: "All tongue muscles are CN XII except the PALATOGLOSSUS, supplied by CN X (vagus) via the pharyngeal plexus." },
+  { id: 44, topic: "Salivary glands", src: "Maini · L06", q: "Which salivary gland appears FIRST in development?", opts: ["Submandibular", "Parotid", "Sublingual", "They appear simultaneously"], a: 1, h1: "All three appear around week 6.", h2: "The one in front of the ear is first.", exp: "The PAROTID appears first (early week 6); submandibular is late week 6; sublingual is last." },
+  { id: 45, topic: "Face & palate", src: "Maini · L06", q: "The medial nasal prominence forms the:", opts: ["Nasal septum", "Sides of the nose", "Upper lip", "Forehead"], a: 0, h1: "Medial = midline.", h2: "The central divider of the nose.", exp: "The MEDIAL nasal prominence forms the nasal SEPTUM (the lateral nasal prominence forms the sides of the nose)." },
+  { id: 46, topic: "Face & palate", src: "Maini · L06", q: "The intermaxillary segment gives rise to the philtrum, the four upper incisors, and the:", opts: ["Secondary palate", "Nasal septum", "Primary palate", "Lower lip"], a: 2, h1: "Formed by the fused medial nasal processes.", h2: "The front palate, not the back one.", exp: "The INTERMAXILLARY segment forms the philtrum, bridge of nose, four upper incisors, and the PRIMARY palate." },
+  { id: 47, topic: "Face & palate", src: "Maini · L06", q: "Secondary palate development usually completes by which week (critical period weeks 6-12)?", opts: ["Week 8", "Week 16", "Week 20", "Week 12"], a: 3, h1: "End of the critical period.", h2: "Twelve.", exp: "The secondary palate usually completes by WEEK 12; the critical period for face/palate is weeks 6-12." },
+  { id: 48, topic: "Congenital", src: "Maini · L06", q: "The correct term for tongue-tie (a short lingual frenulum) is:", opts: ["Macroglossia", "Ankyloglossia", "Glossoptosis", "Aglossia"], a: 1, h1: "Not the 'big tongue' term.", h2: "Starts with 'ankylo-'.", exp: "Tongue-tie = ANKYLOGLOSSIA (a shorter-than-normal lingual frenulum); macroglossia is the large tongue of cretinism." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.edge-note{font-size:12.5px;color:var(--ink-soft);margin:2px 0 8px;max-width:720px}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · The Neck, part 2 · Cervical Viscera + Development · Dr. Maini</span>
+          <h1 className="title serif">The <em>Neck</em>, part 2</h1>
+          <p className="subtitle">One-surface cram for Maini&apos;s cervical viscera and development block — the neck veins &amp; IJV, the thyroid (anatomy, vessels, function, hypo/hyper &amp; Graves), the parathyroids &amp; tetany, the trachea, then the development of the thyroid, tongue, tongue innervation, face &amp; palate — in her order, with a drill in her style and her own tips and analogies.</p>
+          <div className="pill-row">
+            <span className="pill-date">🩺 Cervical viscera + the pharyngeal apparatus · Lectures 5 &amp; 6</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA 0202 lectures — L05 (Blood Vessels of the Neck &amp; Cervical Viscera) and L06 (Cervical Viscera &amp; the Pharyngeal Apparatus). Grounded in the audited Everything-MC bank + transcripts; questions are original, in her style, source-tagged per item. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s Neck-2 essentials, in her order</div>
+        <p>Neck veins &amp; the IJV → thyroid anatomy &amp; relations → thyroid vessels &amp; function → hypo/hyper &amp; Graves → parathyroids &amp; tetany → trachea → thyroid development → tongue development → tongue innervation → salivary glands, face &amp; palate. The ⚑ flags are the high-yield hooks.</p>
+      </div>
+      {cram.map((c) => (
+        <div className="obj" key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Maini&apos;s teaching and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Maini&apos;s own mnemonics, analogies, and tricks pulled straight from the L05/L06 lectures — the retention hooks to lean on when a rule won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the neck viscera &amp; development</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 Gross Anatomy, running a review of THE NECK, PART 2 — the cervical viscera (L05: Blood Vessels of the Neck & Cervical Viscera) and development (L06: Cervical Viscera & the Pharyngeal Apparatus). Teach ONLY from this content; do not invent vessels, branches, nerves, arches, weeks, or values. Warm, direct, and Socratic: you call students "guys," constantly check "right?", "okay?", and "Are we clear?", you love clinical hooks and quick true/false traps, and you push students to reason instead of guessing. Keep answers tight (3-6 sentences) and quiz the student back.
+
+NECK VEINS & LYMPH: Subclavian vein = continuation of the axillary vein at the outer border of the first rib; it passes ANTERIOR to the anterior scalene, then joins the IJV to form the brachiocephalic vein (the two brachiocephalics form the SVC). Internal jugular vein = the main large vein of the head/neck, drains brain, face, and neck; it begins at the jugular foramen as the continuation of the SIGMOID sinus and descends in the carotid sheath. Carotid sheath contents = common carotid artery + IJV + vagus nerve ("three musketeers"). IJV tributaries: inferior petrosal sinus (the one sinus that drains into the IJV), common facial, lingual, pharyngeal, occipital, and superior + middle thyroid veins. External jugular = superficial, drains little. Lymph nodes in regional groups drain via right/left jugular trunks into the right lymphatic duct (right) / thoracic duct (left). Painful node = usually infection (better); painless, firm, fixed, matted node = worrisome (cancer/lymphoma).
+
+THYROID ANATOMY: two lobes + isthmus; inconstant pyramidal lobe (thyroglossal-duct remnant). Upper pole reaches the OBLIQUE LINE of the thyroid cartilage; lower pole the 4th/5th tracheal ring; ISTHMUS crosses the 2nd, 3rd, and 4th tracheal rings (a board question). Relations: anterolateral = infrahyoid strap muscles + anterior SCM; posterolateral = carotid sheath; medial = larynx/trachea + esophagus. Recurrent laryngeal nerve in the tracheoesophageal groove on the posterior surface -> posterior goiter causes HOARSENESS; anterior enlargement compresses the trachea (dyspnea).
+
+THYROID VESSELS & FUNCTION: superior thyroid artery = first branch of the EXTERNAL carotid; inferior thyroid artery = branch of the THYROCERVICAL TRUNK (subclavian). Veins: superior + middle thyroid -> IJV; INFERIOR thyroid vein -> brachiocephalic (different!). Follicles filled with COLLOID = source of T3/T4 (set BMR); parafollicular C cells secrete CALCITONIN (minor). Regulated by TSH (hypothalamus TRH -> pituitary TSH -> T3/T4, negative feedback); NOT nerve-controlled (sympathetics are only vasomotor).
+
+DISORDERS: HYPOthyroid = cold intolerance, weight gain, bradycardia, low RR, low temperature, lethargy ("sluggish like a sloth"); adult form with swelling = myxedema; children = cretinism (short, intellectual impairment, pot belly, large tongue). HYPERthyroid = heat intolerance, weight loss despite appetite, tachycardia, high RR, sweating, nervousness, tremor. Trap: which symptom in a HYPERthyroid patient = HEAT intolerance. GRAVES = autoimmune hyperthyroid; antibody TSI STIMULATES the gland (unusual) -> high T3/T4, LOW TSH, exophthalmos + non-pitting edema (same antibody).
+
+PARATHYROID & CALCIUM: 4 pea-sized glands on the POSTERIOR thyroid; supplied by superior + inferior thyroid arteries; regulated by blood calcium (not nerves). PTH RAISES calcium: leaches from bone, increases kidney reabsorption, activates vitamin D. Hypoparathyroidism (e.g., total thyroidectomy for carcinoma, autoimmune, ischemia) -> severe hypocalcemia -> tetany + carpopedal spasm. Signs: TROUSSEAU (BP cuff above systolic -> carpal spasm) and CHVOSTEK (tap the facial nerve -> facial twitch). Paradox: calcium is needed to contract, but LOW calcium destabilizes the SODIUM channels, so membranes get hyperexcitable and spasm. Normal Ca ~9-12 mg%; below 7 = tetany.
+
+TRACHEA: air tube of C-shaped (incomplete) cartilage rings bridged posteriorly by the TRACHEALIS muscle; incomplete so the esophagus behind can expand during swallowing. Runs from lower border of C6 to upper border of T5 (sternal angle of Louis) - superior mediastinum only. Anterior = strap muscles, thyroid isthmus (rings 2-4), brachiocephalic + inferior thyroid veins; posterior = esophagus with the recurrent laryngeal nerve in the tracheoesophageal groove; lateral = thyroid lobes + common carotids.
+
+THYROID DEVELOPMENT: the FIRST endocrine gland to develop; forms as an ENDODERMAL thickening in the FLOOR of the primordial pharynx (NO relation to the arches) - Maini's classic true/false item. Thyroid diverticulum descends tethered by the THYROGLOSSAL DUCT ("glossal" = tongue), passing close to the hyoid, settling anterior to the trachea; definitive shape/site by WEEK 7. Remnants: pyramidal lobe, accessory/cervical thyroid, thyroglossal duct cyst (midline, moves up with tongue protrusion/swallowing). Origin on the tongue = FORAMEN CECUM at the midpoint of the sulcus terminalis; "cecum" = blind (leads nowhere); it is a thyroglossal-duct remnant.
+
+TONGUE DEVELOPMENT: anterior 2/3 mucosa = 1st arch (tuberculum impar + two lateral lingual swellings that overgrow it; their fusion = the median sulcus). Posterior 1/3 = mainly 3rd (+4th) arch (copula from 2nd/3rd arch overgrown by the hypobranchial eminence from 3rd/4th arch; most posterior part from a 3rd median swelling of the 4th arch). Muscles = occipital somites (occipital myotomes) -> CN XII carrying GSE (general somatic efferent), NOT branchial SVE. Sulcus terminalis (V-groove) separates anterior 2/3 from posterior 1/3.
+
+TONGUE INNERVATION (the table): anterior 2/3 touch (GSA) = lingual branch of V3; anterior 2/3 taste (SVA) = CN VII via the chorda tympani (2nd-arch cells made the front taste buds); posterior 1/3 BOTH touch AND taste = CN IX; root/most posterior = CN X (internal laryngeal). Motor to ALL tongue muscles = CN XII EXCEPT palatoglossus = CN X. Clinical logic: touch lost but taste kept on the front = V3 out; taste lost but touch kept on the front = chorda tympani (VII) out.
+
+SALIVARY/FACE/PALATE: salivary glands appear in week 6 - PAROTID first, submandibular late week 6, SUBLINGUAL last. Face primordia early week 4: frontonasal -> forehead/dorsum/apex of nose; medial nasal -> nasal SEPTUM; lateral nasal -> sides of nose; maxillary -> upper cheek + most of the upper lip; mandibular -> chin/lower lip/lower cheek. Intermaxillary segment (fused medial nasal processes) -> philtrum, bridge of nose, 4 upper incisors, PRIMARY palate. Upper lip = maxillary fuse with medial nasal by end of week 6. Secondary palate: palatine shelves elevate as the tongue descends, fuse by WEEK 12; critical period weeks 6-12 (months 2-3). Anomalies: cleft lip/palate (unilateral/bilateral/median/oblique) -> feeding difficulty + URIs, repaired ~3-6 months; bifid uvula = harmless variant; tongue-tie = ANKYLOGLOSSIA (short frenulum); macroglossia = cretinism/hypothyroid; fissured tongue + papillae hypertrophy = Down syndrome.
+
+Open by offering to drill the thyroid vessels & venous drainage (the inferior-vein trap), hypo-vs-hyperthyroidism, the parathyroid/tetany signs, the thyroid/tongue development story, or the tongue innervation table. When the student is wrong, name the rule (or the arch) and have them re-derive step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys — the neck, part two. Two clusters to nail: the CERVICAL VISCERA (the thyroid's vessels, its venous drainage — remember the inferior thyroid vein drains differently — plus hypo-vs-hyperthyroidism and the parathyroid tetany signs), and DEVELOPMENT (the thyroid's descent down the thyroglossal duct, and the tongue's arches with its nerve table). Want me to drill the thyroid arteries & veins, hypo-vs-hyper (and the heat-vs-cold trap), the parathyroids and Trousseau/Chvostek, the thyroid & tongue development, or the tongue innervation table? Where do you want to start?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the thyroid arteries and venous drainage (the inferior-vein trap)",
+    "Quiz hypo- vs hyperthyroidism and the heat-vs-cold trap",
+    "The parathyroids, PTH, and the tetany signs (Trousseau/Chvostek)",
+    "Walk me through the thyroid's development and the foramen cecum",
+    "The tongue innervation table — which nerve does what?",
+    "Tongue development — the arches, swellings, and muscles",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her L05/L06 lectures. It quizzes you and makes you reason step by step (name the vein, the artery, or the arch) instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

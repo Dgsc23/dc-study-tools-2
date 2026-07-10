@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎯 GA 0202 · The Brain · Learning Objectives (Master the 16)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+.header .voices{color:#fde68a;font-size:12px;margin-top:10px;max-width:720px;margin-left:auto;margin-right:auto;background:rgba(0,0,0,0.18);border:1px solid rgba(245,158,11,0.35);border-radius:8px;padding:7px 12px}
+.header .voices b{color:#fcd34d}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.flag-note{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:9px 13px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0 2px}
+.flag-note b{color:#fca5a5}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+.tieit ul{margin:6px 0 8px 20px;color:#cbd5e1;font-size:12.5px}
+.tieit ul li{margin-bottom:4px}
+.tieit ul li b{color:#fde68a}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 Brain Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 16</h1>
+  <div class="sub">GA 0202 Module 07 &middot; <b>The Brain</b> &middot; the study spine that ties every drill back to what Dr. Maini actually drilled across her two brain lectures &mdash; cement each one, check it off, move on.</div>
+  <div class="meta-line">Dr. Maini &middot; The Brain (Lectures 16 &amp; 17) &middot; &#129504; SCUHS GA 0202</div>
+  <div class="voices">&#128266; Best voices in <b>Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for the brain block. Each objective below is built from <b>Dr. Maini&rsquo;s own two brain lectures</b> and grounded in this module&rsquo;s <b>audited Everything-MC bank</b>; every &ldquo;prove it&rdquo; bullet traces to her transcripts, cited as <b>[lecture &middot; time]</b>. Quotes are transcribed from her Zoom recordings; <span class="fix">[bracketed]</span> words are de-garbled spellings of what she said. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>Dr. Maini walks the brain in two long lectures &mdash; a sagittal / inferior / transverse tour of the cerebrum, then the brainstem, cranial-nerve attachments, ventricles, CSF, and blood supply. This page takes the <b>sixteen things she actually drilled</b> (the same sixteen topic-blocks the audited MC bank is built on), spells out <b>exactly what &ldquo;done&rdquo; looks like</b>, hangs a <b>verbatim Maini quote</b> on each, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: Dr. Maini&rsquo;s <b>The Brain</b> and <b>The Brain (contd.)</b> lecture recordings (SCUHS Canvas Zoom, Lectures 16&ndash;17), cross-checked against the module&rsquo;s audited Everything-MC bank.</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 16 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Organize the brain into its four major parts &mdash; what each does, and the order of the brainstem.</div>
+        <div class="obj-src">content: <b>L16 &middot; 01:33&ndash;04:48</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Cerebrum</b> &mdash; the <b>largest, executive part</b>; seat of the higher functions (personality, judgment, memory, motor, sensory). It&rsquo;s so large it <b>masks all underlying structures except the brainstem</b>. <span class="cite">(L16 01:33&ndash;02:28)</span></li>
+        <li><b>Diencephalon</b> &mdash; the <b>connecting part</b>, mostly ascending &amp; descending <b>pathways</b>; contains thalamus, hypothalamus, optic chiasma, pineal body. <span class="cite">(L16 02:40&ndash;03:32)</span></li>
+        <li><b>Cerebellum</b> &mdash; the &ldquo;small brain,&rdquo; the seat of <b>coordination</b> of movement. <span class="cite">(L16 03:32&ndash;04:11)</span></li>
+        <li><b>Brainstem</b>, superior &rarr; inferior = <b>midbrain &rarr; pons &rarr; medulla oblongata</b>, and the <b>medulla is continuous with the spinal cord</b>. <span class="cite">(L16 04:27&ndash;04:48)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Cerebrum is so large that it covers almost all the parts of the brain except for brain stem &hellip; the executive part of the brain &hellip; the seat of all your higher functions.&rdquo;<span class="cite">&mdash; The Brain &middot; ~00:01:43&ndash;00:02:05</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the four major parts of the brain, and give the brainstem&rsquo;s three parts from top to bottom.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Cerebrum</b> (largest, masks everything but the brainstem), <b>diencephalon</b> (connecting pathways), <b>cerebellum</b> (coordination), and <b>brainstem</b>. Brainstem top&rarr;bottom = <b>midbrain, pons, medulla oblongata</b>, and the medulla is continuous with the spinal cord.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the cortex&rsquo;s architecture &mdash; gray vs white matter, sulcus vs gyrus, and how the two hemispheres are joined.</div>
+        <div class="obj-src">content: <b>L16 &middot; 05:01&ndash;08:37</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>The <b>cerebral cortex is gray matter</b> (neuronal <b>cell bodies</b> at the periphery); the <b>interior is white matter</b> (<b>myelinated fibers</b> &mdash; that&rsquo;s what makes it look white). <span class="cite">(L16 07:36&ndash;08:37)</span></li>
+        <li><b>Sulcus / fissure = a groove; gyrus = a ridge.</b> A groove deeper than ~1 inch gets called a fissure, but the two words are used interchangeably. <span class="cite">(L16 06:23&ndash;07:02)</span></li>
+        <li>The <b>longitudinal fissure</b> divides the left from the right hemisphere, and the <b>falx cerebri</b> sits within it. <span class="cite">(L16 05:42&ndash;06:12)</span></li>
+        <li>The two hemispheres exchange information through the <b>corpus callosum</b>, a band of fibers running between them. <span class="cite">(L16 05:21&ndash;05:42; L17 Menti 01:31:18)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The gray matter &hellip; is located within the cerebral cortex &hellip; and then on the inside, you have white matter &hellip; cell bodies &hellip; towards the periphery, and then white matter is what? The fibers.&rdquo;<span class="cite">&mdash; The Brain &middot; ~00:07:41&ndash;00:08:17</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Where are neuronal cell bodies vs fibers in the cerebrum, and what fissure (and structure inside it) separates the hemispheres?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Cell bodies = <b>gray matter</b> in the peripheral <b>cortex</b>; myelinated fibers = <b>white matter</b> inside. The <b>longitudinal fissure</b> separates the hemispheres and holds the <b>falx cerebri</b>; the <b>corpus callosum</b> connects them. Sulcus/fissure = groove, gyrus = ridge.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">Divide each hemisphere into its five lobes &mdash; the boundaries between them, and the primary cortex each lobe carries.</div>
+        <div class="obj-src">content: <b>L16 &middot; 10:41&ndash;35:04 · L17 Menti</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>List the <b>five lobes</b>: frontal, parietal, temporal, occipital on the surface, and the <b>insula as the deep 5th lobe</b> (found by retracting the lateral fissure). <span class="cite">(L16 10:41&ndash;10:59, 34:30)</span></li>
+        <li>Give the boundaries: <b>central sulcus = frontal/parietal border</b>; <b>lateral sulcus</b> = temporal below vs frontal/parietal above; the <b>occipital lobe</b> is set off by a line from the <b>preoccipital notch to the superior end of the parieto-occipital sulcus</b>. <span class="cite">(L16 11:21&ndash;15:26)</span></li>
+        <li>Match lobe to primary cortex: <b>frontal = primary motor</b>, <b>parietal = primary sensory</b>, <b>occipital = primary visual</b>, <b>temporal = primary auditory (and olfactory)</b>, <b>insula = primary gustatory</b> (taste, plus emotion &amp; visceral sensation). <span class="cite">(L16 15:43&ndash;18:10, 34:43; L17 Menti)</span></li>
+        <li>Add the clinical note: the <b>prefrontal cortex</b> (reasoning/judgment) isn&rsquo;t fully developed until ~<b>25</b> &mdash; why teenagers lack that judgment. <span class="cite">(L16 15:57&ndash;16:28)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Each cerebral hemisphere is divided into 5 lobes &hellip; 4 lobes, they are seen on the surface. 5th lobe is lying deep &hellip; [insula] is a seat of gustatory cortex.&rdquo;<span class="cite">&mdash; The Brain &middot; ~00:10:41 / ~00:35:04</span></blockquote>
+      <div class="flag-note">&#9888;&#65039; <b>Maini&rsquo;s own quiz (Menti):</b> central sulcus &rarr; frontal/parietal; and &ldquo;primary <b>motor</b>/<b>sensory</b>/<b>visual</b>/<b>auditory</b>/<b>gustatory</b> cortex is located in&hellip;&rdquo; &rarr; frontal / parietal / occipital / temporal / insula. She drilled every one of these live.</div>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which sulcus separates frontal from parietal, and where is the primary auditory vs primary gustatory cortex?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>central sulcus</b> divides frontal from parietal. Primary <b>auditory</b> (and olfactory) cortex = <b>temporal lobe</b>; primary <b>gustatory</b> (taste) cortex = <b>insula</b>, the deep 5th lobe. Motor = frontal, sensory = parietal, visual = occipital.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the motor and sensory cortex &mdash; precentral vs postcentral gyrus, the homunculus, and the 2- vs 4-neuron pathways.</div>
+        <div class="obj-src">content: <b>L16 &middot; 18:45&ndash;26:55 · L17 &middot; 09:39</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>The <b>precentral gyrus</b> (just anterior to the central sulcus) = <b>primary motor cortex</b>; the <b>postcentral gyrus</b> (just posterior) = <b>primary sensory / somesthetic cortex</b> (general sensations only). <span class="cite">(L16 18:45&ndash;24:36)</span></li>
+        <li>Read the <b>homunculus</b>: areas needing fine control (face, hands) or with dense receptors get a <b>larger representation</b> than big, coarse muscles like the back. <span class="cite">(L16 22:42&ndash;26:10)</span></li>
+        <li>Motor is a <b>two-neuron pathway</b>: upper motor neuron in the primary motor cortex &rarr; corticospinal tract &rarr; lower (alpha) motor neuron in the <b>anterior/ventral horn</b>. <span class="cite">(L16 20:01&ndash;20:54)</span></li>
+        <li>Sensory is a <b>four-neuron pathway</b>: <b>ganglion &rarr; medulla &rarr; thalamus &rarr; postcentral gyrus</b>. Just anterior to the motor cortex is the <b>frontal eye field</b> for eye movements. <span class="cite">(L16 26:55; L17 09:39&ndash;10:24)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Motor pathway is just two neuron[s] &hellip; But sensory pathway is [a] four neuron pathway &hellip; second neuron is located in the medulla, third in the thalamus, and fourth in the postcentral gyrus.&rdquo;<span class="cite">&mdash; The Brain (contd.) &middot; ~00:09:39&ndash;00:10:24</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which gyrus is primary motor vs sensory, and how many neurons are in the motor vs sensory pathway (name the sensory relays)?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Precentral gyrus = motor, postcentral gyrus = sensory.</b> Motor = <b>2 neurons</b> (cortex &rarr; anterior-horn lower motor neuron via the corticospinal tract). Sensory = <b>4 neurons</b>: <b>ganglion &rarr; medulla &rarr; thalamus &rarr; postcentral gyrus</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">Name the prominent named gyri &mdash; the three parts of the inferior frontal gyrus, the temporal gyri, and the parietal supramarginal/angular gyri.</div>
+        <div class="obj-src">content: <b>L16 &middot; 27:32&ndash;33:44</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>The frontal lobe anterior to the motor cortex splits into <b>3 gyri by 2 sulci</b>: <b>superior, middle, inferior frontal gyri</b>, then the prefrontal cortex most anteriorly. <span class="cite">(L16 27:32&ndash;28:20)</span></li>
+        <li>The <b>inferior frontal gyrus</b> has three parts: <b>pars orbitalis, pars triangularis, pars opercularis</b> (&ldquo;pars&rdquo; = part; operculum = a lid). <span class="cite">(L16 28:52&ndash;30:02)</span></li>
+        <li>The <b>temporal lobe</b> = <b>superior, middle, inferior temporal gyri</b> (divided by superior &amp; inferior temporal sulci). <span class="cite">(L16 29:47&ndash;31:23)</span></li>
+        <li>The <b>parietal lobe</b>: the <b>intraparietal sulcus</b> divides superior &amp; inferior parietal lobules; the inferior lobule carries the <b>supramarginal gyrus</b> (wraps the end of the lateral fissure) and the <b>angular gyrus</b> (both language association areas). <span class="cite">(L16 31:28&ndash;33:44)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;[The] gyrus that surrounds the distal end [of] lateral fissure, that is called as supramarginal gyrus &hellip; and then we have another gyrus, which is angulated &hellip; this is called as angular gyrus.&rdquo;<span class="cite">&mdash; The Brain &middot; ~00:32:53&ndash;00:33:31</span></blockquote>
+      <div class="flag-note">&#9888;&#65039; <b>Maini flagged the scope:</b> &ldquo;I&rsquo;m not going to test you on the functions &hellip; I might test you on <b>which sulcus separates this from this</b> &hellip; <b>some prominent gyri</b>, not, like, everything.&rdquo; Learn the boundaries and the big-name gyri. <span class="cite">(L16 46:33)</span></div>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What are the three parts of the inferior frontal gyrus, and which parietal gyrus wraps the end of the lateral fissure?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Inferior frontal gyrus = <b>pars orbitalis, pars triangularis, pars opercularis</b>. The <b>supramarginal gyrus</b> surrounds the distal end of the lateral fissure (the <b>angular gyrus</b> sits just behind it). Temporal lobe = superior/middle/inferior gyri.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">Distinguish Broca&rsquo;s from Wernicke&rsquo;s area &mdash; location, function, and the aphasia each lesion produces.</div>
+        <div class="obj-src">content: <b>L16 &middot; 36:49&ndash;41:04</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Broca&rsquo;s area</b> = <b>frontal lobe</b>, the <b>motor / expressive</b> speech area (finds the words, spoken or written). <span class="cite">(L16 36:49&ndash;38:22)</span></li>
+        <li><b>Wernicke&rsquo;s area</b> = <b>posterior temporal lobe</b>, the <b>sensory</b> speech area for <b>comprehension</b> (understanding what&rsquo;s said or read). <span class="cite">(L16 37:09&ndash;38:31)</span></li>
+        <li><b>Broca&rsquo;s aphasia</b> (motor): patient is <b>short of words</b> but <b>comprehension is intact</b>. <span class="cite">(L16 40:00&ndash;41:04)</span></li>
+        <li><b>Wernicke&rsquo;s aphasia</b> (sensory): patient speaks fluently but it&rsquo;s <b>&ldquo;word salad&rdquo;</b> with <b>no comprehension</b> &mdash; nothing makes sense. <span class="cite">(L16 39:19&ndash;39:55)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Broca&rsquo;s area is motor speech area. And Wernicke&rsquo;s area is sensory speech area &hellip; sensory aphasia, they do not make sense of anything, they&rsquo;ll speak a lot &hellip; Broca&rsquo;s aphasia, they&rsquo;re short of words.&rdquo;<span class="cite">&mdash; The Brain &middot; ~00:38:22&ndash;00:41:01</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">A patient understands everything but is short of words &mdash; which area, which lobe, and what type of aphasia?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">That&rsquo;s <b>Broca&rsquo;s aphasia</b> (motor / expressive) &mdash; <b>Broca&rsquo;s area, frontal lobe</b>. Contrast Wernicke&rsquo;s aphasia (posterior temporal, sensory): fluent <b>word salad</b> with no comprehension.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Identify the basal nuclei and the three capsules &mdash; and why the internal capsule matters clinically.</div>
+        <div class="obj-src">content: <b>L16 &middot; 08:50&ndash;10:23, 01:19:48&ndash;01:27:12 · L17 Menti</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Define them: <b>basal nuclei</b> = islands of gray matter within the white matter (&ldquo;basal <b>nuclei</b>,&rdquo; not &ldquo;ganglia&rdquo; &mdash; a ganglion is cell bodies <b>outside</b> the CNS). The three: <b>caudate, putamen, globus pallidus</b>; <b>putamen + globus pallidus = lentiform</b>; all three = <b>corpus striatum</b>. <span class="cite">(L16 08:50&ndash;10:23)</span></li>
+        <li>Note the trap: the <b>thalamus is NOT a basal nucleus</b> (it&rsquo;s diencephalon); the <b>claustrum</b> is the thin strip of gray between the external &amp; extreme capsules. <span class="cite">(L16 01:20:07; L17 Menti 01:36:34)</span></li>
+        <li>Place the three capsules: <b>internal capsule</b> = the L-shaped white matter between <b>caudate/globus pallidus and thalamus</b>; <b>external capsule</b> = between putamen/lentiform and <b>claustrum</b>; <b>extreme capsule</b> = between claustrum and <b>insular gray</b>. <span class="cite">(L16 01:23:37&ndash;01:27:12; L17 Menti 01:35:40)</span></li>
+        <li>Explain why it matters: the <b>corticospinal tract runs through the internal capsule</b>, so a lesion/ischemia there causes <b>contralateral paralysis</b> (a very common stroke). A <b>resting tremor</b> points to basal-nuclear dysfunction (e.g. Parkinsonism). <span class="cite">(L16 01:24:04, 01:34:46)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Internal capsule is very important &hellip; corticospinal pathway, your motor tract &hellip; passes through internal capsule &hellip; if there is damage on the right side, there&rsquo;ll be paralysis on the left side of the body.&rdquo;<span class="cite">&mdash; The Brain &middot; ~01:24:04&ndash;01:25:32</span></blockquote>
+      <div class="flag-note">&#9888;&#65039; <b>Maini&rsquo;s own quiz (Menti):</b> &ldquo;Internal capsule is located between&hellip;&rdquo; &rarr; <b>caudate nucleus and globus pallidus</b>; and &ldquo;which is <b>not</b> a basal nucleus?&rdquo; &rarr; <b>thalamus</b>. (Putamen + claustrum = external; claustrum + insular gray = extreme.) <span class="cite">(L17 01:35:40&ndash;01:36:34)</span></div>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the three basal nuclei, say which structure is NOT one, and explain why an internal-capsule stroke paralyzes the opposite side.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Basal nuclei = <b>caudate, putamen, globus pallidus</b> (putamen+GP = lentiform; all three = corpus striatum). The <b>thalamus is NOT</b> one. The <b>corticospinal tract passes through the internal capsule</b> and its fibers <b>cross</b> in the medulla, so a lesion on one side paralyzes the <b>contralateral</b> body.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">Recognize the medial-surface landmarks and the limbic system &mdash; corpus callosum parts, septum pellucidum, the medial gyri, and the fornix.</div>
+        <div class="obj-src">content: <b>L16 &middot; 41:22&ndash;52:43, 01:16:16&ndash;01:18:15</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the ends of the <b>corpus callosum</b>: anterior = <b>rostrum</b>, posterior = <b>splenium</b>. <span class="cite">(L16 52:21&ndash;52:43)</span></li>
+        <li>Point to the <b>septum pellucidum</b> (thin membrane below the corpus callosum &mdash; scrape it and you enter the <b>lateral ventricle</b>). <span class="cite">(L16 48:46&ndash;49:15)</span></li>
+        <li>Read the medial gyri: <b>lingual gyrus</b> (named for its <b>shape</b>, nothing to do with the tongue), <b>cuneus</b> (between the <b>calcarine</b> and <b>parieto-occipital</b> sulci), precuneus, paracentral, cingulate. <span class="cite">(L16 44:19&ndash;46:09)</span></li>
+        <li>Assemble the <b>limbic system</b>: <b>fornix</b> plus the four ring structures &mdash; <b>uncus, parahippocampal gyrus, isthmus, cingulate gyrus</b> (the isthmus links parahippocampal to cingulate). <span class="cite">(L16 49:42, 01:17:08&ndash;01:18:15)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;[Uncus], parahippocampal gyrus, [isthmus], and cingulate gyrus &hellip; all four structures together, they form limbic cortex, limbic system &hellip; [the isthmus] connects parahippocampal gyrus with [cingulate] gyrus.&rdquo;<span class="cite">&mdash; The Brain &middot; ~01:17:08&ndash;01:18:15</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What are the anterior and posterior ends of the corpus callosum, and which four gyri (plus the fornix) make the limbic system?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Corpus callosum ends = <b>rostrum</b> (anterior) and <b>splenium</b> (posterior). Limbic system = <b>fornix</b> + <b>uncus, parahippocampal gyrus, isthmus, cingulate gyrus</b>. (Lingual gyrus is named for its shape; scraping the septum pellucidum opens the lateral ventricle.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the diencephalon &mdash; thalamus as the sensory relay, the hypothalamus, pineal, and the optic chiasma&ndash;pituitary relationship.</div>
+        <div class="obj-src">content: <b>L16 &middot; 50:03&ndash;57:36 · L17 &middot; 06:15&ndash;13:08</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Thalamus = the relay center</b> for sensory pathways heading to the cortex &mdash; the third neuron of the sensory pathway sits here. <b>Only smell (olfaction) bypasses the thalamus.</b> <span class="cite">(L16 50:03&ndash;51:28)</span></li>
+        <li>The two thalami are joined by the <b>interthalamic adhesion = massa intermedia = intermediate mass</b>. <span class="cite">(L16 51:46&ndash;52:10)</span></li>
+        <li><b>Hypothalamus</b> = the master of the <b>autonomic &amp; endocrine</b> system &mdash; the body&rsquo;s <b>thermostat</b>, plus thirst, hunger/satiety, sleep-wake, and pituitary control. <b>Pineal gland</b> secretes <b>melatonin</b> (sleep-wake cycle). <span class="cite">(L16 55:34&ndash;57:36; L17 11:00&ndash;12:00)</span></li>
+        <li>Note the <b>optic chiasma</b> (where the optic nerves cross) sits right by the <b>pituitary</b> &mdash; a pituitary tumor <b>compresses the chiasma</b>, giving visual field loss. (<b>Corpora arenacea</b> = normal pineal calcification after ~40.) <span class="cite">(L16 54:37&ndash;55:21; L17 13:08)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Your thalamus is your London Heathrow. This is where there is a halt, you leave one flight, and start next flight &hellip; [the] next neuron in the sensory pathway is located in the thalamus.&rdquo;<span class="cite">&mdash; The Brain &middot; ~00:50:11&ndash;00:50:39</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which sensation bypasses the thalamus, and why does a pituitary tumor cause visual loss?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The thalamus relays every sensation <b>except smell (olfaction)</b>. The <b>optic chiasma</b> sits right above the pituitary, so an enlarging pituitary tumor <b>compresses the chiasma</b> and causes visual field loss. Hypothalamus = autonomic/endocrine thermostat; pineal = melatonin.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Work through the internal brainstem &amp; midbrain &mdash; colliculi, the aqueduct/red nucleus/substantia nigra, the pyramids and their decussation, olive, and reticular formation.</div>
+        <div class="obj-src">content: <b>L16 &middot; 58:27&ndash;01:12:31 · L17 &middot; 15:02&ndash;41:36</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>The dorsal midbrain = <b>corpora quadrigemina</b> (4 bodies): <b>superior colliculi = visual</b>, <b>inferior colliculi = auditory</b>. <span class="cite">(L16 58:27; L17 34:39)</span></li>
+        <li>In cross-section the midbrain shows the <b>cerebral aqueduct</b> (surrounded by <b>periaqueductal gray</b>), the <b>red nucleus</b>, and the <b>substantia nigra sitting atop the red nucleus</b> (Maini&rsquo;s &ldquo;angry man&rdquo; face). Midbrain parts = peduncles, corpora quadrigemina, red nucleus, substantia nigra. <span class="cite">(L16 01:11:50&ndash;01:12:31; L17 41:25)</span></li>
+        <li>On the <b>medulla</b>: the anterior bulges are the <b>pyramids = corticospinal (pyramidal) tract</b>, which <b>cross at the pyramidal decussation</b> (why a lesion gives contralateral paralysis); the lateral bulge is the <b>olive</b>; the posterior medulla carries <b>nucleus gracilis &amp; cuneatus</b>. <span class="cite">(L17 17:35&ndash;20:00, 36:06)</span></li>
+        <li>Name the network: the <b>reticular formation</b> (in medulla + pons) = the <b>reticular activating system</b> that keeps you awake / alert. <span class="cite">(L17 37:45&ndash;41:11)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This is actually your corticospinal pathway going all the way from precentral gyrus to the spinal cord &hellip; what are these bulges called? Pyramid[s]. That is why corticospinal pathway is also called as [a] pyramidal tract.&rdquo;<span class="cite">&mdash; The Brain (contd.) &middot; ~00:17:35&ndash;00:17:58</span></blockquote>
+      <div class="flag-note">&#9888;&#65039; <b>Maini&rsquo;s own quiz (Menti):</b> &ldquo;<b>Red nucleus</b> is located within which part of the brain?&rdquo; &rarr; <b>midbrain</b>; and &ldquo;which structure <b>passes through the midbrain</b>?&rdquo; &rarr; <b>cerebral aqueduct</b>. <span class="cite">(L17 01:33:23&ndash;01:33:48)</span></div>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What do the pyramids contain and where do they cross, and which colliculi are visual vs auditory?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>pyramids</b> carry the <b>corticospinal (pyramidal) tract</b> and cross at the <b>pyramidal decussation</b> in the lower medulla. In the corpora quadrigemina, <b>superior colliculi = visual</b>, <b>inferior colliculi = auditory</b>. (Red nucleus, substantia nigra, aqueduct, periaqueductal gray = midbrain.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Locate where each cranial nerve attaches to the brainstem &mdash; the emergence point for CN I&ndash;XII.</div>
+        <div class="obj-src">content: <b>L17 &middot; 21:30&ndash;33:52, 01:09:07</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>CN I</b> = olfactory tract/bulb; <b>CN II</b> = optic (at the optic chiasma). <span class="cite">(L17 22:11&ndash;23:55)</span></li>
+        <li><b>CN III</b> emerges from the <b>interpeduncular fossa</b>; <b>CN IV</b> is the <b>only nerve from the dorsal brainstem</b> (below the inferior colliculus). <span class="cite">(L17 24:53&ndash;25:27)</span></li>
+        <li><b>CN V</b> from the <b>side of the pons</b> (thick sensory + thin motor to mastication + tensor tympani/veli palatini, mylohyoid, anterior digastric); <b>CN VI</b> from the <b>pontomedullary sulcus</b> (lateral rectus). <span class="cite">(L17 27:33&ndash;29:03)</span></li>
+        <li><b>CN VII &amp; VIII</b> lateral to CN VI (VII &amp; VIII + labyrinthine artery run through the <b>internal acoustic meatus</b>); <b>CN IX/X/XI</b> from the <b>post-olivary sulcus</b> &rarr; jugular foramen (&ldquo;3 close friends&rdquo;); <b>CN XII</b> from the <b>pre-olivary sulcus</b> (motor to the tongue). <span class="cite">(L17 29:03&ndash;31:57, 01:09:07)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;If there is a question in your quiz that says, third nerve emerges from which one of the following part of the brain &mdash; it is interpeduncular fossa.&rdquo;<span class="cite">&mdash; The Brain (contd.) &middot; ~00:24:53&ndash;00:25:03</span></blockquote>
+      <div class="flag-note">&#9888;&#65039; <b>Maini flagged this hard:</b> &ldquo;you&rsquo;ll be asked questions on this &hellip; there&rsquo;s every hope that you&rsquo;ll be asked these.&rdquo; The cranial-nerve attachment points are high-yield. <span class="cite">(L17 33:52&ndash;34:07)</span></div>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Where do CN III, CN IV, and CN VI emerge, and which cranial nerve is the only one off the dorsal brainstem?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>CN III = interpeduncular fossa</b>; <b>CN VI = pontomedullary sulcus</b>; <b>CN IV</b> is the <b>only nerve from the dorsal (posterior) brainstem</b> (below the inferior colliculus). CN V = side of pons; IX/X/XI = post-olivary; XII = pre-olivary.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the cerebellum &mdash; arbor vitae, vermis, folia, its plan-vs-performed function, and the signs of a cerebellar lesion.</div>
+        <div class="obj-src">content: <b>L16 &middot; 59:42&ndash;01:00:02, 01:28:34&ndash;01:34:41</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the structure: the branching gray/white pattern = <b>arbor vitae</b> (&ldquo;tree of life&rdquo;); the <b>vermis</b> connects the two cerebellar hemispheres; its folds are <b>folia</b> (&ldquo;leaves&rdquo;). <span class="cite">(L16 59:42, 01:28:49&ndash;01:30:52)</span></li>
+        <li>State the function: the cerebellum <b>coordinates</b> movement by <b>comparing the planned movement with the performed movement</b> (via spinocerebellar feedback) and refining it &mdash; it decides <b>when to stop</b>. <span class="cite">(L16 01:32:03&ndash;01:33:28)</span></li>
+        <li>List the lesion signs: <b>intention tremor</b> (the hallmark), <b>finger-nose overshoot</b>, <b>dysarthria</b>, and <b>hypotonia</b>. <span class="cite">(L16 01:33:32&ndash;01:34:41)</span></li>
+        <li>Contrast the tremors: <b>intention tremor = cerebellar</b>; <b>resting tremor = basal-nuclear</b> dysfunction. <span class="cite">(L16 01:34:36&ndash;01:34:51)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Your cerebellum compares the &hellip; planned with the performed activity, and makes the movement better next time &hellip; intentional tremor is a hallmark of cerebellar dysfunction.&rdquo;<span class="cite">&mdash; The Brain &middot; ~01:32:38&ndash;01:34:41</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What is the cerebellum&rsquo;s core job, and which tremor is its hallmark vs the basal nuclei&rsquo;s?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The cerebellum <b>coordinates</b> movement by <b>comparing planned vs performed</b> action and refining it. Its hallmark is an <b>intention tremor</b> (plus finger-nose overshoot, dysarthria, hypotonia); a <b>resting tremor</b> instead points to <b>basal-nuclear</b> dysfunction. (Arbor vitae, vermis, folia.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 13 ===================== -->
+  <div class="lo" id="lo13">
+    <div class="lo-head">
+      <div class="lo-num">13</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace the ventricular system and the flow of CSF &mdash; from choroid plexus to the superior sagittal sinus.</div>
+        <div class="obj-src">content: <b>L17 &middot; 42:29&ndash;56:39</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo13"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the ventricles: two <b>lateral ventricles</b> (anterior horn in the frontal lobe, posterior horn in the occipital, inferior horn in the temporal); a slit-like <b>third ventricle</b> between the thalami; a diamond-shaped <b>fourth ventricle</b> (pons/medulla in front, cerebellum behind). <span class="cite">(L17 43:07&ndash;44:01)</span></li>
+        <li>Link them: <b>interventricular foramen</b> (lateral &rarr; 3rd), <b>cerebral aqueduct</b> (3rd &rarr; 4th, through the midbrain), then out of the 4th via <b>two foramina of Luschka (lateral) + one foramen of Magendie (median)</b>. <span class="cite">(L17 44:10&ndash;46:08)</span></li>
+        <li>Say the source &amp; sink: <b>choroid plexus secretes CSF</b> in each ventricle; <b>arachnoid granulations absorb it into the superior sagittal sinus</b>. <span class="cite">(L17 02:48, 50:00)</span></li>
+        <li>Recite the full path: <b>lateral &rarr; IVF &rarr; 3rd &rarr; aqueduct &rarr; 4th &rarr; subarachnoid space &rarr; arachnoid granulations &rarr; superior sagittal sinus</b>; a blockage (e.g. meningitis) raises intracranial pressure / causes hydrocephalus. <span class="cite">(L17 55:37, 51:57)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Lateral ventricles, interventricular foramina, third ventricle, cerebral aqueduct, fourth ventricle, foramina of [Luschka] and [Magendie], subarachnoid space, arachnoid granulations, and then &hellip; superior sagittal sinus.&rdquo;<span class="cite">&mdash; The Brain (contd.) &middot; ~00:55:37&ndash;00:56:39</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What secretes CSF, what absorbs it (into which sinus), and how many exits does the 4th ventricle have?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Choroid plexus</b> secretes CSF; <b>arachnoid granulations</b> absorb it into the <b>superior sagittal sinus</b>. The 4th ventricle has <b>three exits</b>: two foramina of <b>Luschka</b> (lateral) + one foramen of <b>Magendie</b> (median). Path: lateral &rarr; IVF &rarr; 3rd &rarr; aqueduct &rarr; 4th &rarr; subarachnoid &rarr; granulations &rarr; SSS.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 14 ===================== -->
+  <div class="lo" id="lo14">
+    <div class="lo-head">
+      <div class="lo-num">14</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the brain&rsquo;s blood supply and the Circle of Willis &mdash; the two systems, the ICA/vertebral branches, the cortical territories, and why the circle exists.</div>
+        <div class="obj-src">content: <b>L17 &middot; 57:42&ndash;01:14:02</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo14"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the dual supply: <b>internal carotid arteries</b> (anterior) + <b>vertebral arteries</b> (posterior). The brain is ~<b>2% of body weight</b> but takes ~<b>15% of cardiac output</b>. <span class="cite">(L17 57:42&ndash;58:29)</span></li>
+        <li><b>ICA</b> has 4 parts (cervical, petrous, cavernous, cerebral), gives the ophthalmic artery, and ends as the <b>anterior cerebral (ACA)</b> + <b>middle cerebral (MCA)</b> arteries. <b>ACA = medial</b> surface of frontal &amp; parietal lobes; <b>MCA = lateral</b> cortex + insula (the commonest stroke artery). <span class="cite">(L17 58:46&ndash;01:04:39)</span></li>
+        <li>Follow the posterior system: the <b>two vertebrals unite into the basilar artery</b>, which ends as <b>two posterior cerebral arteries (PCA)</b>; the vertebral is a branch of the <b>subclavian</b>. So the <b>occipital lobe&rsquo;s blood ultimately comes from the vertebral arteries</b>. <span class="cite">(L17 01:06:46&ndash;01:11:39)</span></li>
+        <li>Build the <b>Circle of Willis</b>: PCA + posterior communicating + ICA + ACA + anterior communicating, ringing the optic chiasma / infundibulum / mammillary bodies &mdash; it provides an <b>alternate (collateral) supply</b> if one artery blocks. (Dr. Bowie calls it the &ldquo;Alien Man.&rdquo;) <span class="cite">(L17 01:12:05&ndash;01:14:02)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Two vertebral arteries uniting together to form basilar, and then basilar artery dividing again to form posterior cerebral arteries.&rdquo;<span class="cite">&mdash; The Brain (contd.) &middot; ~01:08:07</span></blockquote>
+      <div class="flag-note">&#9888;&#65039; <b>Maini flagged this for the quiz:</b> &ldquo;which artery supplies the <b>medial</b> vs <b>lateral</b> side &hellip; this is a very important part as far as the quizzes are concerned&rdquo; (ACA = medial, MCA = lateral). And a board-style item: <b>occipital lobe</b> supply &rarr; trace it back to the <b>vertebral arteries</b>. <span class="cite">(L17 01:02:53, 01:11:05)</span></div>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">ACA vs MCA territory, what do the two vertebrals form, and what is the Circle of Willis for?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>ACA = medial</b> frontal/parietal; <b>MCA = lateral</b> cortex + insula (commonest stroke). The two <b>vertebrals unite into the basilar</b>, which splits into the <b>two PCAs</b>. The <b>Circle of Willis</b> gives a <b>collateral/alternate supply</b> if one feeding artery is blocked.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 15 ===================== -->
+  <div class="lo" id="lo15">
+    <div class="lo-head">
+      <div class="lo-num">15</div>
+      <div class="lo-obj">
+        <div class="obj-text">Apply the clinical considerations &mdash; the three cranial hemorrhages, venous drainage, and the valveless cerebral veins.</div>
+        <div class="obj-src">content: <b>L17 &middot; 01:15:08&ndash;01:20:31</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo15"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Epidural hematoma</b> = <b>arterial</b>, from the <b>middle meningeal artery</b> (blow to the <b>pterion</b> / temporal region); develops <b>fast</b>. <span class="cite">(L17 01:16:49&ndash;01:18:01)</span></li>
+        <li><b>Subdural hematoma</b> = <b>venous</b>, from torn <b>bridging veins</b> (common in the <b>elderly</b> with brain atrophy); develops <b>slowly</b> (days to weeks to months). <span class="cite">(L17 01:18:07&ndash;01:19:03)</span></li>
+        <li><b>Subarachnoid hemorrhage</b> = mostly <b>arterial</b>, often from a ruptured <b>aneurysm</b>; can block arachnoid granulations and raise ICP. <span class="cite">(L17 01:19:40&ndash;01:19:57)</span></li>
+        <li>Trace venous drainage: cerebral veins are <b>valveless</b> (low / negative pressure); everything funnels to the dural venous sinuses, and the <b>sigmoid sinus becomes the internal jugular vein</b> at the jugular foramen. A cavernous-sinus ICA rupture gives <b>pulsatile exophthalmos</b>. <span class="cite">(L17 01:15:08, 01:16:00, 01:20:07)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;[Blow] to the [pterion], leading to rupture of middle meningeal artery &hellip; epidural hemorrhages &mdash; these are arterial hemorrhages &hellip; subdural hematoma is venous.&rdquo;<span class="cite">&mdash; The Brain (contd.) &middot; ~01:17:31&ndash;01:18:07</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Match each hemorrhage to its vessel and speed, and name what the sigmoid sinus becomes.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Epidural</b> = arterial (middle meningeal, pterion), fast. <b>Subdural</b> = venous (bridging veins, elderly), slow. <b>Subarachnoid</b> = arterial (aneurysm rupture). The <b>sigmoid sinus becomes the internal jugular vein</b> at the jugular foramen; cerebral veins are valveless.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 16 ===================== -->
+  <div class="lo" id="lo16">
+    <div class="lo-head">
+      <div class="lo-num">16</div>
+      <div class="lo-obj">
+        <div class="obj-text">Outline brain development &mdash; the neural tube and what each primary vesicle becomes.</div>
+        <div class="obj-src">content: <b>L17 &middot; 01:20:50&ndash;01:22:03</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo16"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>The <b>neural tube</b> forms from <b>ectoderm</b> (the top layer folds into a tube) and gives rise to the whole CNS &mdash; brain + spinal cord. <span class="cite">(L17 01:20:58&ndash;01:21:28)</span></li>
+        <li><b>Forebrain</b> &rarr; <b>telencephalon</b> (cerebral hemispheres) + <b>diencephalon</b> (thalami, hypothalamus, infundibulum, pineal, mammillary bodies). <span class="cite">(L17 01:21:35&ndash;01:21:51)</span></li>
+        <li><b>Midbrain (mesencephalon)</b> &rarr; midbrain. <span class="cite">(L17 01:21:51&ndash;01:21:55)</span></li>
+        <li>Hindbrain: <b>metencephalon &rarr; pons + cerebellum</b>; <b>myelencephalon &rarr; medulla</b> (and spinal cord). <span class="cite">(L17 01:21:55&ndash;01:22:03)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Telencephalon gives rise to cerebral hemispheres, diencephalon will give rise to thalami, hypothalamus, infundibulum, pineal gland, mammillary bodies &hellip; metencephalon &hellip; will form pons and cerebellum &hellip; myelencephalon will form spinal cord and medulla.&rdquo;<span class="cite">&mdash; The Brain (contd.) &middot; ~01:21:35&ndash;01:22:03</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Brain Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The neural tube comes from which germ layer, and what do the metencephalon and myelencephalon become?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The neural tube forms from <b>ectoderm</b>. <b>Metencephalon &rarr; pons + cerebellum</b>; <b>myelencephalon &rarr; medulla</b> (+ spinal cord). Forebrain: telencephalon &rarr; hemispheres, diencephalon &rarr; thalamus/hypothalamus/pineal, etc.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 16 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>GA 0202 Brain Hub</b> and drill exactly that topic.</p>
+    <p><b>3.</b> Dr. Maini ended Lecture 17 with a live <b>Menti quiz</b> &mdash; treat those as her own answer key. She literally asked:</p>
+    <ul>
+      <li>Which sulcus separates frontal from parietal? &rarr; <b>central sulcus</b></li>
+      <li>Primary <b>motor / sensory / visual / auditory / gustatory</b> cortex is in? &rarr; <b>frontal / parietal / occipital / temporal / insula</b></li>
+      <li>Band connecting the two hemispheres? &rarr; <b>corpus callosum</b></li>
+      <li><b>Red nucleus</b> is in which part? &rarr; <b>midbrain</b>; what passes through the midbrain? &rarr; <b>cerebral aqueduct</b></li>
+      <li><b>Internal capsule</b> is between? &rarr; <b>caudate nucleus &amp; globus pallidus</b>; which is <b>not</b> a basal nucleus? &rarr; <b>thalamus</b></li>
+    </ul>
+    <div class="flag"><b>&#9888;&#65039; Watch the &ldquo;not ganglia&rdquo; and &ldquo;opposite side&rdquo; traps.</b> It&rsquo;s basal <b>nuclei</b>, not ganglia (a ganglion is cell bodies <i>outside</i> the CNS), and the <b>thalamus is diencephalon, not a basal nucleus</b>. Because the corticospinal fibers <b>cross</b> (pyramidal decussation), a lesion of the internal capsule or motor cortex on one side paralyzes the <b>opposite</b> side of the body.</div>
+    <p style="margin-top:6px">When all 16 boxes are ticked, you own Dr. Maini&rsquo;s objective list for <b>The Brain</b> &mdash; the spine of the GA 0202 Module 07 material.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 07 (The Brain) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from Dr. Maini&rsquo;s lecture recordings (The Brain, Lectures 16&ndash;17) &amp; the audited Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m07_brain_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 Gross Anatomy — The Brain — Dr. Maini
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Module 07 (The Brain) learning objectives, the way Dr. Maini taught it.' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 16 brain learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy for the thalamus relay, the CSF pathway, or the basal-nuclei capsules.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the brain module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 Gross Anatomy with Dr. Maini at SCUHS (Module 07 — The Brain). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

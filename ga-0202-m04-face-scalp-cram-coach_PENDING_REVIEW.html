@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · Face &amp; Scalp — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 4 — FACE & SCALP
+   Dr. Seema Maini. Cram Coach. PENDING REVIEW.
+   Built ONLY from Dr. Maini's GA lectures (L07 Face & Scalp, L08 Face & Scalp-2)
+   and this module's AUDITED Everything-MC bank (anti-fab verified).
+   Voiced, hands-free walkthrough via Web Speech. No new unverified facts.
+   THEME: violet (cloned engine). Correct keys taught plainly; positions balanced.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (12 TOPICS) ==== */
+const cram = [
+  {
+    n: 1, title: "The scalp — the five layers (SCALP)", src: "Maini · L07 Scalp",
+    facts: [
+      "The scalp has FIVE layers, in order spelled by SCALP: Skin (with hair), Connective tissue (the dense, fibro-fatty subcutaneous layer that carries the vessels and nerves), Aponeurosis (the epicranial aponeurosis / galea aponeurotica, formed with occipitofrontalis), Loose areolar connective tissue, and Pericranium (the periosteum of the skull bones).",
+      "The outer THREE — Skin, Connective tissue, Aponeurosis — are bound so tightly they move as ONE unit; that single sheet is what is torn off in a 'scalping' avulsion.",
+      "The 4th layer, LOOSE AREOLAR connective tissue, is the 'danger area of the scalp': it is loosely arranged with abundant potential space, so pus (folliculitis / furunculosis), blood (haematoma), and infection collect and spread easily there — and it is the plane the outer three layers separate along.",
+      "The scalp proper runs from the SUPERIOR NUCHAL LINES posteriorly to the SUPRAORBITAL MARGINS anteriorly.",
+    ],
+    flag: "SCALP = Skin, Connective tissue, Aponeurosis (galea), Loose areolar, Pericranium. Outer 3 move as one. LOOSE AREOLAR = the danger / spread / scalping layer. The aponeurosis is the TENDON layer, NOT where infection spreads (Maini's #1 trap answer).",
+  },
+  {
+    n: 2, title: "Why the scalp bleeds — arteries, wounds, veins", src: "Maini · L07 Scalp",
+    facts: [
+      "The scalp is HIGHLY vascular, so even a tiny cut bleeds a lot. Anteriorly the SUPRATROCHLEAR and SUPRAORBITAL arteries come from the OPHTHALMIC artery, a branch of the INTERNAL carotid; the SUPERFICIAL TEMPORAL, POSTERIOR AURICULAR, and OCCIPITAL arteries are branches of the EXTERNAL carotid.",
+      "Scalp cuts bleed PROFUSELY because of rich ANASTOMOSIS: a scalp vessel bleeds from BOTH cut ends (unlike a limb, where only the proximal end bleeds). That same rich supply is why scalp wounds HEAL very well.",
+      "A laceration running SIDE TO SIDE (transverse) GAPES widely, because the galea's fibres run LONGITUDINALLY (along the sagittal suture) and pull the wound edges apart; a wound running ALONG the fibres heals better.",
+      "Venous drainage: the supratrochlear + supraorbital veins go to the FACIAL vein; the SUPERFICIAL TEMPORAL vein joins the MAXILLARY vein to form the RETROMANDIBULAR vein. All ultimately reach the INTERNAL JUGULAR vein.",
+    ],
+    flag: "Anterior scalp arteries = ICA (via ophthalmic); posterior / lateral = ECA (superficial temporal, posterior auricular, occipital). Bleeds from BOTH ends (anastomosis) and heals well. A transverse wound gapes because the galea fibres run longitudinally.",
+  },
+  {
+    n: 3, title: "Scalp sensory nerves — trigeminal in front, occipital behind", src: "Maini · L07 Scalp",
+    facts: [
+      "Sensation for MOST of the face and scalp is the TRIGEMINAL nerve (CN V) — Maini's 'sensory nerve of the head and neck.'",
+      "Anterior / lateral scalp splits by trigeminal division: supratrochlear + supraorbital = V1 (ophthalmic); zygomaticotemporal = V2 (maxillary); auriculotemporal = V3 (mandibular).",
+      "Posterior scalp: the LESSER OCCIPITAL nerve (C2-C3, from the CERVICAL PLEXUS — ventral rami) supplies the posterolateral scalp; the GREATER OCCIPITAL and THIRD OCCIPITAL nerves (DORSAL rami of C2-C3) supply the midline back of the scalp.",
+    ],
+    flag: "Front & sides of scalp = trigeminal (V1 supratrochlear / supraorbital, V2 zygomaticotemporal, V3 auriculotemporal). Back = lesser occipital (C2-C3 cervical plexus, VENTRAL rami) laterally; greater + third occipital (DORSAL rami C2-C3) in the midline.",
+  },
+  {
+    n: 4, title: "Muscles of facial expression — the general rules", src: "Maini · L07/L08 Face",
+    facts: [
+      "The ONE thing common to ALL muscles of facial expression: they are innervated by the FACIAL nerve (CN VII). Maini: group them by that and studying gets much easier.",
+      "They develop from the SECOND pharyngeal (branchial) arch, they lie in the SUPERFICIAL FASCIA, and they INSERT into the SKIN of the face — which is why they move the skin. The facial nerve carries SVE (special visceral efferent / branchial motor) fibres to them.",
+      "Around orifices they act as SPHINCTERS (orbicularis oculi closes the eye, orbicularis oris closes the mouth, nasalis works the nostrils); everywhere else they produce facial EXPRESSION.",
+      "BOTOX (from Clostridium botulinum) softens wrinkles by BLOCKING neuromuscular transmission — it blocks the receptor where acetylcholine would bind, so the muscle is paralyzed.",
+    ],
+    flag: "ALL facial-expression muscles = CN VII (facial), SVE fibres, from the 2nd pharyngeal arch, insert into SKIN. Botox = blocks the ACh neuromuscular junction. Levator palpebrae superioris (which OPENS the eye) is the exception — CN III, and NOT a facial muscle.",
+  },
+  {
+    n: 5, title: "Specific muscles — forehead, eye, nose", src: "Maini · L07/L08 Face",
+    facts: [
+      "OCCIPITOFRONTALIS: the FRONTAL belly raises the eyebrows and makes HORIZONTAL forehead wrinkles (the 'surprised' look); the OCCIPITAL belly arises from the LATERAL two-thirds of the superior nuchal line. The galea joins the two bellies.",
+      "CORRUGATOR SUPERCILII draws the eyebrows medially to make VERTICAL frown wrinkles. PROCERUS (arises from the NASAL bone, zygomatic branch) pulls the medial eyebrow down and wrinkles the bridge of the nose.",
+      "ORBICULARIS OCULI is the SPHINCTER that CLOSES the eye and blinks to spread the tear film. The muscle that OPENS the eye is LEVATOR PALPEBRAE SUPERIORIS — CN III, and NOT a muscle of facial expression.",
+      "NASALIS has two parts: compressor naris (compresses) and dilator naris (flares the nostril). LEVATOR LABII SUPERIORIS ALAEQUE NASI has TWO actions named in it: elevate the upper lip AND flare (dilate) the nostril.",
+    ],
+    flag: "Frontal belly = HORIZONTAL wrinkle (surprise). Corrugator supercilii = VERTICAL wrinkle (frown). Orbicularis oculi CLOSES the eye; LPS (CN III) OPENS it and is NOT a facial muscle. Procerus arises from the nasal bone.",
+  },
+  {
+    n: 6, title: "Specific muscles — around the mouth", src: "Maini · L08 Face",
+    facts: [
+      "ORBICULARIS ORIS is the SPHINCTER of the mouth — it CLOSES / compresses the lips (whistle, pout). It is the ONLY muscle that closes the oral fissure; the rest are dilators.",
+      "BUCCINATOR (the 'TRUMPETER'S muscle') presses the cheek against the teeth for chewing and blowing; it arises from the ALVEOLAR MARGINS of the maxilla & mandible and the PTERYGOMANDIBULAR RAPHE, and it is PIERCED BY THE PAROTID DUCT. If it is paralyzed, food pools in the cheek and saliva DROOLS from the corner of the mouth.",
+      "Smile / dilator muscles: ZYGOMATICUS MAJOR pulls the angle of the mouth UP and LATERALLY (the main smile); RISORIUS is the horizontal 'GRIN' muscle; levator and depressor anguli oris raise and lower the angle; MENTALIS puckers the CHIN (the 'thinking' chin).",
+      "PLATYSMA is the ONLY muscle of facial expression in the NECK.",
+    ],
+    flag: "Orbicularis oris = the one CLOSER of the mouth. Buccinator = trumpeter's muscle, PIERCED by the parotid duct, origin includes the pterygomandibular raphe; paralysis gives cheek-pouching and drooling. Zygomaticus major = smile (up + lateral). Platysma = the only facial muscle in the neck.",
+  },
+  {
+    n: 7, title: "Facial nerve — the 5 motor branches", src: "Maini · L08 Facial N.",
+    facts: [
+      "The facial nerve EXITS the skull at the STYLOMASTOID FORAMEN, then runs INTO the PAROTID gland and forms the parotid plexus, giving off its terminal motor branches.",
+      "Maini's mnemonic 'To Zanzibar By Motor Car' (she says it as 'To Zambia by motor car'): Temporal, Zygomatic, Buccal, Marginal mandibular, Cervical.",
+      "CERVICAL branch supplies PLATYSMA — Maini's most-commonly-missed question. TEMPORAL branch supplies the frontal belly, orbicularis oculi, corrugator, and anterior / superior auricular muscles — but NOT mentalis (her 'which is NOT supplied' trap: mentalis is far away, down at the chin). BUCCAL branch supplies buccinator.",
+      "Two extra proximal branches: the POSTERIOR AURICULAR branch (occipital belly + auricular muscles) and the branch to the POSTERIOR BELLY OF DIGASTRIC and STYLOHYOID.",
+    ],
+    flag: "Facial nerve exits the STYLOMASTOID foramen then forms the parotid plexus. 'To Zanzibar By Motor Car' = Temporal, Zygomatic, Buccal, Marginal mandibular, Cervical. Cervical branch = PLATYSMA (most-missed). The temporal branch does NOT supply mentalis.",
+  },
+  {
+    n: 8, title: "Facial nerve — intracranial course & branches", src: "Maini · L08 Facial N.",
+    facts: [
+      "The facial nerve enters via the INTERNAL ACOUSTIC MEATUS; at its bend (the 'genu') sits the GENICULATE GANGLION — named for the genu.",
+      "At the geniculate ganglion it gives the GREATER PETROSAL nerve (PREganglionic PARAsympathetic). This is joined by the DEEP PETROSAL nerve (POSTganglionic SYMPATHETIC, from the internal carotid plexus) to form the NERVE OF THE PTERYGOID CANAL, which relays in the PTERYGOPALATINE ganglion and then travels on V2 branches to the LACRIMAL, NASAL, and PALATINE glands.",
+      "In the FACIAL CANAL it gives the NERVE TO STAPEDIUS (paralysis causes HYPERACUSIS) and the CHORDA TYMPANI — which carries TASTE from the anterior two-thirds of the tongue AND preganglionic parasympathetic fibres to the SUBMANDIBULAR ganglion (for the submandibular & sublingual glands). Chorda tympani leaves via the PETROTYMPANIC fissure.",
+      "Three parasympathetic ganglia are introduced here: OTIC, PTERYGOPALATINE, and SUBMANDIBULAR.",
+    ],
+    flag: "IAM, then geniculate ganglion, then greater petrosal (pre-gang PARAsym) + deep petrosal (post-gang SYM) = nerve of pterygoid canal, then pterygopalatine ganglion, then lacrimal / nasal / palatine glands on V2. Facial canal: nerve to stapedius (paralysis = HYPERACUSIS) + chorda tympani (taste ant 2/3 tongue + parasympathetic to submandibular ganglion). 3 ganglia: otic, pterygopalatine, submandibular.",
+  },
+  {
+    n: 9, title: "Facial nerve lesions & clinical signs", src: "Maini · L08 Facial N.",
+    facts: [
+      "BELL'S PALSY = idiopathic LOWER-motor-neuron facial paralysis, often after cold exposure (Maini had it herself in med school). LMN signs on the affected side: LOSS of forehead wrinkling, INABILITY to close the eye, loss of the NASOLABIAL fold, and a smile that DEVIATES to the NORMAL side.",
+      "Orbicularis oculi paralysis cascade: loss of blinking gives XEROPHTHALMIA (dry eye), then corneal ABRASION, then corneal OPACITY, then BLINDNESS. Advise the patient to STRAP / tape the eye (especially while asleep) to keep the cornea bathed.",
+      "LAGOPHTHALMOS = inability to fully close the eye (literally 'lid lag'). ECTROPION = out-turning of the lower eyelid. BELL'S PHENOMENON = the eyeball rolling UP and OUT on attempted closure — a NORMAL reflex, just visible because the lids do not close.",
+      "RAMSAY-HUNT syndrome (herpes zoster oticus) = varicella-zoster reactivation hitting CN VIII and the GENICULATE ganglion of CN VII, with vesicles. FREY'S syndrome = gustatory sweating (sweating instead of salivating over the parotid region) after parotidectomy.",
+    ],
+    flag: "Bell's palsy = idiopathic LMN palsy: NO forehead wrinkle, eye won't close, lost nasolabial fold, smile pulls to the NORMAL side. Dry-eye cascade to blindness (strap the eye). Lagophthalmos = can't close; Bell's phenomenon = eye rolls up-and-out (normal). Ramsay-Hunt = zoster on CN VIII + geniculate ganglion. Frey's = gustatory sweating.",
+  },
+  {
+    n: 10, title: "Parotid gland & the secretomotor pathway", src: "Maini · L08 Parotid",
+    facts: [
+      "The PAROTID is the LARGEST of the three paired salivary glands and makes about 30% of saliva. Its tough fibrous PAROTID SHEATH (rich in pain receptors) is why MUMPS parotitis is so PAINFUL — the swollen gland stretches the capsule.",
+      "The FACIAL NERVE runs THROUGH the parotid, so a parotid tumour or surgery (parotidectomy) can cause facial-nerve palsy. The parotid DUCT opens opposite the UPPER 2ND MOLAR and PIERCES the buccinator.",
+      "PARASYMPATHETIC (secretomotor) path to the parotid: CN IX (glossopharyngeal), then its tympanic branch, then the tympanic plexus, then the LESSER PETROSAL nerve, then the OTIC ganglion, then it hitch-hikes on the AURICULOTEMPORAL nerve (V3) to the gland. Maini's most-flagged trap: it is the 9th nerve, NOT the 7th.",
+      "SYMPATHETIC head / neck fibres synapse in the SUPERIOR CERVICAL ganglion and ride the arterial plexuses (e.g., the external carotid plexus). Saliva's enzyme AMYLASE begins CARBOHYDRATE digestion in the mouth.",
+    ],
+    flag: "Parotid = largest salivary gland (~30% of saliva); painful in mumps because the tough sheath is stretched; the facial nerve runs through it. Duct opens opposite the upper 2nd molar and pierces buccinator. Secretomotor = CN IX, lesser petrosal, OTIC ganglion, auriculotemporal (V3). It is the 9th nerve, NOT the 7th.",
+  },
+  {
+    n: 11, title: "Trigeminal sensory zones & clinical", src: "Maini · L08 Trigeminal",
+    facts: [
+      "Trigeminal skin map: V1 (ophthalmic) = forehead, upper eyelid, and the nose TIP & BRIDGE (plus the CORNEA); V2 (maxillary) = upper lip and cheek; V3 (mandibular) = lower lip and chin.",
+      "There are TWO 'buccal' nerves: the BUCCAL BRANCH OF THE FACIAL nerve is MOTOR (SVE) to buccinator; the BUCCAL NERVE OF V3 is SENSORY (GSA) to the cheek.",
+      "The AURICULOTEMPORAL nerve (a branch of V3) carries general sensation AND hitch-hiking POSTganglionic PARASYMPATHETIC (secretomotor) fibres to the PAROTID gland.",
+      "TRIGEMINAL NEURALGIA (tic douloureux): episodic, lightning-like severe pain along V2 or V3, triggered by washing, shaving, or chewing; drug of choice = CARBAMAZEPINE. HERPES ZOSTER OPHTHALMICUS: zoster in V1 that can involve the cornea and cause blindness.",
+    ],
+    flag: "V1 = forehead / upper eyelid / nose tip & bridge + CORNEA; V2 = upper lip & cheek; V3 = lower lip & chin. Two buccal nerves (facial = motor; V3 = sensory). Auriculotemporal (V3) also carries parasympathetic to the parotid. Trigeminal neuralgia (V2 / V3) treated with carbamazepine.",
+  },
+  {
+    n: 12, title: "Facial vessels & the danger area", src: "Maini · L08 Vessels",
+    facts: [
+      "The FACIAL ARTERY (a branch of the EXTERNAL carotid) is the main supply to the face; its branches are SUBMENTAL, INFERIOR LABIAL, SUPERIOR LABIAL, LATERAL NASAL, and ANGULAR.",
+      "TRICK (Maini flagged this for the board / midterm): the TRANSVERSE FACIAL artery is NOT a branch of the facial artery — it is a branch of the SUPERFICIAL TEMPORAL artery (whose branches are transverse facial, frontal, parietal). The OPHTHALMIC artery (from the ICA) gives the supraorbital, supratrochlear, and dorsal nasal arteries.",
+      "The FACIAL VEIN drains into the INTERNAL JUGULAR vein (via the common facial vein) — NOT the external jugular, even though the artery is 'external' (her classic trap). The COMMON FACIAL vein = facial vein + the ANTERIOR division of the retromandibular vein.",
+      "The 'DANGER AREA / danger triangle' of the face (around the NOSE and UPPER LIP): the facial vein connects to the CAVERNOUS SINUS DIRECTLY (via the superior & inferior ophthalmic veins) and INDIRECTLY (via the deep facial vein to the pterygoid venous plexus). Facial infection here can spread to the cavernous sinus, causing CAVERNOUS SINUS THROMBOSIS, meningitis, or encephalitis.",
+    ],
+    flag: "Facial artery (from ECA): submental, inferior labial, superior labial, lateral nasal, angular. TRANSVERSE FACIAL is a branch of the SUPERFICIAL TEMPORAL, NOT the facial artery (trick). Facial vein drains to the INTERNAL jugular (not external). Danger area (nose + upper lip) connects to the cavernous sinus (direct via ophthalmic veins, indirect via deep facial to pterygoid plexus).",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "The facial nerve's whole story: exits the STYLOMASTOID foramen then forms the parotid plexus and gives 'To Zanzibar By Motor Car' (Temporal, Zygomatic, Buccal, Marginal mandibular, Cervical). Intracranially: IAM, geniculate ganglion, greater petrosal + deep petrosal = nerve of pterygoid canal, then stapedius and chorda tympani branches.", why: "Maini spent both lectures on CN VII and told the class which muscle each branch supplies is fair game — the cervical branch to platysma was her most-missed question.", src: "Maini · L08 Facial N." },
+  { tag: "★★ Heavy", text: "SCALP = Skin, Connective tissue, Aponeurosis (galea), Loose areolar, Pericranium. Outer 3 move as one; the LOOSE AREOLAR layer is the 'danger area' where blood / pus spread and the scalping plane. The aponeurosis is the tendon layer, NOT the spread layer.", why: "She turned this into an in-class question and warned that 'aponeurosis' is the common wrong answer for the spread / danger layer.", src: "Maini · L07/L08 Scalp" },
+  { tag: "★★ Heavy", text: "Parotid secretomotor path (the 9th-nerve pathway): CN IX, tympanic branch, tympanic plexus, lesser petrosal, OTIC ganglion, then ride the auriculotemporal nerve (V3) to the gland.", why: "Her quiz question 'which cranial nerve carries preganglionic parasympathetics to the parotid' — the answer is the 9th, not the 7th; students routinely pick 7.", src: "Maini · L08 Parotid" },
+  { tag: "Trigeminal", text: "The V1 / V2 / V3 skin map: V1 = forehead, upper eyelid, nose tip & bridge, and cornea; V2 = upper lip & cheek; V3 = lower lip & chin. Draw the face and the three zones.", why: "Maini said 'please remember this dermatomal distribution, draw it' and gave sample stems (tip of nose, upper lip, lower lip, chin).", src: "Maini · L08 Trigeminal" },
+  { tag: "Clinical", text: "Facial-nerve (LMN) palsy signs on the affected side: no forehead wrinkling, eye won't close, lost nasolabial fold, and the smile deviates to the NORMAL side. Orbicularis-oculi paralysis leads to dry eye, corneal abrasion, opacity, and blindness — so strap the eye.", why: "She walked through a Bell's-palsy patient photo (and her own case) and the dry-eye cascade in detail.", src: "Maini · L08 Facial N." },
+  { tag: "Muscles", text: "The muscle actions to lock down: frontal belly = horizontal wrinkle; corrugator supercilii = vertical (frown) wrinkle; orbicularis oculi CLOSES the eye (LPS, CN III, opens it and is NOT a facial muscle); orbicularis oris CLOSES the mouth; buccinator = trumpeter's muscle, pierced by the parotid duct.", why: "Every one of these appeared as a stem in her in-class Mentimeter review.", src: "Maini · L07/L08 Face" },
+  { tag: "Trap", text: "Two famous traps: the facial VEIN drains into the INTERNAL jugular (not external), and the TRANSVERSE FACIAL artery is a branch of the SUPERFICIAL TEMPORAL, not the facial artery.", why: "She flagged both by name — 'you'll be tempted to say external jugular' and 'transverse facial, very trick question, it was in your board exams.'", src: "Maini · L08 Vessels" },
+  { tag: "Danger area", text: "The danger area of the face (nose + upper lip): facial vein connects to the cavernous sinus directly (superior & inferior ophthalmic veins) and indirectly (deep facial vein to the pterygoid venous plexus). Infection here can cause cavernous-sinus thrombosis, meningitis, encephalitis.", why: "Maini: 'this question is repeatedly asked in board exams — it is cavernous sinus.'", src: "Maini · L08 Vessels" },
+  { tag: "Facial N. II", text: "Chorda tympani = taste from the anterior two-thirds of the tongue + preganglionic parasympathetics to the submandibular ganglion (exits the petrotympanic fissure). Nerve to stapedius paralysis = hyperacusis. Three parasympathetic ganglia today: otic, pterygopalatine, submandibular.", why: "She uses the level of a facial-nerve lesion (hyperacusis? loss of lacrimation? loss of taste?) to localize the injury.", src: "Maini · L08 Facial N." },
+  { tag: "Nerves", text: "Posterior scalp nerves: lesser occipital = C2-C3 (cervical plexus, ventral rami); greater + third occipital = DORSAL rami of C2-C3. Anterior scalp arteries are ICA (via ophthalmic); posterior / lateral are ECA (superficial temporal, posterior auricular, occipital).", why: "Ventral- vs dorsal-rami origin of the occipital nerves, and ICA- vs ECA-derived scalp arteries, are clean single-best-answer items.", src: "Maini · L07 Scalp" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  { kind: "Mnemonic", title: "SCALP spells the five layers", text: "Skin, Connective tissue, Aponeurosis (the galea), Loose areolar, Pericranium — in that order, outside to bone. Maini walks the letters top-down: S is skin, and P is the pericranium / periosteum of the underlying bone.", helps: "Gives you the layers in order AND flags the 4th (loose areolar) as the danger / spread layer.", src: "Maini · L07 Scalp" },
+  { kind: "Mnemonic", title: "'To Zanzibar By Motor Car' — the facial branches", text: "Maini's line 'To Zambia by motor car' gives the five terminal branches of the facial nerve: Temporal, Zygomatic, Buccal, Marginal mandibular, Cervical (the two extra proximal ones are posterior auricular and the branch to posterior digastric / stylohyoid).", helps: "Her own mnemonic for the branch order — and she tests which muscle each branch supplies.", src: "Maini · L08 Facial N." },
+  { kind: "Analogy", title: "Buccinator = the 'trumpeter's muscle'", text: "Maini calls buccinator the trumpeter's muscle because you use exactly that cheek action — pressing the cheek against the teeth — to blow a trumpet. Its other giveaway on a specimen: it is pierced by the parotid duct.", helps: "Locks in buccinator's action (cheek against teeth) and its identifying feature.", src: "Maini · L08 Face" },
+  { kind: "Etymology", title: "Geniculate = 'at the genu' (the bend)", text: "The geniculate ganglion sits at the genu — the bend — of the facial nerve inside the temporal bone. Maini: 'you know why it is called geniculate, because it is at the genu, the bend.'", helps: "Turns a hard ganglion name into an obvious location word.", src: "Maini · L08 Facial N." },
+  { kind: "Etymology", title: "Lagophthalmos = 'lid lag'", text: "When orbicularis oculi is paralyzed the eye can't fully close — the lid lags behind the normal side. Maini gives the literal meaning: lagophthalmos means lid lag. From there flows the dry-eye (xerophthalmia) cascade.", helps: "Makes the term self-explanatory and connects it to the blindness cascade.", src: "Maini · L08 Facial N." },
+  { kind: "Trap", title: "Facial vein drains INTERNAL, not external", text: "Maini: 'You'll be tempted to say external jugular.' Don't. The facial vein joins the anterior division of the retromandibular vein to form the common facial vein, which drains into the INTERNAL jugular. The artery being 'external carotid' does not make the vein external.", helps: "Defuses the artery-name-implies-vein-name trap she sets on purpose.", src: "Maini · L08 Vessels" },
+  { kind: "Trap", title: "Transverse facial is NOT a branch of the facial artery", text: "'Very trick question,' Maini says — the transverse facial artery only shares the word 'facial'; it is actually a branch of the SUPERFICIAL TEMPORAL artery. She warned this was on a board exam and might appear on the midterm.", helps: "Pre-empts the highest-value trick item in the vessels section.", src: "Maini · L08 Vessels" },
+  { kind: "Rule", title: "Which is NOT supplied? Pick the far-away muscle", text: "For 'which muscle is NOT supplied by the temporal branch,' Maini says use common sense: the temporal branch and mentalis are 'very far away,' so mentalis is the odd one out. Branches supply the muscles in their vicinity.", helps: "Turns a memory question into a location-reasoning question.", src: "Maini · L08 Facial N." },
+  { kind: "Story", title: "Maini's own Bell's palsy", text: "She tells every cohort that she had Bell's palsy in med school — friends noticed she wasn't closing her right eye and her smile was crooked, and she still has slight residual weakness compressing that nostril. Use her story to anchor the LMN signs and the 'start physiotherapy early' advice.", helps: "A vivid, true anchor for the exam-relevant palsy signs and management.", src: "Maini · L08 Facial N." },
+];
+
+/* =============================================================== DRILL ===== */
+/* Original-phrasing items grounded ENTIRELY in this module's audited
+   Everything-MC bank (anti-fab verified) + Maini's L07/L08 lectures.
+   Correct-answer text is verbatim-accurate; option POSITIONS are balanced. */
+const questions = [
+  { id: 1, topic: "Scalp layers", src: "Maini · L07 Scalp", q: "A scalp injury produces a spreading collection of blood beneath the scalp. In which layer does blood or pus most readily accumulate?", opts: ["The epicranial aponeurosis (galea)", "The dense subcutaneous connective tissue", "The loose areolar connective tissue layer", "The pericranium"], a: 2, h1: "Think of the layer with the most free space.", h2: "It is also the 'scalping' plane.", exp: "The 4th layer, LOOSE AREOLAR connective tissue, is loosely arranged with abundant potential space, so blood and pus collect and spread there." },
+  { id: 2, topic: "Scalp layers", src: "Maini · L07 Scalp", q: "In the mnemonic SCALP, the letter 'A' stands for:", opts: ["Areolar tissue", "Adipose", "The aponeurosis (epicranial aponeurosis / galea aponeurotica)", "Artery layer"], a: 2, h1: "It is the tough tendinous sheet.", h2: "It is formed with occipitofrontalis.", exp: "A = APONEUROSIS, the epicranial aponeurosis (galea aponeurotica) — the 3rd layer, the tendon of occipitofrontalis." },
+  { id: 3, topic: "Scalp layers", src: "Maini · L07 Scalp", q: "Which three scalp layers are bound together so tightly they move as one unit (and tear off together in a scalping avulsion)?", opts: ["Aponeurosis, loose areolar, pericranium", "Skin, loose areolar, pericranium", "Skin, connective tissue, and aponeurosis", "Connective tissue, loose areolar, pericranium"], a: 2, h1: "The outermost three.", h2: "S, C, and A of SCALP.", exp: "Skin, Connective tissue, and Aponeurosis are firmly bound and move as a single unit — the sheet avulsed in scalping." },
+  { id: 4, topic: "Scalp layers", src: "Maini · L07 Scalp", q: "The scalp proper extends between which two bony landmarks?", opts: ["Mastoid processes to the zygomatic arches", "Superior nuchal lines posteriorly to the supraorbital margins anteriorly", "External occipital protuberance to the nasion", "Inion to the mental protuberance"], a: 1, h1: "Back of the skull to the eyebrows.", h2: "Nuchal lines to the orbital margins.", exp: "The scalp runs from the SUPERIOR NUCHAL LINES posteriorly to the SUPRAORBITAL MARGINS anteriorly." },
+  { id: 5, topic: "Scalp layers", src: "Maini · L07 Scalp", q: "The aponeurotic (3rd) layer of the scalp is chiefly formed by which muscle?", opts: ["Temporalis", "Occipitofrontalis", "Corrugator supercilii", "Buccinator"], a: 1, h1: "It has a frontal and an occipital belly.", h2: "The galea joins its two bellies.", exp: "OCCIPITOFRONTALIS and its intervening galea form the aponeurotic layer." },
+  { id: 6, topic: "Scalp vessels", src: "Maini · L07 Scalp", q: "The supratrochlear and supraorbital arteries of the anterior scalp are ultimately derived from which parent artery?", opts: ["The internal carotid artery (via the ophthalmic artery)", "The external carotid artery", "The maxillary artery", "The facial artery"], a: 0, h1: "They exit from the orbit.", h2: "Ophthalmic comes off which carotid?", exp: "They are branches of the OPHTHALMIC artery, a branch of the INTERNAL carotid artery." },
+  { id: 7, topic: "Scalp vessels", src: "Maini · L07 Scalp", q: "Which three scalp arteries are branches of the EXTERNAL carotid artery?", opts: ["Superficial temporal, posterior auricular, occipital", "Supratrochlear, supraorbital, dorsal nasal", "Facial, maxillary, ophthalmic", "Angular, submental, superior labial"], a: 0, h1: "The posterior and lateral scalp supply.", h2: "One temporal, one auricular, one occipital.", exp: "The superficial temporal, posterior auricular, and occipital arteries are branches of the EXTERNAL carotid." },
+  { id: 8, topic: "Scalp clinical", src: "Maini · L07 Scalp", q: "Why do even minor scalp lacerations bleed so profusely?", opts: ["The scalp arteries anastomose richly, so both cut ends bleed", "The skin is unusually thin", "Arterial pressure is highest in the scalp", "Scalp veins lack valves"], a: 0, h1: "Compare a scalp cut to a forearm cut.", h2: "Blood arrives from both directions.", exp: "Rich ANASTOMOSIS means a divided scalp vessel bleeds from BOTH cut ends." },
+  { id: 9, topic: "Scalp clinical", src: "Maini · L07 Scalp", q: "A scalp laceration running side-to-side (transverse) tends to gape widely because:", opts: ["The pericranium retracts", "The skin loses its blood supply", "Arterial pull opens the wound", "The galea aponeurotica fibres run longitudinally and pull the edges apart"], a: 3, h1: "Think about the direction of the galea's fibres.", h2: "Fibres run front-to-back along the sagittal suture.", exp: "The galea's fibres run LONGITUDINALLY, so a transverse cut is pulled open across them." },
+  { id: 10, topic: "Scalp nerves", src: "Maini · L07 Scalp", q: "Sensation for most of the face and scalp — the 'sensory nerve of the head and neck' — is provided by:", opts: ["The facial nerve (CN VII)", "The trigeminal nerve (CN V)", "The cervical plexus", "The glossopharyngeal nerve (CN IX)"], a: 1, h1: "It has three divisions.", h2: "V1, V2, V3.", exp: "The TRIGEMINAL nerve (CN V) is the sensory nerve of the face and most of the scalp." },
+  { id: 11, topic: "Scalp nerves", src: "Maini · L07 Scalp", q: "The lesser occipital nerve, supplying the posterolateral scalp, has which root value and origin?", opts: ["Dorsal rami of C2-C3", "C2-C3, from the cervical plexus (ventral rami)", "V3 (mandibular)", "C1 only"], a: 1, h1: "It is a named cutaneous branch of a plexus.", h2: "Ventral rami, C2-C3.", exp: "The lesser occipital nerve is C2-C3 from the CERVICAL PLEXUS (ventral rami)." },
+  { id: 12, topic: "Scalp nerves", src: "Maini · L07 Scalp", q: "The greater occipital and third occipital nerves, supplying the midline posterior scalp, arise from:", opts: ["The dorsal rami of C2 and C3", "The ventral rami of C2-C3", "The cervical plexus", "V2 (maxillary)"], a: 0, h1: "Midline back = a different ramus.", h2: "Dorsal, not ventral.", exp: "The greater and third occipital nerves arise from the DORSAL rami of C2 and C3." },
+  { id: 13, topic: "Scalp nerves", src: "Maini · L07 Scalp", q: "The auriculotemporal nerve, giving sensation to part of the temporal scalp, is a branch of which trigeminal division?", opts: ["V3 (mandibular)", "V1 (ophthalmic)", "V2 (maxillary)", "The facial nerve"], a: 0, h1: "It also carries parasympathetics to the parotid.", h2: "The mandibular division.", exp: "The auriculotemporal nerve is a branch of V3 (mandibular)." },
+  { id: 14, topic: "Scalp veins", src: "Maini · L07 Scalp", q: "The superficial temporal vein joins which vein to help form the retromandibular vein?", opts: ["The facial vein", "The occipital vein", "The angular vein", "The maxillary vein"], a: 3, h1: "Its partner runs deep to the ramus.", h2: "Superficial temporal + this = retromandibular.", exp: "The superficial temporal vein joins the MAXILLARY vein to form the retromandibular vein." },
+  { id: 15, topic: "Facial muscles", src: "Maini · L07 Face", q: "What single feature is common to ALL muscles of facial expression?", opts: ["They all arise from the mandible", "They are all innervated by the facial nerve (CN VII)", "They all close an orifice", "They all develop from the first pharyngeal arch"], a: 1, h1: "Maini said this makes them easy to study.", h2: "One nerve for the whole group.", exp: "ALL muscles of facial expression are innervated by the FACIAL nerve (CN VII)." },
+  { id: 16, topic: "Facial muscles", src: "Maini · L07 Face", q: "The muscles of facial expression develop from which embryological structure?", opts: ["The first pharyngeal arch", "The second pharyngeal arch", "The third pharyngeal arch", "The neural crest of the fourth arch"], a: 1, h1: "The same arch as the facial nerve.", h2: "Arch number two.", exp: "They develop from the SECOND pharyngeal (branchial) arch." },
+  { id: 17, topic: "Facial muscles", src: "Maini · L07 Face", q: "Which general statement about the muscles of facial expression is correct?", opts: ["They insert into bone", "They are innervated by CN V", "They lie in the superficial fascia and insert into the skin of the face", "They produce synovial fluid"], a: 2, h1: "That is why they move the skin.", h2: "Superficial fascia, skin insertion.", exp: "They lie in the SUPERFICIAL FASCIA and insert into the SKIN of the face." },
+  { id: 18, topic: "Facial muscles", src: "Maini · L07 Face", q: "Botulinum toxin ('Botox') reduces wrinkles by which mechanism?", opts: ["It cuts the facial nerve", "It dissolves collagen fibres", "It blocks pain receptors in the skin", "It blocks neuromuscular transmission (acetylcholine action), paralyzing the muscle"], a: 3, h1: "It is a poison from Clostridium botulinum.", h2: "Think of the neuromuscular junction.", exp: "Botox BLOCKS neuromuscular transmission where acetylcholine binds, paralyzing the muscle." },
+  { id: 19, topic: "Specific muscles", src: "Maini · L07/L08 Face", q: "Horizontal wrinkling of the forehead and eyebrow elevation (the 'surprised' look) is produced by:", opts: ["The frontal belly of occipitofrontalis", "Corrugator supercilii", "Procerus", "Orbicularis oculi"], a: 0, h1: "The forehead belly of a two-bellied muscle.", h2: "Frontal belly.", exp: "The FRONTAL BELLY of occipitofrontalis elevates the eyebrows and makes horizontal forehead wrinkles." },
+  { id: 20, topic: "Specific muscles", src: "Maini · L07 Face", q: "Vertical wrinkling of the forehead in frowning (drawing the eyebrows medially) is the action of:", opts: ["Corrugator supercilii", "Frontalis", "Nasalis", "Risorius"], a: 0, h1: "It 'corrugates' between the brows.", h2: "Vertical, not horizontal.", exp: "CORRUGATOR SUPERCILII draws the eyebrows medially, giving vertical frown lines." },
+  { id: 21, topic: "Specific muscles", src: "Maini · L07/L08 Face", q: "Which muscle is the sphincter of the eye and closes the eyelid?", opts: ["Levator palpebrae superioris", "Corrugator supercilii", "Procerus", "Orbicularis oculi"], a: 3, h1: "It orbits the orbit.", h2: "It closes, it does not open.", exp: "ORBICULARIS OCULI is the sphincter of the eye that closes the eyelid." },
+  { id: 22, topic: "Specific muscles", src: "Maini · L07 Face", q: "Which muscle OPENS the eye by elevating the upper eyelid — and is NOT a muscle of facial expression?", opts: ["Orbicularis oculi", "Frontalis", "Levator palpebrae superioris (CN III)", "Nasalis"], a: 2, h1: "Its nerve is not CN VII.", h2: "'Levator' of the eyelid, CN III.", exp: "LEVATOR PALPEBRAE SUPERIORIS opens the eye; it is CN III and NOT a facial-expression muscle." },
+  { id: 23, topic: "Specific muscles", src: "Maini · L08 Face", q: "Which facial muscle is the 'trumpeter's muscle,' compressing the cheek against the teeth and pierced by the parotid duct?", opts: ["Risorius", "Buccinator", "Masseter", "Zygomaticus major"], a: 1, h1: "You use it to blow a trumpet.", h2: "The parotid duct pierces it.", exp: "BUCCINATOR is the trumpeter's muscle; the parotid duct pierces it." },
+  { id: 24, topic: "Specific muscles", src: "Maini · L08 Face", q: "The buccinator muscle takes origin from:", opts: ["The alveolar margins of the maxilla & mandible and the pterygomandibular raphe", "The zygomatic arch", "The mastoid process", "The nasal bone"], a: 0, h1: "Two bony margins plus a raphe.", h2: "The white pterygomandibular line.", exp: "Buccinator arises from the alveolar margins of the maxilla & mandible (opposite the molars) and the pterygomandibular raphe." },
+  { id: 25, topic: "Specific muscles", src: "Maini · L08 Face", q: "Which is the ONLY muscle of facial expression located in the neck?", opts: ["Sternocleidomastoid", "Digastric", "Platysma", "Risorius"], a: 2, h1: "It is a broad, thin sheet in the neck.", h2: "Supplied by the cervical branch of CN VII.", exp: "PLATYSMA is the only muscle of facial expression in the neck." },
+  { id: 26, topic: "Specific muscles", src: "Maini · L08 Face", q: "Zygomaticus major moves the angle of the mouth in which direction (the main smiling action)?", opts: ["Downward and medial", "Purely horizontal", "Upward and laterally", "It closes the lips"], a: 2, h1: "It runs from the cheekbone to the mouth angle.", h2: "Up and out.", exp: "ZYGOMATICUS MAJOR pulls the angle of the mouth UPWARD and LATERALLY — the smile." },
+  { id: 27, topic: "Facial N. branches", src: "Maini · L08 Facial N.", q: "Through which foramen does the facial nerve exit the skull before entering the parotid gland?", opts: ["Foramen ovale", "Jugular foramen", "Stylomastoid foramen", "Internal acoustic meatus"], a: 2, h1: "Between the styloid and mastoid processes.", h2: "Stylo- + -mastoid.", exp: "The facial nerve exits at the STYLOMASTOID foramen, then enters the parotid gland." },
+  { id: 28, topic: "Facial N. branches", src: "Maini · L08 Facial N.", q: "The mnemonic 'To Zanzibar By Motor Car' gives which five facial-nerve branches?", opts: ["Temporal, Zygomatic, Buccal, Mandibular, Cranial", "Temporal, Zygomatic, Bucchal, Marginal, Cutaneous", "Trochlear, Zygomatic, Buccal, Mental, Cervical", "Temporal, Zygomatic, Buccal, Marginal mandibular, Cervical"], a: 3, h1: "T, Z, B, M, C.", h2: "Marginal MANDIBULAR, then Cervical.", exp: "Temporal, Zygomatic, Buccal, Marginal mandibular, Cervical." },
+  { id: 29, topic: "Facial N. branches", src: "Maini · L08 Facial N.", q: "Maini's most-commonly-missed facial-nerve question: the cervical branch supplies which muscle?", opts: ["Buccinator", "Risorius", "Platysma", "Sternocleidomastoid"], a: 2, h1: "The one facial muscle in the neck.", h2: "It is the only neck muscle of facial expression.", exp: "The CERVICAL branch supplies PLATYSMA — the only muscle of facial expression in the neck." },
+  { id: 30, topic: "Facial N. branches", src: "Maini · L08 Facial N.", q: "Maini's trap: which muscle is NOT supplied by the temporal branch of the facial nerve?", opts: ["Frontal belly of occipitofrontalis", "Orbicularis oculi", "Mentalis", "Corrugator supercilii"], a: 2, h1: "Which one is farthest from the temple?", h2: "Down at the chin.", exp: "MENTALIS (at the chin) is not supplied by the temporal branch — it is too far away." },
+  { id: 31, topic: "Facial N. course", src: "Maini · L08 Facial N.", q: "The facial nerve enters the temporal bone / tympanic-cavity region through which opening?", opts: ["The stylomastoid foramen", "The internal acoustic meatus", "The petrotympanic fissure", "The foramen spinosum"], a: 1, h1: "It enters near the inner ear.", h2: "The 'internal acoustic' opening.", exp: "The facial nerve enters via the INTERNAL ACOUSTIC MEATUS." },
+  { id: 32, topic: "Facial N. course", src: "Maini · L08 Facial N.", q: "The sensory ganglion at the bend ('genu') of the facial nerve is the:", opts: ["Otic ganglion", "Pterygopalatine ganglion", "Geniculate ganglion", "Submandibular ganglion"], a: 2, h1: "Named for the genu / bend.", h2: "Geniculate.", exp: "The GENICULATE ganglion sits at the genu (bend) of the facial nerve." },
+  { id: 33, topic: "Facial N. course", src: "Maini · L08 Facial N.", q: "The greater petrosal nerve, given off at the geniculate ganglion, carries which fibres?", opts: ["Preganglionic parasympathetic", "Postganglionic sympathetic", "Taste only", "Motor to stapedius"], a: 0, h1: "It heads for the pterygopalatine ganglion.", h2: "Pre-ganglionic, parasympathetic.", exp: "The greater petrosal nerve carries PREganglionic PARASYMPATHETIC fibres." },
+  { id: 34, topic: "Facial N. course", src: "Maini · L08 Facial N.", q: "The greater petrosal nerve and the deep petrosal nerve unite to form:", opts: ["The chorda tympani", "The nerve of the pterygoid canal", "The lesser petrosal nerve", "The auriculotemporal nerve"], a: 1, h1: "It travels to the pterygopalatine ganglion.", h2: "Named for a canal.", exp: "Together they form the NERVE OF THE PTERYGOID CANAL." },
+  { id: 35, topic: "Facial N. course", src: "Maini · L08 Facial N.", q: "Paralysis of the stapedius muscle (nerve to stapedius, a facial-nerve branch) produces:", opts: ["Complete deafness", "Vertigo", "Hyperacusis (abnormal sensitivity to sound)", "Tinnitus only"], a: 2, h1: "Stapedius normally dampens loud sound.", h2: "Sounds become too loud.", exp: "Stapedius paralysis causes HYPERACUSIS — abnormal sensitivity to sound." },
+  { id: 36, topic: "Facial N. course", src: "Maini · L08 Facial N.", q: "The chorda tympani carries which two functional components?", opts: ["Taste from the posterior 1/3 of the tongue and motor to the tongue", "Sympathetic fibres to the parotid and taste to the palate", "General sensation to the cheek and motor to buccinator", "Taste from the anterior 2/3 of the tongue AND preganglionic parasympathetics to the submandibular ganglion"], a: 3, h1: "One sensory, one autonomic.", h2: "Front of tongue + submandibular ganglion.", exp: "Chorda tympani = TASTE from the anterior 2/3 of the tongue + preganglionic parasympathetics to the SUBMANDIBULAR ganglion." },
+  { id: 37, topic: "Facial N. lesions", src: "Maini · L08 Facial N.", q: "A patient develops sudden unilateral facial droop after cold exposure with no other cause. This is:", opts: ["An upper-motor-neuron stroke", "Bell's palsy (idiopathic LMN facial paralysis)", "Trigeminal neuralgia", "Ramsay-Hunt syndrome"], a: 1, h1: "Idiopathic and lower-motor-neuron.", h2: "Named after Bell.", exp: "This is BELL'S PALSY — idiopathic lower-motor-neuron facial paralysis." },
+  { id: 38, topic: "Facial N. lesions", src: "Maini · L08 Facial N.", q: "In a lower-motor-neuron facial palsy, the smile deviates toward which side?", opts: ["Toward the affected side", "Toward the normal side", "It stays perfectly straight", "It droops equally on both sides"], a: 1, h1: "The working muscles win the tug-of-war.", h2: "Pulled to the unaffected side.", exp: "The smile deviates to the NORMAL side (the paralyzed side cannot pull the mouth angle up)." },
+  { id: 39, topic: "Facial N. lesions", src: "Maini · L08 Facial N.", q: "Inability to close the eye completely (orbicularis oculi paralysis) is termed:", opts: ["Ptosis", "Exophthalmos", "Ectropion", "Lagophthalmos"], a: 3, h1: "Literally 'lid lag.'", h2: "Lag-ophthalmos.", exp: "LAGOPHTHALMOS is the inability to close the eye — literally 'lid lag.'" },
+  { id: 40, topic: "Facial N. lesions", src: "Maini · L07 Face", q: "If orbicularis oculi paralysis is untreated, Maini's clinical cascade ends in:", opts: ["Blindness (via dry eye, corneal abrasion, then opacity)", "Cataract", "Glaucoma", "Retinal detachment"], a: 0, h1: "It starts with loss of blinking.", h2: "Dry cornea scars, then goes opaque.", exp: "Loss of blinking gives xerophthalmia, corneal abrasion, corneal opacity, and finally BLINDNESS — so strap the eye." },
+  { id: 41, topic: "Parotid", src: "Maini · L08 Parotid", q: "Which cranial nerve carries the preganglionic parasympathetic (secretomotor) fibres for the parotid gland?", opts: ["CN IX (glossopharyngeal)", "CN VII (facial)", "CN X (vagus)", "CN V (trigeminal)"], a: 0, h1: "Maini's trap — students pick 7.", h2: "The ninth nerve.", exp: "The GLOSSOPHARYNGEAL nerve (CN IX) carries the parotid's preganglionic parasympathetics — NOT the 7th." },
+  { id: 42, topic: "Parotid", src: "Maini · L08 Parotid", q: "In the parasympathetic pathway to the parotid, the preganglionic fibres synapse in which ganglion?", opts: ["The submandibular ganglion", "The otic ganglion", "The pterygopalatine ganglion", "The geniculate ganglion"], a: 1, h1: "Reached via the lesser petrosal nerve.", h2: "The 'ear' ganglion.", exp: "They synapse in the OTIC ganglion (via CN IX, tympanic plexus, lesser petrosal nerve)." },
+  { id: 43, topic: "Parotid", src: "Maini · L08 Parotid", q: "Postganglionic parasympathetic fibres reach the parotid by hitch-hiking on which nerve?", opts: ["The facial nerve", "The lingual nerve", "The greater petrosal nerve", "The auriculotemporal nerve (V3)"], a: 3, h1: "A branch of the mandibular division.", h2: "Auriculo- + temporal.", exp: "They ride the AURICULOTEMPORAL nerve (a branch of V3) to the parotid gland." },
+  { id: 44, topic: "Parotid", src: "Maini · L08 Parotid", q: "The parotid duct opens into the oral cavity opposite which tooth?", opts: ["The upper (maxillary) second molar", "The lower first molar", "The upper canine", "The lower second premolar"], a: 0, h1: "An upper molar.", h2: "The second one.", exp: "The parotid duct opens opposite the UPPER SECOND MOLAR (and it pierces buccinator)." },
+  { id: 45, topic: "Parotid", src: "Maini · L08 Parotid", q: "Why is the pain of mumps parotitis so intense?", opts: ["The gland erodes the mandible", "The facial nerve is compressed at a foramen", "The saliva becomes acidic", "The tough fibrous parotid sheath, rich in pain receptors, is stretched by the swollen gland"], a: 3, h1: "Think about the capsule around the gland.", h2: "A tight sheath being stretched.", exp: "The tough PAROTID SHEATH (rich in pain receptors) is stretched by the swollen gland, causing severe pain." },
+  { id: 46, topic: "Trigeminal", src: "Maini · L08 Trigeminal", q: "Cutaneous sensation from the tip and bridge of the nose is carried by:", opts: ["V2 (maxillary)", "V3 (mandibular)", "C2 (cervical)", "V1 (ophthalmic)"], a: 3, h1: "The same division as the forehead.", h2: "The ophthalmic division.", exp: "The nose tip and bridge are V1 (OPHTHALMIC)." },
+  { id: 47, topic: "Trigeminal", src: "Maini · L08 Trigeminal", q: "Sensation from the skin of the upper lip and cheek is carried by:", opts: ["V1 (ophthalmic)", "V2 (maxillary)", "V3 (mandibular)", "The facial nerve"], a: 1, h1: "The middle division.", h2: "Maxillary.", exp: "The upper lip and cheek are V2 (MAXILLARY)." },
+  { id: 48, topic: "Trigeminal", src: "Maini · L08 Trigeminal", q: "Sensation from the skin of the lower lip and chin is carried by:", opts: ["V1 (ophthalmic)", "V2 (maxillary)", "V3 (mandibular)", "The cervical plexus"], a: 2, h1: "The lowest division.", h2: "Mandibular.", exp: "The lower lip and chin are V3 (MANDIBULAR)." },
+  { id: 49, topic: "Trigeminal", src: "Maini · L08 Trigeminal", q: "Which medication did Maini name as the drug of choice for trigeminal neuralgia?", opts: ["Carbamazepine", "Ibuprofen", "Prednisone", "Amoxicillin"], a: 0, h1: "It is an anti-epileptic.", h2: "Carba-.", exp: "CARBAMAZEPINE (an anti-epileptic) is the drug of choice for trigeminal neuralgia." },
+  { id: 50, topic: "Facial vessels", src: "Maini · L08 Vessels", q: "The facial artery, the main arterial supply to the face, is a branch of:", opts: ["The internal carotid artery", "The maxillary artery", "The superficial temporal artery", "The external carotid artery"], a: 3, h1: "The 'outer' carotid.", h2: "External carotid.", exp: "The facial artery is a branch of the EXTERNAL carotid artery." },
+  { id: 51, topic: "Facial vessels", src: "Maini · L08 Vessels", q: "Maini's trick question: the transverse facial artery is actually a branch of:", opts: ["The facial artery", "The maxillary artery", "The superficial temporal artery", "The ophthalmic artery"], a: 2, h1: "It only shares the word 'facial.'", h2: "Runs with superficial temporal.", exp: "The TRANSVERSE FACIAL artery is a branch of the SUPERFICIAL TEMPORAL artery — not the facial artery." },
+  { id: 52, topic: "Facial veins", src: "Maini · L08 Vessels", q: "The facial vein ultimately drains into which vein (the point Maini stressed as a trap)?", opts: ["The external jugular vein", "The subclavian vein", "The retromandibular vein only", "The internal jugular vein (via the common facial vein)"], a: 3, h1: "Don't be fooled by 'external carotid.'", h2: "Internal, via the common facial.", exp: "The facial vein drains into the INTERNAL jugular vein via the common facial vein — not the external jugular." },
+  { id: 53, topic: "Danger area", src: "Maini · L08 Vessels", q: "The 'danger area (danger triangle) of the face' is located over which region?", opts: ["Over the mandible and angle of the jaw", "Around the nose and upper lip", "At the temple", "Over the parotid gland"], a: 1, h1: "Where acne can be dangerous.", h2: "Nose and upper lip.", exp: "The danger area is around the NOSE and UPPER LIP." },
+  { id: 54, topic: "Danger area", src: "Maini · L08 Vessels", q: "Why is an infection in the danger area of the face clinically serious?", opts: ["It scars the skin badly", "It obstructs the airway", "It always causes Bell's palsy", "It can spread via facial-vein connections to the cavernous sinus (thrombosis, meningitis, encephalitis)"], a: 3, h1: "Follow the venous connections inward.", h2: "To the cavernous sinus.", exp: "Infection can spread through the facial vein to the CAVERNOUS SINUS, causing cavernous-sinus thrombosis, meningitis, or encephalitis." },
+  { id: 55, topic: "Facial N. lesions", src: "Maini · L08 Facial N.", q: "On attempted eye closure in facial palsy, the eyeball rolls up and out. This normal (but now visible) protective movement is:", opts: ["Bell's phenomenon", "Ectropion", "Lagophthalmos", "Ramsay-Hunt syndrome"], a: 0, h1: "It is normal — you just can't usually see it.", h2: "Named after Bell.", exp: "This is BELL'S PHENOMENON — a normal up-and-out eyeball roll, seen because the lids don't close." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.voicenote{margin-top:9px;font-size:13px;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:8px 12px;max-width:720px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.speakbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:8px 0 16px;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.speakbtn{border:none;background:var(--accent);color:#fff;font:inherit;font-weight:600;font-size:14px;padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;box-shadow:0 8px 20px -10px var(--accent)}
+.speakbtn:hover{background:var(--accent-mid)}
+.speakbtn.ghost2{background:#fff;color:var(--accent-deep);border:1px solid var(--accent-soft);box-shadow:none}
+.rate-row{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);font-weight:600}
+.rate-row input[type=range]{accent-color:var(--accent);cursor:pointer}
+.voicesel{font:inherit;font-size:13px;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:7px 9px;background:#fff;max-width:230px}
+.speaknote{font-size:12px;color:var(--ink-soft);flex-basis:100%}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);transition:box-shadow .2s,outline .2s}
+.obj.reading{outline:2px solid var(--accent);outline-offset:2px;box-shadow:0 0 0 4px var(--accent-tint)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:160px}
+.readbtn{flex:0 0 auto;border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:11.5px;padding:4px 10px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:.14s}
+.readbtn:hover{background:var(--accent-wash)}
+.readbtn.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ============================================= SPEECH (Web Speech API) ===== */
+function speechClean(t){
+  return String(t)
+    .replace(/CN VIII/g,"cranial nerve eight")
+    .replace(/CN VII/g,"cranial nerve seven")
+    .replace(/CN VI/g,"cranial nerve six")
+    .replace(/CN IX/g,"cranial nerve nine")
+    .replace(/CN IV/g,"cranial nerve four")
+    .replace(/CN III/g,"cranial nerve three")
+    .replace(/CN II/g,"cranial nerve two")
+    .replace(/CN X/g,"cranial nerve ten")
+    .replace(/CN V/g,"cranial nerve five")
+    .replace(/→/g," to ")
+    .replace(/[—–]/g,", ")
+    .replace(/•/g," ")
+    .replace(/&/g," and ")
+    .replace(/~/g,"about ")
+    .replace(/%/g," percent")
+    .replace(/\btwo-thirds\b/g,"two thirds")
+    .replace(/2\/3/g,"two thirds")
+    .replace(/1\/3/g,"one third")
+    .replace(/\b2nd\b/g,"second")
+    .replace(/\b3rd\b/g,"third")
+    .replace(/\b1st\b/g,"first")
+    .replace(/\s{2,}/g," ")
+    .trim();
+}
+function topicSpeech(c){
+  return speechClean(c.title + ". " + c.facts.join(" ") + " Maini flag. " + c.flag);
+}
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 4 · Head &amp; Neck · Dr. Maini</span>
+          <h1 className="title serif">Module 4 — the <em>Face &amp; Scalp</em></h1>
+          <p className="subtitle">A voiced, hands-free cram for Maini&apos;s Face &amp; Scalp — the scalp layers &amp; vessels, the muscles of facial expression, the facial nerve (branches, course, lesions), the parotid secretomotor pathway, trigeminal sensory zones, and the facial vessels &amp; danger area — in her order, with her mnemonics, traps, and a drill built on this module&apos;s audited bank.</p>
+          <p className="voicenote">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+          <div className="pill-row">
+            <span className="pill-date">🗣️ Face &amp; Scalp (Lectures 7 &amp; 8) · lecture + lab</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA lectures — Face &amp; Scalp (Lectures 7 &amp; 8) — and this module&apos;s audited Everything-MC bank. Questions are original, in her style, source-tagged per item. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  const [rate, setRate] = useState(1.1);
+  const [voiceURI, setVoiceURI] = useState("");
+  const [voices, setVoices] = useState([]);
+  const [reading, setReading] = useState(-1);
+  const [active, setActive] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const seqRef = useRef({ playing: false, idx: 0, all: false });
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+
+  useEffect(() => {
+    if (!supported) return;
+    const load = () => {
+      const v = window.speechSynthesis.getVoices() || [];
+      if (v.length) setVoices(v);
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => {
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+      seqRef.current.playing = false;
+    };
+  }, [supported]);
+
+  const enVoices = voices.filter((v) => /^en/i.test(v.lang));
+  const pickVoice = () => {
+    if (voiceURI) return voices.find((v) => v.voiceURI === voiceURI) || null;
+    const pref = enVoices.find((v) => /Ava|Emma|Andrew/i.test(v.name) && /Online|Natural/i.test(v.name))
+      || enVoices.find((v) => /Ava|Emma|Andrew/i.test(v.name))
+      || enVoices.find((v) => /en-US/i.test(v.lang))
+      || enVoices[0] || null;
+    return pref;
+  };
+
+  const speakText = (text, onend) => {
+    const u = new SpeechSynthesisUtterance(text);
+    const vo = pickVoice();
+    if (vo) u.voice = vo;
+    u.rate = rate;
+    u.onend = onend;
+    u.onerror = onend;
+    window.speechSynthesis.speak(u);
+  };
+
+  const playAll = (start) => {
+    if (!supported) return;
+    window.speechSynthesis.cancel();
+    seqRef.current = { playing: true, idx: start || 0, all: true };
+    setActive(true); setPaused(false);
+    const step = () => {
+      const s = seqRef.current;
+      if (!s.playing || s.idx >= cram.length) { stopAll(); return; }
+      setReading(s.idx);
+      speakText(topicSpeech(cram[s.idx]), () => {
+        if (!seqRef.current.playing) return;
+        seqRef.current.idx += 1;
+        step();
+      });
+    };
+    step();
+  };
+
+  const playOne = (i) => {
+    if (!supported) return;
+    window.speechSynthesis.cancel();
+    seqRef.current = { playing: true, idx: i, all: false };
+    setActive(true); setPaused(false); setReading(i);
+    speakText(topicSpeech(cram[i]), () => {
+      if (!seqRef.current.all) stopAll();
+    });
+  };
+
+  const pauseResume = () => {
+    if (!supported) return;
+    if (paused) { window.speechSynthesis.resume(); setPaused(false); }
+    else { window.speechSynthesis.pause(); setPaused(true); }
+  };
+
+  const stopAll = () => {
+    seqRef.current.playing = false;
+    if (supported) { try { window.speechSynthesis.cancel(); } catch (e) {} }
+    setActive(false); setPaused(false); setReading(-1);
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s Face &amp; Scalp essentials, in her order</div>
+        <p>Scalp layers → scalp vessels &amp; nerves → the muscles of facial expression → the facial nerve (branches, intracranial course, lesions) → parotid &amp; secretomotor pathway → trigeminal zones → facial vessels &amp; the danger area. Press play and let it read hands-free; the ⚑ flags are the high-yield hooks.</p>
+      </div>
+
+      <div className="speakbar">
+        {!active
+          ? <button className="speakbtn" onClick={() => playAll(0)} disabled={!supported}>▶ Read the whole cram aloud</button>
+          : <>
+              <button className="speakbtn" onClick={pauseResume}>{paused ? "▶ Resume" : "⏸ Pause"}</button>
+              <button className="speakbtn ghost2" onClick={stopAll}>⏹ Stop</button>
+            </>}
+        <div className="rate-row">
+          <span>Speed</span>
+          <input type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => setRate(parseFloat(e.target.value))} />
+          <span>{rate.toFixed(1)}x</span>
+        </div>
+        <select className="voicesel" value={voiceURI} onChange={(e) => setVoiceURI(e.target.value)}>
+          <option value="">Auto (best available)</option>
+          {enVoices.map((v) => <option key={v.voiceURI} value={v.voiceURI}>{v.name}</option>)}
+        </select>
+        {!supported && <div className="speaknote">This browser does not support Web Speech; the text still reads normally on-screen.</div>}
+      </div>
+
+      {cram.map((c, i) => (
+        <div className={`obj ${reading === i ? "reading" : ""}`} key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <button className={`readbtn ${reading === i ? "on" : ""}`} onClick={() => (reading === i ? stopAll() : playOne(i))} disabled={!supported}>
+              {reading === i ? "◼ Reading" : "▶ Read"}
+            </button>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Maini&apos;s framework and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Maini&apos;s own mnemonics, analogies, and traps pulled straight from the Face &amp; Scalp lectures — the retention hooks to lean on when a detail won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the Face &amp; Scalp</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question — all grounded in this module&apos;s audited bank. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 (Gross Anatomy of the Head & Neck) at SCUHS, running a review of the FACE & SCALP (Lectures 7 & 8). Teach ONLY from this content; do not invent muscles, nerves, branches, ganglia, foramina, or pathways. Warm, encouraging and direct: you call students "guys," say "right?" and "okay," love clinical stories and simple day-to-day examples, tell students to DRAW it out, and group structures together to make studying easier. Keep answers tight (3-6 sentences) and quiz the student back.
+
+SCALP (5 layers, mnemonic SCALP): Skin, Connective tissue (dense subcutaneous, holds vessels/nerves), Aponeurosis (epicranial aponeurosis / galea, formed with occipitofrontalis), Loose areolar connective tissue, Pericranium (periosteum of skull). Outer 3 (skin, connective, aponeurosis) move as one unit and are avulsed together in scalping. The LOOSE AREOLAR layer is the danger area - pus/blood/infection spread there and it is the scalping plane; the aponeurosis is the tendon layer and is the common WRONG answer for the spread layer. Scalp extent: superior nuchal lines (back) to supraorbital margins (front). Highly vascular: anterior = supratrochlear + supraorbital (from ophthalmic, a branch of the INTERNAL carotid); posterior/lateral = superficial temporal, posterior auricular, occipital (from EXTERNAL carotid). Bleeds from BOTH cut ends (rich anastomosis) and heals well. A transverse (side-to-side) wound gapes because the galea's fibres run longitudinally. Venous: supratrochlear/supraorbital -> facial vein; superficial temporal + maxillary -> retromandibular; all reach the internal jugular. Sensory: trigeminal (V1 supratrochlear/supraorbital, V2 zygomaticotemporal, V3 auriculotemporal); posterior = lesser occipital (C2-C3, cervical plexus/ventral rami) and greater + third occipital (DORSAL rami C2-C3).
+
+MUSCLES OF FACIAL EXPRESSION: ALL innervated by the facial nerve (CN VII); develop from the 2nd pharyngeal arch; lie in superficial fascia and insert into the SKIN; carry SVE fibres. Botox = blocks the ACh neuromuscular junction. Occipitofrontalis: frontal belly = horizontal forehead wrinkle (surprise); occipital belly from lateral 2/3 of superior nuchal line. Corrugator supercilii = vertical frown wrinkle. Orbicularis oculi = sphincter, CLOSES the eye (LPS opens it - CN III, NOT a facial muscle). Procerus (from nasal bone, zygomatic branch). Nasalis (compressor + dilator naris). Levator labii superioris alaeque nasi = elevate upper lip + flare nostril. Orbicularis oris = sphincter of the mouth (whistle/pout), the only closer; the rest dilate. Buccinator = trumpeter's muscle, origin from alveolar margins of maxilla/mandible + pterygomandibular raphe, PIERCED by the parotid duct, paralysis -> food pools/drooling. Zygomaticus major = smile (up + lateral). Risorius = grin. Mentalis = chin pucker. Platysma = the ONLY facial-expression muscle in the neck.
+
+FACIAL NERVE MOTOR BRANCHES: exits the STYLOMASTOID foramen -> parotid plexus. Mnemonic "To Zanzibar/Zambia By Motor Car": Temporal, Zygomatic, Buccal, Marginal mandibular, Cervical. Cervical -> platysma (most-missed). Temporal -> frontal belly, orbicularis oculi, corrugator, anterior/superior auricular (NOT mentalis - too far away). Buccal -> buccinator. Posterior auricular -> occipital belly + auricular muscles; plus branch to posterior belly of digastric & stylohyoid.
+
+FACIAL NERVE INTRACRANIAL COURSE: enters internal acoustic meatus -> geniculate ganglion (at the genu/bend) -> greater petrosal nerve (preganglionic parasympathetic) joins deep petrosal (postganglionic sympathetic, ICA plexus) = nerve of pterygoid canal -> pterygopalatine ganglion -> on V2 to lacrimal, nasal, palatine glands. In facial canal: nerve to stapedius (paralysis = hyperacusis) and chorda tympani (taste anterior 2/3 tongue + preganglionic parasympathetic to submandibular ganglion, exits petrotympanic fissure -> submandibular & sublingual glands). Three parasympathetic ganglia here: otic, pterygopalatine, submandibular.
+
+FACIAL NERVE LESIONS: Bell's palsy = idiopathic LMN facial paralysis (often after cold; Maini had it herself). LMN signs on affected side: loss of forehead wrinkling, cannot close the eye, loss of nasolabial fold, smile deviates to the NORMAL side. Orbicularis oculi paralysis -> loss of blinking -> xerophthalmia -> corneal abrasion -> corneal opacity -> blindness (strap the eye). Lagophthalmos = can't close the eye (lid lag). Ectropion = everted lower lid. Bell's phenomenon = eyeball rolls up & out on attempted closure (normal, just visible). Ramsay-Hunt (herpes zoster oticus) = zoster on CN VIII + geniculate ganglion of CN VII, vesicles. Frey's syndrome = gustatory sweating after parotidectomy.
+
+PAROTID GLAND: largest of the 3 paired salivary glands, ~30% of saliva; tough parotid sheath -> painful in mumps parotitis; facial nerve runs THROUGH it (parotidectomy -> facial palsy). Duct opens opposite the upper 2nd molar, pierces buccinator. Secretomotor parasympathetic path: CN IX (glossopharyngeal) -> tympanic branch -> tympanic plexus -> lesser petrosal -> OTIC ganglion -> auriculotemporal nerve (V3) -> parotid. (Trap: it is the 9th nerve, NOT the 7th.) Sympathetic: superior cervical ganglion -> external carotid plexus. Amylase begins carbohydrate digestion.
+
+TRIGEMINAL SENSORY ZONES: V1 = forehead, upper eyelid, nose tip & bridge, cornea; V2 = upper lip & cheek; V3 = lower lip & chin. Two "buccal" nerves: buccal branch of facial = motor (SVE) to buccinator; buccal nerve of V3 = sensory (GSA) to cheek. Auriculotemporal (V3) also carries postganglionic parasympathetic to the parotid. Trigeminal neuralgia (tic douloureux) = severe episodic V2/V3 pain, triggered by washing/shaving/chewing, drug of choice carbamazepine. Herpes zoster ophthalmicus = zoster in V1, can involve cornea -> blindness.
+
+FACIAL VESSELS & DANGER AREA: facial artery (branch of external carotid): submental, inferior labial, superior labial, lateral nasal, angular. Superficial temporal: transverse facial, frontal, parietal (TRICK: transverse facial is NOT a branch of the facial artery). Ophthalmic (from ICA): supraorbital, supratrochlear, dorsal nasal. Facial vein -> common facial (facial vein + anterior division of retromandibular) -> INTERNAL jugular (trap: not external). Danger area (nose + upper lip): facial vein connects to the cavernous sinus directly (superior & inferior ophthalmic veins) and indirectly (deep facial vein -> pterygoid venous plexus); infection can cause cavernous sinus thrombosis, meningitis, encephalitis.
+
+Open by offering to drill the scalp layers, the facial nerve (branches / course / lesions), the parotid secretomotor pathway (the 9th-nerve path), the trigeminal V1/V2/V3 map, or the danger area. When the student is wrong, name the rule and have them reason it out step by step, and remind them to draw it.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys - the face and scalp. Two big blocks to nail: the scalp (SCALP layers, and the loose areolar 'danger' layer), and the facial nerve - its five branches ('To Zanzibar By Motor Car'), its intracranial course (geniculate ganglion, greater petrosal, chorda tympani), and what a lesion looks like (Bell's palsy). Want me to drill the scalp layers, the facial-nerve branches and lesions, the parotid secretomotor pathway (remember, it's the 9th nerve, not the 7th), the trigeminal V1/V2/V3 map, or the danger area of the face? Where do you want to start?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the scalp layers and the danger layer",
+    "The facial nerve branches - what does each supply?",
+    "Walk the facial nerve's intracranial course and branches",
+    "Quiz the parotid secretomotor pathway (9th nerve)",
+    "The trigeminal V1/V2/V3 sensory map",
+    "The danger area of the face and cavernous sinus",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her Face &amp; Scalp lectures. It quizzes you and makes you analyze step by step (and draw it out) instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

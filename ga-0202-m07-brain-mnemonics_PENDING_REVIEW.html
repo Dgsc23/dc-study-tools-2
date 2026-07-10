@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · The Brain — Mnemonics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin-bottom: 8px; font-style: italic; font-size: 0.95rem; }
+.voice-note { color: #a7f3d0; text-align: center; margin-bottom: 22px; font-size: 0.82rem; line-height: 1.5; max-width: 760px; margin-left: auto; margin-right: auto; }
+.voice-note b { color: #6ee7b7; }
+.scope-note { background: rgba(45,212,191,0.08); border: 1px solid rgba(45,212,191,0.35); border-radius: 8px; padding: 12px 16px; margin: 0 auto 20px; max-width: 900px; color: #99f6e4; font-size: 0.85rem; line-height: 1.6; }
+.scope-note b { color: #2dd4bf; }
+.scope-note .warn { color: #fca5a5; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 34px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #60a5fa; }
+.card.maini { border-left-color: #2dd4bf; }
+.card.bui { border-left-color: #f59e0b; }
+.card.aid { border-left-color: #60a5fa; }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; font-weight: 700; }
+.card.maini .label { color: #5eead4; }
+.card.bui .label { color: #fbbf24; }
+.card.aid .label { color: #93c5fd; }
+.card .topic { font-size: 0.86rem; color: #cbd5e1; font-weight: 700; margin-bottom: 6px; }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.02rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.maini .hook { color: #5eead4; }
+.card.bui .hook { color: #fcd34d; }
+.card.aid .hook { color: #93c5fd; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .quote { margin-top: 8px; padding: 9px 11px; background: #04201d; border-left: 3px solid #2dd4bf; font-size: 0.88rem; color: #d1fae5; border-radius: 0 6px 6px 0; line-height: 1.55; font-style: italic; }
+.card.bui .quote { background: #1f1403; border-left-color: #f59e0b; color: #fde68a; }
+.card .quote .who { display: block; font-style: normal; font-size: 0.72rem; color: #5eead4; margin-top: 5px; letter-spacing: 0.03em; }
+.card.bui .quote .who { color: #fbbf24; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #60a5fa; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card .like b { color: #fde68a; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 900px; color: #94a3b8; font-size: 0.78rem; line-height: 1.9; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 5px; }
+.legend span { margin: 0 10px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card .fact { color: #222; } .card .like, .card .quote { background: #fff; color: #000; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 GA 0202 &middot; The Brain &mdash; Mnemonics</h1>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s brain lectures &mdash; her own hooks first, then clearly-labelled study aids.</p>
+<p class="voice-note">🔊 Best voices in <b>Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+
+<div class="scope-note">
+  <b>Honest framing:</b> The <span style="color:#5eead4;font-weight:700;">teal cards</span> are memory hooks in <b>Dr. Maini&rsquo;s own words</b> &mdash; each carries her verbatim quote from the Lecture 16 / 17 transcripts. The one <span style="color:#fbbf24;font-weight:700;">amber card</span> is a hook <b>Dr. Bui</b> gave that Maini relayed in class. The <span style="color:#93c5fd;font-weight:700;">blue cards</span> are <b>my illustrative study aids</b> &mdash; <span class="warn">NOT Maini&rsquo;s words</span> &mdash; but every <b>fact</b> they encode is already anti-fabrication verified in this module&rsquo;s Everything-MC bank and the transcripts. Learn the hook to pull the fact at speed; never quote a blue hook back to Dr. Maini as hers.
+</div>
+
+<div class="legend">
+  <span><span class="swatch" style="background:#2dd4bf;"></span>Dr. Maini&rsquo;s own words (quoted)</span>
+  <span><span class="swatch" style="background:#f59e0b;"></span>Dr. Bui&rsquo;s hook (relayed by Maini)</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>Illustrative aid &mdash; my study hook, not hers</span>
+</div>
+
+<h2>Topic 1 &mdash; 🎙️ Dr. Maini&rsquo;s OWN memory hooks (her words)</h2>
+<div class="topic-tagline">Every hook here is quoted straight from her Lecture 16 / 17 recordings.</div>
+<div class="cards">
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Thalamus = the sensory relay</div>
+<div class="hook">✈️ THALAMUS = LONDON HEATHROW LAYOVER</div>
+<div class="fact">The <b>thalamus</b> is the <b>relay center for almost every ascending sensation</b> on its way to the cortex. A sensory signal changes neurons here, like changing planes at a hub. The <b>one exception is smell</b> (olfaction), which bypasses the thalamus.</div>
+<div class="quote">&ldquo;So your thalamus is your London Heathrow. This is where there is a halt, you leave one flight, and start next flight.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 16 (~50:11)</span></div>
+<div class="src">Grounds Everything-MC Q57&ndash;Q58 &middot; L16 Thalamus</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Midbrain cross-section</div>
+<div class="hook">😠 MIDBRAIN = THE ANGRY MAN&rsquo;S FACE</div>
+<div class="fact">On a midbrain cross-section: the <b>red nuclei = the eyes</b> and the <b>substantia nigra = the eyebrows</b> (so substantia nigra sits <b>on top of</b> the red nucleus). Both are <b>midbrain</b> structures. The <b>cerebral aqueduct</b> runs through the middle, ringed by <b>periaqueductal gray</b>.</div>
+<div class="quote">&ldquo;Substantia nigra is like the eyebrows, red nucleus is like the eyes.&rdquo; &mdash; and she pulls it back on her quiz: &ldquo;Do you guys remember that man with the eyes and eyebrows?&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 16 (~1:12:44) / Lecture 17 quiz</span></div>
+<div class="src">Grounds Q67&ndash;Q68, Q75 &middot; L16 Midbrain section</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Cranial nerves IX, X, XI</div>
+<div class="hook">🤝 IX-X-XI = THREE CLOSE FRIENDS</div>
+<div class="fact"><b>CN IX, X, XI</b> travel together: they emerge from the <b>post-olivary sulcus</b> and leave the skull together through the <b>jugular foramen</b>. (She deliberately avoids &ldquo;three musketeers&rdquo; so they don&rsquo;t blur with another trio.)</div>
+<div class="quote">&ldquo;These are 3 close friends, 9, 10, 11. They stay together, post-olivary sulcus. And then jugular foramen.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 17 (~31:19)</span></div>
+<div class="src">Grounds Q82 &middot; L17 CN IX-X-XI</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Trochlear nerve (CN IV)</div>
+<div class="hook">🧣 CN IV DRAPES FORWARD LIKE A SCARF</div>
+<div class="fact"><b>CN IV (trochlear)</b> is the <b>only cranial nerve that emerges from the dorsal (posterior) aspect</b> of the brainstem &mdash; just below the <b>inferior colliculus</b> &mdash; then wraps around to the front, the way a scarf drapes from behind to the front.</div>
+<div class="quote">&ldquo;It moves anteriorly, like if you put a scarf, you know? From posterior side to anterior.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 17 (~26:14)</span></div>
+<div class="src">Grounds Q78 &middot; L17 CN IV</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Dural venous drainage</div>
+<div class="hook">🌀 SIGMOID SINUS = THE &ldquo;SIGMOID COLON&rdquo; OF THE SINUSES</div>
+<div class="fact">Just as the <b>sigmoid colon</b> is the end of the colon, the <b>sigmoid sinus</b> is the <b>last</b> dural venous sinus &mdash; it becomes the <b>internal jugular vein</b> as it exits through the <b>jugular foramen</b>. (She offers it as her own &ldquo;weird connection.&rdquo;)</div>
+<div class="quote">&ldquo;Sigmoid colon is the end part of colon? So, sigmoid sinus is the end part of sinuses &hellip; whatever helps you remember.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 17 (~1:16:22)</span></div>
+<div class="src">Grounds Q119 &middot; L17 Venous drainage</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Cerebellum &mdash; the vermis</div>
+<div class="hook">🐛 VERMIS = THE WORM BETWEEN THE HEMISPHERES</div>
+<div class="fact">The <b>vermis</b> is the worm/caterpillar-shaped band that <b>connects the two cerebellar hemispheres</b> (&ldquo;vermis&rdquo; literally means worm). Its shallow midline is why the <b>falx cerebelli</b> is narrow, unlike the deep falx cerebri.</div>
+<div class="quote">&ldquo;Looks like a caterpillar, or a worm. This is called as vermis.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 16 (~1:29:03)</span></div>
+<div class="src">Grounds Q87 &middot; L16 Vermis</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Hypothalamus</div>
+<div class="hook">🅆 W-SHAPED &middot; THE BODY&rsquo;S THERMOSTAT</div>
+<div class="fact">On the sagittal view she teaches the <b>hypothalamus as the &ldquo;W-shaped structure&rdquo;</b> below the thalamus. Function: it&rsquo;s the <b>thermostat</b> &mdash; plus thirst, hunger, endocrine control, sleep-wake cycle, and autonomic control.</div>
+<div class="quote">&ldquo;I tell my students the W-shaped structure &hellip; this is hypothalamus.&rdquo; &mdash; and in L17: &ldquo;hypothalamus is your thermostat.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 16 (~55:24) / Lecture 17 (~11:30)</span></div>
+<div class="src">Grounds Q60 &middot; L16&ndash;17 Hypothalamus</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Deep gray masses</div>
+<div class="hook">🧩 &ldquo;BASAL NUCLEI,&rdquo; NOT BASAL GANGLIA</div>
+<div class="fact">She insists on <b>basal nuclei</b> as the correct term. A <b>ganglion</b> is a group of cell bodies located <b>OUTSIDE the CNS</b> &mdash; and these masses are inside it &mdash; so &ldquo;basal ganglia&rdquo; is the clinician&rsquo;s term but technically wrong. The three: <b>caudate, putamen, globus pallidus</b>.</div>
+<div class="quote">&ldquo;Nuclei is the best terminology, basal ganglia is not the right terminology.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 16 (~8:56)</span></div>
+<div class="src">Grounds Q10&ndash;Q12 &middot; L16 Basal nuclei</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Abducens nerve (CN VI)</div>
+<div class="hook">👁️ ABDUCENS = THE NERVE THAT ABDUCTS THE EYE</div>
+<div class="fact">The name tells you the job: <b>CN VI abducts the eye</b> by supplying the <b>lateral rectus</b>. It emerges from the <b>middle of the pontomedullary sulcus</b>.</div>
+<div class="quote">&ldquo;It innervates the muscle that helps you abduct your eye &hellip; so abducens.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 17 (~28:39)</span></div>
+<div class="src">Grounds Q81 &middot; L17 CN VI</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Reticular activating system</div>
+<div class="hook">⏰ RETICULAR FORMATION = YOUR &ldquo;STAY-AWAKE&rdquo; NETWORK</div>
+<div class="fact">The <b>reticular formation / activating system</b> is a network of gray &amp; white matter in the <b>medulla and pons</b>. Sensations passing through it <b>keep you alert</b> &mdash; a light or a voice keeps you awake, and as the sensations die down, you fall asleep.</div>
+<div class="quote">&ldquo;This pathway activates you, keeps you alert &hellip; as the sensations die, we tend to sleep.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 17 (~38:04)</span></div>
+<div class="src">Grounds Q73 &middot; L17 Reticular formation</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Trap: the lingual gyrus</div>
+<div class="hook">👅 LINGUAL GYRUS = SHAPE ONLY, NOT THE TONGUE</div>
+<div class="fact">Named-for-shape trap she calls out directly: the <b>lingual gyrus</b> (medial/occipital surface, near the visual cortex) has <b>nothing to do with the tongue</b> &mdash; no tongue muscle, control, or sensation. It just looks tongue-shaped.</div>
+<div class="quote">&ldquo;Has got nothing to do with the tongue, it&rsquo;s because of the shape. It&rsquo;s called as lingual gyrus.&rdquo;<span class="who">&mdash; Dr. Maini, Lecture 16 (~44:28)</span></div>
+<div class="src">Grounds Q52 &middot; L16 Lingual gyrus</div>
+</div>
+
+<div class="card maini">
+<div class="label">🎙️ Dr. Maini&rsquo;s own words</div>
+<div class="topic">Her Latin decoder</div>
+<div class="hook">🔤 THE NAME TELLS YOU THE PART</div>
+<div class="fact">Maini decodes the roots for you: <b>pars = &ldquo;part&rdquo;</b> (pars orbitalis / triangularis / opercularis), <b>operculum = &ldquo;a lid&rdquo;</b>, <b>corpora quadrigemina = &ldquo;four bodies&rdquo;</b> (2 superior + 2 inferior colliculi), <b>arbor vitae = &ldquo;branching tree&rdquo;</b> (cerebellar white matter), and <b>folia = &ldquo;leaves&rdquo;</b> (cerebellar folds).</div>
+<div class="quote">&ldquo;Pars means part.&rdquo; &middot; &ldquo;Operculum means a lid.&rdquo; &middot; &ldquo;Corpora means bodies. Quadrigamina means 4 bodies.&rdquo; &middot; &ldquo;Folia means leaves.&rdquo;<span class="who">&mdash; Dr. Maini, Lectures 16 &amp; 17</span></div>
+<div class="src">Grounds Q34, Q64, Q86, Q88 &middot; L16&ndash;17</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; 🎙️ Dr. Bui&rsquo;s hook (relayed by Maini)</h2>
+<div class="topic-tagline">Maini credits this one to Dr. Bui in her own lecture &mdash; so it is a real classroom hook, just not hers.</div>
+<div class="cards">
+
+<div class="card bui">
+<div class="label">🎙️ Dr. Bui&rsquo;s hook &mdash; relayed by Maini</div>
+<div class="topic">Circle of Willis</div>
+<div class="hook">👽 CIRCLE OF WILLIS = &ldquo;ALIEN MAN&rdquo;</div>
+<div class="fact">Maini says Dr. Bui pictures the <b>Circle of Willis</b> as an <b>alien</b>: eyes, face, antennae, body, arms, and two legs. It sits at the <b>base of the brain</b>, circling the <b>optic chiasma, infundibulum, and mammillary bodies</b>, and is completed by the <b>posterior cerebral, posterior communicating, internal carotid, anterior cerebral, and anterior communicating</b> arteries.</div>
+<div class="quote">&ldquo;Dr. Bowie calls it Alien Man &hellip; these are the eyes, and then there is face &hellip; there are antennae &hellip; and then there&rsquo;s the body, and arms, and everything, and two legs also.&rdquo;<span class="who">&mdash; Dr. Maini relaying Dr. Bui, Lecture 17 (~1:12:05)</span></div>
+<div class="src">Grounds Q113&ndash;Q114 &middot; L17 Circle of Willis (transcript records &ldquo;Bowie&rdquo; = Bui)</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; 💡 Cranial nerves, foramina &amp; their contents</h2>
+<div class="topic-tagline">Illustrative aids for the module&rsquo;s longest lists &mdash; my hooks, not Maini&rsquo;s words. Facts are bank-verified.</div>
+<div class="cards">
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Where each cranial nerve exits</div>
+<div class="hook">🚪 TOP-TO-BOTTOM EXIT MAP (I&ndash;XII)</div>
+<div class="fact"><b>I</b> olfactory tract/bulb (no true nerve) &middot; <b>II</b> optic &rarr; chiasma &middot; <b>III</b> interpeduncular fossa &middot; <b>IV</b> dorsal midbrain, below inferior colliculus &middot; <b>V</b> side of the pons &middot; <b>VI</b> middle of pontomedullary sulcus &middot; <b>VII &amp; VIII</b> through internal acoustic meatus &middot; <b>IX-X-XI</b> post-olivary sulcus &middot; <b>XII</b> pre-olivary sulcus.</div>
+<div class="like">💡 Olive rule to lock in: <b>PRE-olive = 12</b> (one nerve, in front); <b>POST-olive = 9-10-11</b> (Maini&rsquo;s &ldquo;three friends,&rdquo; behind). Nothing between the olive and pyramid is XII&rsquo;s neighbor by accident.</div>
+<div class="src">Grounds Q77&ndash;Q85 &middot; L17 Cranial nerve attachments</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Foramina and what runs through them</div>
+<div class="hook">🕳️ 3 HOLES, 3 GUEST LISTS</div>
+<div class="fact"><b>Jugular foramen</b> &rarr; CN <b>IX, X, XI</b> (and the sigmoid sinus becoming the IJV). <b>Internal acoustic meatus</b> &rarr; CN <b>VII, VIII + labyrinthine artery</b>. <b>Foramen magnum</b> &rarr; medulla-to-spinal-cord + the two <b>vertebral arteries</b> entering.</div>
+<div class="like">💡 Hook for the ear canal: <b>&ldquo;Seven ate the labyrinth&rdquo;</b> &mdash; VII, VIII, and the labyrinthine artery (three tenants) share the internal acoustic meatus.</div>
+<div class="src">Grounds Q82, Q84, Q108, Q111 &middot; L17</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">4th-ventricle apertures</div>
+<div class="hook">💧 LUSCHKA = LATERAL (2) &middot; MAGENDIE = MEDIAN (1)</div>
+<div class="fact">CSF leaves the <b>4th ventricle</b> into the subarachnoid space through <b>two lateral foramina of Luschka</b> and <b>one median foramen of Magendie</b>.</div>
+<div class="like">💡 Both start with the same letter as their position: <b>L</b>uschka = <b>L</b>ateral (and there are two of them, one per side); <b>M</b>agendie = <b>M</b>edian (just the one, in the midline).</div>
+<div class="src">Grounds Q97 &middot; L17 CSF apertures</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Trigeminal (CN V) motor muscles</div>
+<div class="hook">🦷 THIN ROOT = MOTOR &middot; THICK ROOT = SENSORY</div>
+<div class="fact">The small <b>motor root of CN V</b> supplies the <b>muscles of mastication</b> plus <b>tensor tympani, tensor veli palatini, mylohyoid, and the anterior belly of digastric</b>. The thick root is sensory (most of the face).</div>
+<div class="like">💡 <b>Thin = motor, Thick = sensory</b> (Maini&rsquo;s own split). For the four &ldquo;extras&rdquo;: the two <b>tensors</b> (tympani + veli palatini) and the two floor-of-mouth muscles (<b>mylohyoid + anterior digastric</b>).</div>
+<div class="src">Grounds Q80 &middot; L17 CN V motor</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; 💡 Pathways &amp; sequences</h2>
+<div class="topic-tagline">The flow-charts Maini makes you recite &mdash; illustrative ordering hooks, facts bank-verified.</div>
+<div class="cards">
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">CSF circulation</div>
+<div class="hook">🚿 CSF FLOWS DOWN, THEN OUT, THEN HOME</div>
+<div class="fact"><b>Lateral ventricles</b> &rarr; interventricular foramina &rarr; <b>3rd ventricle</b> &rarr; cerebral aqueduct &rarr; <b>4th ventricle</b> &rarr; Luschka + Magendie &rarr; <b>subarachnoid space</b> &rarr; arachnoid granulations &rarr; <b>superior sagittal sinus</b> (back into blood).</div>
+<div class="like">💡 Three beats: <b>DOWN</b> the ventricles (1&rarr;3&rarr;4 via foramina/aqueduct), <b>OUT</b> to the subarachnoid space (Luschka/Magendie), <b>HOME</b> to the blood (arachnoid granulations &rarr; superior sagittal sinus). Block the granulations &rarr; hydrocephalus.</div>
+<div class="src">Grounds Q100&ndash;Q101 &middot; L17 CSF pathway</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Sensory vs motor neuron counts</div>
+<div class="hook">🔢 SENSORY = 4 STOPS &middot; MOTOR = 2 STOPS</div>
+<div class="fact"><b>Sensory (4 neurons):</b> ganglion &rarr; medulla &rarr; thalamus &rarr; postcentral gyrus. <b>Motor (2 neurons):</b> upper motor neuron in the precentral gyrus &rarr; lower (alpha) motor neuron in the anterior/ventral horn.</div>
+<div class="like">💡 Four sensory relay stops = <b>&ldquo;Ganglion, Medulla, Thalamus, Postcentral&rdquo;</b> (in from the periphery, up to the cortex). Motor is the short trip: brain &rarr; cord, just two.</div>
+<div class="src">Grounds Q29&ndash;Q30 &middot; L16&ndash;17 Motor/sensory pathways</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Internal carotid artery, in order</div>
+<div class="hook">🩸 4 PARTS: CERVICAL &rarr; PETROUS &rarr; CAVERNOUS &rarr; CEREBRAL</div>
+<div class="fact">The <b>internal carotid</b> runs <b>cervical &rarr; petrous &rarr; cavernous &rarr; cerebral</b>. The cerebral part gives the <b>ophthalmic artery</b>, then ends as the <b>anterior cerebral (medial surface)</b> and <b>middle cerebral (lateral surface)</b> arteries.</div>
+<div class="like">💡 Bottom-to-top through the bone: neck (<b>C</b>ervical) &rarr; petrous canal (<b>P</b>etrous) &rarr; cavernous sinus (<b>C</b>avernous) &rarr; into the brain (<b>C</b>erebral). MCA is the top stroke artery.</div>
+<div class="src">Grounds Q104&ndash;Q107 &middot; L17 ICA</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Vertebro-basilar build-up</div>
+<div class="hook">🔗 2 &rarr; 1 &rarr; 2 (VERTEBRALS &rarr; BASILAR &rarr; POSTERIOR CEREBRALS)</div>
+<div class="fact">The <b>two vertebral arteries</b> (branches of the <b>subclavian</b>) unite into the <b>single basilar artery</b>, which ends by splitting into the <b>two posterior cerebral arteries</b>. The occipital lobe&rsquo;s blood ultimately traces back to the <b>vertebrals</b>.</div>
+<div class="like">💡 Count it <b>2 &rarr; 1 &rarr; 2</b>: two vertebrals merge to one basilar, then fork back to two PCAs. It&rsquo;s the only place two arteries join into one.</div>
+<div class="src">Grounds Q108&ndash;Q112 &middot; L17 Vertebro-basilar</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; 💡 Deep gray, capsules &amp; lobes</h2>
+<div class="topic-tagline">The nested white-matter capsules and the lobe map &mdash; illustrative hooks, facts bank-verified.</div>
+<div class="cards">
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">The three capsules, inside &rarr; out</div>
+<div class="hook">🧅 INTERNAL &rarr; EXTERNAL &rarr; EXTREME</div>
+<div class="fact">Moving outward: <b>Internal capsule</b> (between caudate/globus pallidus and thalamus &mdash; carries the <b>corticospinal tract</b>, a common stroke site) &rarr; <b>External capsule</b> (between putamen and claustrum) &rarr; <b>Extreme capsule</b> (between claustrum and insular gray). The <b>claustrum</b> is the thin gray strip between the outer two.</div>
+<div class="like">💡 The names literally march outward: <b>Internal</b> (deepest, motor tract), then <b>External</b>, then <b>Extreme</b> (nearest the insula). Claustrum is the &ldquo;filling&rdquo; sandwiched between External and Extreme.</div>
+<div class="src">Grounds Q44&ndash;Q48 &middot; L16&ndash;17 Capsules</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Basal nuclei roster</div>
+<div class="hook">🚗 CAUDATE + PUTAMEN + GLOBUS PALLIDUS (THALAMUS IS THE IMPOSTOR)</div>
+<div class="fact">The three <b>basal nuclei</b>: <b>caudate, putamen, globus pallidus</b>. Putamen + globus pallidus = <b>lentiform nucleus</b>; add the caudate = <b>corpus striatum</b>. The <b>thalamus is NOT a basal nucleus</b> (it&rsquo;s diencephalon) &mdash; a favorite Menti trap.</div>
+<div class="like">💡 Lens shape = <b>Lentiform</b> = Putamen + Globus pallidus. The whole striped set = corpus <b>striatum</b>. If &ldquo;thalamus&rdquo; is in the choices for a basal-nuclei question, it&rsquo;s the wrong one.</div>
+<div class="src">Grounds Q12&ndash;Q13, Q43 &middot; L16&ndash;17 Basal nuclei</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Lobe &rarr; primary function</div>
+<div class="hook">🗺️ FRONT-MOVES, PARIETAL-FEELS, OCCIPUT-SEES, TEMPLE-HEARS, INSULA-TASTES</div>
+<div class="fact"><b>Frontal</b> = motor (+ Broca&rsquo;s speech, reasoning) &middot; <b>Parietal</b> = sensory / somesthetic &middot; <b>Occipital</b> = vision &middot; <b>Temporal</b> = hearing + smell (+ Wernicke&rsquo;s) &middot; <b>Insula</b> (deep 5th lobe) = taste.</div>
+<div class="like">💡 One verb each: front <b>moves</b>, parietal <b>feels</b>, occiput <b>sees</b>, temple <b>hears</b>, insula <b>tastes</b>. Precentral gyrus = motor; postcentral gyrus = sensory (they hug the central sulcus).</div>
+<div class="src">Grounds Q20&ndash;Q24, Q27&ndash;Q28 &middot; L16&ndash;17 Lobes</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Colliculi of the midbrain</div>
+<div class="hook">👁️👂 SUPERIOR = SIGHT &middot; INFERIOR = SOUND</div>
+<div class="fact">The <b>superior colliculi</b> are part of the <b>visual</b> pathway; the <b>inferior colliculi</b> are part of the <b>auditory</b> pathway. Together (2 + 2) they are the <b>corpora quadrigemina</b> on the dorsal midbrain.</div>
+<div class="like">💡 Alliteration keeps it straight: <b>S</b>uperior = <b>S</b>ight, and the lower pair handles what your ears feed <b>in</b> (Inferior = auditory). Eyes look up, ears sit lower.</div>
+<div class="src">Grounds Q64&ndash;Q65 &middot; L17 Colliculi</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; 💡 Diencephalon, limbic, tremor &amp; development</h2>
+<div class="topic-tagline">The remaining roster lists &mdash; illustrative hooks, facts bank-verified.</div>
+<div class="cards">
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Diencephalon components</div>
+<div class="hook">🏛️ 6 PARTS: THALAMUS &amp; FRIENDS (NOT THE MIDBRAIN)</div>
+<div class="fact">The <b>diencephalon</b> = <b>thalamus, hypothalamus, optic chiasma, pineal gland, mammillary bodies, and infundibulum</b>. Note the trap: the <b>midbrain is NOT diencephalon</b> (it&rsquo;s brainstem).</div>
+<div class="like">💡 Anchor on the two thalami and hang the rest off them: <b>hypo</b>thalamus below, <b>optic chiasma</b> in front, <b>pineal</b> behind, <b>mammillary bodies</b> + <b>infundibulum</b> on the floor. Six parts, all deep-midline.</div>
+<div class="src">Grounds Q123, L17 (~6:15) &middot; Diencephalon</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Limbic cortex &mdash; the 4 gyri</div>
+<div class="hook">💗 U-P-I-C: UNCUS &middot; PARAHIPPOCAMPAL &middot; ISTHMUS &middot; CINGULATE</div>
+<div class="fact">Maini groups four structures as the <b>limbic cortex</b>: <b>uncus, parahippocampal gyrus, isthmus, and cingulate gyrus</b> (the <b>isthmus</b> is the band linking the parahippocampal to the cingulate). The <b>fornix</b> is limbic too. Job: emotion, memory, reward/punishment.</div>
+<div class="like">💡 Read them as a loop from front-bottom around to top: <b>U</b>ncus &rarr; <b>P</b>arahippocampal &rarr; <b>I</b>sthmus &rarr; <b>C</b>ingulate. &ldquo;UPIC&rdquo; = the emotional ring.</div>
+<div class="src">Grounds Q54&ndash;Q56 &middot; L16 Limbic system</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Tremor localizer</div>
+<div class="hook">🤝 REST = BASAL NUCLEI &middot; INTENTION = CEREBELLUM</div>
+<div class="fact">A <b>resting tremor</b> is the hallmark of <b>basal-nuclear</b> dysfunction (Parkinsonism: slow, sluggish, rigid). An <b>intention tremor</b> &mdash; worse as the hand nears a target, with finger-nose overshoot, dysarthria, hypotonia &mdash; is the hallmark of <b>cerebellar</b> dysfunction.</div>
+<div class="like">💡 If it shakes <b>at rest</b>, blame the <b>basal nuclei</b>; if it shakes <b>on intention</b> (reaching), blame the <b>cerebellum</b>. Same word pairs the tremor to the structure.</div>
+<div class="src">Grounds Q49, Q89&ndash;Q90 &middot; L16 Tremor types</div>
+</div>
+
+<div class="card aid">
+<div class="label">💡 Illustrative aid &mdash; NOT Dr. Maini&rsquo;s words</div>
+<div class="topic">Brain vesicle derivatives</div>
+<div class="hook">🌱 TELE&rarr;HEMISPHERES &middot; DI&rarr;THALAMUS SET &middot; MET&rarr;PONS+CEREBELLUM &middot; MYEL&rarr;MEDULLA</div>
+<div class="fact"><b>Telencephalon</b> &rarr; cerebral hemispheres. <b>Diencephalon</b> &rarr; thalami, hypothalamus, infundibulum, pineal, mammillary bodies. <b>Mesencephalon</b> &rarr; midbrain. <b>Metencephalon</b> &rarr; pons + cerebellum. <b>Myelencephalon</b> &rarr; medulla (+ spinal cord). The whole neural tube is from <b>ectoderm</b>.</div>
+<div class="like">💡 Two &ldquo;M&rdquo;s of the hindbrain, alphabetical by size going down: <b>Met</b>encephalon (pons + cerebellum) sits above <b>Myel</b>encephalon (medulla). &ldquo;Myel&rdquo; &rarr; myelinated cord below.</div>
+<div class="src">Grounds Q122&ndash;Q124 &middot; L17 Development</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD &middot; GA 0202 Module 7 The Brain &mdash; Mnemonics</div>
+</div>
+
+<!-- PENDING REVIEW badge -->
+<style>
+.pending-badge{position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:99998;background:#7c2d12;color:#fed7aa;border:1px solid #ea580c;border-radius:999px;padding:4px 14px;font-size:.7rem;font-weight:700;letter-spacing:.08em;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.4);pointer-events:none}
+@media(max-width:600px){.pending-badge{top:4px;font-size:.62rem;padding:3px 10px}}
+.fab-in-iframe .pending-badge{display:none!important}
+</style>
+<div class="pending-badge">&#9203; PENDING REVIEW</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html" title="Return to the Brain Study Hub" aria-label="Return to the Brain Study Hub">📚</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 - The Brain (Dr. Maini)
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask about any brain mnemonic or fact..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (The Brain) with Dr. Maini at SCUHS. Mnemonics page question:\n\n";
+    if (ctx.question) prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

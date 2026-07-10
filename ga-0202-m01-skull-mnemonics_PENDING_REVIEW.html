@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 &middot; The Skull &mdash; Mnemonics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin-bottom: 10px; font-style: italic; font-size: 0.95rem; }
+.edge-banner { text-align: center; max-width: 880px; margin: 0 auto 12px; padding: 8px 14px; background: rgba(59,130,246,0.10); border: 1px solid rgba(59,130,246,0.35); border-radius: 8px; color: #93c5fd; font-size: 0.82rem; line-height: 1.5; }
+.pending-wrap { text-align: center; margin-bottom: 18px; }
+.pending-badge { display: inline-block; padding: 3px 12px; background: #3a2a0a; color: #fbbf24; border: 1px solid #b45309; border-radius: 6px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; }
+.scope-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.35); border-radius: 8px; padding: 10px 14px; margin: 0 auto 18px; max-width: 880px; color: #a7f3d0; font-size: 0.85rem; line-height: 1.55; }
+.scope-note b { color: #34d399; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #f59e0b; }
+.card.kinematics { border-left-color: #60a5fa; }
+.card.ligament { border-left-color: #a78bfa; }
+.card.muscle { border-left-color: #34d399; }
+.card.rule { border-left-color: #ef4444; }
+.card .tagrow { margin-bottom: 8px; }
+.card .tag { display: inline-block; font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 10px; }
+.card .tag.maini { background: rgba(251,191,36,0.15); color: #fcd34d; border: 1px solid rgba(251,191,36,0.45); }
+.card .tag.mine { background: rgba(148,163,184,0.12); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.35); }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 700; }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.kinematics .hook { color: #93c5fd; }
+.card.ligament .hook { color: #c4b5fd; }
+.card.muscle .hook { color: #6ee7b7; }
+.card.rule .hook { color: #fca5a5; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .quote { margin: 8px 0; padding: 8px 11px; background: rgba(251,191,36,0.06); border-left: 3px solid #fbbf24; border-radius: 0 6px 6px 0; font-size: 0.88rem; color: #fde68a; font-style: italic; line-height: 1.5; }
+.card .quote .q-src { display: block; margin-top: 4px; font-style: normal; font-size: 0.72rem; color: #a16207; letter-spacing: 0.02em; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #f59e0b; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card.kinematics .like { border-left-color: #60a5fa; }
+.card.ligament .like { border-left-color: #a78bfa; }
+.card.muscle .like { border-left-color: #34d399; }
+.card.rule .like { border-left-color: #ef4444; }
+.card .like b { color: #fde68a; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 880px; color: #94a3b8; font-size: 0.78rem; line-height: 1.7; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.legend span { margin: 0 8px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card .fact { color: #222; } .card .like { background: #fff; color: #000; } .card .quote { color: #000; background: #fffbe6; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 GA 0202 &middot; The Skull &mdash; Mnemonics</h1>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s skull osteology (Lectures 1&ndash;2), in &ldquo;think-of-it-like&rdquo; voice.</p>
+<div class="edge-banner">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+<div class="pending-wrap"><span class="pending-badge">PENDING REVIEW</span></div>
+<div class="scope-note">
+  <b>Two kinds of card, clearly marked.</b> A <b>🎙️ Dr. Maini&rsquo;s own</b> card carries her <b>exact words</b> (quoted, with the lecture cited). A <b>🧩 Study aid (mine)</b> card is <b>my</b> creative memory device &mdash; <b>never</b> hers. Either way, every underlying <b>fact</b> is drawn from this module&rsquo;s <b>audited 136-question Skull bank</b> and the L01&ndash;L02 transcripts. The hook is a handle; the fact is the anatomy.
+</div>
+<div class="legend">
+  <span><span class="swatch" style="background:#f59e0b;"></span>bones &amp; regions</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>landmarks &amp; points</span>
+  <span><span class="swatch" style="background:#a78bfa;"></span>foramina &amp; passages</span>
+  <span><span class="swatch" style="background:#34d399;"></span>development &amp; clinical</span>
+  <span><span class="swatch" style="background:#ef4444;"></span>rule / exam trap</span>
+</div>
+
+<h2>Topic 1 &mdash; Dr. Maini&rsquo;s OWN memory hooks</h2>
+<div class="topic-tagline">Straight from the lecture, in her words. Lead with these &mdash; they are the ones she actually handed the class.</div>
+<div class="cards">
+
+<div class="card">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Sphenoid</div>
+<div class="hook">🦇 SPHENOID = A BAT</div>
+<div class="fact">The <b>sphenoid</b> is a deep cranial bone with a <b>lesser wing</b>, a <b>greater wing</b>, and a downward <b>pterygoid process</b>. Those &ldquo;wings&rdquo; are why Maini calls it bat-shaped &mdash; and it carries <b>foramen rotundum, ovale &amp; spinosum</b> plus the <b>sella turcica</b>.</div>
+<div class="quote">&ldquo;Sphenoid is a bat-shaped bone, looks like a bat.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 Picture a <b>bat with spread wings</b> hanging in the middle of the skull. Once it is a bat, the two wings (greater + lesser) and its holes come for free.</div>
+<div class="src">Maini L01 &middot; bank: Sphenoid parts / bat-shaped</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Ovale + spinosum</div>
+<div class="hook">❗ OVALE + SPINOSUM = AN EXCLAMATION MARK</div>
+<div class="fact"><b>Foramen ovale</b> (large oval) and <b>foramen spinosum</b> (tiny dot) sit <b>right next to each other</b>. Both are part of the <b>sphenoid</b>, and both ARE visible in the inferior view.</div>
+<div class="quote">&ldquo;Ovale and spinosum, they stay together&hellip; if you write an exclamation mark, it goes like this.&rdquo;<span class="q-src">Maini, L02</span></div>
+<div class="like">💡 The big oval is the <b>tall stroke</b>, the little spinosum is the <b>dot underneath</b> &mdash; together they draw a <b>&ldquo;!&rdquo;</b>. Spinosum is even named for the neighbouring <b>spine of the sphenoid</b>.</div>
+<div class="src">Maini L02 &middot; bank: Sphenoid foramina; foramen spinosum naming</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Middle cranial fossa openings</div>
+<div class="hook">🌈 DRAW THE ARCH: SOF &rarr; ROTUNDUM &rarr; OVALE &rarr; SPINOSUM</div>
+<div class="fact">Four openings sweep <b>front-to-back in an arch</b>: <b>Superior Orbital Fissure</b>, foramen <b>Rotundum</b>, foramen <b>Ovale</b>, foramen <b>Spinosum</b> &mdash; all part of the <b>sphenoid</b>. Trap: <b>rotundum is NOT seen</b> in the inferior view.</div>
+<div class="quote">&ldquo;All these four foramina, they make an arch&hellip; it&rsquo;s going to take you four seconds, but you&rsquo;re going to remember this forever.&rdquo;<span class="q-src">Maini, L01 / L02</span></div>
+<div class="like">💡 Do exactly what she says: <b>sketch the little curved arch</b> and label the four in order. It is her single highest-yield study move for this module.</div>
+<div class="src">Maini L01/L02 &middot; bank: SOF-rotundum-ovale-spinosum arch</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Crista galli</div>
+<div class="hook">🐓 CRISTA GALLI = A ROOSTER&rsquo;S COMB</div>
+<div class="fact"><b>Crista galli</b> is the midline ridge of the <b>ethmoid</b> bone, standing up in the centre of the <b>cribriform plate</b>.</div>
+<div class="quote">&ldquo;Galli is the name for rooster, and this is like a rooster&rsquo;s comb, that red-coloured thing they have.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 &ldquo;Crista galli&rdquo; literally means <b>rooster&rsquo;s crest</b>. See the red comb standing up between the two perforated plates &mdash; that is the ethmoid&rsquo;s ridge.</div>
+<div class="src">Maini L01 &middot; bank: Crista galli (ethmoid)</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Cribriform plate</div>
+<div class="hook">🧂 CRIBRIFORM = A FILTER FULL OF HOLES</div>
+<div class="fact">The <b>cribriform plate</b> of the <b>ethmoid</b> is peppered with holes that transmit fascicles of the <b>olfactory nerve (CN I)</b>. It helps floor the <b>anterior cranial fossa</b>.</div>
+<div class="quote">&ldquo;Cribriform means something like a filter, with multiple perforations.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 A <b>sieve / salt-shaker</b> lets tiny things sift through &mdash; here the tiny things are the smell-nerve strands rising from the nose into the brain.</div>
+<div class="src">Maini L01 &middot; bank: Cribriform plate contents (CN I)</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Emissary veins</div>
+<div class="hook">🛂 EMISSARY VEIN = A DIPLOMATIC EMISSARY</div>
+<div class="fact"><b>Parietal emissary foramina</b> carry <b>emissary veins</b>, which <b>connect the extracranial veins with the intracranial veins</b>.</div>
+<div class="quote">&ldquo;Emissary means something coming from another place&hellip; like an embassy official, an emissary to the USA.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 An emissary is a <b>messenger who links two countries</b>. An emissary vein links the <b>two &ldquo;countries&rdquo; of the head</b> &mdash; inside the skull and outside it.</div>
+<div class="src">Maini L01 &middot; bank: Emissary veins (parietal foramina)</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Mental foramen</div>
+<div class="hook">🤔 MENTAL FORAMEN = HAND-ON-CHIN &ldquo;THINKING&rdquo;</div>
+<div class="fact">The <b>mental foramen</b> of the <b>mandible</b> lets the <b>mental nerve</b> out onto the chin (sensory to the <b>lower lip &amp; chin</b>). It is the far end of the <b>inferior alveolar nerve</b>.</div>
+<div class="quote">&ldquo;The mental nerve leaves the mandible through this foramen &mdash; mentally, when you think&hellip; you keep your hand on your chin.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 Strike the <b>thinker pose</b>: hand resting on the chin. Your fingers land right over the <b>mental</b> foramen &mdash; &ldquo;mental&rdquo; as in <i>thinking</i>.</div>
+<div class="src">Maini L01 &middot; bank: Mental foramen / mental nerve</div>
+</div>
+
+<div class="card">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Ethmoid</div>
+<div class="hook">🕸️ &ldquo;ETHMOID IS EVERYWHERE&rdquo;</div>
+<div class="fact">The <b>ethmoid</b> builds the <b>roof of the nasal cavity</b> (cribriform plate), a <b>lateral wall</b>, the <b>upper nasal septum</b> (perpendicular plate), and the <b>superior + middle conchae</b>. Trap: the <b>lower</b> septum is the <b>vomer</b>, and the <b>inferior concha</b> is its own bone.</div>
+<div class="quote">&ldquo;I told you &mdash; ethmoid is everywhere.&rdquo;<span class="q-src">Maini, L01 / L02</span></div>
+<div class="like">💡 When a nasal-cavity part is asked and you are unsure, <b>ethmoid is the safe first guess</b> &mdash; except the two it does NOT own: lower septum (vomer) and inferior concha (separate bone).</div>
+<div class="src">Maini L01/L02 &middot; bank: Ethmoid contributions</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Chiasmatic sulcus</div>
+<div class="hook">🏠 &ldquo;WHO LIVES IN JOHN&rsquo;S HOUSE? JOHN.&rdquo;</div>
+<div class="fact">The <b>chiasmatic (prechiasmatic) sulcus</b> lodges the <b>optic chiasma</b> &mdash; it is <b>named for what it holds</b>.</div>
+<div class="quote">&ldquo;What is located in the chiasmatic sulcus? The optic chiasma. Who lives in John&rsquo;s house? John.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 Her rule for the whole skull: many grooves and canals are <b>named after their tenant</b> &mdash; carotid sulcus holds the carotid, chiasmatic sulcus holds the chiasma. Read the name, name the content.</div>
+<div class="src">Maini L01 &middot; bank: Chiasmatic sulcus (optic chiasma)</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Superciliary arch</div>
+<div class="hook">👁️ SUPER-CILIARY = ABOVE THE BROW HAIR</div>
+<div class="fact">The <b>superciliary arches</b> are the ridges just <b>above the orbital margins</b>; the smooth <b>glabella</b> sits between them (both part of the <b>frontal</b> bone).</div>
+<div class="quote">&ldquo;Cilia means hair &mdash; which hair? Your brow.&rdquo;<span class="q-src">Maini, L02</span></div>
+<div class="like">💡 <b>Super</b> (above) + <b>cilia</b> (eyelash/brow hair) = the ridge <b>above your eyebrow</b>. Same &ldquo;cilia = hair&rdquo; root shows up all over anatomy.</div>
+<div class="src">Maini L02 &middot; bank: Frontal eminence / glabella</div>
+</div>
+
+<div class="card">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Names that describe the shape</div>
+<div class="hook">🔤 PIRIFORM = PEAR &middot; ROTUNDUM = ROUND &middot; LACERUM = LACY</div>
+<div class="fact"><b>Piriform aperture</b> = the pear-shaped <b>anterior nasal aperture</b>. <b>Foramen rotundum</b> = round. <b>Foramen lacerum</b> = jagged/&ldquo;lacy&rdquo; margins, and it is the odd one <b>built from three bones</b> (sphenoid, temporal, occipital).</div>
+<div class="quote">&ldquo;Piriform, because it&rsquo;s pear-shaped&hellip; rotundum comes from the shape, that is round&hellip; lacerum, the name comes from the lacy, jagged margin.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 Half the foramina <b>tell you their own shape</b>. When the name sounds like a shape (pear, round, lacy), trust it &mdash; Maini leans on this constantly.</div>
+<div class="src">Maini L01 &middot; bank: Piriform aperture; foramen lacerum (3 bones)</div>
+</div>
+
+<div class="card rule">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Suture naming</div>
+<div class="hook">🧩 A SUTURE IS NAMED FOR THE TWO BONES IT LIES BETWEEN</div>
+<div class="fact"><b>Fronto-nasal</b> (frontal+nasal), <b>coronal</b> (frontal+parietal), <b>sagittal</b> (parietal+parietal), <b>squamous</b> (temporal+parietal), <b>lambdoid</b> (parietal+occipital), <b>occipitomastoid</b> (occipital+temporal). Sutures are the body&rsquo;s <b>most stable, least mobile</b> joints.</div>
+<div class="quote">&ldquo;Sutures are named after the articulating bones &mdash; the bones they are located in between.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 Don&rsquo;t memorise a list &mdash; <b>read the two bones and glue their names</b>. The only oddball is the palate&rsquo;s <b>cruciform</b> suture (a cross of three: intermaxillary + palatomaxillary + interpalatine).</div>
+<div class="src">Maini L01 &middot; bank: Suture naming; cruciform suture</div>
+</div>
+
+<div class="card rule">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Carotid canal vs internal acoustic meatus</div>
+<div class="hook">👀 SAME NEIGHBOUR, DIFFERENT VIEW</div>
+<div class="fact">The opening beside the <b>jugular foramen</b> depends on the view: <b>INFERIOR view &rarr; carotid canal</b> (internal carotid artery); <b>INTERNAL base view &rarr; internal acoustic meatus</b> (to the inner ear). Students mix these up.</div>
+<div class="quote">&ldquo;In the inferior view, the carotid canal lies right next to the jugular foramen&hellip; please write this in bold &mdash; inferior view only.&rdquo;<span class="q-src">Maini, L02</span></div>
+<div class="like">💡 Before you answer &ldquo;what&rsquo;s next to the jugular foramen,&rdquo; <b>check which view you&rsquo;re in</b>. Bottom of skull = carotid canal; inside the base = internal acoustic meatus.</div>
+<div class="src">Maini L02 &middot; bank: Inferior vs internal base neighbour of jugular foramen</div>
+</div>
+
+<div class="card muscle">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Scaphocephaly</div>
+<div class="hook">🛶 SCAPHA = A BOAT</div>
+<div class="fact"><b>Scaphocephaly</b> is a <b>long, narrow, boat-shaped head</b> from <b>premature fusion of the sagittal suture</b>.</div>
+<div class="quote">&ldquo;It&rsquo;s a condition where the child has a boat-shaped head. Scapha means a boat.&rdquo;<span class="q-src">Maini, L02</span></div>
+<div class="like">💡 Sagittal suture fuses too early, so the skull can&rsquo;t widen &mdash; it grows long and keeled like an <b>upturned canoe</b>. Scapha = boat.</div>
+<div class="src">Maini L02 &middot; bank: Scaphocephaly</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag maini">🎙️ Dr. Maini&rsquo;s own</span></div>
+<div class="label">Quick spoken hooks</div>
+<div class="hook">⚡ &ldquo;PAT&rdquo; &middot; &ldquo;NOT ONION&rdquo; &middot; &ldquo;BLESSING&rdquo;</div>
+<div class="fact"><b>Parietal</b> &mdash; &ldquo;where you <b>pat</b> your younger brother&rdquo; (top/side of head). <b>Inion</b> = external occipital protuberance (&ldquo;not <b>onion</b>&rdquo;). <b>Bregma</b> = coronal+sagittal junction (&ldquo;from <b>blessing</b> &mdash; you touch the forehead&rdquo;).</div>
+<div class="quote">&ldquo;Two parietal bones, where you pat your younger brother&hellip; inion, not onion&hellip; bregma comes from blessing, you touch the forehead.&rdquo;<span class="q-src">Maini, L01</span></div>
+<div class="like">💡 These are throw-away lines she said in class, but they stick: <b>pat</b> &rarr; parietal, <b>not onion</b> &rarr; inion, <b>blessing on the forehead</b> &rarr; bregma up top.</div>
+<div class="src">Maini L01 &middot; bank: Cranial bones; inion; bregma</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; Bones of the skull (study aids)</h2>
+<div class="topic-tagline">The two families and the exam-trap bones. Cards below are my devices, not Maini&rsquo;s words &mdash; the facts are hers.</div>
+<div class="cards">
+
+<div class="card">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Two families</div>
+<div class="hook">🧠 NEURO = BRAIN-BOX &middot; VISCERO = FACE</div>
+<div class="fact">Maini splits the skull in two: the <b>neurocranium</b> (cranial bones that <b>surround the brain</b>) and the <b>viscerocranium</b> (facial bones that <b>support the visceral organs</b> &mdash; nasal &amp; oral cavities).</div>
+<div class="like">💡 <b>Neuro</b> = neurons = the <b>brain box</b>. <b>Viscero</b> = viscera = the <b>face</b> around the airway and mouth. Every skull bone lands in one bucket.</div>
+<div class="src">Study aid &middot; bank: Skull divisions (neuro- vs viscerocranium)</div>
+</div>
+
+<div class="card">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">The 8 cranial bones</div>
+<div class="hook">🪜 &ldquo;STEP OF&rdquo; THE BRAIN BOX</div>
+<div class="fact">Eight neurocranium bones, six names: <b>S</b>phenoid, <b>T</b>emporal (&times;2), <b>E</b>thmoid, <b>P</b>arietal (&times;2), <b>O</b>ccipital, <b>F</b>rontal. Ethmoid &amp; sphenoid sit deep &ldquo;inside&rdquo; but still count as cranial.</div>
+<div class="like">💡 Say &ldquo;<b>STEP OF</b> the brain box.&rdquo; Temporal and parietal are the <b>paired</b> ones (&times;2 each), which turns 6 names into 8 bones.</div>
+<div class="src">Study aid &middot; bank: Cranial bone list</div>
+</div>
+
+<div class="card rule">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Facial-bone traps</div>
+<div class="hook">🎭 SEPTUM &amp; CONCHA TRAPS</div>
+<div class="fact"><b>Upper</b> nasal septum = <b>ethmoid</b> (perpendicular plate); <b>lower</b> septum = <b>vomer</b>. <b>Superior + middle conchae</b> = ethmoid; <b>inferior concha</b> = its <b>own separate bone</b> (Maini&rsquo;s &ldquo;none of the above&rdquo; trap). <b>Lacrimal</b> = the tiny bone in the <b>medial wall of the orbit</b>.</div>
+<div class="like">💡 Vertical split of the septum: <b>ethmoid on top, vomer on the bottom</b>. Conchae: two are ethmoid, the <b>bottom one stands alone</b>.</div>
+<div class="src">Study aid &middot; bank: Nasal septum; conchae; lacrimal</div>
+</div>
+
+<div class="card muscle">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">The 4 sinus bones</div>
+<div class="hook">🫁 FOUR PNEUMATIZED BONES SPELL A FACE</div>
+<div class="fact">Only <b>four</b> bones hold paranasal air sinuses: <b>Frontal</b> (forehead), <b>Ethmoid</b> (between the eyes), <b>Maxillary</b> (cheeks), <b>Sphenoid</b> (deep centre). They <b>lighten the skull</b> and <b>add resonance</b> to the voice.</div>
+<div class="like">💡 Trace them <b>top &rarr; middle &rarr; cheeks &rarr; deep</b> across a face. Separate trap: <b>mastoid air cells</b> are a <b>closed</b> system &mdash; they do NOT communicate with the nasal cavity.</div>
+<div class="src">Study aid &middot; bank: Paranasal sinus bones; mastoid air cells</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; Sutures &amp; the fragile points</h2>
+<div class="topic-tagline">Where sutures cross, bone is thin and fracture-prone. Learn the junctions and the danger under the pterion.</div>
+<div class="cards">
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">The midline junction points</div>
+<div class="hook">📍 NASION &middot; BREGMA &middot; LAMBDA (front to back)</div>
+<div class="fact"><b>Nasion</b> = internasal + frontonasal sutures. <b>Bregma</b> = coronal + sagittal. <b>Lambda</b> = sagittal + lambdoid. <b>Vertex</b> = the highest point (just behind bregma).</div>
+<div class="like">💡 Walk the midline nose-to-back: <b>Nasion &rarr; Bregma &rarr; Lambda</b>. Bregma is where the <b>crown</b> (coronal) meets the <b>arrow</b> (sagittal); lambda looks like the letter <b>&lambda;</b>.</div>
+<div class="src">Study aid &middot; bank: Nasion; bregma; lambda; vertex</div>
+</div>
+
+<div class="card rule">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Pterion &mdash; the danger spot</div>
+<div class="hook">🩸 4 BONES OVER THE MIDDLE MENINGEAL ARTERY</div>
+<div class="fact"><b>Pterion</b> is an <b>H-shaped</b> meeting of <b>four bones</b>: <b>frontal, parietal, temporal, sphenoid</b> (greater wing). The <b>middle meningeal artery</b> runs deep to it &mdash; a blow here can fracture it and cause an <b>epidural (extradural) hemorrhage</b>.</div>
+<div class="like">💡 &ldquo;<b>Four bones meet at the H; the middle meningeal hides beneath.</b>&rdquo; It is also the future site of the <b>anterolateral fontanelle</b>.</div>
+<div class="src">Study aid &middot; bank: Pterion (bones + MMA); pterion fracture</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Asterion</div>
+<div class="hook">⭐ ASTERION = 3 SUTURES MEET</div>
+<div class="fact"><b>Asterion</b> is where the <b>squamous, lambdoid, and occipitomastoid</b> sutures meet, low on the back-side of the skull. It is the future site of the <b>posterolateral (mastoid) fontanelle</b>.</div>
+<div class="like">💡 <b>Aster</b> = star. Picture a little <b>three-point star</b> (three sutures) low behind the ear. Pterion has four bones up front; asterion has three sutures out back.</div>
+<div class="src">Study aid &middot; bank: Asterion (3 sutures)</div>
+</div>
+
+<div class="card rule">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Why the junctions matter</div>
+<div class="hook">💥 MANY SUTURES = THIN = FRACTURE-PRONE</div>
+<div class="fact">Maini stresses points like <b>nasion, pterion, asterion, lambda</b> because <b>multiple sutures converge</b> there, leaving the bone <b>fragile</b>. A hard blow tends to fracture at these convergences.</div>
+<div class="like">💡 Think of <b>seams on a garment</b>: where several seams cross, the fabric tears first. Same for the skull&rsquo;s suture crossings.</div>
+<div class="src">Study aid &middot; bank: Clinical importance of suture-junction points</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; Foramina &amp; what runs through them</h2>
+<div class="topic-tagline">The single hardest list. Each hook ties one opening to its one contents &mdash; grounded in the bank.</div>
+<div class="cards">
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Foramen magnum</div>
+<div class="hook">🕳️ THE BIG HOLE = BRAINSTEM MEETS CORD</div>
+<div class="fact">The <b>foramen magnum</b> transmits the junction of the <b>medulla oblongata and the spinal cord</b> &mdash; where the brainstem becomes the cord.</div>
+<div class="like">💡 <b>Magnum = biggest</b>, and it carries the <b>biggest structure</b> leaving the brain: the cord itself.</div>
+<div class="src">Study aid &middot; bank: Foramen magnum contents</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Jugular foramen &amp; carotid canal</div>
+<div class="hook">🩸 THE TWO BIG BRAIN VESSELS, SIDE BY SIDE</div>
+<div class="fact"><b>Jugular foramen</b> (between <b>temporal + occipital</b> bones) drains the <b>internal jugular vein</b>. The neighbouring <b>carotid canal</b> carries the <b>internal carotid artery</b>. Vein out, artery in.</div>
+<div class="like">💡 The brain&rsquo;s <b>main artery-in and main vein-out</b> live next door to each other. In the inferior view, find the jugular foramen and the carotid canal is right beside it.</div>
+<div class="src">Study aid &middot; bank: Jugular foramen; carotid canal contents</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Stylomastoid foramen</div>
+<div class="hook">😀 THE FACE EXITS BETWEEN STYLOID &amp; MASTOID</div>
+<div class="fact">The <b>facial nerve (CN VII)</b> leaves the skull through the <b>stylomastoid foramen</b>, tucked between the <b>styloid and mastoid processes</b>.</div>
+<div class="like">💡 <b>Face</b> exits at <b>stylo-mastoid</b>. The name literally hands you its two landmarks and the nerve rhymes with the exit: the <b>facial</b> nerve.</div>
+<div class="src">Study aid &middot; bank: Stylomastoid foramen (facial nerve)</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Cribriform &amp; optic canal</div>
+<div class="hook">👃 SMELL SIFTS &middot; 👁️ SIGHT THREADS THE OPTIC CANAL</div>
+<div class="fact"><b>Cribriform plate</b> (ethmoid) = fascicles of the <b>olfactory nerve (CN I)</b>. <b>Optic canal</b> (sphenoid) = the <b>optic nerve (CN II)</b>.</div>
+<div class="like">💡 <b>Smell</b> sifts through the ethmoid <b>sieve</b>; <b>sight</b> threads the <b>optic</b> canal. Senses 1 and 2 enter through the two front-most openings.</div>
+<div class="src">Study aid &middot; bank: Cribriform (CN I); optic canal (CN II, sphenoid)</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Multi-bone foramina</div>
+<div class="hook">🧱 LACERUM = 3 BONES (S-T-O) &middot; JUGULAR = 2 (T-O)</div>
+<div class="fact"><b>Foramen lacerum</b> is bordered by <b>three</b> bones: <b>S</b>phenoid, <b>T</b>emporal, <b>O</b>ccipital. The <b>jugular foramen</b> is bordered by <b>two</b>: <b>T</b>emporal + <b>O</b>ccipital.</div>
+<div class="like">💡 Both share the <b>&ldquo;T-O&rdquo;</b> pair (temporal + occipital). Lacerum just adds the <b>sphenoid</b> up front. Remember: &ldquo;<b>STO</b> for the lacy one.&rdquo;</div>
+<div class="src">Study aid &middot; bank: Foramen lacerum (3 bones); jugular foramen (2 bones)</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Palatine &amp; supraorbital</div>
+<div class="hook">🏷️ &ldquo;OF THE SAME NAME&rdquo; PACKAGES</div>
+<div class="fact">Several openings pass an <b>artery, vein, and nerve of the same name</b>: <b>supraorbital</b> foramen (supraorbital n./a./v.) and the <b>greater &amp; lesser palatine</b> foramina (palatine vessels &amp; nerve). The <b>mandibular foramen</b> passes the <b>inferior alveolar nerve</b>, exiting the <b>mental foramen</b> as the <b>mental nerve</b>.</div>
+<div class="like">💡 When a foramen&rsquo;s name matches a nerve name, expect the <b>matching artery + vein too</b> &mdash; one tidy neurovascular bundle.</div>
+<div class="src">Study aid &middot; bank: Supraorbital; palatine foramina; mandibular/mental</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; Cranial fossae &amp; their floors</h2>
+<div class="topic-tagline">Three stepped floors, front to back. Know which bones build each floor and what sits inside.</div>
+<div class="cards">
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Anterior cranial fossa floor</div>
+<div class="hook">🅵🅴🆂 = FRONTAL + ETHMOID + SPHENOID</div>
+<div class="fact">Floor of the <b>anterior</b> fossa: <b>orbital plate of the Frontal</b>, <b>cribriform plate of the Ethmoid</b>, and <b>lesser wing of the Sphenoid</b>. Landmarks: <b>crista galli</b>, <b>foramen cecum</b> (a blind hole &mdash; nothing passes).</div>
+<div class="like">💡 Three bones, front-to-back: <b>F-E-S</b>. Frontal roofs the orbits, ethmoid sieves in the middle, sphenoid&rsquo;s lesser wing caps the back edge.</div>
+<div class="src">Study aid &middot; bank: Anterior cranial fossa floor; foramen cecum</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Middle cranial fossa</div>
+<div class="hook">🦇 SPHENOID CENTRE + TEMPORAL WINGS</div>
+<div class="fact">The <b>middle</b> fossa is floored by the <b>greater wing + body of the sphenoid</b> and the <b>squamous + petrous temporal</b> bone. Its <b>posterior boundary</b> = the <b>crest of the petrous temporal</b>. It holds the sphenoid&rsquo;s foramina arch and the <b>sella turcica</b>.</div>
+<div class="like">💡 The <b>bat (sphenoid)</b> sits in the centre with the <b>temporal</b> bones as side walls, and the sharp <b>petrous ridge</b> is the back fence.</div>
+<div class="src">Study aid &middot; bank: Middle cranial fossa floor / posterior boundary</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Sella turcica</div>
+<div class="hook">🪑 TURKISH SADDLE FOR THE PITUITARY</div>
+<div class="fact">The <b>sella turcica</b> (body of the <b>sphenoid</b>) seats the <b>pituitary gland</b>. Three parts front-to-back: <b>tuberculum sellae</b>, <b>hypophyseal fossa</b> (the pituitary), <b>dorsum sellae</b>. The sphenoid sinus sits just below &mdash; the route for a <b>trans-sphenoidal</b> pituitary approach.</div>
+<div class="like">💡 A <b>saddle</b> (sella = saddle) with the pituitary sitting in the seat. Because the sphenoid sinus is right underneath, surgeons can reach the gland <b>through the nose</b>.</div>
+<div class="src">Study aid &middot; bank: Sella turcica parts; trans-sphenoidal approach</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Posterior cranial fossa</div>
+<div class="hook">〽️ CLIVUS + VENOUS GROOVES (S IS FOR SIGMOID)</div>
+<div class="fact">The <b>posterior</b> fossa is floored mainly by the <b>occipital</b> (its inner basilar slope = the <b>clivus</b>) and the <b>petrous temporal</b>. Venous-sinus grooves to know: <b>Sigmoid</b> (the <b>S-shaped</b> one), <b>transverse</b>, and <b>superior + inferior petrosal</b>.</div>
+<div class="like">💡 The <b>S-shaped</b> groove is the <b>Sigmoid</b> sinus (sigma = S). The clivus is the smooth <b>ski-slope</b> of the basilar occipital, running down toward the foramen magnum.</div>
+<div class="src">Study aid &middot; bank: Clivus; sigmoid / petrosal sinus grooves</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; Development, fontanelles &amp; anomalies</h2>
+<div class="topic-tagline">How the skull is built, the soft spots and their future landmarks, and the named malformations.</div>
+<div class="cards">
+
+<div class="card muscle">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Ossification</div>
+<div class="hook">🧱 FLAT = MEMBRANE &middot; BASE = CARTILAGE</div>
+<div class="fact"><b>Flat</b> bones (frontal, parietal &mdash; the roof and sides) form by <b>intramembranous</b> ossification. <b>Irregular</b> bones and the <b>base</b> of the skull form by <b>endochondral (cartilaginous)</b> ossification &mdash; the base is dense/&ldquo;petrous&rdquo; to protect the brain.</div>
+<div class="like">💡 &ldquo;<b>Flat From Membrane; Base is Cartilage.</b>&rdquo; Thin roof = a membrane that hardened; tough base = cartilage that hardened.</div>
+<div class="src">Study aid &middot; bank: Membranous vs endochondral ossification</div>
+</div>
+
+<div class="card muscle">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Embryonic origins</div>
+<div class="hook">🌱 CREST ON TOP &middot; ARCHES MAKE THE FACE</div>
+<div class="fact"><b>Neurocranium</b> = mainly <b>neural crest</b>; the <b>base (chondrocranium)</b> adds <b>occipital somites</b>; the <b>viscerocranium (face)</b> = the <b>first two pharyngeal arches</b>.</div>
+<div class="like">💡 <b>Brain box from the neural crest, face from the first two arches.</b> The base borrows a bit of somite to build its tough floor.</div>
+<div class="src">Study aid &middot; bank: Neurocranium / viscerocranium origins</div>
+</div>
+
+<div class="card kinematics">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Fontanelles &rarr; future landmarks</div>
+<div class="hook">🔷 ANT = BREGMA &middot; 🔺 POST = LAMBDA &middot; SIDES = -TERIONS</div>
+<div class="fact"><b>Anterior</b> fontanelle (<b>diamond</b>) &rarr; <b>bregma</b>. <b>Posterior</b> (<b>triangle</b>) &rarr; <b>lambda</b>. <b>Anterolateral</b> &rarr; <b>pterion</b>. <b>Posterolateral (mastoid)</b> &rarr; <b>asterion</b>.</div>
+<div class="like">💡 Midline soft spots become the <b>midline points</b> (bregma, lambda); the side soft spots become the <b>&ldquo;-terions&rdquo;</b> (pterion, asterion). Shape tags: diamond in front, triangle behind.</div>
+<div class="src">Study aid &middot; bank: Fontanelles &amp; their future sites</div>
+</div>
+
+<div class="card rule">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Anterior fontanelle clinic</div>
+<div class="hook">🩺 SUNKEN &middot; BULGING &middot; DELAYED</div>
+<div class="fact">The <b>anterior</b> fontanelle is the one pediatricians palpate (largest, <b>last to close &mdash; about 18 months</b>). <b>Sunken</b> = dehydration; <b>bulging</b> = raised intracranial pressure (hydrocephalus/tumor); <b>delayed closure</b> = rickets (vitamin&nbsp;D / calcium deficiency).</div>
+<div class="like">💡 One soft spot, three readings: <b>down = dry, up = pressure, late = rickets.</b> It closes last, so it is the useful clinical window.</div>
+<div class="src">Study aid &middot; bank: Fontanelle clinical signs / closure</div>
+</div>
+
+<div class="card rule">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Craniosynostosis shapes</div>
+<div class="hook">🛶 BOAT &middot; 🗼 TOWER &middot; ↔️ LOPSIDED</div>
+<div class="fact"><b>Scaphocephaly</b> = sagittal fusion &rarr; long boat head. <b>Oxycephaly / turricephaly</b> = coronal fusion &rarr; tall tower head. <b>Plagiocephaly</b> = one-sided coronal/lambdoid fusion &rarr; asymmetric head. Separate: <b>acrania</b> = skull-cap bones fail to form; <b>microcephaly</b> = small head from abnormal CNS development.</div>
+<div class="like">💡 Name reads the shape: <b>scapha</b> = boat, <b>turris</b> = tower, <b>plagio</b> = oblique/slanted. Acrania and microcephaly are <b>failures to form/grow</b>, not premature fusion.</div>
+<div class="src">Study aid &middot; bank: Scapho-/oxy-/plagiocephaly; acrania; microcephaly</div>
+</div>
+
+</div>
+
+<h2>Topic 7 &mdash; The mandible</h2>
+<div class="topic-tagline">The one movable skull bone. Its parts, its joint, its nerve tunnel, and the two glands the mylohyoid line divides.</div>
+<div class="cards">
+
+<div class="card">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Mandible parts</div>
+<div class="hook">🦴 BODY &middot; RAMUS &middot; ANGLE (= GONION)</div>
+<div class="fact">Maini divides the mandible into <b>body, ramus, and angle</b>. The angle is also called <b>gonion</b>. Its arched, tooth-bearing edge is the <b>alveolar process</b> &mdash; and the <b>maxilla + mandible</b> are the only two skull bones with alveolar arches.</div>
+<div class="like">💡 <b>Body</b> (horizontal), <b>ramus</b> (vertical branch), and the <b>angle</b> where they turn &mdash; that corner is <b>gonion</b>.</div>
+<div class="src">Study aid &middot; bank: Mandible divisions; alveolar arches; gonion</div>
+</div>
+
+<div class="card muscle">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Which process makes the joint?</div>
+<div class="hook">🔗 CONDYLAR = TMJ &middot; CORONOID = MUSCLE</div>
+<div class="fact">The <b>condylar process</b> (head + neck) forms the <b>temporomandibular joint</b>, seating in the <b>mandibular (articular) fossa</b> of the temporal bone. Its neck has the <b>pterygoid fovea</b> for the <b>lateral pterygoid</b> muscle. The <b>coronoid</b> process is the muscle-only one.</div>
+<div class="like">💡 <b>Cond</b>ylar &rarr; <b>joint</b>; <b>cor</b>onoid &rarr; muscle. The rounded head articulates; the flat blade is just a muscle anchor.</div>
+<div class="src">Study aid &middot; bank: Condylar process (TMJ); pterygoid fovea</div>
+</div>
+
+<div class="card ligament">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">The nerve tunnel</div>
+<div class="hook">🚇 IN AT MANDIBULAR &middot; OUT AT MENTAL</div>
+<div class="fact">The <b>inferior alveolar nerve</b> enters the <b>mandibular foramen</b> (guarded by the tongue-shaped <b>lingula</b> &mdash; the <b>dental-block</b> landmark), runs through the bone, and exits the <b>mental foramen</b> as the <b>mental nerve</b> (lower lip &amp; chin).</div>
+<div class="like">💡 One nerve, two doors: it goes <b>in the mandibular foramen and out the mental foramen</b>, changing its name on the way out. The lingula is where the dentist aims the needle.</div>
+<div class="src">Study aid &middot; bank: Mandibular foramen; lingula; mental nerve</div>
+</div>
+
+<div class="card rule">
+<div class="tagrow"><span class="tag mine">🧩 Study aid (mine)</span></div>
+<div class="label">Mylohyoid line divides two glands</div>
+<div class="hook">👅 ABOVE = SUBLINGUAL &middot; BELOW = SUBMANDIBULAR</div>
+<div class="fact">On the inner mandible, the <b>mylohyoid line</b> anchors the <b>mylohyoid muscle</b> (floor of the mouth). <b>Above</b> the line = <b>sublingual</b> fossa/gland; <b>below</b> = <b>submandibular</b> fossa/gland. The <b>mylohyoid groove</b> carries the <b>mylohyoid nerve</b>.</div>
+<div class="like">💡 <b>Sub-LINGUAL</b> = under the tongue, so it sits <b>higher</b> (above the line); <b>sub-MANDIBULAR</b> hangs <b>lower</b> (below the line).</div>
+<div class="src">Study aid &middot; bank: Mylohyoid line; sublingual / submandibular fossae</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD &middot; GA 0202 Module 1 &mdash; The Skull (Dr. Maini) &middot; Mnemonics</div>
+</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m01-skull-hub_PENDING_REVIEW.html" title="Return to the Skull Study Hub" aria-label="Return to the Skull Study Hub">📚</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the skull..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (Gross Anatomy) — The Skull, with Dr. Maini at SCUHS.\n\n";
+    if (ctx.question) prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

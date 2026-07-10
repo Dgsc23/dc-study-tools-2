@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>&#128064; GA 0202 &middot; The Eye &amp; Orbit &mdash; Learning Objectives (Master the 14)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+.header .voices{color:#fde68a;font-size:11.5px;margin-top:9px;max-width:720px;margin-left:auto;margin-right:auto;opacity:0.92}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 M08 Eye &amp; Orbit Hub</a>
+
+<div class="header">
+  <h1>&#128064; Learning Objectives &mdash; Master the 14</h1>
+  <div class="voices">&#128266; Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+  <div class="sub">GA 0202 &middot; <b>The Eye &amp; Orbit</b> &middot; the study spine that ties every drill back to what Dr. Maini actually drilled across the three Orbit &amp; Eye lectures &mdash; cement each one, check it off, move on.</div>
+  <div class="meta-line">Dr. Maini &middot; The Orbit &amp; Its Contents (L19&ndash;L20) + Eye Muscles, Nerves &amp; Ciliary Ganglion (L21) &middot; &#128064; SCUHS GA 0202</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for the Eye &amp; Orbit module. Each objective is distilled from <b>what Dr. Maini actually emphasizes and flags as testable</b> across her three lectures, and every fact is grounded in the module&rsquo;s <b>audited Everything-MC bank</b> and her transcripts; each &ldquo;prove it&rdquo; bullet is cited as <b>[lecture &middot; HH:MM]</b>. Quotes are transcribed from her Zoom recordings; <span class="fix">[bracketed]</span> words are de-garbled spellings of what she said. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>The Eye &amp; Orbit block is big &mdash; three lectures, from the bony orbit all the way to the ciliary ganglion and the pupillary reflexes. This page takes the <b>fourteen things Dr. Maini actually drilled</b> (the same fourteen topic families the audited MC bank is built around), spells out <b>exactly what &ldquo;done&rdquo; looks like</b> for each, hangs a <b>verbatim Maini quote</b> on it, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: Dr. Maini&rsquo;s <b>The Orbit and Its Contents</b> (L19), <b>&hellip; contd</b> (L20), and <b>Testing of Eye Muscles, Arteries &amp; Nerves of the Eye, Ciliary Ganglion</b> (L21) recordings (SCUHS Canvas Zoom), cross-checked against the module&rsquo;s audited Everything-MC bank.</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 14 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the bony orbit &mdash; its pyramidal shape, apex vs base, and the prominent bone(s) of each of the four walls.</div>
+        <div class="obj-src">content: <b>L19 &middot; 00:38&ndash;07:06</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Call the orbit a <b>quadrilateral pyramid</b> with a posterior <b>apex</b> (essentially the <b>optic canal</b>, where the optic nerve leaves for the cranial cavity) and an anterior <b>base</b> (the opening). <span class="cite">(L19 01:22&ndash;01:59)</span></li>
+        <li>Name the three bones of the <b>margin/base</b>: <b>frontal, zygomatic, maxilla</b>. <span class="cite">(L19 01:59&ndash;02:29)</span></li>
+        <li>Give the prominent bone of each wall: <b>roof</b> = orbital plate of <b>frontal</b> + <b>lesser wing of sphenoid</b>; <b>medial wall</b> = <b>ethmoid</b> (air cells) plus the papery-thin <b>lacrimal</b> (&ldquo;papyrus&rdquo;) bone; <b>floor</b> = mostly <b>maxilla</b>; <b>lateral wall</b> = <b>zygomatic + greater wing of sphenoid</b>. <span class="cite">(L19 02:29&ndash;06:41)</span></li>
+        <li>State Maini&rsquo;s test rule: know the <b>prominent</b> bones (she won&rsquo;t test the tiny palatine contribution to the floor), but <b>do</b> know which bone each fissure/foramen belongs to. <span class="cite">(L19 06:41&ndash;07:06)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;That is the apex. So that means your optic canal &hellip; optic nerve leaves through optic canal and enters the cranial cavity &hellip; that is the apex of the orbit &hellip; you can say quadrilateral pyramidal structure with an apex and a base.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents (L19) &middot; ~00:01:27&ndash;00:01:59</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What structure marks the apex of the orbit, and which three bones form its base (margin)?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>optic canal</b> marks the posterior <b>apex</b> (optic nerve exits to the cranial cavity). The <b>base/margin</b> = <b>frontal, zygomatic, maxilla</b>. Roof = frontal plate + lesser wing of sphenoid; medial wall = ethmoid (+ lacrimal); floor = maxilla; lateral wall = zygomatic + greater wing of sphenoid.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the fissures, canals &amp; foramina of the orbit &mdash; the three &ldquo;doorways,&rdquo; what each connects to, and the local landmarks.</div>
+        <div class="obj-src">content: <b>L19 &middot; 07:06&ndash;15:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the <b>three doorways</b>: <b>superior orbital fissure</b>, <b>inferior orbital fissure</b>, and the <b>optic canal</b>. <span class="cite">(L19 10:33&ndash;11:03)</span></li>
+        <li><b>SOF</b> (between greater &amp; lesser wings of sphenoid): CN <b>III, IV, VI</b>, the three V1 branches (<b>lacrimal, frontal, nasociliary</b>), superior ophthalmic vein &mdash; communicates with the <b>middle cranial fossa</b>. <span class="cite">(L19 11:42&ndash;12:53)</span></li>
+        <li><b>IOF</b> (between maxilla &amp; greater wing of sphenoid): <b>V2 (maxillary)</b>, inferior ophthalmic vein, and the <b>infraorbital artery</b> &mdash; opens to the <b>pterygopalatine / infratemporal fossa</b>, <b>not</b> the cranial cavity. <span class="cite">(L19 10:33&ndash;13:37)</span></li>
+        <li><b>Optic canal</b> (lesser wing of sphenoid): <b>optic nerve + ophthalmic artery</b>, to the middle cranial fossa. Plus local landmarks &mdash; supraorbital notch/foramen, infraorbital groove, and the <b>lacrimal fossa</b> (holds the lacrimal <b>sac</b>, not the gland). <span class="cite">(L19 07:06&ndash;09:36, 14:04&ndash;14:20)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Fissures are actually the inlets, or the doorways to the orbit. So there are 3 doorways to the orbit &hellip; there is superior orbital fissure &hellip; the next one is inferior orbital fissure &hellip; and then there is optic canal.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents (L19) &middot; ~00:10:33&ndash;00:11:03</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which doorway does NOT communicate with the cranial cavity, and what fossa does it open into instead?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>inferior orbital fissure</b> does not reach the cranial cavity &mdash; it opens into the <b>pterygopalatine / infratemporal fossa</b> (carrying V2, inferior ophthalmic vein, infraorbital artery). The SOF and optic canal both connect to the <b>middle cranial fossa</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">Work through the eyelids &amp; lacrimal apparatus &mdash; the glands (and their inflammations), plus the path a tear travels to the nose.</div>
+        <div class="obj-src">content: <b>L19 &middot; 19:30&ndash;37:00 &middot; L20 &middot; 05:00&ndash;09:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Sort the <b>marginal glands</b> from the <b>tarsal glands</b>: sebaceous <b>glands of Zeis</b> + sweat <b>glands of Moll</b> sit at the lid <b>margin</b> (inflame &rarr; <b>external hordeolum / stye</b>); the <b>tarsal (meibomian) glands</b> sit <b>inside the tarsal plate</b> and keep the closed lids airtight (inflame &rarr; <b>internal hordeolum / chalazion</b>, often scooped out). <span class="cite">(L19 21:16&ndash;25:06)</span></li>
+        <li>Trace a tear: <b>lacrimal gland</b> &rarr; ducts across the eye &rarr; <b>lacrimal lake</b> (with the central <b>caruncle</b> and lateral <b>plica semilunaris</b>) &rarr; <b>lacrimal punctum</b> on each papilla &rarr; <b>canaliculi</b> &rarr; <b>lacrimal sac</b> &rarr; <b>nasolacrimal duct</b> &rarr; <b>inferior meatus</b> of the nose. <span class="cite">(L19 25:12&ndash;30:08 &middot; L20 05:11&ndash;06:44)</span></li>
+        <li>Split the two blockages/inflammations: <b>dacryoadenitis</b> = inflammation of the <b>gland</b> (autoimmune); <b>dacryocystitis</b> = inflammation of the <b>sac</b> (infectious). No tears at all = <b>xerophthalmia</b> &rarr; corneal ulcers. <span class="cite">(L19 30:22&ndash;31:08 &middot; L20 06:59&ndash;08:58)</span></li>
+        <li>Peel the eyelid layers: <b>skin</b> &rarr; superficial fascia with <b>orbicularis oculi</b> (closes the eye, CN VII) &rarr; <b>levator palpebrae superioris</b> tendon &rarr; <b>tarsal plate</b> with meibomian glands &rarr; <b>palpebral conjunctiva</b>. <span class="cite">(L19 31:33&ndash;35:11)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;There&rsquo;ll be a swelling at the lid margin, which you call external hord[eolum], or stye &hellip; sometimes there can be inflammation of the tarsal gland &hellip; if they get inflamed, you will get internal hord[eolum], or [chalazion].&rdquo;<span class="cite">&mdash; The Orbit and Its Contents (L19) &middot; ~00:23:29&ndash;00:23:53</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">A swelling on the eyelid (not at the margin) &mdash; which gland is inflamed and what is it called? And where do tears finally drain?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">A swelling <b>on the lid</b> (not the margin) = inflamed <b>tarsal / meibomian gland</b> = <b>internal hordeolum / chalazion</b> (a margin swelling = external hordeolum / stye of Zeis or Moll). Tears drain punctum &rarr; canaliculi &rarr; sac &rarr; nasolacrimal duct &rarr; <b>inferior meatus</b> of the nose.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain why levator palpebrae superioris is unique &mdash; its two lamellae, the smooth superior tarsal muscle, and Horner syndrome.</div>
+        <div class="obj-src">content: <b>L19 &middot; 37:00&ndash;47:00 &middot; L20 &middot; 00:15&ndash;05:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the origin/action: <b>LPS</b> arises from the lesser wing of the sphenoid above the optic canal and <b>elevates the upper eyelid</b> (there is no elevator for the lower lid). <span class="cite">(L19 37:57&ndash;38:14)</span></li>
+        <li>Split its <b>two lamellae</b>: the <b>anterior (skeletal) lamella</b> &rarr; anterior tarsal plate, <b>CN III (GSE)</b>; the <b>posterior lamella</b> = the <b>superior tarsal muscle</b>, which is <b>smooth muscle</b> &rarr; superior margin of tarsal plate, <b>sympathetic only</b>. <span class="cite">(L19 38:21&ndash;39:57)</span></li>
+        <li>Predict a sympathetic lesion: <b>partial ptosis</b> (not complete, because the CN III skeletal part is intact). <span class="cite">(L19 40:22&ndash;41:08)</span></li>
+        <li>List the <b>5 signs of Horner syndrome</b> (a board favorite): partial ptosis, <b>miosis</b>, <b>anhidrosis</b>, facial <b>flushing</b> (vasodilation), and <b>enophthalmos</b> &mdash; from sympathetic failure on one side (classically a <b>Pancoast tumor</b> of the lung apex). <span class="cite">(L19 41:08&ndash;46:06)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;A part of this muscle is smooth muscle &hellip; controlled by a sympathetic nervous system &hellip; superior tarsal muscle is not functioning, but third nerve is intact, so there is not complete ptosis, because [the] skeletal muscle part is intact.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents (L20 &amp; L19) &middot; ~L20 00:01:30 / L19 00:40:58</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Why does a sympathetic lesion give only PARTIAL ptosis, and what are the five features of Horner syndrome?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Only the <b>smooth superior tarsal muscle</b> (sympathetic) fails; the larger <b>skeletal LPS</b> (CN III) still works, so ptosis is <b>partial</b>. Horner = <b>partial ptosis, miosis, anhidrosis, facial flushing, enophthalmos</b> (classic cause: Pancoast tumor compressing the cervical sympathetic chain).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">Lay out the three coats of the eyeball and the orbital/bulbar fascia &mdash; what each coat contains and its clinical hook.</div>
+        <div class="obj-src">content: <b>L20 &middot; 12:42&ndash;32:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the <b>three coats</b>: outer <b>fibrous (tunica fibrosa)</b>, middle <b>vascular (tunica vasculosa)</b>, inner <b>nervous (tunica nervosa)</b>. <span class="cite">(L20 18:47&ndash;21:59)</span></li>
+        <li><b>Fibrous:</b> <b>sclera</b> (posterior 5/6, white; turns yellow first in <b>jaundice</b> when bilirubin &gt; ~2 mg%) + <b>cornea</b> (anterior 1/6, transparent, <b>avascular</b>, main refractor; a foreign body &rarr; pain + photophobia). The perforated <b>lamina cribrosa</b> is where the optic nerve pierces &mdash; a classic &ldquo;which layer?&rdquo; trap. <span class="cite">(L20 22:17&ndash;27:16)</span></li>
+        <li><b>Vascular:</b> <b>choroid</b> (posterior, feeds the avascular outer coat) &rarr; <b>ciliary body</b> (processes secrete aqueous humor; contains the <b>ciliary muscle</b>) &rarr; <b>iris</b> (eye color; central aperture = <b>pupil</b>). <span class="cite">(L20 27:55&ndash;32:00)</span></li>
+        <li>Add the <b>fascia</b>: <b>periorbita</b> (periosteal lining of the orbital bones) and the <b>bulbar fascia = Tenon&rsquo;s capsule</b> (separated from the sclera by the <b>episcleral space</b>; left behind to hold an artificial eye after enucleation), plus the medial &amp; lateral <b>check ligaments</b>. <span class="cite">(L20 12:42&ndash;18:00)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Eyeball is composed of 3 layers &hellip; outer, middle, and innermost &hellip; the outermost coat is fibrous, tunica fibrosa &hellip; composed of sclera &hellip; and cornea &hellip; cornea is transparent, it forms [the] anterior transparent window for the light rays to enter your eyeball.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents contd (L20) &middot; ~00:18:47&ndash;00:19:52</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which coat does the lamina cribrosa belong to, and which three structures make up the vascular coat?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>lamina cribrosa</b> is part of the <b>fibrous coat</b> (perforated sclera where the optic nerve exits) &mdash; Maini&rsquo;s &ldquo;don&rsquo;t exclude it&rdquo; trap. The <b>vascular coat</b> = <b>choroid + ciliary body + iris</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the retina &amp; photoreceptors &mdash; its cell layers, rods vs cones, and the landmarks (optic disc, macula, fovea, ora serrata).</div>
+        <div class="obj-src">content: <b>L20 &middot; 35:00&ndash;46:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Split the retina into an <b>outer pigmented layer</b> (melanin absorbs stray light; deficient in <b>albinism</b>) and an inner <b>neural layer</b>. <span class="cite">(L20 36:31&ndash;37:35)</span></li>
+        <li>Chain the three neural layers: <b>rods &amp; cones</b> &rarr; <b>bipolar cells</b> &rarr; <b>ganglion cells</b>, and it is the <b>axons of the ganglion cells</b> that form the <b>optic nerve (CN II)</b> &mdash; not the rods/cones. <span class="cite">(L20 39:49&ndash;41:38)</span></li>
+        <li>Contrast the photoreceptors: <b>rods</b> = dim/night vision, no color; <b>cones</b> = bright light, <b>color</b> vision. <span class="cite">(L20 38:41&ndash;39:44)</span></li>
+        <li>Place the landmarks: <b>optic disc</b> = where the nerve exits, no photoreceptors = <b>blind spot</b>; the <b>macula lutea</b> (yellow) with its center the <b>fovea centralis</b>, saturated with cones = point of <b>acute vision</b>; the serrated <b>ora serrata</b> is the anterior margin of the retina. <span class="cite">(L20 41:48&ndash;45:56)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Fovea centralis is the place where cones are maximally located. It is saturated with cones. That means this is the point of acute vision &hellip; [the optic disc] lacks photoreceptors &hellip; this is called [the] blind spot.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents contd (L20) &middot; ~00:42:00&ndash;00:43:49</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which cells&rsquo; axons form the optic nerve, and what makes the fovea centralis the point of sharpest vision?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>ganglion cell</b> axons form the optic nerve (rods/cones &rarr; bipolar &rarr; ganglion). The <b>fovea centralis</b> is <b>saturated with cones</b>, so it gives the sharpest, most detailed (acute) color vision. The optic disc lacks photoreceptors = blind spot.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Follow aqueous humor through the chambers &mdash; where it is made, its circulation, its drainage, and how glaucoma happens.</div>
+        <div class="obj-src">content: <b>L20 &middot; 47:00&ndash;54:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Separate the chambers: the <b>vitreous chamber</b> (behind the lens, holds the gel <b>vitreous body</b> that keeps the eyeball&rsquo;s shape) vs the <b>anterior</b> and <b>posterior</b> chambers in front of the lens, which communicate through the <b>pupil</b>. <span class="cite">(L20 47:07&ndash;49:21)</span></li>
+        <li>Route the aqueous humor: secreted by the <b>ciliary processes</b> into the <b>posterior chamber</b> &rarr; through the <b>pupil</b> &rarr; <b>anterior chamber</b>. <span class="cite">(L20 48:32&ndash;49:36)</span></li>
+        <li>Drain it: absorbed at the <b>iridocorneal angle</b> into the <b>sinus venosus sclerae (canal of Schlemm)</b> &rarr; venous blood. Function: nourish the avascular cornea and maintain its curvature. <span class="cite">(L20 49:37&ndash;53:15)</span></li>
+        <li>Explain <b>glaucoma</b>: blocked canal of Schlemm or a narrowed iridocorneal angle &rarr; aqueous backs up &rarr; raised <b>intraocular pressure</b> &rarr; retinal degeneration/blindness (<b>open-angle</b> = debris blocks the canal; <b>closed-angle</b> = a chronically acute angle). <span class="cite">(L20 50:48&ndash;54:09)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Aqueous humor &hellip; is formed by the ciliary processes &hellip; exits the anterior chamber by draining into sinus venosus sclerae &hellip; which is called [the] canal of Schlem[m] &hellip; in case this canal is blocked &hellip; that will increase intraocular tension, leading to &hellip; glaucoma.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents contd (L20) &middot; ~00:50:11&ndash;00:51:03</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Trace aqueous humor from where it is made to where it is drained &mdash; and what raises pressure in glaucoma?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Ciliary processes</b> &rarr; posterior chamber &rarr; <b>pupil</b> &rarr; anterior chamber &rarr; absorbed at the <b>iridocorneal angle</b> into the <b>canal of Schlemm (sinus venosus sclerae)</b> &rarr; veins. <b>Glaucoma</b> = blocked canal or narrowed angle &rarr; aqueous accumulates &rarr; raised intraocular pressure.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">List the four refractive media and match each refractive error to its corrective lens.</div>
+        <div class="obj-src">content: <b>L20 &middot; 54:00&ndash;63:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the <b>four refractive media</b> in order: <b>cornea</b> (largely responsible) &rarr; <b>aqueous humor</b> &rarr; <b>lens</b> &rarr; <b>vitreous humor</b> &mdash; all must be transparent to focus light on one retinal spot. <span class="cite">(L20 54:38&ndash;56:14)</span></li>
+        <li><b>Myopia</b> (short-sightedness, bigger eye, focus <b>in front</b> of the retina) &rarr; <b>concave</b> glasses; common in the young. <span class="cite">(L20 60:49&ndash;61:15)</span></li>
+        <li><b>Hyperopia</b> (farsightedness, smaller eye, focus <b>behind</b> the retina) &rarr; <b>convex</b> glasses. <span class="cite">(L20 60:35&ndash;61:04)</span></li>
+        <li><b>Astigmatism</b> (irregular corneal curvature) &rarr; <b>cylindrical</b> glasses; plus <b>presbyopia</b> (near-focus loss after ~40), <b>cataract</b> (lens opacity), and <b>asthenopia</b> (eye strain). <span class="cite">(L20 61:46&ndash;63:13)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Hyperopia &hellip; the size of the eyeball is shorter than normal, and light rays are focused behind the retina &hellip; you have to wear convex glasses &hellip; myopia &hellip; light rays are focused in front &hellip; to correct myopia, you have to wear concave glasses.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents contd (L20) &middot; ~01:00:55&ndash;01:01:27</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">In myopia, where does light focus and which lens corrects it? Name the four refractive media.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Myopia</b>: light focuses <b>in front of</b> the retina &rarr; corrected with a <b>concave</b> lens (hyperopia focuses behind &rarr; convex). Four media: <b>cornea, aqueous humor, lens, vitreous humor</b> (cornea does most of the refraction).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">Give the six extraocular muscles &mdash; origin, action, innervation (SO4/LR6, rest III), and the &ldquo;floor of the orbit&rdquo; board trap.</div>
+        <div class="obj-src">content: <b>L20 &middot; 01:17&ndash;01:32</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Separate them from the intrinsics: <b>6 extrinsic skeletal muscles</b> (4 recti + 2 obliques, from occipital myotomes, GSE) vs the 3 smooth <b>intrinsic</b> muscles (sphincter/dilator pupillae, ciliary). Recti share a <b>common tendinous ring</b> around the optic canal. <span class="cite">(L20 01:17:44&ndash;01:20:51)</span></li>
+        <li>Give the actions: <b>SR</b> up &amp; in, <b>IR</b> down &amp; in, <b>MR</b> adducts, <b>LR</b> abducts, <b>SO</b> down &amp; out (via the <b>trochlea</b> pulley), <b>IO</b> up &amp; out. <span class="cite">(L20 01:23:57&ndash;01:29:29)</span></li>
+        <li>Nail the innervation with Maini&rsquo;s mnemonic: <b>SO4</b> (superior oblique = CN IV), <b>LR6</b> (lateral rectus = CN VI), <b>everything else CN III</b> (plus LPS). <span class="cite">(L20 01:21:23&ndash;01:22:56)</span></li>
+        <li>Flag the traps: the <b>inferior oblique is the only muscle from the floor of the orbit</b> (Maini: seen on board exams), and her mnemonic <b>&ldquo;inferior people extort money&rdquo;</b> (IR + IO = <b>extortion</b>; both superiors = intorsion). <span class="cite">(L20 01:27:45&ndash;01:30:10)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;It goes SO4, LR6 &hellip; all others by third [nerve] &hellip; this is the only muscle that originates from the floor of the orbit &hellip; I&rsquo;ve seen this question appearing &hellip; in your board exams &hellip; inferior people extort money &hellip; both inferior rectus and inferior oblique cause extortion.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents contd (L20) &middot; ~01:21:23&ndash;01:30:05</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which extraocular muscle originates from the floor of the orbit, and which two muscles are NOT innervated by CN III?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>inferior oblique</b> is the only one from the floor of the orbit (the other five arise near the sphenoid). By <b>SO4 / LR6</b>: the <b>superior oblique</b> (CN IV) and <b>lateral rectus</b> (CN VI) are the exceptions; all the rest (SR, IR, MR, IO + LPS) are CN III.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Perform the clinical (H-pattern) testing of the eye muscles &mdash; and know why the test position is &ldquo;opposite&rdquo; to the action.</div>
+        <div class="obj-src">content: <b>L21 &middot; 00:00&ndash;10:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the principle: to isolate a muscle you line the <b>optic axis up with the muscle&rsquo;s axis</b>, which is why the <b>test position is opposite to the action</b> &mdash; only the abduction/adduction part flips; elevation/depression stays the same. <span class="cite">(L21 09:16&ndash;09:41)</span></li>
+        <li>Test the vertical recti by <b>abducting first</b>: eye out, then <b>up = superior rectus</b>, <b>down = inferior rectus</b>. <span class="cite">(L21 02:31&ndash;05:14)</span></li>
+        <li>Test the obliques by <b>adducting first</b>: eye in, then <b>up &amp; in = inferior oblique</b>, <b>down &amp; in = superior oblique</b>. <span class="cite">(L21 03:25&ndash;06:34)</span></li>
+        <li>Draw <b>two H&rsquo;s</b> (one per eye, labeled right/left): MR/LR are the easy horizontal tests; recti go on the <b>outside</b>, obliques on the <b>inside</b> &mdash; and Maini warns to label the eye so you don&rsquo;t reverse the direction. <span class="cite">(L21 05:47&ndash;09:05)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;It is opposite to the actions of the muscles &mdash; just the abduction and [adduction] part. [The] elevation-depression part is the same &hellip; to test the recti you ask the patient to abduct; to test the obliques you ask the patient to adduct.&rdquo;<span class="cite">&mdash; Testing of Eye Muscles &hellip; (L21) &middot; ~00:09:16&ndash;00:09:41</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">To isolate the superior rectus, which way do you ask the patient to look first &mdash; and why is that &ldquo;opposite&rdquo; to its action?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Ask the patient to <b>abduct</b> (look laterally), then <b>up</b> &mdash; abducting lines the optic axis up with the SR&rsquo;s pull so it acts as a pure elevator. Testing flips the <b>abduction/adduction</b> part of the action; the elevation/depression part stays the same. Recti = abduct to test; obliques = adduct to test.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the cranial nerves of the orbit &mdash; CN II fiber type, CN III/IV/VI targets, and the three branches of V1 (NFL).</div>
+        <div class="obj-src">content: <b>L21 &middot; 13:00&ndash;20:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Classify the <b>optic nerve (CN II)</b>: it carries <b>SSA</b> fibers (special somatic afferent &mdash; vision, like hearing, from ectoderm); the <b>central retinal artery</b> runs in its substance. <span class="cite">(L21 13:16&ndash;14:31)</span></li>
+        <li>Assign the motor nerves: <b>CN III (oculomotor)</b> enters via the SOF and supplies SR, IR, MR, IO + LPS; <b>CN IV (trochlear)</b> &rarr; superior oblique; <b>CN VI (abducent)</b> &rarr; lateral rectus. <span class="cite">(L21 14:33&ndash;16:04, 15:47&ndash;16:04)</span></li>
+        <li>Break down <b>V1 (ophthalmic)</b> with Maini&rsquo;s mnemonic <b>NFL</b>: <b>N</b>asociliary, <b>F</b>rontal (&rarr; supraorbital + supratrochlear), <b>L</b>acrimal (&rarr; lacrimal gland) &mdash; all GSA, cell bodies in the <b>trigeminal ganglion</b>. <span class="cite">(L21 16:05&ndash;16:57)</span></li>
+        <li>List the nasociliary branches: <b>sensory root to the ciliary ganglion</b>, <b>long ciliary</b> nerves, <b>infratrochlear</b>, and <b>anterior + posterior ethmoidal</b> nerves. <span class="cite">(L21 20:00&ndash;22:43)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Frontal gives supraorbital and supratrochlear &hellip; lacrimal nerve for the lacrimal gland, nasociliary nerve. So, NFL &mdash; National Football League. These are the three branches of V1.&rdquo;<span class="cite">&mdash; Testing of Eye Muscles &hellip; (L21) &middot; ~00:16:36&ndash;00:16:57</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What fiber type is the optic nerve, and what are the three branches of V1?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The optic nerve carries <b>SSA</b> fibers (special somatic afferent, vision). V1 branches = <b>NFL</b>: <b>Nasociliary, Frontal, Lacrimal</b> (frontal splits into supraorbital + supratrochlear). Their GSA cell bodies sit in the <b>trigeminal ganglion</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace the arteries &amp; veins of the orbit &mdash; ophthalmic artery &amp; its key branches, and where the ophthalmic veins drain.</div>
+        <div class="obj-src">content: <b>L21 &middot; 10:00&ndash;13:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Source the supply: the <b>ophthalmic artery</b> is a branch of the <b>internal carotid artery</b> (ICA gives off ophthalmic, then divides into middle &amp; anterior cerebral). <span class="cite">(L21 10:03&ndash;10:29)</span></li>
+        <li>Star branch = the <b>central retinal artery</b>, which runs <b>in the substance of the optic nerve</b> and enters at the center of the optic disc (an end artery). <span class="cite">(L21 10:29&ndash;11:04)</span></li>
+        <li>List other branches: <b>anterior ciliary</b> (at the corneoscleral junction), <b>short &amp; long posterior ciliary</b>, <b>lacrimal</b>, supraorbital, supratrochlear, anterior &amp; posterior ethmoidal, medial palpebral, dorsal nasal. <span class="cite">(L21 11:04&ndash;12:35)</span></li>
+        <li>Drain the orbit: <b>superior ophthalmic vein &rarr; directly to the cavernous sinus</b>; <b>inferior ophthalmic vein &rarr; pterygoid venous plexus</b> via the IOF; both connect anteriorly with the <b>facial vein</b> (a route for facial infection to reach the cavernous sinus). <span class="cite">(L21 12:35&ndash;13:09)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Ophthalmic artery is a branch of internal carotid artery &hellip; central retinal artery &hellip; runs in the substance of [the] optic nerve to enter the eye at the center of [the] optic disc &hellip; superior ophthalmic is directly draining into cavernous sinus.&rdquo;<span class="cite">&mdash; Testing of Eye Muscles &hellip; (L21) &middot; ~00:10:15&ndash;00:12:45</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The ophthalmic artery is a branch of which vessel, and where does the superior ophthalmic vein drain?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The ophthalmic artery branches from the <b>internal carotid artery</b>; its <b>central retinal artery</b> runs inside the optic nerve. The <b>superior ophthalmic vein</b> drains <b>directly into the cavernous sinus</b> (inferior &rarr; pterygoid venous plexus; both link to the facial vein).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 13 ===================== -->
+  <div class="lo" id="lo13">
+    <div class="lo-head">
+      <div class="lo-num">13</div>
+      <div class="lo-obj">
+        <div class="obj-text">Wire up the ciliary ganglion &amp; eye autonomics &mdash; its three roots, which fibers synapse vs pass through, and the two &ldquo;2C&rdquo; muscles.</div>
+        <div class="obj-src">content: <b>L21 &middot; 24:00&ndash;34:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo13"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Classify it: the <b>ciliary ganglion</b> is a <b>parasympathetic</b> ganglion (lateral to the optic nerve) holding the cell bodies of <b>postganglionic parasympathetic</b> neurons. <span class="cite">(L21 25:09&ndash;25:43)</span></li>
+        <li><b>Parasympathetic root:</b> preganglionic fibers from <b>CN III (oculomotor)</b> <b>SYNAPSE</b> here &rarr; postganglionic leave via <b>short ciliary nerves</b> &rarr; the <b>2C</b> muscles: <b>constrictor (sphincter) pupillae</b> (miosis) + <b>ciliary muscle</b> (accommodation). <span class="cite">(L21 25:43&ndash;27:11)</span></li>
+        <li><b>Sympathetic root:</b> postganglionic fibers from the <b>superior cervical ganglion</b> (via the ICA plexus) <b>PASS THROUGH</b> uninterrupted (they already synapsed) &rarr; short ciliary nerves (and also long ciliary nerves) &rarr; <b>dilator pupillae</b>. <span class="cite">(L21 28:24&ndash;29:00)</span></li>
+        <li><b>Sensory root:</b> GSA fibers from the <b>nasociliary nerve</b> also pass through. So the <b>short ciliary nerves</b> carry all three &mdash; GSA, sympathetic, and postganglionic parasympathetic. <span class="cite">(L21 29:00&ndash;30:07)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;It&rsquo;s a parasympathetic ganglion &hellip; cell bodies of postganglionic parasympathetic &hellip; parasympathetic root carries preganglionic fibers from oculomotor nerve &hellip; sympathetic root carries postganglionic sympathetic fibers &hellip; they pass through the ganglion uninterruptedly.&rdquo;<span class="cite">&mdash; Testing of Eye Muscles &hellip; (L21) &middot; ~00:25:30&ndash;00:30:03</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which fibers actually SYNAPSE in the ciliary ganglion, and which two muscles do its postganglionic fibers supply?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Only the <b>parasympathetic</b> fibers (preganglionic, from <b>CN III</b>) synapse; the sympathetic and sensory roots just pass through. Its postganglionic fibers (via short ciliary nerves) supply the <b>2C</b> muscles: <b>constrictor pupillae</b> (miosis) and <b>ciliary muscle</b> (accommodation).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 14 ===================== -->
+  <div class="lo" id="lo14">
+    <div class="lo-head">
+      <div class="lo-num">14</div>
+      <div class="lo-obj">
+        <div class="obj-text">Run the eye reflexes &mdash; the pupillary light (direct/consensual), accommodation (3 C&rsquo;s), and corneal reflexes, plus Argyll Robertson.</div>
+        <div class="obj-src">content: <b>L20 &middot; 01:03&ndash;01:17</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo14"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Wire the <b>pupillary light reflex</b>: light &rarr; retina &rarr; <b>optic nerve</b> &rarr; <b>pretectal nucleus</b> &rarr; <b>Edinger-Westphal nucleus</b> &rarr; <b>CN III</b> &rarr; ciliary ganglion &rarr; sphincter pupillae &rarr; constriction. Crossing at the pretectal level gives both a <b>direct</b> (same eye) and a <b>consensual</b> (opposite eye) response. <span class="cite">(L20 01:03:26&ndash;01:08:30)</span></li>
+        <li>Use it to localize: an <b>optic nerve (sensory)</b> lesion vs a <b>CN III (motor)</b> lesion predicts exactly which direct/consensual responses are lost. <span class="cite">(L20 01:06:31&ndash;01:07:55)</span></li>
+        <li>List the <b>3 C&rsquo;s of accommodation</b> (a parasympathetic reflex): <b>Convergence</b> (medial recti), pupillary <b>Constriction</b>, and increased <b>Convexity</b> of the lens (ciliary muscle contracts &rarr; suspensory ligament relaxes &rarr; lens thickens). <span class="cite">(L20 01:10:05&ndash;01:13:31)</span></li>
+        <li>Do the <b>corneal reflex</b> (sensory <b>V1</b>, motor <b>VII</b> &rarr; orbicularis oculi blink) and recognize the <b>Argyll Robertson pupil</b> (light reflex lost, accommodation preserved &mdash; classically syphilis). <span class="cite">(L20 01:03:26&ndash;01:16:47, 01:15:50)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;There are three C &hellip; convergence &hellip; pupillary constriction, and increased convexity of the lens &hellip; [the corneal reflex] sensory division is 5th nerve, motor division is 7th nerve &hellip; Argyll Robertson pupil &mdash; light reflex is lost, but accommodation reflex is preserved &hellip; seen in syphilis.&rdquo;<span class="cite">&mdash; The Orbit and Its Contents contd (L20) &middot; ~01:10:30&ndash;01:16:47</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M08 Eye &amp; Orbit Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What are the three C&rsquo;s of the accommodation reflex, and which nerves are sensory vs motor in the corneal reflex?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Accommodation = <b>Convergence, Constriction, Convexity</b> (all parasympathetic, CN III). Corneal reflex: <b>sensory = V1 (ophthalmic)</b>, <b>motor = CN VII</b> (orbicularis oculi blink). Argyll Robertson pupil = light reflex lost but accommodation preserved (syphilis).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 14 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>M08 Eye &amp; Orbit Hub</b> and drill exactly that topic in the Everything-MC bank.</p>
+    <p><b>3.</b> The <b>autonomics + reflexes</b> (Objectives 4, 13, 14) are where Maini&rsquo;s &ldquo;which fiber, which nerve, which muscle&rdquo; questions live &mdash; spend extra reps tracing sympathetic vs parasympathetic pathways.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t mix up sympathetic and parasympathetic in the eye.</b> <b>Parasympathetic</b> (CN III, ciliary ganglion, short ciliary nerves) = <b>miosis</b> (sphincter pupillae) + <b>accommodation</b> (ciliary muscle). <b>Sympathetic</b> (superior cervical ganglion, ICA plexus, long ciliary nerves) = <b>mydriasis</b> (dilator pupillae) + the <b>superior tarsal muscle</b> &mdash; whose failure gives Horner syndrome. Maini&rsquo;s memory hook: mydriasis is the <b>longer</b> word (dilation), myosis the shorter (constriction).</div>
+    <p style="margin-top:6px">When all 14 boxes are ticked, you own the whole Eye &amp; Orbit block &mdash; from the pyramidal orbit through the ciliary ganglion &mdash; the spine of the GA 0202 Module 08 material.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 08 (The Eye &amp; Orbit) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from Dr. Maini&rsquo;s lecture recordings (The Orbit and Its Contents, L19&ndash;L21) and the module&rsquo;s audited Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m08_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 General Anatomy — Dr. Maini
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Module 08 Eye & Orbit learning objectives.' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 14 Eye & Orbit learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy for the sympathetic vs parasympathetic control of the pupil, or the aqueous humor circulation.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the Eye & Orbit module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 General Anatomy with Dr. Maini at SCUHS (Module 08 — The Eye & Orbit). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

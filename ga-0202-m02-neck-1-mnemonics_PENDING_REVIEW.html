@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · The Neck (part 1) — Mnemonics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin-bottom: 8px; font-style: italic; font-size: 0.95rem; }
+.edge-note { color: #7dd3fc; text-align: center; margin: 0 auto 20px; max-width: 820px; font-size: 0.82rem; line-height: 1.5; }
+.scope-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.35); border-radius: 8px; padding: 10px 14px; margin: 0 auto 18px; max-width: 880px; color: #a7f3d0; font-size: 0.85rem; line-height: 1.55; }
+.scope-note b { color: #34d399; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #f59e0b; }
+.card.kinematics { border-left-color: #60a5fa; }
+.card.ligament { border-left-color: #a78bfa; }
+.card.muscle { border-left-color: #34d399; }
+.card.rule { border-left-color: #ef4444; }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 700; }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.kinematics .hook { color: #93c5fd; }
+.card.ligament .hook { color: #c4b5fd; }
+.card.muscle .hook { color: #6ee7b7; }
+.card.rule .hook { color: #fca5a5; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #f59e0b; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card.kinematics .like { border-left-color: #60a5fa; }
+.card.ligament .like { border-left-color: #a78bfa; }
+.card.muscle .like { border-left-color: #34d399; }
+.card.rule .like { border-left-color: #ef4444; }
+.card .like b { color: #fde68a; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+/* --- added for this page: unmistakable separation of Dr. Maini's OWN words vs my study aids --- */
+.card.maini { border-left-color: #fbbf24; background: #221d10; }
+.card .maini-quote { margin-top: 8px; padding: 10px 12px; background: rgba(251,191,36,0.10); border: 1px solid rgba(251,191,36,0.45); border-radius: 8px; font-size: 0.9rem; color: #fde68a; line-height: 1.55; }
+.card .maini-quote .who { display: block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: #fbbf24; font-weight: 800; margin-bottom: 4px; }
+.badge-maini { display: inline-block; background: #fbbf24; color: #1e293b; font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; }
+.badge-mine { display: inline-block; background: #334155; color: #94a3b8; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 6px; border-radius: 4px; margin-left: 6px; vertical-align: middle; border: 1px solid #475569; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 880px; color: #94a3b8; font-size: 0.78rem; line-height: 1.7; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.legend span { margin: 0 8px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card .fact { color: #222; } .card .like { background: #fff; color: #000; } .card.maini { background: #fffbe8; } .card .maini-quote { color: #7c5b00; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 GA 0202 &middot; The Neck (part 1) &mdash; Mnemonics</h1>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s neck: triangles, muscles, nerves &amp; vessels &mdash; in &ldquo;think-of-it-like&rdquo; voice.</p>
+<p class="edge-note">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+<div class="scope-note">
+  <b>Two kinds of hooks &mdash; and the difference matters.</b> Cards tagged <span class="badge-maini">🎓 Dr. Maini&rsquo;s own</span> quote <b>her exact words</b> from the Lecture 3 &amp; 5 transcripts. Cards tagged <span class="badge-mine">💡 my study aid</span> are <b>mine, not hers</b>. Either way, every <b>fact</b> a hook encodes is verifiable in this module&rsquo;s <b>audited Everything-MC bank</b> and Maini&rsquo;s transcripts (cited on each card). The hook is a memory handle; the fact is what gets tested.
+</div>
+<div class="legend">
+  <span><span class="swatch" style="background:#f59e0b;"></span>anatomy / landmark</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>vessels</span>
+  <span><span class="swatch" style="background:#a78bfa;"></span>nerves</span>
+  <span><span class="swatch" style="background:#34d399;"></span>muscles</span>
+  <span><span class="swatch" style="background:#ef4444;"></span>rule / trap</span>
+  <span><span class="swatch" style="background:#fbbf24;border:1px solid #fbbf24;"></span>Dr. Maini&rsquo;s own</span>
+</div>
+
+<h2>Topic 1 &mdash; Triangles of the neck</h2>
+<div class="topic-tagline">Two big triangles, then slice each one up. Learn the muscle that forms each wall.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">The two triangles <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🔺 SCM SPLITS THE NECK: FRONT vs BACK</div>
+<div class="fact">The <b>sternocleidomastoid (SCM)</b> divides each side of the neck. <b>Anterior triangle</b> = midline (front), anterior border of SCM (behind), lower border of the <b>mandible</b> (top). <b>Posterior triangle</b> = SCM (front), <b>trapezius</b> (back), <b>clavicle</b> (base).</div>
+<div class="like">💡 The SCM is the fence down the side of the neck: everything <b>in front</b> of it is the anterior triangle, everything <b>behind</b> it is the posterior triangle.</div>
+<div class="src">Bank Q4, Q20 &middot; L03 &mdash; triangle boundaries</div>
+</div>
+
+<div class="card rule">
+<div class="label">Posterior triangle <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🚧 BACK-TRIANGLE = SCM + TRAP + CLAVICLE</div>
+<div class="fact">Posterior triangle borders: <b>SCM</b> in front, <b>trapezius</b> behind, <b>clavicle</b> as the base. The <b>inferior belly of omohyoid</b> crosses it and splits it into the <b>occipital</b> triangle (above) and the <b>supraclavicular / subclavian</b> triangle (below).</div>
+<div class="like">💡 Two muscles and a bone box it in (SCM &middot; Trap &middot; Clavicle). The little omohyoid belly is the horizontal line that cuts the box into an upper and a lower room.</div>
+<div class="src">Bank Q4, Q5 &middot; L03 &mdash; posterior triangle</div>
+</div>
+
+<div class="card">
+<div class="label">Anterior triangle subdivisions <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🍽️ 4 SLICES: SUBMENTAL &middot; DIGASTRIC &middot; CAROTID &middot; MUSCULAR</div>
+<div class="fact">The <b>digastric</b> and <b>omohyoid</b> bellies carve the anterior triangle into <b>four</b> smaller triangles: <b>submental</b>, <b>digastric (submandibular)</b>, <b>carotid</b>, and <b>muscular</b>.</div>
+<div class="like">💡 Walk from the chin downward: <b>S</b>ubmental (under the chin), <b>D</b>igastric (under the jaw), <b>C</b>arotid (the pulse), <b>M</b>uscular (the straps). &ldquo;<b>S</b>am <b>D</b>igs <b>C</b>arrot <b>M</b>uffins&rdquo; if you need the order.</div>
+<div class="src">Bank Q21, Q22 &middot; L03 &mdash; anterior triangle</div>
+</div>
+
+<div class="card rule">
+<div class="label">Shared walls (a Maini quiz item) <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🧱 THE DIVIDING BELLY IS THE SHARED WALL</div>
+<div class="fact">Maini asks which muscle is the <b>common boundary</b> between two triangles. <b>Anterior belly of digastric</b> = wall between <b>submental &amp; digastric</b>. <b>Posterior belly of digastric</b> = wall between <b>carotid &amp; digastric</b>. <b>Superior belly of omohyoid</b> = wall between <b>muscular &amp; carotid</b>.</div>
+<div class="like">💡 The belly that <i>draws</i> the dividing line <i>is</i> the shared wall between the two rooms it separates. Front-belly up top, back-belly next door, omohyoid down low.</div>
+<div class="src">Bank Q32-Q34 (flagged as quiz items) &middot; L03</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; Suprahyoid muscles &amp; their nerves</h2>
+<div class="topic-tagline">Four muscles that lift the hyoid. The nerve supply is where Maini sets her traps.</div>
+<div class="cards">
+
+<div class="card muscle">
+<div class="label">Suprahyoid group <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">⬆️ SUPRA = LIFT: DIGASTRIC · STYLO · MYLO · GENIO</div>
+<div class="fact">The <b>suprahyoid</b> muscles all <b>elevate the hyoid bone</b> (key in swallowing). Four of them: <b>digastric, stylohyoid, mylohyoid, geniohyoid</b>. <b>Mylohyoid</b> is the fan-shaped muscle forming the <b>floor of the oral cavity</b>; <b>geniohyoid</b> lies <b>on top of</b> mylohyoid.</div>
+<div class="like">💡 &ldquo;Supra&rdquo; = <b>above</b> the hyoid = they pull it <b>up</b>. (The infrahyoids below will pull it down.) Every <b>-hyoid</b> name is literally telling you what it grabs onto.</div>
+<div class="src">Bank Q37, Q48, Q51 &middot; L03 &mdash; suprahyoid muscles</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Digastric = 2 bellies, 2 nerves <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🎭 BACK-BELLY = FACE (VII) &middot; FRONT-BELLY = FIVE (V3)</div>
+<div class="fact">The <b>digastric</b> is a &ldquo;composite&rdquo; muscle: two bellies, two different nerves. <b>Posterior belly &rarr; facial nerve (CN VII)</b>. <b>Anterior belly &rarr; nerve to mylohyoid</b> (a branch of the inferior alveolar, from <b>V3</b>, the mandibular division of the trigeminal).</div>
+<div class="like">💡 Two bellies built from two different pharyngeal arches, so two different nerves. <b>Back = Face</b> (7), <b>Front = Five</b> (V3). The nerve to mylohyoid also runs the <b>mylohyoid</b> muscle next door.</div>
+<div class="src">Bank Q41-Q44 &middot; L03 &mdash; digastric innervation</div>
+</div>
+
+<div class="card maini">
+<div class="label">Post. digastric + stylohyoid <span class="badge-maini">🎓 Dr. Maini&rsquo;s own</span></div>
+<div class="hook">🔤 &ldquo;THEY MAKE AN F &mdash; F FOR FACIAL&rdquo;</div>
+<div class="fact">The <b>posterior belly of digastric</b> and the <b>stylohyoid</b> lie side by side and share one nerve: the <b>facial nerve (CN VII)</b>. Maini points out the two muscles together trace an <b>F</b> shape &mdash; <b>F for Facial</b>.</div>
+<div class="maini-quote"><span class="who">🎓 Dr. Maini, verbatim (L03 ~40:16)</span>&ldquo;These two muscles&hellip; they make an <b>F</b> here&hellip; That is <b>facial nerve</b>. Posterior belly of digastric, stylohyoid, innervated by facial nerve.&rdquo;</div>
+<div class="src">Bank Q47 &middot; L03 transcript ~40:16&ndash;40:42</div>
+</div>
+
+<div class="card ligament">
+<div class="label">C1 hitchhikers <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🚗 C1 HITCHHIKES ON CN XII &rarr; GENIOHYOID (&amp; THYROHYOID)</div>
+<div class="fact"><b>Geniohyoid</b> is run by <b>C1 fibers carried along the hypoglossal nerve (CN XII)</b> &mdash; not the trigeminal, not the facial. (The infrahyoid <b>thyrohyoid</b> gets the very same C1-via-XII supply, which is why it&rsquo;s the odd one out downstairs.)</div>
+<div class="like">💡 CN XII is the tongue nerve, but C1 fibers <b>hitch a ride</b> on it and jump off to power <b>geniohyoid</b> and <b>thyrohyoid</b>. Same taxi, two drop-offs.</div>
+<div class="src">Bank Q52, Q60 &middot; L03 &mdash; geniohyoid / thyrohyoid</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; Infrahyoid straps &amp; the ansa cervicalis</h2>
+<div class="topic-tagline">Four straps that pull the hyoid down. One breaks the nerve pattern.</div>
+<div class="cards">
+
+<div class="card muscle">
+<div class="label">Infrahyoid group <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">⬇️ INFRA = DEPRESS: STERNO/STERNO/THYRO/OMO-HYOID</div>
+<div class="fact">The <b>infrahyoid (strap)</b> muscles <b>depress the hyoid bone</b>: <b>sternohyoid, sternothyroid, thyrohyoid, omohyoid</b>. They live in the <b>muscular triangle</b> (that&rsquo;s why it&rsquo;s named &ldquo;muscular&rdquo;). <b>Sternothyroid</b> stops at the <b>oblique line of the thyroid cartilage</b>, so it <b>depresses the larynx</b>.</div>
+<div class="like">💡 &ldquo;Infra&rdquo; = <b>below</b> the hyoid = they pull it <b>down</b>. Read each name origin-to-insertion: <b>sterno-thyroid</b> = sternum to thyroid cartilage (never reaches the hyoid).</div>
+<div class="src">Bank Q54, Q57, Q58, Q30 &middot; L03 &mdash; infrahyoid muscles</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Omohyoid <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🦴 OMO = SHOULDER: THE ONLY STRAP ON THE SCAPULA</div>
+<div class="fact"><b>Omohyoid</b> is the only infrahyoid muscle that reaches the <b>scapula</b> (its inferior belly comes off the superior border of the scapula). Its <b>intermediate tendon</b> is slung to the <b>clavicle and first rib</b> by a loop of deep fascia.</div>
+<div class="like">💡 &ldquo;<b>Omo</b>&rdquo; is Greek for <b>shoulder</b> &mdash; so <b>omo</b>hyoid is the strap that runs all the way out to the shoulder blade. The others stay on the sternum / thyroid cartilage.</div>
+<div class="src">Bank Q55, Q56 &middot; L03 &mdash; omohyoid</div>
+</div>
+
+<div class="card maini">
+<div class="label">Thyrohyoid&rsquo;s odd nerve <span class="badge-maini">🎓 Dr. Maini&rsquo;s own</span></div>
+<div class="hook">🅃 &ldquo;T-MUSCLE&rdquo; = TH = THYROHYOID (the exception)</div>
+<div class="fact">Every infrahyoid is run by the <b>ansa cervicalis</b> &mdash; <b>except thyrohyoid</b>, which is run by <b>C1 fibers carried on the hypoglossal nerve (CN XII)</b>. Maini&rsquo;s tag for it is the &ldquo;<b>T-Muscle</b>.&rdquo;</div>
+<div class="maini-quote"><span class="who">🎓 Dr. Maini, verbatim (L03 ~55:50)</span>&ldquo;I gave this trick to most of the cohorts, <b>T-Muscle. TH, thyrohyoid</b>&hellip; this is the only muscle which has different nerve supply&hellip; C1 fibers through 12th nerve.&rdquo;</div>
+<div class="src">Bank Q18, Q60 &middot; L03 transcript ~55:50</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Ansa cervicalis roots <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🔁 LOOP = 1 ON TOP (C1), 2-3 BELOW (C2,C3)</div>
+<div class="fact">The <b>ansa cervicalis</b> is a nerve loop that supplies <b>most of the infrahyoid muscles</b>. <b>Superior root = C1</b> fibers (riding the hypoglossal, then peeling off). <b>Inferior root = C2 and C3</b>. The two roots meet to form the loop (&ldquo;ansa&rdquo; = loop / handle).</div>
+<div class="like">💡 Number the loop: <b>1 comes over the top</b> (superior root, C1), <b>2 and 3 come up from below</b> (inferior root). They join into a hoop that drops branches onto the straps.</div>
+<div class="src">Bank Q15-Q17 &middot; L03 &mdash; ansa cervicalis</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; Cervical plexus &amp; neck nerves</h2>
+<div class="topic-tagline">C1 to C4 fans out. The four skin branches all pop out at one spot.</div>
+<div class="cards">
+
+<div class="card ligament">
+<div class="label">Cervical plexus + nerve point <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">📍 C1-C4, ALL 4 SKIN BRANCHES EXIT AT ERB&rsquo;S POINT</div>
+<div class="fact">The <b>cervical plexus</b> is built from the ventral rami of <b>C1 to C4</b>. Its four <b>cutaneous (superficial)</b> branches all emerge at one spot: the <b>nerve point of the neck (Erb&rsquo;s point)</b>, at the <b>middle of the posterior border of SCM</b>.</div>
+<div class="like">💡 One doorway, four nerves. Find the <b>midpoint of the back edge of SCM</b> and all four skin nerves are pouring out of that single &ldquo;nerve point.&rdquo;</div>
+<div class="src">Bank Q7, Q11 &middot; L03 &mdash; cervical plexus</div>
+</div>
+
+<div class="card ligament">
+<div class="label">The 4 cutaneous branches <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🔤 &ldquo;GLAT&rdquo;: GREAT-AURICULAR · LESSER-OCC · TRANSVERSE · SUPRACLAV</div>
+<div class="fact">The four skin branches: <b>lesser occipital</b>, <b>greater auricular</b> (heads up toward the ear/auricle), <b>transverse cervical</b>, and <b>supraclavicular</b> (which splits into medial, intermediate, lateral).</div>
+<div class="like">💡 Read each name as its destination: <b>occipital</b> = back of head, <b>auricular</b> = ear, <b>transverse cervical</b> = across the neck, <b>supraclavicular</b> = over the collarbone. The names <i>are</i> the map.</div>
+<div class="src">Bank Q9, Q10, Q12 &middot; L03 &mdash; cutaneous branches</div>
+</div>
+
+<div class="card maini">
+<div class="label">Phrenic nerve <span class="badge-maini">🎓 Dr. Maini&rsquo;s own</span></div>
+<div class="hook">🫁 &ldquo;3, 4, 5, TO KEEP YOU ALIVE&rdquo;</div>
+<div class="fact">The <b>phrenic nerve</b> is a muscular branch of the cervical plexus with root value <b>C3, C4, C5</b>. It runs the <b>diaphragm</b> &mdash; so its roots literally &ldquo;keep you alive&rdquo; (breathing).</div>
+<div class="maini-quote"><span class="who">🎓 Dr. Maini, verbatim (L03 ~11:39)</span>&ldquo;Phrenic nerve is also one of the muscular branch. What is the root value? <b>3, 4, 5, to keep you alive</b>, right? It&rsquo;s a branch of cervical plexus.&rdquo;</div>
+<div class="src">Bank Q13 &middot; L03 transcript ~11:39</div>
+</div>
+
+<div class="card ligament">
+<div class="label">SCM, trapezius &amp; spinal accessory <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🏋️ CN XI DRIVES SCM + TRAP &middot; C2-C4 RIDE ALONG</div>
+<div class="fact"><b>SCM</b> and <b>trapezius</b> get motor supply from the <b>spinal accessory nerve (CN XI)</b>, with <b>C2, C3, C4</b> fibers joining it. Find <b>CN XI in the posterior triangle</b> &mdash; that&rsquo;s Maini&rsquo;s favorite &ldquo;which triangle?&rdquo; answer.</div>
+<div class="like">💡 Two big surface muscles, one motor nerve (11), with cervical fibers tagging along for proprioception. And the nerve that runs them <b>crosses the posterior triangle</b> to get there.</div>
+<div class="src">Bank Q6, Q14 &middot; L03 / L05 &mdash; CN XI</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; Carotid arteries</h2>
+<div class="topic-tagline">One sheath, two carotids, eight external branches. Maini hands you two of these hooks herself.</div>
+<div class="cards">
+
+<div class="card maini">
+<div class="label">Carotid sheath contents <span class="badge-maini">🎓 Dr. Maini&rsquo;s own</span></div>
+<div class="hook">⚔️ &ldquo;THE THREE MUSKETEERS&rdquo; = CCA + IJV + VAGUS</div>
+<div class="fact">Three structures ride together inside the <b>carotid sheath</b>: the <b>common carotid artery</b>, the <b>internal jugular vein</b>, and the <b>vagus nerve (CN X)</b>. After the common carotid bifurcates, the <b>external carotid leaves the sheath</b>; internal carotid, IJV and vagus stay.</div>
+<div class="maini-quote"><span class="who">🎓 Dr. Maini, verbatim (L03 ~24:52)</span>&ldquo;Common carotid artery, internal jugular vein and vagus&hellip; wrapped up in a common sheath called carotid sheath, and they&rsquo;re called as the <b>three musketeers</b>, because they lie together.&rdquo;</div>
+<div class="src">Bank Q35, Q36 &middot; L03 ~24:52, L05 ~confirmed</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Bifurcation level <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">✌️ COMMON CAROTID SPLITS AT THE TOP OF THYROID CARTILAGE</div>
+<div class="fact">The <b>common carotid</b> bifurcates into <b>external</b> and <b>internal</b> carotid at the <b>superior border of the thyroid cartilage</b>. <b>Right</b> common carotid comes off the <b>brachiocephalic trunk</b>; <b>left</b> comes straight off the <b>aortic arch</b>.</div>
+<div class="like">💡 The Adam&rsquo;s-apple cartilage marks the fork in the road: below it, one common carotid; at its top edge, it splits into the two branches.</div>
+<div class="src">Bank Q62-Q64 &middot; L03 &mdash; carotid origins</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Internal vs external carotid <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🚫 INTERNAL = NO NECK BRANCHES (the quiet one)</div>
+<div class="fact">Easy tell: the <b>internal carotid gives NO branches in the neck</b> &mdash; it heads straight up and enters the skull through the <b>carotid canal</b>. The <b>external carotid</b> is the one throwing off all the neck branches to face and scalp.</div>
+<div class="like">💡 <b>Internal</b> keeps to itself (no neck branches, goes <b>in</b>to the skull); <b>external</b> spreads out to everything <b>outside</b> the skull. Branchy artery in the neck = external, every time.</div>
+<div class="src">Bank Q65, Q66 &middot; L03 &mdash; ICA vs ECA</div>
+</div>
+
+<div class="card maini">
+<div class="label">External carotid&rsquo;s 8 branches <span class="badge-maini">🎓 Dr. Maini&rsquo;s own</span></div>
+<div class="hook">🔤 &ldquo;SOME ANATOMISTS LIKE FREAKING OUT POOR MEDICAL STUDENTS&rdquo;</div>
+<div class="fact">The mnemonic Maini wrote on the slide for the <b>8 external-carotid branches</b> (root to tip): <b>S</b>uperior thyroid, <b>A</b>scending pharyngeal, <b>L</b>ingual, <b>F</b>acial, <b>O</b>ccipital, <b>P</b>osterior auricular, <b>M</b>axillary, <b>S</b>uperficial temporal. Grouped: 3 anterior (superior thyroid, lingual, facial), 3 posterior (ascending pharyngeal, occipital, posterior auricular), 2 terminal (maxillary, superficial temporal).</div>
+<div class="maini-quote"><span class="who">🎓 Dr. Maini, verbatim (L03 ~1:12:45)</span>&ldquo;Some anatomists like freaking out poor medical students&hellip; That&rsquo;s why I already wrote the mnemonic.&rdquo; (First letters = the ECA branches.)</div>
+<div class="src">Bank Q71-Q74 &middot; L03 ~1:12:45, L05 ~22:08</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Carotid sinus vs carotid body <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🩺 SINUS = SQUEEZE (baro) &middot; BODY = BREATH-GAS (chemo)</div>
+<div class="fact"><b>Carotid sinus</b> (a dilatation at the <b>start of the internal carotid</b>) holds <b>baroreceptors</b> &mdash; blood <b>pressure</b>. <b>Carotid body</b> holds <b>chemoreceptors</b> &mdash; senses <b>&uarr;CO2, &uarr;H+, &darr;O2</b>. Both report through the <b>glossopharyngeal nerve (CN IX)</b>.</div>
+<div class="like">💡 <b>Baro</b> = pressure (the sinus feels the <b>squeeze</b>); <b>chemo</b> = chemistry (the body sniffs the <b>blood gases</b>). One messenger for both: the 9th nerve.</div>
+<div class="src">Bank Q67-Q70 &middot; L03 &mdash; carotid sinus / body</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; Subclavian artery &amp; neck veins</h2>
+<div class="topic-tagline">The anterior scalene is the landmark. What&rsquo;s in front of it, behind it, and how the artery is cut into parts.</div>
+<div class="cards">
+
+<div class="card rule">
+<div class="label">Anterior scalene relations <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🚦 ARTERY &amp; PLEXUS HIDE BEHIND &middot; VEIN RIDES IN FRONT</div>
+<div class="fact">Maini&rsquo;s guaranteed quiz shape: what&rsquo;s anterior vs posterior to the <b>anterior scalene</b>? <b>POSTERIOR</b> = <b>subclavian artery</b> + <b>brachial plexus</b> (trunks, from C5-T1, emerging between anterior and middle scalene). <b>ANTERIOR</b> = <b>subclavian vein</b> + the <b>transverse cervical</b> and <b>suprascapular</b> arteries.</div>
+<div class="like">💡 &ldquo;<b>A</b>rtery is <b>A</b>t the back&rdquo; with the plexus; the <b>vein</b> is out in <b>front</b>. That&rsquo;s also why scalene (thoracic outlet) syndrome squeezes the <b>artery + plexus</b> together, not the vein.</div>
+<div class="src">Bank Q1, Q81, Q90, Q92, Q91 &middot; L03 / L05</div>
+</div>
+
+<div class="card rule">
+<div class="label">Subclavian artery in 3 parts <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">1️⃣2️⃣3️⃣ BEFORE · BEHIND · BEYOND the scalene</div>
+<div class="fact">The <b>anterior scalene</b> cuts the subclavian artery into <b>3 parts</b>: <b>Part 1</b> = medial to the muscle, <b>Part 2</b> = deep / posterior to it, <b>Part 3</b> = lateral to it.</div>
+<div class="like">💡 Track the artery left-to-right across the muscle: <b>1 before</b> it (medial), <b>2 behind</b> it (deep), <b>3 beyond</b> it (lateral). Same &ldquo;muscle divides the vessel into 3&rdquo; trick as pec minor with the axillary artery.</div>
+<div class="src">Bank Q82 &middot; L03 &mdash; subclavian parts</div>
+</div>
+
+<div class="card vessels kinematics">
+<div class="label">Part-1 branches <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🔤 &ldquo;VIT&rdquo;: VERTEBRAL · INTERNAL THORACIC · THYROCERVICAL</div>
+<div class="fact"><b>Part 1</b> gives three branches: <b>V</b>ertebral (up the transverse foramina to the foramen magnum), <b>I</b>nternal <b>T</b>horacic, and the <b>T</b>hyrocervical trunk. <b>Part 2</b> = costocervical trunk (&rarr; deep cervical + superior intercostal). <b>Part 3</b> = usually nothing (occasionally a dorsal scapular).</div>
+<div class="like">💡 <b>VIT</b> for &ldquo;<b>vit</b>al&rdquo; branches off part 1. Most action is part 1; part 2 gives one trunk; part 3 is usually a no-show.</div>
+<div class="src">Bank Q83, Q84, Q87-Q89 &middot; L03 &mdash; subclavian branches</div>
+</div>
+
+<div class="card vessels kinematics">
+<div class="label">Thyrocervical trunk <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🔱 TRUNK OF 3: INFERIOR THYROID · TRANSVERSE CERVICAL · SUPRASCAPULAR</div>
+<div class="fact">The <b>thyrocervical trunk</b> (off part 1) fans into three: <b>inferior thyroid</b> (supplies the lower thyroid), <b>transverse cervical</b>, and <b>suprascapular</b>. Note: the <b>inferior thyroid</b> is the thyroid vessel that comes from the <b>subclavian</b>, not the external carotid.</div>
+<div class="like">💡 Three prongs from a short trunk: one goes to the <b>thyroid</b> (inferior thyroid), two head out toward the <b>shoulder blade</b> (transverse cervical, suprascapular) &mdash; the same two that ride <i>in front of</i> the anterior scalene.</div>
+<div class="src">Bank Q85, Q86 &middot; L03 / L05 &mdash; thyrocervical</div>
+</div>
+
+<div class="card vessels kinematics">
+<div class="label">Internal jugular vein <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🧠 IJV: SIGMOID SINUS IN &rarr; JOINS SUBCLAVIAN &rarr; BRACHIOCEPHALIC</div>
+<div class="fact">The <b>internal jugular vein</b> begins at the <b>jugular foramen</b> as the continuation of the <b>sigmoid sinus</b>, drains <b>brain, face &amp; neck</b>, rides in the carotid sheath, then unites with the <b>subclavian vein</b> to form the <b>brachiocephalic vein</b>.</div>
+<div class="like">💡 Trace it top to bottom: <b>sigmoid</b> sinus turns into the IJV at the jugular foramen, it collects the head, then shakes hands with the subclavian to make the brachiocephalic.</div>
+<div class="src">Bank Q94-Q97 &middot; L05 &mdash; neck veins</div>
+</div>
+
+<div class="card rule">
+<div class="label">Thyroid vein drainage (the trap) <span class="badge-mine">💡 my study aid</span></div>
+<div class="hook">🩸 SUPERIOR + MIDDLE &rarr; IJV &middot; INFERIOR &rarr; BRACHIOCEPHALIC</div>
+<div class="fact">Thyroid venous drainage splits: <b>superior</b> and <b>middle</b> thyroid veins drain into the <b>internal jugular vein</b>, but the <b>inferior</b> thyroid vein is the odd one out &mdash; it drains straight into the <b>brachiocephalic vein</b>.</div>
+<div class="like">💡 Top two go to the IJV; the <b>bottom</b> one drops <b>lower</b>, all the way to the brachiocephalic. &ldquo;Inferior drains inferiorly.&rdquo;</div>
+<div class="src">Bank Q99, Q100 &middot; L05 &mdash; thyroid drainage</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD &middot; GA 0202 The Neck (part 1) &mdash; Mnemonics</div>
+</div>
+
+<!-- PENDING REVIEW badge -->
+<div style="position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9001;padding:5px 14px;background:linear-gradient(135deg,#78350f,#b45309);color:#fde68a;border:1px solid #f59e0b;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;box-shadow:0 3px 10px rgba(0,0,0,0.4);pointer-events:none;">⏳ PENDING REVIEW</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m02-neck-1-hub.html" title="Return to the Neck (part 1) Study Hub" aria-label="Return to the Neck (part 1) Study Hub">📚</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the neck..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (The Neck) with Dr. Maini at SCUHS. Study question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

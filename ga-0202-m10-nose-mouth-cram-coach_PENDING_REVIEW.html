@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · Nose &amp; Mouth — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 10 — NOSE & MOUTH (Nasal Cavity · Paranasal Sinuses ·
+   Oral Cavity · Tongue · Salivary Glands). Dr. Seema Maini. Cram Coach.
+   PENDING REVIEW.
+   Built ONLY from Maini's GA lectures (L23 nasal cavity & sinuses,
+   L25 oral cavity), grounded in the AUDITED Nose & Mouth Everything-MC bank.
+   No captured exam items; original phrasing, source-tagged. Reads aloud (Web
+   Speech). Correct keys taught plainly; answer positions balanced at build.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ==================================================== CRAM (13 TOPICS) ===== */
+const cram = [
+  {
+    n: 1, title: "Nasal cavity — the big picture (functions, vestibule, choana)", src: "Maini · Nasal Cavity",
+    facts: [
+      "The nose is part of the UPPER RESPIRATORY system, split into two nasal cavities by the nasal septum. Its functions: OLFACTION, air CONDUCTION, air HUMIDIFICATION, WARMING of air, and FILTRATION of dust. Maini flags a 'very silly question people miss' — the air is WARMED, not cooled (plus humidified and filtered).",
+      "The nose also RECEIVES SECRETIONS from two sources: the PARANASAL SINUSES and the NASOLACRIMAL DUCT (tears).",
+      "Just inside the nostril aperture is a dilated space, the NASAL VESTIBULE, lined by SKIN bearing stiff hairs called VIBRISSAE. With mucus, the vibrissae make a mat that traps dust and soot, so air is FILTERED.",
+      "Each nasal cavity opens POSTERIORLY into the nasopharynx through the CHOANA. Each cavity has a roof, a floor, and lateral and medial walls.",
+    ],
+    flag: "Air is WARMED, not cooled (Maini's silly-question trap), plus humidified and filtered. The nose receives secretions from the PARANASAL SINUSES and the NASOLACRIMAL DUCT. Vestibule = skin plus vibrissae. Posterior opening = CHOANA.",
+  },
+  {
+    n: 2, title: "External nose — cartilaginous and bony framework", src: "Maini · Nasal Cavity",
+    facts: [
+      "The external nose has a CARTILAGINOUS framework and a BONY framework. CARTILAGES: the lateral nasal cartilage, the SEPTAL cartilage (which supports the ANTERIOR septum), and the GREATER and LESSER ALAR cartilages, which support the alae, the wings around the nostrils.",
+      "BONES: the NASAL bones, the FRONTAL PROCESS of the MAXILLA, and the NASAL PART of the FRONTAL bone.",
+      "The midline point where the frontal bone meets the nasal bones (the root of the nose) is the NASION; the tip is the APEX.",
+    ],
+    flag: "Cartilage = lateral nasal, SEPTAL (anterior septum), and greater and lesser ALAR (around the nostrils). Bone = nasal, frontal process of maxilla, and nasal part of frontal. The root landmark is the NASION.",
+  },
+  {
+    n: 3, title: "Nasal septum — bones plus clinical (deviated septum, SMR, the lacrimal trap)", src: "Maini · Nasal Septum",
+    facts: [
+      "The bony posterior majority of the septum = the PERPENDICULAR PLATE of the ETHMOID plus the VOMER. The ANTERIOR septum is supported by the SEPTAL CARTILAGE.",
+      "Small contributors: the crest of the SPHENOID, the nasal crest of the PALATINE bone, the nasal crest of the MAXILLA, the nasal bone, and the nasal spine of the FRONTAL bone.",
+      "CLINICAL: a DEVIATED nasal septum is usually the CARTILAGINOUS part deviating, NOT the bony part. If it is symptomatic (recurrent respiratory infections), it is treated by a SUBMUCOUS RESECTION (SMR) plus septoplasty, where a prosthesis replaces the removed cartilage.",
+      "Maini's TRAP: she likes to sneak in the LACRIMAL bone. The lacrimal bone is NOT part of the septum — it forms the MEDIAL ORBITAL wall and part of the LATERAL nasal wall.",
+    ],
+    flag: "Bony septum = PERPENDICULAR PLATE of ETHMOID plus VOMER; anterior = SEPTAL CARTILAGE. A deviated septum is the CARTILAGE (not the bone), fixed by SMR plus septoplasty. The LACRIMAL bone is NOT septum (it is orbit plus lateral wall) — Maini's favorite sneak-in distractor.",
+  },
+  {
+    n: 4, title: "Nasal cavity walls — roof, floor, lateral", src: "Maini · Nasal Cavity",
+    facts: [
+      "ROOF: four bones — the CRIBRIFORM PLATE of the ETHMOID (which transmits the olfactory nerves), the BODY of the SPHENOID (posterior roof), the FRONTAL bone, and the NASAL bone.",
+      "FLOOR = the roof of the oral cavity, the hard palate: the PALATINE PROCESS of the MAXILLA plus the HORIZONTAL PLATE of the PALATINE bone.",
+      "LATERAL WALL: the nasal bone, the frontal process of the maxilla, the lacrimal bone (a tiny bit), the SUPERIOR and MIDDLE conchae of the ETHMOID, the INFERIOR concha (a separate bone), the perpendicular plate of the palatine bone, and the MEDIAL PTERYGOID PLATE, which is part of the SPHENOID.",
+    ],
+    flag: "ROOF = cribriform plate (ethmoid), body of sphenoid, frontal, and nasal. FLOOR = maxilla (palatine process) plus palatine (horizontal plate), the same as the hard palate. The lateral wall carries the conchae; the medial pterygoid plate belongs to the SPHENOID.",
+  },
+  {
+    n: 5, title: "Conchae and meatuses", src: "Maini · Nasal Cavity",
+    facts: [
+      "The SUPERIOR and MIDDLE conchae are part of the ETHMOID; the INFERIOR concha is a SEPARATE bone. The conchae INCREASE the SURFACE AREA of the lateral wall so the air is warmed and humidified.",
+      "The pocket UNDERNEATH each concha is a MEATUS (superior, middle, inferior). The recess located ABOVE the superior concha is the SPHENOETHMOIDAL RECESS.",
+    ],
+    flag: "Superior and middle conchae = ETHMOID; the inferior concha is a SEPARATE bone. The space under a concha is a MEATUS; the space above the superior concha is the SPHENOETHMOIDAL RECESS. Conchae exist to add surface area to warm and humidify air.",
+  },
+  {
+    n: 6, title: "Paranasal sinuses and the drainage map", src: "Maini · Paranasal Sinuses",
+    facts: [
+      "There are FOUR paired paranasal sinuses, named for their bones: FRONTAL, ETHMOID, SPHENOID, and MAXILLARY. The ETHMOID is unusual — not one cavity but many ETHMOIDAL AIR CELLS (anterior, middle, and posterior groups), each with its own opening.",
+      "THE DRAINAGE MAP. SPHENOETHMOIDAL RECESS: the sphenoid sinus. SUPERIOR MEATUS: the posterior ethmoidal cells. MIDDLE MEATUS (the busy one, at the HIATUS SEMILUNARIS): the FRONTAL sinus at the superior end (via the ethmoidal infundibulum / frontonasal duct), the ANTERIOR ethmoidal cells in the middle, and the MAXILLARY sinus at the inferior end; the MIDDLE ethmoidal cells open on the ETHMOIDAL BULLA. INFERIOR MEATUS: the NASOLACRIMAL DUCT — which is NOT a sinus, it is tears.",
+      "CLINICAL: sinusitis is slow to clear with antibiotics because the sinuses are POORLY VASCULARIZED, so it often takes a course of about three weeks.",
+    ],
+    flag: "Sphenoethmoidal recess drains the SPHENOID. Superior meatus drains the POSTERIOR ethmoid cells. Middle meatus (hiatus semilunaris) drains the FRONTAL (top), ANTERIOR ethmoid (middle), and MAXILLARY (bottom); MIDDLE ethmoid cells open on the ethmoidal BULLA. Inferior meatus drains the NASOLACRIMAL DUCT (not a sinus). Sinusitis is slow because the sinuses have a poor blood supply.",
+  },
+  {
+    n: 7, title: "Nasal blood supply and nerves", src: "Maini · Nasal Cavity",
+    facts: [
+      "ARTERIES come mainly from the MAXILLARY and OPHTHALMIC arteries. The ophthalmic branches are the ANTERIOR and POSTERIOR ETHMOIDAL arteries, which enter through the ethmoidal foramina.",
+      "KIESSELBACH'S area (also Little's area), in the ANTERIOR septum, is the MOST COMMON site of epistaxis (anterior nosebleed). It is an anastomosis of the SPHENOPALATINE artery, the ETHMOIDAL arteries, and the SEPTAL branch (from the superior labial branch of the FACIAL artery). It is treated with anterior nasal packing.",
+      "NERVES: the OLFACTORY nerves pass through the CRIBRIFORM PLATE to reach the olfactory mucosa in the roof. GENERAL (touch and pain) sensation is carried by the OPHTHALMIC (V1, anterior) and MAXILLARY (V2, posterior) divisions of the trigeminal nerve.",
+    ],
+    flag: "Nasal arteries = MAXILLARY plus OPHTHALMIC (its ethmoidal branches). KIESSELBACH'S area is the anterior septum, the number-one epistaxis site (sphenopalatine, ethmoidal, and septal/facial). Smell travels through the CRIBRIFORM PLATE. General sensation = V1 plus V2 (NOT V3).",
+  },
+  {
+    n: 8, title: "The tongue — papillae, terminal sulcus, foramen cecum", src: "Maini · Tongue",
+    facts: [
+      "FOUR papilla types: FILIFORM (scattered over the dorsum, keratinized, NO taste buds), FUNGIFORM (near the TIP and periphery), FOLIATE (folds along the posterolateral tongue), and CIRCUMVALLATE, also called VALLATE (a V-shaped row just anterior to the terminal sulcus, with taste buds sitting in a surrounding well).",
+      "The TERMINAL SULCUS (sulcus terminalis) is the V-shaped groove dividing the ANTERIOR two-thirds from the POSTERIOR one-third. At its apex sits the FORAMEN CECUM, a blind pit that is the remnant of the THYROGLOSSAL DUCT, where the thyroid began.",
+      "Development: the ANTERIOR two-thirds of the tongue comes from the FIRST pharyngeal arch.",
+    ],
+    flag: "Papillae: FILIFORM (dorsum, no taste), FUNGIFORM (tip), FOLIATE (sides), CIRCUMVALLATE (V-row, taste in a well). The TERMINAL SULCUS splits the anterior two-thirds from the posterior one-third; its apex is the FORAMEN CECUM (thyroglossal duct remnant). The anterior two-thirds is first-arch.",
+  },
+  {
+    n: 9, title: "Taste — Maini's location map", src: "Maini · Tongue",
+    facts: [
+      "Maini teaches that all taste receptors work the SAME way, so the tongue tells tastes apart by receptor LOCATION — her taste map: SWEET near the TIP, SALTY at the SIDES OF THE TIP, SOUR along the sides, BITTER at the POSTERIOR tongue, and UMAMI in the central part.",
+      "Each taste ties to a chemical class: SWEET = carbohydrates / monosaccharides; SALTY = SODIUM ions; SOUR = ACID / HYDROGEN ions; BITTER = alkaloids; UMAMI = AMINO ACIDS (protein-rich food).",
+    ],
+    flag: "Maini's taste map: SWEET at the tip, SALTY at the sides of the tip, SOUR along the sides, BITTER at the posterior tongue, UMAMI central. Chemicals: sweet from sugars, salty from SODIUM, sour from acid / hydrogen ions, bitter from alkaloids, umami from AMINO ACIDS.",
+  },
+  {
+    n: 10, title: "Tongue muscles — extrinsic and intrinsic", src: "Maini · Tongue",
+    facts: [
+      "FOUR EXTRINSIC muscles (they MOVE the tongue). GENIOGLOSSUS: from the MENTAL SPINE (genial tubercle) of the mandible, fan-shaped, the MAIN BULK of the tongue; it PROTRUDES (posterior fibers) and DEPRESSES (anterior fibers). HYOGLOSSUS: from the body and greater horn of the HYOID; it DEPRESSES and RETRACTS. STYLOGLOSSUS: from the STYLOID process; it RETRACTS and ELEVATES the posterior tongue. PALATOGLOSSUS: from the PALATINE APONEUROSIS; it closes the oropharyngeal isthmus.",
+      "Maini calls the HYOGLOSSUS the fence muscle — it separates the NERVES (the hypoglossal and lingual, behind it) from the ARTERIES (the lingual artery, in front of it).",
+      "FOUR INTRINSIC muscles (they change the tongue's SHAPE): the SUPERIOR longitudinal, the INFERIOR longitudinal, the TRANSVERSE, and the VERTICAL.",
+    ],
+    flag: "Extrinsic (move): GENIOglossus (mental spine; protrude and depress; main bulk), HYOglossus (hyoid; depress and retract; the fence muscle, nerves behind and arteries in front), STYLOglossus (styloid; retract and elevate), PALATOglossus (palatine aponeurosis; closes the oropharyngeal isthmus). Intrinsic (shape): superior longitudinal, inferior longitudinal, transverse, vertical.",
+  },
+  {
+    n: 11, title: "Tongue — innervation, vessels, lymph", src: "Maini · Tongue",
+    facts: [
+      "MOTOR: ALL tongue muscles are supplied by the HYPOGLOSSAL nerve (CN XII) EXCEPT the PALATOGLOSSUS, which is supplied by the VAGUS (CN X) because it is really a palatine muscle.",
+      "SENSATION of the ANTERIOR two-thirds: GENERAL sensation is the LINGUAL branch of V3, with cell bodies in the TRIGEMINAL ganglion; TASTE is the CHORDA TYMPANI of CN VII, with cell bodies in the GENICULATE ganglion. For the POSTERIOR one-third, BOTH general sensation and taste travel with the GLOSSOPHARYNGEAL nerve (CN IX).",
+      "ARTERY: the LINGUAL artery, the SECOND branch of the EXTERNAL CAROTID (order: Superior thyroid, Lingual, Facial). LYMPH: the TIP drains to the SUBMENTAL nodes, the SIDES to the submandibular nodes, and the POSTERIOR one-third to the SUPERIOR DEEP CERVICAL nodes.",
+    ],
+    flag: "Motor = CN XII to ALL except PALATOGLOSSUS (CN X). Anterior two-thirds: general = V3 lingual (trigeminal ganglion), taste = chorda tympani of VII (geniculate ganglion). Posterior one-third: general and taste both = CN IX. Lingual artery = second branch of the ECA. Lymph: tip goes to submental, posterior goes to superior deep cervical.",
+  },
+  {
+    n: 12, title: "Palate, oral floor, and salivary glands", src: "Maini · Salivary Glands",
+    facts: [
+      "The PALATOGLOSSUS plus its mucosa forms the PALATOGLOSSAL ARCH; contracting it draws the tongue and soft palate together to close the OROPHARYNGEAL ISTHMUS during chewing. The LINGUAL FRENULUM ties the undersurface of the tongue to the floor of the mouth.",
+      "THREE major salivary pairs. PAROTID: the LARGEST, but about 30 percent of saliva. SUBMANDIBULAR: about 60 percent of secretion, the MOST. SUBLINGUAL: the SMALLEST, about 7 to 8 percent. The von EBNER glands (serous, on the tongue) secrete lingual lipase.",
+      "AUTONOMICS. PAROTID (parasympathetic): CN IX — Maini's mnemonic, P is parotid and 9 is a mirror image of P — from the inferior salivatory nucleus in the medulla, via the tympanic and lesser petrosal nerves, synapsing in the OTIC ganglion, then along the auriculotemporal nerve. SUBMANDIBULAR and SUBLINGUAL: CN VII via the chorda tympani, from the superior salivatory nucleus in the pons, riding on the LINGUAL nerve to the SUBMANDIBULAR ganglion. SYMPATHETICS: from the superior cervical ganglion, forming a plexus on the EXTERNAL CAROTID artery and piggybacking to all the glands.",
+    ],
+    flag: "Parotid = LARGEST; submandibular = MOST saliva (about 60 percent). Parotid parasympathetics = CN IX to the OTIC ganglion (inferior salivatory nucleus). Submandibular and sublingual = CN VII to the SUBMANDIBULAR ganglion (superior salivatory nucleus). Sympathetics ride the external-carotid plexus. Maini: P is parotid, 9 mirrors P.",
+  },
+  {
+    n: 13, title: "Tongue and oral clinical terms", src: "Maini · Tongue",
+    facts: [
+      "The dys- terms. DYSARTHRIA: a disorder of ARTICULATION (from a cerebellar disorder or oral/tongue pathology), with the language itself intact. DYSPHAGIA: difficulty SWALLOWING. DYSPHONIA: a VOICE disorder — Maini stresses this is LARYNGEAL, NOT a tongue problem.",
+      "Lesions: a CHANCRE is the hard, sore SYPHILITIC lesion on the tongue. An APHTHOUS ULCER (a canker sore) tends to form when immunity is low and heals faster with VITAMIN C, which aids collagen synthesis.",
+      "RISK: Maini notes TOBACCO CHEWING as a major cause of tongue and oral cancer.",
+    ],
+    flag: "DysARTHRIA = articulation (tongue). DysPHAGIA = swallowing. DysPHONIA = voice (the LARYNX, not the tongue). A CHANCRE = syphilis (a hard sore). A canker / aphthous ulcer heals with VITAMIN C. The big tongue-cancer risk is TOBACCO CHEWING.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "The paranasal-sinus DRAINAGE MAP: sphenoethmoidal recess = sphenoid; superior meatus = posterior ethmoid; middle meatus (hiatus semilunaris) = frontal (top), anterior ethmoid (middle), maxillary (bottom), with the middle ethmoid cells on the ethmoidal bulla; inferior meatus = nasolacrimal duct (not a sinus).", why: "Maini walks the whole drainage table out loud — expect a 'which meatus does X drain into' item, and the classic trap that the nasolacrimal duct (tears) opens into the inferior meatus.", src: "Maini · Paranasal Sinuses" },
+  { tag: "★★ Heavy", text: "Tongue sensation split: anterior two-thirds general = lingual V3 (trigeminal ganglion), taste = chorda tympani / VII (geniculate ganglion); posterior one-third general AND taste = glossopharyngeal (CN IX). Motor is CN XII to everything except palatoglossus (CN X).", why: "She hammers the modality-by-region and the matching ganglion — a favorite cluster and an easy place to swap the ganglion on you.", src: "Maini · Tongue" },
+  { tag: "★★ Heavy", text: "Salivary gland autonomics: parotid = CN IX, otic ganglion, inferior salivatory nucleus; submandibular and sublingual = CN VII (chorda tympani), submandibular ganglion, superior salivatory nucleus. Sympathetics ride the external-carotid plexus.", why: "Maini's 'P is parotid, 9 mirrors P' mnemonic plus the nucleus-and-ganglion pairs is prime exam material.", src: "Maini · Salivary Glands" },
+  { tag: "Tongue", text: "The four papillae and their locations: filiform (dorsum, no taste), fungiform (tip), foliate (sides), circumvallate (V-row anterior to the terminal sulcus, taste in a well). Terminal sulcus apex = foramen cecum (thyroglossal duct remnant).", why: "Expect 'which papillae at the tip' or 'which form the V-row' and the foramen-cecum origin.", src: "Maini · Tongue" },
+  { tag: "Tongue", text: "Maini's taste map by location: sweet tip, salty sides of the tip, sour sides, bitter posterior, umami central; each tied to a chemical (sodium = salty, acid/hydrogen ions = sour, amino acids = umami).", why: "She teaches taste by receptor location and by chemical class — she may ask either direction.", src: "Maini · Tongue" },
+  { tag: "Nose", text: "The nasal septum: perpendicular plate of the ethmoid plus vomer (bony), septal cartilage (anterior). The lacrimal bone is NOT septum (orbit plus lateral wall); a deviated septum is the cartilage, treated by SMR.", why: "Her 'sneak-in lacrimal bone' distractor and the deviated-septum clinical both come straight from lecture.", src: "Maini · Nasal Septum" },
+  { tag: "Tongue", text: "Extrinsic-muscle origins and actions plus the exceptions: genioglossus (mental spine; protrude/depress), hyoglossus (hyoid; depress/retract; the 'fence muscle'), styloglossus (styloid; retract/elevate), palatoglossus (palatine aponeurosis; CN X, not XII).", why: "Origin-to-action pairing and the palatoglossus CN X exception are reliable points.", src: "Maini · Tongue" },
+  { tag: "Nose", text: "Nasal-function trap: the air is WARMED (not cooled), humidified, and filtered; the nose also receives secretions from the paranasal sinuses and the nasolacrimal duct.", why: "Maini calls the 'cooled' choice a silly question people miss — she flagged it directly.", src: "Maini · Nasal Cavity" },
+  { tag: "Clinical", text: "Kiesselbach's (Little's) area in the anterior septum is the number-one site of epistaxis — an anastomosis of the sphenopalatine, ethmoidal, and septal (facial) arteries.", why: "A high-yield anterior-nosebleed clinical she connects to the septal blood supply.", src: "Maini · Nasal Cavity" },
+  { tag: "Nose", text: "Conchae and meatuses: superior and middle conchae are ethmoid, the inferior concha is a separate bone; the space under a concha is a meatus, the recess above the superior concha is the sphenoethmoidal recess.", why: "Definitions plus 'which concha is a separate bone' are quick, testable facts.", src: "Maini · Nasal Cavity" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  { kind: "Mnemonic", title: "'P is parotid, 9 is a mirror image of P'", text: "For the parotid gland's parasympathetic supply, Maini's memory hook is that a capital P flipped looks like a 9 — so the parotid is served by the ninth cranial nerve, the glossopharyngeal (CN IX), synapsing in the otic ganglion.", helps: "Pins the one salivary nerve people mix up: the parotid is CN IX, while the submandibular and sublingual are CN VII.", src: "Maini · Salivary Glands" },
+  { kind: "Nickname", title: "Hyoglossus = the 'fence muscle'", text: "Maini calls the hyoglossus the fence muscle because it stands between two groups: the NERVES (hypoglossal and lingual) run BEHIND it and the ARTERIES (the lingual artery) run IN FRONT of it.", helps: "Recalls the key relations around the hyoglossus in one image — nerves behind the fence, arteries in front.", src: "Maini · Tongue" },
+  { kind: "Trap", title: "'Warmed, not cooled' — the silly question people miss", text: "Maini warns that a very easy nasal-function item catches people: the air is warmed, humidified, and filtered. Students see 'humidified' and 'filtered,' assume the pattern, and wrongly pick 'cooled.'", helps: "Solves the nasal-function trap: the nose WARMS the incoming air.", src: "Maini · Nasal Cavity" },
+  { kind: "Trap", title: "The sneak-in lacrimal bone", text: "Maini admits she likes to slip the lacrimal bone into septum questions. The lacrimal bone belongs to the medial orbital wall and the lateral nasal wall — it can never be part of the septum.", helps: "Beats the septum-versus-lateral-wall distractor she deliberately plants.", src: "Maini · Nasal Septum" },
+  { kind: "Rule", title: "One exception to CN XII", text: "Every tongue muscle is motor-supplied by the hypoglossal nerve (CN XII) except the palatoglossus, which is really a palatine muscle and rides with the vagus (CN X).", helps: "Answers the motor-innervation item: name the exception, palatoglossus / CN X.", src: "Maini · Tongue" },
+  { kind: "Rule", title: "Deviated septum = cartilage, not bone", text: "When a septum deviates, it is the cartilaginous part that bends, not the bony ethmoid or vomer. That is why the fix is a submucous resection (SMR) of the cartilage plus a septoplasty.", helps: "Anchors the deviated-septum clinical: cartilage deviates, SMR repairs.", src: "Maini · Nasal Septum" },
+  { kind: "Rule", title: "Taste is told apart by LOCATION", text: "Maini teaches that all taste receptors respond the same way, so the tongue distinguishes flavors by WHERE the stimulated receptors sit: sweet at the tip, salty at the sides of the tip, sour along the sides, bitter at the back, umami in the center.", helps: "Frames the taste map as a location scheme, so you reason each answer from position.", src: "Maini · Tongue" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Original-phrasing items grounded in Maini's Nose & Mouth lectures and the
+   AUDITED Everything-MC bank. Answer positions are balanced at build (see the
+   balance pass right after this array). */
+const questions = [
+  { id: 1, topic: "Nasal functions", src: "Maini · Nasal Cavity", q: "Dr. Maini's 'silly question people miss': as air passes through the nasal cavity it is...", opts: ["Cooled, humidified, and filtered", "Warmed, humidified, and filtered", "Warmed and dried out", "Left unchanged"], a: 1, h1: "One word is the whole trap.", h2: "The air is warmed, not cooled.", exp: "Warmed (NOT cooled), humidified, and filtered — Maini flags 'cooled' as the classic wrong pick." },
+  { id: 2, topic: "Nasal functions", src: "Maini · Nasal Cavity", q: "The nasal cavity receives secretions from which two sources?", opts: ["The parotid duct and the auditory tube", "The submandibular and parotid ducts", "The paranasal sinuses and the nasolacrimal duct", "The auditory tube and the nasolacrimal duct"], a: 2, h1: "One set drains air-filled bone; the other carries tears.", h2: "Sinuses plus the tear duct.", exp: "The nose receives secretions from the paranasal sinuses and the nasolacrimal duct." },
+  { id: 3, topic: "Vestibule", src: "Maini · Nasal Cavity", q: "The dilated space just inside the nostril, lined by skin bearing stiff hairs (vibrissae), is the...", opts: ["Nasal vestibule", "Choana", "Sphenoethmoidal recess", "Hiatus semilunaris"], a: 0, h1: "It is skin-lined, not mucosa-lined.", h2: "The hairs here are vibrissae.", exp: "The nasal vestibule is the skin-lined dilatation just inside the nostril, bearing the vibrissae." },
+  { id: 4, topic: "Choana", src: "Maini · Nasal Cavity", q: "The choana is...", opts: ["The anterior nostril", "A cleft in the middle meatus", "The posterior opening of the nasal cavity into the nasopharynx", "The olfactory recess in the roof"], a: 2, h1: "Think posterior, not anterior.", h2: "It leads into the nasopharynx.", exp: "The choana is the posterior aperture where each nasal cavity opens into the nasopharynx." },
+  { id: 5, topic: "External nose", src: "Maini · Nasal Cavity", q: "Which structure is part of the CARTILAGINOUS framework of the external nose?", opts: ["The nasal bone", "The septal cartilage", "The frontal process of the maxilla", "The nasal part of the frontal bone"], a: 1, h1: "Three of these are bone.", h2: "It supports the anterior septum.", exp: "The septal cartilage (with the lateral nasal and alar cartilages) is the cartilaginous framework; the rest are bony." },
+  { id: 6, topic: "External nose", src: "Maini · Nasal Cavity", q: "The greater and lesser alar cartilages support which part of the external nose?", opts: ["The bridge / root", "The septum", "The alae, the wings around the nostrils", "The cribriform roof"], a: 2, h1: "'Alar' names the part.", h2: "The wings around the nostrils.", exp: "The greater and lesser alar cartilages form the framework of the alae around the nostrils." },
+  { id: 7, topic: "External nose", src: "Maini · Nasal Cavity", q: "The midline point where the frontal bone meets the nasal bones (the root of the nose) is the...", opts: ["Nasion", "Glabella", "Apex", "Anterior nasal spine"], a: 0, h1: "It is the frontonasal junction.", h2: "The glabella sits above it.", exp: "The nasion is the frontonasal junction point at the root of the nose." },
+  { id: 8, topic: "Nasal septum", src: "Maini · Nasal Septum", q: "Which two structures form the bony posterior majority of the nasal septum?", opts: ["Septal cartilage and vomer", "Perpendicular plate of the ethmoid and the vomer", "Cribriform plate and sphenoid crest", "Palatine and lacrimal bones"], a: 1, h1: "One is a plate of the ethmoid.", h2: "Ethmoid plate plus the plough-shaped bone.", exp: "The perpendicular plate of the ethmoid and the vomer form the bony posterior majority of the septum." },
+  { id: 9, topic: "Nasal septum", src: "Maini · Nasal Septum", q: "The ANTERIOR part of the nasal septum is supported by...", opts: ["The vomer", "The perpendicular plate of the ethmoid", "The septal cartilage", "The palatine bone"], a: 2, h1: "The anterior part is not bone.", h2: "It is cartilage.", exp: "The septal cartilage supports the anterior part of the nasal septum." },
+  { id: 10, topic: "Nasal septum", src: "Maini · Nasal Septum", q: "In a deviated nasal septum, which part typically deviates?", opts: ["The cartilaginous part", "The vomer", "The perpendicular plate of the ethmoid", "The nasal crest of the maxilla"], a: 0, h1: "Bone rarely bends; this part does.", h2: "It is the cartilage.", exp: "A deviated nasal septum is usually the cartilaginous part, not the bony part (fixed by SMR plus septoplasty)." },
+  { id: 11, topic: "Nasal septum", src: "Maini · Nasal Septum", q: "Maini 'sneaks in' the lacrimal bone as a distractor. Which statement is correct?", opts: ["The lacrimal bone forms most of the septum", "The lacrimal bone is NOT part of the septum; it forms the medial orbital wall and part of the lateral nasal wall", "The lacrimal bone forms the roof of the nasal cavity", "The lacrimal bone forms the nasal floor"], a: 1, h1: "It belongs to the orbit and lateral wall.", h2: "It can never be septum.", exp: "The lacrimal bone forms the medial orbital wall and part of the lateral nasal wall — never the septum." },
+  { id: 12, topic: "Nasal walls", src: "Maini · Nasal Cavity", q: "The floor of the nasal cavity (the hard palate) is formed by which two bones?", opts: ["Vomer and ethmoid", "Body of sphenoid and frontal bone", "Palatine process of the maxilla and horizontal plate of the palatine bone", "Cribriform plate and nasal bone"], a: 2, h1: "Same as the roof of the mouth.", h2: "Maxilla plus palatine bone.", exp: "The floor equals the hard palate: the palatine process of the maxilla plus the horizontal plate of the palatine bone." },
+  { id: 13, topic: "Nasal walls", src: "Maini · Nasal Cavity", q: "Which bone's CRIBRIFORM PLATE forms part of the roof and transmits the olfactory nerves?", opts: ["Sphenoid", "Frontal", "Vomer", "Ethmoid"], a: 3, h1: "The same bone gives the superior and middle conchae.", h2: "It is the ethmoid.", exp: "The cribriform plate of the ethmoid forms the middle roof and transmits the olfactory nerve fibers." },
+  { id: 14, topic: "Nasal walls", src: "Maini · Nasal Cavity", q: "Which four bones form the ROOF of the nasal cavity?", opts: ["Maxilla, palatine, vomer, ethmoid", "Cribriform plate of ethmoid, body of sphenoid, frontal, and nasal", "Nasal, lacrimal, maxilla, palatine", "Vomer, ethmoid plate, sphenoid crest, palatine"], a: 1, h1: "Front to back across the top.", h2: "Cribriform, sphenoid, frontal, nasal.", exp: "The roof is the cribriform plate of the ethmoid, the body of the sphenoid, the frontal bone, and the nasal bone." },
+  { id: 15, topic: "Conchae", src: "Maini · Nasal Cavity", q: "The superior and middle conchae belong to which bone, and which concha is a separate bone?", opts: ["Ethmoid; the inferior concha is separate", "Maxilla; the superior concha is separate", "Palatine; the middle concha is separate", "Sphenoid; the inferior concha is separate"], a: 0, h1: "Two are part of one bone; one stands alone.", h2: "Superior and middle are ethmoid.", exp: "The superior and middle conchae are ethmoid; the inferior concha is a separate bone." },
+  { id: 16, topic: "Conchae", src: "Maini · Nasal Cavity", q: "The recess located ABOVE the superior concha is the...", opts: ["Superior meatus", "Hiatus semilunaris", "Sphenoethmoidal recess", "Ethmoidal infundibulum"], a: 2, h1: "It receives the sphenoid sinus.", h2: "Its name blends sphenoid and ethmoid.", exp: "The sphenoethmoidal recess lies above the superior concha and receives the sphenoid sinus." },
+  { id: 17, topic: "Conchae", src: "Maini · Nasal Cavity", q: "The space UNDERNEATH each concha is called a...", opts: ["Recess", "Meatus", "Bulla", "Sinus"], a: 1, h1: "There is a superior, middle, and inferior one.", h2: "Under a concha sits a meatus.", exp: "The pocket underneath each concha is a meatus (superior, middle, inferior)." },
+  { id: 18, topic: "Sinuses", src: "Maini · Paranasal Sinuses", q: "How many paired paranasal sinuses are there, and in which bones?", opts: ["Three: frontal, sphenoid, maxillary", "Four: frontal, ethmoid, sphenoid, maxillary", "Four: frontal, ethmoid, sphenoid, palatine", "Five, including the lacrimal"], a: 1, h1: "Do not forget the ethmoid.", h2: "Four sinuses in four bones.", exp: "There are four paired sinuses: frontal, ethmoid, sphenoid, and maxillary." },
+  { id: 19, topic: "Sinuses", src: "Maini · Paranasal Sinuses", q: "The ETHMOID sinus is unusual because it is...", opts: ["A single large cavity", "Multiple air cells (anterior, middle, posterior), each with its own opening", "Absent at birth and never develops", "Drained only by the inferior meatus"], a: 1, h1: "It is not one cavity.", h2: "Many little cells in groups.", exp: "The ethmoid sinus is many ethmoidal air cells in anterior, middle, and posterior groups, each with a separate opening." },
+  { id: 20, topic: "Sinuses", src: "Maini · Paranasal Sinuses", q: "The SPHENOID sinus drains into...", opts: ["The inferior meatus", "The middle meatus", "The sphenoethmoidal recess", "The superior meatus"], a: 2, h1: "Its name matches its drainage site.", h2: "The recess above the superior concha.", exp: "The sphenoid sinus drains into the sphenoethmoidal recess." },
+  { id: 21, topic: "Sinuses", src: "Maini · Paranasal Sinuses", q: "The POSTERIOR ethmoidal air cells drain into the...", opts: ["Superior meatus", "Middle meatus", "Inferior meatus", "Sphenoethmoidal recess"], a: 0, h1: "Anterior and middle cells go to the middle meatus.", h2: "The posterior group goes one level up.", exp: "The posterior ethmoidal air cells drain into the superior meatus." },
+  { id: 22, topic: "Sinuses", src: "Maini · Paranasal Sinuses", q: "Which sinus opens at the INFERIOR end of the hiatus semilunaris?", opts: ["Frontal", "Sphenoid", "Maxillary", "Posterior ethmoid"], a: 2, h1: "The frontal is at the superior end.", h2: "The biggest sinus, at the bottom of the cleft.", exp: "The maxillary sinus opens at the inferior end of the hiatus semilunaris (middle meatus)." },
+  { id: 23, topic: "Sinuses", src: "Maini · Paranasal Sinuses", q: "Which structure, which is NOT a sinus, opens into the INFERIOR meatus?", opts: ["Frontal sinus", "Maxillary sinus", "Nasolacrimal duct", "Sphenoid sinus"], a: 2, h1: "It carries tears, not air.", h2: "The tear duct.", exp: "The nasolacrimal duct (tears) opens into the inferior meatus — it is not a paranasal sinus." },
+  { id: 24, topic: "Sinuses", src: "Maini · Paranasal Sinuses", q: "The MIDDLE ethmoidal air cells open onto which structure in the middle meatus?", opts: ["The hiatus semilunaris", "The ethmoidal bulla", "The sphenoethmoidal recess", "The ethmoidal infundibulum"], a: 1, h1: "It is a rounded bulge.", h2: "A 'bubble' of ethmoid cells.", exp: "The ethmoidal bulla, a rounded bulge, carries the openings of the middle ethmoidal air cells." },
+  { id: 25, topic: "Sinuses", src: "Maini · Paranasal Sinuses", q: "Maini says sinusitis is slow to clear with antibiotics because the sinuses are...", opts: ["Highly vascular", "Poorly vascularized, so drugs take about three weeks to reach them", "Completely sealed off from the nose", "Protected by the cribriform plate"], a: 1, h1: "It is a blood-supply issue.", h2: "Poor vascularity means slow delivery.", exp: "The sinuses are poorly vascularized, so antibiotics take a long time (often about three weeks) to reach them." },
+  { id: 26, topic: "Nasal vessels", src: "Maini · Nasal Cavity", q: "Arterial supply to the nasal cavity comes mainly from branches of which two arteries?", opts: ["Facial and lingual", "Maxillary and ophthalmic", "Superior thyroid and facial", "The internal carotid only"], a: 1, h1: "One is a terminal branch of the external carotid; one comes off the internal carotid system.", h2: "Maxillary plus ophthalmic.", exp: "The nasal cavity is supplied mainly by branches of the maxillary and ophthalmic arteries." },
+  { id: 27, topic: "Nasal vessels", src: "Maini · Nasal Cavity", q: "Kiesselbach's (Little's) area, the most common site of anterior epistaxis, is located...", opts: ["In the posterior nasopharynx", "On the cribriform plate", "In the anterior nasal septum", "In the maxillary sinus"], a: 2, h1: "It is where fingers reach.", h2: "The front of the septum.", exp: "Kiesselbach's / Little's area lies in the anterior nasal septum and is the number-one epistaxis site." },
+  { id: 28, topic: "Nasal nerves", src: "Maini · Nasal Cavity", q: "General (touch and pain) sensation of the nasal cavity is carried by which trigeminal divisions?", opts: ["V2 and V3", "V3 only", "Ophthalmic (V1) and maxillary (V2)", "V1 and V3"], a: 2, h1: "V3 supplies the lower face and tongue, not the nose.", h2: "The upper two divisions.", exp: "General nasal sensation is carried by the ophthalmic (V1, anterior) and maxillary (V2, posterior) divisions." },
+  { id: 29, topic: "Papillae", src: "Maini · Tongue", q: "Which lingual papillae are scattered over the dorsum and carry NO taste buds?", opts: ["Filiform", "Fungiform", "Circumvallate", "Foliate"], a: 0, h1: "They are keratinized and mechanical.", h2: "Thread-like, all over the dorsum.", exp: "Filiform papillae are scattered over the dorsum, are keratinized, and hold no taste buds." },
+  { id: 30, topic: "Papillae", src: "Maini · Tongue", q: "Which papillae form a V-shaped row just anterior to the terminal sulcus, with taste buds in a surrounding 'well'?", opts: ["Fungiform", "Filiform", "Foliate", "Circumvallate (vallate)"], a: 3, h1: "They are large and few.", h2: "They line up in a V.", exp: "The circumvallate (vallate) papillae form a V-shaped row anterior to the terminal sulcus, with taste buds in the well." },
+  { id: 31, topic: "Tongue landmarks", src: "Maini · Tongue", q: "The V-shaped groove dividing the anterior two-thirds from the posterior one-third of the tongue is the...", opts: ["Median sulcus", "Terminal sulcus", "Lingual frenulum", "Hiatus semilunaris"], a: 1, h1: "It runs as a V, not front-to-back.", h2: "'Terminal' names it.", exp: "The terminal sulcus (sulcus terminalis) is the V-shaped divider between the anterior two-thirds and posterior one-third." },
+  { id: 32, topic: "Tongue landmarks", src: "Maini · Tongue", q: "At the apex of the terminal sulcus is a blind pit, a remnant of the thyroglossal duct, called the...", opts: ["Foramen cecum", "Foramen ovale", "Lingual frenulum", "Sphenoethmoidal recess"], a: 0, h1: "It is a blind pit, leading nowhere.", h2: "Where the thyroid began.", exp: "The foramen cecum, at the apex of the terminal sulcus, marks the origin of the thyroglossal duct." },
+  { id: 33, topic: "Taste map", src: "Maini · Tongue", q: "On Maini's taste map, SWEET is concentrated...", opts: ["At the posterior tongue", "Near the tip", "On the sides", "Centrally"], a: 1, h1: "The friendliest taste sits up front.", h2: "The tip.", exp: "On Maini's location map, sweet is concentrated near the tip of the tongue." },
+  { id: 34, topic: "Taste map", src: "Maini · Tongue", q: "On Maini's taste map, BITTER is appreciated...", opts: ["At the tip", "On the sides of the tip", "At the posterior tongue", "Centrally"], a: 2, h1: "It is the last-ditch 'spit it out' taste.", h2: "The back.", exp: "Bitter is appreciated along the posterior part of the tongue." },
+  { id: 35, topic: "Taste chemistry", src: "Maini · Tongue", q: "UMAMI taste (central) is produced by which chemical class?", opts: ["Sodium ions", "Amino acids", "Hydrogen ions", "Monosaccharides"], a: 1, h1: "Think savory, protein-rich food.", h2: "The building blocks of protein.", exp: "Umami comes from amino acids in protein-rich foods." },
+  { id: 36, topic: "Tongue muscles", src: "Maini · Tongue", q: "Which extrinsic tongue muscle arises from the mental spine of the mandible and forms the main bulk of the tongue?", opts: ["Hyoglossus", "Styloglossus", "Genioglossus", "Palatoglossus"], a: 2, h1: "'Genio-' means chin.", h2: "From the mental spine, fan-shaped.", exp: "The genioglossus arises from the mental spine of the mandible and is the main bulk of the tongue." },
+  { id: 37, topic: "Tongue muscles", src: "Maini · Tongue", q: "Based on its fiber direction, the genioglossus chiefly produces...", opts: ["Retraction and elevation", "Protrusion and depression", "Elevation only", "Depression and retraction"], a: 1, h1: "Posterior fibers push it out; anterior fibers pull it down.", h2: "It sticks the tongue out.", exp: "The genioglossus protrudes (posterior fibers) and depresses (anterior fibers) the tongue." },
+  { id: 38, topic: "Tongue muscles", src: "Maini · Tongue", q: "Maini calls the hyoglossus the 'fence muscle' because it...", opts: ["Separates the tongue from the palate", "Closes the oropharyngeal isthmus", "Separates the nerves (behind it) from the arteries (in front of it)", "Divides the salivary glands"], a: 2, h1: "A fence stands between two things.", h2: "Nerves on one side, arteries on the other.", exp: "The hyoglossus separates the nerves (hypoglossal and lingual, behind) from the arteries (lingual, in front)." },
+  { id: 39, topic: "Tongue muscles", src: "Maini · Tongue", q: "The styloglossus (from the styloid process) produces...", opts: ["Protrusion and depression", "Retraction and elevation of the posterior tongue", "Depression and retraction", "Shape change only"], a: 1, h1: "It pulls up and back from the styloid.", h2: "Retract and elevate.", exp: "The styloglossus retracts and elevates the posterior part of the tongue." },
+  { id: 40, topic: "Tongue muscles", src: "Maini · Tongue", q: "Which set are the INTRINSIC muscles of the tongue (they change its shape)?", opts: ["Genioglossus, hyoglossus, styloglossus, palatoglossus", "Superior longitudinal, inferior longitudinal, transverse, vertical", "Superior and inferior constrictors", "Oblique and circular"], a: 1, h1: "Intrinsic = shape, extrinsic = move.", h2: "Named by fiber direction.", exp: "The intrinsic muscles are the superior longitudinal, inferior longitudinal, transverse, and vertical." },
+  { id: 41, topic: "Tongue nerves", src: "Maini · Tongue", q: "All tongue muscles are motor-supplied by CN XII EXCEPT one. Which, and by what nerve?", opts: ["Genioglossus — CN VII", "Hyoglossus — CN IX", "Palatoglossus — vagus (CN X)", "Styloglossus — CN V"], a: 2, h1: "The exception is really a palatine muscle.", h2: "Palatoglossus rides the vagus.", exp: "Every tongue muscle is CN XII except the palatoglossus, which is supplied by the vagus (CN X)." },
+  { id: 42, topic: "Tongue nerves", src: "Maini · Tongue", q: "GENERAL sensation of the anterior two-thirds of the tongue is carried by...", opts: ["The chorda tympani (CN VII)", "The lingual branch of V3 (cell bodies in the trigeminal ganglion)", "The glossopharyngeal nerve", "The hypoglossal nerve"], a: 1, h1: "General is touch/pain, not taste.", h2: "It rides V3.", exp: "General sensation of the anterior two-thirds is the lingual branch of V3 (trigeminal ganglion)." },
+  { id: 43, topic: "Tongue nerves", src: "Maini · Tongue", q: "BOTH general sensation and taste from the posterior one-third of the tongue are carried by...", opts: ["The glossopharyngeal nerve (CN IX)", "The chorda tympani (CN VII)", "The lingual nerve (V3)", "The vagus nerve"], a: 0, h1: "One nerve does both modalities back here.", h2: "The ninth nerve.", exp: "The posterior one-third carries both general sensation and taste on the glossopharyngeal nerve (CN IX)." },
+  { id: 44, topic: "Tongue lymph", src: "Maini · Tongue", q: "Lymph from the TIP of the tongue drains primarily to which nodes?", opts: ["Superior deep cervical", "Submandibular", "Submental", "Parotid"], a: 2, h1: "The tip sits just behind the chin.", h2: "Sub-mental = under the chin.", exp: "Lymph from the tip of the tongue drains to the submental nodes (the sides drain to submandibular; the posterior third to superior deep cervical)." },
+  { id: 45, topic: "Palate", src: "Maini · Salivary Glands", q: "Contraction of the palatoglossus closes which opening during chewing?", opts: ["The choana", "The laryngeal inlet", "The oropharyngeal isthmus", "The pharyngeal isthmus"], a: 2, h1: "It draws the tongue and soft palate together.", h2: "Between the mouth and oropharynx.", exp: "The palatoglossus closes the oropharyngeal isthmus so food is not swallowed before it is chewed." },
+  { id: 46, topic: "Salivary glands", src: "Maini · Salivary Glands", q: "Which salivary gland is the LARGEST, and which contributes the MOST saliva (about 60 percent)?", opts: ["Largest = submandibular; most = parotid", "Largest = parotid; most = submandibular", "Largest = sublingual; most = parotid", "Largest = parotid; most = sublingual"], a: 1, h1: "Biggest by size is not the biggest producer.", h2: "Parotid is largest; submandibular makes the most.", exp: "The parotid is the largest gland, but the submandibular contributes the most saliva (about 60 percent)." },
+  { id: 47, topic: "Salivary glands", src: "Maini · Salivary Glands", q: "The PAROTID gland's parasympathetic supply comes from which nerve, synapsing in which ganglion?", opts: ["CN VII; submandibular ganglion", "CN IX; otic ganglion", "CN X; pterygopalatine ganglion", "CN V; geniculate ganglion"], a: 1, h1: "'P is parotid, 9 mirrors P.'", h2: "CN IX, and the ganglion by the ear.", exp: "The parotid is served by CN IX, synapsing in the otic ganglion, then via the auriculotemporal nerve." },
+  { id: 48, topic: "Salivary glands", src: "Maini · Salivary Glands", q: "The submandibular and sublingual glands get parasympathetic fibers from CN VII (chorda tympani), synapsing in the...", opts: ["Otic ganglion", "Geniculate ganglion", "Submandibular ganglion", "Superior cervical ganglion"], a: 2, h1: "The fibers ride the lingual nerve to get there.", h2: "It is named for one of the two glands.", exp: "These fibers ride the lingual nerve to the submandibular ganglion, then supply both glands." },
+  { id: 49, topic: "Clinical terms", src: "Maini · Tongue", q: "Which term means a disorder of ARTICULATION, with language itself intact?", opts: ["Dysphagia", "Dysarthria", "Dysphonia", "Aphasia"], a: 1, h1: "'-arthria' relates to jointed, articulated speech.", h2: "The words come out poorly.", exp: "Dysarthria is a disorder of articulation (cerebellar or oral/tongue), with language intact." },
+  { id: 50, topic: "Clinical terms", src: "Maini · Tongue", q: "Maini stresses that DYSPHONIA reflects pathology of the...", opts: ["Tongue", "Larynx", "Esophagus", "Soft palate"], a: 1, h1: "'-phonia' relates to voice.", h2: "The voice box.", exp: "Dysphonia is a voice disorder from laryngeal pathology, not a tongue problem." },
+  { id: 51, topic: "Clinical terms", src: "Maini · Tongue", q: "A hard, sore lesion on the tongue seen in SYPHILIS is a...", opts: ["Chancre", "Aphthous ulcer", "Leukoplakia", "Mucocele"], a: 0, h1: "It is the primary syphilitic sore.", h2: "A 'chancre.'", exp: "The chancre is the hard syphilitic sore on the tongue (the aphthous ulcer / canker sore is unrelated to syphilis)." },
+];
+
+/* --- Balance the answer positions deterministically (no 'always B' skew) --- */
+questions.forEach((q, k) => {
+  const target = k % 4;
+  if (target === q.a) return;
+  const correct = q.opts[q.a];
+  q.opts.splice(q.a, 1);
+  q.opts.splice(target, 0, correct);
+  q.a = target;
+});
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.voicenote{margin:10px 0 0;font-size:13px;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:9px 13px;max-width:720px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.readbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:12px 15px;margin:0 0 16px;box-shadow:0 12px 28px -24px rgba(124,58,237,.35)}
+.readbar .rb-title{font-weight:700;font-size:13px;color:var(--accent-deep);display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.readbtn{border:none;background:var(--accent);color:#fff;font:inherit;font-weight:700;font-size:13.5px;padding:9px 15px;border-radius:10px;cursor:pointer;transition:.14s;box-shadow:0 6px 16px -8px var(--accent)}
+.readbtn:hover{background:var(--accent-mid)}
+.readbtn.ghost{background:#fff;color:var(--accent-deep);border:1px solid var(--accent-soft);box-shadow:none;font-weight:600;padding:8px 12px}
+.readbtn.ghost:hover{background:var(--accent-wash)}
+.readbtn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.rb-speed{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+.rb-speed input[type=range]{accent-color:var(--accent);width:120px}
+.rb-speedval{background:var(--accent-wash);color:var(--accent-deep);font-weight:700;border:1px solid var(--line);border-radius:6px;padding:2px 8px;min-width:46px;text-align:center}
+.rb-voice{font:inherit;font-size:12.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;max-width:210px}
+.rb-now{flex-basis:100%;font-size:12px;color:var(--ink-soft)}
+.rb-now b{color:var(--accent-deep)}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);transition:box-shadow .2s,border-color .2s}
+.obj.reading{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft),0 16px 34px -20px rgba(124,58,237,.5)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"\\2691 Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 10 · Head &amp; Neck · Dr. Maini</span>
+          <h1 className="title serif">Nose &amp; <em>Mouth</em> — Cram Coach</h1>
+          <p className="subtitle">A voiced, hands-free cram of Maini&apos;s Nose &amp; Mouth must-knows — the nasal cavity, septum, walls, conchae, and the paranasal-sinus drainage map, then the tongue (papillae, taste, muscles, innervation), the palate and salivary glands, and her clinical terms — in her order, weighted by what she stresses. Press play and it reads itself aloud.</p>
+          <p className="voicenote">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+          <div className="pill-row">
+            <span className="pill-date">🫁 Nasal Cavity &amp; Paranasal Sinuses (L23) · 👅 Oral Cavity &amp; Tongue (L25)</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA lectures — the Nasal Cavity &amp; Paranasal Sinuses (L23) and the Oral Cavity &amp; Tongue (L25) — and grounded in the audited Nose &amp; Mouth Everything-MC bank. Questions are original, in her style, source-tagged per item. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+/* Cram carries the hands-free Web-Speech read-aloud walkthrough. */
+function Cram() {
+  const [voices, setVoices] = useState([]);
+  const [voiceURI, setVoiceURI] = useState("");
+  const [rate, setRate] = useState(1);
+  const [reading, setReading] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [curIdx, setCurIdx] = useState(-1);
+
+  const rateRef = useRef(1);
+  const voiceRef = useRef("");
+  const stopRef = useRef(false);
+  const cardsRef = useRef([]);
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+
+  useEffect(() => { rateRef.current = rate; }, [rate]);
+  useEffect(() => { voiceRef.current = voiceURI; }, [voiceURI]);
+
+  useEffect(() => {
+    if (!supported) return;
+    const load = () => {
+      const v = window.speechSynthesis.getVoices() || [];
+      setVoices(v);
+      if (v.length && !voiceRef.current) {
+        const pref =
+          v.find((x) => /Ava/i.test(x.name)) ||
+          v.find((x) => /Emma/i.test(x.name)) ||
+          v.find((x) => /Andrew/i.test(x.name)) ||
+          v.find((x) => /Aria|Jenny|Natural|Microsoft/i.test(x.name)) ||
+          v.find((x) => x.lang && x.lang.toLowerCase().indexOf("en") === 0) ||
+          v[0];
+        if (pref) { voiceRef.current = pref.voiceURI; setVoiceURI(pref.voiceURI); }
+      }
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => {
+      stopRef.current = true;
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+      try { window.speechSynthesis.onvoiceschanged = null; } catch (e) {}
+    };
+  }, [supported]);
+
+  const speakable = (t) => t
+    .replace(/→/g, " to ")
+    .replace(/&/g, " and ")
+    .replace(/\bCN\s*IX\b/g, "cranial nerve nine")
+    .replace(/\bCN\s*XII\b/g, "cranial nerve twelve")
+    .replace(/\bCN\s*VII\b/g, "cranial nerve seven")
+    .replace(/\bCN\s*X\b/g, "cranial nerve ten")
+    .replace(/\bCN\s*V\b/g, "cranial nerve five")
+    .replace(/\bV1\b/g, "V one")
+    .replace(/\bV2\b/g, "V two")
+    .replace(/\bV3\b/g, "V three")
+    .replace(/\btwo-thirds\b/g, "two thirds")
+    .replace(/\bone-third\b/g, "one third")
+    .replace(/\bSMR\b/g, "S M R")
+    .replace(/\bECA\b/g, "external carotid")
+    .replace(/~/g, "about ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const buildText = (c) => {
+    let s = "Topic " + c.n + ". " + c.title + ". ";
+    s += c.facts.join(" ");
+    if (c.flag) s += " Maini flag. " + c.flag;
+    return speakable(s);
+  };
+
+  const stopAll = () => {
+    stopRef.current = true;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    setReading(false); setPaused(false); setCurIdx(-1);
+  };
+
+  const playFrom = (i) => {
+    if (!supported) return;
+    if (i < 0 || i >= cram.length) { stopAll(); return; }
+    stopRef.current = false;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    setReading(true); setPaused(false); setCurIdx(i);
+    const el = cardsRef.current[i];
+    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    const u = new SpeechSynthesisUtterance(buildText(cram[i]));
+    u.rate = Math.min(3, Math.max(0.5, rateRef.current));
+    const v = (window.speechSynthesis.getVoices() || []).find((x) => x.voiceURI === voiceRef.current);
+    if (v) u.voice = v;
+    u.onend = () => {
+      if (stopRef.current) return;
+      if (i + 1 < cram.length) playFrom(i + 1);
+      else stopAll();
+    };
+    // small delay guards against a cancel/speak race in some browsers
+    setTimeout(() => { try { window.speechSynthesis.speak(u); } catch (e) {} }, 60);
+  };
+
+  const togglePlay = () => {
+    if (!supported) { alert("Your browser does not support Web Speech read-aloud. Try Microsoft Edge or Chrome."); return; }
+    if (!reading) { playFrom(curIdx >= 0 ? curIdx : 0); return; }
+    if (paused) { try { window.speechSynthesis.resume(); } catch (e) {} setPaused(false); }
+    else { try { window.speechSynthesis.pause(); } catch (e) {} setPaused(true); }
+  };
+  const nextTopic = () => { const i = (curIdx < 0 ? -1 : curIdx) + 1; if (i < cram.length) playFrom(i); };
+  const prevTopic = () => { const i = (curIdx < 0 ? 0 : curIdx) - 1; if (i >= 0) playFrom(i); };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s Nose &amp; Mouth essentials, in her order</div>
+        <p>Nasal cavity &amp; vestibule → external nose → septum → walls → conchae &amp; meatuses → the paranasal-sinus drainage map → nasal vessels &amp; nerves → tongue papillae → the taste map → tongue muscles → tongue innervation → palate &amp; salivary glands → clinical terms. The ⚑ flags are the high-yield hooks.</p>
+      </div>
+
+      <div className="readbar">
+        <span className="rb-title">🔊 Read aloud</span>
+        <button className="readbtn" onClick={togglePlay}>{!reading ? "▶ Play" : paused ? "▶ Resume" : "⏸ Pause"}</button>
+        <button className="readbtn ghost" onClick={prevTopic} disabled={!reading && curIdx <= 0}>⏮ Prev</button>
+        <button className="readbtn ghost" onClick={nextTopic}>Next ⏭</button>
+        <button className="readbtn ghost" onClick={stopAll} disabled={!reading}>⏹ Stop</button>
+        <label className="rb-speed">Speed
+          <input type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => setRate(parseFloat(e.target.value))} />
+          <span className="rb-speedval">{rate.toFixed(1)}x</span>
+        </label>
+        {voices.length > 0 && (
+          <select className="rb-voice" value={voiceURI} onChange={(e) => setVoiceURI(e.target.value)} title="Voice">
+            {voices.filter((v) => !v.lang || v.lang.toLowerCase().indexOf("en") === 0).map((v) => (
+              <option key={v.voiceURI} value={v.voiceURI}>{v.name}</option>
+            ))}
+          </select>
+        )}
+        <div className="rb-now">
+          {reading
+            ? <>Now reading <b>Topic {curIdx + 1}</b> of {cram.length} — {cram[curIdx] ? cram[curIdx].title : ""}. Speed applies to the next section. Hands-free: it auto-advances.</>
+            : <>Press <b>Play</b> for a hands-free walkthrough — it reads each topic aloud and moves on by itself. Best in Microsoft Edge (Ava / Emma / Andrew).</>}
+        </div>
+      </div>
+
+      {cram.map((c, i) => (
+        <div className={`obj ${curIdx === i ? "reading" : ""}`} key={c.n} ref={(el) => { cardsRef.current[i] = el; }}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, ordered to match how Maini stresses and writes about Nose &amp; Mouth.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Dr. Maini&apos;s own mnemonics, nicknames, and traps pulled straight from the Nose &amp; Mouth lectures — the retention hooks to lean on when a fact won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across Nose &amp; Mouth</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 (Gross Anatomy, Head & Neck) at SCUHS, running a review of the NOSE & MOUTH module — the nasal cavity, paranasal sinuses, oral cavity, tongue, and salivary glands. Teach ONLY from this content; do not invent bones, openings, nerves, ganglia, or drainage sites. Warm and encouraging; you say "right?", "okay?", "make sense?", "all right?", and call students "guys." You love clinical asides and simple location logic, and you make students reason step by step instead of guessing. Keep answers tight (3-6 sentences) and quiz the student back.
+
+NASAL CAVITY OVERVIEW: part of the upper respiratory tract, split into two cavities by the nasal septum. Functions: olfaction, air conduction, HUMIDIFICATION, WARMING (not cooling - the silly trap people miss), and FILTRATION; it also receives secretions from the paranasal sinuses and the nasolacrimal duct. The nasal vestibule is the skin-lined dilatation just inside the nostril, bearing stiff hairs (vibrissae) that trap dust/soot. Posterior opening into the nasopharynx = the choana.
+
+EXTERNAL NOSE: cartilaginous framework = lateral nasal cartilage, septal cartilage (supports the anterior septum), greater and lesser alar cartilages (around the nostrils). Bony framework = nasal bones, frontal process of maxilla, nasal part of frontal bone. Root landmark = nasion; tip = apex.
+
+NASAL SEPTUM: bony posterior majority = perpendicular plate of ethmoid + vomer; anterior = septal cartilage. Small contributors: sphenoid crest, nasal crest of palatine, nasal crest of maxilla, nasal bone, nasal spine of frontal. Clinical: a deviated septum is the CARTILAGE, not bone; treat with submucous resection (SMR) + septoplasty. TRAP: the lacrimal bone is NOT part of the septum - it is the medial orbital wall and part of the lateral nasal wall (I like to sneak it in).
+
+NASAL WALLS: ROOF = cribriform plate of ethmoid (transmits olfactory nerves) + body of sphenoid + frontal + nasal. FLOOR = hard palate = palatine process of maxilla + horizontal plate of palatine. LATERAL WALL = nasal, frontal process of maxilla, lacrimal, superior + middle conchae (ethmoid), inferior concha (separate bone), perpendicular plate of palatine, medial pterygoid plate (sphenoid).
+
+CONCHAE & MEATUSES: superior + middle conchae = ethmoid; inferior concha = separate bone. Conchae increase surface area to warm/humidify air. Under a concha = a meatus (superior/middle/inferior). Above the superior concha = the sphenoethmoidal recess.
+
+PARANASAL SINUSES: four paired - frontal, ethmoid, sphenoid, maxillary. The ethmoid is many air cells (anterior/middle/posterior groups), each with its own opening. DRAINAGE: sphenoethmoidal recess = sphenoid sinus; superior meatus = posterior ethmoidal cells; middle meatus (hiatus semilunaris) = frontal (superior end, via ethmoidal infundibulum/frontonasal duct), anterior ethmoidal cells (middle), maxillary (inferior end), with the middle ethmoidal cells on the ethmoidal bulla; inferior meatus = nasolacrimal duct (NOT a sinus - tears). Sinusitis is slow to treat because the sinuses are poorly vascularized (~3-week course).
+
+NASAL VESSELS/NERVES: arteries mainly from the maxillary + ophthalmic (anterior + posterior ethmoidal branches). Kiesselbach's/Little's area in the anterior septum is the #1 epistaxis site - an anastomosis of sphenopalatine, ethmoidal, and the septal branch (superior labial branch of the facial). Olfactory nerves pass through the cribriform plate. General sensation = ophthalmic (V1, anterior) + maxillary (V2, posterior); NOT V3.
+
+TONGUE - PAPILLAE: filiform (scattered over the dorsum, keratinized, NO taste), fungiform (tip and periphery), foliate (posterolateral folds), circumvallate/vallate (V-row anterior to the terminal sulcus, taste buds in a well). The terminal sulcus divides the anterior 2/3 from the posterior 1/3; its apex is the foramen cecum (thyroglossal duct remnant). Anterior 2/3 develops from the first pharyngeal arch.
+
+TASTE MAP (my scheme - receptors are the same, so location tells them apart): sweet at the tip, salty at the sides of the tip, sour along the sides, bitter at the posterior tongue, umami central. Chemicals: sweet = carbohydrates/monosaccharides, salty = sodium ions, sour = acid/hydrogen ions, bitter = alkaloids, umami = amino acids.
+
+TONGUE MUSCLES (extrinsic, move the tongue): genioglossus (mental spine of mandible; fan-shaped, main bulk; protrudes + depresses), hyoglossus (body + greater horn of hyoid; depresses + retracts; the "fence muscle" - nerves behind it, arteries in front), styloglossus (styloid process; retracts + elevates the posterior tongue), palatoglossus (palatine aponeurosis; closes the oropharyngeal isthmus). Intrinsic (change shape): superior longitudinal, inferior longitudinal, transverse, vertical.
+
+TONGUE INNERVATION/VESSELS/LYMPH: MOTOR = hypoglossal (CN XII) to ALL except palatoglossus (vagus, CN X). SENSATION - anterior 2/3: general = lingual branch of V3 (trigeminal ganglion), taste = chorda tympani/CN VII (geniculate ganglion); posterior 1/3: BOTH general + taste = glossopharyngeal (CN IX). Artery = lingual artery, second branch of the external carotid (Superior thyroid, Lingual, Facial). Lymph: tip = submental, sides = submandibular, posterior 1/3 = superior deep cervical.
+
+PALATE/ORAL FLOOR + SALIVARY GLANDS: palatoglossus + mucosa = palatoglossal arch, closing the oropharyngeal isthmus during chewing; lingual frenulum ties the undersurface of the tongue to the floor of the mouth. Salivary glands: parotid = largest (~30% of saliva); submandibular = most (~60%); sublingual = smallest (~7-8%); von Ebner glands (serous, on the tongue) make lingual lipase. AUTONOMICS: parotid parasympathetic = CN IX ("P is parotid, 9 is a mirror image of P"), inferior salivatory nucleus (medulla) -> tympanic/lesser petrosal -> otic ganglion -> auriculotemporal nerve. Submandibular + sublingual = CN VII (chorda tympani), superior salivatory nucleus (pons) -> ride the lingual nerve -> submandibular ganglion. Sympathetics: superior cervical ganglion -> plexus on the external carotid artery -> all glands.
+
+CLINICAL TERMS: dysarthria = a disorder of articulation (cerebellar/oral, language intact); dysphagia = difficulty swallowing; dysphonia = a VOICE disorder from the LARYNX (not the tongue). Chancre = the hard syphilitic sore on the tongue; aphthous ulcer (canker sore) forms with low immunity and heals faster with vitamin C. Tongue/oral cancer risk = tobacco chewing.
+
+Open by offering to drill the paranasal-sinus drainage map, the tongue's nerve supply (anterior 2/3 vs posterior 1/3, general vs taste, and the ganglia), the salivary-gland autonomics, the tongue muscles, or the taste map. When a student is wrong, name the rule and have them re-derive it step by step. Never claim a mnemonic is mine unless it is in this content (the two that are mine: "P is parotid, 9 mirrors P" for the parotid, and the hyoglossus as the "fence muscle").`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys — Nose and Mouth. Two clusters trip people up the most: the paranasal-sinus DRAINAGE map (which meatus each sinus empties into, and remember the nasolacrimal duct in the inferior meatus is NOT a sinus), and the tongue's nerve supply (anterior two-thirds versus posterior one-third, general versus taste, and the matching ganglion). Want me to drill the sinus drainage, the tongue innervation, the salivary-gland autonomics, the tongue muscles, or my taste map? Where do you want to start?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the paranasal-sinus drainage map",
+    "Quiz the tongue's nerve supply (anterior 2/3 vs posterior 1/3)",
+    "Salivary-gland autonomics — parotid vs submandibular/sublingual",
+    "The tongue muscles — origins, actions, and the fence muscle",
+    "Walk me through your taste map",
+    "The nasal septum bones and the lacrimal-bone trap",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her Nose &amp; Mouth lectures. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

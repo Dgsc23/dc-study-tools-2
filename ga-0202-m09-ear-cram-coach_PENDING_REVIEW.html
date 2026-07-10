@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · The Ear — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 9 — THE EAR
+   Dr. Seema Maini. Cram Coach. PENDING REVIEW.
+   Built ONLY from Maini's Lecture 22 (The Ear) and this module's AUDITED
+   Everything-MC bank (anti-fab verified). No new unverified facts.
+   VOICED, hands-free walkthrough via Web Speech. Answer positions balanced.
+   THEME: violet.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m09-ear-hub_PENDING_REVIEW.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "tables", label: "Tables" },
+  { id: "study", label: "Traps & Flags" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (12 TOPICS) ==== */
+const cram = [
+  {
+    n: 1, title: "The ear at a glance — three regions, one job", src: "Maini · The Ear",
+    facts: [
+      "The ear has THREE parts: EXTERNAL, MIDDLE, and INTERNAL. Sound waves create vibrations that are passed structure to structure until they reach the receptors, which sit deep and protected in the INTERNAL ear, where they are converted into ACTION POTENTIALS carried to the temporal lobe.",
+      "The EXTERNAL and MIDDLE ear are only a CONDUIT: their whole job is to conduct vibrations inward. No receptors live there.",
+      "External ear = auricle + external acoustic meatus + tympanic membrane. Middle ear = the air-filled tympanic cavity (3 ossicles, 2 muscles, the auditory tube). Internal ear = the labyrinth (cochlea for hearing; vestibule and semicircular canals for balance).",
+    ],
+    flag: "Receptors = INTERNAL ear only. External + middle ear = a conduit that passes vibrations along. Never put receptors on the eardrum or in the meatus.",
+  },
+  {
+    n: 2, title: "The auricle (pinna)", src: "Maini · The Ear",
+    facts: [
+      "The auricle is a SINGLE piece of ELASTIC cartilage covered by thin, hairy skin. Distort it and it springs back. Maini's other elastic-cartilage example: the EPIGLOTTIS.",
+      "The LOBULE (earlobe) has NO cartilage, just skin and soft tissue, and is very vascular.",
+      "Named parts (Maini says she has seen bold exam questions here): HELIX (outer curved ridge), ANTIHELIX (parallel to it), SCAPHA (the boat-shaped fossa between them), TRAGUS (anterior to the meatus), ANTITRAGUS (opposite it), and the INTERTRAGIC NOTCH between them.",
+      "Arteries: superficial temporal, posterior auricular, occipital, all branches of the EXTERNAL CAROTID. Sensory: great auricular and lesser occipital (CERVICAL PLEXUS) and auriculotemporal (V3). Motor to the rudimentary auricular muscles: the FACIAL nerve (VII).",
+    ],
+    flag: "Auricle = elastic cartilage (like the epiglottis); the lobule has NO cartilage. Know helix, antihelix, scapha, tragus, antitragus.",
+  },
+  {
+    n: 3, title: "External acoustic meatus", src: "Maini · The Ear",
+    facts: [
+      "A SINUOUS (S-shaped) tube about 2.5 cm long. The LATERAL one-third is supported by elastic cartilage; the MEDIAL two-thirds by the temporal bone.",
+      "Lined by skin with SEBACEOUS and CERUMINOUS glands. Cerumen (wax) plus hair forms a mat that traps dust, soot, and even small insects.",
+      "Sensory supply: the auriculotemporal branch of V3 and the AURICULAR BRANCH OF THE VAGUS (X). Because the vagus branch carries GSA here, cleaning the ear can trigger a tickle or cough sensation in the THROAT.",
+    ],
+    flag: "2.5 cm, S-shaped; lateral one-third cartilage, medial two-thirds bone. The ear-to-throat reflex = the auricular branch of the VAGUS.",
+  },
+  {
+    n: 4, title: "Tympanic membrane (the eardrum)", src: "Maini · The Ear",
+    facts: [
+      "Thin, semi-transparent, OVAL, pearly-gray fibrous membrane. Covered EXTERNALLY by thin skin, INTERNALLY by mucous membrane, with a core of dense fibrous tissue (three layers).",
+      "Central depression where the malleus handle attaches = the UMBO (Maini: ambo means umbrella). From the umbo a CONE OF LIGHT radiates antero-inferiorly: RIGHT ear 5 o'clock, LEFT ear 7 o'clock. Maini flagged this as a likely exam question.",
+      "Divided into FOUR quadrants for exam: antero-superior, postero-superior, antero-inferior, postero-inferior. The superior part is the lax PARS FLACCIDA; the larger inferior part is the tense PARS TENSA.",
+      "Blood: EXTERNAL surface = deep auricular branch of the maxillary artery. Nerve: EXTERNAL surface = auriculotemporal (V3) plus the auricular branch of vagus; INTERNAL surface = glossopharyngeal (IX).",
+    ],
+    flag: "Cone of light: RIGHT 5, LEFT 7. Umbo = malleus attachment. Outer surface nerve = V3 and vagus; inner surface nerve = IX.",
+  },
+  {
+    n: 5, title: "Eardrum clinical — quadrants, chorda tympani, myringotomy", src: "Maini · The Ear",
+    facts: [
+      "The POSTERO-SUPERIOR quadrant is dangerous: the CHORDA TYMPANI runs just behind it, so a puncture there can damage it.",
+      "The POSTERO-INFERIOR quadrant is the PREFERRED site for a MYRINGOTOMY, because nothing important lies behind it. A myringotomy drains a middle-ear fluid or pus collection (often from a pharyngeal infection tracking up the auditory tube) before the drum ruptures.",
+      "A controlled myringotomy heals cleanly; a SPONTANEOUS rupture leaves serrated, irregular margins that heal poorly. A ruptured, thickened, or fibrosed drum causes HEARING IMPAIRMENT.",
+    ],
+    flag: "POSTERO-SUPERIOR = chorda tympani (avoid). POSTERO-INFERIOR = myringotomy (safe). Two different quadrants; do not swap them.",
+  },
+  {
+    n: 6, title: "Middle ear — the six walls and key features", src: "Maini · The Ear",
+    facts: [
+      "The tympanic cavity sits in the PETROUS temporal bone. ROOF = TEGMEN TYMPANI. FLOOR = the roof of the JUGULAR FOSSA. LATERAL wall = the tympanic membrane.",
+      "ANTERIOR wall (incomplete): openings for the PHARYNGOTYMPANIC (auditory) TUBE and the TENSOR TYMPANI. POSTERIOR wall: the ADITUS to the mastoid antrum, the PYRAMID (origin of stapedius), and the facial canal.",
+      "MEDIAL wall (shared with the inner ear): the PROMONTORY (the bulge of the cochlea's base), the OVAL WINDOW (fenestra vestibuli, holding the stapes footplate), and the ROUND WINDOW (fenestra cochlea). The FACIAL CANAL runs in the medial AND posterior walls.",
+      "Posteriorly the cavity connects through the aditus to the MASTOID air cells, so middle-ear infection can spread to cause MASTOIDITIS.",
+    ],
+    flag: "Roof = tegmen tympani; floor = jugular fossa roof. Promontory = base of the cochlea. Oval window = stapes footplate. Aditus links the middle ear to the mastoid antrum.",
+  },
+  {
+    n: 7, title: "The auditory ossicles", src: "Maini · The Ear",
+    facts: [
+      "Three tiniest bones in the body, from the eardrum inward: MALLEUS, INCUS, STAPES (M-I-S). Malleus = hammer (largest; its manubrium attaches to the eardrum). Incus = anvil. Stapes = stirrup (head, neck, two crura, footplate in the oval window).",
+      "The MALLEUS is attached to the drum; it moves the INCUS, which moves the STAPES, whose footplate rocks in the oval window and sets the inner-ear fluid moving.",
+      "Joint types (testable): the incudoMALLEOLAR joint (malleus-incus) is a SADDLE joint; the incudoSTAPEDIAL joint (incus-stapes) is a BALL-AND-SOCKET joint.",
+    ],
+    flag: "Order M-I-S. Incudomalleolar = SADDLE; incudostapedial = BALL-AND-SOCKET. Malleus on the drum, stapes footplate in the oval window.",
+  },
+  {
+    n: 8, title: "Middle-ear muscles and the auditory reflex", src: "Maini · The Ear",
+    facts: [
+      "TENSOR TYMPANI: originates from the cartilage of the auditory tube; a FIRST-arch muscle, so its nerve is V3 (the nerve to medial pterygoid). Action: draws the eardrum MEDIALLY, tensing it to LESSEN sound transmission.",
+      "STAPEDIUS: originates from the PYRAMID and inserts on the NECK of the stapes; nerve = FACIAL (VII). Action: dampens vibration by pulling the stapes head POSTERIORLY.",
+      "In loud surroundings both contract together = the protective AUDITORY (acoustic) REFLEX. Lose stapedius (for example a facial nerve lesion) and ordinary sounds seem too loud = HYPERACUSIS.",
+    ],
+    flag: "Tensor tympani = V3 (1st arch), tenses the drum. Stapedius = VII, damps the stapes. Both fire = the auditory reflex; stapedius loss = HYPERACUSIS.",
+  },
+  {
+    n: 9, title: "The auditory tube", src: "Maini · The Ear",
+    facts: [
+      "One tube, THREE names: AUDITORY = PHARYNGOTYMPANIC = EUSTACHIAN. It connects the middle ear to the NASOPHARYNX; about 3.5 to 4 cm, funnel-shaped, with the POSTERIOR one-third bony and the ANTERIOR two-thirds cartilaginous.",
+      "MAIN function = EQUALIZE PRESSURE across the tympanic membrane (Maini: it has nothing to do with hearing). Yawning or a Valsalva on a plane pushes air through it to re-balance the pressure.",
+      "A TUBAL TONSIL of lymphoid tissue guards its opening in the nasopharynx. Prolonged flu can block it, giving a nasal twang.",
+    ],
+    flag: "One tube, THREE names. Job = pressure equalization, NOT hearing. Do not confuse it with the external acoustic meatus (that one conducts sound and opens to the outside).",
+  },
+  {
+    n: 10, title: "Embryology of the ear", src: "Maini · The Ear",
+    facts: [
+      "TYMPANIC MEMBRANE = the FIRST PHARYNGEAL MEMBRANE (where the cleft and pouch meet).",
+      "MIDDLE EAR (tympanic cavity) = the FIRST PHARYNGEAL POUCH (an endoderm out-pocketing).",
+      "EXTERNAL ACOUSTIC MEATUS = the FIRST PHARYNGEAL CLEFT / groove (an ectoderm in-pocketing that invaginates to meet the pouch at the membrane).",
+    ],
+    flag: "All FIRST: meatus = 1st CLEFT, eardrum = 1st MEMBRANE, middle ear = 1st POUCH. Cleft (outside) and pouch (inside) meet at the membrane.",
+  },
+  {
+    n: 11, title: "Internal ear — labyrinth, fluids and the cochlea", src: "Maini · The Ear",
+    facts: [
+      "The inner ear = the LABYRINTH: an outer BONY labyrinth and an inner MEMBRANOUS labyrinth that follows the same contour. PERILYMPH lies OUTSIDE the membranous labyrinth (between it and bone); ENDOLYMPH fills INSIDE it.",
+      "Bony labyrinth = COCHLEA (hearing) + VESTIBULE + three SEMICIRCULAR CANALS (balance). The cochlea coils about 2.5 turns around a central bony pillar, the MODIOLUS, which houses the SPIRAL GANGLION.",
+      "The cochlear canal is split into three by the VESTIBULAR and BASILAR membranes: scala VESTIBULI (perilymph, top), the COCHLEAR DUCT / scala media (ENDOLYMPH, middle, carrying the organ of Corti), and scala TYMPANI (perilymph, bottom). The scalae join at the apex through the HELICOTREMA.",
+      "The ORGAN OF CORTI sits on the BASILAR membrane; its HAIR CELLS are the hearing receptors, their cilia embedded in the fixed TECTORIAL membrane. Low-frequency sound acts near the APEX and helicotrema, high-frequency near the base.",
+    ],
+    flag: "PERI = OUTSIDE, ENDO = INSIDE (endolymph in the cochlear duct / scala media). Organ of Corti on the BASILAR membrane; cilia in the TECTORIAL membrane. The modiolus holds the spiral ganglion.",
+  },
+  {
+    n: 12, title: "Vestibule, semicircular canals and the three sensory organs", src: "Maini · The Ear",
+    facts: [
+      "The VESTIBULE holds the UTRICLE (larger) and SACCULE (smaller). Their sensory spot = the MACULA, whose hair-cell cilia sit in an OTOLITHIC membrane weighted with tiny stones (OTOLITHS). Maculae sense STATIC equilibrium and LINEAR acceleration (macula sacculi is vertical, detecting up and down like an elevator).",
+      "Three SEMICIRCULAR CANALS per ear, set at RIGHT ANGLES. You NAME them (anterior, posterior, lateral) relative to the POSTERIOR surface of the PETROUS temporal bone (Maini: a board-style question). The dilated end of each duct = the AMPULLA, holding the CRISTA AMPULLARIS, whose cilia sit in a gel CUPULA. Cristae sense ANGULAR / rotational motion = DYNAMIC equilibrium.",
+      "Nerves: the cochlear and vestibular divisions of CN VIII (with CN VII and the labyrinthine vessels) run through the INTERNAL ACOUSTIC MEATUS. Hearing tests = WEBER and RINNE (tuning fork); vestibular test = the CALORIC test (warm and cold water).",
+    ],
+    flag: "Three organs and their gels: organ of Corti to the TECTORIAL membrane; macula to the OTOLITHIC membrane; crista to the CUPULA. Macula = STATIC/linear; crista = DYNAMIC/rotational. Name the canals off the posterior petrous surface.",
+  },
+];
+
+/* ==================================================== TABLES ============== */
+const tables = [
+  {
+    title: "The six walls of the middle ear",
+    head: ["Wall", "Formed by / key feature"],
+    rows: [
+      ["Roof", "Tegmen tympani (a plate of temporal bone)"],
+      ["Floor", "Roof of the jugular fossa"],
+      ["Lateral", "The tympanic membrane"],
+      ["Medial", "Promontory (cochlea base), oval + round windows, facial canal"],
+      ["Anterior", "Openings for the auditory tube + tensor tympani (incomplete wall)"],
+      ["Posterior", "Aditus to mastoid antrum, pyramid (stapedius), facial canal"],
+    ],
+  },
+  {
+    title: "The three inner-ear sensory organs",
+    head: ["Sensory organ", "Location", "Gelatinous membrane", "Senses"],
+    rows: [
+      ["Organ of Corti", "Basilar membrane (cochlear duct)", "Tectorial membrane", "Hearing"],
+      ["Macula (utricle & saccule)", "Vestibule", "Otolithic membrane (otoliths)", "Static equilibrium + linear acceleration"],
+      ["Crista ampullaris", "Ampulla of each semicircular duct", "Cupula", "Angular / rotational motion (dynamic)"],
+    ],
+  },
+  {
+    title: "The two middle-ear muscles",
+    head: ["Muscle", "Origin", "Nerve", "Action"],
+    rows: [
+      ["Tensor tympani", "Cartilage of the auditory tube", "V3 (nerve to medial pterygoid)", "Draws the eardrum medially, tenses it, lessens sound"],
+      ["Stapedius", "Pyramid (posterior wall)", "Facial (VII)", "Pulls the stapes head posteriorly, damps vibration"],
+    ],
+  },
+  {
+    title: "The auditory ossicles and their joints",
+    head: ["Ossicle", "Looks like", "Key point"],
+    rows: [
+      ["Malleus", "Hammer", "Largest; manubrium (handle) attached to the eardrum"],
+      ["Incus", "Anvil", "Body + long and short processes; sits between malleus and stapes"],
+      ["Stapes", "Stirrup", "Head, neck, two crura, footplate in the oval window"],
+      ["Joints", "-", "Incudomalleolar = SADDLE; incudostapedial = BALL-AND-SOCKET"],
+    ],
+  },
+  {
+    title: "Fluids and their spaces",
+    head: ["Space", "Fluid"],
+    rows: [
+      ["Between bony & membranous labyrinth (scala vestibuli, scala tympani)", "Perilymph (OUTSIDE the membranous labyrinth)"],
+      ["Inside the membranous labyrinth (cochlear duct / scala media, utricle, saccule, ducts)", "Endolymph (INSIDE)"],
+    ],
+  },
+  {
+    title: "Semicircular canal orientation (vs the posterior petrous surface)",
+    head: ["Canal", "Orientation"],
+    rows: [
+      ["Anterior", "At a right angle to the surface"],
+      ["Posterior", "Along (in line with) the surface"],
+      ["Lateral", "Horizontal"],
+    ],
+  },
+  {
+    title: "Ear embryology — all first-arch region derivatives",
+    head: ["Structure", "Embryonic origin"],
+    rows: [
+      ["External acoustic meatus", "1st pharyngeal CLEFT (groove)"],
+      ["Tympanic membrane", "1st pharyngeal MEMBRANE"],
+      ["Middle ear / tympanic cavity", "1st pharyngeal POUCH"],
+    ],
+  },
+];
+
+/* ============================================= TRAPS & FLAGS ============== */
+const flags = [
+  { tag: "Trap", text: "CONE OF LIGHT: RIGHT ear = 5 o'clock, LEFT ear = 7 o'clock.", why: "Maini said outright this can appear on the exam. The two ears mirror each other, so it is very easy to flip right and left.", src: "Maini · The Ear" },
+  { tag: "Trap", text: "AUDITORY TUBE vs EXTERNAL ACOUSTIC MEATUS: the auditory (pharyngotympanic / eustachian) tube equalizes PRESSURE and opens to the NASOPHARYNX; the external acoustic meatus conducts SOUND and opens to the OUTSIDE.", why: "Maini repeatedly warns students confuse these two because both are tubes near the ear.", src: "Maini · The Ear" },
+  { tag: "Trap", text: "TWO QUADRANTS: POSTERO-SUPERIOR = chorda tympani (danger, avoid); POSTERO-INFERIOR = myringotomy (safe, nothing important behind it).", why: "Swapping the two posterior quadrants is the classic error. Superior is risky, inferior is the drainage site.", src: "Maini · The Ear" },
+  { tag: "Trap", text: "PERILYMPH vs ENDOLYMPH: peri = OUTSIDE the membranous labyrinth (scala vestibuli and tympani); endo = INSIDE (cochlear duct / scala media, utricle, saccule).", why: "The two fluids are constantly reversed. Peri = around it, endo = within it.", src: "Maini · The Ear" },
+  { tag: "Trap", text: "TWO MUSCLES, TWO NERVES: TENSOR TYMPANI = V3 (1st arch); STAPEDIUS = facial (VII).", why: "Easy to mis-pair the nerve. Tensor goes with the chewing muscles (V3); stapedius rides with the facial nerve in its canal.", src: "Maini · The Ear" },
+  { tag: "Trap", text: "OVAL vs ROUND WINDOW: the OVAL window (fenestra vestibuli) holds the stapes footplate and starts the fluid wave; the ROUND window (fenestra cochlea) is closed by the secondary tympanic membrane, where the wave dissipates.", why: "Both sit on the medial wall and both are windows to the inner ear; keep entry (oval) and exit (round) straight.", src: "Maini · The Ear" },
+  { tag: "Trap", text: "OSSICLE JOINTS: incudomalleolar = SADDLE; incudostapedial = BALL-AND-SOCKET.", why: "Two small joints, two different types; a favorite matching item.", src: "Maini · The Ear" },
+  { tag: "★★ Heavy", text: "THREE SENSORY ORGANS to their GELS: organ of Corti = TECTORIAL membrane; macula = OTOLITHIC membrane; crista ampullaris = CUPULA. Macula = static + linear; crista = dynamic / rotational.", why: "Maini gives this as a summary set; it is a high-yield matching item and easy to scramble.", src: "Maini · The Ear" },
+  { tag: "★★ Heavy", text: "SEMICIRCULAR CANALS are named off the POSTERIOR PETROUS surface: anterior = at a right angle, posterior = along the surface, lateral = horizontal.", why: "Maini flags this as a board-style question and repeats the reference surface several times.", src: "Maini · The Ear" },
+  { tag: "Flag", text: "EMBRYOLOGY, all FIRST: meatus = 1st CLEFT, eardrum = 1st MEMBRANE, middle ear = 1st POUCH.", why: "Clean three-way set. Cleft (outside) and pouch (inside) meet at the membrane.", src: "Maini · The Ear" },
+  { tag: "Flag", text: "EARDRUM NERVES by surface: OUTER = auriculotemporal (V3) + auricular branch of vagus; INNER = glossopharyngeal (IX).", why: "The drum is a boundary, so its two surfaces have different nerves; the inner (mucosal) surface is IX.", src: "Maini · The Ear" },
+  { tag: "Flag", text: "HYPERACUSIS = lost STAPEDIUS, a facial-nerve sign. Ordinary sounds seem too loud without the stapedius damping the stapes.", why: "Links a symptom back to the muscle and its nerve (VII); a common clinical pairing.", src: "Maini · The Ear" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+/* Only analogies/mnemonics Maini actually says in the Lecture 22 transcript. */
+const tips = [
+  { kind: "Mnemonic", title: "M-I-S for the ossicles", text: "Malleus, Incus, Stapes, in that order from the eardrum inward. Maini says it out loud: 'M-I-S, MES, or SIM, whatever you want to say.'", helps: "Locks the order and direction of the ossicle chain.", src: "Maini · The Ear" },
+  { kind: "Analogy", title: "Umbo means umbrella", text: "The central dimple of the eardrum, where the malleus handle pulls it in, is the umbo. Maini notes 'ambo means umbrella,' so picture a slightly pulled-in umbrella tip.", helps: "Reminds you the drum is not flat; it has a central depression.", src: "Maini · The Ear" },
+  { kind: "Analogy", title: "Stapes is a stirrup", text: "Maini ties it to horse riding: the stapes is shaped like the stirrup you rest your foot in, with a footplate that seats in the oval window.", helps: "Pins the stirrup shape and the footplate detail.", src: "Maini · The Ear" },
+  { kind: "Analogy", title: "The cochlea looks like a snail", text: "Maini describes the coiled cochlea as a snail. It coils about 2.5 turns around its central pillar (the modiolus).", helps: "Anchors the coiled shape and the modiolus core.", src: "Maini · The Ear" },
+  { kind: "Analogy", title: "Promontory = a bump pushed into a wall", text: "Maini: 'if you push very hard on a wall, you create a bump.' The promontory is just the cochlea's base bulging into the medial wall of the middle ear.", helps: "Explains why the promontory is on the medial wall and what makes it.", src: "Maini · The Ear" },
+  { kind: "Analogy", title: "The airplane yawn", text: "On takeoff and landing the pressure across the eardrum changes; you yawn or do a Valsalva to force air up the auditory tube and re-balance it.", helps: "Cements that the tube's job is PRESSURE, not hearing.", src: "Maini · The Ear" },
+  { kind: "Rule", title: "Say all its names in your head", text: "Maini tells students to mentally recite every name of a structure: auditory tube = pharyngotympanic tube = eustachian tube, one structure.", helps: "Stops you treating the same tube as three different things on an exam.", src: "Maini · The Ear" },
+  { kind: "Analogy", title: "Stapedius in the DJ room", text: "In a very loud place (Maini's example: a DJ room) the stapedius contracts to steady the stapes so the violent vibrations do not reach the delicate receptors.", helps: "Links the protective auditory reflex to a real loud-noise setting.", src: "Maini · The Ear" },
+  { kind: "Mnemonic", title: "Scapha means a boat", text: "The boat-shaped fossa between the helix and antihelix is the scapha. Maini: 'scafa means a boat.'", helps: "Names the fossa by its literal meaning.", src: "Maini · The Ear" },
+  { kind: "Analogy", title: "AirPods and diamonds", text: "Maini's memory tags for two auricle parts: the intertragic notch is 'to hold your AirPods,' and the lobule is 'to wear your diamonds.'", helps: "Two light, sticky tags for the intertragic notch and the lobule.", src: "Maini · The Ear" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Curated from this module's AUDITED Everything-MC bank (anti-fab verified).
+   4 options each, correct index balanced across A/B/C/D. */
+const questions = [
+  {"id": 1, "topic": "External ear", "src": "Maini · The Ear", "q": "Dr. Maini divides the ear into external, middle, and internal parts. Where are the auditory receptors that convert sound-wave vibrations into action potentials located?", "opts": ["In the middle ear, on the ossicles", "In the internal ear", "On the tympanic membrane of the external ear", "Within the external acoustic meatus"], "a": 1, "h1": "The conducting parts just pass vibrations along.", "h2": "Receptors sit deep and protected, past the middle ear.", "exp": "Maini stresses the receptors sit deeply protected in the internal ear, where vibrations are converted into action potentials carried to the temporal lobe."},
+  {"id": 2, "topic": "External ear", "src": "Maini · The Ear", "q": "The auricle (pinna) is supported by what type of cartilage?", "opts": ["A single piece of elastic cartilage", "Hyaline cartilage", "Fibrocartilage", "Calcified cartilage"], "a": 0, "h1": "Remove the skin and you find one springy piece.", "h2": "The type that springs back to its shape.", "exp": "Maini says removing the skin reveals a single piece of elastic cartilage, which springs back to shape."},
+  {"id": 3, "topic": "External ear", "src": "Maini · The Ear", "q": "Which nerve provides MOTOR supply to the (rudimentary) auricular muscles?", "opts": ["The facial nerve (VII)", "The auriculotemporal nerve (V3)", "The great auricular nerve", "The vagus nerve (X)"], "a": 0, "h1": "Muscles of facial expression share one motor nerve.", "h2": "Cranial nerve VII.", "exp": "Maini states the facial nerve supplies the superior, anterior, and posterior auricular muscles, which are rudimentary in humans."},
+  {"id": 4, "topic": "External ear", "src": "Maini · The Ear", "q": "How is the external acoustic meatus supported along its length?", "opts": ["Entirely by cartilage", "Lateral two-thirds by bone, medial one-third by cartilage", "Lateral one-third by elastic cartilage, medial two-thirds by the temporal bone", "Entirely by the petrous temporal bone"], "a": 2, "h1": "Outer part is springy, inner part is hard.", "h2": "Lateral third cartilage, medial two-thirds bone.", "exp": "Maini says the lateral one-third is supported by cartilage and the medial two-thirds by the temporal bone."},
+  {"id": 5, "topic": "External ear", "src": "Maini · The Ear", "q": "The ceruminous glands lining the external acoustic meatus secrete cerumen. What is its function, per Maini?", "opts": ["It lubricates the ossicular chain", "It equalizes middle-ear pressure", "With hair, it forms a mat that traps dust, soot, and small insects", "It amplifies sound vibrations"], "a": 2, "h1": "Think what wax plus hair does to dust.", "h2": "It traps particles and small insects.", "exp": "Maini explains the waxy cerumen plus hair creates a mat that traps dust, soot particles, and even tiny insects."},
+  {"id": 6, "topic": "External ear", "src": "Maini · The Ear", "q": "Which nerve carries GSA fibers from the external acoustic meatus, explaining why cleaning the ear can trigger a throat/cough sensation?", "opts": ["The auricular branch of the vagus nerve", "The auriculotemporal branch of V3", "The glossopharyngeal nerve", "The chorda tympani"], "a": 0, "h1": "Cleaning the ear can tickle your throat.", "h2": "A branch of the vagus (X).", "exp": "Maini attributes the throat sensation on cleaning the ear to stimulation of the auricular branch of the vagus, which carries GSA from the meatus."},
+  {"id": 7, "topic": "Eardrum", "src": "Maini · The Ear", "q": "The central depression of the tympanic membrane, where the malleus handle attaches, is called the:", "opts": ["Cone of light", "Pars flaccida", "Annulus", "Umbo"], "a": 3, "h1": "Central pull-in where the malleus attaches.", "h2": "Its name means umbrella.", "exp": "Maini calls the central depression the umbo ('ambo' = umbrella), a slight depression in the middle."},
+  {"id": 8, "topic": "Eardrum", "src": "Maini · The Ear", "q": "In the RIGHT ear, at what clock position does the cone of light appear on otoscopy?", "opts": ["7 o'clock", "5 o'clock", "3 o'clock", "12 o'clock"], "a": 1, "h1": "Right and left mirror each other on a clock face.", "h2": "Right = 5, left = 7.", "exp": "Maini says the cone of light is at 5 o'clock in the right ear (and 7 o'clock in the left) and flags this as a likely exam question."},
+  {"id": 9, "topic": "Eardrum", "src": "Maini · The Ear", "q": "Puncturing the POSTEROSUPERIOR quadrant of the tympanic membrane risks damaging which structure lying just behind it?", "opts": ["The facial nerve trunk", "The chorda tympani", "The stapedius muscle", "The auditory tube"], "a": 1, "h1": "A nerve of taste runs just behind here.", "h2": "The chorda tympani.", "exp": "Maini warns that the chorda tympani lies just posterior to the posterosuperior quadrant, so cutting there can damage it."},
+  {"id": 10, "topic": "Eardrum", "src": "Maini · The Ear", "q": "Which quadrant of the tympanic membrane is the PREFERRED site for a myringotomy, because no important structure lies behind it?", "opts": ["Posterosuperior", "Anterosuperior", "Anteroinferior", "Posteroinferior"], "a": 3, "h1": "The safe quadrant with nothing important behind it.", "h2": "Postero-inferior.", "exp": "Maini says the posteroinferior quadrant is preferred for myringotomy because there is no important structure posterior to it."},
+  {"id": 11, "topic": "Eardrum", "src": "Maini · The Ear", "q": "The sensory supply of the tympanic membrane differs by surface. The INTERNAL (medial) surface is supplied by which nerve?", "opts": ["The auriculotemporal nerve (V3)", "The auricular branch of the vagus (X)", "The facial nerve (VII)", "The glossopharyngeal nerve (IX)"], "a": 3, "h1": "The inner mucosal surface has a different nerve than the outer.", "h2": "Cranial nerve IX (glossopharyngeal).", "exp": "Maini says the internal surface is supplied by the 9th nerve (glossopharyngeal), while the external surface is supplied by auriculotemporal (V3) and the auricular branch of vagus."},
+  {"id": 12, "topic": "Clinical", "src": "Maini · The Ear", "q": "Loss of stapedius function (e.g., facial nerve injury proximal to its branch) produces which symptom Maini describes?", "opts": ["Complete deafness", "Hyperacusis - abnormal sensitivity to ordinary sounds", "Vertigo on head turning", "Loss of the cone of light"], "a": 1, "h1": "Lose the dampening muscle and sounds seem too loud.", "h2": "The stapedius (facial nerve) is out.", "exp": "Maini says a non-functioning stapedius causes hyperacusis, where even mild sounds seem too loud - a sign of facial nerve damage."},
+  {"id": 13, "topic": "Embryology", "src": "Maini · The Ear", "q": "From which embryonic structure does the tympanic membrane develop?", "opts": ["The first pharyngeal membrane", "The first pharyngeal pouch", "The first pharyngeal cleft/groove", "The second pharyngeal arch"], "a": 0, "h1": "Where the cleft and pouch meet.", "h2": "First pharyngeal membrane.", "exp": "Maini says the first pharyngeal membrane gives rise to the tympanic membrane, where the cleft and pouch meet."},
+  {"id": 14, "topic": "Embryology", "src": "Maini · The Ear", "q": "The middle ear (tympanic cavity) develops from which embryonic structure?", "opts": ["The first pharyngeal membrane", "The first pharyngeal cleft", "The first pharyngeal pouch", "The otic vesicle"], "a": 2, "h1": "The out-pocketing, not the groove.", "h2": "First pharyngeal pouch.", "exp": "Maini states the middle ear develops from the first pharyngeal pouch."},
+  {"id": 15, "topic": "Embryology", "src": "Maini · The Ear", "q": "The external acoustic meatus develops from which embryonic structure?", "opts": ["The first pharyngeal cleft (groove)", "The first pharyngeal pouch", "The first pharyngeal membrane", "The third pharyngeal arch"], "a": 0, "h1": "The inward groove on the surface.", "h2": "First pharyngeal cleft.", "exp": "Maini says the external acoustic meatus develops from the first pharyngeal cleft/groove, which invaginates to meet the pouch at the tympanic membrane."},
+  {"id": 16, "topic": "Middle ear walls", "src": "Maini · The Ear", "q": "Posteriorly, the middle ear cavity communicates with the mastoid antrum through which opening?", "opts": ["The oval window", "The aditus (ad antrum)", "The auditory tube", "The internal acoustic meatus"], "a": 1, "h1": "The doorway back to the mastoid air cells.", "h2": "The aditus ad antrum.", "exp": "Maini names the aditus as the passage from the middle ear cavity to the mastoid antrum."},
+  {"id": 17, "topic": "Middle ear walls", "src": "Maini · The Ear", "q": "What forms the ROOF of the tympanic cavity?", "opts": ["The roof of the jugular fossa", "The tegmen tympani (a plate of temporal bone)", "The promontory", "The pyramid"], "a": 1, "h1": "A thin plate of temporal bone overhead.", "h2": "Tegmen tympani.", "exp": "Maini says the roof is the tegmen tympani, a part of the temporal bone."},
+  {"id": 18, "topic": "Middle ear walls", "src": "Maini · The Ear", "q": "What forms the FLOOR of the tympanic cavity?", "opts": ["The tegmen tympani", "The carotid canal wall", "The pyramidal eminence", "The roof of the jugular fossa"], "a": 3, "h1": "It sits on top of a big vein's fossa.", "h2": "Roof of the jugular fossa.", "exp": "Maini identifies the floor as the roof of the jugular fossa."},
+  {"id": 19, "topic": "Middle ear walls", "src": "Maini · The Ear", "q": "The MEDIAL wall of the middle ear bulges as the promontory. What forms this promontory?", "opts": ["The head of the malleus", "The footplate of the stapes", "The base (basal turn) of the cochlea", "The mastoid antrum"], "a": 2, "h1": "A bulge pushed into the medial wall.", "h2": "The base of the cochlea.", "exp": "Maini says the promontory is the raised projection formed by the base of the cochlea pressing on the medial wall."},
+  {"id": 20, "topic": "Middle ear walls", "src": "Maini · The Ear", "q": "On the MEDIAL wall of the middle ear, the fenestra vestibuli (oval window) and fenestra cochlea (round window) are found. Which structure occupies the oval window?", "opts": ["The footplate (base) of the stapes", "The manubrium of the malleus", "The long process of the incus", "The secondary tympanic membrane"], "a": 0, "h1": "The last ossicle's base plugs it.", "h2": "The stapes footplate.", "exp": "Maini says the footplate of the stapes sits in the oval window (fenestra vestibuli)."},
+  {"id": 21, "topic": "Ossicles", "src": "Maini · The Ear", "q": "Maini calls the three auditory ossicles the tiniest bones in the body. What are they, in order from the tympanic membrane inward?", "opts": ["Stapes, incus, malleus", "Malleus, incus, stapes", "Incus, malleus, stapes", "Malleus, stapes, incus"], "a": 1, "h1": "Hammer, anvil, stirrup from the drum inward.", "h2": "Malleus, incus, stapes.", "exp": "Maini lists malleus, incus, stapes (M-I-S) from the eardrum toward the oval window."},
+  {"id": 22, "topic": "Ossicles", "src": "Maini · The Ear", "q": "According to Maini, the incudomalleolar joint (between malleus and incus) is what type of joint?", "opts": ["A ball-and-socket joint", "A saddle joint", "A hinge joint", "A pivot joint"], "a": 1, "h1": "The malleus-incus joint type.", "h2": "A saddle joint.", "exp": "Maini states the incudomalleolar (incus-malleus) joint is a saddle joint."},
+  {"id": 23, "topic": "Ossicles", "src": "Maini · The Ear", "q": "According to Maini, the incudostapedial joint (between incus and stapes) is what type of joint?", "opts": ["A saddle joint", "A ball-and-socket joint", "A plane (gliding) joint", "A syndesmosis"], "a": 1, "h1": "The incus-stapes joint type.", "h2": "A ball-and-socket joint.", "exp": "Maini states the incudostapedial (incus-stapes) joint is a ball-and-socket joint."},
+  {"id": 24, "topic": "Middle-ear muscles", "src": "Maini · The Ear", "q": "The tensor tympani muscle develops from which pharyngeal arch and is innervated by which nerve?", "opts": ["Second arch; the facial nerve", "Third arch; the glossopharyngeal nerve", "First arch; the facial nerve", "First arch; the mandibular nerve (V3, nerve to medial pterygoid)"], "a": 3, "h1": "Shares the arch and nerve of the chewing muscles.", "h2": "First arch, V3 (nerve to medial pterygoid).", "exp": "Maini confirms tensor tympani is a first-arch muscle innervated by V3 (the nerve to medial pterygoid)."},
+  {"id": 25, "topic": "Middle-ear muscles", "src": "Maini · The Ear", "q": "The stapedius muscle inserts onto which structure, and which nerve supplies it?", "opts": ["The manubrium of the malleus; V3", "The long process of the incus; IX", "The neck of the stapes; the facial nerve (VII)", "The footplate of the stapes; the vagus"], "a": 2, "h1": "It grabs the smallest ossicle and shares the facial nerve.", "h2": "Neck of the stapes, CN VII.", "exp": "Maini says the stapedius inserts onto the neck of the stapes and is supplied by the 7th (facial) nerve."},
+  {"id": 26, "topic": "Middle-ear muscles", "src": "Maini · The Ear", "q": "Maini calls the reflex contraction of tensor tympani and stapedius in loud surroundings the:", "opts": ["Vestibulo-ocular reflex", "Corneal reflex", "Gag reflex", "Auditory (acoustic) reflex"], "a": 3, "h1": "Both middle-ear muscles fire together in loud rooms.", "h2": "The auditory (acoustic) reflex.", "exp": "Maini names the protective co-contraction of both muscles in loud environments the auditory reflex."},
+  {"id": 27, "topic": "Auditory tube", "src": "Maini · The Ear", "q": "The auditory tube is also known by which other names Maini emphasizes?", "opts": ["Cochlear duct and scala media", "Aditus and antrum", "Fenestra vestibuli and cochlea", "Pharyngotympanic tube and eustachian tube"], "a": 3, "h1": "It has three names students must know.", "h2": "Pharyngotympanic and eustachian.", "exp": "Maini stresses the three names: auditory tube = pharyngotympanic tube = eustachian tube."},
+  {"id": 28, "topic": "Auditory tube", "src": "Maini · The Ear", "q": "What is the MAIN function of the auditory tube, per Maini?", "opts": ["To conduct sound waves to the receptors", "To equalize air pressure on the two sides of the tympanic membrane", "To drain endolymph", "To transmit the facial nerve"], "a": 1, "h1": "Despite the name it is not about hearing.", "h2": "It equalizes pressure across the eardrum.", "exp": "Maini stresses the tube equalizes pressure across the tympanic membrane (as when yawning during a flight); despite the name, it has 'nothing to do with hearing.'"},
+  {"id": 29, "topic": "Auditory tube", "src": "Maini · The Ear", "q": "Maini repeatedly reminds students NOT to confuse the auditory tube with which other structure, since one is for pressure and the other conducts sound?", "opts": ["The cochlear duct", "The facial canal", "The mastoid antrum", "The external acoustic meatus"], "a": 3, "h1": "One handles pressure, the other conducts sound.", "h2": "The external acoustic meatus.", "exp": "Maini warns that students confuse the auditory tube (pressure equalization, opens to nasopharynx) with the external acoustic meatus (sound conduction, opens to the exterior)."},
+  {"id": 30, "topic": "Labyrinth", "src": "Maini · The Ear", "q": "Which fluid lies BETWEEN the bony labyrinth and the membranous labyrinth (outside the membranous labyrinth)?", "opts": ["Perilymph", "Endolymph", "Cerebrospinal fluid", "Aqueous humor"], "a": 0, "h1": "The fluid outside the membranous labyrinth.", "h2": "Perilymph.", "exp": "Maini says if you crack the bony shell, perilymph oozes out - it lies outside the membranous labyrinth."},
+  {"id": 31, "topic": "Labyrinth", "src": "Maini · The Ear", "q": "Which fluid FILLS the membranous labyrinth (inside it)?", "opts": ["Perilymph", "Plasma", "Synovial fluid", "Endolymph"], "a": 3, "h1": "The fluid inside the membranous labyrinth.", "h2": "Endolymph.", "exp": "Maini says the membranous labyrinth is filled with endolymph."},
+  {"id": 32, "topic": "Labyrinth", "src": "Maini · The Ear", "q": "The BONY labyrinth is composed of which three parts?", "opts": ["Utricle, saccule, and cochlear duct", "Cochlea, vestibule, and three semicircular canals", "Malleus, incus, and stapes", "Scala vestibuli, scala media, and scala tympani"], "a": 1, "h1": "Coil, chamber, and the three loops.", "h2": "Cochlea, vestibule, semicircular canals.", "exp": "Maini lists the bony labyrinth as the coiled cochlea, the vestibule, and three semicircular canals."},
+  {"id": 33, "topic": "Cochlea", "src": "Maini · The Ear", "q": "The cochlea coils about two and a half turns around a central bony core called the:", "opts": ["Helicotrema", "Modiolus", "Promontory", "Umbo"], "a": 1, "h1": "The central bony pillar the cochlea winds around.", "h2": "The modiolus.", "exp": "Maini says the cochlea makes 2.5 turns around the bony modiolus, which also houses the spiral ganglion."},
+  {"id": 34, "topic": "Cochlea", "src": "Maini · The Ear", "q": "Which cochlear compartment is the MIDDLE one, is filled with endolymph, and is also called the scala media?", "opts": ["The scala vestibuli", "The scala tympani", "The cochlear duct", "The helicotrema"], "a": 2, "h1": "The middle duct that carries the organ of Corti.", "h2": "The cochlear duct (scala media), endolymph.", "exp": "Maini says the middle compartment is the cochlear duct (scala media), filled with endolymph and carrying the organ of Corti on the basilar membrane."},
+  {"id": 35, "topic": "Cochlea", "src": "Maini · The Ear", "q": "The auditory receptor cells in the organ of Corti are called:", "opts": ["Hair cells", "Rod cells", "Chief cells", "Purkinje cells"], "a": 0, "h1": "Named for the cilia on their tops.", "h2": "Hair cells.", "exp": "Maini says the receptors are hair cells, named for the cilia on their apical surfaces."},
+  {"id": 36, "topic": "Cochlea", "src": "Maini · The Ear", "q": "The gelatinous membrane in which the cilia of the cochlear hair cells are embedded is the:", "opts": ["Basilar membrane", "Vestibular membrane", "Otolithic membrane", "Tectorial membrane"], "a": 3, "h1": "The fixed gel the cilia press into.", "h2": "The tectorial membrane.", "exp": "Maini describes the tectorial membrane as the fixed gelatinous membrane; when the basilar membrane vibrates, the embedded cilia are distorted against it, generating action potentials."},
+  {"id": 37, "topic": "Cochlea", "src": "Maini · The Ear", "q": "Maini describes how the cochlea codes pitch. Low-frequency sounds stimulate the basilar membrane in which region?", "opts": ["Near the apex, close to the helicotrema", "Near the base, close to the oval window", "Uniformly along its entire length", "Only at the round window"], "a": 0, "h1": "Pitch maps along the basilar membrane.", "h2": "Low tones near the apex and helicotrema.", "exp": "Maini says low-frequency sounds strike the basilar membrane close to the helicotrema (apex), whereas high-frequency sounds act near the base."},
+  {"id": 38, "topic": "Sound pathway", "src": "Maini · The Ear", "q": "Trace the correct route of vibration once sound reaches the tympanic membrane.", "opts": ["Tympanic membrane -> stapes -> incus -> malleus -> round window", "Oval window -> stapes -> incus -> malleus -> tympanic membrane", "Tympanic membrane -> malleus -> incus -> stapes -> footplate at oval window -> perilymph", "Tympanic membrane -> incus -> malleus -> stapes -> round window"], "a": 2, "h1": "Follow the ossicle chain to the first fluid.", "h2": "TM to malleus, incus, stapes, oval window, perilymph.", "exp": "Maini says TM vibration passes to malleus, incus, stapes, then the stapes footplate at the oval window sets the inner-ear perilymph into motion."},
+  {"id": 39, "topic": "Vestibule", "src": "Maini · The Ear", "q": "The bony vestibule (about 5 mm) contains which two membranous sacs?", "opts": ["The utricle and the saccule", "The cochlear duct and the endolymphatic sac", "The ampulla and the cupula", "The scala media and the helicotrema"], "a": 0, "h1": "Two membranous sacs sit in the vestibule.", "h2": "Utricle and saccule.", "exp": "Maini says the vestibule contains the utricle (larger) and saccule (smaller)."},
+  {"id": 40, "topic": "Vestibule", "src": "Maini · The Ear", "q": "The tiny calcium-carbonate stones embedded in the otolithic membrane of the maculae are called:", "opts": ["Cerumen", "Cupulae", "Otoliths", "Ossicles"], "a": 2, "h1": "Tiny stones weigh down the macular gel.", "h2": "Otoliths.", "exp": "Maini says the otolithic membrane bears tiny stones (otoliths); their weight shifts the membrane and distorts the hair-cell cilia."},
+  {"id": 41, "topic": "Semicircular canals", "src": "Maini · The Ear", "q": "How many semicircular canals are there in each ear, and how are they oriented relative to one another?", "opts": ["Two, oriented parallel to each other", "Three, oriented at right angles (90 degrees) to each other", "Three, all oriented horizontally", "Four, oriented at 45 degrees"], "a": 1, "h1": "One loop per plane of space.", "h2": "Three, at right angles.", "exp": "Maini says there are three semicircular canals per ear, set at right angles to each other so they detect head rotation in different planes."},
+  {"id": 42, "topic": "Semicircular canals", "src": "Maini · The Ear", "q": "Maini flags this as a board-style question: to name the semicircular canals you orient them to which reference surface?", "opts": ["The posterior surface of the petrous portion of the temporal bone", "The floor of the middle cranial fossa", "The lateral wall of the orbit", "The anterior surface of the sphenoid body"], "a": 0, "h1": "You name them against one landmark surface.", "h2": "The posterior surface of the petrous temporal bone.", "exp": "Maini repeatedly says you determine anterior/posterior/lateral canals relative to the posterior surface of the petrous portion of the temporal bone."},
+  {"id": 43, "topic": "Semicircular canals", "src": "Maini · The Ear", "q": "Inside each ampulla is the sensory organ for dynamic (rotational) equilibrium. What is it called?", "opts": ["The macula", "The crista ampullaris", "The organ of Corti", "The spiral ganglion"], "a": 1, "h1": "The sensor inside the ampulla.", "h2": "The crista ampullaris.", "exp": "Maini names the crista ampullaris as the sensory organ inside each ampulla for angular/rotational motion."},
+  {"id": 44, "topic": "Semicircular canals", "src": "Maini · The Ear", "q": "The hair cells of the crista ampullaris are embedded in which gelatinous structure?", "opts": ["The otolithic membrane", "The tectorial membrane", "The basilar membrane", "The cupula"], "a": 3, "h1": "The gel the crista's cilia sit in.", "h2": "The cupula.", "exp": "Maini says the crista's hair cells are embedded in a gelatinous cupula; when the head rotates, the cupula moves and distorts the cilia."},
+  {"id": 45, "topic": "Nerves & vessels", "src": "Maini · The Ear", "q": "Which structures pass through the internal acoustic meatus?", "opts": ["Cranial nerves IX, X, and XI", "Cranial nerves VII and VIII plus the labyrinthine artery and vein", "The chorda tympani and the tympanic nerve", "The maxillary artery and the middle meningeal artery"], "a": 1, "h1": "Two cranial nerves plus their vessels.", "h2": "CN VII and VIII with the labyrinthine vessels.", "exp": "Maini lists CN VII (facial), CN VIII (vestibulocochlear), and the labyrinthine artery and vein passing through the IAM."},
+  {"id": 46, "topic": "Nerves & vessels", "src": "Maini · The Ear", "q": "The tympanic branch of the glossopharyngeal nerve (IX) enters the middle ear and forms a plexus over the promontory. What is this plexus, and what nerve leaves it?", "opts": ["The tympanic plexus; the greater petrosal nerve exits toward the pterygopalatine ganglion", "The tympanic plexus; the lesser petrosal nerve exits toward the otic ganglion", "The pharyngeal plexus; the chorda tympani exits", "The cervical plexus; the great auricular nerve exits"], "a": 1, "h1": "IX branches over the promontory then re-forms.", "h2": "Tympanic plexus, then the lesser petrosal nerve.", "exp": "Maini says the tympanic branch of IX forms the tympanic plexus over the promontory, then re-condenses as the lesser petrosal nerve heading to the otic ganglion (then parotid via auriculotemporal)."},
+  {"id": 47, "topic": "Clinical tests", "src": "Maini · The Ear", "q": "Maini groups Weber's test and Rinne's test as tests of what function?", "opts": ["Vestibular (balance) function", "Hearing", "Facial motor function", "Taste"], "a": 1, "h1": "Tuning-fork tests.", "h2": "They test hearing.", "exp": "Maini states Weber's and Rinne's are the tests for hearing, whereas the caloric test assesses vestibular function."},
+  {"id": 48, "topic": "Clinical tests", "src": "Maini · The Ear", "q": "In the caloric test, described by Maini, the ear is irrigated with warm and cold water alternately. What function does this test assess?", "opts": ["Cochlear hearing thresholds", "Middle-ear pressure", "Facial nerve conduction", "Vestibular (labyrinth/semicircular canal) function"], "a": 3, "h1": "Warm and cold water in the ear.", "h2": "It tests vestibular function.", "exp": "Maini says the caloric test irrigates the ear with warm and cold water and is a test of vestibular function (the vestibular apparatus)."}
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.voicenote{margin:6px 0 2px;font-size:13px;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:8px 12px;display:inline-block}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px;margin-top:8px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.voicebar{position:sticky;top:52px;z-index:15;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 14px;box-shadow:0 12px 28px -22px rgba(124,58,237,.4)}
+.vb-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.vb-btn{border:none;background:var(--accent);color:#fff;font:inherit;font-weight:700;font-size:14px;padding:9px 15px;border-radius:10px;cursor:pointer;transition:.14s;box-shadow:0 6px 16px -8px var(--accent)}
+.vb-btn:hover{background:var(--accent-mid)}
+.vb-btn.ghost{background:#fff;color:var(--accent-deep);border:1px solid var(--line);box-shadow:none}
+.vb-btn.ghost:hover{background:var(--accent-wash)}
+.vb-now{font-size:12.5px;color:var(--ink-soft);margin-left:auto}
+.vb-now b{color:var(--accent-deep)}
+.vb-ctl{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:10px}
+.vb-field{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink-soft)}
+.vb-field select{font:inherit;font-size:12.5px;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:5px 8px;background:#fff;max-width:210px}
+.vb-field input[type=range]{accent-color:var(--accent);width:130px}
+.vb-note{font-size:11.5px;color:var(--ink-soft);margin-top:8px}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);transition:.18s}
+.obj.reading{border-left-color:var(--good);box-shadow:0 0 0 2px var(--good-line),0 14px 30px -20px rgba(14,122,82,.45);background:linear-gradient(180deg,var(--good-bg),#fff 40%)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj.reading .obj-num{color:var(--good)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.gtable-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px 6px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3)}
+.gtable-title{font-weight:700;font-size:15px;color:var(--ink);margin-bottom:8px}
+.gtable-scroll{overflow-x:auto}
+table.gtable{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:8px}
+table.gtable th{text-align:left;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;padding:8px 10px;border:1px solid var(--line);white-space:nowrap}
+table.gtable td{padding:8px 10px;border:1px solid var(--line);color:var(--ink-soft);vertical-align:top}
+table.gtable tr:nth-child(even) td{background:#fbfaff}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagtag.trap{background:#b42318}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ============================================================ SPEECH ====== */
+function useVoices() {
+  const [voices, setVoices] = useState([]);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.speechSynthesis) return;
+    const load = () => { try { setVoices(window.speechSynthesis.getVoices() || []); } catch (e) {} };
+    load();
+    try { window.speechSynthesis.onvoiceschanged = load; } catch (e) {}
+    return () => { try { window.speechSynthesis.onvoiceschanged = null; } catch (e) {} };
+  }, []);
+  return voices;
+}
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 9 · The Ear · Dr. Maini</span>
+          <h1 className="title serif">The <em>Ear</em></h1>
+          <p className="voicenote">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+          <p className="subtitle">A voiced, hands-free cram of Dr. Maini&apos;s ear lecture, in her order: the three regions, the auricle and meatus, the eardrum and its quadrants, the middle-ear walls, ossicles and muscles, the auditory tube, embryology, and the inner-ear labyrinth. Press play and let it read the must-knows aloud, with tables, traps, a drill, and an AI coach in her voice.</p>
+          <div className="pill-row">
+            <span className="pill-date">🦻 Lecture 22 — The Ear (external, middle &amp; internal) · Dr. Maini</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "tables" && <Tables />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s Lecture 22 (The Ear) and this module&apos;s audited Everything-MC bank. Facts are source-tagged and anti-fabrication verified; no new unverified content. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  const voices = useVoices();
+  const [idx, setIdx] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [rate, setRate] = useState(1);
+  const [voiceURI, setVoiceURI] = useState("");
+
+  const idxRef = useRef(0);
+  const rateRef = useRef(1);
+  const voiceRef = useRef("");
+  const playingRef = useRef(false);
+  useEffect(() => { idxRef.current = idx; }, [idx]);
+  useEffect(() => { rateRef.current = rate; }, [rate]);
+  useEffect(() => { voiceRef.current = voiceURI; }, [voiceURI]);
+
+  const synth = (typeof window !== "undefined") ? window.speechSynthesis : null;
+
+  // pick a good default voice once voices are available
+  useEffect(() => {
+    if (!voices.length || voiceURI) return;
+    const pref = ["ava", "emma", "andrew", "aria", "jenny", "natural", "google us", "samantha"];
+    let best = null;
+    for (const p of pref) {
+      best = voices.find((v) => (v.name || "").toLowerCase().includes(p) && (v.lang || "").toLowerCase().startsWith("en"));
+      if (best) break;
+    }
+    if (!best) best = voices.find((v) => (v.lang || "").toLowerCase().startsWith("en")) || voices[0];
+    if (best) setVoiceURI(best.voiceURI);
+  }, [voices, voiceURI]);
+
+  const buildText = (c) => `Topic ${c.n}. ${c.title}. ${c.facts.join(" ")} Maini flag: ${c.flag}`;
+
+  const speakIdx = (i) => {
+    if (!synth) return;
+    try { synth.cancel(); } catch (e) {}
+    const c = cram[i];
+    if (!c) { playingRef.current = false; setPlaying(false); return; }
+    const u = new SpeechSynthesisUtterance(buildText(c));
+    try {
+      const vs = synth.getVoices() || [];
+      const v = vs.find((x) => x.voiceURI === voiceRef.current);
+      if (v) u.voice = v;
+    } catch (e) {}
+    u.rate = rateRef.current;
+    u.onend = () => {
+      if (!playingRef.current) return;
+      const nx = i + 1;
+      if (nx < cram.length) { setIdx(nx); idxRef.current = nx; speakIdx(nx); }
+      else { playingRef.current = false; setPlaying(false); }
+    };
+    try { synth.speak(u); } catch (e) {}
+  };
+
+  const play = () => { if (!synth) return; playingRef.current = true; setPlaying(true); speakIdx(idxRef.current); };
+  const pause = () => { playingRef.current = false; setPlaying(false); if (synth) { try { synth.cancel(); } catch (e) {} } };
+  const goTo = (i) => {
+    const j = Math.max(0, Math.min(cram.length - 1, i));
+    setIdx(j); idxRef.current = j;
+    if (playingRef.current) speakIdx(j);
+    const el = document.getElementById(`cram-card-${j}`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+  const restart = () => { goTo(0); if (!playingRef.current) play(); else speakIdx(0); };
+
+  // stop speech when leaving the tab / unmounting
+  useEffect(() => () => { playingRef.current = false; if (synth) { try { synth.cancel(); } catch (e) {} } }, []);
+
+  const enVoices = voices.filter((v) => (v.lang || "").toLowerCase().startsWith("en"));
+  const listVoices = enVoices.length ? enVoices : voices;
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s ear essentials, read aloud</div>
+        <p>Three regions → auricle → meatus → eardrum → eardrum clinical → middle-ear walls → ossicles → muscles &amp; reflex → auditory tube → embryology → inner ear → vestibule &amp; canals. Press Play for a hands-free walkthrough; the ⚑ Maini flags are the high-yield hooks.</p>
+      </div>
+
+      <div className="voicebar">
+        <div className="vb-row">
+          <button className="vb-btn" onClick={playing ? pause : play}>{playing ? "❚❚ Pause" : "▶ Play"}</button>
+          <button className="vb-btn ghost" onClick={() => goTo(idx - 1)}>← Prev</button>
+          <button className="vb-btn ghost" onClick={() => goTo(idx + 1)}>Next →</button>
+          <button className="vb-btn ghost" onClick={restart}>⟲ Restart</button>
+          <span className="vb-now">Now reading: <b>{idx + 1}</b> / {cram.length} — {cram[idx].title}</span>
+        </div>
+        <div className="vb-ctl">
+          <label className="vb-field">Voice
+            <select value={voiceURI} onChange={(e) => setVoiceURI(e.target.value)}>
+              {listVoices.length === 0 && <option value="">(default)</option>}
+              {listVoices.map((v) => <option key={v.voiceURI} value={v.voiceURI}>{v.name}{v.lang ? ` (${v.lang})` : ""}</option>)}
+            </select>
+          </label>
+          <label className="vb-field">Speed
+            <input type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => setRate(parseFloat(e.target.value))} />
+            <span><b>{rate.toFixed(1)}x</b></span>
+          </label>
+        </div>
+        <div className="vb-note">Hands-free: it auto-advances through every card and highlights the one being read. Speed goes to 3.0x. (Speed and voice changes apply from the next card.)</div>
+      </div>
+
+      {cram.map((c, i) => (
+        <div className={`obj ${i === idx ? "reading" : ""}`} id={`cram-card-${i}`} key={c.n} onClick={() => goTo(i)}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tables --- */
+function Tables() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">📊 Tables — the ear at a glance</div>
+        <p>The grids Maini keeps returning to: the six walls, the three sensory organs and their gels, the two muscles, the ossicles and joints, the fluids, canal orientation, and embryology.</p>
+      </div>
+      {tables.map((t, i) => (
+        <div className="gtable-card" key={i}>
+          <div className="gtable-title">{t.title}</div>
+          <div className="gtable-scroll">
+            <table className="gtable">
+              <thead><tr>{t.head.map((h, j) => <th key={j}>{h}</th>)}</tr></thead>
+              <tbody>{t.rows.map((r, j) => <tr key={j}>{r.map((c, k) => <td key={k}>{c}</td>)}</tr>)}</tbody>
+            </table>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : (t === "Trap" ? "flagtag trap" : "flagtag");
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ Traps &amp; Flags</div>
+        <p>The confusions Maini calls out and the highest-yield hooks — the pairs that flip on you and the items she pointed at as exam-worthy.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Maini&apos;s own analogies and mnemonics, pulled straight from the ear lecture — the retention hooks to lean on when a name won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the ear</div>
+        <p>Four options, two progressive hints, an explanation, and a source per question. Tap to self-test, or flip to the Answer Key to review. Items are drawn from this module&apos;s audited bank.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 (Gross Anatomy), running a review of THE EAR from your Lecture 22. Teach ONLY from this content; do not invent structures, nerves, arteries, joint types, embryonic origins, or clinical points. Warm and Socratic; you call on students, say "right?", "okay?", "make sense?", "did you get that?", you give both names of a structure, and you push students to reason it out. Keep answers tight (3-6 sentences) and quiz the student.
+
+EAR OVERVIEW: three parts - external, middle, internal. Sound waves make vibrations that are conducted structure to structure until they reach the receptors, which sit deep and protected in the INTERNAL ear, where they become action potentials sent to the temporal lobe. External + middle ear = a conduit only (no receptors). External ear = auricle + external acoustic meatus + tympanic membrane. Middle ear = tympanic cavity (3 ossicles, 2 muscles, auditory tube). Internal ear = labyrinth (cochlea for hearing; vestibule + semicircular canals for balance).
+
+AURICLE: single piece of ELASTIC cartilage (like the epiglottis), thin hairy skin; the lobule has NO cartilage and is very vascular. Parts: helix, antihelix, scapha (boat-shaped fossa between them), tragus (anterior to meatus), antitragus, intertragic notch. Arteries: superficial temporal, posterior auricular, occipital - all from the external carotid. Sensory: great auricular + lesser occipital (cervical plexus), auriculotemporal (V3). Motor to auricular muscles: facial nerve (VII).
+
+EXTERNAL ACOUSTIC MEATUS: sinuous (S-shaped) tube ~2.5 cm; lateral 1/3 cartilage, medial 2/3 temporal bone. Ceruminous glands make wax; wax + hair traps dust and insects. Nerves: auriculotemporal (V3) + auricular branch of vagus (X) - the vagus branch explains the ear-to-throat/cough sensation on cleaning.
+
+TYMPANIC MEMBRANE: thin, semi-transparent, oval, pearly-gray; outer thin skin, inner mucous membrane, dense fibrous core. Umbo = central depression (malleus handle). Cone of light: RIGHT 5 o'clock, LEFT 7 o'clock (exam point). Four quadrants; superior = pars flaccida, inferior = pars tensa. Postero-superior quadrant = chorda tympani just behind (danger). Postero-inferior = preferred myringotomy site (nothing important behind). Blood: external surface = deep auricular branch of maxillary. Nerve: external surface = auriculotemporal (V3) + auricular branch of vagus; internal surface = glossopharyngeal (IX). Spontaneous rupture = serrated margins, heals poorly; ruptured/thickened/fibrosed drum = hearing impairment. Myringotomy drains a middle-ear collection (often from pharyngeal infection up the tube).
+
+MIDDLE EAR WALLS: in the petrous temporal bone. Roof = tegmen tympani; floor = roof of jugular fossa; lateral = tympanic membrane; anterior (incomplete) = openings for auditory tube + tensor tympani; posterior = aditus to mastoid antrum, pyramid (stapedius origin), facial canal; medial = promontory (base of cochlea), oval window (fenestra vestibuli, stapes footplate), round window (fenestra cochlea). Facial canal is in the medial AND posterior walls. Mastoid has air cells communicating via the aditus - middle-ear infection can cause mastoiditis. Tympanic branch of IX forms the tympanic plexus over the promontory, then re-forms as the lesser petrosal nerve to the otic ganglion.
+
+OSSICLES: malleus, incus, stapes (M-I-S) from the drum inward - tiniest bones in the body. Malleus = hammer (largest; manubrium on the drum). Incus = anvil. Stapes = stirrup (head, neck, two crura, footplate in the oval window). Incudomalleolar joint = SADDLE; incudostapedial joint = BALL-AND-SOCKET.
+
+MIDDLE-EAR MUSCLES / REFLEX: tensor tympani - first arch, V3 (nerve to medial pterygoid), origin from cartilage of the auditory tube; draws the drum medially, tenses it, lessens sound. Stapedius - origin from the pyramid, inserts on the neck of the stapes, nerve VII; pulls the stapes head posteriorly to damp vibration. Both fire in loud settings = the auditory (acoustic) reflex. Stapedius loss = hyperacusis (a facial-nerve sign).
+
+AUDITORY TUBE: three names - auditory = pharyngotympanic = eustachian. Connects the middle ear to the nasopharynx; ~3.5-4 cm, posterior 1/3 bony, anterior 2/3 cartilaginous. Function = equalize pressure across the eardrum (NOT hearing) - yawn/Valsalva on a plane. Tubal tonsil guards its nasopharyngeal opening. Do NOT confuse it with the external acoustic meatus.
+
+EMBRYOLOGY (all first): external acoustic meatus = 1st pharyngeal cleft; tympanic membrane = 1st pharyngeal membrane; middle ear = 1st pharyngeal pouch.
+
+INTERNAL EAR: labyrinth = bony + membranous; perilymph OUTSIDE the membranous labyrinth, endolymph INSIDE. Bony labyrinth = cochlea + vestibule + three semicircular canals. Cochlea coils ~2.5 turns around the modiolus (which houses the spiral ganglion). Vestibular + basilar membranes split the cochlear canal into scala vestibuli (perilymph), cochlear duct/scala media (endolymph, organ of Corti), and scala tympani (perilymph); they meet at the apex via the helicotrema. Organ of Corti on the basilar membrane; hair cells are the receptors, cilia in the fixed tectorial membrane; low frequency near the apex/helicotrema, high near the base. Cochlear branch of CN VIII = hearing, vestibular branch = balance. Round window closed by the secondary tympanic membrane.
+
+VESTIBULE + CANALS: vestibule holds the utricle (larger) + saccule (smaller); their macula sits in an otolithic membrane with otoliths; macula = static equilibrium + linear acceleration (macula sacculi vertical = up/down). Three semicircular canals at right angles, named vs the POSTERIOR surface of the petrous temporal bone (anterior = right angle, posterior = along it, lateral = horizontal). Each duct's dilated end = ampulla, holding the crista ampullaris (cilia in a gel cupula); crista = angular/rotational = dynamic equilibrium. Three organs and gels: organ of Corti/tectorial, macula/otolithic, crista/cupula. IAM (posteromedial petrous) transmits CN VII + VIII + labyrinthine vessels. Sound path: TM -> malleus -> incus -> stapes -> oval window -> perilymph. Weber + Rinne = hearing tests; caloric (warm/cold water) = vestibular test.
+
+Open by offering to drill the sound-conduction pathway, the eardrum quadrants (chorda tympani vs myringotomy), the middle-ear walls, the ossicles and their joints, the auditory tube (three names, pressure not hearing), or the inner-ear sensory organs and their gels. When the student is wrong, name the rule and have them reason it out again.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys - the ear. Remember the big idea first: the external and middle ear are just a conduit, and the receptors sit deep in the internal ear, right? So sound goes tympanic membrane, malleus, incus, stapes, oval window, into the perilymph. Where do you want to start - the sound-conduction pathway, the eardrum quadrants (chorda tympani versus myringotomy), the middle-ear walls, the ossicles and their two joints, the auditory tube (three names, and it is for pressure, not hearing), or the three inner-ear sensory organs and their gels? Make sense? Pick one." },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the sound-conduction pathway, start to finish",
+    "Eardrum quadrants: chorda tympani vs myringotomy",
+    "Quiz the six walls of the middle ear",
+    "The ossicles and their two joint types",
+    "The auditory tube - three names, and why it's not for hearing",
+    "The three inner-ear sensory organs and their gels",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her ear lecture. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

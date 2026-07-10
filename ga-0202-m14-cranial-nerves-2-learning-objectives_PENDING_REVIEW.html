@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>&#127919; GA 0202 M14 &mdash; Cranial Nerves (part 2) &middot; Learning Objectives (Master the 10)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .voices{color:#fde68a;font-size:12px;max-width:720px;margin:10px auto 0;background:rgba(0,0,0,0.18);border:1px solid rgba(245,158,11,0.35);border-radius:9px;padding:7px 12px}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;min-width:34px;height:34px;padding:0 7px;background:#f59e0b;color:#231603;border-radius:17px;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;white-space:nowrap}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="ga-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 M14 Cranial Nerves Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 10</h1>
+  <div class="sub"><b>GA 0202 &middot; Cranial Nerves (part 2)</b> &middot; Module 14 &middot; one objective per nerve (CN IV&ndash;XII) plus a big-picture foramina/ganglia synthesis &mdash; every fact grounded in this module&rsquo;s audited Everything-MC bank. Cement each one, check it off, move on.</div>
+  <div class="voices">&#128266; Best voices in <b>Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+  <div class="meta-line">Dr. Maini &middot; Cranial Nerves (part 2), CN IV&ndash;XII &middot; &#129504; SCUHS GA 0202</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This is the <span class="live">objective-by-objective study spine</span> for the part-2 cranial nerves (<b>CN IV&ndash;XII</b>). Every objective and every &ldquo;prove it&rdquo; bullet is drawn from this module&rsquo;s <b>audited Everything-MC bank</b> and <b>Dr. Maini&rsquo;s own lecture recordings</b> &mdash; those facts are already anti-fab verified. Quotes marked <span class="fix">[Maini]</span> are transcribed from her Zoom recordings. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>The part-2 cranial-nerve block runs from <b>CN IV to CN XII</b>. This page distills the facts Dr. Maini drills hardest into <b>ten objectives</b> &mdash; one per nerve, plus a big-picture synthesis of the skull-base foramina, ganglia, and the tongue map. Each objective spells out <b>exactly what &ldquo;done&rdquo; looks like</b>, hangs a <b>verified Maini quote</b> on it where she said one, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: this module&rsquo;s <b>audited Everything-MC bank (105 Q)</b> + <b>Dr. Maini&rsquo;s GA 0202 lecture recordings</b> (SCUHS Canvas Zoom).</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 10 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 : CN IV ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">CN IV</div>
+      <div class="lo-obj">
+        <div class="obj-text">Account for the trochlear nerve (CN IV) &mdash; its single muscle, its unique dorsal-midbrain exit, its action, orbital entry, and palsy.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L17 Brain / L20 The Orbit</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State that CN IV supplies exactly <b>ONE</b> muscle &mdash; the <b>superior oblique</b> (the &ldquo;SO4&rdquo; in Maini&rsquo;s <b>SO4 / LR6 / AO3</b> eye-muscle rule) &mdash; and is <b>purely motor</b>. <span class="cite">(L20 Orbit)</span></li>
+        <li>Name its landmark: CN IV is the <b>only cranial nerve to emerge from the dorsal (posterior) surface of the brainstem</b>, at the <b>midbrain</b>. <span class="cite">(L17 Brain)</span></li>
+        <li>Trace the muscle: the superior oblique tendon loops through a fibrocartilaginous pulley, the <b>trochlea</b>, and rotates the eye <b>down and out</b> (depression + lateral rotation). <span class="cite">(L20 Orbit)</span></li>
+        <li>Apply it: CN IV enters the orbit through the <b>superior orbital fissure</b>; a <b>CN IV palsy</b> makes it hardest to look <b>down-and-in</b> (classic: trouble descending stairs). <span class="cite">(L20/L21 Orbit)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;It goes like SO4, LR6, AO3&hellip; superior oblique, that is your trochlear nerve.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L20 The Orbit (contd) &middot; SO4/LR6/AO3 mnemonic</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which single muscle does CN IV supply, from which brainstem surface does it emerge, and what eye movement results?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Superior oblique</b> (SO4) &mdash; the only nerve from the <b>dorsal/posterior surface of the midbrain</b>. Via the <b>trochlea</b> it moves the eye <b>down and out</b>. Purely motor; enters through the superior orbital fissure.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 : CN V ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">CN V</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the trigeminal nerve (CN V) &mdash; its three divisions and their skull exits, the one mixed division, mastication, its sensory ganglion, and tongue sensation.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L01 Osteology / L10&ndash;11 Infratemporal Fossa / L06 Pharyngeal Apparatus</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>List the <b>three divisions</b> and their exits: <b>V1 ophthalmic &rarr; superior orbital fissure</b>, <b>V2 maxillary &rarr; foramen rotundum</b>, <b>V3 mandibular &rarr; foramen ovale</b>. Middle-fossa order: <b>SOF &rarr; rotundum &rarr; ovale &rarr; spinosum</b>. <span class="cite">(L01 Osteology)</span></li>
+        <li>Flag the odd one: <b>V3 is the only mixed (sensory + motor) division</b>; its motor fibers drive the <b>muscles of mastication</b> (e.g., temporalis). CN V + mastication = <b>1st pharyngeal arch</b>, and nearly all V3 branches leave in the <b>infratemporal fossa</b>. <span class="cite">(L10 Infratemporal Fossa)</span></li>
+        <li>Locate the ganglion: the large <b>trigeminal (sensory) ganglion</b> sits at the apex of the <b>petrous temporal bone</b> &mdash; it is a <b>sensory</b> ganglion, NOT autonomic. <span class="cite">(L11 Infratemporal Fossa)</span></li>
+        <li>Own the tongue link: general (touch/pain) sensation of the <b>anterior 2/3 of the tongue</b> = <b>lingual nerve (V3)</b>; the <b>chorda tympani</b> (CN VII taste) hitchhikes on it. Corneal-reflex afferent = <b>V1</b>; trigeminal neuralgia = shock-like V2/V3 pain. <span class="cite">(L06 Pharyngeal Apparatus)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Superior orbital fissure, foramen rotundum, ovale, foramen spinosum.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L01 Osteology of the Skull</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Through which foramina do V1, V2, and V3 leave the skull, and which division is mixed?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>V1 = superior orbital fissure, V2 = foramen rotundum, V3 = foramen ovale.</b> <b>V3</b> is the mixed (sensory + motor) division &mdash; its motor fibers run the <b>muscles of mastication</b>. Sensory ganglion sits on the petrous temporal bone.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 : CN VI ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">CN VI</div>
+      <div class="lo-obj">
+        <div class="obj-text">State the abducens nerve (CN VI) essentials &mdash; its one muscle, its action, orbital entry, and why it&rsquo;s the &ldquo;diplopia&rdquo; nerve.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L17 Brain / L19&ndash;21 The Orbit</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State that CN VI supplies exactly <b>ONE</b> muscle &mdash; the <b>lateral rectus</b> (&ldquo;LR6&rdquo;) &mdash; and is <b>purely motor</b>. <span class="cite">(L20 Orbit)</span></li>
+        <li>Decode the name: <b>abducens</b> = it <b>abducts</b> the eye (turns it out/laterally); it&rsquo;s isolated on testing when the patient looks <b>straight laterally (temporally)</b>. <span class="cite">(L21 Testing of Eye Muscles)</span></li>
+        <li>Route it: CN VI enters the orbit through the <b>superior orbital fissure</b>, alongside <b>CN III, IV, and V1</b>. <span class="cite">(L19 Orbit)</span></li>
+        <li>Apply it: a <b>CN VI lesion</b> lets the medial rectus win, so the eye <b>deviates medially</b> with <b>horizontal diplopia</b>; its long intracranial course makes it the <b>first eye nerve hit by raised intracranial pressure</b>. <span class="cite">(L20 Orbit)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This nerve supplies the abductor of the eye, so abducens.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L17 The Brain (contd) &middot; CN VI</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which muscle does CN VI supply, and which way does the eye deviate if it is lesioned?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Lateral rectus</b> (LR6). A lesion &rarr; the eye <b>deviates medially</b> (unopposed medial rectus) with <b>horizontal double vision</b>. It enters via the superior orbital fissure and is first affected by raised intracranial pressure.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 : CN VII ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">CN VII</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace the facial nerve (CN VII) &mdash; its skull entry/exit, the geniculate ganglion, its motor + taste + secretomotor jobs, and Bell&rsquo;s palsy.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L08 Face &amp; Scalp / L22 The Ear</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Run the course: enters with <b>CN VIII</b> through the <b>internal acoustic meatus</b> &rarr; the bend (genu) carries the <b>geniculate ganglion</b> (cell bodies of <b>taste/SVA</b> from the anterior 2/3 tongue) &rarr; exits the <b>stylomastoid foramen</b> &rarr; passes through the <b>parotid gland</b> (5 terminal branches, e.g., <b>marginal mandibular</b>). <span class="cite">(L08 Face &amp; Scalp)</span></li>
+        <li>Give the <b>motor</b> job: the <b>muscles of facial expression</b> (e.g., orbicularis oculi), plus the <b>posterior belly of digastric</b>, <b>stylohyoid</b>, and <b>stapedius</b>. <span class="cite">(L08 Face &amp; Scalp)</span></li>
+        <li>Give the <b>taste + secretomotor</b> jobs: <b>taste from the anterior 2/3 of the tongue</b>; its <b>chorda tympani</b> carries parasympathetic secretomotor fibers to the <b>submandibular and sublingual glands</b>. <span class="cite">(L06/L08)</span></li>
+        <li>Apply it clinically: <b>Bell&rsquo;s palsy</b> = idiopathic paralysis of one whole side of the face; <b>Bell&rsquo;s phenomenon</b> = the eyeball rolls up when they try to close the eye; <b>Ramsay Hunt</b> (herpes zoster oticus) hits the geniculate ganglion + CN VIII. <span class="cite">(L08 Face &amp; Scalp)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Facial nerve exits the skull through stylomastoid foramen&hellip; Right after that, it passes through the substance of the parotid gland.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L08 Face &amp; Scalp &middot; facial nerve course</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Where does CN VII exit the skull, and what are its taste vs facial-muscle roles?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Exits at the <b>stylomastoid foramen</b>, then through the <b>parotid</b>. Carries <b>taste from the anterior 2/3 of the tongue</b> (chorda tympani; cell bodies in the <b>geniculate ganglion</b>) and gives <b>motor to the muscles of facial expression</b>. Idiopathic paralysis = <b>Bell&rsquo;s palsy</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 : CN VIII ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">CN VIII</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the vestibulocochlear nerve (CN VIII) &mdash; its two divisions, its purely-sensory nature, where it ends, and its lesion signs.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L22 The Ear</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Split it: two components &mdash; <b>cochlear</b> (hearing) and <b>vestibular</b> (balance/equilibrium). It is <b>purely sensory</b> (special somatic afferent) &mdash; the hearing nerve. <span class="cite">(L22 The Ear)</span></li>
+        <li>Enter it: passes through the <b>internal acoustic meatus</b> with <b>CN VII</b>. <span class="cite">(L22 The Ear)</span></li>
+        <li>Note the exception: unlike CN VII it <b>does NOT leave the skull</b> &mdash; it ends in the <b>inner ear within the petrous temporal bone</b>. <span class="cite">(L22 The Ear)</span></li>
+        <li>Read the lesions: <b>cochlear</b> lesion &rarr; <b>tinnitus and/or deafness</b>; <b>vestibular</b> lesion &rarr; <b>vertigo and loss of balance</b>. Because VII and VIII share the IAM, an <b>acoustic neuroma</b> (vestibular schwannoma) there can knock out BOTH. <span class="cite">(L22 The Ear)</span></li>
+      </ul>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What are CN VIII&rsquo;s two divisions, and what does a lesion of each one cause?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Cochlear</b> (hearing &rarr; tinnitus/deafness if lesioned) and <b>vestibular</b> (balance &rarr; vertigo if lesioned). Purely sensory; enters the internal acoustic meatus with CN VII and stays in the petrous temporal bone.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 : CN IX ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">CN IX</div>
+      <div class="lo-obj">
+        <div class="obj-text">Cover the glossopharyngeal nerve (CN IX) &mdash; its skull exit, its one muscle, posterior-tongue sensation/taste, parotid secretomotor, and its reflex roles.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L28 Pharynx / L10 Infratemporal Fossa / L06 Pharyngeal Apparatus</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Exit it: leaves the skull through the <b>jugular foramen</b> (with X and XI); it is the nerve of the <b>3rd pharyngeal arch</b>. <span class="cite">(L28 Pharynx)</span></li>
+        <li>Give its one muscle: <b>stylopharyngeus</b> &mdash; the ONLY pharyngeal muscle NOT supplied by the vagus. <span class="cite">(L28 Pharynx; L29 Lab)</span></li>
+        <li>Own the tongue: carries <b>BOTH general sensation AND taste from the posterior 1/3 of the tongue</b>. <span class="cite">(L06 Pharyngeal Apparatus)</span></li>
+        <li>Add the extras: parasympathetic <b>secretomotor to the parotid gland</b> via the <b>otic ganglion</b>; branches include the <b>tympanic nerve (of Jacobson) &rarr; tympanic plexus</b>, the <b>carotid sinus/body</b> afferents, and the <b>afferent (sensory) limb of the gag reflex</b>. <span class="cite">(L10 Infratemporal Fossa)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The mucosa overlying this area of the tongue receives its sensory innervation from the ninth cranial nerve, the glossopharyngeal.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L06 Pharyngeal Apparatus &middot; posterior tongue</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What single muscle and what tongue territory does CN IX serve, and which gland does it feed?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Stylopharyngeus</b> (the only non-vagal pharyngeal muscle); <b>general sensation + taste from the posterior 1/3 of the tongue</b>; and parasympathetic <b>secretomotor to the parotid</b> via the <b>otic ganglion</b>. Nerve of the 3rd pharyngeal arch; exits the jugular foramen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 : CN X ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">CN X</div>
+      <div class="lo-obj">
+        <div class="obj-text">Follow the vagus nerve (CN X) &mdash; its skull exit, carotid-sheath course, its laryngeal branches, and its huge parasympathetic reach.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L05 Cervical Viscera / L26 The Larynx</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Route it: exits the <b>jugular foramen</b>, then runs in the <b>carotid sheath</b> with the <b>common carotid artery</b> and <b>internal jugular vein</b> (the &ldquo;three musketeers&rdquo;). <span class="cite">(L05 Cervical Viscera)</span></li>
+        <li>Split the larynx supply: the <b>recurrent laryngeal nerve</b> supplies <b>all intrinsic laryngeal muscles EXCEPT the cricothyroid</b> (that one = the <b>external laryngeal nerve</b>, from the superior laryngeal). The RLN ascends in the <b>tracheoesophageal groove</b>. <span class="cite">(L26 Larynx; L29 Lab)</span></li>
+        <li>Divide the sensation: <b>above the vocal folds &rarr; internal laryngeal nerve</b>; <b>below the vocal folds &rarr; recurrent laryngeal nerve</b>. Unilateral RLN injury &rarr; <b>hoarseness</b>; bilateral &rarr; <b>aphonia + inspiratory stridor</b>. <span class="cite">(L05/L26)</span></li>
+        <li>Add the reach: <b>palatoglossus</b> is the one tongue muscle it supplies; it is the <b>motor (efferent) limb of the gag reflex</b>; and it gives <b>parasympathetic</b> supply to thoracic + abdominal viscera down to the <b>left colic (splenic) flexure</b>. <span class="cite">(L06 Pharyngeal Apparatus)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Recurrent laryngeal nerve ascends on either side of the grooves between trachea and esophagus.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L05 Cervical Viscera &middot; RLN course</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which laryngeal muscle is NOT supplied by the recurrent laryngeal nerve, and what happens with a one-sided RLN injury?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>cricothyroid</b> (supplied by the <b>external laryngeal nerve</b>). One-sided RLN injury &rarr; <b>hoarseness</b>; both RLNs &rarr; <b>aphonia + inspiratory stridor</b>. Sensation is internal laryngeal above the folds, recurrent laryngeal below.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 : CN XI ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">CN XI</div>
+      <div class="lo-obj">
+        <div class="obj-text">State the accessory nerve (CN XI) &mdash; its two muscles, its unusual foramen-magnum route, its cervical contribution, and how it&rsquo;s tested.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L03 Cervical Triangles / L05 Cervical Viscera / L28 Pharynx</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name its two muscles: the <b>spinal root</b> of CN XI supplies the <b>sternocleidomastoid (SCM)</b> and <b>trapezius</b>; it runs its exposed, surgically vulnerable course in the <b>posterior triangle</b>. <span class="cite">(L03 Cervical Triangles)</span></li>
+        <li>Trace the odd route: the spinal root first <b>ascends through the foramen magnum</b>, then <b>exits the skull via the jugular foramen</b> (with IX and X). <span class="cite">(L28 Pharynx)</span></li>
+        <li>Add the joiners: <b>C2, C3, C4</b> fibers join it to help supply SCM and trapezius; the small <b>cranial root joins CN X</b>. <span class="cite">(L03 Cervical Triangles)</span></li>
+        <li>Test + lesion it: <b>shrug the shoulders and turn the head against resistance</b>; a lesion &rarr; <b>weak shrug, difficulty turning the head, drooping shoulder + scapular winging</b>. (SCM acting on one side turns the head to the OPPOSITE side.) <span class="cite">(L03/L05)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Sternocleidomastoid and trapezius, they are innervated by spinal accessory, which is a cranial nerve&hellip; C2, C3, C4 fibers, they join spinal accessory nerve.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L03 Cervical Triangles &middot; spinal accessory</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which two muscles does CN XI supply, and how do you test it clinically?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Sternocleidomastoid and trapezius.</b> Test by <b>shoulder shrug + head turn against resistance</b>; a lesion &rarr; drooping shoulder, weak shrug, scapular winging. Its spinal root ascends through the foramen magnum, then exits the jugular foramen.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 : CN XII ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">CN XII</div>
+      <div class="lo-obj">
+        <div class="obj-text">Nail the hypoglossal nerve (CN XII) &mdash; its canal, the one tongue muscle it skips, its lesion sign, and the C1 hitchhikers.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L03 Cervical Triangles / L06 Pharyngeal Apparatus / L01 Osteology</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Exit it: <b>purely motor</b>; leaves the cranial cavity through the <b>hypoglossal canal</b> (in the <b>occipital bone</b>, near the foramen magnum). <span class="cite">(L01 Osteology)</span></li>
+        <li>Give the exception: it supplies <b>ALL tongue muscles EXCEPT palatoglossus</b> (that one = the vagus, CN X). <b>Genioglossus</b> is the chief protruder. <span class="cite">(L06 Pharyngeal Apparatus; L29 Lab)</span></li>
+        <li>Read the lesion: a <b>unilateral CN XII lesion</b> makes the tongue <b>deviate TOWARD the affected side</b> on protrusion (with wasting) &mdash; &ldquo;the tongue points at the lesion.&rdquo; <span class="cite">(CN XII clinical)</span></li>
+        <li>Track the hitchhikers: <b>C1 fibers</b> ride along CN XII, then peel off to the <b>superior root of the ansa cervicalis</b> (infrahyoid muscles) plus <b>thyrohyoid and geniohyoid</b>. <span class="cite">(L03 Cervical Triangles)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The motor innervation of tongue muscles comes from the hypoglossal nerve&hellip; except the palatoglossus muscle.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L06 Pharyngeal Apparatus &middot; tongue muscles</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which tongue muscle does CN XII NOT supply, and which way does the tongue deviate with a one-sided lesion?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Palatoglossus</b> (that one is CN X / vagus). A unilateral CN XII lesion &rarr; the tongue <b>deviates toward the affected side</b> on protrusion. It exits through the hypoglossal canal in the occipital bone; genioglossus is the protruder.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 : BIG PICTURE ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">BIG&nbsp;PICTURE</div>
+      <div class="lo-obj">
+        <div class="obj-text">Synthesize the whole set &mdash; the 12-nerve count, the skull-base foramina map, the four parasympathetic nerves and their ganglia, the tongue map, and the pure motor/sensory nerves.</div>
+        <div class="obj-src">source: <b>Dr. Maini &middot; L01 Osteology / L11 Infratemporal Fossa / L14 Cranial Meninges &middot; CN overview</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the count + foramina map: <b>12 pairs</b> of cranial nerves. <b>Jugular foramen = IX, X, XI</b>; <b>hypoglossal canal = XII</b>; <b>internal acoustic meatus = VII, VIII</b>; <b>superior orbital fissure = III, IV, VI, V1</b>. (The sigmoid sinus becomes the <b>internal jugular vein</b> at the jugular foramen.) <span class="cite">(L01 Osteology / L28)</span></li>
+        <li>List the parasympathetics: the <b>4 cranial-outflow nerves = III, VII, IX, X</b>, with their ganglia &mdash; <b>ciliary = III</b>, <b>otic = IX</b> (parotid). The <b>cavernous sinus</b> carries <b>III, IV, VI and V1/V2</b>. <span class="cite">(L11/L14)</span></li>
+        <li>Draw the tongue map: <b>anterior 2/3</b> &mdash; general sensation = <b>lingual (V3)</b>, taste = <b>chorda tympani (VII)</b>; <b>posterior 1/3</b> &mdash; general + taste = <b>IX</b>. <span class="cite">(L06 Pharyngeal Apparatus)</span></li>
+        <li>Sort the fiber types: <b>purely sensory = I, II, VIII</b>; <b>purely motor</b> includes <b>XII</b> (also III, IV, VI, XI). Sensory ganglia (<b>geniculate, trigeminal, spiral/vestibular</b>) hold afferent cell bodies. <span class="cite">(CN overview)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Ciliary ganglion is associated with third nerve&hellip; Otic ganglion&hellip; ninth nerve carries preganglionic parasympathetic fibers to this ganglion.&rdquo;<span class="cite">&mdash; Dr. Maini &middot; L10/L11 Infratemporal Fossa &middot; ganglia</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html">&#128220; M14 Cranial Nerves Hub</a>
+        <a class="chip" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC Drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which nerves share the jugular foramen, and which four cranial nerves carry parasympathetic fibers?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Jugular foramen = IX, X, XI.</b> Parasympathetics = <b>III, VII, IX, X</b> (ganglia: <b>ciliary III, otic IX</b>). Purely sensory = I, II, VIII; hypoglossal canal = XII; internal acoustic meatus = VII, VIII.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 10 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>M14 Cranial Nerves Hub</b> and drill exactly that nerve on the <b>Everything-MC Drill</b>.</p>
+    <p><b>3.</b> The <b>foramina map</b> and the <b>tongue map</b> (Objective 10) are where Dr. Maini&rsquo;s &ldquo;which structure does NOT pass through&hellip;&rdquo; trap questions live &mdash; spend extra reps there.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t mix up the &ldquo;exception&rdquo; muscles.</b> <b>Palatoglossus</b> is supplied by <b>CN X</b> (vagus), not CN XII. <b>Stylopharyngeus</b> is supplied by <b>CN IX</b>, not the vagus. The <b>cricothyroid</b> is supplied by the <b>external laryngeal nerve</b>, not the recurrent laryngeal. And among the palatine muscles, <b>tensor veli palatini</b> is the odd one out &mdash; supplied by <b>V3</b>, not CN X. <i>(Dr. Maini, L29 Lab: &ldquo;tensor veli palatini is not innervated by 10th nerve&hellip; V3.&rdquo;)</i></div>
+    <p style="margin-top:6px">When all 10 boxes are ticked, you own the part-2 cranial-nerve spine (CN IV&ndash;XII) &mdash; the backbone of GA 0202 Module 14.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 14 (Cranial Nerves, part 2) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from this module&rsquo;s audited Everything-MC bank + Dr. Maini&rsquo;s lecture recordings &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m14_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="ga-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 Gross Anatomy — Dr. Maini (Cranial Nerves, part 2)
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Module 14 cranial-nerves (part 2, CN IV-XII) learning objectives.' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 10 cranial-nerve (part 2) learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy or mnemonic for a cranial nerve in the part-2 set (CN IV-XII) — for example the tongue innervation map or the skull-base foramina.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the cranial-nerves (part 2) module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 Gross Anatomy with Dr. Maini at SCUHS (Module 14 — Cranial Nerves, part 2, CN IV-XII). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

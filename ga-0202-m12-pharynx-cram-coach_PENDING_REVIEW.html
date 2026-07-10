@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · The Pharynx — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 12 — THE PHARYNX
+   Dr. Seema Maini. Cram Coach. PENDING REVIEW.
+   Built ONLY from Dr. Maini's GA lecture (Lecture 27 — The Pharynx) and the
+   module's AUDITED Everything-MC bank. Voiced, hands-free walkthrough via Web
+   Speech. Original phrasing, in her style; no captured exam items. Source-tagged.
+   THEME: violet (cloned from the gold cram-coach engine).
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (9 TOPICS) ===== */
+const cram = [
+  {
+    n: 1, title: "The pharynx — the big picture", src: "Maini · Pharynx",
+    facts: [
+      "The pharynx is a COMMON CHAMBER for the respiratory and digestive tracts, so both air and a swallowed bolus pass through it.",
+      "It is FUNNEL-SHAPED and about 12 cm long. It runs from the BASE OF THE SKULL down to the LOWER BORDER OF THE CRICOID CARTILAGE, the C6 vertebral level, where it becomes continuous with the ESOPHAGUS.",
+      "Maini calls it C-SHAPED, not a complete tube: it has essentially NO anterior wall, because it opens forward into the nasal cavity, the oral cavity, and the larynx. In her teaching image the POSTERIOR wall is removed so you can see inside.",
+      "It has three parts from top to bottom: the NASOPHARYNX, the OROPHARYNX, and the LARYNGOPHARYNX. The larynx and the laryngopharynx share the same inferior limit, the lower border of the cricoid at C6.",
+    ],
+    flag: "Common chamber for AIR and FOOD. Funnel-shaped, about 12 cm, base of skull to lower border of cricoid (C6), then esophagus. C-shaped, no anterior wall. Three parts: naso, oro, laryngo.",
+  },
+  {
+    n: 2, title: "Nasopharynx — the respiratory part", src: "Maini · Pharynx",
+    facts: [
+      "The nasopharynx is ENTIRELY RESPIRATORY. Its walls are rigid and cannot be collapsed, because they are supported by bone almost all the way around.",
+      "It runs from the base of the skull down to the level of the SOFT PALATE. Its ROOF is supported by the body of the SPHENOID and the basilar part of the OCCIPITAL bone; its FLOOR is the sloping upper surface of the soft palate; its POSTERIOR wall is supported by the anterior arch of the ATLAS, the C1 vertebra.",
+      "The PHARYNGEAL ISTHMUS is the opening between the soft palate and the posterior pharyngeal wall. The LATERAL wall carries four features: the opening of the AUDITORY (pharyngotympanic) tube, the TORUS TUBARIUS ridge it raises, the SALPINGOPHARYNGEAL FOLD running down from it, and the PHARYNGEAL RECESS behind the torus. Tubal tonsils surround the tube opening.",
+      "The auditory tube runs forward to the ANTERIOR wall of the middle ear. In the ROOF sits the single PHARYNGEAL TONSIL; when it is inflamed and enlarged it is called ADENOIDS.",
+    ],
+    flag: "Nasopharynx = respiratory, rigid (bony support). Roof: sphenoid body plus basilar occipital. Posterior wall: anterior arch of atlas (C1). Lateral wall: auditory tube opening, torus tubarius, salpingopharyngeal fold, pharyngeal recess. Roof tonsil = pharyngeal tonsil = adenoids when inflamed. Salpingo means tube.",
+  },
+  {
+    n: 3, title: "Adenoids — the nasopharyngeal clinical", src: "Maini · Pharynx",
+    facts: [
+      "The pharyngeal tonsil sits right in the roof of the nasopharynx, so when it is chronically enlarged it blocks the posterior nasal openings and the child becomes a MOUTH-BREATHER.",
+      "Long-term mouth breathing gives ADENOID FACIES: a flat face, a recessed and smaller mandible, and a habitually open mouth.",
+      "Caught early, an ADENOIDECTOMY can let the face normalize, because the facial bones and paranasal sinuses keep developing until PUBERTY. Left too long, the changes can become permanent.",
+      "Maini's take-home: adenoids are simply an inflamed pharyngeal tonsil, and it is a single, unpaired tonsil.",
+    ],
+    flag: "Enlarged pharyngeal tonsil (adenoids) blocks the posterior nares, so the child mouth-breathes and develops adenoid facies: flat face, small recessed jaw, open mouth. Early adenoidectomy works because facial bones grow until puberty. The pharyngeal tonsil is SINGLE.",
+  },
+  {
+    n: 4, title: "Oropharynx — the digestive entrance", src: "Maini · Pharynx",
+    facts: [
+      "The oropharynx is the DIGESTIVE ENTRANCE of the chamber. It runs from the SOFT PALATE down to the UPPER BORDER OF THE EPIGLOTTIS.",
+      "Its ROOF is the undersurface of the soft palate plus the pharyngeal isthmus. Its FLOOR is the POSTERIOR ONE-THIRD OF THE TONGUE and the gap between the tongue and the epiglottis. Its posterior wall is supported by the body of C2, the upper body of C3, and the disc between them.",
+      "Three GLOSSOEPIGLOTTIC FOLDS, one median and two lateral, connect the tongue to the epiglottis; the pockets between them are the VALLECULAE. The single LINGUAL TONSIL sits on the root of the tongue.",
+      "The LATERAL wall has the PALATOGLOSSAL and PALATOPHARYNGEAL folds; the TONSILLAR FOSSA between them holds the PALATINE TONSIL.",
+    ],
+    flag: "Oropharynx = digestive entrance, soft palate to upper border of epiglottis. Floor = posterior third of tongue. Posterior wall = C2 plus upper C3. Valleculae sit between the three glossoepiglottic folds. Palatine tonsil in the tonsillar fossa between the palatoglossal and palatopharyngeal folds. Lingual tonsil on the tongue root.",
+  },
+  {
+    n: 5, title: "Laryngopharynx & the piriform fossa", src: "Maini · Pharynx",
+    facts: [
+      "The laryngopharynx lies BEHIND the laryngeal inlet and the posterior wall of the larynx. It runs from the upper border of the epiglottis to the LOWER BORDER OF THE CRICOID (C6), communicating with the oropharynx above and the ESOPHAGUS below.",
+      "Its anterior wall is the laryngeal inlet plus the mucosa over the back of the larynx. Its posterior wall is supported by the bodies of C3 through C6, and its LATERAL wall by the THYROID CARTILAGE and thyrohyoid membrane, which Maini calls the larynx's ARMOR.",
+      "On each side of the laryngeal inlet is the PIRIFORM FOSSA, a pear-shaped, shallow depression. Because it is shallow, sharp foreign bodies such as a FISHBONE can lodge there.",
+      "Just deep to the mucosa of the piriform fossa runs the INTERNAL LARYNGEAL NERVE, which is sensory to the larynx ABOVE the vocal folds. Injury from a foreign body loses the GAG REFLEX, risking ASPIRATION and aspiration pneumonitis.",
+    ],
+    flag: "Laryngopharynx: behind the laryngeal inlet, upper border of epiglottis to lower border of cricoid (C6), then esophagus. Lateral wall = thyroid cartilage plus thyrohyoid membrane (the armor). Piriform fossa = pear-shaped shallow pocket where a fishbone lodges; the internal laryngeal nerve runs just under its mucosa, so injury loses the gag reflex and risks aspiration.",
+  },
+  {
+    n: 6, title: "The pharyngeal wall — layers", src: "Maini · Pharynx",
+    facts: [
+      "The pharynx is lined by STRATIFIED SQUAMOUS, NON-KERATINIZED epithelium. It is stratified to survive the ABRASION of the food bolus, and non-keratinized because keratin is found only in skin.",
+      "From inside out there are FOUR layers: MUCOSA, then the PHARYNGOBASILAR FASCIA (a strong fibrous submucosa that blends with the periosteum of the skull base), then the MUSCULAR layer, then the BUCCOPHARYNGEAL FASCIA on the outside.",
+      "The muscular layer has an OUTER CIRCULAR layer (the three constrictors) and an INNER LONGITUDINAL layer (the three 'pharyngeus' muscles).",
+      "Behind the pharynx is the RETROPHARYNGEAL SPACE, filled with loose areolar tissue, which lets the pharynx GLIDE up and down during swallowing. If it is obliterated by fibrosis or a tumor, the pharynx becomes fixed to the spine and you get DYSPHAGIA.",
+    ],
+    flag: "Lining = stratified squamous, NON-keratinized (keratin is only in skin; stratified to resist bolus abrasion). Layers inside-out: mucosa, pharyngobasilar fascia (blends with skull-base periosteum), muscle (outer circular constrictors plus inner longitudinal), buccopharyngeal fascia. Retropharyngeal space lets the pharynx glide; obliteration causes dysphagia.",
+  },
+  {
+    n: 7, title: "Constrictor muscles (the outer circular layer)", src: "Maini · Pharynx",
+    facts: [
+      "The THREE CONSTRICTORS (superior, middle, inferior) are the outer, circularly arranged muscle layer; they squeeze the bolus downward during swallowing.",
+      "The SUPERIOR constrictor arises from the pterygoid hamulus, pterygomandibular raphe, mylohyoid line, and side of the tongue, and inserts on the PHARYNGEAL TUBERCLE, on the basilar occipital bone just in front of the foramen magnum. On the pterygomandibular raphe the BUCCINATOR lies in front of it.",
+      "The MIDDLE constrictor arises from the stylohyoid ligament and the horns of the hyoid, and inserts on the midline PHARYNGEAL RAPHE. The INFERIOR constrictor arises from the oblique line of the thyroid cartilage and the cricoid cartilage.",
+      "The inferior constrictor has two parts: THYROPHARYNGEUS (upper, forms a raphe) and CRICOPHARYNGEUS (lower, no raphe). Cricopharyngeus encircles the pharyngoesophageal junction as the UPPER ESOPHAGEAL SPHINCTER, keeping the esophagus closed except during swallowing. When it loses tone in old age you get AEROPHAGIA, swallowing air with constant belching.",
+    ],
+    flag: "Three constrictors = outer circular layer. Superior inserts on the pharyngeal tubercle (basilar occipital, in front of foramen magnum); buccinator lies anterior on the pterygomandibular raphe. Middle inserts on the midline pharyngeal raphe. Inferior = thyropharyngeus (forms a raphe) plus cricopharyngeus (no raphe, the upper esophageal sphincter). Three muscles on the oblique line of thyroid: inferior constrictor, sternothyroid, thyrohyoid (NOT sternohyoid).",
+  },
+  {
+    n: 8, title: "Longitudinal muscles + innervation", src: "Maini · Pharynx",
+    facts: [
+      "The INNER LONGITUDINAL layer is three muscles: PALATOPHARYNGEUS, SALPINGOPHARYNGEUS, and STYLOPHARYNGEUS. They ELEVATE and SHORTEN the pharynx and larynx during swallowing.",
+      "PALATOPHARYNGEUS comes from the hard palate and palatine aponeurosis and forms the palatopharyngeal arch; SALPINGOPHARYNGEUS comes from the cartilage of the auditory tube; STYLOPHARYNGEUS comes from the STYLOID PROCESS. Palatopharyngeus and stylopharyngeus insert on the THYROID CARTILAGE.",
+      "INNERVATION: most pharyngeal muscles come from the 4th and 6th pharyngeal arches, so they are supplied by the VAGUS NERVE, cranial nerve ten, through its pharyngeal branch.",
+      "The ONE exception is STYLOPHARYNGEUS, supplied by the GLOSSOPHARYNGEAL NERVE, cranial nerve nine, because it comes from the 3rd arch. Maini's line: stylopharyngeus is so stylish it has its own nerve.",
+    ],
+    flag: "Inner longitudinal muscles: palatopharyngeus, salpingopharyngeus, stylopharyngeus; they elevate and shorten the pharynx. Salpingopharyngeus comes from the auditory tube cartilage; stylopharyngeus from the styloid process. All pharyngeal muscles are vagus (CN X) EXCEPT stylopharyngeus, which is glossopharyngeal (CN IX) from the 3rd arch. Maini: so stylish it has its own nerve.",
+  },
+  {
+    n: 9, title: "Tonsil ring + clinical wrap-up", src: "Maini · Pharynx",
+    facts: [
+      "Four named TONSILS guard the openings into the pharynx, the lymphoid (Waldeyer's) ring: the PHARYNGEAL, TUBAL, PALATINE, and LINGUAL tonsils. The pharyngeal and lingual tonsils are SINGLE (unpaired).",
+      "ADENOIDS are an inflamed pharyngeal tonsil in the roof of the nasopharynx; a chronic case gives the mouth-breathing child adenoid facies.",
+      "AEROPHAGIA is a lax cricopharyngeus (the upper esophageal sphincter) in old age, so the patient swallows air and belches constantly. ASPIRATION PNEUMONITIS is lung inflammation from material aspirated from the digestive tract into the airway, for example after loss of the gag reflex.",
+      "DYSPHAGIA, difficult swallowing, results when the retropharyngeal space is obliterated and the pharynx can no longer glide on the spine.",
+    ],
+    flag: "Waldeyer's ring: pharyngeal, tubal, palatine, lingual tonsils (pharyngeal and lingual are single). Clinical quartet: adenoids (enlarged pharyngeal tonsil), aerophagia (lax UES, belching), aspiration pneumonitis (gag reflex lost), dysphagia (retropharyngeal space obliterated).",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "The three parts and their boundaries: NASOPHARYNX (base of skull to soft palate, respiratory), OROPHARYNX (soft palate to upper border of epiglottis, the digestive entrance), LARYNGOPHARYNX (upper epiglottis to lower border of cricoid, C6). Know what each communicates with.", why: "Maini frames the whole lecture around the three parts and their limits, so every boundary is a potential item.", src: "Maini · Pharynx" },
+  { tag: "★★ Heavy", text: "The muscles: three CONSTRICTORS (outer circular) with the inferior constrictor split into thyropharyngeus and cricopharyngeus (the UES), plus the three LONGITUDINAL 'pharyngeus' muscles. Innervation is CN X (vagus) for all EXCEPT stylopharyngeus (CN IX).", why: "She spends the back half of the lecture on the muscles and explicitly flags the one innervation exception.", src: "Maini · Pharynx" },
+  { tag: "Nasopharynx", text: "Lateral-wall features: auditory tube opening, torus tubarius, salpingopharyngeal fold, and pharyngeal recess, plus the pharyngeal tonsil (adenoids) in the roof. The pharyngeal TUBERCLE is NOT a lateral-wall feature; it is a superior-constrictor insertion.", why: "She lists these four features almost verbatim and warns that the tubercle belongs elsewhere, a classic EXCEPT trap.", src: "Maini · Pharynx" },
+  { tag: "Clinical anchor", text: "Piriform fossa + internal laryngeal nerve: a pear-shaped shallow fossa beside the laryngeal inlet where a fishbone lodges; the internal laryngeal nerve runs just under its mucosa, sensory above the vocal folds. Injury loses the gag reflex and risks aspiration.", why: "A favourite clinical link she walks through step by step, from fossa to nerve to deficit.", src: "Maini · Pharynx" },
+  { tag: "Wall layers", text: "Lining is STRATIFIED SQUAMOUS, NON-KERATINIZED. Layers inside-out: mucosa, pharyngobasilar fascia, muscular layer, buccopharyngeal fascia. The retropharyngeal space allows gliding; obliteration causes dysphagia.", why: "She asks the epithelium type, WHY it is non-keratinized, and the exact layer order.", src: "Maini · Pharynx" },
+  { tag: "Oropharynx", text: "Floor = posterior one-third of the tongue; three glossoepiglottic folds with the valleculae between them; the palatine tonsil sits in the tonsillar fossa between the palatoglossal and palatopharyngeal folds; the lingual tonsil is on the tongue root.", why: "Dense with named folds and spaces she points out one by one, easy to mix up.", src: "Maini · Pharynx" },
+  { tag: "Exam item", text: "The OBLIQUE LINE of the thyroid cartilage has three muscles: inferior constrictor, sternothyroid, and thyrohyoid. Sternohyoid does NOT attach there.", why: "Maini says outright that this makes a good exam question, phrasing it as a 'which is NOT attached' stem.", src: "Maini · Pharynx" },
+  { tag: "Ladder", text: "Vertebral supports climb the spine: nasopharynx = anterior arch of the atlas (C1), oropharynx = C2 and upper C3, laryngopharynx = C3 through C6, ending at C6.", why: "Easy to confuse; she gives a specific vertebral level for each part.", src: "Maini · Pharynx" },
+  { tag: "Clinical", text: "The clinical cluster: adenoids and adenoid facies, aerophagia from a lax UES, aspiration pneumonitis from a lost gag reflex, and dysphagia from an obliterated retropharyngeal space.", why: "Each vignette maps back to one structure, so these are high-yield application items.", src: "Maini · Pharynx" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  { kind: "Analogy", title: "Three rooms, one corridor", text: "Maini pictures the pharynx as the common corridor behind three rooms: the nasal cavity, the oral cavity, and the larynx. It has no real anterior wall because it opens straight into all three, which is why she calls it C-shaped rather than a complete tube.", helps: "Anchors why the pharynx is C-shaped and what each of the three parts communicates with.", src: "Maini · Pharynx" },
+  { kind: "Mnemonic", title: "Stylopharyngeus is 'so stylish it has its own nerve'", text: "Maini's own line: of all the pharyngeal muscles, stylopharyngeus is the one that is NOT on the vagus. It is supplied by the glossopharyngeal nerve (CN IX) because it develops from the 3rd pharyngeal arch, while the rest come from arches 4 and 6.", helps: "Pins the single innervation exception with her exact phrase.", src: "Maini · Pharynx" },
+  { kind: "Rule", title: "Salpingo means tube", text: "Maini reminds you that salpingo (salpinx) means tube, the same root as salpingitis and the fallopian tube. So the salpingopharyngeal fold and the salpingopharyngeus muscle both relate to the auditory (pharyngotympanic) tube.", helps: "Decodes two named nasopharyngeal structures from one root word.", src: "Maini · Pharynx" },
+  { kind: "Analogy", title: "The thyroid cartilage is armor", text: "Maini calls the thyroid cartilage the larynx's armor. It also reaches down over the laryngopharynx, forming the lateral wall of the laryngopharynx along with the thyrohyoid membrane.", helps: "Fixes the lateral-wall support of the laryngopharynx.", src: "Maini · Pharynx" },
+  { kind: "Analogy", title: "Cricopharyngeus is a sling", text: "Maini compares cricopharyngeus to puborectalis around the anorectal junction: it slings around the pharyngoesophageal junction. That lower part of the inferior constrictor is the upper esophageal sphincter, keeping the esophagus shut except when you swallow.", helps: "Explains why the lower inferior constrictor acts as the UES.", src: "Maini · Pharynx" },
+  { kind: "Trick", title: "The oblique-line trap", text: "Three muscles attach to the oblique line of the thyroid cartilage: the inferior constrictor, sternothyroid, and thyrohyoid. If a stem asks which muscle is NOT attached there, the answer is sternohyoid. Maini flags this herself as a good exam question.", helps: "Solves Maini's stated 'which is NOT attached' item.", src: "Maini · Pharynx" },
+  { kind: "Trick", title: "C6 is the triple landmark", text: "The lower border of the cricoid cartilage sits at C6 and marks three things at once: the bottom of the larynx, the bottom of the laryngopharynx, and the start of the esophagus.", helps: "One vertebral level answers several boundary questions.", src: "Maini · Pharynx" },
+  { kind: "Trick", title: "Fishbone and the gag reflex", text: "A sharp object lodges in the shallow piriform fossa and can injure the internal laryngeal nerve running just beneath its mucosa. That nerve is sensory above the vocal folds, so losing it loses the gag reflex and invites aspiration.", helps: "Chains the fossa, the nerve, and the clinical deficit into one image.", src: "Maini · Pharynx" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Original-phrasing items built on Maini's Lecture 27 and grounded in the
+   module's AUDITED Everything-MC bank. Option positions are shuffled at build
+   (see Drill) so there is no positional answer skew. */
+const questions = [
+  { id: 1, topic: "Overview", src: "Maini · Pharynx", q: "The pharynx is a common chamber shared by which two systems?", opts: ["The respiratory and digestive tracts", "The respiratory and circulatory systems", "The digestive and lymphatic systems", "The nervous and endocrine systems"], a: 0, h1: "Think about what passes through it.", h2: "Both air and a swallowed bolus.", exp: "Maini opens by defining the pharynx as the common chamber for the RESPIRATORY and DIGESTIVE tracts; air and food both traverse it." },
+  { id: 2, topic: "Overview", src: "Maini · Pharynx", q: "The pharynx extends from the base of the skull down to the:", opts: ["Hyoid bone", "Upper border of the thyroid cartilage", "Lower border of the cricoid cartilage", "First tracheal ring"], a: 2, h1: "Same lower limit as the larynx.", h2: "The bottom of the cricoid.", exp: "It runs from the base of the skull to the LOWER BORDER OF THE CRICOID CARTILAGE, then continues as the esophagus." },
+  { id: 3, topic: "Overview", src: "Maini · Pharynx", q: "The inferior limit of the pharynx sits at which vertebral level?", opts: ["C3", "C4", "C6", "T1"], a: 2, h1: "Shared with the laryngopharynx and larynx.", h2: "Sixth cervical.", exp: "The lower border of the cricoid, and therefore the inferior limit of the pharynx, is at the C6 level." },
+  { id: 4, topic: "Overview", src: "Maini · Pharynx", q: "Inferiorly the pharynx becomes continuous with the:", opts: ["Trachea", "Esophagus", "Larynx", "Nasal cavity"], a: 1, h1: "The digestive tube below.", h2: "Food passage continues here.", exp: "Below the lower border of the cricoid the pharynx is continuous with the ESOPHAGUS." },
+  { id: 5, topic: "Overview", src: "Maini · Pharynx", q: "Maini calls the pharynx 'C-shaped, not a complete tube.' Which wall is essentially absent?", opts: ["Posterior wall", "Lateral wall", "Anterior wall", "The roof"], a: 2, h1: "It opens into the three rooms.", h2: "The front is open.", exp: "It has essentially NO anterior wall, because it opens forward into the nasal cavity, oral cavity, and larynx." },
+  { id: 6, topic: "Overview", src: "Maini · Pharynx", q: "The three parts of the pharynx, from superior to inferior, are:", opts: ["Oropharynx, nasopharynx, laryngopharynx", "Nasopharynx, oropharynx, laryngopharynx", "Nasopharynx, laryngopharynx, oropharynx", "Laryngopharynx, oropharynx, nasopharynx"], a: 1, h1: "Naso is on top.", h2: "Naso, then oro, then laryngo.", exp: "From top to bottom: NASOPHARYNX, OROPHARYNX, LARYNGOPHARYNX." },
+  { id: 7, topic: "Nasopharynx", src: "Maini · Pharynx", q: "Functionally, the nasopharynx is:", opts: ["Entirely respiratory", "Entirely digestive", "Mixed respiratory and digestive", "Purely lymphatic"], a: 0, h1: "Air only.", h2: "It sits behind the nasal cavity.", exp: "The nasopharynx is ENTIRELY RESPIRATORY." },
+  { id: 8, topic: "Nasopharynx", src: "Maini · Pharynx", q: "Why can the nasopharynx not be collapsed or obliterated?", opts: ["It is filled with air under pressure", "Its walls are supported by bone almost all around", "It is lined by cartilage", "Its muscles are always contracted"], a: 1, h1: "Its walls are rigid.", h2: "Bone holds it open.", exp: "Its walls are supported by BONY structures almost all the way around, so it is rigid and cannot collapse." },
+  { id: 9, topic: "Nasopharynx", src: "Maini · Pharynx", q: "The roof of the nasopharynx is supported by the:", opts: ["Body of the mandible", "Hard palate", "Body of the sphenoid and basilar part of the occipital bone", "Cricoid cartilage"], a: 2, h1: "Two skull-base bones.", h2: "Sphenoid plus occipital.", exp: "The roof is supported by the BODY OF THE SPHENOID and the BASILAR PART OF THE OCCIPITAL bone." },
+  { id: 10, topic: "Nasopharynx", src: "Maini · Pharynx", q: "The posterior wall of the nasopharynx is supported by the:", opts: ["Anterior arch of the atlas (C1)", "Body of C3", "Dens of C2 only", "Basilar occipital bone"], a: 0, h1: "The first cervical vertebra.", h2: "Front arch of the atlas.", exp: "The posterior wall of the nasopharynx is supported by the ANTERIOR ARCH OF THE ATLAS (C1)." },
+  { id: 11, topic: "Nasopharynx", src: "Maini · Pharynx", q: "The floor of the nasopharynx is formed by the:", opts: ["Hard palate", "Sloping upper surface of the soft palate", "Dorsum of the tongue", "Epiglottis"], a: 1, h1: "It slopes.", h2: "Upper surface of the soft palate.", exp: "The floor is the SLOPING UPPER SURFACE OF THE SOFT PALATE." },
+  { id: 12, topic: "Nasopharynx", src: "Maini · Pharynx", q: "The pharyngeal isthmus is the opening between the:", opts: ["Tongue and epiglottis", "Two palatine tonsils", "Soft palate and the posterior pharyngeal wall", "Larynx and esophagus"], a: 2, h1: "It is in the floor of the nasopharynx.", h2: "Between soft palate and back wall.", exp: "The pharyngeal isthmus is the opening between the SOFT PALATE and the POSTERIOR PHARYNGEAL WALL." },
+  { id: 13, topic: "Nasopharynx", src: "Maini · Pharynx", q: "The auditory (pharyngotympanic) tube connects the nasopharynx to the:", opts: ["Middle ear (tympanic cavity)", "Frontal sinus", "Inner ear", "Mastoid air cells only"], a: 0, h1: "It equalizes ear pressure.", h2: "Opens on the anterior wall of the middle ear.", exp: "The auditory tube connects the nasopharynx to the MIDDLE EAR (tympanic cavity), opening on its anterior wall." },
+  { id: 14, topic: "Nasopharynx", src: "Maini · Pharynx", q: "The ridge raised by the cartilage of the auditory tube in the lateral nasopharyngeal wall is the:", opts: ["Salpingopharyngeal fold", "Torus tubarius", "Pharyngeal recess", "Palatopharyngeal arch"], a: 1, h1: "Torus means a ridge.", h2: "Tubarius, from the tube.", exp: "The cartilage of the auditory tube raises the TORUS TUBARIUS (tubal elevation)." },
+  { id: 15, topic: "Nasopharynx", src: "Maini · Pharynx", q: "The prefix 'salpingo-' (salpinx) means:", opts: ["Fold", "Muscle", "Tube", "Tonsil"], a: 2, h1: "Same root as salpingitis.", h2: "As in fallopian tube.", exp: "Salpingo (salpinx) means TUBE, the same root as salpingitis and the fallopian tube." },
+  { id: 16, topic: "Nasopharynx", src: "Maini · Pharynx", q: "The single tonsil in the roof of the nasopharynx is the:", opts: ["Palatine tonsil", "Lingual tonsil", "Tubal tonsil", "Pharyngeal tonsil"], a: 3, h1: "Its inflamed form is called adenoids.", h2: "In the roof.", exp: "The single tonsil in the roof of the nasopharynx is the PHARYNGEAL TONSIL." },
+  { id: 17, topic: "Nasopharynx", src: "Maini · Pharynx", q: "An inflamed, enlarged pharyngeal tonsil is clinically called:", opts: ["Adenoids", "Quinsy", "A ranula", "Tonsillar fossa"], a: 0, h1: "A common childhood word.", h2: "Ends in -oids.", exp: "An inflamed and enlarged pharyngeal tonsil is clinically called ADENOIDS." },
+  { id: 18, topic: "Nasopharynx", src: "Maini · Pharynx", q: "An enlarged pharyngeal tonsil in a child most directly causes:", opts: ["Difficulty hearing only", "Nasal obstruction, making the child a mouth-breather", "Loss of taste", "A hoarse voice"], a: 1, h1: "It sits in the roof, blocking the back of the nose.", h2: "The child breathes through the mouth.", exp: "It blocks the posterior nasal openings, causing NASAL OBSTRUCTION and turning the child into a MOUTH-BREATHER." },
+  { id: 19, topic: "Nasopharynx", src: "Maini · Pharynx", q: "All of the following are features of the LATERAL wall of the nasopharynx EXCEPT the:", opts: ["Opening of the auditory tube", "Salpingopharyngeal fold", "Pharyngeal tubercle", "Pharyngeal recess"], a: 2, h1: "Three belong; one is a muscle insertion.", h2: "The tubercle is where the superior constrictor inserts.", exp: "The PHARYNGEAL TUBERCLE is a superior-constrictor insertion on the occiput, not a lateral-wall feature. The others are all lateral-wall features." },
+  { id: 20, topic: "Oropharynx", src: "Maini · Pharynx", q: "The oropharynx represents which entrance of the pharyngeal chamber?", opts: ["Respiratory entrance", "Digestive entrance", "Auditory entrance", "Nasal entrance"], a: 1, h1: "Food enters here.", h2: "It is behind the mouth.", exp: "The oropharynx is the DIGESTIVE ENTRANCE of the chamber." },
+  { id: 21, topic: "Oropharynx", src: "Maini · Pharynx", q: "The oropharynx extends from the soft palate down to the:", opts: ["Lower border of the cricoid", "Upper (superior) border of the epiglottis", "Hyoid bone", "Vocal folds"], a: 1, h1: "The top of the epiglottis.", h2: "Superior border of the epiglottis.", exp: "The oropharynx runs from the soft palate to the UPPER BORDER OF THE EPIGLOTTIS." },
+  { id: 22, topic: "Oropharynx", src: "Maini · Pharynx", q: "The floor of the oropharynx is formed by the:", opts: ["Anterior two-thirds of the tongue", "Hard palate", "Posterior one-third of the tongue", "Soft palate"], a: 2, h1: "The back of the tongue.", h2: "Posterior third.", exp: "The floor is the POSTERIOR ONE-THIRD OF THE TONGUE and the interval between tongue and epiglottis." },
+  { id: 23, topic: "Oropharynx", src: "Maini · Pharynx", q: "The single lingual tonsil is attached to the:", opts: ["Undersurface of the soft palate", "Root (posterior part) of the tongue", "Epiglottis", "Palatoglossal fold"], a: 1, h1: "On the tongue.", h2: "Its root, posteriorly.", exp: "The single LINGUAL TONSIL is attached to the ROOT of the tongue." },
+  { id: 24, topic: "Oropharynx", src: "Maini · Pharynx", q: "The valleculae are the:", opts: ["Spaces between the glossoepiglottic folds", "Tonsillar crypts", "Openings of the auditory tubes", "Folds over the arytenoids"], a: 0, h1: "Between tongue and epiglottis.", h2: "Pockets between the folds.", exp: "The VALLECULAE are the right and left spaces between the glossoepiglottic folds." },
+  { id: 25, topic: "Oropharynx", src: "Maini · Pharynx", q: "How many glossoepiglottic folds connect the tongue to the epiglottis?", opts: ["One", "Two", "Three (one median, two lateral)", "Four"], a: 2, h1: "A midline one plus a pair.", h2: "One median, two lateral.", exp: "There are THREE glossoepiglottic folds: one median and two lateral." },
+  { id: 26, topic: "Oropharynx", src: "Maini · Pharynx", q: "The palatine tonsil sits in the tonsillar fossa, between the:", opts: ["Palatoglossal and palatopharyngeal folds", "Two glossoepiglottic folds", "Torus tubarius and pharyngeal recess", "Epiglottis and tongue"], a: 0, h1: "Two lateral-wall folds.", h2: "Palatoglossal in front, palatopharyngeal behind.", exp: "The PALATINE TONSIL lies in the tonsillar fossa between the PALATOGLOSSAL and PALATOPHARYNGEAL folds." },
+  { id: 27, topic: "Oropharynx", src: "Maini · Pharynx", q: "The posterior wall of the oropharynx is supported by which vertebral levels?", opts: ["Anterior arch of the atlas", "Body of C2, upper body of C3, and the disc between", "Bodies of C3 to C6", "Basilar occipital bone"], a: 1, h1: "Second and third cervical.", h2: "C2 and upper C3.", exp: "The posterior wall of the oropharynx is supported by the body of C2, the upper body of C3, and the C2 to C3 disc." },
+  { id: 28, topic: "Laryngopharynx", src: "Maini · Pharynx", q: "The laryngopharynx lies:", opts: ["Anterior to the nasal cavity", "Behind the laryngeal inlet and posterior wall of the larynx", "Above the soft palate", "Inside the larynx"], a: 1, h1: "It is behind the larynx.", h2: "A slit behind the laryngeal inlet.", exp: "The laryngopharynx lies BEHIND the laryngeal inlet and the posterior wall of the larynx." },
+  { id: 29, topic: "Laryngopharynx", src: "Maini · Pharynx", q: "The laryngopharynx communicates superiorly with the oropharynx and inferiorly with the:", opts: ["Trachea", "Nasal cavity", "Esophagus", "Middle ear"], a: 2, h1: "The digestive tube below.", h2: "Food passage.", exp: "It communicates with the lumen of the OROPHARYNX above and the lumen of the ESOPHAGUS below." },
+  { id: 30, topic: "Laryngopharynx", src: "Maini · Pharynx", q: "The piriform fossa is best described as a:", opts: ["Deep bony canal", "Pear-shaped, shallow fossa on each side of the laryngeal inlet", "Single midline pouch", "Muscular sphincter"], a: 1, h1: "Its name means pear-shaped.", h2: "A shallow depression, one each side.", exp: "The piriform fossa is a PEAR-SHAPED, SHALLOW fossa on each side of the laryngeal inlet." },
+  { id: 31, topic: "Laryngopharynx", src: "Maini · Pharynx", q: "The piriform fossa is clinically important because:", opts: ["It secretes saliva", "A sharp foreign body such as a fishbone can lodge there", "It is where tonsils form", "It houses the vocal folds"], a: 1, h1: "It is shallow.", h2: "Sharp objects get stuck.", exp: "Because it is shallow, sharp foreign bodies such as a FISHBONE can lodge in the piriform fossa." },
+  { id: 32, topic: "Laryngopharynx", src: "Maini · Pharynx", q: "Which nerve lies just deep to the mucosa of the piriform fossa?", opts: ["Recurrent laryngeal nerve", "Glossopharyngeal nerve", "Internal laryngeal nerve", "Hypoglossal nerve"], a: 2, h1: "Sensory to the upper larynx.", h2: "The internal branch of the superior laryngeal.", exp: "The INTERNAL LARYNGEAL NERVE lies just deep to the mucosa of the piriform fossa." },
+  { id: 33, topic: "Laryngopharynx", src: "Maini · Pharynx", q: "Injury to the internal laryngeal nerve in the piriform fossa causes:", opts: ["Loss of the gag reflex, with risk of aspiration", "Loss of tongue movement", "Complete voice loss", "Deafness"], a: 0, h1: "It is sensory above the vocal folds.", h2: "The gag reflex depends on it.", exp: "Injury loses the GAG REFLEX (sensation above the vocal folds), risking ASPIRATION and aspiration pneumonitis." },
+  { id: 34, topic: "Laryngopharynx", src: "Maini · Pharynx", q: "The lateral wall of the laryngopharynx, which Maini likens to 'armor,' is supported by the:", opts: ["Thyroid cartilage and thyrohyoid membrane", "Hyoid bone", "Cricoid cartilage only", "Sphenoid bone"], a: 0, h1: "The shield of the larynx.", h2: "Thyroid cartilage plus its membrane.", exp: "The lateral wall is supported by the THYROID CARTILAGE and THYROHYOID MEMBRANE, which Maini calls armor." },
+  { id: 35, topic: "Wall layers", src: "Maini · Pharynx", q: "The pharynx is lined by which epithelium?", opts: ["Simple columnar", "Stratified squamous, non-keratinized", "Keratinized stratified squamous", "Pseudostratified ciliated columnar"], a: 1, h1: "Multi-layered, no keratin.", h2: "Handles the bolus without keratin.", exp: "The pharynx is lined by STRATIFIED SQUAMOUS, NON-KERATINIZED epithelium." },
+  { id: 36, topic: "Wall layers", src: "Maini · Pharynx", q: "Why is the pharyngeal lining NON-keratinized?", opts: ["Keratin is found only in skin", "It never touches food", "It is a single cell layer", "It is constantly frozen"], a: 0, h1: "Where do you find keratin?", h2: "Only in skin.", exp: "Keratin is found only in SKIN; mucous membranes lack it, so the pharyngeal lining is non-keratinized." },
+  { id: 37, topic: "Wall layers", src: "Maini · Pharynx", q: "The strong fibrous submucosal sheet of the pharynx is the:", opts: ["Buccopharyngeal fascia", "Pharyngobasilar fascia", "Pretracheal fascia", "Palatine aponeurosis"], a: 1, h1: "It blends with the skull-base periosteum.", h2: "Basilar, from the skull base.", exp: "The submucosa is the PHARYNGOBASILAR FASCIA, which blends with the periosteum of the skull base." },
+  { id: 38, topic: "Wall layers", src: "Maini · Pharynx", q: "From internal to external, the pharyngeal wall layers are:", opts: ["Mucosa, pharyngobasilar fascia, muscular layer, buccopharyngeal fascia", "Muscular layer, mucosa, buccopharyngeal fascia, pharyngobasilar fascia", "Buccopharyngeal fascia, muscle, mucosa, pharyngobasilar fascia", "Mucosa, muscle, pharyngobasilar fascia, buccopharyngeal fascia"], a: 0, h1: "Mucosa is innermost.", h2: "Bucco is the outer coat.", exp: "Inside-out: MUCOSA, PHARYNGOBASILAR FASCIA, MUSCULAR layer, BUCCOPHARYNGEAL FASCIA." },
+  { id: 39, topic: "Wall layers", src: "Maini · Pharynx", q: "The main functional role of the retropharyngeal space is to:", opts: ["Store lymph", "Let the pharynx glide up and down during swallowing", "Anchor the tongue", "Produce mucus"], a: 1, h1: "It is loose areolar tissue.", h2: "It allows movement on the spine.", exp: "The retropharyngeal space lets the pharynx GLIDE up and down during swallowing." },
+  { id: 40, topic: "Wall layers", src: "Maini · Pharynx", q: "Obliteration of the retropharyngeal space by fibrosis or tumor leads to:", opts: ["Deafness", "Aerophagia", "Dysphagia, as the pharynx becomes fixed to the spine", "Loss of smell"], a: 2, h1: "The pharynx can no longer glide.", h2: "Difficult swallowing.", exp: "Obliteration fixes the pharynx to the spine, causing DYSPHAGIA (difficult swallowing)." },
+  { id: 41, topic: "Constrictors", src: "Maini · Pharynx", q: "The three constrictor muscles form which layer of the pharyngeal wall?", opts: ["The inner longitudinal layer", "The outer circular layer", "The submucosa", "The mucosa"], a: 1, h1: "Their fibers run circularly.", h2: "Outer and circular.", exp: "The three constrictors form the OUTER CIRCULAR layer of the pharyngeal musculature." },
+  { id: 42, topic: "Constrictors", src: "Maini · Pharynx", q: "The superior constrictor inserts onto the:", opts: ["Pharyngeal raphe", "Pharyngeal tubercle", "Hyoid bone", "Thyroid cartilage"], a: 1, h1: "On the occipital bone.", h2: "A midline tubercle at the skull base.", exp: "The superior constrictor inserts onto the PHARYNGEAL TUBERCLE." },
+  { id: 43, topic: "Constrictors", src: "Maini · Pharynx", q: "The pharyngeal tubercle is located on the:", opts: ["Basilar part of the occipital bone, just anterior to the foramen magnum", "Body of the sphenoid", "Anterior arch of the atlas", "Greater horn of the hyoid"], a: 0, h1: "Near the foramen magnum.", h2: "Center of the basilar occipital.", exp: "The pharyngeal tubercle sits in the center of the BASILAR OCCIPITAL bone, just anterior to the foramen magnum." },
+  { id: 44, topic: "Constrictors", src: "Maini · Pharynx", q: "On the pterygomandibular raphe, which muscle lies anterior to the superior constrictor?", opts: ["Masseter", "Buccinator", "Mylohyoid", "Temporalis"], a: 1, h1: "A muscle of facial expression.", h2: "The cheek muscle.", exp: "The BUCCINATOR lies anterior to the superior constrictor on the pterygomandibular raphe." },
+  { id: 45, topic: "Constrictors", src: "Maini · Pharynx", q: "The middle constrictor originates from the:", opts: ["Oblique line of the thyroid cartilage", "Styloid process", "Stylohyoid ligament and horns of the hyoid bone", "Cricoid cartilage"], a: 2, h1: "From the hyoid region.", h2: "Stylohyoid ligament plus hyoid horns.", exp: "The middle constrictor arises from the STYLOHYOID LIGAMENT and the greater and lesser horns of the hyoid bone." },
+  { id: 46, topic: "Constrictors", src: "Maini · Pharynx", q: "The two named parts of the inferior constrictor are:", opts: ["Thyropharyngeus and cricopharyngeus", "Salpingopharyngeus and stylopharyngeus", "Superior and middle", "Thyrohyoid and sternothyroid"], a: 0, h1: "Named for the cartilages they arise from.", h2: "Thyro- (upper) and crico- (lower).", exp: "The inferior constrictor has an upper THYROPHARYNGEUS and a lower CRICOPHARYNGEUS." },
+  { id: 47, topic: "Constrictors", src: "Maini · Pharynx", q: "The cricopharyngeus encircles the pharyngoesophageal junction and acts as the:", opts: ["Lower esophageal sphincter", "Upper esophageal sphincter", "Palatopharyngeal sphincter", "Laryngeal inlet"], a: 1, h1: "It keeps the esophagus closed at rest.", h2: "Upper end of the esophagus.", exp: "Cricopharyngeus is the UPPER ESOPHAGEAL SPHINCTER, keeping the esophagus closed except during swallowing." },
+  { id: 48, topic: "Constrictors", src: "Maini · Pharynx", q: "Which muscle is NOT attached to the oblique line of the thyroid cartilage?", opts: ["Inferior constrictor", "Sternothyroid", "Thyrohyoid", "Sternohyoid"], a: 3, h1: "Three are attached, one is not.", h2: "The sterno-to-hyoid one.", exp: "The inferior constrictor, sternothyroid, and thyrohyoid attach to the oblique line; STERNOHYOID does NOT. Maini flags this as a good exam question." },
+  { id: 49, topic: "Constrictors", src: "Maini · Pharynx", q: "Loss of cricopharyngeus (UES) tone in old age produces aerophagia, meaning the patient:", opts: ["Swallows air and belches frequently", "Cannot swallow solids", "Loses their voice", "Aspirates every meal"], a: 0, h1: "The sphincter no longer stays shut.", h2: "Air enters the esophagus.", exp: "A lax UES lets the patient SWALLOW AIR, producing frequent belching (aerophagia)." },
+  { id: 50, topic: "Longitudinal", src: "Maini · Pharynx", q: "The three longitudinal (inner) muscles of the pharynx are:", opts: ["The three constrictors", "Palatopharyngeus, salpingopharyngeus, stylopharyngeus", "Buccinator, mylohyoid, styloglossus", "Thyrohyoid, sternothyroid, sternohyoid"], a: 1, h1: "They end in -pharyngeus.", h2: "Palato-, salpingo-, stylo-.", exp: "The inner longitudinal muscles are PALATOPHARYNGEUS, SALPINGOPHARYNGEUS, and STYLOPHARYNGEUS." },
+  { id: 51, topic: "Longitudinal", src: "Maini · Pharynx", q: "Compared with the constrictors, the longitudinal muscles mainly:", opts: ["Close the auditory tube", "Elevate and shorten the pharynx and larynx", "Rotate the head", "Produce the voice"], a: 1, h1: "Their fibers run lengthwise.", h2: "They lift the pharynx.", exp: "The longitudinal muscles ELEVATE and SHORTEN the pharynx and larynx during swallowing." },
+  { id: 52, topic: "Longitudinal", src: "Maini · Pharynx", q: "Salpingopharyngeus originates from the:", opts: ["Cartilaginous part of the auditory tube", "Styloid process", "Hard palate", "Hyoid bone"], a: 0, h1: "Salpingo means tube.", h2: "From the auditory tube.", exp: "Salpingopharyngeus arises from the CARTILAGINOUS PART OF THE AUDITORY TUBE." },
+  { id: 53, topic: "Innervation", src: "Maini · Pharynx", q: "Most pharyngeal muscles develop from which pharyngeal arches?", opts: ["1st and 2nd", "2nd and 3rd", "4th and 6th", "5th and 7th"], a: 2, h1: "The vagus arches.", h2: "Four and six.", exp: "Most pharyngeal muscles develop from the 4th and 6th pharyngeal arches." },
+  { id: 54, topic: "Innervation", src: "Maini · Pharynx", q: "Because they arise from the 4th and 6th arches, most pharyngeal muscles are supplied by the:", opts: ["Glossopharyngeal nerve", "Vagus nerve (CN X)", "Hypoglossal nerve", "Facial nerve"], a: 1, h1: "Cranial nerve ten.", h2: "Its pharyngeal branch.", exp: "They are supplied by the VAGUS NERVE (CN X), through its pharyngeal branch." },
+  { id: 55, topic: "Innervation", src: "Maini · Pharynx", q: "Which single pharyngeal muscle is the exception, supplied by the glossopharyngeal nerve (CN IX)?", opts: ["Superior constrictor", "Palatopharyngeus", "Stylopharyngeus", "Salpingopharyngeus"], a: 2, h1: "So stylish it has its own nerve.", h2: "From the 3rd arch.", exp: "STYLOPHARYNGEUS is the exception, supplied by the GLOSSOPHARYNGEAL nerve (CN IX) from the 3rd arch." },
+  { id: 56, topic: "Tonsils", src: "Maini · Pharynx", q: "Which four named tonsils guard the openings into the pharynx?", opts: ["Pharyngeal, tubal, palatine, lingual", "Palatine, lingual, sublingual, submandibular", "Pharyngeal, palatine, laryngeal, nasal", "Tubal, palatine, thyroid, cricoid"], a: 0, h1: "Waldeyer's ring.", h2: "Pharyngeal, tubal, palatine, lingual.", exp: "The lymphoid ring is the PHARYNGEAL, TUBAL, PALATINE, and LINGUAL tonsils." },
+  { id: 57, topic: "Tonsils", src: "Maini · Pharynx", q: "Which two tonsils are single (unpaired)?", opts: ["The palatine and tubal tonsils", "The pharyngeal and lingual tonsils", "The two palatine tonsils", "The tubal tonsils"], a: 1, h1: "One in the roof, one on the tongue.", h2: "Pharyngeal and lingual.", exp: "The PHARYNGEAL and LINGUAL tonsils are single (unpaired); the palatine and tubal are paired." },
+  { id: 58, topic: "Clinical", src: "Maini · Pharynx", q: "A young child who is a chronic mouth-breather with a flat face and recessed jaw most likely has:", opts: ["Enlarged adenoids (pharyngeal tonsil)", "A deviated septum only", "A cleft palate", "Tonsillitis of the lingual tonsil"], a: 0, h1: "Adenoid facies.", h2: "The roof tonsil is enlarged.", exp: "This is adenoid facies from ENLARGED ADENOIDS (the pharyngeal tonsil)." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.voicenote{font-size:12.5px;color:var(--ink-soft);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:9px 13px;margin-top:12px;max-width:720px}
+.voicenote b{color:var(--accent-deep)}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.coachbar{position:sticky;top:49px;z-index:15;display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 16px;box-shadow:0 12px 28px -22px rgba(124,58,237,.45)}
+.coachbar .cbtn{border:none;font:inherit;font-weight:700;font-size:13.5px;padding:9px 16px;border-radius:10px;cursor:pointer;transition:.15s}
+.cbtn.play{background:var(--accent);color:#fff;box-shadow:0 8px 18px -8px var(--accent)}
+.cbtn.play:hover{background:var(--accent-mid)}
+.cbtn.ghost2{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.cbtn.ghost2:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.cbtn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.cbctl{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--ink-soft)}
+.cbctl input[type=range]{accent-color:var(--accent);width:104px}
+.cbctl select{font:inherit;font-size:12.5px;border:1px solid var(--line);border-radius:8px;padding:5px 8px;color:var(--ink);background:#fff;max-width:172px}
+.cbstate{font-size:12px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:5px 11px;border-radius:999px;margin-left:auto}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);transition:box-shadow .2s,outline .2s}
+.obj.speaking{outline:2px solid var(--accent);outline-offset:2px;box-shadow:0 0 0 5px var(--accent-tint),0 12px 28px -20px rgba(124,58,237,.5)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:180px}
+.obj-play{flex:0 0 auto;border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:11px;font-weight:700;padding:4px 10px;border-radius:7px;cursor:pointer;transition:.14s}
+.obj-play:hover{background:var(--accent-wash)}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"\\2691 Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 12 · The Pharynx · Dr. Maini</span>
+          <h1 className="title serif">Module 12 — the <em>Pharynx</em></h1>
+          <p className="subtitle">A voiced, hands-free cram for Maini&apos;s pharynx lecture — the three parts and their boundaries, the nasopharynx and adenoids, the oropharynx, the laryngopharynx and piriform fossa, the wall layers, the constrictor and longitudinal muscles with their innervation, and the tonsil ring — in her order, with a drill in her style and her own analogies. Press Play and it reads the essentials aloud.</p>
+          <p className="voicenote">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+          <div className="pill-row">
+            <span className="pill-date">🗣️ The Pharynx · Lecture 27 (Dr. Maini)</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA 0202 lecture — Lecture 27, The Pharynx — and grounded in the module&apos;s audited Everything-MC bank. Questions are original, in her style, source-tagged per item. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  const [rate, setRate] = useState(1);
+  const [voiceName, setVoiceName] = useState("");
+  const [voices, setVoices] = useState([]);
+  const [curLine, setCurLine] = useState(-1);
+  const [status, setStatus] = useState("idle"); // idle | playing | paused
+  const idxRef = useRef(-1);
+  const rateRef = useRef(1);
+  const voiceRef = useRef(null);
+  const cardRefs = useRef([]);
+  const stoppedRef = useRef(true);
+
+  useEffect(() => { rateRef.current = rate; }, [rate]);
+
+  const lines = useMemo(() => {
+    const out = [];
+    cram.forEach((c, ci) => {
+      out.push({ card: ci, text: `Section ${c.n}. ${c.title}.` });
+      c.facts.forEach((f) => out.push({ card: ci, text: f }));
+      out.push({ card: ci, text: `Maini flag. ${c.flag}` });
+    });
+    return out;
+  }, []);
+
+  useEffect(() => {
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    const load = () => {
+      const vs = synth.getVoices().filter((v) => /en/i.test(v.lang));
+      if (!vs.length) return;
+      setVoices(vs);
+      setVoiceName((prev) => {
+        if (prev) return prev;
+        const pref = ["Ava", "Emma", "Andrew", "Natural", "Aria", "Jenny", "Google US English", "Samantha"];
+        for (const p of pref) { const hit = vs.find((v) => v.name.includes(p)); if (hit) return hit.name; }
+        return vs[0].name;
+      });
+    };
+    load();
+    synth.addEventListener("voiceschanged", load);
+    return () => { synth.removeEventListener("voiceschanged", load); };
+  }, []);
+
+  useEffect(() => { voiceRef.current = voices.find((v) => v.name === voiceName) || null; }, [voiceName, voices]);
+
+  useEffect(() => () => { stoppedRef.current = true; try { window.speechSynthesis.cancel(); } catch (e) {} }, []);
+
+  const speakFrom = (i) => {
+    const synth = window.speechSynthesis;
+    if (!synth) return;
+    if (i >= lines.length) { stoppedRef.current = true; setStatus("idle"); setCurLine(-1); idxRef.current = -1; return; }
+    idxRef.current = i;
+    setCurLine(i);
+    const card = lines[i].card;
+    const el = cardRefs.current[card];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    const u = new SpeechSynthesisUtterance(lines[i].text);
+    u.rate = rateRef.current;
+    if (voiceRef.current) { u.voice = voiceRef.current; u.lang = voiceRef.current.lang; }
+    u.onend = () => { if (!stoppedRef.current) speakFrom(i + 1); };
+    synth.speak(u);
+  };
+
+  const play = (from) => {
+    const synth = window.speechSynthesis;
+    if (!synth) { alert("Your browser does not support speech. Try Microsoft Edge or Chrome."); return; }
+    synth.cancel();
+    stoppedRef.current = false;
+    setStatus("playing");
+    const start = from != null ? from : (idxRef.current >= 0 ? idxRef.current : 0);
+    speakFrom(start);
+  };
+  const pause = () => { try { window.speechSynthesis.pause(); setStatus("paused"); } catch (e) {} };
+  const resume = () => { try { window.speechSynthesis.resume(); setStatus("playing"); } catch (e) {} };
+  const stop = () => { stoppedRef.current = true; try { window.speechSynthesis.cancel(); } catch (e) {} setStatus("idle"); setCurLine(-1); idxRef.current = -1; };
+  const playCard = (ci) => { const s = lines.findIndex((l) => l.card === ci); if (s >= 0) play(s); };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s pharynx essentials, in her order</div>
+        <p>Overview and extent, then the nasopharynx and adenoids, the oropharynx, the laryngopharynx and piriform fossa, the wall layers, the constrictor and longitudinal muscles with their innervation, and the tonsil ring. Press ▶ Play and it reads the whole thing to you, hands-free. The ⚑ Maini flags are the high-yield hooks.</p>
+      </div>
+
+      <div className="coachbar">
+        {status === "playing" ? (
+          <>
+            <button className="cbtn ghost2" onClick={pause}>⏸ Pause</button>
+            <button className="cbtn ghost2" onClick={stop}>⏹ Stop</button>
+          </>
+        ) : status === "paused" ? (
+          <>
+            <button className="cbtn play" onClick={resume}>▶ Resume</button>
+            <button className="cbtn ghost2" onClick={stop}>⏹ Stop</button>
+          </>
+        ) : (
+          <button className="cbtn play" onClick={() => play(0)}>▶ Play all</button>
+        )}
+        <label className="cbctl">Speed
+          <input type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => setRate(parseFloat(e.target.value))} />
+          <span>{rate.toFixed(1)}x</span>
+        </label>
+        <label className="cbctl">Voice
+          <select value={voiceName} onChange={(e) => setVoiceName(e.target.value)}>
+            {voices.length === 0 && <option value="">Default</option>}
+            {voices.map((v) => <option key={v.name} value={v.name}>{v.name}</option>)}
+          </select>
+        </label>
+        {status !== "idle" && <span className="cbstate">{status === "playing" ? "🔊 Reading" : "⏸ Paused"}{curLine >= 0 ? ` · ${curLine + 1}/${lines.length}` : ""}</span>}
+      </div>
+
+      {cram.map((c, ci) => (
+        <div className={`obj ${curLine >= 0 && lines[curLine] && lines[curLine].card === ci ? "speaking" : ""}`} key={c.n} ref={(el) => (cardRefs.current[ci] = el)}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <button className="obj-play" onClick={() => playCard(ci)}>▶ Read</button>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Maini&apos;s framework and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Dr. Maini&apos;s own mnemonics, analogies, and tricks pulled straight from the pharynx lecture — the retention hooks to lean on when a detail won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function shuffleQ(q) {
+  const correct = q.opts[q.a];
+  const opts = q.opts.slice();
+  for (let i = opts.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = opts[i]; opts[i] = opts[j]; opts[j] = t; }
+  return { ...q, opts, a: opts.indexOf(correct) };
+}
+
+function Drill({ bank }) {
+  const deck = useMemo(() => bank.map(shuffleQ), [bank]);
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, deck.length - 1));
+  const q = deck[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = deck.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, deck]
+  );
+
+  if (!deck.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {deck.length} questions across the pharynx</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {deck.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {deck.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(deck.length - 1, safeIdx + 1))} disabled={safeIdx >= deck.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 Gross Anatomy, running a review of THE PHARYNX (Lecture 27). Teach ONLY from this content; do not invent structures, attachments, nerves, or vertebral levels. Warm and direct; you call students "guys," say "right?", "okay?", and "make sense?", love a quick analogy, and push students to reason it out. Keep answers tight (3-6 sentences) and quiz the student back.
+
+BIG PICTURE: the pharynx is a common chamber for the respiratory AND digestive tracts. Funnel-shaped, about 12 cm, from the base of the skull to the lower border of the cricoid cartilage (C6), then continuous with the esophagus. It is C-shaped, not a complete tube - essentially no anterior wall, because it opens into the nasal cavity, oral cavity, and larynx (your "three rooms, one corridor" analogy). Three parts top to bottom: nasopharynx, oropharynx, laryngopharynx.
+
+NASOPHARYNX (entirely respiratory, rigid because bone supports it): base of skull to the soft palate. Roof = body of sphenoid + basilar occipital; floor = sloping upper surface of the soft palate; posterior wall = anterior arch of the atlas (C1). Pharyngeal isthmus = opening between soft palate and posterior wall. Lateral wall features: opening of the auditory (pharyngotympanic) tube, torus tubarius, salpingopharyngeal fold, and pharyngeal recess (the pharyngeal tubercle is NOT here - it is a superior-constrictor insertion). Auditory tube goes to the anterior wall of the middle ear. Salpingo means tube. Pharyngeal tonsil (single) sits in the roof; inflamed it is called adenoids -> mouth-breather -> adenoid facies (flat face, small recessed jaw, open mouth); early adenoidectomy works because facial bones grow until puberty.
+
+OROPHARYNX (the digestive entrance): soft palate to the upper border of the epiglottis. Roof = undersurface of soft palate + pharyngeal isthmus; floor = posterior one-third of the tongue + interval to epiglottis; posterior wall = body of C2, upper C3, and the disc between. Three glossoepiglottic folds (one median, two lateral) with the valleculae between them; single lingual tonsil on the tongue root. Lateral wall folds: palatoglossal and palatopharyngeal, with the palatine tonsil in the tonsillar fossa between them.
+
+LARYNGOPHARYNX: behind the laryngeal inlet and posterior wall of the larynx, from upper border of epiglottis to lower border of cricoid (C6); communicates with oropharynx above and esophagus below. Anterior wall = laryngeal inlet + mucosa over the back of the larynx; posterior wall support = C3-C6; lateral wall = thyroid cartilage + thyrohyoid membrane (the "armor"). PIRIFORM FOSSA = pear-shaped shallow depression each side of the laryngeal inlet where a fishbone lodges; the internal laryngeal nerve runs just deep to its mucosa (sensory above the vocal folds), so injury loses the gag reflex and risks aspiration / aspiration pneumonitis.
+
+WALL LAYERS: lining is stratified squamous, NON-keratinized (stratified to resist bolus abrasion; non-keratinized because keratin is only in skin). Inside-out: mucosa, pharyngobasilar fascia (submucosa, blends with skull-base periosteum), muscular layer (outer circular constrictors + inner longitudinal), buccopharyngeal fascia. Retropharyngeal space (loose areolar tissue) lets the pharynx glide during swallowing; obliteration causes dysphagia.
+
+CONSTRICTORS (outer circular, 3): superior (from pterygoid hamulus, pterygomandibular raphe, mylohyoid line, side of tongue) inserts on the pharyngeal tubercle - buccinator lies anterior on the pterygomandibular raphe. Middle (from stylohyoid ligament + horns of hyoid) inserts on the midline pharyngeal raphe. Inferior (from oblique line of thyroid + cricoid) has two parts: thyropharyngeus (forms a raphe) and cricopharyngeus (no raphe = the upper esophageal sphincter, keeps the esophagus closed except when swallowing; lax with age -> aerophagia, belching). Three muscles on the oblique line of thyroid: inferior constrictor, sternothyroid, thyrohyoid (NOT sternohyoid) - your favorite "which is NOT attached" question.
+
+LONGITUDINAL (inner, 3): palatopharyngeus (hard palate + palatine aponeurosis, forms the palatopharyngeal arch), salpingopharyngeus (cartilage of the auditory tube), stylopharyngeus (styloid process). They elevate/shorten the pharynx and larynx. Palatopharyngeus and stylopharyngeus insert on the thyroid cartilage.
+
+INNERVATION: most pharyngeal muscles come from the 4th and 6th arches, so they are vagus (CN X) via the pharyngeal branch. The ONE exception is stylopharyngeus - glossopharyngeal (CN IX), 3rd arch. Your mnemonic: stylopharyngeus is "so stylish it has its own nerve."
+
+TONSIL RING (Waldeyer): pharyngeal, tubal, palatine, lingual tonsils; pharyngeal and lingual are single. CLINICAL: adenoids/adenoid facies, aerophagia (lax UES), aspiration pneumonitis (lost gag reflex), dysphagia (obliterated retropharyngeal space).
+
+Open by offering to drill the three parts and their boundaries, the nasopharynx lateral-wall features, the piriform fossa and internal laryngeal nerve, the constrictor and longitudinal muscles, or the innervation exception. When the student is wrong, name the structure and walk them back through it.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys, the pharynx. Two things to lock in first: the pharynx is a common chamber for BOTH air and food, running from the base of the skull to the lower border of the cricoid at C6, right? And it is C-shaped, not a complete tube, because it opens into three rooms - the nasal cavity, the oral cavity, and the larynx. Where do you want to start: the three parts and their boundaries, the nasopharynx lateral wall, the piriform fossa and internal laryngeal nerve, the constrictor and longitudinal muscles, or the innervation exception?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the three parts and their boundaries",
+    "Nasopharynx lateral-wall features (and the tubercle trap)",
+    "Piriform fossa and the internal laryngeal nerve",
+    "The constrictor muscles and the inferior constrictor's two parts",
+    "Which muscle is the innervation exception, and why?",
+    "The wall layers, inside to outside",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her pharynx lecture. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 &middot; Face &amp; Scalp Mnemonics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.pending { display: inline-block; margin: 0 auto 8px; padding: 2px 10px; background: #3a2a0a; color: #fbbf24; border: 1px solid #b45309; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+.pending-wrap { text-align: center; margin-bottom: 8px; }
+.voice-banner { max-width: 680px; margin: 8px auto 0; padding: 8px 14px; background: #0f2a1a; border: 1px solid #1e5f3a; border-radius: 8px; color: #86efac; font-size: 12px; line-height: 1.5; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin: 14px 0 20px; font-style: italic; font-size: 0.95rem; }
+.scope-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.35); border-radius: 8px; padding: 10px 14px; margin: 0 auto 16px; max-width: 880px; color: #a7f3d0; font-size: 0.85rem; line-height: 1.55; }
+.scope-note b { color: #34d399; }
+.howto { background: #131c2e; border: 1px solid #1e293b; border-radius: 8px; padding: 10px 14px; margin: 0 auto 22px; max-width: 880px; color: #cbd5e1; font-size: 0.82rem; line-height: 1.6; }
+.howto .m-chip { display: inline-block; background: #0a1f16; border-left: 3px solid #34d399; padding: 1px 8px; border-radius: 0 4px 4px 0; color: #6ee7b7; font-weight: 700; font-size: 0.78rem; }
+.howto .l-chip { display: inline-block; background: #0b1220; border-left: 3px solid #f59e0b; padding: 1px 8px; border-radius: 0 4px 4px 0; color: #fde68a; font-weight: 700; font-size: 0.78rem; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #f59e0b; }
+.card.pathway { border-left-color: #60a5fa; }
+.card.nerve { border-left-color: #a78bfa; }
+.card.muscle { border-left-color: #34d399; }
+.card.rule { border-left-color: #ef4444; }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 700; }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.pathway .hook { color: #93c5fd; }
+.card.nerve .hook { color: #c4b5fd; }
+.card.muscle .hook { color: #6ee7b7; }
+.card.rule .hook { color: #fca5a5; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .maini { margin-top: 8px; padding: 9px 11px; background: #0a1f16; border-left: 3px solid #34d399; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card .maini .who { display: block; font-size: 0.7rem; color: #6ee7b7; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700; margin-bottom: 3px; }
+.card .maini .said { font-style: italic; color: #d1fae5; font-size: 0.88rem; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #f59e0b; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card.pathway .like { border-left-color: #60a5fa; }
+.card.nerve .like { border-left-color: #a78bfa; }
+.card.muscle .like { border-left-color: #34d399; }
+.card.rule .like { border-left-color: #ef4444; }
+.card .like b { color: #fde68a; }
+.card .like .illus-tag { display: inline-block; font-size: 0.68rem; color: #fbbf24; background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.4); border-radius: 4px; padding: 0 6px; margin-right: 5px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 700; vertical-align: middle; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 880px; color: #94a3b8; font-size: 0.78rem; line-height: 1.7; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.legend span { margin: 0 8px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card .fact { color: #222; } .card .like, .card .maini { background: #fff; color: #000; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 GA 0202 &middot; Face &amp; Scalp Mnemonics</h1>
+<div class="pending-wrap"><span class="pending">PENDING REVIEW</span></div>
+<div class="voice-banner">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s hardest Face &amp; Scalp lists &mdash; layers, muscle groups, nerve branches &amp; secretomotor chains.</p>
+<div class="scope-note">
+  <b>Honest framing:</b> Where Dr. Maini gave a mnemonic <b>in the lecture</b>, it is <b>quoted in a green box</b> as her own words. Everything else is a <b>clearly-labelled illustrative hook</b> &mdash; my study aid, never hers. Every <b>fact</b> is verifiable in this module&rsquo;s audited <b>Everything-MC bank</b> and in Dr. Maini&rsquo;s <b>Face &amp; Scalp (Lectures 7&ndash;8)</b> transcripts. No new facts are introduced.
+</div>
+<div class="howto">
+  Two kinds of box appear on the cards: <span class="m-chip">🎙️ Dr. Maini&rsquo;s own words</span> = a mnemonic or hook she actually said in class (quoted verbatim). <span class="l-chip">💡 Think of it like</span> = my illustrative analogy; when the whole hook is mine (not hers) it carries an <b>ILLUSTRATIVE</b> tag.
+</div>
+<div class="legend">
+  <span><span class="swatch" style="background:#f59e0b;"></span>anatomy / list</span>
+  <span><span class="swatch" style="background:#34d399;"></span>muscle</span>
+  <span><span class="swatch" style="background:#a78bfa;"></span>nerve / branch</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>pathway / course</span>
+  <span><span class="swatch" style="background:#ef4444;"></span>rule / trap / clinical</span>
+</div>
+
+<h2>Topic 1 &mdash; The 5 layers of the scalp (SCALP)</h2>
+<div class="topic-tagline">Maini&rsquo;s five-letter walk, the &ldquo;dangerous&rdquo; layer, and why side-to-side cuts gape.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">The 5 layers, in order</div>
+<div class="hook">🧠 S &middot; C &middot; A &middot; L &middot; P</div>
+<div class="fact"><b>S</b>kin &middot; <b>C</b>onnective tissue (dense subcutaneous) &middot; <b>A</b>poneurosis (the epicranial aponeurosis = <b>galea aponeurotica</b>, holding the two bellies of occipitofrontalis) &middot; <b>L</b>oose areolar connective tissue &middot; <b>P</b>ericranium (periosteum of the skull). The word <b>SCALP</b> itself spells the five layers, outer to deep.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 7, ~06:05)</span><span class="said">&ldquo;S for skin, connective tissue, aponeurotic layer, loose areolar tissue layer, and then pericranium. These five layers, in that order, they make up your scalp.&rdquo;</span></div>
+<div class="src">Maini L07 00:35, 01:05, 03:39, 06:05 &middot; Bank: Scalp &mdash; Layers (SCALP)</div>
+</div>
+
+<div class="card rule">
+<div class="label">The dangerous layer</div>
+<div class="hook">🩸 LAYER 4 (LOOSE AREOLAR) = THE FREE-SPACE LAYER</div>
+<div class="fact">The <b>loose areolar connective tissue</b> (4th layer) is loosely arranged with abundant potential space, so <b>pus (folliculitis/furunculosis)</b> and <b>blood/haematoma</b> collect there. It is also the <b>scalping plane</b> &mdash; a hard pull separates the <b>outer three layers</b> from the pericranium along it.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 7, ~04:33 &amp; 05:02)</span><span class="said">&ldquo;Along this layer you can have collections like pus... and there can be haematoma formation in that layer.&rdquo; &mdash; &ldquo;You can actually separate outer three layers from periosteum along this layer.&rdquo;</span></div>
+<div class="like">💡 Think of it like a <b>loose bedsheet over a mattress</b>: the tight layers above (skin/connective/aponeurosis) move as one, and the roomy gap underneath is where fluid pools &mdash; and where a scalp gets peeled off in one flap.</div>
+<div class="src">Maini L07 04:33, 05:02 &middot; Bank: Scalp &mdash; Layers / Clinical</div>
+</div>
+
+<div class="card rule">
+<div class="label">Why side-to-side wounds gape</div>
+<div class="hook">↔️ GALEA FIBERS RUN FRONT&ndash;BACK</div>
+<div class="fact">The <b>galea aponeurotica</b> is dense regular connective tissue whose collagen fibers run <b>longitudinally</b> (front-to-back, along the sagittal suture). A cut <b>across</b> those fibers (side-to-side) lets the frontalis and occipitalis pull the edges apart, so the wound <b>gapes</b> and needs suturing; a cut <b>along</b> the fibers heals better.</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like <b>ripping paper against the grain vs with it</b>: cut across the grain and the sheet springs open; cut with the grain and the edges stay put.</div>
+<div class="src">Maini L07 02:43, 15:39 &middot; Bank: Scalp &mdash; Clinical</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; Scalp vessels &amp; nerves</h2>
+<div class="topic-tagline">Two arteries from the front (ICA) vs three from behind (ECA), and who feels the scalp.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Arterial supply &mdash; the front pair</div>
+<div class="hook">👁️ SUPRA-TROCHLEAR + SUPRA-ORBITAL = ICA (via ophthalmic)</div>
+<div class="fact">The two <b>anterior</b> scalp arteries &mdash; <b>supratrochlear</b> and <b>supraorbital</b> &mdash; are branches of the <b>ophthalmic artery</b>, which is a branch of the <b>internal carotid</b>. They exit the orbit through the supratrochlear/supraorbital foramina onto the forehead.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 7, ~08:47)</span><span class="said">&ldquo;Supraorbital and supratrochlear are branches of ophthalmic, which is a branch of internal carotid.&rdquo;</span></div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like <b>&ldquo;SUPRA = above the eye = fed from inside (ICA)&rdquo;</b>: the two &ldquo;supra&rdquo; arteries climb up out of the orbit, so they come from the <i>internal</i> carotid, not the external.</div>
+<div class="src">Maini L07 06:45, 08:47 &middot; Bank: Scalp &mdash; Vessels &amp; Nerves</div>
+</div>
+
+<div class="card">
+<div class="label">Arterial supply &mdash; the back three</div>
+<div class="hook">🔙 ST &middot; PA &middot; OCC = ECA (Superficial Temporal, Posterior Auricular, Occipital)</div>
+<div class="fact">The other three scalp arteries &mdash; <b>superficial temporal</b>, <b>posterior auricular</b>, and <b>occipital</b> &mdash; are branches of the <b>external carotid</b>. So the scalp is fed by <b>both carotids</b> that meet over the surface: ICA in front, ECA behind and to the sides.</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like a <b>lawn watered from two hoses</b>: the front sprinkler is the internal carotid (two jets), the back/side sprinkler is the external carotid (three jets). They overlap in the middle &mdash; which is exactly why the scalp bleeds so much.</div>
+<div class="src">Maini L07 08:19, 08:51 &middot; Bank: Scalp &mdash; Vessels &amp; Nerves</div>
+</div>
+
+<div class="card rule">
+<div class="label">Why scalp wounds bleed &amp; heal</div>
+<div class="hook">🚿 BLOOD FROM BOTH CUT ENDS</div>
+<div class="fact">Because those arteries form a <b>rich anastomosis</b>, a cut vessel bleeds from <b>both ends</b> (not just the proximal end like a limb). Result: profuse bleeding &mdash; but also <b>excellent healing</b> thanks to the same rich vascularity.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 7, ~14:29)</span><span class="said">&ldquo;On the scalp you have blood flowing from both directions... because there is connection between the arteries.&rdquo;</span></div>
+<div class="src">Maini L07 13:52, 14:29 &middot; Bank: Scalp &mdash; Clinical</div>
+</div>
+
+<div class="card nerve">
+<div class="label">Sensory supply of the scalp</div>
+<div class="hook">🗺️ TRIGEMINAL IN FRONT &middot; OCCIPITALS BEHIND</div>
+<div class="fact"><b>Front / most of the scalp</b> = <b>trigeminal (CN V)</b> branches. <b>Back</b> = the occipitals: <b>lesser occipital</b> (C2&ndash;C3, from the <b>cervical plexus / ventral rami</b>), plus <b>greater occipital</b> and <b>third (least) occipital</b> (from the <b>dorsal rami</b> of C2/C3 down the midline).</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like a <b>hoodie</b>: the trigeminal is the <b>front visor</b> covering the forehead, and the occipital nerves are the <b>hood at the back</b> &mdash; and the midline strip (greater/third occipital) rides the <i>dorsal</i> rami, exactly like the seam runs down the hood&rsquo;s spine.</div>
+<div class="src">Maini L07 09:21, 11:05, 11:17 &middot; Bank: Scalp &mdash; Vessels &amp; Nerves</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; Muscles of facial expression</h2>
+<div class="topic-tagline">The one rule that unlocks the whole group, plus name-decoding hooks.</div>
+<div class="cards">
+
+<div class="card muscle">
+<div class="label">The one rule for the whole group</div>
+<div class="hook">7️⃣ ALL FACIAL-EXPRESSION MUSCLES = CN VII</div>
+<div class="fact">Every muscle of facial expression is supplied by the <b>facial nerve (CN VII)</b>, carrying <b>SVE</b> (branchial motor) fibers. Group them and one fact answers a dozen questions. (Contrast: <b>levator palpebrae superioris</b> opens the eye and is <b>CN III</b> &mdash; NOT a facial-expression muscle.)</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 7, ~22:59)</span><span class="said">&ldquo;What is one thing common between the muscles of facial expression? Innervation &mdash; seventh nerve, facial nerve.&rdquo;</span></div>
+<div class="src">Maini L07 22:59, 24:58, 30:42 &middot; Bank: Muscles of Facial Expression &mdash; General</div>
+</div>
+
+<div class="card muscle">
+<div class="label">The two sphincters</div>
+<div class="hook">⭕ ORBICULARIS = &ldquo;ORBIT&rdquo; (it circles the opening)</div>
+<div class="fact"><b>Orbicularis oculi</b> circles the <b>eye</b> and <b>closes the eyelid</b> (its loss = <b>lagophthalmos</b> &rarr; dry <b>xerophthalmia</b>). <b>Orbicularis oris</b> circles the <b>mouth</b> and closes the lips (whistle / pout). Maini decodes the name itself.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 7, ~31:59)</span><span class="said">&ldquo;The word orbicularis means orbit. They orbit around.&rdquo;</span></div>
+<div class="like">💡 Also her literal decoding: <b>lag</b>ophthalmos = <b>lid lag</b> (eye won&rsquo;t close); <b>xero</b>phthalmia = <b>dry</b> eye. The Latin IS the mnemonic.</div>
+<div class="src">Maini L07 29:56, 31:59; L08 00:26 &middot; Bank: Muscles of Facial Expression &mdash; Specific</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Read the Latin name = get origin + action</div>
+<div class="hook">🔤 LEVATOR/DEPRESSOR + LABII/ANGULI + SUPERIORIS/ORIS</div>
+<div class="fact">Maini&rsquo;s method for the lip muscles: decode the name. <b>Levator</b> = elevates, <b>depressor</b> = depresses; <b>labii</b> = of the lip, <b>anguli</b> = of the angle; <b>superioris</b> = upper, <b>oris</b> = the (single) mouth angle. So <b>levator labii superioris</b> lifts the upper lip; <b>depressor anguli oris</b> pulls the mouth-angle down. <b>Levator labii superioris alaeque nasi</b> = the long one that lifts the upper lip AND flares the nostril (ala).</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 7, ~30:42)</span><span class="said">&ldquo;Levator &mdash; the word itself says levator elevates. Palpebrae is the scientific word for eyelid. Superioris is upper.&rdquo;</span></div>
+<div class="src">Maini L07 30:42; L08 02:31, 05:00&ndash;07:50 &middot; Bank: Muscles of Facial Expression &mdash; Specific</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Buccinator, the deep one</div>
+<div class="hook">🎺 BUCCINATOR = &ldquo;TRUMPETER&rsquo;S MUSCLE&rdquo;</div>
+<div class="fact"><b>Buccinator</b> compresses the cheek against the teeth (chewing, blowing, swallowing); paralysis &rarr; food pockets in the cheek &amp; drooling. Two ID tricks: it is <b>pierced by the parotid duct</b>, and its nickname is the <b>trumpeter&rsquo;s muscle</b>.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 8, ~13:00)</span><span class="said">&ldquo;Also called trumpeteer&rsquo;s muscle, because you need to do that action to play your trumpet.&rdquo;</span></div>
+<div class="like">💡 Picture <b>puffing your cheeks to blow a trumpet</b> &mdash; that is buccinator squeezing the cheek flat. The parotid duct spearing through it is your dissection give-away.</div>
+<div class="src">Maini L08 12:39, 13:00 &middot; Bank: Muscles of Facial Expression &mdash; Specific</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; Facial nerve motor branches</h2>
+<div class="topic-tagline">Maini&rsquo;s own five-branch mnemonic, the platysma trap, and the &ldquo;nearest muscle&rdquo; rule.</div>
+<div class="cards">
+
+<div class="card nerve">
+<div class="label">The 5 branches on the face</div>
+<div class="hook">🚗 &ldquo;TO ZAMBIA BY MOTOR CAR&rdquo;</div>
+<div class="fact">The five branches of CN VII fanning out of the parotid, top to bottom: <b>T</b>emporal &middot; <b>Z</b>ygomatic &middot; <b>B</b>uccal &middot; <b>M</b>arginal mandibular &middot; <b>C</b>ervical. (Before the face it also gives the <b>posterior auricular</b> and the branch to <b>posterior belly of digastric + stylohyoid</b>.)</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 8, ~31:20)</span><span class="said">&ldquo;To Zambia by motor car... T temporal, zygomatic, buccal, marginal mandibular, and cervical.&rdquo;</span></div>
+<div class="like">💡 <b>T</b>o&nbsp;<b>Z</b>ambia&nbsp;<b>B</b>y&nbsp;<b>M</b>otor&nbsp;<b>C</b>ar &rarr; <b>T-Z-B-M-C</b>, read from the temple down to the neck. (Some books say &ldquo;Zanzibar&rdquo; &mdash; use whichever place sticks; the letters are what matter.)</div>
+<div class="src">Maini L08 31:20&ndash;32:01 &middot; Bank: Facial Nerve &mdash; Motor Branches</div>
+</div>
+
+<div class="card rule">
+<div class="label">The cervical-branch trap</div>
+<div class="hook">🧣 CERVICAL BRANCH &rarr; PLATYSMA (the only neck one)</div>
+<div class="fact">There is exactly <b>one</b> muscle of facial expression in the neck: <b>platysma</b>, supplied by the <b>cervical branch</b>. Maini flags this as a commonly-missed question (only ~50% got it last term).</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 8, ~36:04)</span><span class="said">&ldquo;There&rsquo;s only one muscle of facial expression in the neck &mdash; platysma.&rdquo;</span></div>
+<div class="src">Maini L08 35:58, 36:04 &middot; Bank: Facial Nerve &mdash; Motor Branches</div>
+</div>
+
+<div class="card rule">
+<div class="label">Which branch supplies which muscle?</div>
+<div class="hook">📍 A BRANCH FEEDS THE MUSCLES NEAREST IT</div>
+<div class="fact">Maini&rsquo;s common-sense rule: a facial-nerve branch innervates the muscles <b>in its vicinity</b>, not the ones farthest away. So the <b>temporal branch</b> serves upper-face muscles (frontalis, orbicularis oculi, corrugator, auricularis) &mdash; and does <b>NOT</b> supply <b>mentalis</b> (that&rsquo;s down at the chin).</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like <b>local mail routes</b>: each branch delivers to its own neighborhood. Temporal is uptown; mentalis lives downtown &mdash; wrong zip code.</div>
+<div class="src">Maini L08 34:46&ndash;35:35 &middot; Bank: Facial Nerve &mdash; Motor Branches</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; Trigeminal sensory zones (V1 / V2 / V3)</h2>
+<div class="topic-tagline">Three floors of the face, and the lip/chin trap examiners love.</div>
+<div class="cards">
+
+<div class="card nerve">
+<div class="label">Three divisions, three levels</div>
+<div class="hook">🏢 V1 OPHTHALMIC (top) &middot; V2 MAXILLARY (mid) &middot; V3 MANDIBULAR (low)</div>
+<div class="fact"><b>Trigeminal (CN V)</b> = general sensory to the face in three stacked zones. <b>V1 = ophthalmic</b> (forehead, upper eyelid, bridge/tip of nose). <b>V2 = maxillary</b> (cheek, upper lip). <b>V3 = mandibular</b> (lower lip, chin, jaw). Trigeminus = &ldquo;three divisions.&rdquo;</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 7, ~10:09)</span><span class="said">&ldquo;What is the name of V1? Ophthalmic. V2 is maxillary. And V3 is mandibular.&rdquo;</span></div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like a <b>3-storey building</b>: eyes on the top floor (V1), cheeks on the middle (V2), jaw in the basement (V3). Count top-to-bottom, 1-2-3.</div>
+<div class="src">Maini L07 09:21, 10:09; L08 01:06:37 &middot; Bank: Trigeminal &mdash; Sensory Zones</div>
+</div>
+
+<div class="card rule">
+<div class="label">The lip &amp; nose trap</div>
+<div class="hook">👄 UPPER LIP = V2 &middot; LOWER LIP + CHIN = V3 &middot; NOSE-TIP = V1</div>
+<div class="fact">The tested boundary: the <b>upper lip is V2</b>, but the <b>lower lip AND chin are V3</b>. And despite the nose sitting mid-face, the <b>tip/bridge of the nose is V1</b> (external nasal branch). Trigeminal neuralgia (tic douloureux) hits <b>V2 or V3</b> most; herpes zoster ophthalmicus hits <b>V1</b> (threatens the cornea).</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like a <b>zipper meeting at the lips</b>: the seam splits there &mdash; top lip stays with the cheek (V2), bottom lip drops to the jaw (V3). The nose-tip is the odd one out, reaching up to V1.</div>
+<div class="src">Maini L08 01:06:48&ndash;01:07:02, 01:10:44 &middot; Bank: Trigeminal &mdash; Sensory Zones / Clinical</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; Parotid gland: the secretomotor chain (CN IX)</h2>
+<div class="topic-tagline">The long parasympathetic relay list, and the CN-IX-not-VII trap.</div>
+<div class="cards">
+
+<div class="card pathway">
+<div class="label">Parotid parasympathetic pathway</div>
+<div class="hook">🚉 IX &rarr; TYMPANIC &rarr; LESSER PETROSAL &rarr; OTIC &rarr; AURICULOTEMPORAL &rarr; PAROTID</div>
+<div class="fact">Saliva-to-parotid relay: <b>inferior salivatory nucleus</b> &rarr; <b>CN IX (glossopharyngeal)</b> &rarr; <b>tympanic nerve</b> &rarr; <b>tympanic plexus</b> &rarr; <b>lesser petrosal nerve</b> &rarr; synapse in the <b>otic ganglion</b> &rarr; postganglionic fibers ride the <b>auriculotemporal nerve (V3)</b> &rarr; <b>parotid gland</b>.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 8, ~01:32:27)</span><span class="said">&ldquo;It&rsquo;s ninth nerve, glossopharyngeal... tympanic plexus, lesser petrosal, otic ganglion, auriculotemporal, parotid gland.&rdquo;</span></div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like a <b>train with a transfer</b>: board the <b>9</b> line, change at the middle-ear station (tympanic plexus), catch the <b>lesser petrosal</b> express, transfer at <b>Otic</b> junction, then hitch the <b>auriculotemporal</b> shuttle to the parotid terminal.</div>
+<div class="src">Maini L08 20:44&ndash;25:57, 01:31:41&ndash;01:32:41 &middot; Bank: Parotid Gland &amp; Secretomotor Pathway</div>
+</div>
+
+<div class="card rule">
+<div class="label">The exam trap</div>
+<div class="hook">⚠️ PAROTID = CN IX, NOT CN VII</div>
+<div class="fact">Every OTHER salivary gland in this module runs on CN VII &mdash; so students reflexively pick 7 for the parotid too. But the <b>parotid</b>&rsquo;s preganglionic parasympathetics are <b>CN IX</b>. Maini put this as the last Menti question precisely because &ldquo;seventh&rdquo; is the tempting wrong answer.</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like the <b>one sibling who doesn&rsquo;t share the family car</b>: submandibular &amp; sublingual take the CN VII carpool (chorda tympani); the parotid insists on its own CN IX ride.</div>
+<div class="src">Maini L08 20:23, 01:32:41 &middot; Bank: Parotid Gland &amp; Secretomotor Pathway</div>
+</div>
+
+<div class="card pathway">
+<div class="label">CN VII&rsquo;s intracranial branches</div>
+<div class="hook">💧 GREATER PETROSAL &middot; 🔇 NERVE TO STAPEDIUS &middot; 👅 CHORDA TYMPANI</div>
+<div class="fact">Before it exits the stylomastoid foramen, CN VII gives three branches &mdash; each maps to a lesion sign: <b>greater petrosal</b> (parasympathetic &rarr; lacrimal/nasal/palatine glands; lesion = <b>dry eye</b>), <b>nerve to stapedius</b> (lesion = <b>hyperacusis</b>), <b>chorda tympani</b> (<b>taste, anterior 2/3 tongue</b> + preganglionic to the <b>submandibular ganglion</b>).</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like a <b>checklist that localizes the lesion</b>: dry eye + sound-sensitivity + lost front-tongue taste means the damage is <b>high</b> (inside the canal), not just at the exit.</div>
+<div class="src">Maini L08 39:34, 47:55, 49:10&ndash;52:14 &middot; Bank: Facial Nerve &mdash; Intracranial Course</div>
+</div>
+
+<div class="card pathway">
+<div class="label">Three parasympathetic ganglia today</div>
+<div class="hook">🎯 OTIC (IX) &middot; PTERYGOPALATINE (VII) &middot; SUBMANDIBULAR (VII)</div>
+<div class="fact">Maini names three ganglia in one lecture: <b>Otic</b> (parotid, via CN IX), <b>Pterygopalatine</b> (lacrimal + nasal + palatine glands, via greater petrosal of CN VII), <b>Submandibular</b> (submandibular + sublingual glands, via chorda tympani of CN VII). The fourth, <b>ciliary</b> (eye, CN III), comes later.</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like <b>three switchboards</b>: Otic routes the parotid (9), Pterygopalatine routes tears &amp; nose (7-greater petrosal), Submandibular routes the two floor-of-mouth glands (7-chorda tympani).</div>
+<div class="src">Maini L08 57:25 &middot; Bank: Parotid / Facial Nerve &mdash; Intracranial Course</div>
+</div>
+
+<div class="card nerve">
+<div class="label">Naming hook</div>
+<div class="hook">🦵 GENICULATE = AT THE GENU (the bend)</div>
+<div class="fact">The <b>geniculate ganglion</b> of CN VII sits at the sharp <b>bend</b> the nerve makes in the facial canal. &ldquo;Genu&rdquo; = knee/bend (same root as genuflect), so the ganglion at the bend is <b>geniculate</b>.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 8, ~44:48)</span><span class="said">&ldquo;It is called geniculate because it is at the genu, the bend.&rdquo;</span></div>
+<div class="src">Maini L08 44:48 &middot; Bank: Facial Nerve &mdash; Intracranial Course</div>
+</div>
+
+</div>
+
+<h2>Topic 7 &mdash; Facial vessels, the danger area &amp; the ECA list</h2>
+<div class="topic-tagline">Two vein traps, the danger triangle, and the eight-branch ECA list (illustrative).</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Branches of the facial artery (5)</div>
+<div class="hook">🅰️ SUBMENTAL &middot; INF. LABIAL &middot; SUP. LABIAL &middot; LATERAL NASAL &middot; ANGULAR</div>
+<div class="fact">The <b>facial artery</b> (a branch of the ECA) supplies most of the face via five named branches, chin-to-eye: <b>submental &rarr; inferior labial &rarr; superior labial &rarr; lateral nasal &rarr; angular</b> (ending near the medial eye, where it meets the ophthalmic system).</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like <b>climbing the face from chin to eye</b>: under the chin (submental), lower lip, upper lip, side of the nose, then the corner of the eye (angular). Follow the artery&rsquo;s own path upward.</div>
+<div class="src">Maini L08 01:14:44&ndash;01:15:33 &middot; Bank: Facial Vessels &mdash; Arteries</div>
+</div>
+
+<div class="card rule">
+<div class="label">Artery trap</div>
+<div class="hook">🎣 TRANSVERSE FACIAL &ne; FACIAL ARTERY</div>
+<div class="fact">Despite the name, the <b>transverse facial artery</b> is <b>NOT</b> a branch of the facial artery &mdash; it is a branch of the <b>superficial temporal</b> artery (you can feel its pulse along the zygomatic arch). Maini calls this a board-exam trick question.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 8, ~01:17:33)</span><span class="said">&ldquo;Transverse facial is not a branch of facial... it&rsquo;s a branch of superficial temporal.&rdquo;</span></div>
+<div class="src">Maini L08 01:17:33&ndash;01:18:06 &middot; Bank: Facial Vessels &mdash; Arteries</div>
+</div>
+
+<div class="card rule">
+<div class="label">Vein trap</div>
+<div class="hook">🩸 COMMON FACIAL VEIN &rarr; INTERNAL JUGULAR</div>
+<div class="fact">The facial vein joins the <b>anterior division of the retromandibular</b> to form the <b>common facial vein</b>, which drains into the <b>INTERNAL jugular</b> &mdash; not the external, even though the matching artery is the <i>external</i> carotid. That mismatch is the trap.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 8, ~01:19:43)</span><span class="said">&ldquo;Where does common facial drain? Internal jugular, not external jugular.&rdquo;</span></div>
+<div class="src">Maini L08 01:19:43&ndash;01:20:02 &middot; Bank: Facial Vessels &mdash; Veins &amp; Danger Area</div>
+</div>
+
+<div class="card rule">
+<div class="label">The danger triangle of the face</div>
+<div class="hook">☠️ NOSE + UPPER LIP &rarr; CAVERNOUS SINUS (valveless)</div>
+<div class="fact">The <b>facial vein</b> communicates with the <b>cavernous sinus</b> &mdash; directly via the <b>superior/inferior ophthalmic veins</b>, and indirectly via the <b>deep facial vein &rarr; pterygoid venous plexus</b>. Because these veins are valveless, infection in the <b>nose/upper-lip &ldquo;danger triangle&rdquo;</b> can spread intracranially &rarr; cavernous sinus thrombosis, <b>meningitis/encephalitis</b>.</div>
+<div class="maini"><span class="who">🎙️ Dr. Maini (Lecture 8, ~01:22:06)</span><span class="said">&ldquo;This infection can spread to the cavernous sinus, leading to intracranial infection... meningitis, encephalitis.&rdquo;</span></div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like a <b>backdoor with no lock</b>: squeeze a pimple in the triangle and bacteria can flow <i>backward</i> through valveless veins straight into the skull.</div>
+<div class="src">Maini L08 01:20:56&ndash;01:22:55 &middot; Bank: Facial Vessels &mdash; Veins &amp; Danger Area</div>
+</div>
+
+<div class="card nerve">
+<div class="label">The 8 branches of the ECA</div>
+<div class="hook">🧾 &ldquo;Some Anatomists Like Freaking Out Poor Medical Students&rdquo;</div>
+<div class="fact">Maini says you must know all <b>eight</b> ECA branches; three feed the scalp (superficial temporal, posterior auricular, occipital). The classic list, superior to inferior-ish: <b>S</b>uperior thyroid, <b>A</b>scending pharyngeal, <b>L</b>ingual, <b>F</b>acial, <b>O</b>ccipital, <b>P</b>osterior auricular, <b>M</b>axillary, <b>S</b>uperficial temporal.</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 <b>&ldquo;Some Anatomists Like Freaking Out Poor Medical Students&rdquo;</b> is a widely-used hook, <b>not stated by Maini in these lectures</b> &mdash; but she winked at it herself: <i>&ldquo;I&rsquo;ve become that anatomist who freaks out medical students... I gave you the mnemonic also&rdquo;</i> (L07 ~09:12). She referenced a mnemonic without spelling one out here, so treat the acronym as mine.</div>
+<div class="src">Maini L07 08:51, 09:12 &middot; Bank: Scalp &mdash; Vessels &amp; Nerves (ECA branches)</div>
+</div>
+
+</div>
+
+<h2>Topic 8 &mdash; Facial nerve lesion (Bell&rsquo;s palsy)</h2>
+<div class="topic-tagline">The whole-side LMN picture &mdash; how it differs from a central lesion.</div>
+<div class="cards">
+
+<div class="card rule">
+<div class="label">Bell&rsquo;s palsy signs</div>
+<div class="hook">😶 WHOLE HALF-FACE DROPS (LMN pattern)</div>
+<div class="fact">A lower-motor-neuron CN VII lesion (idiopathic = <b>Bell&rsquo;s palsy</b>, often post-cold/viral) paralyses <b>the entire half of the face</b>: <b>loss of forehead wrinkling</b>, <b>can&rsquo;t close the eye</b> (lagophthalmos + lost nasolabial fold), and the <b>mouth droops / deviates to the normal side</b>. Advise eye-strapping, massage, and stimulation to limit residual paralysis.</div>
+<div class="like"><span class="illus-tag">Illustrative</span>💡 Think of it like <b>the whole light circuit tripping on one side</b> &mdash; forehead included. (A central/stroke lesion spares the forehead, because the upper face has backup wiring from both hemispheres.)</div>
+<div class="src">Maini L08 59:07&ndash;01:01:07 &middot; Bank: Facial Nerve &mdash; Lesions &amp; Clinical</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD &middot; GA 0202 Module 4 &mdash; Face &amp; Scalp Mnemonics</div>
+</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html" title="Return to the Face &amp; Scalp Study Hub" aria-label="Return to the Face &amp; Scalp Study Hub">📚</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this topic..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Face & Scalp mnemonics:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

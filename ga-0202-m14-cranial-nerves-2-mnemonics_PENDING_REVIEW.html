@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 &middot; Cranial Nerves (part 2) &mdash; Mnemonics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin-bottom: 10px; font-style: italic; font-size: 0.95rem; }
+.voices-note { text-align: center; color: #93c5fd; font-size: 0.82rem; margin: 0 auto 16px; max-width: 820px; line-height: 1.5; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.28); border-radius: 8px; padding: 8px 12px; }
+.badge-pending { display: block; width: fit-content; margin: 0 auto 18px; padding: 4px 14px; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.5); color: #fca5a5; border-radius: 999px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+.scope-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.35); border-radius: 8px; padding: 10px 14px; margin: 0 auto 22px; max-width: 880px; color: #a7f3d0; font-size: 0.85rem; line-height: 1.55; }
+.scope-note b { color: #34d399; }
+.scope-note .maini-flag { color: #fcd34d; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+h2.maini-h2 { color: #fbbf24; border-bottom-color: #78350f; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #f59e0b; }
+.card.kinematics { border-left-color: #60a5fa; }
+.card.ligament { border-left-color: #a78bfa; }
+.card.muscle { border-left-color: #34d399; }
+.card.rule { border-left-color: #ef4444; }
+.card.maini { border-left-color: #fbbf24; background: #1c1917; border-color: #78350f; }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 700; }
+.card.maini .label { color: #fcd34d; }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.kinematics .hook { color: #93c5fd; }
+.card.ligament .hook { color: #c4b5fd; }
+.card.muscle .hook { color: #6ee7b7; }
+.card.rule .hook { color: #fca5a5; }
+.card.maini .hook { color: #fcd34d; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #f59e0b; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card.kinematics .like { border-left-color: #60a5fa; }
+.card.ligament .like { border-left-color: #a78bfa; }
+.card.muscle .like { border-left-color: #34d399; }
+.card.rule .like { border-left-color: #ef4444; }
+.card .like b { color: #fde68a; }
+.card .maini-quote { margin-top: 8px; padding: 10px 12px; background: #0b1220; border-left: 3px solid #fbbf24; font-size: 0.9rem; color: #fde68a; font-style: italic; border-radius: 0 6px 6px 0; line-height: 1.6; }
+.card .maini-quote .who { display: block; font-style: normal; font-weight: 700; color: #fbbf24; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 880px; color: #94a3b8; font-size: 0.78rem; line-height: 1.7; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.legend span { margin: 0 8px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card .fact { color: #222; } .card .like { background: #fff; color: #000; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 GA 0202 &middot; Cranial Nerves (part 2) &mdash; Mnemonics</h1>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s cranial-nerve material (CN IV&ndash;XII), in &ldquo;think-of-it-like&rdquo; voice.</p>
+<p class="voices-note">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+<span class="badge-pending">&#9888; Pending Review</span>
+<div class="scope-note">
+  <b>Honest framing &mdash; who said what:</b> The <span class="maini-flag">first section</span> (&#127908; <b>Dr. Maini&rsquo;s own words</b>) quotes her <b>verbatim</b> &mdash; those hooks are hers. <b>Every other hook is MY study aid</b>, <b>not</b> Dr. Maini&rsquo;s words. But every <b>fact</b> on this page is verified against the audited GA 0202 <i>Cranial Nerves 2 (IV&ndash;XII) Everything-MC bank</i> and Dr. Maini&rsquo;s lecture transcripts (cited on each card). Nothing is attributed to her unless it appears <b>in quotation marks with her name</b>. The hook is creative; the facts are solid.
+</div>
+<div class="legend">
+  <span><span class="swatch" style="background:#fbbf24;"></span>Maini&rsquo;s own words</span>
+  <span><span class="swatch" style="background:#f59e0b;"></span>nerve identity</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>foramen &amp; route</span>
+  <span><span class="swatch" style="background:#34d399;"></span>function (what it supplies)</span>
+  <span><span class="swatch" style="background:#a78bfa;"></span>exception / eponym</span>
+  <span><span class="swatch" style="background:#ef4444;"></span>lesion &amp; clinical</span>
+</div>
+
+<h2 class="maini-h2">Topic 1 &mdash; &#127908; Dr. Maini&rsquo;s OWN memory hooks (quoted verbatim)</h2>
+<div class="topic-tagline">These six hooks are hers, straight from lecture. Learn these first &mdash; they are the ones she actually said out loud.</div>
+<div class="cards">
+
+<div class="card maini">
+<div class="label">Eye-muscle nerves (IV, VI, III)</div>
+<div class="hook">👁️ SO4 &middot; LR6 &middot; AO3</div>
+<div class="fact"><b>Superior Oblique = CN 4</b> (trochlear). <b>Lateral Rectus = CN 6</b> (abducens). <b>All Other extraocular muscles = CN 3</b> (oculomotor). This is Maini&rsquo;s own formula for wiring the eye muscles to their nerves.</div>
+<div class="maini-quote"><span class="who">Dr. Maini said:</span>&ldquo;It goes like SO4, LR6, AO3&hellip; superior oblique, that is your trochlear nerve.&rdquo; &mdash; and for the leftovers: &ldquo;if you filter out superior oblique and lateral rectus, then rest 4 of them&hellip; all the four&rdquo; (belong to CN III).</div>
+<div class="src">Dr. Maini &mdash; L20 The Orbit &middot; MC bank Q1, Q8, Q9</div>
+</div>
+
+<div class="card maini">
+<div class="label">Superior oblique action (CN IV)</div>
+<div class="hook">↘️ &ldquo;DOWN AND OUT&rdquo;</div>
+<div class="fact">When the <b>superior oblique</b> (CN IV) acts, the eyeball goes <b>down and laterally</b>. Maini hands you the phrase to remember it: <b>&ldquo;down and out.&rdquo;</b> (Clinically, a IV palsy = trouble looking down-and-in, e.g. descending stairs.)</div>
+<div class="maini-quote"><span class="who">Dr. Maini said:</span>&ldquo;It rotates the eyeball down and laterally. So you can remember this as down and out.&rdquo;</div>
+<div class="src">Dr. Maini &mdash; L20 The Orbit &middot; MC bank Q4, Q7</div>
+</div>
+
+<div class="card maini">
+<div class="label">Carotid sheath contents (CN X)</div>
+<div class="hook">🤺 THE &ldquo;THREE MUSKETEERS&rdquo;</div>
+<div class="fact">Inside the <b>carotid sheath</b> travel three structures together: the <b>common carotid artery</b>, the <b>internal jugular vein</b>, and the <b>vagus nerve (CN X)</b>. Maini calls them the <b>three musketeers</b>.</div>
+<div class="maini-quote"><span class="who">Dr. Maini said:</span>&ldquo;Common carotid and vagus&hellip; three musketeers&hellip; wrapped in the carotid sheath.&rdquo;</div>
+<div class="src">Dr. Maini &mdash; L05 Cervical Viscera &middot; MC bank Q66</div>
+</div>
+
+<div class="card maini">
+<div class="label">Geniculate ganglion (CN VII)</div>
+<div class="hook">🦵 GENICULATE = at the GENU (the bend)</div>
+<div class="fact">The <b>geniculate ganglion</b> sits at the <b>genu</b> &mdash; the <b>bend</b> of the facial nerve inside the facial canal. Maini gives you the name&rsquo;s meaning as the memory hook (<i>genu</i> = knee/bend, as in &ldquo;genuflect&rdquo;).</div>
+<div class="maini-quote"><span class="who">Dr. Maini said:</span>&ldquo;It is called geniculate because it is at the genu, the bend.&rdquo;</div>
+<div class="src">Dr. Maini &mdash; L08 Face &amp; Scalp &middot; MC bank Q36</div>
+</div>
+
+<div class="card maini">
+<div class="label">Naming the abducens (CN VI)</div>
+<div class="hook">👉 ABDUCENS runs the ABDUCTOR</div>
+<div class="fact">The <b>abducens nerve (CN VI)</b> supplies the <b>lateral rectus</b>, the muscle that <b>abducts</b> the eye (turns it outward). Maini ties the name to the job so you never lose it.</div>
+<div class="maini-quote"><span class="who">Dr. Maini said:</span>&ldquo;This nerve supplies the abductor of the eye, so abducens.&rdquo;</div>
+<div class="src">Dr. Maini &mdash; L17 The Brain &middot; MC bank Q10</div>
+</div>
+
+<div class="card maini">
+<div class="label">Stylopharyngeus (CN IX)</div>
+<div class="hook">💅 &ldquo;VERY STYLISH MUSCLE&rdquo;</div>
+<div class="fact">Of all the pharyngeal muscles, <b>stylopharyngeus is the ONLY one not supplied by the vagus</b> &mdash; it is <b>CN IX (glossopharyngeal)</b>, because it comes from the <b>third pharyngeal arch</b>. In her Week 11/12 lab Maini nicknamed it the <b>&ldquo;very stylish muscle.&rdquo;</b></div>
+<div class="maini-quote"><span class="who">Dr. Maini said:</span>&ldquo;Stylopharyngeus&hellip; very stylish muscle&hellip; ninth nerve&hellip; because it originates from third pharyngeal arch.&rdquo; <span style="color:#94a3b8;font-size:0.78rem;">(from her auto-transcribed lab Q&amp;A)</span></div>
+<div class="src">Dr. Maini &mdash; L29 Week 11/12 Labs &middot; MC bank Q56, Q63</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; Foramina &amp; their tenants (the big lists)</h2>
+<div class="topic-tagline">Which nerve leaves through which hole. The single most-tested list &mdash; learn the door, then the roster behind it.</div>
+<div class="cards">
+
+<div class="card kinematics">
+<div class="label">Middle-fossa order (Maini&rsquo;s sequence)</div>
+<div class="hook">🚪 SOF &rarr; ROTUNDUM &rarr; OVALE &rarr; SPINOSUM</div>
+<div class="fact">Maini has you list the sphenoid openings <b>medial to lateral</b>: <b>Superior orbital fissure &rarr; foramen Rotundum (V2) &rarr; foramen Ovale (V3) &rarr; foramen Spinosum</b> (middle meningeal artery). That order also walks you down the trigeminal divisions.</div>
+<div class="like">💡 Read them like a row of doors getting rounder then bigger: fissure, <b>R</b>otundum, <b>O</b>vale, spinosum. V2 takes the round one, V3 takes the oval one.</div>
+<div class="src">Dr. Maini quote &mdash; L01 Osteology &middot; MC bank Q31</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Superior orbital fissure roster</div>
+<div class="hook">🎟️ SOF CLUB: III &middot; IV &middot; V1 &middot; VI</div>
+<div class="fact">The <b>superior orbital fissure</b> carries <b>CN III, CN IV, V1 (ophthalmic), and CN VI</b>. (Optic nerve II uses its own <b>optic canal</b>; V2 uses <b>rotundum</b>; V3 uses <b>ovale</b>.)</div>
+<div class="like">💡 The SOF is the <b>crowded club door</b> &mdash; four nerves squeeze through together (III, IV, V1, VI). Only the optic nerve is exclusive enough to get its own canal.</div>
+<div class="src">Dr. Maini &mdash; L19 The Orbit &middot; MC bank Q5, Q12, Q13, Q18</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Jugular foramen roster</div>
+<div class="hook">🕳️ 9-10-11 LEAVE TOGETHER + the vein</div>
+<div class="fact">The <b>jugular foramen</b> transmits <b>CN IX, X, and XI</b> &mdash; and it is where the <b>sigmoid sinus becomes the internal jugular vein</b>. Three nerves, one exit.</div>
+<div class="like">💡 Count them off &mdash; <b>9, 10, 11</b> ride out one door, and the sinus turns into the IJV in the same hole. If a stem groups IX/X/XI, it&rsquo;s the jugular foramen.</div>
+<div class="src">Dr. Maini &mdash; L28 Pharynx &middot; MC bank Q55, Q65, Q79, Q96, Q105</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Internal acoustic meatus roster</div>
+<div class="hook">👂 IAM CARPOOL: VII + VIII</div>
+<div class="fact">The <b>internal acoustic meatus</b> carries <b>CN VII (facial) and CN VIII (vestibulocochlear)</b> together into the petrous temporal bone. (This is why one tumor here &mdash; an acoustic neuroma &mdash; can hit both.)</div>
+<div class="like">💡 <b>7 and 8 carpool</b> into the same meatus. VII then drives on out the stylomastoid foramen; VIII stays in the inner ear for good.</div>
+<div class="src">Dr. Maini &mdash; L22 The Ear &middot; MC bank Q33, Q47, Q53, Q96</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Trigeminal exits, top to bottom</div>
+<div class="hook">🎟️ &ldquo;STANDING ROOM ONLY&rdquo; &mdash; SOF &middot; Rotundum &middot; Ovale</div>
+<div class="fact"><b>V1 ophthalmic &rarr; Superior orbital fissure. V2 maxillary &rarr; foramen Rotundum. V3 mandibular &rarr; foramen Ovale.</b> V1 and V2 are purely sensory; V3 is sensory <b>and</b> motor.</div>
+<div class="like">💡 <b>&ldquo;S.R.O. = Standing Room Only&rdquo;</b> walks the exits in order V1&rarr;V2&rarr;V3. (My study aid, not Maini&rsquo;s.) Only the last ticket &mdash; V3 / ovale &mdash; also carries the motor seat.</div>
+<div class="src">Dr. Maini &mdash; L01 Osteology / L10 Infratemporal &middot; MC bank Q18&ndash;Q20</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Solo doors: XII &amp; VII-out</div>
+<div class="hook">🚪 XII = its own canal &middot; VII exits STYLOmastoid</div>
+<div class="fact">The <b>hypoglossal nerve (XII)</b> gets its <b>own hypoglossal canal</b> in the occipital bone. The <b>facial nerve (VII)</b>, after the facial canal, <b>exits the skull at the stylomastoid foramen</b>, then pierces the parotid gland.</div>
+<div class="like">💡 The tongue nerve has a <b>private door named after it</b> (hypoglossal canal). VII enters at the meatus but leaves by a <b>different</b> door &mdash; the stylomastoid.</div>
+<div class="src">Dr. Maini &mdash; L08 Face &middot; L01 Osteology &middot; MC bank Q34, Q86, Q93</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; Eye movers: IV Trochlear &amp; VI Abducens</h2>
+<div class="topic-tagline">Two pure-motor nerves, each running exactly one eye muscle. IV is the oddball off the BACK of the brainstem; VI is the fragile long-runner.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Trochlear (IV) &mdash; emergence</div>
+<div class="hook">🔙 IV = the only nerve off the BACK of the brainstem</div>
+<div class="fact">The <b>trochlear nerve (CN IV)</b> is the <b>only cranial nerve to emerge from the posterior (dorsal) surface of the midbrain</b>. Its tendon then loops through a fibrocartilaginous pulley &mdash; the <b>trochlea</b> &mdash; which is what gives the nerve its name.</div>
+<div class="like">💡 If a stem says <b>&ldquo;dorsal/posterior midbrain&rdquo;</b>, think trochlear. And &ldquo;trochlea&rdquo; = pulley: the muscle&rsquo;s tendon runs through a little pulley to change its angle of pull.</div>
+<div class="src">Dr. Maini &mdash; L17 The Brain / L20 Orbit &middot; MC bank Q2, Q3</div>
+</div>
+
+<div class="card rule">
+<div class="label">Abducens (VI) &mdash; lesion</div>
+<div class="hook">👁️ LR GONE &rarr; EYE LOOKS IN (medial)</div>
+<div class="fact">A <b>CN VI palsy</b> paralyzes the <b>lateral rectus</b> &rarr; the unopposed <b>medial rectus</b> pulls the eye inward &rarr; <b>medial deviation</b> of the affected eye with <b>horizontal diplopia</b> (double vision).</div>
+<div class="like">💡 The only muscle that drags the eye <b>outward</b> is gone, so the eyeball drifts <b>IN toward the nose</b>. Medial deviation + horizontal double vision = abducens.</div>
+<div class="src">Dr. Maini &mdash; L20 Orbit &middot; MC bank Q11</div>
+</div>
+
+<div class="card rule">
+<div class="label">Abducens (VI) &mdash; the fragile one</div>
+<div class="hook">🎈 RAISED PRESSURE &rarr; VI FAILS FIRST</div>
+<div class="fact">Because of its <b>long intracranial course</b>, the <b>abducens (CN VI)</b> is often the <b>first extraocular nerve affected by raised intracranial pressure</b>, producing horizontal diplopia. Both IV and VI are <b>purely motor</b> to a single muscle.</div>
+<div class="like">💡 Think of VI as the <b>longest, most exposed cable</b> in the skull &mdash; stretch the head with pressure and it&rsquo;s the first to snap, giving early double vision.</div>
+<div class="src">Clinical anatomy w/ CN VI (Dr. Maini) &middot; MC bank Q14, Q15</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; Trigeminal V (V1 &middot; V2 &middot; V3)</h2>
+<div class="topic-tagline">A sensory ganglion on the &ldquo;rock,&rdquo; then three divisions through three holes. Only V3 is also motor &mdash; the chewing division.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Ganglion &amp; three divisions</div>
+<div class="hook">🪨 V SITS ON THE ROCK (petrous apex)</div>
+<div class="fact">CN V has <b>three divisions: V1 ophthalmic, V2 maxillary, V3 mandibular</b>. Its large <b>sensory ganglion (trigeminal / semilunar)</b> sits at the <b>apex of the petrous part of the temporal bone</b> &mdash; and it is a <b>sensory</b> ganglion, NOT autonomic.</div>
+<div class="like">💡 <b>Petrous</b> = &ldquo;rock&rdquo; in Latin, so the ganglion perches on the tip of the temporal <b>rock</b>. It holds sensory cell bodies &mdash; it is not one of the parasympathetic ganglia.</div>
+<div class="src">Dr. Maini &mdash; L11 Infratemporal Fossa &middot; MC bank Q17, Q24, Q25</div>
+</div>
+
+<div class="card muscle">
+<div class="label">V3 &mdash; the only motor division</div>
+<div class="hook">🦷 V3 = THE ONLY CHEWER (arch 1)</div>
+<div class="fact"><b>V3 (mandibular, via foramen ovale) is the ONLY trigeminal division with motor fibers</b> &mdash; to the <b>muscles of mastication</b> (temporalis, masseter, medial &amp; lateral pterygoids). V + the chewing muscles come from the <b>1st pharyngeal arch</b>. Nearly all V3 branches are given off in the <b>infratemporal fossa</b>.</div>
+<div class="like">💡 Three siblings, only the youngest has a job: <b>V3 chews</b>; V1 and V2 just <b>feel</b>. See &ldquo;muscles of mastication&rdquo; &rarr; V3 &rarr; foramen ovale &rarr; first arch.</div>
+<div class="src">Dr. Maini &mdash; L10 Infratemporal Fossa &middot; MC bank Q21&ndash;Q23, Q30, Q32</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Anterior 2/3 of the tongue (V + VII)</div>
+<div class="hook">👅 FRONT TONGUE: FEEL = V3 &middot; TASTE = VII</div>
+<div class="fact">For the <b>anterior two-thirds of the tongue</b>: <b>general sensation (touch/pain) = lingual nerve (branch of V3)</b>; <b>taste = chorda tympani (from CN VII)</b>, which <b>hitchhikes on the lingual nerve</b> to get there.</div>
+<div class="like">💡 Two nerves share the front of the tongue: the <b>lingual (V3) feels</b> it, and the <b>chorda tympani (VII) tastes</b> it &mdash; riding piggyback on the lingual. (Back 1/3 is all CN IX &mdash; see Topic 6.)</div>
+<div class="src">Dr. Maini &mdash; L06 Pharyngeal Apparatus &middot; MC bank Q27, Q28, Q100</div>
+</div>
+
+<div class="card rule">
+<div class="label">V1 &amp; the corneal reflex + neuralgia</div>
+<div class="hook">⚡ V1 FEELS the blink &middot; V2/V3 = tic douloureux</div>
+<div class="fact"><b>Corneal (blink) reflex:</b> the <b>sensory limb is V1</b>, the motor limb is <b>CN VII</b>. <b>Trigeminal neuralgia (tic douloureux)</b> = sudden, severe, <b>shock-like pain</b> in the <b>V2 or V3</b> dermatome.</div>
+<div class="like">💡 <b>V1 senses, VII blinks.</b> And the classic &ldquo;electric-shock face pain&rdquo; lives in the <b>lower two divisions</b> (V2/V3), not the ophthalmic.</div>
+<div class="src">Reflex anatomy w/ V1 &middot; L16 clinical &middot; MC bank Q26, Q29</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; Face &amp; Ear: VII Facial &amp; VIII Vestibulocochlear</h2>
+<div class="topic-tagline">The two that carpool into the internal acoustic meatus. VII drives on out to the face; VIII stays for hearing and balance.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Facial (VII) &mdash; the route</div>
+<div class="hook">🛣️ IAM &rarr; facial canal (genu) &rarr; STYLOMASTOID &rarr; parotid</div>
+<div class="fact">The <b>facial nerve (VII)</b> enters the <b>internal acoustic meatus</b> with VIII, bends at the <b>genu (geniculate ganglion)</b> inside the facial canal, <b>exits at the stylomastoid foramen</b>, then <b>passes through the parotid gland</b>, where it splits into its <b>five terminal branches</b> (incl. the marginal mandibular).</div>
+<div class="like">💡 Trace the road: <b>in the meatus &rarr; around the bend &rarr; out the stylomastoid &rarr; through the parotid &rarr; fan out</b>. Different door in, different door out.</div>
+<div class="src">Dr. Maini &mdash; L08 Face &amp; Scalp &middot; MC bank Q33&ndash;Q37, Q42</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Facial (VII) &mdash; the jobs</div>
+<div class="hook">😀 FACE &middot; front-tongue TASTE &middot; TEARS + SPIT</div>
+<div class="fact">VII is motor to the <b>muscles of facial expression</b> (e.g. orbicularis oculi) plus <b>stylohyoid, posterior belly of digastric, and stapedius</b>. It carries <b>taste from the anterior 2/3 of the tongue</b> (cell bodies in the geniculate ganglion) and <b>parasympathetic secretomotor</b> fibers (via chorda tympani) to the <b>submandibular and sublingual glands</b> (and lacrimal).</div>
+<div class="like">💡 VII does the <b>smile</b>, the <b>front-of-tongue taste</b>, and the <b>tears + spit</b> glands. (Posterior 1/3 taste belongs to IX &mdash; don&rsquo;t hand it to VII.)</div>
+<div class="src">Dr. Maini &mdash; L08 Face &amp; Scalp &middot; MC bank Q37&ndash;Q43</div>
+</div>
+
+<div class="card rule">
+<div class="label">Facial (VII) &mdash; Bell&rsquo;s palsy</div>
+<div class="hook">😐 IDIOPATHIC WHOLE-SIDE DROOP + eye rolls up</div>
+<div class="fact"><b>Bell&rsquo;s palsy</b> = idiopathic paralysis of one whole side of the face. <b>Bell&rsquo;s phenomenon</b> = when the patient tries to close the weak eye, the <b>eyeball rolls upward</b> (visible because the lid won&rsquo;t shut). Herpes zoster of the geniculate ganglion + VIII = <b>Ramsay Hunt</b> (ear vesicles + facial palsy + hearing symptoms).</div>
+<div class="like">💡 A peripheral VII lesion sags the <b>whole half</b> of the face &mdash; forehead included. If the eye won&rsquo;t close and rolls up, that&rsquo;s Bell&rsquo;s phenomenon giving the diagnosis away.</div>
+<div class="src">Dr. Maini &mdash; L08 Face &amp; Scalp &middot; MC bank Q44&ndash;Q46</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Vestibulocochlear (VIII)</div>
+<div class="hook">👂 HEAR + BALANCE &middot; never leaves the skull</div>
+<div class="fact">CN VIII is <b>purely sensory</b>, with two parts: <b>cochlear (hearing)</b> and <b>vestibular (balance)</b>. Unlike VII, it <b>does not exit the skull</b> &mdash; it ends in the inner ear within the petrous temporal bone.</div>
+<div class="like">💡 VIII <b>carpools with VII</b> into the meatus, then splits into a <b>&ldquo;hearing&rdquo; wire</b> (cochlear) and a <b>&ldquo;balance&rdquo; wire</b> (vestibular) &mdash; and never comes back out.</div>
+<div class="src">Dr. Maini &mdash; L22 The Ear &middot; MC bank Q47, Q48, Q51, Q52, Q54</div>
+</div>
+
+<div class="card rule">
+<div class="label">Vestibulocochlear (VIII) &mdash; lesion</div>
+<div class="hook">🔔 COCHLEAR &rarr; RING/DEAF &middot; VESTIBULAR &rarr; SPIN</div>
+<div class="fact"><b>Cochlear-fiber</b> lesion &rarr; <b>tinnitus</b> (ringing) and/or <b>deafness</b>. <b>Vestibular-fiber</b> lesion &rarr; <b>vertigo</b> and disturbed balance.</div>
+<div class="like">💡 Split the symptom by the wire: the <b>hearing wire</b> fails &rarr; ringing/deaf; the <b>balance wire</b> fails &rarr; the room spins.</div>
+<div class="src">Dr. Maini &mdash; L22 The Ear &middot; MC bank Q49, Q50</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; Jugular trio: IX Glossopharyngeal, X Vagus, XI Accessory</h2>
+<div class="topic-tagline">Three nerves out one door (jugular foramen). Two clean &ldquo;all-except&rdquo; rules, the wandering vagus, and the shrug-and-turn nerve.</div>
+<div class="cards">
+
+<div class="card muscle">
+<div class="label">Glossopharyngeal (IX) &mdash; function</div>
+<div class="hook">👅 IX = 1 MUSCLE + PAROTID + BACK-tongue</div>
+<div class="fact"><b>Motor to stylopharyngeus ONLY</b>; <b>parasympathetic to the parotid gland</b> (relayed through the <b>otic ganglion</b>); <b>general sensation AND taste from the posterior 1/3 of the tongue</b>; plus the <b>carotid sinus &amp; body</b> and the <b>sensory (afferent) limb of the gag reflex</b>. IX is the nerve of the <b>3rd pharyngeal arch</b>.</div>
+<div class="like">💡 IX runs a <b>single muscle</b> (stylopharyngeus), <b>waters the parotid</b> (otic ganglion), and <b>tastes/feels the back third</b> of the tongue. Touch the back of the throat &rarr; IX senses the gag.</div>
+<div class="src">Dr. Maini &mdash; L06 / L10 / L28 &middot; MC bank Q56&ndash;Q63</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Vagus (X) &mdash; the wanderer</div>
+<div class="hook">🚶 X WANDERS: throat &rarr; heart &rarr; gut</div>
+<div class="fact">The <b>vagus (X)</b> exits the jugular foramen, rides the <b>carotid sheath</b>, and supplies <b>parasympathetics to the thorax and gut down to the left colic (splenic) flexure</b>. It is the <b>motor (efferent) limb of the gag reflex</b> and runs <b>all pharyngeal muscles EXCEPT stylopharyngeus</b>, and the <b>one tongue muscle palatoglossus</b>.</div>
+<div class="like">💡 The <b>vagus is the vagabond</b> &mdash; it wanders farther than any other cranial nerve, throat to gut. IX <b>feels</b> the gag; X <b>does</b> the gag.</div>
+<div class="src">Dr. Maini &mdash; L05 / L28 &middot; MC bank Q65, Q66, Q73&ndash;Q75</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Vagus (X) &mdash; the laryngeal nerves</div>
+<div class="hook">🗣️ ABOVE cords = internal &middot; BELOW = recurrent</div>
+<div class="fact"><b>Recurrent laryngeal nerve</b> = motor to <b>ALL intrinsic laryngeal muscles EXCEPT cricothyroid</b> (that one is the <b>external laryngeal nerve</b>), and it <b>runs in the tracheo-esophageal groove</b>. <b>Sensory divide at the vocal folds:</b> above = <b>internal laryngeal nerve</b>; below = <b>recurrent laryngeal nerve</b>.</div>
+<div class="like">💡 Two rules in one: for <b>movement</b>, recurrent does everything but cricothyroid; for <b>sensation</b>, draw a line at the vocal folds &mdash; internal above, recurrent below.</div>
+<div class="src">Dr. Maini &mdash; L26 The Larynx &middot; MC bank Q67, Q68, Q71, Q72, Q76</div>
+</div>
+
+<div class="card rule">
+<div class="label">Vagus (X) &mdash; recurrent laryngeal lesions</div>
+<div class="hook">🪜 ONE RLN = HOARSE &middot; BOTH = APHONIA + STRIDOR</div>
+<div class="fact"><b>One recurrent laryngeal nerve</b> injured (thyroid surgery, or a posteriorly enlarging thyroid) &rarr; <b>hoarseness (dysphonia)</b>. <b>Both</b> recurrent laryngeals &rarr; <b>aphonia + inspiratory stridor</b>.</div>
+<div class="like">💡 Climb the ladder by how much is cut: one side &rarr; a <b>hoarse voice</b>; both sides &rarr; <b>no voice</b> plus a whistle on breathing in. The RLN is the surgeon&rsquo;s tripwire in thyroid surgery.</div>
+<div class="src">Dr. Maini &mdash; L05 / L26 &middot; MC bank Q69, Q70</div>
+</div>
+
+<div class="card">
+<div class="label">Accessory (XI) &mdash; the two-hole nerve</div>
+<div class="hook">⬆️ SPINAL ROOT climbs UP the foramen magnum</div>
+<div class="fact">The <b>spinal root of CN XI</b> arises from the upper cervical cord, <b>ascends THROUGH the foramen magnum</b>, joins the cranial root, then <b>exits the jugular foramen</b> (with IX and X). The cranial root joins the <b>vagus</b>; the spinal root goes to <b>sternocleidomastoid + trapezius</b>, joined by <b>C2&ndash;C4</b> fibers.</div>
+<div class="like">💡 XI is the nerve at <b>two holes</b>: it goes <b>up</b> through the foramen magnum, then <b>out</b> the jugular foramen. The cranial part defects to the vagus; the spinal part drives the shrug muscles.</div>
+<div class="src">Dr. Maini &mdash; L03 / L28 &middot; MC bank Q77&ndash;Q80, Q85</div>
+</div>
+
+<div class="card rule">
+<div class="label">Accessory (XI) &mdash; test &amp; lesion</div>
+<div class="hook">🤷 SHRUG + TURN the head (SCM &amp; trapezius)</div>
+<div class="fact">Test CN XI by <b>shrugging the shoulders (trapezius)</b> and <b>turning the head against resistance (SCM)</b>. A lesion &rarr; <b>weak shrug, drooping shoulder, scapular winging, and difficulty turning the head</b>. Note: one SCM turns the head to the <b>opposite</b> side. XI runs exposed in the <b>posterior triangle</b>.</div>
+<div class="like">💡 Can&rsquo;t <b>shrug</b>, can&rsquo;t <b>turn the head</b> &rarr; accessory. It runs superficially across the posterior triangle, so it&rsquo;s easily nicked in neck surgery.</div>
+<div class="src">Dr. Maini &mdash; L03 / L05 &middot; MC bank Q81&ndash;Q84</div>
+</div>
+
+</div>
+
+<h2>Topic 7 &mdash; Tongue: XII Hypoglossal</h2>
+<div class="topic-tagline">The motor nerve of the tongue. Its own canal, one &ldquo;except,&rdquo; some C1 hitchhikers, and a lesion that points at the problem.</div>
+<div class="cards">
+
+<div class="card muscle">
+<div class="label">Hypoglossal (XII) &mdash; function</div>
+<div class="hook">👅 ALL &ldquo;-GLOSSUS&rdquo; MUSCLES &mdash; except PALATOglossus</div>
+<div class="fact">CN XII is <b>purely motor</b> to <b>all intrinsic and extrinsic tongue muscles EXCEPT palatoglossus</b> (which is vagus, X). <b>Genioglossus</b> is the muscle that <b>protrudes</b> the tongue.</div>
+<div class="like">💡 Every <b>&ldquo;-glossus&rdquo;</b> muscle is the tongue nerve&rsquo;s&hellip; except <b>palatoglossus</b>, the one the vagus stole. (My study aid, not Maini&rsquo;s.) It&rsquo;s the mirror of the vagus / stylopharyngeus rule &mdash; learn the pair.</div>
+<div class="src">Dr. Maini &mdash; L06 Pharyngeal Apparatus &middot; MC bank Q87, Q89, Q91, Q92</div>
+</div>
+
+<div class="card">
+<div class="label">Hypoglossal (XII) &mdash; C1 hitchhikers</div>
+<div class="hook">🚗 C1 rides XII &rarr; ansa + thyrohyoid + geniohyoid</div>
+<div class="fact"><b>C1 fibers hitchhike along the hypoglossal nerve</b>, then leave it to form the <b>superior root of the ansa cervicalis</b> (to infrahyoid muscles) and to supply <b>thyrohyoid and geniohyoid</b>. The nerve itself exits via the <b>hypoglossal canal</b> in the occipital bone.</div>
+<div class="like">💡 XII gives some passengers (C1) a lift, then drops them off to run the strap muscles &mdash; so &ldquo;geniohyoid / thyrohyoid&rdquo; are C1 fibers, not true XII fibers.</div>
+<div class="src">Dr. Maini &mdash; L03 Cervical Triangles &middot; MC bank Q90, Q93</div>
+</div>
+
+<div class="card rule">
+<div class="label">Hypoglossal (XII) &mdash; lesion</div>
+<div class="hook">👅 TONGUE POINTS TO THE LESION</div>
+<div class="fact">A <b>unilateral CN XII lesion</b> makes the protruded tongue <b>deviate TOWARD the damaged side</b> (the intact genioglossus of the normal side pushes it across), often with wasting on the affected side.</div>
+<div class="like">💡 The tongue <b>points at the problem</b> &mdash; deviates <b>toward</b> the lesion, not away. (Standard memory device &mdash; not attributed to Maini.)</div>
+<div class="src">Dr. Maini &mdash; CN XII clinical &middot; MC bank Q88, Q94</div>
+</div>
+
+</div>
+
+<h2>Topic 8 &mdash; Muscle &ldquo;all-except&rdquo; rules &amp; big-picture maps</h2>
+<div class="topic-tagline">The hardest lists collapse into a few &ldquo;everything-EXCEPT&rdquo; rules and four whole-set groupings. Learn the exception, not the roster.</div>
+<div class="cards">
+
+<div class="card ligament">
+<div class="label">The three muscle-group &ldquo;except&rdquo; rules</div>
+<div class="hook">✌️ Pharynx&rarr;X / Palate&rarr;X / Tongue&rarr;XII (each has ONE exception)</div>
+<div class="fact"><b>Pharyngeal muscles = vagus (X)</b>, EXCEPT <b>stylopharyngeus (IX)</b>. <b>Palatal muscles = vagus (X)</b>, EXCEPT <b>tensor veli palatini (V3)</b>. <b>Tongue muscles = hypoglossal (XII)</b>, EXCEPT <b>palatoglossus (X)</b>. Three lists, three exceptions.</div>
+<div class="like">💡 Vagus is the &ldquo;default throat nerve&rdquo; for pharynx AND palate &mdash; each list loses just one muscle (stylopharyngeus to IX; tensor veli palatini to V3). And the tongue is all XII except the one palatoglossus that vagus took.</div>
+<div class="src">Dr. Maini &mdash; L29 Labs (palate all X except tensor veli palatini &rarr; V3; tongue all XII except palatoglossus) &middot; MC bank Q56, Q73, Q87</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Parasympathetic outflow &amp; its ganglia</div>
+<div class="hook">🌿 PSNS = 3, 7, 9, 10 &middot; ganglia: ciliary(III) &middot; otic(IX)</div>
+<div class="fact">Only <b>four cranial nerves carry parasympathetic fibers: III, VII, IX, X</b>. Ganglia Maini pins to nerves: <b>ciliary ganglion = CN III</b>; <b>otic ganglion = CN IX</b> (to the parotid). (VII relays through pterygopalatine + submandibular ganglia.)</div>
+<div class="like">💡 The parasympathetic cranial club is <b>3-7-9-10</b>. Match ganglion to nerve: <b>ciliary&rarr;III, otic&rarr;IX</b> &mdash; both confirmed word-for-word in Maini&rsquo;s lecture.</div>
+<div class="src">Dr. Maini &mdash; L10/L11 ganglia &middot; MC bank Q97, Q98, Q99</div>
+</div>
+
+<div class="card">
+<div class="label">Purely sensory vs purely motor</div>
+<div class="hook">👁️ SENSORY: I &middot; II &middot; VIII &nbsp;|&nbsp; MOTOR: IV &middot; VI &middot; XI &middot; XII</div>
+<div class="fact"><b>Purely sensory: CN I (olfactory), II (optic), VIII (vestibulocochlear).</b> <b>Purely (somatic) motor: CN IV, VI, XI, XII.</b> (III is left out of &ldquo;pure motor&rdquo; because it also carries parasympathetic fibers.) There are <b>12 pairs</b> of cranial nerves total.</div>
+<div class="like">💡 Two tiny sets to memorize outright: the <b>3 pure-sensory</b> (1, 2, 8) and the <b>4 pure-motor</b> (4, 6, 11, 12). Everything else is mixed.</div>
+<div class="src">Dr. Maini &mdash; CN overview / fiber types &middot; MC bank Q95, Q102, Q104</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Cavernous sinus residents</div>
+<div class="hook">🏛️ IN THE WALL: III &middot; IV &middot; V1 &middot; V2 &middot; VI (VI floats inside)</div>
+<div class="fact">Running in or along the <b>wall of the cavernous sinus</b>: <b>CN III, IV, V1, V2</b> (in the lateral wall) and <b>VI</b> (running free through the sinus beside the internal carotid). All then head for the orbit / face.</div>
+<div class="like">💡 The cavernous sinus is a <b>nerve hallway</b> next to the carotid: III, IV, V1, V2 line the wall while VI walks down the middle &mdash; which is why VI is vulnerable here.</div>
+<div class="src">Dr. Maini &mdash; L14 Cranial Meninges &middot; MC bank Q101</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PhD &middot; GA 0202 Cranial Nerves (part 2) Mnemonics &middot; PENDING REVIEW</div>
+</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html" title="Return to the M14 Study Hub" aria-label="Return to the M14 Study Hub">📚</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

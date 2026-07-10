@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · Cranial Meninges — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 06 — CRANIAL MENINGES & BRAIN COVERINGS
+   Dr. Seema Maini. Cram Coach (voiced, hands-free). PENDING REVIEW.
+   GROUNDED ONLY in this module's AUDITED Everything-MC bank (84 anti-fab
+   verified items) + Dr. Maini's Cranial Meninges lecture (Lecture 13).
+   No new unverified facts. Analogies attributed to Maini are her own words.
+   THEME: violet. Correct keys taught plainly; answer positions balanced.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html";
+
+const TABS = [
+  { id: "cram", label: "Cram (voiced)" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (10 TOPICS) ==== */
+const cram = [
+  {
+    n: 1, title: "The big picture — three layers, their meanings, and the cranial rule", src: "Maini · Cranial Meninges",
+    facts: [
+      "We say CRANIAL meninges (not just meninges) because these same three layers continue down as the SPINAL meninges, but the spaces and the way the layers are arranged differ between the head and the spine.",
+      "Three layers, from the skull inward: DURA mater, then ARACHNOID mater, then PIA mater. The names are literal: dura means TOUGH (the 'tough mother', durable), arachnoid means SPIDER (its thread-like, web-like extensions), and pia means TENDER or soft (the 'soft mother').",
+      "The single most important cranial rule: the cranial dura is stuck to the periosteum of the skull on the OUTSIDE and to the arachnoid on the INSIDE, so there is NO natural epidural space and NO natural subdural space in the head. The one true fluid space is the SUBARACHNOID space, between arachnoid and pia, which holds cerebrospinal fluid.",
+      "Because there is normally no space beside the dura, if an image shows the dura separated from the bone, that separation is ABNORMAL: a collection of blood (hematoma) or pus.",
+    ],
+    flag: "Outside-in: DURA (tough mother), ARACHNOID (spider), PIA (tender mother). Cranially the epidural and subdural spaces are only POTENTIAL (they appear with bleeding); the SUBARACHNOID space is the one true CSF space. A dura-off-bone gap on imaging = an abnormal collection.",
+  },
+  {
+    n: 2, title: "Brain surface — gyri, sulci, and gray vs white matter", src: "Maini · Cranial Meninges",
+    facts: [
+      "The cortical surface is folded, not smooth. The RIDGES are the GYRI (gyrus singular) and the GROOVES between them are the SULCI (sulcus singular). A deep groove is a fissure.",
+      "Why fold at all? The convolutions let the cortex pack in far more neurons, roughly 10,000 times more than a smooth brain would hold.",
+      "GRAY matter is the OUTER cortex and contains the neuronal CELL BODIES. WHITE matter is deeper and is mostly MYELINATED fibers, because anything that looks white in the nervous system has a myelin sheath.",
+      "Clinical hook: smoothing or loss of the convolutions means fewer cortical neurons, which Maini links to DEMENTIA.",
+    ],
+    flag: "Gyri = ridges, sulci = grooves. Folding buys about 10,000x more neurons. Gray = outer cortex (cell bodies); white = mostly myelinated fibers. Loss of convolutions points toward dementia.",
+  },
+  {
+    n: 3, title: "Pia mater — the onion peel that carries vessels and helps make CSF", src: "Maini · Cranial Meninges",
+    facts: [
+      "The pia is a THIN, highly VASCULARIZED membrane made of LOOSE connective tissue, and it is the innermost layer.",
+      "It is applied so closely to the brain that it dips into every sulcus and gyrus, following the contours exactly, like an ONION PEEL. In a cadaver you need sharp forceps to lift it off.",
+      "As it dips in, the pia CARRIES small blood vessels with it and forms a sheath around them.",
+      "The cerebral VEINS run on the pia within the subarachnoid space, so a SUBARACHNOID hemorrhage is usually VENOUS, not arterial.",
+      "The pia, together with its blood vessels, also forms the tela choroidea and a FILTRATION membrane, helping to PRODUCE cerebrospinal fluid as part of the choroid plexus.",
+    ],
+    flag: "Pia = thin, vascular, loose CT; the onion peel that follows every sulcus and carries vessels in. Cerebral veins ride on the pia in the subarachnoid space, so a subarachnoid bleed is VENOUS. The pia also helps FORM (filter) CSF.",
+  },
+  {
+    n: 4, title: "Arachnoid mater, the subarachnoid space & cisterns", src: "Maini · Cranial Meninges",
+    facts: [
+      "The arachnoid is a DELICATE, TRANSPARENT, web-like membrane.",
+      "Unlike the pia, the arachnoid PASSES OVER the sulci and gyri instead of dipping in, Maini's 'sheet thrown over a chair' (you drape it rather than tuck it in).",
+      "The SUBARACHNOID space lies BETWEEN the arachnoid and the pia and is filled with cerebrospinal fluid.",
+      "Where the arachnoid bridges over a dip in the brain, the subarachnoid space widens into a CISTERN, a CSF-filled pocket. The LARGEST is the cerebellomedullary cistern (cisterna magna), between the cerebellum and the medulla; others she names are the chiasmatic, interpeduncular, pontine, and superior cisterns.",
+      "Clinical: because the cisterns are continuous with the subarachnoid space, a subarachnoid bleed can SPREAD through all of them.",
+    ],
+    flag: "Arachnoid = transparent web that DRAPES over the sulci (sheet over a chair). Subarachnoid space (arachnoid to pia) holds CSF and widens into CISTERNS. Largest cistern = cisterna magna (cerebellomedullary). A bleed can spread through all the cisterns.",
+  },
+  {
+    n: 5, title: "CSF & the choroid plexus — how the fluid is made", src: "Maini · Cranial Meninges",
+    facts: [
+      "Cerebrospinal fluid is found INSIDE the ventricles and, in a thin layer, OUTSIDE the brain in the subarachnoid space. Its two jobs: BUOYANCY (the brain floats so it does not bruise on the skull, especially at the BASE) and NUTRITION, a balanced environment for the sensitive neurons.",
+      "Neurons are NON-MITOTIC, so if they are damaged they are not replaced, which is why they are so heavily protected.",
+      "CSF is made by the CHOROID PLEXUS, a cauliflower-like tuft of villi in the ROOF of EACH ventricle.",
+      "The plexus is lined by EPENDYMAL cells, one of the four types of GLIAL cells (with astrocytes, oligodendrocytes, and microglia). The ependymal cells SECRETE the CSF; the pia plus its vessels form the tela choroidea, which fuses with the ependyma to complete the plexus.",
+      "CSF is formed by FILTRATION from blood; the ependymal cells and the pia keep its composition correct.",
+    ],
+    flag: "CSF = buoyancy + nutrition (floats the brain off the skull base). It is made by the CHOROID PLEXUS in the ROOF of each ventricle; EPENDYMAL cells (a glial type) secrete it by FILTRATION from blood. Neurons are non-mitotic, hence heavily protected.",
+  },
+  {
+    n: 6, title: "Arachnoid granulations & CSF absorption — the one-way valve", src: "Maini · Cranial Meninges",
+    facts: [
+      "CSF is secreted CONSTANTLY, so it must be ABSORBED at the same rate or it accumulates and raises intracranial pressure, which can compress blood flow and cause ischemia, infection, or stroke.",
+      "Absorption is done by the ARACHNOID GRANULATIONS (villi): tufted prolongations of the pia-arachnoid that push THROUGH the meningeal layer of the dura.",
+      "Board favorite (Maini flags it out loud): the structure that acts as a ONE-WAY VALVE for CSF absorption is the ARACHNOID GRANULATIONS. They return CSF to the venous blood at the SUPERIOR SAGITTAL SINUS.",
+      "You saw their IMPRESSIONS inside the calvaria, flanking the midline groove of the superior sagittal sinus, along with the middle meningeal vessels.",
+      "If blood cells or debris (after a bleed or infection) BLOCK the granulations, CSF is not absorbed and intracranial pressure rises.",
+    ],
+    flag: "ONE-WAY VALVE for CSF absorption = ARACHNOID GRANULATIONS (Maini: a frequent BOARD question). They push through the meningeal dura and drain CSF into the SUPERIOR SAGITTAL SINUS. Blocked granulations raise ICP. Secretion rate must equal absorption rate.",
+  },
+  {
+    n: 7, title: "Dura mater — layers, adherence, and pain", src: "Maini · Cranial Meninges",
+    facts: [
+      "The dura is the OUTERMOST and TOUGHEST covering of the CNS, made of DENSE connective tissue, and it is rich in PAIN RECEPTORS, so stretching it causes intense headache.",
+      "The CRANIAL dura has TWO layers: an outer PERIOSTEAL layer (against the bone) and an inner MENINGEAL layer. The SPINAL dura keeps the MENINGEAL layer ONLY, with no periosteal layer.",
+      "The cranial dura is adherent to the periosteum on the outside and to the arachnoid on the inside, so there is NO natural space on either side of it in the head.",
+      "The MENINGEAL layer is the one that projects inward to form the dural folds (septa); the two layers also SEPARATE in places to enclose the venous sinuses.",
+    ],
+    flag: "Dura = outermost, toughest, dense CT, full of PAIN receptors. Cranial dura = TWO layers (periosteal + meningeal); SPINAL dura = meningeal only. It is adherent to bone AND to arachnoid, so no natural space beside it. The MENINGEAL layer forms the septa and splits to hold the sinuses.",
+  },
+  {
+    n: 8, title: "The four dural septa (folds)", src: "Maini · Cranial Meninges",
+    facts: [
+      "The meningeal dura forms FOUR inward folds (septa) that partition the brain.",
+      "1) FALX CEREBRI, falx means SICKLE: a vertical sickle-shaped partition sitting in the LONGITUDINAL FISSURE between the left and right CEREBRAL hemispheres. It attaches ANTERIORLY to the frontal crest and crista galli, and POSTERIORLY to the internal occipital crest and protuberance.",
+      "2) TENTORIUM CEREBELLI, tentorium means TENT: a wide, arched shelf separating the OCCIPITAL LOBE from the CEREBELLUM. Attachments: the posterior clinoid processes, the superior part of the petrous temporal bone, and the grooves for the TRANSVERSE sinuses.",
+      "3) FALX CEREBELLI: a SHALLOW midline fold between the two CEREBELLAR hemispheres (shallow because those hemispheres sit close together).",
+      "4) DIAPHRAGMA SELLAE: a small horizontal sheet roofing the SELLA TURCICA (which houses the PITUITARY gland), with a central APERTURE for the pituitary stalk. A pituitary adenoma stretches this pain-sensitive sheet, causing intense headache.",
+    ],
+    flag: "FALX CEREBRI = sickle (between the cerebral hemispheres); TENTORIUM CEREBELLI = tent (occipital lobe vs cerebellum); FALX CEREBELLI = shallow (between the cerebellar hemispheres); DIAPHRAGMA SELLAE = roof over the sella turcica / pituitary, with an aperture for the stalk. Maini: expect a LOT of final-exam questions here.",
+  },
+  {
+    n: 9, title: "Dural venous sinuses — negative pressure & air embolism", src: "Maini · Cranial Meninges",
+    facts: [
+      "The literal meaning of SINUS is a SPACE, here a venous, blood-filled space.",
+      "A dural venous sinus forms where the two dura layers (periosteal and meningeal) SEPARATE; the gap fills with venous blood. The SUPERIOR SAGITTAL SINUS runs in the midline along the top of the head, front to back, and it is the sinus that receives CSF from the granulations.",
+      "These sinuses have NEGATIVE pressure. Venous pressure is about zero at the heart, becomes positive below it (about plus 95 millimeters of mercury at the feet when standing), and drops BELOW zero above the heart, which is why the external jugular vein is normally collapsed.",
+      "Surgical danger: because of the negative, vacuum-like pressure, a small NICK in a sinus can SUCK AIR in, causing an AIR EMBOLISM that travels to the heart and arteries and can block them (stroke, myocardial infarction, tissue infarction) and kill the patient on the table.",
+    ],
+    flag: "Sinus = a SPACE; the venous sinuses sit between the two dura layers; the superior sagittal sinus is the midline one on top and the only one that receives CSF. NEGATIVE pressure (why the EJV is collapsed) means a nicked sinus can SUCK AIR in = AIR EMBOLISM to the heart and arteries.",
+  },
+  {
+    n: 10, title: "Meningeal spaces & bleeds — arterial vs venous", src: "Maini · Cranial Meninges",
+    facts: [
+      "Cranially, the EPIDURAL and SUBDURAL spaces are only POTENTIAL, they appear only if there is BLEEDING. The SUBARACHNOID space is the one true, CSF-filled space.",
+      "So on imaging, dura separated from BONE = an abnormal EPIDURAL / extradural collection (hematoma or pus); dura separated from arachnoid = an abnormal SUBDURAL collection.",
+      "Which is worse, an ARTERIAL or a VENOUS bleed? ARTERIAL, because the high arterial pressure collects blood FAST and compresses structures almost immediately.",
+      "A VENOUS collection accumulates SLOWLY and may not be noticed for DAYS or even WEEKS. A SUBARACHNOID hemorrhage is usually VENOUS because the cerebral veins run on the pia in that space.",
+      "Contrast with the SPINE: there the dura keeps only its meningeal layer and there IS a real epidural space, filled with FAT, nerves, and veins.",
+    ],
+    flag: "Cranially: epidural & subdural = POTENTIAL (bleed only); subarachnoid = the true CSF space. Dura-off-bone = epidural collection; dura-off-arachnoid = subdural. ARTERIAL bleed = fast and worse; VENOUS = slow (days to weeks); a subarachnoid hemorrhage is venous. The SPINE, unlike the head, HAS a real (fatty) epidural space.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Board Q", text: "The structure that acts as a ONE-WAY VALVE for the absorption of CSF is the ARACHNOID GRANULATIONS (villi). They push through the meningeal dura and drain CSF into the SUPERIOR SAGITTAL SINUS.", why: "Maini literally calls this 'a very frequently asked question in your board exam' — know that granulations absorb, the choroid plexus secretes.", src: "Maini · Cranial Meninges" },
+  { tag: "★★ Heavy", text: "The FOUR dural septa: falx cerebri (sickle, between the cerebral hemispheres), tentorium cerebelli (tent, occipital lobe vs cerebellum), falx cerebelli (shallow, between the cerebellar hemispheres), diaphragma sellae (roof of the sella turcica, aperture for the pituitary stalk). Know the meanings, what each separates, and the attachments.", why: "She says out loud: 'You'll have a lot of questions on this in your final exam, and we are going to have a quiz also.'", src: "Maini · Cranial Meninges" },
+  { tag: "The no-space rule", text: "Cranially there is NO natural epidural space and NO natural subdural space, because the dura is fused to the periosteum outside and the arachnoid inside. The only true CSF space is the SUBARACHNOID space. So a dura-off-bone gap on an image is an abnormal collection.", why: "Her favorite reasoning chain — she draws it, then asks 'what does a separation mean?' (a hematoma or pus).", src: "Maini · Cranial Meninges" },
+  { tag: "CSF loop", text: "CSF is SECRETED by the choroid plexus (ependymal cells) in the roof of each ventricle, flows into the subarachnoid space, and is ABSORBED by the arachnoid granulations into the superior sagittal sinus. Secretion must equal absorption or intracranial pressure rises (ischemia, infection, stroke).", why: "She walks the whole production-to-absorption circuit and stresses the balance — a classic 'where is CSF made / absorbed' pairing.", src: "Maini · Cranial Meninges" },
+  { tag: "Layers", text: "Dura = outermost, toughest, DENSE CT, rich in pain receptors, two layers cranially (periosteal + meningeal). Arachnoid = delicate, transparent, web-like. Pia = thin, highly VASCULAR, loose CT. And the meanings: dura = tough mother, arachnoid = spider, pia = tender mother.", why: "She tests both the tissue type and the literal name meaning of each layer.", src: "Maini · Cranial Meninges" },
+  { tag: "Sinuses", text: "A dural venous sinus is a SPACE between the two dura layers, filled with venous blood. It carries NEGATIVE pressure, so a nick sucks air in and causes an AIR EMBOLISM to the heart and arteries. The superior sagittal sinus is the midline one and the one that receives CSF.", why: "The negative-pressure / air-embolism surgical warning is a vivid point she dwells on — high-yield.", src: "Maini · Cranial Meninges" },
+  { tag: "Bleeds", text: "ARTERIAL bleeds are worse: high pressure collects fast and compresses structures quickly. VENOUS collections build slowly, noticed over days to weeks. A SUBARACHNOID hemorrhage is usually VENOUS because the cerebral veins run on the pia there.", why: "She asks 'which is worse, arterial or venous?' and links the subarachnoid bleed to the veins on the pia.", src: "Maini · Cranial Meninges" },
+  { tag: "Cisterns", text: "Because the arachnoid passes OVER the brain's contours rather than dipping in, the subarachnoid space widens into CISTERNS, all CSF-filled. The LARGEST is the cerebellomedullary cistern (cisterna magna), between the cerebellum and the medulla.", why: "Expect a 'largest cistern' item and the 'why do cisterns form' reasoning (arachnoid drapes over).", src: "Maini · Cranial Meninges" },
+  { tag: "Pia's two roles", text: "The pia is the onion peel that follows every sulcus AND carries blood vessels in; it also helps FORM CSF as the filtration membrane of the choroid plexus (tela choroidea fuses with the ependyma).", why: "Easy to forget the pia's second job — producing CSF — beyond just wrapping the brain.", src: "Maini · Cranial Meninges" },
+  { tag: "Surface", text: "Gyri = ridges, sulci = grooves; folding gives about 10,000x more neurons; gray matter = outer cortex (cell bodies), white matter = myelinated fibers; loss of convolutions points to dementia.", why: "Fast definitional points she opens with — quick, guaranteed marks.", src: "Maini · Cranial Meninges" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  { kind: "Analogy", title: "The three 'mothers' unlock the layers", text: "Maini translates each layer's name: DURA = tough / durable, the 'tough mother'; ARACHNOID = spider, for its web-like threads; PIA = tender / soft, the 'soft mother'. The meaning tells you the character of each membrane.", helps: "One image (tough / spider / tender) fixes the order and the nature of all three layers.", src: "Maini · Cranial Meninges" },
+  { kind: "Analogy", title: "Pia = an onion peel", text: "The pia is applied so closely to the brain that it follows every sulcus and gyrus exactly. Maini says that in a cadaver you must use sharp forceps to separate it, like peeling an onion skin.", helps: "Anchors that the pia (not the arachnoid) hugs the contours and carries the small vessels in.", src: "Maini · Cranial Meninges" },
+  { kind: "Analogy", title: "Sheet over a chair — and how cisterns form", text: "You can cover a chair two ways: tuck the sheet in, or throw it over. The PIA tucks in (follows the sulci); the ARACHNOID drapes over. Where the arachnoid drapes over a dip, the gap it leaves fills with CSF and becomes a cistern.", helps: "Explains the pia-vs-arachnoid difference and why cisterns exist in one image.", src: "Maini · Cranial Meninges" },
+  { kind: "Rule", title: "'Sinus' just means a space", text: "Maini reminds the class that the literal meaning of sinus is a space. A dural venous sinus is simply a blood-filled space that opens up where the two dura layers separate.", helps: "Stops you overthinking sinuses — they are spaces between the periosteal and meningeal dura.", src: "Maini · Cranial Meninges" },
+  { kind: "Rule", title: "falx = sickle, tentorium = tent", text: "The Latin names describe the shapes. FALX means sickle (a curved blade) — a sickle-shaped curtain in the midline. TENTORIUM means tent — a tent pitched over the cerebellum.", helps: "The names alone tell you the shape and location of two of the four septa.", src: "Maini · Cranial Meninges" },
+  { kind: "Rule", title: "No space in the head unless there's blood", text: "Cranially the epidural and subdural spaces are only potential; the dura is glued to bone and to arachnoid. So Maini's clinical read: any separation of dura from bone (or from arachnoid) on an image is a collection — blood or pus.", helps: "Turns a normal-anatomy fact into the exact clinical inference she asks for.", src: "Maini · Cranial Meninges" },
+  { kind: "Trick", title: "Negative pressure = a vacuum that sucks air", text: "The dural sinuses sit above the heart, where venous pressure drops below zero — the same reason the external jugular vein is collapsed. Maini's surgeon warning: nick a sinus and that vacuum sucks air in, an air embolism that can reach the heart and kill the patient.", helps: "Links the negative-pressure fact to the collapsed EJV and to the air-embolism danger in one story.", src: "Maini · Cranial Meninges" },
+  { kind: "Rule", title: "Secrete vs absorb — plexus vs granulation", text: "Two structures, opposite jobs. The CHOROID PLEXUS (ependymal cells) SECRETES CSF into the ventricles. The ARACHNOID GRANULATIONS ABSORB it, acting as one-way valves into the superior sagittal sinus — Maini's flagged board answer.", helps: "Prevents the classic mix-up between the maker and the drain of CSF.", src: "Maini · Cranial Meninges" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Items derived from this module's AUDITED Everything-MC bank (anti-fab
+   verified) and Maini's Cranial Meninges lecture. Answer positions balanced
+   across A/B/C/D (8/8/7/7 over 30 items). */
+const questions = [
+  { id: 1, topic: "Layers & spaces", src: "Maini · Cranial Meninges", q: "List the three cranial meningeal layers from the skull inward.", opts: ["Dura, then arachnoid, then pia", "Pia, then arachnoid, then dura", "Arachnoid, then dura, then pia", "Dura, then pia, then arachnoid"], a: 0, h1: "Start at the skull and work inward.", h2: "Tough one first, tender one last.", exp: "From outside in: DURA, then ARACHNOID, then PIA." },
+  { id: 2, topic: "Layers & spaces", src: "Maini · Cranial Meninges", q: "The word 'dura' (dura mater) literally means:", opts: ["Tender / soft (the 'soft mother')", "Tough / durable (the 'tough mother')", "Spider-like (the 'spider web')", "Double-layered (the 'two mothers')"], a: 1, h1: "Think 'durable'.", h2: "It is the toughest layer.", exp: "Dura means TOUGH / durable, the 'tough mother'." },
+  { id: 3, topic: "Layers & spaces", src: "Maini · Cranial Meninges", q: "In the head, which is the ONLY true, naturally CSF-filled space?", opts: ["The epidural space", "The subdural space", "The subarachnoid space", "The extradural space"], a: 2, h1: "Cranially two of the 'spaces' are only potential.", h2: "It sits between arachnoid and pia.", exp: "Only the SUBARACHNOID space (arachnoid to pia) is a true CSF space cranially; epidural and subdural are only potential." },
+  { id: 4, topic: "Brain surface", src: "Maini · Cranial Meninges", q: "The raised ridges of the cortex and the grooves between them are called, respectively:", opts: ["Sulci and gyri", "Cisterns and villi", "Fissures and gyri", "Gyri and sulci"], a: 3, h1: "Ridge up, groove down.", h2: "A gyrus is a ridge.", exp: "The ridges are GYRI and the grooves are SULCI." },
+  { id: 5, topic: "Brain surface", src: "Maini · Cranial Meninges", q: "Why is the cortical surface folded instead of smooth?", opts: ["To pack in roughly 10,000x more neurons", "To make more cerebrospinal fluid", "To anchor the pia to the bone", "To let the dura form its septa"], a: 0, h1: "It is about capacity.", h2: "Far more cell bodies fit.", exp: "Folding lets the cortex hold about 10,000x more neurons than a smooth brain." },
+  { id: 6, topic: "Brain surface", src: "Maini · Cranial Meninges", q: "Which correctly contrasts gray and white matter?", opts: ["Gray = myelinated fibers; white = cell bodies", "Gray = outer cortex with cell bodies; white = mostly myelinated fibers", "Both are mostly myelin", "Gray = choroid plexus; white = pia"], a: 1, h1: "Anything white in the CNS has myelin.", h2: "Cell bodies sit in the outer cortex.", exp: "GRAY = outer cortex (neuronal cell bodies); WHITE = mostly myelinated fibers." },
+  { id: 7, topic: "Pia", src: "Maini · Cranial Meninges", q: "The pia mater is best described as:", opts: ["A tough, two-layered dense-CT membrane", "A transparent, avascular web", "A thin, highly vascular membrane of loose connective tissue", "A bony periosteal membrane"], a: 2, h1: "It is the innermost, most delicate wrap.", h2: "Thin and full of vessels.", exp: "The pia is thin, highly VASCULAR, and made of loose connective tissue." },
+  { id: 8, topic: "Pia", src: "Maini · Cranial Meninges", q: "Maini's 'onion peel' describes which layer, and why?", opts: ["Dura, because it is tough", "Arachnoid, because it drapes over the sulci", "The periosteal layer, because it lines bone", "Pia, because it follows every sulcus so closely you must peel it with sharp forceps"], a: 3, h1: "Which layer hugs the brain exactly?", h2: "You need forceps to lift it off.", exp: "The PIA follows every contour so closely it peels off like an onion skin." },
+  { id: 9, topic: "Pia", src: "Maini · Cranial Meninges", q: "Cerebral VEINS run on the pia within the subarachnoid space. Maini's takeaway is:", opts: ["A subarachnoid hemorrhage is usually VENOUS", "A subarachnoid hemorrhage is always arterial", "The subarachnoid space contains no vessels", "The veins there produce CSF"], a: 0, h1: "Which vessels lie in that space?", h2: "Veins, not arteries.", exp: "Because the cerebral veins lie on the pia there, a subarachnoid bleed is usually VENOUS." },
+  { id: 10, topic: "Arachnoid & cisterns", src: "Maini · Cranial Meninges", q: "The arachnoid mater is described as:", opts: ["A thick, vascular membrane of loose CT", "A delicate, transparent, web-like membrane", "A tough, two-layered membrane", "A bony membrane continuous with periosteum"], a: 1, h1: "It is named for a spider web.", h2: "See-through and delicate.", exp: "The arachnoid is a delicate, transparent, web-like membrane." },
+  { id: 11, topic: "Arachnoid & cisterns", src: "Maini · Cranial Meninges", q: "Maini's 'sheet over a chair' contrast between pia and arachnoid says:", opts: ["Both pia and arachnoid dip into the sulci", "The arachnoid dips in; the pia drapes over", "The pia dips into the sulci; the arachnoid drapes over them", "Both drape over the sulci"], a: 2, h1: "One tucks in, one drapes.", h2: "Pia tucks; arachnoid drapes.", exp: "The PIA tucks into the sulci; the ARACHNOID drapes over them (the sheet over a chair)." },
+  { id: 12, topic: "Arachnoid & cisterns", src: "Maini · Cranial Meninges", q: "The LARGEST cistern is:", opts: ["The interpeduncular cistern", "The pontine cistern", "The chiasmatic cistern", "The cerebellomedullary cistern (cisterna magna)"], a: 3, h1: "It lies between two hindbrain structures.", h2: "Between cerebellum and medulla.", exp: "The cerebellomedullary cistern (CISTERNA MAGNA), between cerebellum and medulla, is the largest." },
+  { id: 13, topic: "CSF & choroid plexus", src: "Maini · Cranial Meninges", q: "Maini lists the two main functions of CSF as:", opts: ["Buoyancy and nutrition / a balanced environment", "Myelin production and CO2 removal", "Forming septa and anchoring the dura", "Absorbing venous blood"], a: 0, h1: "One is mechanical, one is chemical.", h2: "It floats the brain.", exp: "CSF provides BUOYANCY and NUTRITION (a balanced environment for the neurons)." },
+  { id: 14, topic: "CSF & choroid plexus", src: "Maini · Cranial Meninges", q: "The choroid plexus is located:", opts: ["In the subarachnoid space over the cerebellum", "In the ROOF of each ventricle", "Between the two dura layers", "Inside the superior sagittal sinus"], a: 1, h1: "Inside the brain's fluid cavities.", h2: "In their roof.", exp: "The choroid plexus sits in the ROOF of each ventricle." },
+  { id: 15, topic: "CSF & choroid plexus", src: "Maini · Cranial Meninges", q: "The ependymal cells that line the choroid plexus are:", opts: ["A type of neuron", "A type of arachnoid granulation", "A glial cell that SECRETES CSF", "A layer of the dura mater"], a: 2, h1: "They are neuroglia, not neurons.", h2: "They make the fluid.", exp: "Ependymal cells are GLIAL cells that SECRETE CSF (one of the four glial types)." },
+  { id: 16, topic: "CSF & choroid plexus", src: "Maini · Cranial Meninges", q: "How is cerebrospinal fluid formed?", opts: ["By secretion from the arachnoid granulations", "By condensation of venous blood", "By breakdown of myelin", "By FILTRATION from blood, regulated by the ependymal cells and pia"], a: 3, h1: "Like most body fluids.", h2: "It is filtered from plasma.", exp: "CSF is formed by FILTRATION from blood; the ependymal cells and pia keep its composition normal." },
+  { id: 17, topic: "Granulations", src: "Maini · Cranial Meninges", q: "The one-way VALVE for CSF absorption (Maini's board question) is the:", opts: ["Arachnoid granulations (villi)", "Choroid plexus", "Ependymal cells", "Diaphragma sellae"], a: 0, h1: "Absorption, not secretion.", h2: "Tufts that poke through the dura.", exp: "The ARACHNOID GRANULATIONS act as one-way valves for CSF absorption — Maini's flagged board question." },
+  { id: 18, topic: "Granulations", src: "Maini · Cranial Meninges", q: "Arachnoid granulations return CSF to the venous blood at which sinus?", opts: ["The cavernous sinus", "The superior sagittal sinus", "The straight sinus", "The transverse sinus"], a: 1, h1: "Midline, along the top of the head.", h2: "The sagittal one.", exp: "They drain CSF into the SUPERIOR SAGITTAL SINUS." },
+  { id: 19, topic: "Granulations", src: "Maini · Cranial Meninges", q: "After a bleed or infection, intracranial pressure can rise because:", opts: ["The choroid plexus stops making CSF", "The pia detaches from the brain", "Blood cells or debris block the granulations, so CSF is not absorbed", "The dura peels off the skull"], a: 2, h1: "Think of the plumbing.", h2: "The drain gets clogged.", exp: "Debris can BLOCK the granulations, so CSF is not absorbed and intracranial pressure rises." },
+  { id: 20, topic: "Dura", src: "Maini · Cranial Meninges", q: "The cranial dura has how many layers, and which?", opts: ["One, meningeal only", "One, periosteal only", "Three, adding an arachnoid layer", "Two: periosteal (against bone) and meningeal"], a: 3, h1: "The spinal dura has just one.", h2: "Outer against bone, inner meningeal.", exp: "The cranial dura has TWO layers, PERIOSTEAL + MENINGEAL (the spinal dura keeps the meningeal layer only)." },
+  { id: 21, topic: "Dura", src: "Maini · Cranial Meninges", q: "Why is there normally NO epidural space in the head?", opts: ["The cranial dura is adherent to the periosteum of the skull", "The dura floats freely in CSF", "The arachnoid fills the gap with villi", "The pia seals the bone"], a: 0, h1: "What is the dura stuck to?", h2: "To the bone's periosteum.", exp: "The cranial dura is fused to the skull's periosteum, so no epidural space normally exists." },
+  { id: 22, topic: "Dura", src: "Maini · Cranial Meninges", q: "Stretching the dura causes intense headache because it is rich in:", opts: ["Blood vessels", "Pain receptors", "Myelinated motor fibers", "Choroid villi"], a: 1, h1: "It is very sensitive.", h2: "Nociceptors.", exp: "The dura has a large number of PAIN RECEPTORS, so stretching it produces intense pain." },
+  { id: 23, topic: "Dural septa", src: "Maini · Cranial Meninges", q: "Where does the falx cerebri sit, and what does 'falx' mean?", opts: ["Between cerebellum and occipital lobe; 'tent'", "Over the sella turcica; 'diaphragm'", "In the longitudinal fissure between the cerebral hemispheres; 'sickle'", "Between the cerebellar hemispheres; 'small sickle'"], a: 2, h1: "Falx = sickle.", h2: "Between the two big hemispheres.", exp: "The FALX CEREBRI (sickle) is a vertical partition in the longitudinal fissure between the cerebral hemispheres." },
+  { id: 24, topic: "Dural septa", src: "Maini · Cranial Meninges", q: "The tentorium cerebelli separates:", opts: ["The two cerebral hemispheres", "The two cerebellar hemispheres", "The pituitary from the hypothalamus", "The occipital lobe of the cerebrum from the cerebellum"], a: 3, h1: "Tentorium = tent.", h2: "A shelf over the cerebellum.", exp: "The TENTORIUM CEREBELLI separates the OCCIPITAL LOBE from the CEREBELLUM." },
+  { id: 25, topic: "Dural septa", src: "Maini · Cranial Meninges", q: "The diaphragma sellae roofs the sella turcica (which houses the pituitary). Its special feature is:", opts: ["A central aperture for the pituitary stalk", "A groove for the transverse sinus", "Attachment to the crista galli", "A sickle shape in the midline"], a: 0, h1: "Something has to pass through it.", h2: "The pituitary stalk.", exp: "The DIAPHRAGMA SELLAE has a central APERTURE for the pituitary stalk; an adenoma stretching it causes intense headache." },
+  { id: 26, topic: "Venous sinuses", src: "Maini · Cranial Meninges", q: "The literal meaning of the word 'sinus' is:", opts: ["A valve", "A space", "A fold", "A vein wall"], a: 1, h1: "Not a structure — a void.", h2: "An empty space.", exp: "'Sinus' literally means a SPACE — here a venous, blood-filled space." },
+  { id: 27, topic: "Venous sinuses", src: "Maini · Cranial Meninges", q: "A dural venous sinus forms where:", opts: ["The arachnoid balloons over a sulcus", "The pia lifts off the brain surface", "The two dura layers (periosteal + meningeal) separate", "The skull erodes a channel in the bone"], a: 2, h1: "Between two layers of one membrane.", h2: "The dura splits apart.", exp: "A sinus forms where the PERIOSTEAL and MENINGEAL dura SEPARATE, and that space fills with venous blood." },
+  { id: 28, topic: "Venous sinuses", src: "Maini · Cranial Meninges", q: "Why can a nicked dural venous sinus cause an air embolism?", opts: ["High arterial pressure sprays blood out", "CSF leaks and lowers the pressure", "The sinus clots instantly", "Its NEGATIVE pressure sucks air in, which travels to the heart and arteries"], a: 3, h1: "These sinuses have an unusual pressure.", h2: "A vacuum pulls air in.", exp: "Dural sinuses have NEGATIVE pressure; a nick sucks AIR in, causing an embolism that reaches the heart and arteries." },
+  { id: 29, topic: "Bleeds", src: "Maini · Cranial Meninges", q: "Which is worse, an arterial or a venous intracranial bleed, and why?", opts: ["Arterial — high pressure collects blood fast and compresses structures quickly", "Venous — the blood is thicker and clots faster", "They are equal — both fill the same space", "Venous — because of the negative pressure"], a: 0, h1: "Compare the pressures.", h2: "Arteries are high-pressure.", exp: "ARTERIAL is worse — the high pressure fills fast and compresses structures almost immediately." },
+  { id: 30, topic: "Bleeds", src: "Maini · Cranial Meninges", q: "A slowly enlarging collection noticed only after days to weeks is most consistent with:", opts: ["An arterial bleed", "A venous bleed", "Rupture of an arachnoid granulation", "Choroid plexus over-secretion"], a: 1, h1: "It accumulates slowly.", h2: "A low-pressure source.", exp: "A VENOUS collection accumulates slowly and may be noticed only over days to weeks." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.voicenote{font-size:13px;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0 6px;line-height:1.4}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.player{position:sticky;top:52px;z-index:15;background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:14px;padding:12px 14px;margin:0 0 16px;box-shadow:0 14px 32px -20px var(--accent-deep)}
+.player-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pbtn{border:none;background:rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:600;font-size:14px;padding:8px 13px;border-radius:10px;cursor:pointer;transition:.14s}
+.pbtn:hover{background:rgba(255,255,255,.30)}
+.pbtn.main{background:#fff;color:var(--accent-deep)}
+.pbtn:disabled{opacity:.45;cursor:default}
+.pstatus{font-size:13px;font-weight:600;opacity:.96;margin-left:4px;flex:1;min-width:140px}
+.pset{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:11px;font-size:12.5px}
+.pset label{display:flex;gap:8px;align-items:center;font-weight:600}
+.pset input[type=range]{accent-color:#fff;width:130px}
+.pset select{font:inherit;font-size:12.5px;border-radius:8px;border:none;padding:5px 8px;background:rgba(255,255,255,.92);color:var(--ink);max-width:190px}
+.pnote{font-size:12px;opacity:.92;margin-top:9px}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);scroll-margin-top:120px;transition:box-shadow .2s,outline-color .2s}
+.obj.reading{outline:3px solid var(--accent);outline-offset:2px;box-shadow:0 0 0 6px var(--accent-tint),0 12px 28px -20px rgba(124,58,237,.5)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ============================================== TTS text normalizer ======= */
+function speakClean(t) {
+  return String(t)
+    .replace(/[→➔➜⮕⇒]/g, " to ")
+    .replace(/[–—]/g, ", ")
+    .replace(/[★☆⚑🔊⚡💡🎯]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 06 · Head &amp; Neck · Dr. Maini</span>
+          <h1 className="title serif">Cranial <em>Meninges</em> &amp; Brain Coverings</h1>
+          <p className="voicenote">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+          <p className="subtitle">A voiced, hands-free cram for Maini&apos;s cranial-meninges lecture &mdash; the three layers and their spaces, brain surface, pia &amp; arachnoid, CSF and the choroid plexus, the arachnoid granulations, the dura and its four septa, the venous sinuses, and the bleeds &mdash; in her order, with a drill in her style and her own analogies. Press play on the Cram tab and it reads the must-knows aloud.</p>
+          <div className="pill-row">
+            <span className="pill-date">🧠 Cranial Meninges &amp; Brain Coverings · Lecture 13</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s Cranial Meninges lecture and this module&apos;s audited question bank. High-yield walkthrough, source-tagged per card. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+/* Voiced, hands-free walkthrough. Web Speech reads each card aloud and
+   auto-advances through all ten topics. */
+function Cram() {
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+  const [voices, setVoices] = useState([]);
+  const [voiceURI, setVoiceURI] = useState("");
+  const [rate, setRate] = useState(1);
+  const [playing, setPlaying] = useState(false);
+  const [active, setActive] = useState(-1);
+
+  const playingRef = useRef(false);
+  const idxRef = useRef(0);
+  const rateRef = useRef(1);
+  const voiceRef = useRef(null);
+
+  const lines = useMemo(() => {
+    const L = [];
+    cram.forEach((c, ci) => {
+      L.push({ ci, text: c.title });
+      c.facts.forEach((f) => L.push({ ci, text: f }));
+      if (c.flag) L.push({ ci, text: "Maini's flag. " + c.flag });
+    });
+    return L;
+  }, []);
+  const linesRef = useRef(lines);
+  useEffect(() => { linesRef.current = lines; }, [lines]);
+
+  useEffect(() => {
+    if (!supported) return;
+    const load = () => {
+      const vs = window.speechSynthesis.getVoices();
+      setVoices(vs);
+      if (vs.length && !voiceRef.current) {
+        const pick =
+          vs.find((v) => /ava/i.test(v.name)) ||
+          vs.find((v) => /emma/i.test(v.name)) ||
+          vs.find((v) => /andrew/i.test(v.name)) ||
+          vs.find((v) => /natural/i.test(v.name) && /^en/i.test(v.lang)) ||
+          vs.find((v) => /^en/i.test(v.lang)) ||
+          vs[0];
+        if (pick) { voiceRef.current = pick; setVoiceURI(pick.voiceURI); }
+      }
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => {
+      try { window.speechSynthesis.onvoiceschanged = null; window.speechSynthesis.cancel(); } catch (e) {}
+    };
+  }, [supported]);
+
+  const scrollTo = (ci) => {
+    try {
+      const el = document.getElementById("cram-card-" + cram[ci].n);
+      if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch (e) {}
+  };
+
+  const speakFrom = (i) => {
+    if (!supported) return;
+    const L = linesRef.current;
+    if (i >= L.length) { playingRef.current = false; setPlaying(false); setActive(-1); idxRef.current = 0; return; }
+    idxRef.current = i;
+    setActive(L[i].ci);
+    scrollTo(L[i].ci);
+    const u = new SpeechSynthesisUtterance(speakClean(L[i].text));
+    if (voiceRef.current) u.voice = voiceRef.current;
+    u.rate = rateRef.current;
+    u.onend = () => { if (playingRef.current) speakFrom(idxRef.current + 1); };
+    try { window.speechSynthesis.speak(u); } catch (e) {}
+  };
+
+  const play = () => {
+    if (!supported) return;
+    playingRef.current = true; setPlaying(true);
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    speakFrom(idxRef.current || 0);
+  };
+  const pause = () => {
+    playingRef.current = false; setPlaying(false);
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+  };
+  const stop = () => {
+    playingRef.current = false; setPlaying(false); idxRef.current = 0; setActive(-1);
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+  };
+  const jump = (dir) => {
+    const L = linesRef.current;
+    const cur = (L[idxRef.current] && L[idxRef.current].ci) || 0;
+    let target = Math.max(0, Math.min(cram.length - 1, cur + dir));
+    const first = L.findIndex((x) => x.ci === target);
+    idxRef.current = first >= 0 ? first : 0;
+    if (playingRef.current) { try { window.speechSynthesis.cancel(); } catch (e) {} speakFrom(idxRef.current); }
+    else { setActive(target); scrollTo(target); }
+  };
+  const onRate = (v) => {
+    setRate(v); rateRef.current = v;
+    if (playingRef.current) { try { window.speechSynthesis.cancel(); } catch (e) {} speakFrom(idxRef.current); }
+  };
+  const onVoice = (uri) => {
+    setVoiceURI(uri);
+    voiceRef.current = voices.find((x) => x.voiceURI === uri) || null;
+    if (playingRef.current) { try { window.speechSynthesis.cancel(); } catch (e) {} speakFrom(idxRef.current); }
+  };
+
+  const status = playing
+    ? `▶ Reading ${active + 1} / ${cram.length}: ${cram[active] ? cram[active].title : ""}`
+    : active >= 0
+      ? `⏸ Paused at ${active + 1} / ${cram.length}`
+      : `Ready — press Play to hear all ${cram.length} topics, hands-free`;
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s cranial-meninges must-knows, in her order</div>
+        <p>Layers &amp; spaces → brain surface → pia → arachnoid &amp; cisterns → CSF &amp; choroid plexus → arachnoid granulations → dura → the four septa → venous sinuses → bleeds. The ⚑ flags are the high-yield hooks. Press Play for a hands-free read-through.</p>
+      </div>
+
+      <div className="player">
+        <div className="player-row">
+          <button className="pbtn main" onClick={playing ? pause : play} disabled={!supported}>{playing ? "⏸ Pause" : "▶ Play"}</button>
+          <button className="pbtn" onClick={stop} disabled={!supported}>⏹ Stop</button>
+          <button className="pbtn" onClick={() => jump(-1)} disabled={!supported}>⏮ Prev</button>
+          <button className="pbtn" onClick={() => jump(1)} disabled={!supported}>⏭ Next</button>
+          <span className="pstatus">{status}</span>
+        </div>
+        {supported && (
+          <div className="pset">
+            <label>Speed
+              <input type="range" min="0.5" max="3" step="0.25" value={rate} onChange={(e) => onRate(parseFloat(e.target.value))} />
+              <b>{rate.toFixed(2)}x</b>
+            </label>
+            <label>Voice
+              <select value={voiceURI} onChange={(e) => onVoice(e.target.value)}>
+                {voices.length === 0 && <option value="">(loading voices…)</option>}
+                {voices.map((v) => <option key={v.voiceURI} value={v.voiceURI}>{v.name} ({v.lang})</option>)}
+              </select>
+            </label>
+          </div>
+        )}
+        {!supported && <div className="pnote">Read-aloud needs a browser with speech support (Chrome or Edge). The cards below still work as a written cram.</div>}
+      </div>
+
+      {cram.map((c) => (
+        <div className={`obj${active === c.n - 1 ? " reading" : ""}`} id={"cram-card-" + c.n} key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Maini&apos;s framework and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Dr. Maini&apos;s own analogies, meanings, and rules pulled straight from the cranial-meninges lecture &mdash; the retention hooks to lean on when a fact won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the cranial meninges</div>
+        <p>Four options, two progressive hints, an explanation, and a source per question. Tap to self-test, or flip to the Answer Key to review. Every item is grounded in the module&apos;s audited bank.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 (Gross Anatomy) Head & Neck, running a review of the CRANIAL MENINGES and brain coverings. Teach ONLY from this content; do not invent structures, spaces, attachments, cell types, or numbers. Warm and lively; you call students "guys," say "right?", "okay," "alright," and "make sense?", you ask lots of quick rhetorical questions, you translate Latin roots, and you push students to reason clinically. Keep answers tight (3-6 sentences) and quiz the student back.
+
+THREE LAYERS (outside in): DURA (tough = 'tough mother'), ARACHNOID (spider, web-like threads), PIA (tender/soft = 'soft mother'). They continue as the spinal meninges but the spaces differ. CRANIAL RULE: the cranial dura is adherent to the periosteum outside and the arachnoid inside, so there is NO natural epidural space and NO natural subdural space in the head; the only true CSF space is the subarachnoid space (between arachnoid and pia). A dura-off-bone separation on an image is abnormal (a hematoma or pus).
+
+BRAIN SURFACE: gyri = ridges, sulci = grooves (a deep groove = fissure). Convolutions let the cortex hold ~10,000x more neurons; loss of convolutions is linked to dementia. Gray matter = outer cortex (cell bodies); white matter = mostly myelinated fibers (anything white in the CNS has myelin).
+
+PIA: thin, highly vascular, loose connective tissue; the 'onion peel' that follows every sulcus and carries small blood vessels in (peel it off a cadaver with sharp forceps). Cerebral VEINS run on the pia in the subarachnoid space, so a subarachnoid hemorrhage is usually VENOUS. The pia (with vessels) forms the tela choroidea and a filtration membrane, helping PRODUCE CSF.
+
+ARACHNOID & CISTERNS: delicate, transparent, web-like; PASSES OVER the sulci ('sheet thrown over a chair') rather than dipping in. The subarachnoid space (arachnoid to pia) holds CSF and widens into CISTERNS where the arachnoid drapes over dips. Largest cistern = cerebellomedullary cistern (cisterna magna), between cerebellum and medulla; others: chiasmatic, interpeduncular, pontine, superior. A subarachnoid bleed can spread through all the cisterns.
+
+CSF & CHOROID PLEXUS: CSF is in the ventricles and, thinly, in the subarachnoid space. Functions: buoyancy (brain floats so it doesn't bruise, especially the base) + nutrition/balanced environment. Neurons are NON-MITOTIC (not replaced), hence heavily protected. Choroid plexus = cauliflower-like villi in the ROOF of each ventricle; lined by EPENDYMAL cells (one of four glial types with astrocytes, oligodendrocytes, microglia) that SECRETE CSF. CSF is made by FILTRATION from blood; ependymal cells + pia keep its composition right.
+
+ARACHNOID GRANULATIONS: tufted prolongations of pia-arachnoid that push THROUGH the meningeal dura; they ABSORB CSF and act as ONE-WAY VALVES (a frequent BOARD question) returning CSF to the venous blood at the SUPERIOR SAGITTAL SINUS. Secretion must equal absorption or intracranial pressure rises (ischemia, infection, stroke). Debris/blood can block them. Their impressions are seen in the calvaria beside the superior sagittal sinus (with the middle meningeal vessels).
+
+DURA: outermost, toughest, DENSE connective tissue, rich in PAIN receptors (stretch = intense headache). Cranial dura = TWO layers (periosteal against bone + meningeal); spinal dura = meningeal only. The meningeal layer forms the septa and the two layers split to hold the venous sinuses.
+
+FOUR DURAL SEPTA: (1) FALX CEREBRI (falx = sickle) in the longitudinal fissure between the cerebral hemispheres; attaches anteriorly to the frontal crest & crista galli, posteriorly to the internal occipital crest/protuberance. (2) TENTORIUM CEREBELLI (tentorium = tent) separating the occipital lobe from the cerebellum; attaches to posterior clinoid processes, superior petrous temporal bone, and the grooves for the transverse sinuses. (3) FALX CEREBELLI, a shallow fold between the cerebellar hemispheres. (4) DIAPHRAGMA SELLAE, roofing the sella turcica (which holds the pituitary), with a central aperture for the pituitary stalk; a pituitary adenoma stretches it, causing intense headache.
+
+DURAL VENOUS SINUSES: 'sinus' means a SPACE; a venous blood-filled space where the two dura layers separate. The superior sagittal sinus runs midline on top, front to back, and receives CSF. Sinuses have NEGATIVE pressure (venous pressure ~0 at heart, ~+95 mmHg at the feet, below zero above the heart = why the external jugular vein is collapsed). A nick sucks air in = AIR EMBOLISM to the heart/arteries (stroke, MI, infarction) that can kill on the table.
+
+BLEEDS: cranially epidural & subdural = potential only (appear with bleeding); subarachnoid = true CSF space. Dura-off-bone = epidural/extradural collection; dura-off-arachnoid = subdural. ARTERIAL bleed is worse (high pressure, fast compression); VENOUS collects slowly (days to weeks). Subarachnoid hemorrhage is usually venous (veins on the pia). In the SPINE there IS a real epidural space filled with fat, nerves, and veins.
+
+Open by offering to drill the three layers and their spaces, the CSF loop (made vs absorbed), the four dural septa, why there's no epidural space in the head, the venous sinuses and air embolism, or arterial vs venous bleeds. When the student is wrong, name the rule and have them reason it out step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys, cranial meninges. Two things I really want you to nail: the CRANIAL RULE, that there is no natural epidural or subdural space in the head because the dura is stuck to bone and to the arachnoid, so any separation on an image means blood or pus, right? And the CSF loop, made by the choroid plexus (ependymal cells) and absorbed by the arachnoid granulations, our one-way valves, into the superior sagittal sinus. Where do you want to start? The three layers and their spaces, the CSF loop, the four dural septa, the venous sinuses and air embolism, or arterial vs venous bleeds?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the three layers and their spaces",
+    "Quiz the CSF loop — made where, absorbed where?",
+    "The four dural septa and what each separates",
+    "Why is there no epidural space in the head?",
+    "Venous sinuses, negative pressure, and air embolism",
+    "Arterial vs venous bleeds — which is worse and why?",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her cranial-meninges lecture. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

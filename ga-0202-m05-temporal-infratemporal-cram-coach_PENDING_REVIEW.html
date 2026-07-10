@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · Temporal & Infratemporal Fossa — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — TEMPORAL & INFRATEMPORAL FOSSA · Dr. Maini · Cram Coach · PENDING REVIEW
+   Module slug: ga-0202-m05-temporal-infratemporal
+   Voiced, hands-free walkthrough (Web Speech) of the module's must-knows,
+   weighted by what Maini stresses.
+   Built ONLY from the AUDITED module bank + Maini's lectures 10 & 11
+   (Temporal & infratemporal fossa, TMJ, muscles of mastication, maxillary
+   artery, pterygoid plexus, V3, lingual/chorda tympani, ganglia, PPF).
+   No new unverified facts. Analogies credited to Maini only where she says them.
+   THEME: violet. Drill grounded in the audited bank; option positions balanced.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m05-temporal-infratemporal-hub.html";
+
+const TABS = [
+  { id: "cram", label: "Cram (voiced)" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (12 TOPICS) ===== */
+const cram = [
+  {
+    n: 1, title: "Temporal fossa — boundaries, floor, contents", src: "Maini · L10",
+    facts: [
+      "BOUNDARIES: the superior and posterior boundary is the two TEMPORAL LINES (Maini states outright they are on the PARIETAL bone). The LATERAL wall is the ZYGOMATIC ARCH (making it a shallow pocket). The INFERIOR boundary is the INFRATEMPORAL CREST (the jagged, irregular, lowermost edge).",
+      "FLOOR: the same FOUR bones that meet at the PTERION form the floor — PARIETAL, FRONTAL, SPHENOID, and TEMPORAL. Pterion is the clinically weak spot overlying the middle meningeal artery.",
+      "CONTENTS: almost the entire fossa is occupied by the TEMPORALIS muscle, covered by the temporal fascia.",
+      "VESSELS: the SUPERFICIAL TEMPORAL ARTERY is one of the two TERMINAL branches of the external carotid (the maxillary artery is the other). The superficial temporal vein unites with the maxillary vein to form the RETROMANDIBULAR vein.",
+    ],
+    flag: "Temporal lines = PARIETAL bone. Lateral wall = zygomatic arch; inferior = infratemporal crest; floor = 4 bones at PTERION (weak spot over the middle meningeal artery). Fossa filled by TEMPORALIS. Superficial temporal artery = a terminal branch of the external carotid.",
+  },
+  {
+    n: 2, title: "Infratemporal fossa — boundaries & contents", src: "Maini · L10/L11",
+    facts: [
+      "ROOF = the inferior surface of the GREATER WING OF THE SPHENOID. Maini's quiz answer — she rejects the zygomatic arch out loud: it cannot be the roof. FLOOR = the MEDIAL PTERYGOID, which runs internally to the angle of the mandible.",
+      "WALLS: LATERAL = ramus of the mandible; MEDIAL = the LATERAL PTERYGOID PLATE of the sphenoid; ANTERIOR = posterior surface of the maxilla; POSTERIOR = the tympanic plate, the mastoid process, and the STYLOID process.",
+      "CONTENTS: the lateral and medial pterygoid muscles, the MAXILLARY ARTERY and its branches, the PTERYGOID VENOUS PLEXUS, the mandibular nerve (V3) and its branches, the CHORDA TYMPANI, and the OTIC GANGLION. The parotid gland is NOT a listed content.",
+      "The chorda tympani rides through this fossa but is a branch of the FACIAL nerve (CN VII), not V3 — a point Maini stresses.",
+    ],
+    flag: "ROOF = greater wing of sphenoid (NOT the zygomatic arch). FLOOR = medial pterygoid. Contents = 2 pterygoids, maxillary artery, pterygoid venous plexus, V3 + branches, chorda tympani (CN VII, an intruder among V3 branches), otic ganglion.",
+  },
+  {
+    n: 3, title: "Muscles of mastication — the big four (attachments)", src: "Maini · L10/L11",
+    facts: [
+      "All FOUR muscles of mastication (temporalis, masseter, medial pterygoid, lateral pterygoid) develop from the FIRST pharyngeal arch and are innervated by V3.",
+      "TEMPORALIS: fills the temporal fossa, inserting on the CORONOID process and anterior border of the ramus. MASSETER: from the zygomatic arch to the ANGLE and lateral surface of the ramus.",
+      "MEDIAL PTERYGOID: from the medial surface of the lateral pterygoid plate, the pyramidal process of the palatine bone, and the tuberosity of the maxilla, to the MEDIAL surface of the ramus — it mirrors the masseter internally (the fossa floor).",
+      "LATERAL PTERYGOID: from the greater wing / infratemporal surface of the sphenoid and the LATERAL surface of the lateral pterygoid plate, to the PTERYGOID FOVEA of the condyle PLUS the TMJ joint capsule and articular DISC.",
+    ],
+    flag: "All 4 = first arch, V3. Insertions: temporalis to coronoid, masseter to angle/lateral ramus, medial pterygoid to medial ramus, lateral pterygoid to pterygoid fovea + capsule & DISC. Only the lateral pterygoid grabs the disc (it moves it).",
+  },
+  {
+    n: 4, title: "Muscle actions — Maini's must-memorize exceptions", src: "Maini · L10/L11",
+    facts: [
+      "ELEVATION (closing): temporalis + masseter + medial pterygoid. DEPRESSION (opening): the LATERAL PTERYGOID is the SOLE depressor (helped by the supra/infrahyoids and gravity) — write this one down.",
+      "RETRACTION: the TEMPORALIS is the ONLY retractor, via its horizontal POSTERIOR fibers; its vertical ANTERIOR fibers elevate. Because it is the retractor, temporalis is NOT a protruder.",
+      "PROTRACTION: lateral pterygoid + medial pterygoid + masseter (but NOT temporalis). The masseter and medial pterygoid run parallel, so they ONLY elevate and protract.",
+      "LATERAL DEVIATION: alternating pterygoid pull. Deviate the jaw to the RIGHT and the LEFT condyle glides FORWARD (protraction) while the right rotates in place — Maini's door analogy.",
+    ],
+    flag: "TWO exceptions to memorize: LATERAL PTERYGOID = sole DEPRESSOR; TEMPORALIS = only RETRACTOR (so NOT a protruder). Masseter + medial pterygoid = elevate & protract only. Lateral pterygoid = protract + depress (the chair).",
+  },
+  {
+    n: 5, title: "TMJ — type, structure, disc, ligaments", src: "Maini · L10/L11",
+    facts: [
+      "A SYNOVIAL joint (hyaline surfaces, synovial fluid, cavity, membrane, and a fibrous capsule) between the MANDIBULAR FOSSA of the temporal bone and the HEAD of the condylar process. Maini: one of the most mobile / least stable joints, second only to the SHOULDER.",
+      "The ARTICULAR DISC divides the cavity into a SUPERIOR and an INFERIOR compartment. The ARTICULAR TUBERCLE, just anterior to the fossa, helps limit anterior dislocation of the mandibular head.",
+      "The synovial fluid nourishes the AVASCULAR hyaline cartilage — lose movement or fluid and the cartilage is destroyed.",
+      "Two EXTRINSIC ligaments: the SPHENOMANDIBULAR (spine of the sphenoid to the LINGULA — deep landmark, because the lingula is more internal) and the STYLOMANDIBULAR (styloid process to the ANGLE of the mandible — external to external).",
+    ],
+    flag: "Synovial; head of condyle meets mandibular fossa; 2nd most mobile joint (after the shoulder). Disc splits it into superior + inferior compartments. Sphenomandibular ligament to the LINGULA (internal); stylomandibular to the ANGLE (external).",
+  },
+  {
+    n: 6, title: "TMJ — movements, nerve, blood supply", src: "Maini · L10/L11",
+    facts: [
+      "Movements: GLIDING (protraction / retraction), ROTATION (side-to-side), and ELEVATION / DEPRESSION. In Maini's terminology ELEVATION is called flexion (joint angle decreases) and DEPRESSION is extension.",
+      "Lateral deviation to the RIGHT causes the LEFT condyle to glide forward (protraction) while the right rotates in place — like opening a door.",
+      "NERVE: the AURICULOTEMPORAL nerve is the single best answer for TMJ innervation (with the masseteric and deep temporal branches of V3 also supplying the capsule).",
+      "BLOOD: branches of the MAXILLARY and SUPERFICIAL TEMPORAL arteries, which lie in the vicinity.",
+    ],
+    flag: "TMJ moves by glide + rotation + elevation/depression (elevation = flexion). Best nerve = AURICULOTEMPORAL (V3). Deviate right, the LEFT condyle protracts (the door). Blood = maxillary + superficial temporal arteries.",
+  },
+  {
+    n: 7, title: "Maxillary artery — course, branches, middle meningeal", src: "Maini · L11",
+    facts: [
+      "The LARGER of the two terminal branches of the EXTERNAL CAROTID (the superficial temporal is the smaller). It arises behind the neck of the mandible, related to the PAROTID gland, and leaves the infratemporal fossa through the PTERYGOMAXILLARY FISSURE into the pterygopalatine fossa.",
+      "Its TERMINAL branch is the INFRAORBITAL artery — a Maini frequently-asked item.",
+      "The MIDDLE MENINGEAL artery enters the skull through the FORAMEN SPINOSUM to supply the dura; rupture at the thin PTERION causes an EXTRADURAL (epidural) hemorrhage. It buttonholes through the two roots of the auriculotemporal nerve.",
+      "Other branches: inferior alveolar (to the mandible and lower teeth; gives a MYLOHYOID branch before the mandibular foramen), deep auricular + anterior tympanic (to the ear), deep temporal / pterygoid / masseteric / buccal (to muscles and cheek), and in the pterygopalatine fossa the SPHENOPALATINE (to the nasal cavity), descending palatine, and posterior superior alveolar.",
+    ],
+    flag: "Maxillary artery = LARGER terminal branch of the external carotid; its terminal branch = INFRAORBITAL. Middle meningeal to foramen SPINOSUM to dura; a pterion fracture = an EXTRADURAL bleed. Sphenopalatine artery to the nasal cavity (the classic nosebleed artery).",
+  },
+  {
+    n: 8, title: "Pterygoid venous plexus — the danger route", src: "Maini · L10/L11",
+    facts: [
+      "A venous network lying between the TEMPORAL and PTERYGOID muscles, surrounding the maxillary artery.",
+      "It drains POSTERIORLY into the MAXILLARY vein, which then helps form the retromandibular vein.",
+      "Clinically important: it communicates with the CAVERNOUS SINUS and with the (deep) FACIAL vein, and these veins are VALVELESS — so an infection on the face can spread backward to the cavernous sinus (this ties into the danger area of the face).",
+    ],
+    flag: "Plexus sits between temporalis and the pterygoids, wrapping the maxillary artery; drains into the MAXILLARY vein. VALVELESS connections to the CAVERNOUS SINUS + facial vein let a face infection spread inward.",
+  },
+  {
+    n: 9, title: "Mandibular nerve (V3) — foramen, divisions, branches", src: "Maini · L11",
+    facts: [
+      "V3 exits through the FORAMEN OVALE (Maini's foramen tip: V2 goes through foramen ROTUNDUM, and rotundum means round; pair V3 with the oval ovale). It is the ONLY MIXED (sensory + motor) division of the trigeminal. It descends between TENSOR VELI PALATINI (medially) and the LATERAL PTERYGOID (laterally), so it lies deep to the lateral pterygoid.",
+      "MAIN TRUNK gives the MENINGEAL branch and the nerve to MEDIAL PTERYGOID.",
+      "ANTERIOR division is mostly MOTOR (masseteric, deep temporal nerves, nerve to lateral pterygoid) with ONE sensory branch: the (long) BUCCAL nerve, sensory to the cheek — do not confuse it with the facial nerve's motor buccal branch.",
+      "POSTERIOR division is mostly sensory: AURICULOTEMPORAL, LINGUAL, and INFERIOR ALVEOLAR. The inferior alveolar gives the nerve to MYLOHYOID before entering the mandibular foramen (guarded by the lingula) and exits as the MENTAL nerve (chin and lower lip). The auriculotemporal is pierced by the MIDDLE MENINGEAL artery — a reliable identifier.",
+    ],
+    flag: "V3 = foramen OVALE, the only mixed division. Trunk gives meningeal + nerve to medial pterygoid. Anterior = motor + the sensory BUCCAL. Posterior = auriculotemporal, lingual, inferior alveolar (to the mental nerve). Auriculotemporal = the nerve the middle meningeal artery pierces.",
+  },
+  {
+    n: 10, title: "Lingual nerve & chorda tympani", src: "Maini · L11",
+    facts: [
+      "The LINGUAL nerve (from V3's posterior division) alone carries GENERAL sensation (GSA) from the ANTERIOR TWO-THIRDS of the tongue.",
+      "The CHORDA TYMPANI is a branch of the FACIAL nerve (CN VII). It exits through the PETROTYMPANIC FISSURE and joins the lingual nerve, adding two fiber types: TASTE (SVA) from the anterior two-thirds and PREGANGLIONIC PARASYMPATHETIC fibers.",
+      "Those parasympathetic fibers synapse in the SUBMANDIBULAR ganglion; the postganglionic fibers then supply the SUBMANDIBULAR and SUBLINGUAL glands.",
+      "Watch the boundaries: the tongue MUSCLES are motor via CN XII, and taste from the POSTERIOR third is CN IX — neither belongs to the lingual nerve.",
+    ],
+    flag: "Lingual nerve alone = GSA, anterior 2/3 of the tongue. Chorda tympani (CN VII, via the petrotympanic fissure) adds TASTE (SVA) + preganglionic parasympathetics, relayed in the SUBMANDIBULAR ganglion, to the submandibular + sublingual glands.",
+  },
+  {
+    n: 11, title: "Parasympathetic ganglia — otic ganglion & COPS", src: "Maini · L11",
+    facts: [
+      "COPS names the FOUR parasympathetic ganglia of the head: CILIARY (CN III, to the eye), OTIC (CN IX, to the parotid), PTERYGOPALATINE (CN VII, to the lacrimal / nasal / palatine glands), and SUBMANDIBULAR (CN VII, to the submandibular / sublingual glands). The cranial parasympathetic outflow is CN III, VII, IX, and X.",
+      "OTIC GANGLION: it lies DEEP (medial) to V3, just below the foramen ovale. Preganglionic fibers come from CN IX (cell bodies in the INFERIOR SALIVATORY nucleus). Pathway: tympanic nerve, then tympanic plexus, then LESSER PETROSAL nerve, then the otic ganglion; postganglionic fibers hitch-hike on the AURICULOTEMPORAL nerve to the PAROTID. Maini: otic rhymes with parotid.",
+      "The TRIGEMINAL (semilunar) ganglion is a SENSORY ganglion (like a dorsal root ganglion), NOT one of the COPS.",
+      "TRAP: the DEEP PETROSAL nerve is NOT a branch of CN VII — it carries POSTGANGLIONIC SYMPATHETIC fibers from the internal carotid plexus, and joins the greater petrosal to form the nerve of the pterygoid canal.",
+    ],
+    flag: "COPS = Ciliary (III), Otic (IX to parotid), Pterygopalatine (VII), Submandibular (VII). Otic chain: CN IX, lesser petrosal, otic ganglion, auriculotemporal, parotid. Trigeminal ganglion = SENSORY. Deep petrosal = SYMPATHETIC (NOT CN VII).",
+  },
+  {
+    n: 12, title: "Pterygopalatine fossa — the crossroads", src: "Maini · L11",
+    facts: [
+      "A small space between the pterygoid process (posteriorly) and the POSTERIOR SURFACE OF THE MAXILLA (anteriorly). Its roof is the greater wing of the sphenoid; its floor is the PYRAMIDAL PROCESS of the palatine bone.",
+      "Communications: MEDIALLY with the nasal cavity via the SPHENOPALATINE foramen; POSTERIORLY with the middle cranial fossa via the FORAMEN ROTUNDUM (which transmits V2); laterally with the infratemporal fossa via the pterygomaxillary fissure; superiorly with the orbit via the inferior orbital fissure.",
+      "Contents: the terminal MAXILLARY artery, the PTERYGOPALATINE GANGLION, and the maxillary nerve (V2).",
+      "V2 continues as the INFRAORBITAL nerve (exiting the infraorbital foramen). Its ZYGOMATIC nerve splits into zygomaticofacial and zygomaticotemporal branches.",
+    ],
+    flag: "PPF = the crossroads. Medial to the nasal cavity (sphenopalatine foramen); posterior to the middle cranial fossa (foramen ROTUNDUM, V2). Contents = terminal maxillary artery, pterygopalatine ganglion, V2. V2 becomes the infraorbital nerve.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "The two muscle-action exceptions: the LATERAL PTERYGOID is the SOLE depressor, and the TEMPORALIS is the ONLY retractor (so temporalis is NOT a protruder). Masseter + medial pterygoid only elevate and protract.", why: "Maini told the class to write these down, then built 'which is NOT' traps (temporalis is not a protruder because it is the retractor). Expect a muscle-action item.", src: "Maini · L10/L11" },
+  { tag: "★★ Heavy", text: "Infratemporal fossa ROOF = greater wing of the sphenoid (she rejects the zygomatic arch); FLOOR = the medial pterygoid.", why: "Both were live quiz questions in lecture — she said the greater wing is the right answer and the zygomatic arch cannot be the roof.", src: "Maini · L11" },
+  { tag: "★★ Heavy", text: "The two TMJ extrinsic ligaments: SPHENOMANDIBULAR to the LINGULA (deep to deep) and STYLOMANDIBULAR to the ANGLE (external to external).", why: "Maini's frequently-asked item: the sphenomandibular ligament attaches to the lingula because the lingula is more internal.", src: "Maini · L11" },
+  { tag: "★★ Heavy", text: "The AURICULOTEMPORAL nerve does triple duty: best nerve to the TMJ, the nerve the middle meningeal artery pierces (a reliable ID), and the carrier of otic-ganglion postganglionics to the parotid.", why: "She flags 'any nerve with a passage is auriculotemporal,' picks it for TMJ innervation, and uses it for the parotid pathway.", src: "Maini · L10/L11" },
+  { tag: "Vessels", text: "Maxillary artery = the LARGER terminal branch of the external carotid; its terminal branch = INFRAORBITAL. Middle meningeal to foramen SPINOSUM; a pterion fracture = an EXTRADURAL (epidural) bleed.", why: "Several quiz items ride on this: the terminal branch, the foramen, and the classic extradural hemorrhage.", src: "Maini · L11" },
+  { tag: "Ganglia", text: "COPS + which cranial nerve feeds each: Ciliary (III), Otic (IX), Pterygopalatine (VII), Submandibular (VII). The deep petrosal nerve is SYMPATHETIC (from the internal carotid plexus), NOT a branch of CN VII.", why: "Her COPS mnemonic plus the 'which is NOT a branch of the 7th nerve' trap — the deep petrosal is the answer.", src: "Maini · L11" },
+  { tag: "Autonomics", text: "Chorda tympani = CN VII, via the petrotympanic fissure, joining the lingual nerve; it carries TASTE + preganglionic parasympathetics that synapse in the SUBMANDIBULAR ganglion for the submandibular + sublingual glands.", why: "The classic hitch-hiking chain — she stresses that chorda tympani is CN VII, not V3.", src: "Maini · L11" },
+  { tag: "Foramina", text: "Foramen matching: V3 = foramen OVALE; V2 = foramen ROTUNDUM (round); middle meningeal artery = foramen SPINOSUM; chorda tympani = petrotympanic fissure; sphenopalatine artery = sphenopalatine foramen.", why: "Foramen-to-structure matching is a guaranteed item; she gave the ovale/rotundum shape trick to lock it in.", src: "Maini · L11" },
+  { tag: "Fossa", text: "Temporal fossa: the temporal lines are on the PARIETAL bone; the floor is the four bones meeting at the PTERION. The infratemporal fossa contents include the chorda tympani (a CN VII intruder) and the otic ganglion.", why: "She states the parietal point outright, and pterion carries the middle-meningeal clinical.", src: "Maini · L10" },
+  { tag: "Clinical", text: "The pterygoid venous plexus is VALVELESS and communicates with the cavernous sinus and the facial vein — a route for facial infection to spread inward (danger area of the face).", why: "The one clinical hook on the venous drainage — expect a 'why is it important' item.", src: "Maini · L11" },
+  { tag: "Crossroads", text: "Pterygopalatine fossa communications: MEDIAL to the nasal cavity (sphenopalatine foramen), POSTERIOR to the middle cranial fossa (foramen rotundum, V2). Contents = terminal maxillary artery, pterygopalatine ganglion, and V2.", why: "She walks the four communications like a compass — a matching item is likely.", src: "Maini · L11" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+/* Analogies/mnemonics credited to Maini only where she actually says them in L10/L11. */
+const tips = [
+  { kind: "Analogy", title: "The chair — how the lateral pterygoid opens the jaw", text: "Maini: pulling the head of the mandible forward is like grabbing a chair by its back and pulling it toward you — you are not lifting it, so the back tips toward you and the seat (the body of the mandible) drops. Pulling the head forward therefore gives depression PLUS protraction.", helps: "Explains in one image why the lateral pterygoid both protracts and depresses (opens) the jaw.", src: "Maini · L10" },
+  { kind: "Analogy", title: "The door — lateral deviation", text: "Maini: moving the jaw to one side is like opening a door — the side you push moves forward while the opposite side stays. Deviate to the RIGHT and the LEFT condyle glides forward (protraction) while the right rotates in place.", helps: "Locks in which condyle protracts during side-to-side chewing.", src: "Maini · L10" },
+  { kind: "Mnemonic", title: "COPS — the four parasympathetic ganglia", text: "Maini groups the four head parasympathetic ganglia as the COPS: Ciliary, Otic, Pterygopalatine, Submandibular. (The trigeminal ganglion is NOT one of them — it is a sensory ganglion.)", helps: "One word recalls all four ganglia and screens out the sensory trigeminal ganglion.", src: "Maini · L11" },
+  { kind: "Mnemonic", title: "Otic rhymes with parotid", text: "Maini's rhyme: the salivary gland served by the otic ganglion is the one that rhymes with it — the PAROTID. Otic ganglion (near the ear) to parotid gland (in front of the ear).", helps: "Instantly pairs the otic ganglion with its target gland.", src: "Maini · L10" },
+  { kind: "Trick", title: "Rotundum means round", text: "Maini: V2 passes through the foramen ROTUNDUM, and rotundum means round. Pair the round foramen with V2 and the oval foramen OVALE with V3, and the two never get swapped.", helps: "Turns a memorized fact into a shape you can reason out on the spot.", src: "Maini · L11" },
+  { kind: "Rule", title: "Write it down: only retractor, sole depressor", text: "Maini: the temporalis is the ONLY retractor (write it down), and the lateral pterygoid is the SOLE depressor. Every other action is shared by several muscles, but these two exceptions are single-muscle answers.", helps: "Pre-answers the two most common muscle-action traps she sets.", src: "Maini · L10" },
+  { kind: "ID", title: "The buttonhole nerve", text: "Maini: the auriculotemporal nerve has a buttonhole-like passage that the middle meningeal artery pierces. So any time you see a nerve with a hole or passage through it, be sure it is the auriculotemporal.", helps: "Gives a foolproof visual identifier for the auriculotemporal nerve on a specimen or image.", src: "Maini · L11" },
+  { kind: "Rule", title: "Deep to deep, external to external", text: "Maini: the sphenomandibular ligament runs to the LINGULA because the lingula is more internal (deep landmark for a deep ligament off the spine of the sphenoid), while the external styloid process reaches the external angle via the stylomandibular ligament.", helps: "Sorts the two TMJ extrinsic ligaments by depth so you never swap lingula and angle.", src: "Maini · L11" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Grounded in the AUDITED module bank (anti-fab verified). Option positions
+   balanced by shuffling at build (A/B/C/D ~26/24/23/20 across 93 items). */
+const questions = [
+  { id:1, topic:"Temporal Region & Fossa", src:"L10 · Temporal fossa boundaries", q:"The temporal lines that form the superior and posterior boundary of the temporal fossa are found on which bone?", opts:["Temporal bone", "Sphenoid bone", "Parietal bone", "Frontal bone"], a:2, h1:"Same bone the temporalis origin arches across.", h2:"Maini's study tag: Temporal fossa — bony boundaries.", exp:"Maini states outright that the temporal lines are on the parietal bone.  [Maini] 'Which bone has temporal lines? ... parietal, right?'" },
+  { id:2, topic:"Temporal Region & Fossa", src:"L10 · Temporal fossa boundaries", q:"Which structure forms the lateral boundary of the temporal fossa?", opts:["Zygomatic arch", "Infratemporal crest", "Ramus of the mandible", "Temporal lines"], a:0, h1:"The bony bar you can feel across the side of your face.", h2:"Maini's study tag: Temporal fossa — lateral boundary.", exp:"The zygomatic arch bounds the fossa laterally, making it a shallow pocket." },
+  { id:3, topic:"Temporal Region & Fossa", src:"L10 · Temporal fossa boundaries", q:"The inferior boundary of the temporal fossa is formed by which landmark?", opts:["Infratemporal crest", "Pterygomaxillary fissure", "Articular tubercle", "Zygomatic arch"], a:0, h1:"Recall Maini's point on Temporal fossa — inferior boundary.", h2:"Maini's study tag: Temporal fossa — inferior boundary.", exp:"Maini calls it the jagged, irregular, lowermost boundary — the infratemporal crest." },
+  { id:4, topic:"Temporal Region & Fossa", src:"L10 · Temporal fossa floor", q:"The floor of the temporal fossa is formed by the same four bones that meet at which landmark?", opts:["Pterion", "Lambda", "Bregma", "Asterion"], a:0, h1:"The clinically weak spot overlying the middle meningeal artery.", h2:"Maini's study tag: Temporal fossa — floor / pterion.", exp:"The parietal, frontal, sphenoid, and temporal bones form the floor — the four bones that meet at pterion." },
+  { id:5, topic:"Temporal Region & Fossa", src:"L10 · Temporal fossa contents", q:"The temporal fossa is almost entirely occupied by which muscle?", opts:["Masseter", "Lateral pterygoid", "Temporalis", "Medial pterygoid"], a:2, h1:"Recall Maini's point on Temporal fossa — contents.", h2:"Maini's study tag: Temporal fossa — contents.", exp:"Maini: almost all of the fossa is occupied by temporalis, covered by temporal fascia." },
+  { id:6, topic:"Temporal Region & Fossa", src:"L10 · Superficial temporal vessels", q:"The superficial temporal artery is best described as which of the following?", opts:["A branch of the internal carotid artery", "A branch of the maxillary artery", "One of the two terminal branches of the external carotid artery", "The terminal branch of the facial artery"], a:2, h1:"Recall Maini's point on Superficial temporal artery — origin.", h2:"Maini's study tag: Superficial temporal artery — origin.", exp:"Maini: the superficial temporal is one of the two terminal branches of the external carotid artery." },
+  { id:7, topic:"Temporal Region & Fossa", src:"L10 · Venous drainage of temporal region", q:"The superficial temporal vein unites with the maxillary vein to form which vein?", opts:["Internal jugular vein", "Facial vein", "Retromandibular vein", "Pterygoid venous plexus"], a:2, h1:"Recall Maini's point on Retromandibular vein — formation.", h2:"Maini's study tag: Retromandibular vein — formation.", exp:"Superficial temporal + maxillary veins form the retromandibular vein." },
+  { id:8, topic:"Infratemporal Fossa — Boundaries", src:"L11 · Maini quiz — roof of infratemporal fossa", q:"Which structure forms the roof of the infratemporal fossa?", opts:["Lateral pterygoid plate", "Medial pterygoid muscle", "Greater wing of the sphenoid", "Zygomatic arch"], a:2, h1:"She rejected the zygomatic arch out loud.", h2:"Maini's study tag: ITF — roof.", exp:"The roof is the inferior surface of the greater wing of the sphenoid — Maini's quiz answer.  [Maini] 'Greater wing of the sphenoid is the right answer. Zygomatic arch cannot be the roof.'" },
+  { id:9, topic:"Infratemporal Fossa — Boundaries", src:"L10 · ITF boundaries", q:"The lateral boundary of the infratemporal fossa is formed by which structure?", opts:["Ramus of the mandible", "Lateral pterygoid plate", "Posterior surface of the maxilla", "Styloid process"], a:0, h1:"Recall Maini's point on ITF — lateral boundary.", h2:"Maini's study tag: ITF — lateral boundary.", exp:"Laterally the infratemporal fossa is bounded by the ramus of the mandible." },
+  { id:10, topic:"Infratemporal Fossa — Boundaries", src:"L10 · ITF boundaries", q:"The medial boundary of the infratemporal fossa is formed by which structure?", opts:["Greater wing of the sphenoid", "Medial pterygoid muscle", "Lateral pterygoid plate of the sphenoid", "Ramus of the mandible"], a:2, h1:"Recall Maini's point on ITF — medial boundary.", h2:"Maini's study tag: ITF — medial boundary.", exp:"Medially the fossa is bounded by the lateral pterygoid plate of the sphenoid." },
+  { id:11, topic:"Infratemporal Fossa — Boundaries", src:"L10 · ITF boundaries", q:"The anterior boundary of the infratemporal fossa is formed by which structure?", opts:["Posterior surface of the maxilla", "Tympanic plate", "Lateral pterygoid plate", "Ramus of the mandible"], a:0, h1:"Recall Maini's point on ITF — anterior boundary.", h2:"Maini's study tag: ITF — anterior boundary.", exp:"The posterior surface of the maxilla forms the anterior boundary." },
+  { id:12, topic:"Infratemporal Fossa — Boundaries", src:"L10 · ITF boundaries", q:"The posterior boundary of the infratemporal fossa is formed by the tympanic plate, the mastoid process, and which other process?", opts:["Styloid process", "Articular tubercle", "Pterygoid hamulus", "Coronoid process"], a:0, h1:"Recall Maini's point on ITF — posterior boundary.", h2:"Maini's study tag: ITF — posterior boundary.", exp:"The styloid process joins the tympanic plate and mastoid process posteriorly." },
+  { id:13, topic:"Infratemporal Fossa — Boundaries", src:"L11 · Maini quiz — floor of infratemporal fossa", q:"Which muscle forms the floor of the infratemporal fossa?", opts:["Lateral pterygoid", "Temporalis", "Medial pterygoid", "Masseter"], a:2, h1:"The muscle that runs internally to the angle of the mandible.", h2:"Maini's study tag: ITF — floor.", exp:"Maini's quiz: the medial pterygoid, attached near the angle of the mandible, forms the floor.  [Maini] 'Medial pterygoid ... so medial pterygoid also forms a floor of infratemporal fossa.'" },
+  { id:14, topic:"Infratemporal Fossa — Contents", src:"L10 · ITF contents", q:"Which of the following is NOT listed among the contents of the infratemporal fossa?", opts:["Otic ganglion", "Parotid gland", "Pterygoid venous plexus", "Maxillary artery"], a:1, h1:"Recall Maini's point on ITF — contents overview.", h2:"Maini's study tag: ITF — contents overview.", exp:"The parotid gland is not an infratemporal fossa content; the maxillary artery merely arises within it more posteriorly." },
+  { id:15, topic:"Infratemporal Fossa — Contents", src:"L10 · ITF contents / chorda tympani", q:"Chorda tympani is found among the contents of the infratemporal fossa. It is a branch of which nerve?", opts:["Mandibular nerve (V3)", "Facial nerve (CN VII)", "Lingual nerve", "Glossopharyngeal nerve (CN IX)"], a:1, h1:"A CN VII fiber hiding in a fossa full of V3 branches.", h2:"Maini's study tag: Chorda tympani — parent nerve.", exp:"Maini stresses that chorda tympani is a branch of the facial nerve, not V3.  [Maini] 'Is chorda tympani a branch of V3 or not? ... No, it's a branch of facial, good.'" },
+  { id:16, topic:"Infratemporal Fossa — Contents", src:"L10/L11 · Inferior alveolar nerve", q:"The inferior alveolar nerve enters the mandible through which opening?", opts:["Mandibular foramen", "Mental foramen", "Foramen ovale", "Petrotympanic fissure"], a:0, h1:"The lingula sits right beside the entrance.", h2:"Maini's study tag: Inferior alveolar nerve — entry.", exp:"It enters the ramus through the mandibular foramen, guarded by the lingula." },
+  { id:17, topic:"Infratemporal Fossa — Contents", src:"L10/L11 · Inferior alveolar nerve", q:"Just before entering the mandibular foramen, the inferior alveolar nerve gives off which branch?", opts:["Buccal nerve", "Nerve to mylohyoid", "Lingual nerve", "Auriculotemporal nerve"], a:1, h1:"Same muscle whose artery branches off the inferior alveolar artery.", h2:"Maini's study tag: Nerve to mylohyoid.", exp:"It gives the nerve to mylohyoid (which also supplies the anterior belly of digastric)." },
+  { id:18, topic:"Muscles of Mastication", src:"L10 · Muscles of mastication overview", q:"The four muscles of mastication all develop from which pharyngeal arch and are innervated by which nerve?", opts:["Second pharyngeal arch; facial nerve (CN VII)", "Second pharyngeal arch; mandibular nerve (V3)", "First pharyngeal arch; mandibular nerve (V3)", "First pharyngeal arch; facial nerve (CN VII)"], a:2, h1:"Recall Maini's point on Muscles of mastication — arch & nerve.", h2:"Maini's study tag: Muscles of mastication — arch & nerve.", exp:"Maini: muscles of mastication are first-arch muscles innervated by V3." },
+  { id:19, topic:"Muscles of Mastication", src:"L10/L11 · Maini quiz — prime retractor of TMJ", q:"Which single muscle is the prime (sole) retractor of the mandible at the TMJ?", opts:["Temporalis", "Masseter", "Lateral pterygoid", "Medial pterygoid"], a:0, h1:"One of her two must-memorize exceptions.", h2:"Maini's study tag: Temporalis — retraction rule.", exp:"Maini's rule: temporalis is the only retractor (via its horizontal posterior fibers).  [Maini] 'Temporalis is the retractor. Only retractor.'" },
+  { id:20, topic:"Muscles of Mastication", src:"L10/L11 · Maini quiz — prime depressor of TMJ", q:"Which single muscle is the prime (sole) depressor of the mandible at the TMJ?", opts:["Medial pterygoid", "Lateral pterygoid", "Masseter", "Temporalis"], a:1, h1:"Her second must-memorize exception.", h2:"Maini's study tag: Lateral pterygoid — depression rule.", exp:"Maini's rule: the lateral pterygoid is the sole depressor (aided by supra-/infrahyoids and gravity).  [Maini] 'Lateral pterygoid is the sole depressor.'" },
+  { id:21, topic:"Muscles of Mastication", src:"L10 · Muscle actions — elevation", q:"Elevation of the mandible is produced by the temporalis, masseter, and medial pterygoid — but NOT by which muscle?", opts:["Lateral pterygoid", "Medial pterygoid", "Temporalis", "Masseter"], a:0, h1:"Recall Maini's point on Elevation — muscle set.", h2:"Maini's study tag: Elevation — muscle set.", exp:"The lateral pterygoid is the depressor, so it does not elevate." },
+  { id:22, topic:"Muscles of Mastication", src:"L10 · Muscle actions — protrusion", q:"Protrusion (protraction) of the mandible is produced by the lateral pterygoid, medial pterygoid, and masseter — but NOT by which muscle?", opts:["Masseter", "Medial pterygoid", "Temporalis", "Lateral pterygoid"], a:2, h1:"Recall Maini's point on Protrusion — muscle set.", h2:"Maini's study tag: Protrusion — muscle set.", exp:"The temporalis is a retractor, so it does not protrude the mandible.  [Maini] 'Temporalis is not a protruder, because it is what? It is a retractor.'" },
+  { id:23, topic:"Muscles of Mastication", src:"L10 · Temporalis fiber orientation", q:"The temporalis has two fiber groups: its vertical anterior fibers elevate the mandible, while its horizontal posterior fibers produce which action?", opts:["Lateral deviation", "Retraction", "Protrusion", "Depression"], a:1, h1:"Recall Maini's point on Temporalis — fiber directions.", h2:"Maini's study tag: Temporalis — fiber directions.", exp:"The horizontally oriented posterior fibers pull the mandible backward (retraction)." },
+  { id:24, topic:"Muscles of Mastication", src:"L10 · Temporalis insertion", q:"The temporalis muscle inserts onto which part of the mandible?", opts:["Coronoid process and anterior border of the ramus", "Pterygoid fovea of the condylar process", "Medial surface of the ramus below the mandibular foramen", "Angle and lateral surface of the ramus"], a:0, h1:"Recall Maini's point on Temporalis — insertion.", h2:"Maini's study tag: Temporalis — insertion.", exp:"Temporalis inserts on the tip/medial surface of the coronoid process and the anterior border of the ramus." },
+  { id:25, topic:"Muscles of Mastication", src:"L10 · Masseter", q:"The masseter originates from the zygomatic arch and the maxillary process of the zygomatic bone and inserts on which part of the mandible?", opts:["Angle and lateral surface of the ramus", "Coronoid process", "Pterygoid fovea of the condyle", "Medial surface of the ramus"], a:0, h1:"Recall Maini's point on Masseter — attachments.", h2:"Maini's study tag: Masseter — attachments.", exp:"The masseter inserts on the angle and lateral surface of the ramus." },
+  { id:26, topic:"Muscles of Mastication", src:"L11 · Masseter & medial pterygoid actions", q:"According to Maini, the masseter and medial pterygoid share the same pair of actions because their fibers run parallel. Those actions are:", opts:["Depression and protraction", "Elevation and protraction", "Elevation and retraction", "Depression and retraction"], a:1, h1:"Recall Maini's point on Masseter/medial pterygoid — actions.", h2:"Maini's study tag: Masseter/medial pterygoid — actions.", exp:"Maini: the masseter and medial pterygoid only elevate and protract.  [Maini] 'Masseter and medial pterygoid, they only elevate and protract.'" },
+  { id:27, topic:"Muscles of Mastication", src:"L10/L11 · Lateral pterygoid insertion", q:"Besides the pterygoid fovea of the condylar process, the lateral pterygoid inserts onto which two structures?", opts:["Coronoid process and temporal fascia", "Joint capsule and articular disc of the TMJ", "Styloid process and stylomandibular ligament", "Lingula and mandibular foramen"], a:1, h1:"Recall Maini's point on Lateral pterygoid — capsule/disc attachment.", h2:"Maini's study tag: Lateral pterygoid — capsule/disc attachment.", exp:"The lateral pterygoid attaches to the TMJ joint capsule and articular disc." },
+  { id:28, topic:"Muscles of Mastication", src:"L10 · Lateral pterygoid origin", q:"The lateral pterygoid originates from the infratemporal surface and greater wing of the sphenoid and from the LATERAL surface of which plate?", opts:["Pyramidal process of the palatine bone", "Medial pterygoid plate", "Tuberosity of the maxilla", "Lateral pterygoid plate"], a:3, h1:"Recall Maini's point on Lateral pterygoid — origin.", h2:"Maini's study tag: Lateral pterygoid — origin.", exp:"It arises from the lateral surface of the lateral pterygoid plate." },
+  { id:29, topic:"Muscles of Mastication", src:"L10 · Medial pterygoid origin", q:"The medial pterygoid originates from the medial surface of the lateral pterygoid plate, the pyramidal process of the palatine bone, and which other structure?", opts:["Zygomatic arch", "Coronoid process", "Tuberosity of the maxilla", "Spine of the sphenoid"], a:2, h1:"Recall Maini's point on Medial pterygoid — origin.", h2:"Maini's study tag: Medial pterygoid — origin.", exp:"The medial pterygoid also arises from the tuberosity of the maxilla." },
+  { id:30, topic:"Muscles of Mastication", src:"L10 · Lateral pterygoid — chair analogy", q:"Using Maini's 'chair' analogy, the lateral pterygoid pulls the head of the mandible forward while the body drops. This produces which combined result?", opts:["Retraction with elevation", "Protraction with depression of the mandible", "Pure lateral deviation", "Elevation only"], a:1, h1:"Recall Maini's point on Lateral pterygoid — depression mechanism.", h2:"Maini's study tag: Lateral pterygoid — depression mechanism.", exp:"Pulling the head forward (like pulling a chair by its back) drops the body — depression plus protraction." },
+  { id:31, topic:"TMJ — Movements & Actions", src:"L10 · Lateral (side-to-side) jaw movement", q:"When the mandible is deviated to the RIGHT, what happens at the LEFT temporomandibular joint?", opts:["The joint dislocates anteriorly", "The head glides forward (protraction)", "The head is retracted", "The head rotates in place"], a:1, h1:"Think of opening a door: the far side swings forward.", h2:"Maini's study tag: TMJ — lateral deviation mechanics.", exp:"Moving the jaw to the right causes protraction on the left (and rotation on the right) — 'like a door.'" },
+  { id:32, topic:"TMJ — Movements & Actions", src:"L10/L11 · TMJ movement terminology", q:"In the TMJ terminology Maini uses, 'flexion' and 'extension' correspond to which movements?", opts:["Flexion = retraction; extension = protrusion", "Flexion = depression; extension = elevation", "Flexion = elevation; extension = depression", "Flexion = protrusion; extension = retraction"], a:2, h1:"Recall Maini's point on TMJ — flexion/extension pairing.", h2:"Maini's study tag: TMJ — flexion/extension pairing.", exp:"Elevation = flexion (joint angle decreases); depression = extension (joint angle increases)." },
+  { id:33, topic:"TMJ — Movements & Actions", src:"L10 · TMJ movements", q:"Which movements are possible at the temporomandibular joint?", opts:["Only rotation", "Only elevation and depression", "Circumduction and opposition", "Gliding (protrusion/retraction), rotation, and elevation/depression"], a:3, h1:"Recall Maini's point on TMJ — movement repertoire.", h2:"Maini's study tag: TMJ — movement repertoire.", exp:"Maini lists gliding (forward/back), rotation (side-to-side), and elevation/depression." },
+  { id:34, topic:"TMJ — Structure & Ligaments", src:"L10 · TMJ classification", q:"What type of joint is the temporomandibular joint?", opts:["Primary cartilaginous joint", "Synovial joint", "Secondary cartilaginous (symphysis) joint", "Fibrous (syndesmosis) joint"], a:1, h1:"Recall Maini's point on TMJ — joint type.", h2:"Maini's study tag: TMJ — joint type.", exp:"It is synovial, with hyaline articular surfaces, synovial fluid/cavity/membrane, and a fibrous capsule." },
+  { id:35, topic:"TMJ — Structure & Ligaments", src:"L10 · TMJ mobility/stability", q:"Maini describes the TMJ as one of the most mobile and least stable joints — second only to which joint?", opts:["Elbow joint", "Shoulder (glenohumeral) joint", "Atlanto-occipital joint", "Hip joint"], a:1, h1:"Recall Maini's point on TMJ — stability ranking.", h2:"Maini's study tag: TMJ — stability ranking.", exp:"The shoulder is THE most mobile/least stable joint; the TMJ is next." },
+  { id:36, topic:"TMJ — Structure & Ligaments", src:"L10 · TMJ articulation", q:"The TMJ is formed between the mandibular fossa of the temporal bone and which part of the mandible?", opts:["Lingula", "Head of the condylar process", "Angle of the mandible", "Coronoid process"], a:1, h1:"Recall Maini's point on TMJ — articulating surfaces.", h2:"Maini's study tag: TMJ — articulating surfaces.", exp:"The head of the condylar process articulates with the mandibular fossa." },
+  { id:37, topic:"TMJ — Structure & Ligaments", src:"L10 · TMJ articular disc", q:"The articular disc of the TMJ divides the joint cavity into which compartments?", opts:["A medial and a lateral compartment", "An anterior and a posterior compartment", "No compartments; it is a single cavity", "A superior and an inferior compartment"], a:3, h1:"Recall Maini's point on TMJ — articular disc.", h2:"Maini's study tag: TMJ — articular disc.", exp:"The disc lies in the middle of the cavity, dividing it into superior and inferior compartments." },
+  { id:38, topic:"TMJ — Structure & Ligaments", src:"L10 · TMJ — articular tubercle", q:"Which bony prominence lies just anterior to the mandibular fossa and helps limit anterior dislocation of the mandibular head?", opts:["Pterygoid hamulus", "Articular tubercle", "Coronoid process", "Mastoid process"], a:1, h1:"Recall Maini's point on TMJ — articular tubercle.", h2:"Maini's study tag: TMJ — articular tubercle.", exp:"Maini: the articular tubercle prevents forward dislocation of the mandibular head, to some extent." },
+  { id:39, topic:"TMJ — Structure & Ligaments", src:"L11 · Maini quiz — sphenomandibular ligament", q:"The sphenomandibular ligament, an extrinsic ligament of the TMJ, attaches from the spine of the sphenoid to which mandibular landmark?", opts:["Lingula", "Angle of the mandible", "Mandibular notch", "Coronoid process"], a:0, h1:"A deep/internal attachment — pairs with the deep spine of the sphenoid.", h2:"Maini's study tag: Sphenomandibular ligament.", exp:"Maini's frequently-asked item: the sphenomandibular ligament attaches to the lingula.  [Maini] 'Sphenomandibular ligament ... it is lingula. Because lingula is more internal.'" },
+  { id:40, topic:"TMJ — Structure & Ligaments", src:"L11 · Stylomandibular ligament", q:"The stylomandibular ligament runs from the styloid process to which part of the mandible?", opts:["Lingula", "Head of the condyle", "Mental protuberance", "Angle of the mandible"], a:3, h1:"Styloid is external, so it goes to the external angle.", h2:"Maini's study tag: Stylomandibular ligament.", exp:"The stylomandibular ligament attaches to the angle of the mandible." },
+  { id:41, topic:"TMJ — Structure & Ligaments", src:"L10/L11 · TMJ extrinsic ligaments", q:"The two extrinsic ligaments that reinforce the TMJ are the stylomandibular ligament and which other ligament?", opts:["Pterygomandibular raphe", "Pterygospinous ligament", "Sphenomandibular ligament", "Stylohyoid ligament"], a:2, h1:"Recall Maini's point on TMJ — two extrinsic ligaments.", h2:"Maini's study tag: TMJ — two extrinsic ligaments.", exp:"Maini names two extrinsic ligaments: the sphenomandibular and the stylomandibular." },
+  { id:42, topic:"TMJ — Structure & Ligaments", src:"L10 · TMJ — synovial fluid function", q:"The synovial fluid of the TMJ provides lubrication and also serves which other function?", opts:["Nourishing the avascular hyaline articular cartilage", "Transmitting motor impulses", "Anchoring the articular disc", "Producing red blood cells"], a:0, h1:"Recall Maini's point on TMJ — synovial fluid nutrition.", h2:"Maini's study tag: TMJ — synovial fluid nutrition.", exp:"Maini: the hyaline cartilage receives its nutrition from synovial fluid; loss of movement/fluid leads to its destruction." },
+  { id:43, topic:"TMJ — Structure & Ligaments", src:"L11 · Maini quiz — nerve to TMJ", q:"Which nerve is the single best answer for the innervation of the TMJ (Maini's distractors: buccal, lingual, chorda tympani)?", opts:["Chorda tympani", "Auriculotemporal nerve", "Lingual nerve", "Buccal nerve"], a:1, h1:"Recall Maini's point on TMJ — auriculotemporal.", h2:"Maini's study tag: TMJ — auriculotemporal.", exp:"Maini: the auriculotemporal nerve is the best choice for TMJ innervation.  [Maini] 'Auriculotemporal ... is the best choice, good.'" },
+  { id:44, topic:"TMJ — Structure & Ligaments", src:"L10 · TMJ innervation", q:"The sensory supply of the TMJ capsule is carried mainly by the auriculotemporal nerve together with which other branches of V3?", opts:["Lingual and inferior alveolar nerves", "Chorda tympani and greater petrosal nerves", "Buccal and mental nerves", "Masseteric and deep temporal nerves"], a:3, h1:"Recall Maini's point on TMJ — sensory nerves.", h2:"Maini's study tag: TMJ — sensory nerves.", exp:"Maini: auriculotemporal, masseteric, and deep temporal nerves supply the joint." },
+  { id:45, topic:"TMJ — Structure & Ligaments", src:"L10 · TMJ blood supply", q:"The arterial supply of the TMJ comes from branches of the maxillary artery and which other nearby artery?", opts:["Occipital artery", "Facial artery", "Lingual artery", "Superficial temporal artery"], a:3, h1:"Recall Maini's point on TMJ — arterial supply.", h2:"Maini's study tag: TMJ — arterial supply.", exp:"Maini: the superficial temporal and maxillary arteries, lying in the vicinity, supply the joint." },
+  { id:46, topic:"Maxillary Artery", src:"L11 · Maxillary artery origin", q:"The maxillary artery is described by Maini as which of the following?", opts:["The larger of the two terminal branches of the external carotid artery", "A branch of the internal carotid artery", "The smaller terminal branch of the external carotid artery", "The terminal branch of the superficial temporal artery"], a:0, h1:"Recall Maini's point on Maxillary artery — origin.", h2:"Maini's study tag: Maxillary artery — origin.", exp:"It is the larger of the two terminal branches of the external carotid artery." },
+  { id:47, topic:"Maxillary Artery", src:"L11 · Maxillary artery course", q:"The maxillary artery arises within which gland, behind the neck of the mandible?", opts:["Parotid gland", "Thyroid gland", "Sublingual gland", "Submandibular gland"], a:0, h1:"Recall Maini's point on Maxillary artery — parotid relation.", h2:"Maini's study tag: Maxillary artery — parotid relation.", exp:"Like the facial nerve, it is related to the parotid gland at the neck of the mandible." },
+  { id:48, topic:"Maxillary Artery", src:"L11 · Maxillary artery course", q:"The maxillary artery leaves the infratemporal fossa to enter the pterygopalatine fossa through which opening?", opts:["Foramen rotundum", "Pterygomaxillary fissure", "Inferior orbital fissure", "Sphenopalatine foramen"], a:1, h1:"Recall Maini's point on Maxillary artery — pterygomaxillary fissure.", h2:"Maini's study tag: Maxillary artery — pterygomaxillary fissure.", exp:"It passes through the pterygomaxillary fissure into the pterygopalatine fossa." },
+  { id:49, topic:"Maxillary Artery", src:"L11 · Maini quiz — terminal branch of maxillary artery", q:"The maxillary artery terminates as which artery?", opts:["Middle meningeal artery", "Inferior alveolar artery", "Sphenopalatine artery", "Infraorbital artery"], a:3, h1:"Recall Maini's point on Maxillary artery — termination.", h2:"Maini's study tag: Maxillary artery — termination.", exp:"Maini's frequently-asked item: the terminal branch is the infraorbital artery.  [Maini] 'Which one of the following is terminal branch of maxillary artery? That is infraorbital.'" },
+  { id:50, topic:"Maxillary Artery", src:"L11 · Middle meningeal artery", q:"Which branch of the maxillary artery enters the cranium through the foramen spinosum to supply the dura mater?", opts:["Buccal artery", "Middle meningeal artery", "Inferior alveolar artery", "Deep auricular artery"], a:1, h1:"Recall Maini's point on Middle meningeal artery — foramen spinosum.", h2:"Maini's study tag: Middle meningeal artery — foramen spinosum.", exp:"The middle meningeal artery enters via foramen spinosum and supplies the dura." },
+  { id:51, topic:"Maxillary Artery", src:"L11 · Middle meningeal artery — clinical", q:"Rupture of the middle meningeal artery, classically from a fracture at the pterion, produces which type of hemorrhage?", opts:["Subdural hemorrhage", "Subarachnoid hemorrhage", "Extradural (epidural) hemorrhage", "Intracerebral hemorrhage"], a:2, h1:"The bone is thinnest at the pterion.", h2:"Maini's study tag: Middle meningeal — extradural hemorrhage.", exp:"Maini: middle meningeal rupture causes a temporal-fossa extradural hemorrhage from a pterion fracture." },
+  { id:52, topic:"Maxillary Artery", src:"L11 · Inferior alveolar artery", q:"Like the inferior alveolar nerve, the inferior alveolar artery gives off which small branch before entering the mandibular foramen?", opts:["Buccal branch", "Lingual branch", "Mental branch", "Mylohyoid branch (to mylohyoid)"], a:3, h1:"Recall Maini's point on Inferior alveolar artery — mylohyoid branch.", h2:"Maini's study tag: Inferior alveolar artery — mylohyoid branch.", exp:"It gives a mylohyoid artery, just as the nerve gives the nerve to mylohyoid." },
+  { id:53, topic:"Maxillary Artery", src:"L11 · Maxillary artery branches (ITF)", q:"Which pair of maxillary-artery branches, given off in the infratemporal fossa, supply structures of the ear?", opts:["Deep temporal and pterygoid arteries", "Sphenopalatine and descending palatine arteries", "Buccal and masseteric arteries", "Deep auricular and anterior tympanic arteries"], a:3, h1:"Recall Maini's point on Maxillary artery — auricular/tympanic branches.", h2:"Maini's study tag: Maxillary artery — auricular/tympanic branches.", exp:"The deep auricular and anterior tympanic arteries supply the ear." },
+  { id:54, topic:"Maxillary Artery", src:"L11 · Maini quiz — artery to nasal cavity", q:"Within the pterygopalatine fossa, which branch of the maxillary artery passes medially into the nasal cavity?", opts:["Posterior superior alveolar artery", "Infraorbital artery", "Descending palatine artery", "Sphenopalatine artery"], a:3, h1:"The classic 'artery of epistaxis.'", h2:"Maini's study tag: Sphenopalatine artery.", exp:"Maini's frequently-asked item: the sphenopalatine artery passes to the nasal cavity via the sphenopalatine foramen.  [Maini] 'Which artery passes from pterygopalatine fossa to the nasal cavity is sphenopalatine.'" },
+  { id:55, topic:"Pterygoid Venous Plexus", src:"L11 · Pterygoid venous plexus", q:"The pterygoid venous plexus is a venous network located between which structures, surrounding the maxillary artery?", opts:["The temporalis and pterygoid muscles", "The masseter and buccinator", "The parotid and submandibular glands", "The tensor and levator veli palatini"], a:0, h1:"Recall Maini's point on Pterygoid plexus — location.", h2:"Maini's study tag: Pterygoid plexus — location.", exp:"Maini: the plexus lies between the temporal and pterygoid muscles." },
+  { id:56, topic:"Pterygoid Venous Plexus", src:"L10/L11 · Pterygoid plexus drainage", q:"Posteriorly, the pterygoid venous plexus drains primarily into which vein?", opts:["Maxillary vein", "Facial vein", "Superficial temporal vein", "Internal jugular vein"], a:0, h1:"Recall Maini's point on Pterygoid plexus — drainage.", h2:"Maini's study tag: Pterygoid plexus — drainage.", exp:"Posteriorly the plexus drains into the maxillary vein (which then helps form the retromandibular vein)." },
+  { id:57, topic:"Pterygoid Venous Plexus", src:"L11 · Pterygoid plexus — clinical", q:"Why is the pterygoid venous plexus clinically important as a route for the spread of infection?", opts:["It communicates with the cavernous sinus and with the facial vein", "It connects the middle ear to the mastoid air cells", "It has valves that trap emboli in the orbit", "It drains directly into the carotid artery"], a:0, h1:"Ties into the 'danger area' of the face.", h2:"Maini's study tag: Pterygoid plexus — cavernous sinus link.", exp:"Maini: the plexus communicates with the cavernous sinus and the facial (deep facial) vein, so facial infection can spread to the cavernous sinus." },
+  { id:58, topic:"Mandibular Nerve (V3)", src:"L11 · Mandibular nerve — foramen", q:"The mandibular nerve (V3) exits the skull through which foramen?", opts:["Foramen spinosum", "Foramen rotundum", "Foramen ovale", "Superior orbital fissure"], a:2, h1:"Recall Maini's point on V3 — foramen ovale.", h2:"Maini's study tag: V3 — foramen ovale.", exp:"V3 passes through foramen ovale ('ovale' = oval, matching the more oval V3).  [Maini] 'V3 passes through foramen ovale ... V2 passes through foramen rotundum. Rotundum means round.'" },
+  { id:59, topic:"Mandibular Nerve (V3)", src:"L11 · V3 — fiber types", q:"Functionally, the mandibular nerve (V3) is which of the following?", opts:["A mixed nerve carrying both sensory and motor fibers", "Purely sensory", "Purely parasympathetic", "Purely motor"], a:0, h1:"Recall Maini's point on V3 — mixed nerve.", h2:"Maini's study tag: V3 — mixed nerve.", exp:"V3 is a mixed nerve; unlike V1 and V2, it carries motor fibers as well as sensory." },
+  { id:60, topic:"Mandibular Nerve (V3)", src:"L11 · V3 — relations", q:"After exiting foramen ovale, V3 descends between which two structures before dividing?", opts:["Masseter and ramus of the mandible", "Tensor veli palatini (medially) and lateral pterygoid (laterally)", "Temporalis and temporal fascia", "Medial and lateral pterygoid muscles"], a:1, h1:"Recall Maini's point on V3 — relation to lateral pterygoid.", h2:"Maini's study tag: V3 — relation to lateral pterygoid.", exp:"Maini: V3 descends between tensor veli palatini medially and lateral pterygoid laterally, so it lies deep to the lateral pterygoid." },
+  { id:61, topic:"Mandibular Nerve (V3)", src:"L11 · V3 — trunk branches", q:"Which branch arises from the MAIN TRUNK of V3 (before the anterior/posterior split), along with the meningeal branch?", opts:["Nerve to masseter", "Nerve to medial pterygoid", "Auriculotemporal nerve", "Buccal nerve"], a:1, h1:"Recall Maini's point on V3 — trunk branches.", h2:"Maini's study tag: V3 — trunk branches.", exp:"Maini: the trunk gives the meningeal branch and the nerve to medial pterygoid." },
+  { id:62, topic:"Mandibular Nerve (V3)", src:"L11 · V3 anterior division", q:"The anterior division of V3 is largely motor. Which of its branches is the one SENSORY branch?", opts:["Deep temporal nerves", "Nerve to masseter", "Nerve to lateral pterygoid", "Buccal nerve"], a:3, h1:"Don't confuse this sensory buccal with the motor buccal branch of the facial nerve.", h2:"Maini's study tag: V3 anterior division — sensory buccal.", exp:"The (long) buccal nerve of V3 is sensory to the cheek; the rest of the anterior division is motor." },
+  { id:63, topic:"Mandibular Nerve (V3)", src:"L11 · V3 posterior division", q:"The three named branches of the POSTERIOR division of V3 are the inferior alveolar, the lingual, and which nerve?", opts:["Deep temporal nerve", "Masseteric nerve", "Auriculotemporal nerve", "Buccal nerve"], a:2, h1:"Recall Maini's point on V3 posterior division — branches.", h2:"Maini's study tag: V3 posterior division — branches.", exp:"The posterior division gives the auriculotemporal, lingual, and inferior alveolar nerves." },
+  { id:64, topic:"Mandibular Nerve (V3)", src:"L11 · Auriculotemporal nerve — identifying feature", q:"Which nerve is identified by the fact that the middle meningeal artery pierces (passes between its two roots) it?", opts:["Buccal nerve", "Lingual nerve", "Auriculotemporal nerve", "Inferior alveolar nerve"], a:2, h1:"Recall Maini's point on Auriculotemporal — two roots.", h2:"Maini's study tag: Auriculotemporal — two roots.", exp:"Maini: the auriculotemporal nerve forms a 'buttonhole' through which the middle meningeal artery passes — a reliable identifier.  [Maini] 'Anytime you look at a nerve which has a passage ... it's auriculotemporal, because it is pierced by middle meningeal artery.'" },
+  { id:65, topic:"Mandibular Nerve (V3)", src:"L11 · Inferior alveolar to mental nerve", q:"The inferior alveolar nerve continues within the mandible and exits the mental foramen as which nerve, supplying the chin and lower lip?", opts:["Buccal nerve", "Mental nerve", "Lingual nerve", "Nerve to mylohyoid"], a:1, h1:"Recall Maini's point on Mental nerve.", h2:"Maini's study tag: Mental nerve.", exp:"The mental nerve is the terminal continuation of the inferior alveolar nerve." },
+  { id:66, topic:"Mandibular Nerve (V3)", src:"L10/L11 · Auriculotemporal — parotid secretomotor", q:"In addition to general sensation from the ear and temple, the auriculotemporal nerve carries which fibers to the parotid gland?", opts:["Postganglionic parasympathetic fibers (relayed in the otic ganglion)", "Special sensory (taste) fibers", "Preganglionic parasympathetic fibers", "Only sympathetic fibers to sweat glands"], a:0, h1:"Recall Maini's point on Auriculotemporal — parotid parasympathetics.", h2:"Maini's study tag: Auriculotemporal — parotid parasympathetics.", exp:"It delivers postganglionic parasympathetic (secretomotor) fibers, which synapsed in the otic ganglion, to the parotid." },
+  { id:67, topic:"Mandibular Nerve (V3)", src:"L10 · Auriculotemporal nerve — parent", q:"The auriculotemporal nerve, which carries sensation from the external ear and temporal region, is a branch of which nerve?", opts:["Facial nerve (CN VII)", "Glossopharyngeal nerve (CN IX)", "Maxillary nerve (V2)", "Mandibular nerve (V3)"], a:3, h1:"Recall Maini's point on Auriculotemporal — V3 branch.", h2:"Maini's study tag: Auriculotemporal — V3 branch.", exp:"Maini: the auriculotemporal nerve is a branch of V3." },
+  { id:68, topic:"Lingual Nerve & Chorda Tympani", src:"L11 · Lingual nerve — fibers", q:"Before it is joined by the chorda tympani, the lingual nerve carries which fibers?", opts:["Motor fibers to the tongue muscles", "Parasympathetic fibers to the parotid", "Taste (SVA) fibers from the anterior two-thirds", "General sensory (GSA) fibers from the anterior two-thirds of the tongue"], a:3, h1:"Recall Maini's point on Lingual nerve — GSA.", h2:"Maini's study tag: Lingual nerve — GSA.", exp:"On its own the lingual nerve carries GSA (general sensation) from the anterior two-thirds of the tongue." },
+  { id:69, topic:"Lingual Nerve & Chorda Tympani", src:"L11 · Chorda tympani — course", q:"The chorda tympani, a branch of the facial nerve, exits the skull to reach the lingual nerve through which opening?", opts:["Sphenopalatine foramen", "Foramen ovale", "Stylomastoid foramen", "Petrotympanic fissure"], a:3, h1:"Recall Maini's point on Chorda tympani — petrotympanic fissure.", h2:"Maini's study tag: Chorda tympani — petrotympanic fissure.", exp:"The chorda tympani exits through the petrotympanic fissure and joins the lingual nerve." },
+  { id:70, topic:"Lingual Nerve & Chorda Tympani", src:"L11 · Chorda tympani — functions", q:"The chorda tympani carries which two functional fiber types?", opts:["Taste (SVA) from the anterior two-thirds of the tongue and preganglionic parasympathetic fibers", "General sensation from the tongue and motor fibers to it", "Taste from the posterior third and postganglionic sympathetic fibers", "Preganglionic sympathetic and postganglionic parasympathetic fibers"], a:0, h1:"Recall Maini's point on Chorda tympani — SVA + preganglionic parasympathetic.", h2:"Maini's study tag: Chorda tympani — SVA + preganglionic parasympathetic.", exp:"Maini: (1) SVA taste from the anterior two-thirds and (2) preganglionic parasympathetic fibers to the submandibular ganglion." },
+  { id:71, topic:"Lingual Nerve & Chorda Tympani", src:"L11 · Submandibular ganglion", q:"The preganglionic parasympathetic fibers of the chorda tympani synapse in which ganglion?", opts:["Ciliary ganglion", "Otic ganglion", "Pterygopalatine ganglion", "Submandibular ganglion"], a:3, h1:"Recall Maini's point on Submandibular ganglion — chorda tympani.", h2:"Maini's study tag: Submandibular ganglion — chorda tympani.", exp:"The chorda tympani's parasympathetic fibers synapse in the submandibular ganglion." },
+  { id:72, topic:"Lingual Nerve & Chorda Tympani", src:"L11 · Submandibular ganglion targets", q:"After the chorda tympani joins it, the lingual nerve delivers postganglionic parasympathetic fibers (via the submandibular ganglion) to which glands?", opts:["Palatine glands", "Submandibular and sublingual salivary glands", "Parotid gland only", "Lacrimal and nasal glands"], a:1, h1:"Recall Maini's point on Submandibular ganglion — targets.", h2:"Maini's study tag: Submandibular ganglion — targets.", exp:"Via the submandibular ganglion, the fibers reach the submandibular and sublingual glands." },
+  { id:73, topic:"Otic Ganglion", src:"L10/L11 · Otic ganglion", q:"The otic ganglion, a parasympathetic ganglion of the infratemporal fossa, provides secretomotor fibers to which gland?", opts:["Submandibular gland", "Parotid gland", "Sublingual gland", "Lacrimal gland"], a:1, h1:"Otic = near the ear, like the parotid in front of the ear.", h2:"Maini's study tag: Otic ganglion — parotid.", exp:"Maini's mnemonic: otic ganglion goes with the parotid ('it rhymes')." },
+  { id:74, topic:"Otic Ganglion", src:"L11 · Otic ganglion — CN IX", q:"Preganglionic parasympathetic fibers reaching the otic ganglion are carried by which cranial nerve?", opts:["Glossopharyngeal nerve (CN IX)", "Facial nerve (CN VII)", "Oculomotor nerve (CN III)", "Vagus nerve (CN X)"], a:0, h1:"Recall Maini's point on Otic ganglion — glossopharyngeal input.", h2:"Maini's study tag: Otic ganglion — glossopharyngeal input.", exp:"CN IX carries the preganglionic parasympathetic fibers to the otic ganglion." },
+  { id:75, topic:"Otic Ganglion", src:"L11 · Otic ganglion — inferior salivatory nucleus", q:"The preganglionic parasympathetic cell bodies for the otic ganglion (via CN IX) are located in which nucleus?", opts:["Superior salivatory nucleus of the medulla", "Edinger-Westphal nucleus of the midbrain", "Dorsal motor nucleus of the vagus", "Inferior salivatory nucleus of the medulla"], a:3, h1:"Recall Maini's point on Otic ganglion — preganglionic origin.", h2:"Maini's study tag: Otic ganglion — preganglionic origin.", exp:"Maini: the inferior salivatory nucleus houses these CN IX preganglionic neurons." },
+  { id:76, topic:"Otic Ganglion", src:"L11 · Otic ganglion pathway", q:"After the otic ganglion, the postganglionic parasympathetic fibers hitch-hike on which nerve to reach the parotid gland?", opts:["Auriculotemporal nerve", "Chorda tympani", "Lingual nerve", "Greater petrosal nerve"], a:0, h1:"Recall Maini's point on Otic ganglion to auriculotemporal to parotid.", h2:"Maini's study tag: Otic ganglion to auriculotemporal to parotid.", exp:"Postganglionic fibers from the otic ganglion travel on the auriculotemporal nerve (a V3 branch) to the parotid." },
+  { id:77, topic:"Otic Ganglion", src:"L11 · Otic ganglion — lesser petrosal nerve", q:"The tympanic nerve (a branch of CN IX) forms the tympanic plexus, which continues as which nerve to reach the otic ganglion?", opts:["Nerve of the pterygoid canal", "Deep petrosal nerve", "Lesser petrosal nerve", "Greater petrosal nerve"], a:2, h1:"Recall Maini's point on Lesser petrosal nerve.", h2:"Maini's study tag: Lesser petrosal nerve.", exp:"Maini: tympanic nerve then tympanic plexus then lesser petrosal nerve then otic ganglion." },
+  { id:78, topic:"Otic Ganglion", src:"L11 · Otic ganglion — position", q:"Within the infratemporal fossa, the otic ganglion lies in which position relative to the mandibular nerve (V3)?", opts:["Within the TMJ capsule", "Superficial (lateral) to V3", "Deep (medial) to V3, just below foramen ovale", "Inside the parotid gland"], a:2, h1:"Recall Maini's point on Otic ganglion — location vs V3.", h2:"Maini's study tag: Otic ganglion — location vs V3.", exp:"Maini: the otic ganglion lies deep to the mandibular nerve, so it is hidden by V3." },
+  { id:79, topic:"Parasympathetic Ganglia (COPS)", src:"L11 · Four parasympathetic ganglia (COPS)", q:"Maini's mnemonic 'COPS' names the four parasympathetic ganglia of the head. What do the letters stand for?", opts:["Ciliary, Otic, Parotid, Sublingual", "Cochlear, Optic, Palatine, Sphenoidal", "Ciliary, Otic, Pterygopalatine, Submandibular", "Ciliary, Otic, Pterygoid, Stellate"], a:2, h1:"C-O-P-S.", h2:"Maini's study tag: COPS mnemonic.", exp:"C-O-P-S = Ciliary, Otic, Pterygopalatine, Submandibular." },
+  { id:80, topic:"Parasympathetic Ganglia (COPS)", src:"L11 · Cranial parasympathetic outflow", q:"Which cranial nerves carry the preganglionic parasympathetic outflow of the head, neck, and body (as summarized by Maini)?", opts:["CN III, IV, V, and VI", "CN III, VII, IX, and X", "CN V, VII, IX, and XII", "CN VII, IX, X, and XI"], a:1, h1:"Recall Maini's point on Parasympathetic cranial nerves 3-7-9-10.", h2:"Maini's study tag: Parasympathetic cranial nerves 3-7-9-10.", exp:"Maini: the 3rd, 7th, 9th, and 10th cranial nerves carry the cranial parasympathetic outflow." },
+  { id:81, topic:"Parasympathetic Ganglia (COPS)", src:"L11 · Ciliary ganglion", q:"The ciliary ganglion (the 'C' of COPS) receives its preganglionic parasympathetic fibers from which cranial nerve?", opts:["Glossopharyngeal nerve (CN IX)", "Facial nerve (CN VII)", "Trigeminal nerve (CN V)", "Oculomotor nerve (CN III)"], a:3, h1:"Recall Maini's point on Ciliary ganglion — CN III.", h2:"Maini's study tag: Ciliary ganglion — CN III.", exp:"The ciliary ganglion is supplied by CN III and controls intraocular muscles." },
+  { id:82, topic:"Parasympathetic Ganglia (COPS)", src:"L11 · CN VII parasympathetic ganglia", q:"The pterygopalatine and submandibular ganglia both receive their preganglionic parasympathetic fibers from which cranial nerve?", opts:["Glossopharyngeal nerve (CN IX)", "Facial nerve (CN VII)", "Oculomotor nerve (CN III)", "Vagus nerve (CN X)"], a:1, h1:"Recall Maini's point on CN VII — two ganglia.", h2:"Maini's study tag: CN VII — two ganglia.", exp:"CN VII supplies the pterygopalatine ganglion (via the greater petrosal nerve) and the submandibular ganglion (via the chorda tympani)." },
+  { id:83, topic:"Parasympathetic Ganglia (COPS)", src:"L11 · Trigeminal ganglion", q:"The trigeminal (semilunar) ganglion differs from the four COPS ganglia because it is which type of ganglion?", opts:["A sensory ganglion (housing sensory neuron cell bodies)", "A sympathetic ganglion", "A parasympathetic ganglion", "A motor ganglion"], a:0, h1:"Analogous to a dorsal root ganglion.", h2:"Maini's study tag: Trigeminal ganglion — sensory.", exp:"Maini: a ganglion on a nerve like the trigeminal is a sensory ganglion, analogous to a dorsal root ganglion." },
+  { id:84, topic:"Parasympathetic Ganglia (COPS)", src:"L11 · Maini quiz — not a branch of CN VII", q:"Maini's trick question: which of the following is NOT a branch of the facial nerve (CN VII)?", opts:["Chorda tympani", "Greater petrosal nerve", "Deep petrosal nerve", "Nerve to the stapedius"], a:2, h1:"Recall Maini's point on Deep petrosal — sympathetic, not VII.", h2:"Maini's study tag: Deep petrosal — sympathetic, not VII.", exp:"The deep petrosal nerve arises from the internal carotid (sympathetic) plexus, not from CN VII.  [Maini] 'Which one of the following is not a branch of 7th nerve? ... deep petrosal ... coming from ICA plexus, carrying postganglionic sympathetic fibers.'" },
+  { id:85, topic:"Parasympathetic Ganglia (COPS)", src:"L11 · Nerve of pterygoid canal", q:"The nerve of the pterygoid canal is formed by the greater petrosal nerve joined by the deep petrosal nerve. What does the deep petrosal nerve contribute?", opts:["Preganglionic parasympathetic fibers", "Motor fibers to the palate", "Taste fibers from the palate", "Postganglionic sympathetic fibers from the internal carotid plexus"], a:3, h1:"Recall Maini's point on Nerve of pterygoid canal — components.", h2:"Maini's study tag: Nerve of pterygoid canal — components.", exp:"The deep petrosal nerve carries postganglionic sympathetic fibers from the internal carotid plexus." },
+  { id:86, topic:"Parasympathetic Ganglia (COPS)", src:"L11 · Pterygopalatine ganglion targets", q:"Postganglionic parasympathetic fibers from the pterygopalatine ganglion supply the lacrimal gland, the nasal mucosal glands, and which other glands?", opts:["Submandibular gland", "Sublingual gland", "Palatine glands", "Parotid gland"], a:2, h1:"Recall Maini's point on Pterygopalatine ganglion — targets.", h2:"Maini's study tag: Pterygopalatine ganglion — targets.", exp:"The pterygopalatine ganglion also supplies the palatine glands." },
+  { id:87, topic:"Pterygopalatine Fossa", src:"L11 · Pterygopalatine fossa — boundaries", q:"The pterygopalatine fossa lies between the pterygoid process of the sphenoid posteriorly and which structure anteriorly?", opts:["Pyramidal process of the palatine bone", "Squamous part of the temporal bone", "Posterior surface of the maxilla", "Zygomatic bone"], a:2, h1:"Recall Maini's point on PPF — anterior boundary.", h2:"Maini's study tag: PPF — anterior boundary.", exp:"The anterior wall is the posterior surface of the maxilla." },
+  { id:88, topic:"Pterygopalatine Fossa", src:"L11 · PPF — floor", q:"The roof of the pterygopalatine fossa is the greater wing of the sphenoid; its floor is formed by which structure?", opts:["Pyramidal process of the palatine bone", "Tuberosity of the maxilla", "Medial pterygoid muscle", "Lateral pterygoid plate"], a:0, h1:"Recall Maini's point on PPF — floor.", h2:"Maini's study tag: PPF — floor.", exp:"The pyramidal process of the palatine bone forms the floor of the pterygopalatine fossa." },
+  { id:89, topic:"Pterygopalatine Fossa", src:"L11 · PPF communications", q:"The pterygopalatine fossa communicates MEDIALLY with the nasal cavity through which opening?", opts:["Foramen rotundum", "Inferior orbital fissure", "Pterygomaxillary fissure", "Sphenopalatine foramen"], a:3, h1:"Recall Maini's point on PPF — medial communication.", h2:"Maini's study tag: PPF — medial communication.", exp:"The sphenopalatine foramen connects the pterygopalatine fossa to the nasal cavity medially." },
+  { id:90, topic:"Pterygopalatine Fossa", src:"L11 · PPF — foramen rotundum", q:"The pterygopalatine fossa communicates POSTERIORLY with the middle cranial fossa through which opening (which also transmits V2)?", opts:["Sphenopalatine foramen", "Foramen ovale", "Inferior orbital fissure", "Foramen rotundum"], a:3, h1:"Recall Maini's point on PPF — posterior communication / V2.", h2:"Maini's study tag: PPF — posterior communication / V2.", exp:"The foramen rotundum transmits the maxillary nerve (V2) and links the fossa to the middle cranial fossa." },
+  { id:91, topic:"Pterygopalatine Fossa", src:"L11 · PPF contents", q:"Besides the terminal maxillary artery and the pterygopalatine ganglion, the pterygopalatine fossa contains which nerve?", opts:["Facial nerve (CN VII)", "Maxillary nerve (V2)", "Glossopharyngeal nerve (CN IX)", "Mandibular nerve (V3)"], a:1, h1:"Recall Maini's point on PPF — contents (V2).", h2:"Maini's study tag: PPF — contents (V2).", exp:"The pterygopalatine part of the maxillary nerve (V2) is a content of the fossa." },
+  { id:92, topic:"Pterygopalatine Fossa", src:"L11 · V2 — infraorbital nerve", q:"The infraorbital nerve, which reaches the face through the infraorbital foramen, is the terminal continuation of which nerve?", opts:["Maxillary nerve (V2)", "Mandibular nerve (V3)", "Zygomatic nerve", "Inferior alveolar nerve"], a:0, h1:"Recall Maini's point on Infraorbital nerve — V2 termination.", h2:"Maini's study tag: Infraorbital nerve — V2 termination.", exp:"The infraorbital nerve is the termination of the maxillary nerve (V2)." },
+  { id:93, topic:"Pterygopalatine Fossa", src:"L11 · V2 branches", q:"The maxillary nerve (V2) gives off the zygomatic nerve, which divides into which two branches?", opts:["Zygomaticofacial and infraorbital nerves", "Anterior and posterior superior alveolar nerves", "Zygomaticofacial and zygomaticotemporal nerves", "Zygomaticotemporal and lingual nerves"], a:2, h1:"Recall Maini's point on Zygomatic nerve — divisions.", h2:"Maini's study tag: Zygomatic nerve — divisions.", exp:"The zygomatic nerve splits into the zygomaticofacial and zygomaticotemporal nerves, exiting foramina of the same name." }
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.voicenote{font-size:12.5px;color:var(--ink-soft);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0 4px;max-width:720px}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+/* voice control bar */
+.voicebar{position:sticky;top:52px;z-index:15;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 14px;box-shadow:0 12px 28px -22px rgba(124,58,237,.4)}
+.vb-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.vb-btn{border:none;font:inherit;font-weight:700;font-size:13.5px;padding:9px 15px;border-radius:10px;cursor:pointer;transition:.14s;display:inline-flex;align-items:center;gap:6px}
+.vb-play{background:var(--accent);color:#fff;box-shadow:0 6px 16px -8px var(--accent)}
+.vb-play:hover{background:var(--accent-mid)}
+.vb-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.vb-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.vb-ghost:disabled{opacity:.4;cursor:default}
+.vb-spacer{flex:1 1 auto;min-width:8px}
+.vb-select{font:inherit;font-size:12.5px;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 9px;max-width:210px}
+.vb-rate{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-soft);font-weight:600}
+.vb-rate input[type=range]{width:130px;accent-color:var(--accent)}
+.vb-rateval{font-weight:800;color:var(--accent-deep);min-width:42px;text-align:center;background:var(--accent-wash);border:1px solid var(--line);border-radius:7px;padding:2px 6px}
+.vb-status{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.vb-status b{color:var(--accent-deep)}
+.vb-warn{font-size:12px;color:var(--bad);margin-top:6px}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);transition:box-shadow .2s,border-color .2s}
+.obj.speaking{border-left-color:var(--accent-deep);box-shadow:0 0 0 2px var(--accent-soft),0 16px 34px -20px rgba(124,58,237,.55);background:linear-gradient(180deg,#fbf9ff,#fff)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj.speaking .obj-num{color:var(--accent)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:180px}
+.readbtn{flex:0 0 auto;border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:700;font-size:11.5px;padding:5px 10px;border-radius:8px;cursor:pointer}
+.readbtn:hover{background:var(--accent-wash)}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Head &amp; Neck · Dr. Maini</span>
+          <h1 className="title serif">GA 0202 · Temporal &amp; <em>Infratemporal Fossa</em></h1>
+          <div className="voicenote">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+          <p className="subtitle">A voiced, hands-free cram for Maini&apos;s temporal &amp; infratemporal fossa block — the two fossae, muscles of mastication, the TMJ, the maxillary artery, the pterygoid plexus, V3 and its branches, the lingual nerve &amp; chorda tympani, the parasympathetic ganglia (COPS), and the pterygopalatine fossa — in her order, weighted by what she stresses, with her own analogies and a drill from the audited bank.</p>
+          <div className="pill-row">
+            <span className="pill-date">🗂 Lectures 10 &amp; 11 · Temporal &amp; infratemporal fossa</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA 0202 lectures 10 &amp; 11 (Temporal &amp; Infratemporal Fossa). Facts are grounded in the audited module bank; the drill is the audited bank with balanced option positions. Analogies are credited to Maini only where she says them. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+/* Voiced, hands-free walkthrough via the Web Speech API. */
+function Cram() {
+  const [voices, setVoices] = useState([]);
+  const [voiceURI, setVoiceURI] = useState("");
+  const [rate, setRate] = useState(1);
+  const [speaking, setSpeaking] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [current, setCurrent] = useState(-1);
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+
+  const rateRef = useRef(1);
+  const voiceRef = useRef("");
+  const queueRef = useRef([]);
+  const idxRef = useRef(0);
+  const activeRef = useRef(false);
+  useEffect(() => { rateRef.current = rate; }, [rate]);
+  useEffect(() => { voiceRef.current = voiceURI; }, [voiceURI]);
+
+  // load voices, prefer an Edge natural voice (Ava / Emma / Andrew)
+  useEffect(() => {
+    if (!supported) return;
+    const load = () => {
+      const vs = window.speechSynthesis.getVoices() || [];
+      if (!vs.length) return;
+      setVoices(vs);
+      setVoiceURI((prev) => {
+        if (prev) return prev;
+        const en = vs.filter((v) => /^en/i.test(v.lang));
+        const pick =
+          en.find((v) => /Ava/i.test(v.name)) ||
+          en.find((v) => /Emma/i.test(v.name)) ||
+          en.find((v) => /Andrew/i.test(v.name)) ||
+          en.find((v) => /Natural|Online/i.test(v.name)) ||
+          en[0] || vs[0];
+        return pick ? pick.voiceURI : "";
+      });
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => {
+      try { window.speechSynthesis.onvoiceschanged = null; window.speechSynthesis.cancel(); } catch (e) {}
+    };
+  }, [supported]);
+
+  const buildQueue = (startTopic) => {
+    const q = [];
+    for (let i = startTopic; i < cram.length; i++) {
+      const c = cram[i];
+      q.push({ topic: i, text: "Topic " + c.n + ". " + c.title + "." });
+      c.facts.forEach((f) => q.push({ topic: i, text: f }));
+      if (c.flag) q.push({ topic: i, text: "Maini flag. " + c.flag });
+    }
+    return q;
+  };
+
+  const speakNext = () => {
+    if (!activeRef.current) return;
+    const q = queueRef.current;
+    if (idxRef.current >= q.length) { stopAll(); return; }
+    const seg = q[idxRef.current];
+    setCurrent(seg.topic);
+    const el = document.getElementById("cram-topic-" + seg.topic);
+    if (el && seg.text.indexOf("Topic ") === 0) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    const u = new SpeechSynthesisUtterance(seg.text);
+    u.rate = Math.max(0.5, Math.min(3, rateRef.current));
+    const v = voices.find((x) => x.voiceURI === voiceRef.current);
+    if (v) u.voice = v;
+    u.onend = () => { idxRef.current += 1; speakNext(); };
+    u.onerror = () => { idxRef.current += 1; speakNext(); };
+    try { window.speechSynthesis.speak(u); } catch (e) {}
+  };
+
+  const startFrom = (startTopic) => {
+    if (!supported) return;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    queueRef.current = buildQueue(startTopic);
+    idxRef.current = 0;
+    activeRef.current = true;
+    setSpeaking(true); setPaused(false);
+    // slight delay so cancel settles
+    setTimeout(speakNext, 60);
+  };
+
+  const stopAll = () => {
+    activeRef.current = false;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    setSpeaking(false); setPaused(false); setCurrent(-1);
+  };
+
+  const togglePause = () => {
+    if (!supported || !speaking) return;
+    if (paused) { window.speechSynthesis.resume(); setPaused(false); }
+    else { window.speechSynthesis.pause(); setPaused(true); }
+  };
+
+  useEffect(() => () => { try { window.speechSynthesis.cancel(); } catch (e) {} }, []);
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s temporal &amp; infratemporal essentials, in her order</div>
+        <p>Press play and it reads the whole block aloud, hands-free, highlighting each card as it goes: temporal fossa → infratemporal fossa → muscles of mastication &amp; their actions → TMJ → maxillary artery → pterygoid plexus → V3 → lingual nerve &amp; chorda tympani → ganglia (COPS) → pterygopalatine fossa. The ⚑ flags are the high-yield hooks.</p>
+      </div>
+
+      <div className="voicebar">
+        <div className="vb-row">
+          {!speaking
+            ? <button className="vb-btn vb-play" onClick={() => startFrom(0)} disabled={!supported}>▶ Play walkthrough</button>
+            : <button className="vb-btn vb-play" onClick={togglePause}>{paused ? "▶ Resume" : "⏸ Pause"}</button>}
+          <button className="vb-btn vb-ghost" onClick={stopAll} disabled={!speaking}>⏹ Stop</button>
+          <div className="vb-spacer" />
+          <div className="vb-rate">
+            <span>Rate</span>
+            <input type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => setRate(parseFloat(e.target.value))} />
+            <span className="vb-rateval">{rate.toFixed(1)}x</span>
+          </div>
+          <select className="vb-select" value={voiceURI} onChange={(e) => setVoiceURI(e.target.value)}>
+            {voices.length === 0 && <option value="">Default voice</option>}
+            {voices.filter((v) => /^en/i.test(v.lang)).map((v) => (
+              <option key={v.voiceURI} value={v.voiceURI}>{v.name}</option>
+            ))}
+          </select>
+        </div>
+        {supported
+          ? <div className="vb-status">{speaking ? <span>Reading <b>Topic {current + 1}</b> of {cram.length}{paused ? " (paused)" : ""}…</span> : <span>Hands-free: press play, or tap 🔊 on any card to start there.</span>}</div>
+          : <div className="vb-warn">This browser doesn&apos;t support the Web Speech API. Try Microsoft Edge or Chrome to hear the walkthrough.</div>}
+      </div>
+
+      {cram.map((c, i) => (
+        <div className={`obj ${current === i && speaking ? "speaking" : ""}`} id={"cram-topic-" + i} key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <button className="readbtn" onClick={() => startFrom(i)} disabled={!supported} title="Read from here">🔊 Read</button>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.indexOf("★") !== -1 ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Maini&apos;s framework and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Dr. Maini&apos;s own mnemonics, analogies, and tricks pulled straight from lectures 10 &amp; 11 — the retention hooks to lean on when a rule won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions from the audited bank</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Maini, teaching GA 0202 (gross anatomy, head & neck), running a review of the TEMPORAL & INFRATEMPORAL FOSSA block (lectures 10 & 11). Teach ONLY from this content; do not invent bones, boundaries, muscles, attachments, foramina, nerves, arteries, ganglia, or fiber types. Warm and direct; you ask lots of quick quiz questions, say "right?" and "okay," give worked mnemonics, and tell students to "write it down" for the must-memorize points. Keep answers tight (3-6 sentences) and quiz the student.
+
+TEMPORAL FOSSA: superior/posterior boundary = the temporal lines (on the PARIETAL bone); lateral = zygomatic arch; inferior = infratemporal crest. Floor = the four bones meeting at PTERION (parietal, frontal, sphenoid, temporal) - the weak spot over the middle meningeal artery. Filled almost entirely by TEMPORALIS under the temporal fascia. Superficial temporal artery = one of the two terminal branches of the external carotid; superficial temporal + maxillary veins form the retromandibular vein.
+
+INFRATEMPORAL FOSSA: ROOF = greater wing of sphenoid (NOT the zygomatic arch - reject it). FLOOR = medial pterygoid (runs to the angle of the mandible). Lateral = ramus of mandible; medial = lateral pterygoid plate; anterior = posterior surface of maxilla; posterior = tympanic plate + mastoid process + styloid process. Contents: 2 pterygoids, maxillary artery + branches, pterygoid venous plexus, V3 + branches, chorda tympani (a branch of the FACIAL nerve, not V3), otic ganglion. (Parotid gland is not a listed content.)
+
+MUSCLES OF MASTICATION: all 4 are first-arch, V3. Temporalis -> coronoid process + anterior ramus. Masseter (zygomatic arch) -> angle & lateral ramus. Medial pterygoid (medial surface of lateral pterygoid plate, pyramidal process of palatine, maxillary tuberosity) -> medial ramus. Lateral pterygoid (greater wing/infratemporal surface + lateral surface of lateral pterygoid plate) -> pterygoid fovea of the condyle + TMJ capsule + articular disc. ACTIONS: elevation = temporalis + masseter + medial pterygoid; DEPRESSION = lateral pterygoid is the SOLE depressor (write it down); RETRACTION = temporalis is the ONLY retractor (horizontal posterior fibers), so temporalis is NOT a protruder; PROTRACTION = lateral + medial pterygoid + masseter; masseter & medial pterygoid only elevate & protract. Lateral deviation like a door: deviate right -> LEFT condyle protracts. Chair analogy: lateral pterygoid pulls the head forward like pulling a chair by its back, so the body drops -> depression + protraction.
+
+TMJ: synovial joint (hyaline surfaces, synovial fluid/cavity/membrane, fibrous capsule) between the mandibular fossa and the head of the condylar process; 2nd most mobile/least stable joint after the shoulder. Articular disc -> superior + inferior compartments. Articular tubercle limits anterior dislocation. Synovial fluid nourishes the avascular hyaline cartilage. Two extrinsic ligaments: sphenomandibular (spine of sphenoid -> LINGULA, deep/internal) and stylomandibular (styloid -> ANGLE, external). Movements = gliding, rotation, elevation/depression (elevation = "flexion"). Best nerve to TMJ = auriculotemporal (plus masseteric + deep temporal). Blood = maxillary + superficial temporal arteries.
+
+MAXILLARY ARTERY: larger of the two terminal branches of the external carotid; arises near the neck of the mandible by the parotid; exits via the pterygomaxillary fissure into the pterygopalatine fossa; terminal branch = INFRAORBITAL. Middle meningeal artery -> foramen SPINOSUM -> dura; ruptures at pterion -> EXTRADURAL (epidural) hemorrhage; buttonholes through the two roots of the auriculotemporal nerve. Inferior alveolar artery gives a mylohyoid branch before the mandibular foramen. Deep auricular + anterior tympanic -> ear. In the PPF: sphenopalatine (-> nasal cavity, nosebleeds), descending palatine, posterior superior alveolar.
+
+PTERYGOID VENOUS PLEXUS: between temporalis and the pterygoids, around the maxillary artery; drains posteriorly into the maxillary vein. VALVELESS communications with the cavernous sinus and facial vein -> a face infection can spread inward (danger area).
+
+MANDIBULAR NERVE (V3): exits foramen OVALE (V2 = foramen rotundum, "rotundum means round"); the ONLY mixed (sensory+motor) division; descends between tensor veli palatini (medial) and lateral pterygoid (lateral), so deep to the lateral pterygoid. TRUNK: meningeal branch + nerve to medial pterygoid. ANTERIOR division: mostly motor (masseteric, deep temporal, nerve to lateral pterygoid) + ONE sensory = the (long) buccal nerve to the cheek (not the facial nerve's motor buccal). POSTERIOR division: auriculotemporal, lingual, inferior alveolar (gives nerve to mylohyoid, enters mandibular foramen by the lingula, exits as the MENTAL nerve). Auriculotemporal is pierced by the middle meningeal artery.
+
+LINGUAL NERVE & CHORDA TYMPANI: lingual nerve (V3) alone = GSA from the anterior 2/3 of the tongue. Chorda tympani = a branch of the FACIAL nerve, exits the petrotympanic fissure, joins the lingual nerve; carries taste (SVA, anterior 2/3) + preganglionic parasympathetics -> submandibular ganglion -> submandibular + sublingual glands. Tongue muscles = CN XII; posterior third taste = CN IX.
+
+GANGLIA (COPS): the four parasympathetic ganglia = Ciliary (CN III, eye), Otic (CN IX, parotid), Pterygopalatine (CN VII, lacrimal/nasal/palatine), Submandibular (CN VII, submandibular/sublingual). Cranial parasympathetic outflow = CN III, VII, IX, X. OTIC ganglion lies deep/medial to V3 below foramen ovale; preganglionic from CN IX (inferior salivatory nucleus) via tympanic nerve -> tympanic plexus -> lesser petrosal -> otic ganglion; postganglionics ride the auriculotemporal nerve to the parotid ("otic rhymes with parotid"). Trigeminal (semilunar) ganglion = a SENSORY ganglion, NOT one of COPS. Deep petrosal nerve = postganglionic SYMPATHETIC from the internal carotid plexus (NOT a branch of CN VII); joins greater petrosal to form the nerve of the pterygoid canal.
+
+PTERYGOPALATINE FOSSA: between the pterygoid process (posterior) and the posterior surface of the maxilla (anterior); roof = greater wing of sphenoid, floor = pyramidal process of the palatine bone. Communications: medial -> nasal cavity (sphenopalatine foramen); posterior -> middle cranial fossa (foramen rotundum, V2); lateral -> infratemporal fossa (pterygomaxillary fissure); superior -> orbit (inferior orbital fissure). Contents: terminal maxillary artery, pterygopalatine ganglion, V2. V2 -> infraorbital nerve; zygomatic nerve -> zygomaticofacial + zygomaticotemporal.
+
+Open by offering to drill the two fossae boundaries, the muscles of mastication and Maini's two exceptions (sole depressor / only retractor), the TMJ, the maxillary artery, V3 branches, the ganglia (COPS), or the pterygopalatine fossa. When the student is wrong, name the rule and have them re-derive step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay, the temporal and infratemporal fossa. Two things students always trip on: the muscle-action exceptions, right? Lateral pterygoid is the SOLE depressor, temporalis is the ONLY retractor - write those down. And the autonomics: chorda tympani is a branch of the FACIAL nerve, not V3, even though it hides among the V3 branches. Where do you want to start - the two fossae boundaries, the muscles of mastication and their actions, the TMJ, the maxillary artery, V3 and its branches, the ganglia (COPS), or the pterygopalatine fossa?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the two fossae boundaries — roof and floor of each",
+    "Muscles of mastication — and your two exceptions",
+    "Quiz the TMJ — type, disc, and the two extrinsic ligaments",
+    "The maxillary artery — course, terminal branch, middle meningeal",
+    "V3 branches — trunk, anterior, posterior divisions",
+    "The ganglia — COPS, and which nerve feeds each",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her temporal &amp; infratemporal fossa lectures. It quizzes you and makes you analyze step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

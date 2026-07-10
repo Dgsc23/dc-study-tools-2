@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 &middot; The Eye &amp; Orbit</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin-bottom: 6px; font-style: italic; font-size: 0.95rem; }
+.voice-note { color: #a5b4fc; text-align: center; margin: 0 auto 22px; max-width: 820px; font-size: 0.82rem; line-height: 1.5; }
+.scope-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.35); border-radius: 8px; padding: 10px 14px; margin: 0 auto 22px; max-width: 880px; color: #a7f3d0; font-size: 0.85rem; line-height: 1.55; }
+.scope-note b { color: #34d399; }
+.scope-note .maini-b { color: #fbbf24; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #f59e0b; }
+.card.kinematics { border-left-color: #60a5fa; }
+.card.ligament { border-left-color: #a78bfa; }
+.card.muscle { border-left-color: #34d399; }
+.card.rule { border-left-color: #ef4444; }
+.card.maini { border-left-color: #fbbf24; background: #1f2635; box-shadow: inset 3px 0 0 rgba(251,191,36,0.18); }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 700; }
+.card .tag { display: inline-block; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 10px; margin-bottom: 7px; text-transform: uppercase; }
+.tag.maini-tag { background: rgba(251,191,36,0.16); color: #fbbf24; border: 1px solid rgba(251,191,36,0.55); }
+.tag.mine-tag { background: rgba(96,165,250,0.14); color: #93c5fd; border: 1px solid rgba(96,165,250,0.45); }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.kinematics .hook { color: #93c5fd; }
+.card.ligament .hook { color: #c4b5fd; }
+.card.muscle .hook { color: #6ee7b7; }
+.card.rule .hook { color: #fca5a5; }
+.card.maini .hook { color: #fcd34d; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .quote { margin-top: 8px; padding: 9px 11px; background: rgba(251,191,36,0.07); border-left: 3px solid #fbbf24; font-size: 0.86rem; color: #fde68a; font-style: italic; border-radius: 0 6px 6px 0; line-height: 1.5; }
+.card .quote b { color: #fffbeb; font-style: normal; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #f59e0b; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card.kinematics .like { border-left-color: #60a5fa; }
+.card.ligament .like { border-left-color: #a78bfa; }
+.card.muscle .like { border-left-color: #34d399; }
+.card.rule .like { border-left-color: #ef4444; }
+.card.maini .like { border-left-color: #fbbf24; }
+.card .like b { color: #fde68a; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 900px; color: #94a3b8; font-size: 0.78rem; line-height: 1.7; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.legend span { margin: 0 8px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card .fact { color: #222; } .card .like { background: #fff; color: #000; } .card .quote { background: #fff; color: #333; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 GA 0202 &middot; The Eye &amp; Orbit &mdash; Mnemonics</h1>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s orbit, eyeball &amp; extraocular lists &mdash; her own mnemonics first, then my &ldquo;think-of-it-like&rdquo; study aids.</p>
+<p class="voice-note">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+<div class="scope-note">
+  <b>Honest framing:</b> The first section is <span class="maini-b">Dr. Maini&rsquo;s OWN mnemonics</span>, quoted from her Orbit lectures (marked <span class="maini-b">🎓 Maini&rsquo;s words</span>). Everything after is <b>my study aid</b> (marked 💡 my hook) &mdash; the <b>hook</b> is mine, but every <b>fact</b> it encodes is verifiable in the audited <b>Eye &amp; Orbit Everything-MC bank</b> and in <b>Lectures 19&ndash;21</b> (cited on each card). No mnemonic is attributed to Dr. Maini unless she actually says it on the recording.
+</div>
+<div class="legend">
+  <span><span class="swatch" style="background:#fbbf24;"></span>Maini&rsquo;s own</span>
+  <span><span class="swatch" style="background:#f59e0b;"></span>osteology / gross anatomy</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>optics / reflexes</span>
+  <span><span class="swatch" style="background:#a78bfa;"></span>nerves &amp; vessels</span>
+  <span><span class="swatch" style="background:#34d399;"></span>muscles</span>
+  <span><span class="swatch" style="background:#ef4444;"></span>clinical / trap</span>
+</div>
+
+<h2>Topic 1 &mdash; Dr. Maini&rsquo;s OWN mnemonics (quoted from lecture)</h2>
+<div class="topic-tagline">These are hers, in her words. She literally hands each one to the class &mdash; learn them exactly as she says them.</div>
+<div class="cards">
+
+<div class="card maini muscle">
+<div class="tag maini-tag">🎓 Maini&rsquo;s words</div>
+<div class="label">Extraocular muscle innervation</div>
+<div class="hook">SO4 &middot; LR6 &middot; ALL OTHERS = 3</div>
+<div class="fact"><b>Superior Oblique &rarr; CN IV</b> (trochlear). <b>Lateral Rectus &rarr; CN VI</b> (abducens). Every other extraocular muscle &mdash; superior rectus, inferior rectus, medial rectus, inferior oblique (and levator palpebrae superioris) &mdash; is <b>CN III</b> (oculomotor).</div>
+<div class="quote">Maini: <b>&ldquo;I&rsquo;ll give you a mnemonic to remember the innervation of the muscles &hellip; it goes like SO4, LR6 &hellip; all others by third nerve.&rdquo;</b></div>
+<div class="like">💡 Filter out just <b>SO</b> and <b>LR</b> first; whatever is left over all belongs to <b>CN III</b>.</div>
+<div class="src">Maini, Lecture 20 (~1:21:16). Bank: &ldquo;Using the mnemonic SO4, LR6, AO3&hellip;&rdquo;</div>
+</div>
+
+<div class="card maini muscle">
+<div class="tag maini-tag">🎓 Maini&rsquo;s words</div>
+<div class="label">Intorsion vs extorsion</div>
+<div class="hook">INFERIOR PEOPLE EXTORT MONEY</div>
+<div class="fact">Both <b>INFERIOR</b> muscles &mdash; <b>inferior rectus + inferior oblique</b> &mdash; produce <b>EXTORSION</b> (top of the eye rolls outward). Both <b>SUPERIOR</b> muscles &mdash; superior rectus + superior oblique &mdash; produce <b>INTORSION</b>.</div>
+<div class="quote">Maini: <b>&ldquo;Just remember this mnemonic &mdash; inferior people extort money. That means both inferior rectus and inferior obliques, they cause extortion.&rdquo;</b></div>
+<div class="like">💡 &ldquo;Inferior&rdquo; muscles extort; so by elimination the two &ldquo;superior&rdquo; muscles must do the opposite (intorsion).</div>
+<div class="src">Maini, Lecture 20 (~1:29:56). Bank: &ldquo;Extortion &hellip; ('inferior people extort')&rdquo;</div>
+</div>
+
+<div class="card maini muscle">
+<div class="tag maini-tag">🎓 Maini&rsquo;s words</div>
+<div class="label">Superior oblique action</div>
+<div class="hook">O FOR OBLIQUE, O FOR OUT</div>
+<div class="fact">The <b>superior oblique</b> rotates the eyeball <b>DOWN and OUT</b> (down + laterally). Its tendon first threads through the <b>trochlea</b> (a fibrocartilaginous pulley), which is why the pull ends up oblique.</div>
+<div class="quote">Maini: <b>&ldquo;It rotates the eyeball down and laterally, so you can remember this as down and out. O for oblique. O for out.&rdquo;</b></div>
+<div class="like">💡 Pairs with the inferior oblique = <b>up and out</b>: both <b>obliques</b> take the eye <b>OUT</b>; the superior one also takes it down.</div>
+<div class="src">Maini, Lecture 20 (~1:26:47). Bank: &ldquo;What is the action of the superior oblique?&rdquo;</div>
+</div>
+
+<div class="card maini kinematics">
+<div class="tag maini-tag">🎓 Maini&rsquo;s words</div>
+<div class="label">Mydriasis vs miosis</div>
+<div class="hook">mydriasis has a &ldquo;D&rdquo; = DILATION</div>
+<div class="fact"><b>Mydriasis</b> (the longer word, and it contains a <b>D</b>) = pupillary <b>DILATION</b> = <b>sympathetic</b> (dilator pupillae). <b>Miosis</b> (the shorter word) = pupillary <b>CONSTRICTION</b> = <b>parasympathetic</b> (sphincter pupillae).</div>
+<div class="quote">Maini: <b>&ldquo;There is a D in mydriasis, it&rsquo;s pupillary dilation &hellip; mydriasis is a larger word, dilation; miosis is a smaller word, constriction.&rdquo;</b></div>
+<div class="like">💡 Big word, big pupil (dilation); small word, small pupil (constriction).</div>
+<div class="src">Maini, Lecture 20 (~0:36:04). Bank: &ldquo;the pupillary finding is miosis &hellip; what does 'miosis' mean?&rdquo;</div>
+</div>
+
+<div class="card maini ligament">
+<div class="tag maini-tag">🎓 Maini&rsquo;s words</div>
+<div class="label">Branches of the ophthalmic nerve (V1)</div>
+<div class="hook">NFL = NATIONAL FOOTBALL LEAGUE</div>
+<div class="fact">The three branches of the <b>ophthalmic nerve (V1)</b> are <b>N</b>asociliary, <b>F</b>rontal, <b>L</b>acrimal. Frontal then splits into supraorbital + supratrochlear; nasociliary is the one that also sends a <b>sensory root to the ciliary ganglion</b>.</div>
+<div class="quote">Maini: <b>&ldquo;Frontal, lacrimal, nasociliary nerve &mdash; so, NFL. National Football League. These are the three branches. We won.&rdquo;</b></div>
+<div class="like">💡 NFL &ldquo;says we won&rdquo; &mdash; Nasociliary, Frontal, Lacrimal are the only three branches of V1 inside the orbit.</div>
+<div class="src">Maini, Lecture 21 (~0:16:36). Bank: &ldquo;Using the mnemonic 'NFL', the three branches of the ophthalmic nerve (V1) are&hellip;&rdquo;</div>
+</div>
+
+<div class="card maini kinematics">
+<div class="tag maini-tag">🎓 Maini&rsquo;s words</div>
+<div class="label">Accommodation reflex</div>
+<div class="hook">3 C&rsquo;s: CONVERGE &middot; CONSTRICT &middot; CONVEX</div>
+<div class="fact">Shifting your gaze to a <b>NEAR</b> object triggers three changes: <b>Convergence</b> (eyes adduct via the medial recti), pupillary <b>Constriction</b>, and increased <b>Convexity of the lens</b> (ciliary muscle contracts &rarr; suspensory ligaments slacken &rarr; lens fattens). All <b>parasympathetic</b>, via CN III.</div>
+<div class="quote">Maini: <b>&ldquo;There are three C that happen in an accommodation reflex &mdash; convergence &hellip; pupillary constriction, and increased convexity of the lens.&rdquo;</b></div>
+<div class="like">💡 All three start with C, and all three are the parasympathetic &ldquo;look up close&rdquo; package.</div>
+<div class="src">Maini, Lecture 20 (~1:10:38). Bank: &ldquo;the three changes ('3 C's') of the accommodation reflex&hellip;&rdquo;</div>
+</div>
+
+<div class="card maini muscle">
+<div class="tag maini-tag">🎓 Maini&rsquo;s words</div>
+<div class="label">Parasympathetic eye muscles</div>
+<div class="hook">2 C&rsquo;s: CONSTRICTOR PUPILLAE + CILIARY</div>
+<div class="fact">The two <b>intraocular</b> muscles driven by <b>parasympathetic</b> fibers (CN III &rarr; ciliary ganglion &rarr; short ciliary nerves) both start with C: the <b>Constrictor (sphincter) pupillae</b> and the <b>Ciliary muscle</b>.</div>
+<div class="quote">Maini: <b>&ldquo;What are the two muscles innervated by parasympathetic fibers? 2C &hellip; constrictor pupillae &hellip; ciliary muscle.&rdquo;</b></div>
+<div class="like">💡 The 2 C&rsquo;s of &ldquo;close vision&rdquo;: constrict the pupil, and fatten the lens (ciliary).</div>
+<div class="src">Maini, Lecture 21 (~0:26:51). Bank: &ldquo;Postganglionic parasympathetic fibers &hellip; supply which two muscles?&rdquo;</div>
+</div>
+
+<div class="card maini rule">
+<div class="tag maini-tag">🎓 Maini&rsquo;s words</div>
+<div class="label">Clinical testing of the eye muscles</div>
+<div class="hook">DRAW THE H (testing is OPPOSITE the action)</div>
+<div class="fact">Draw an <b>H per eye</b> (label right vs left). <b>Recti</b> are tested in <b>ABDUCTION</b> (patient looks OUT); <b>obliques</b> are tested in <b>ADDUCTION</b> (looks IN). Rule: testing is <b>OPPOSITE</b> the muscle&rsquo;s action for the abduct/adduct part; the up/down part stays the same.</div>
+<div class="quote">Maini: <b>&ldquo;There is an H figure &hellip; just remember one thing, it is opposite to the actions of the muscles &mdash; just the abduction and adduction part.&rdquo;</b></div>
+<div class="like">💡 Superior rectus <b>acts</b> up-and-in, but you <b>test</b> it up-and-OUT (in abduction) so the muscle&rsquo;s axis lines up with the gaze.</div>
+<div class="src">Maini, Lecture 21 (~0:02:43, ~0:09:16). Bank: &ldquo;To isolate and test the superior rectus during the H-test&hellip;&rdquo;</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; Orbit osteology &amp; the 3 doorways</h2>
+<div class="topic-tagline">The hardest lists in the module: which bone builds which wall, and what passes through each opening.</div>
+<div class="cards">
+
+<div class="card">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Bones of the 4 walls</div>
+<div class="hook">ROOF-frontal &middot; FLOOR-maxilla &middot; MEDIAL-ethmoid &middot; LATERAL-zygoma+sphenoid</div>
+<div class="fact"><b>Roof</b> = orbital plate of <b>frontal</b> + lesser wing of sphenoid. <b>Floor</b> = mostly <b>maxilla</b> (tiny zygomatic + palatine). <b>Medial wall</b> = <b>ethmoid</b> (prominent, air cells) + <b>lacrimal</b> (the papery &ldquo;papyrus&rdquo; bone) + frontal + body of sphenoid + maxilla. <b>Lateral wall</b> = frontal process of <b>zygomatic</b> + <b>greater wing of sphenoid</b>.</div>
+<div class="like">💡 Bank one prominent bone per wall &mdash; <b>F</b>rontal roof, <b>M</b>axilla floor, <b>E</b>thmoid medial, <b>Z</b>ygoma+<b>S</b>phenoid lateral. Sphenoid touches every wall except the bulk of the floor.</div>
+<div class="src">Facts: Maini, Lecture 19 (~0:02:33&ndash;0:06:37). The one-bone-per-wall pairing is my aid.</div>
+</div>
+
+<div class="card">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Margin (base) of the orbit</div>
+<div class="hook">F-Z-M ring: Frontal, Zygomatic, Maxilla</div>
+<div class="fact">The <b>rim (base)</b> of the orbit &mdash; the part you can feel around your own eye socket &mdash; is made of <b>three</b> bones: <b>frontal</b> (above), <b>zygomatic</b> (lateral), and <b>maxilla</b> (below and medial).</div>
+<div class="like">💡 Trace your finger around the socket top &rarr; side &rarr; bottom: Frontal, Zygomatic, Maxilla.</div>
+<div class="src">Maini, Lecture 19 (~0:01:59). Bank: &ldquo;The base (margin) of the orbit is made up of three bones&hellip;&rdquo;</div>
+</div>
+
+<div class="card">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">The 3 doorways into the orbit</div>
+<div class="hook">3 GATES: OPTIC CANAL &middot; SUP. FISSURE &middot; INF. FISSURE</div>
+<div class="fact"><b>(1) Optic canal</b> (lesser wing of sphenoid) &rarr; optic nerve (CN II) + ophthalmic artery; to the <b>middle cranial fossa</b>. <b>(2) Superior orbital fissure</b> (between greater &amp; lesser wings of sphenoid) &rarr; CN III, IV, VI + the V1 branches + superior ophthalmic vein; to the <b>middle cranial fossa</b>. <b>(3) Inferior orbital fissure</b> (between maxilla &amp; greater wing) &rarr; maxillary nerve (V2), inferior ophthalmic vein, infraorbital artery; to the <b>pterygopalatine / infratemporal fossa</b> (NOT the cranial cavity).</div>
+<div class="like">💡 Two <b>fissures</b> are slits between sphenoid parts; the <b>canal</b> is a round tube. Only the <b>inferior</b> fissure opens away from the skull cavity.</div>
+<div class="src">Maini, Lecture 19 (~0:10:33&ndash;0:14:20). Bank: &ldquo;How many 'doorways' allow structures to enter or leave the orbit&hellip;&rdquo;</div>
+</div>
+
+<div class="card ligament">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Superior orbital fissure contents</div>
+<div class="hook">3-4-6 + V1 (NFL) + superior ophthalmic vein</div>
+<div class="fact">The <b>superior orbital fissure</b> transmits <b>CN III, IV, VI</b>, all three <b>V1 branches (nasociliary, frontal, lacrimal = NFL)</b>, and the <b>superior ophthalmic vein</b>. It lies between the greater and lesser wings of the sphenoid and communicates with the <b>middle cranial fossa</b>.</div>
+<div class="like">💡 Every nerve that <b>moves</b> the eye (3, 4, 6) plus the sensory <b>NFL</b>, all pouring through one slit.</div>
+<div class="src">Maini, Lecture 19 (~0:11:42&ndash;0:12:45). Ties to Maini&rsquo;s own NFL mnemonic above.</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; Eyelid &amp; lacrimal apparatus</h2>
+<div class="topic-tagline">Two ordered lists (lid layers, tear pathway) plus the gland-and-lump vocabulary and Horner&rsquo;s.</div>
+<div class="cards">
+
+<div class="card">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Layers of the eyelid (outer &rarr; inner)</div>
+<div class="hook">Skin &rarr; Muscle &rarr; LPS tendon &rarr; Tarsal plate &rarr; Conjunctiva</div>
+<div class="fact">Surface to deep: <b>(1) skin</b>, <b>(2) superficial fascia with orbicularis oculi</b>, <b>(3) tendon of levator palpebrae superioris</b>, <b>(4) tarsal plate</b> (holds the tarsal / Meibomian glands), <b>(5) palpebral conjunctiva</b>.</div>
+<div class="like">💡 Peel the lid: cover (skin) &rarr; closer-muscle (orbicularis) &rarr; opener-tendon (LPS) &rarr; stiff cardboard (tarsal plate) &rarr; wet lining (conjunctiva).</div>
+<div class="src">Maini, Lecture 19 (~0:31:33&ndash;0:34:49). Bank: &ldquo;Dissecting the eyelid from superficial to deep&hellip;&rdquo;</div>
+</div>
+
+<div class="card">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Three eyelid glands (and their lumps)</div>
+<div class="hook">ZEIS + MOLL at the margin &middot; MEIBOMIAN in the plate</div>
+<div class="fact"><b>Margin glands:</b> glands of <b>Zeis</b> (sebaceous, on the lashes) and glands of <b>Moll</b> (sweat). <b>Deep in the tarsal plate:</b> the tarsal / <b>Meibomian</b> glands (sebaceous; keep closed lids airtight). Inflamed <b>margin</b> gland = <b>external hordeolum (stye)</b>. Inflamed <b>Meibomian</b> gland = <b>internal hordeolum / chalazion</b> (lump on the body of the lid, often needs scooping).</div>
+<div class="like">💡 Margin lumps (Zeis/Moll) show on the <b>edge</b>; a chalazion sits back on the lid because the Meibomian gland is buried in the plate.</div>
+<div class="src">Maini, Lecture 19 (~0:21:16&ndash;0:24:50); Lecture 20 (~0:13:44).</div>
+</div>
+
+<div class="card kinematics">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Tear (lacrimal) drainage pathway</div>
+<div class="hook">GLAND &rarr; LAKE &rarr; PUNCTUM &rarr; CANALICULI &rarr; SAC &rarr; DUCT &rarr; NOSE</div>
+<div class="fact"><b>Lacrimal gland</b> &rarr; ducts spread tears over the eye &rarr; tears pool in the <b>lacrimal lake</b> at the medial angle &rarr; <b>lacrimal punctum</b> (on each papilla) &rarr; <b>lacrimal canaliculi</b> (superior + inferior) &rarr; <b>lacrimal sac</b> &rarr; <b>nasolacrimal duct</b> &rarr; <b>inferior meatus</b> of the nasal cavity. That is why crying makes your nose run.</div>
+<div class="like">💡 Tears drain like a sink: the <b>punctum</b> is the drain hole in the medial corner, the <b>nasolacrimal duct</b> is the pipe to the nose.</div>
+<div class="src">Maini, Lecture 19 (~0:28:02&ndash;0:30:08); Lecture 20 (~0:06:04). Bank: &ldquo;Which sequence correctly traces tear drainage&hellip;&rdquo;</div>
+</div>
+
+<div class="card rule">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Horner syndrome (sympathetic failure)</div>
+<div class="hook">5 SIGNS: Ptosis &middot; Miosis &middot; Anhidrosis &middot; Flushing &middot; Enophthalmos</div>
+<div class="fact">One-sided <b>sympathetic failure</b> (classically a <b>Pancoast tumor</b> at the lung apex compressing the cervical sympathetic chain) gives: partial <b>Ptosis</b> (superior tarsal muscle fails), <b>Miosis</b> (unopposed constriction), <b>Anhidrosis</b> (no sweating), <b>Flushing</b> (vasodilation), and <b>Enophthalmos</b> (sunken eye). Ptosis is only <b>partial</b> because CN III still runs the skeletal part of LPS.</div>
+<div class="like">💡 Sympathetic = &ldquo;fight or flight&rdquo;; lose it on one side and that side goes droopy-lidded, small-pupiled, dry, flushed, and sunken.</div>
+<div class="src">Maini, Lecture 19 (~0:40:08&ndash;0:46:04); Lecture 20 (~0:02:00). Bank: &ldquo;Which finding is NOT part of Horner syndrome&hellip;&rdquo;</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; Eyeball coats &amp; the retina</h2>
+<div class="topic-tagline">Three nested coats, the parts of the uvea, and the retina&rsquo;s signal chain.</div>
+<div class="cards">
+
+<div class="card">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Three coats of the eyeball</div>
+<div class="hook">FIBROUS &rarr; VASCULAR &rarr; NERVOUS (outer &rarr; inner)</div>
+<div class="fact"><b>Outer fibrous</b> (tunica fibrosa) = sclera (posterior 5/6) + cornea (anterior 1/6). <b>Middle vascular</b> (tunica vasculosa / uvea) = choroid + ciliary body + iris. <b>Inner nervous</b> (tunica nervosa) = retina.</div>
+<div class="like">💡 Three nested balls: tough white shell (fibrous), blood-rich curtain (vascular), the camera film (nervous / retina).</div>
+<div class="src">Maini, Lecture 20 (~0:18:47&ndash;0:21:20). Bank: &ldquo;The outer fibrous coat &hellip; consists of which two parts?&rdquo;</div>
+</div>
+
+<div class="card">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Middle (vascular) coat = 3 parts</div>
+<div class="hook">Choroid &rarr; Ciliary body &rarr; Iris</div>
+<div class="fact">Back to front, the <b>uvea</b> is <b>choroid</b> (largest, vascular; feeds the avascular outer layer), <b>ciliary body</b> (ciliary processes secrete aqueous humor; ciliary muscle for accommodation), and <b>iris</b> (colored, central pupil; sphincter + dilator pupillae).</div>
+<div class="like">💡 One continuous drape: dark lining (choroid) &rarr; fluid-making fringe (ciliary body) &rarr; adjustable diaphragm (iris).</div>
+<div class="src">Maini, Lecture 20 (~0:20:00&ndash;0:32:00). Bank: &ldquo;The middle vascular coat &hellip; is composed of which three structures?&rdquo;</div>
+</div>
+
+<div class="card kinematics">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Retina signal chain</div>
+<div class="hook">RODS/CONES &rarr; BIPOLAR &rarr; GANGLION (axons = CN II)</div>
+<div class="fact">Light hits the photoreceptors (<b>rods + cones</b>) &rarr; they synapse on <b>bipolar cells</b> &rarr; bipolar cells synapse on <b>ganglion cells</b> &rarr; the axons of the <b>ganglion cells</b> form the optic nerve (CN II). The signal runs &ldquo;backward&rdquo; through the retina toward the front-facing photoreceptors.</div>
+<div class="like">💡 A three-relay chain, and only the LAST relay (ganglion cells) sends the wire (optic nerve) out of the eye.</div>
+<div class="src">Maini, Lecture 20 (~0:37:47&ndash;0:41:38). Bank: &ldquo;The optic nerve (CN II) is formed by the axons of which retinal cells?&rdquo;</div>
+</div>
+
+<div class="card kinematics">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Rods vs cones, disc vs macula</div>
+<div class="hook">RODS = night / no color &middot; CONES = bright / color</div>
+<div class="fact"><b>Rods</b> = dim-light / night vision, no color. <b>Cones</b> = bright light + color, packed at the <b>fovea centralis</b> (point of sharpest vision) inside the <b>macula lutea</b>. The <b>optic disc</b> is where CN II exits &mdash; no photoreceptors &mdash; so it is the <b>blind spot</b>.</div>
+<div class="like">💡 <b>coNES</b> = <b>coloR</b> at the fovea; the disc is a hole in the film, so it is blind.</div>
+<div class="src">Maini, Lecture 20 (~0:38:05&ndash;0:44:13). Bank: &ldquo;Which photoreceptors &hellip; night vision &hellip; color vision&hellip;&rdquo;</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; Aqueous humor &amp; optics</h2>
+<div class="topic-tagline">The fluid loop that fails in glaucoma, the refractive media, and the error-of-refraction pairs.</div>
+<div class="cards">
+
+<div class="card kinematics">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Aqueous humor circulation</div>
+<div class="hook">CILIARY PROCESSES &rarr; POST. CHAMBER &rarr; pupil &rarr; ANT. CHAMBER &rarr; CANAL OF SCHLEMM</div>
+<div class="fact"><b>Ciliary processes</b> secrete aqueous humor into the <b>posterior chamber</b> &rarr; it flows through the <b>pupil</b> into the <b>anterior chamber</b> &rarr; drains at the <b>iridocorneal angle</b> into the <b>sinus venosus sclerae (canal of Schlemm)</b> &rarr; venous blood. Block the canal &rarr; pressure rises &rarr; <b>glaucoma</b>.</div>
+<div class="like">💡 A fountain: made at the back fringe, flows through the pupil doorway, drains at the corner gutter (Schlemm). Clog the gutter and the eye floods (glaucoma).</div>
+<div class="src">Maini, Lecture 20 (~0:47:02&ndash;0:51:03). Bank: &ldquo;Which sequence correctly describes normal aqueous humor circulation?&rdquo;</div>
+</div>
+
+<div class="card kinematics">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Refractive media (order of light)</div>
+<div class="hook">CORNEA &rarr; AQUEOUS &rarr; LENS &rarr; VITREOUS</div>
+<div class="fact">Light bends through four clear media in order: <b>cornea</b> (does most of the refracting), <b>aqueous humor</b>, <b>lens</b>, <b>vitreous body</b>. All four must stay transparent to see.</div>
+<div class="like">💡 Four windows in a row &mdash; and the <b>cornea</b> (not the &ldquo;lens&rdquo;) is the main refractor.</div>
+<div class="src">Maini, Lecture 20 (~0:54:52&ndash;0:56:08). Bank: &ldquo;In the correct order, through which refractive media does light pass&hellip;&rdquo;</div>
+</div>
+
+<div class="card rule">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Errors of refraction</div>
+<div class="hook">MYOPIA-long / concave &middot; HYPEROPIA-short / convex</div>
+<div class="fact"><b>Myopia</b> (near-sighted): eyeball too <b>LONG</b>, image focuses <b>in front of</b> the retina, fix with a <b>CONCAVE</b> lens (common in the young). <b>Hyperopia</b> (far-sighted): eyeball too <b>SHORT</b>, image focuses <b>behind</b> the retina, fix with a <b>CONVEX</b> lens. <b>Astigmatism</b>: irregular corneal curvature, cylindrical lens. <b>Presbyopia</b>: age &gt;40, near focus lost, reading glasses.</div>
+<div class="like">💡 &ldquo;my<b>O</b>pia = eye t<b>OO</b> l<b>O</b>ng, needs a sc<b>OO</b>ped-out (concave) lens.&rdquo; Hyperopia is the opposite on every count.</div>
+<div class="src">Maini, Lecture 20 (~1:00:15&ndash;1:02:40). Bank: &ldquo;In myopia, where is the image focused and what lens corrects it?&rdquo;</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; Extraocular muscles (actions &amp; origins)</h2>
+<div class="topic-tagline">The six-muscle action grid, the common origin, and the floor-of-the-orbit board trap.</div>
+<div class="cards">
+
+<div class="card muscle">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Actions of the 6 extraocular muscles</div>
+<div class="hook">SR up-in &middot; IR down-in &middot; MR in &middot; LR out &middot; SO down-out &middot; IO up-out</div>
+<div class="fact"><b>Superior rectus</b> = up + in. <b>Inferior rectus</b> = down + in. <b>Medial rectus</b> = adduct (in). <b>Lateral rectus</b> = abduct (out). <b>Superior oblique</b> = down + out. <b>Inferior oblique</b> = up + out.</div>
+<div class="like">💡 Recti are the &ldquo;in&rdquo; family, obliques the &ldquo;out&rdquo; family; &ldquo;superior&rdquo; means up for the rectus but down for the oblique &mdash; a deliberate flip. (See Maini&rsquo;s &ldquo;O for oblique, O for out.&rdquo;)</div>
+<div class="src">Maini, Lecture 20 (~1:23:39&ndash;1:29:29). Bank: &ldquo;What is the action of the superior rectus?&rdquo; etc.</div>
+</div>
+
+<div class="card muscle">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Common origin of the recti</div>
+<div class="hook">4 RECTI = one ring around the optic canal</div>
+<div class="fact">All four recti share a <b>common tendinous ring</b> (annulus) around the <b>optic canal</b> (sphenoid), then diverge forward to insert on the sclera. The <b>superior oblique</b> starts from the body of the sphenoid; the <b>inferior oblique</b> from the orbital floor.</div>
+<div class="like">💡 Four straps radiating forward from one back ring, like tent guy-lines from a single peg.</div>
+<div class="src">Maini, Lecture 20 (~1:20:19&ndash;1:21:05). Bank: &ldquo;The four recti of the eye share a common origin. From where&hellip;&rdquo;</div>
+</div>
+
+<div class="card muscle">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Board trap: floor of the orbit</div>
+<div class="hook">INFERIOR OBLIQUE = the ONLY muscle from the FLOOR</div>
+<div class="fact">Five of the six extraocular muscles (the 4 recti via the common ring + the superior oblique) arise from the <b>sphenoid</b> near the optic canal. The <b>inferior oblique</b> is the <b>only</b> one that originates from the <b>floor of the orbit</b> (medial part). Maini flagged this as a repeated board question.</div>
+<div class="like">💡 The odd one out is the <b>low</b> one: inferior oblique starts on the floor, everyone else starts at the back (sphenoid).</div>
+<div class="src">Maini, Lecture 20 (~1:27:38&ndash;1:28:01). Bank: &ldquo;Which extraocular muscle is the ONLY one that originates from the floor of the orbit&hellip;&rdquo;</div>
+</div>
+
+</div>
+
+<h2>Topic 7 &mdash; Nerves, vessels &amp; the ciliary ganglion</h2>
+<div class="topic-tagline">The vessel source, the venous exit, and the three-root logic that trips everyone up.</div>
+<div class="cards">
+
+<div class="card ligament">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Ophthalmic artery &amp; central retinal artery</div>
+<div class="hook">ICA &rarr; OPHTHALMIC A. &rarr; central retinal a. (end artery)</div>
+<div class="fact">The <b>ophthalmic artery</b> is a branch of the <b>internal carotid artery</b>. Its <b>central retinal artery</b> runs <b>inside</b> the optic nerve and enters at the center of the optic disc &mdash; an <b>end artery</b>, so a blockage blinds. Other branches: anterior / posterior ciliary, lacrimal, supraorbital, supratrochlear, ethmoidal, palpebral, dorsal nasal.</div>
+<div class="like">💡 The central retinal artery hitches a ride <b>inside</b> the optic nerve; being an end artery, there is no backup if it clogs.</div>
+<div class="src">Maini, Lecture 21 (~0:10:15&ndash;0:12:35). Bank: &ldquo;The ophthalmic artery is a branch of which vessel?&rdquo;</div>
+</div>
+
+<div class="card ligament">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Where the orbit drains</div>
+<div class="hook">SUP. + INF. OPHTHALMIC VEINS &rarr; CAVERNOUS SINUS</div>
+<div class="fact">Two ophthalmic veins drain the orbit. The <b>superior ophthalmic vein</b> drains directly to the <b>cavernous sinus</b>; the <b>inferior</b> drains via the inferior orbital fissure to the <b>pterygoid venous plexus</b>. Anteriorly both link to the <b>facial vein</b> &mdash; a route for facial infection to reach the cavernous sinus.</div>
+<div class="like">💡 The orbit&rsquo;s back door opens onto the cavernous sinus, its front door onto the facial vein &mdash; the &ldquo;danger triangle&rdquo; connection.</div>
+<div class="src">Maini, Lecture 21 (~0:12:35&ndash;0:13:09). Bank: &ldquo;The two ophthalmic veins ultimately drain principally into&hellip;&rdquo;</div>
+</div>
+
+<div class="card ligament">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Ciliary ganglion: 3 roots</div>
+<div class="hook">PARASYMP synapses &middot; SYMP &amp; SENSORY pass through</div>
+<div class="fact"><b>Parasympathetic (motor) root:</b> preganglionic from CN III &rarr; <b>SYNAPSES here</b> &rarr; postganglionic via <b>short ciliary nerves</b> to the 2 C&rsquo;s (constrictor pupillae + ciliary muscle). <b>Sympathetic root</b> (from the superior cervical ganglion via the ICA plexus) and <b>sensory root</b> (from nasociliary / V1) both <b>PASS THROUGH without synapsing</b>. Short ciliary nerves therefore carry all three fiber types.</div>
+<div class="like">💡 Only the parasympathetic fibers &ldquo;get off the bus&rdquo; (synapse) at this stop; sympathetic and sensory fibers just ride through.</div>
+<div class="src">Maini, Lecture 21 (~0:25:01&ndash;0:30:09). Bank: &ldquo;How do sympathetic fibers behave at the ciliary ganglion?&rdquo;</div>
+</div>
+
+<div class="card kinematics">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Pupil control (two muscles)</div>
+<div class="hook">SPHINCTER = para = MIOSIS &middot; DILATOR = symp = MYDRIASIS</div>
+<div class="fact"><b>Sphincter pupillae</b> (circular iris fibers) = <b>parasympathetic</b> (CN III) = <b>miosis</b> (constriction). <b>Dilator pupillae</b> (radial fibers) = <b>sympathetic</b> = <b>mydriasis</b> (dilation). (Recall Maini&rsquo;s tag: mydriasis has a &ldquo;D.&rdquo;)</div>
+<div class="like">💡 The circular muscle cinches the pupil shut like a drawstring; the radial muscle pulls it open like spokes.</div>
+<div class="src">Maini, Lecture 20 (~0:33:10&ndash;0:36:04). Bank: &ldquo;The circular fibers of the iris form which muscle&hellip;&rdquo;</div>
+</div>
+
+<div class="card kinematics">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Two reflexes to keep straight</div>
+<div class="hook">LIGHT: II in, III out &middot; CORNEAL: V1 in, VII out</div>
+<div class="fact"><b>Pupillary light reflex</b> &mdash; afferent CN II &rarr; pretectal nucleus &rarr; Edinger-Westphal &rarr; CN III &rarr; ciliary ganglion &rarr; sphincter pupillae (constriction). Shining one eye also constricts the other = <b>consensual reflex</b> (crossover at the pretectal nucleus). <b>Corneal (blink) reflex</b> &mdash; afferent <b>CN V1</b> (ophthalmic), efferent <b>CN VII</b> (orbicularis oculi).</div>
+<div class="like">💡 Light reflex &ldquo;sees&rdquo; with II and &ldquo;acts&rdquo; with III; corneal reflex &ldquo;feels&rdquo; with V and &ldquo;blinks&rdquo; with VII.</div>
+<div class="src">Maini, Lecture 20 (~1:03:26&ndash;1:08:03, ~1:16:22). Bank: &ldquo;In the corneal reflex, which nerves form the sensory &hellip; and motor limbs?&rdquo;</div>
+</div>
+
+<div class="card rule">
+<div class="tag mine-tag">💡 my hook</div>
+<div class="label">Argyll Robertson pupil</div>
+<div class="hook">ACCOMMODATES but does NOT REACT (syphilis)</div>
+<div class="fact"><b>Argyll Robertson pupil:</b> the <b>light reflex is LOST</b> but the <b>accommodation reflex is PRESERVED</b>. Classically seen in <b>syphilis</b>. Both are CN III functions, so the dissociation is the exam point.</div>
+<div class="like">💡 &ldquo;Accommodates but does not react&rdquo; &mdash; the pupil still shrinks for near focus, but ignores a shining light.</div>
+<div class="src">Maini, Lecture 20 (~1:15:03&ndash;1:15:45). Bank: &ldquo;Argyll Robertson pupil &hellip; is classically associated with which disease?&rdquo;</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD &middot; GA 0202 Module 8: The Eye &amp; Orbit &mdash; Mnemonics</div>
+</div>
+
+<!-- PENDING REVIEW badge -->
+<style>
+.dc-pending-badge {
+  position: fixed; top: 10px; right: 10px; z-index: 100000;
+  background: linear-gradient(135deg,#78350f,#b45309);
+  color: #fde68a; border: 1px solid #f59e0b; border-radius: 8px;
+  padding: 5px 11px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.05em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.4); pointer-events: none; text-transform: uppercase;
+}
+@media (max-width: 600px) { .dc-pending-badge { top: 8px; right: 8px; font-size: 0.66rem; padding: 4px 9px; } }
+.fab-in-iframe .dc-pending-badge { display: none !important; }
+</style>
+<div class="dc-pending-badge">⏳ Pending Review</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html" title="Return to the Eye &amp; Orbit Study Hub" aria-label="Return to the Eye &amp; Orbit Study Hub">📚</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

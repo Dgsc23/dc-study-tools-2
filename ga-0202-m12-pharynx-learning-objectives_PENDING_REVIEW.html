@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎯 GA 0202 M12 — The Pharynx · Learning Objectives (Master the 12)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .voices{color:#fed7aa;font-size:12px;max-width:720px;margin:8px auto 0;line-height:1.5}
+.header .voices b{color:#fcd34d}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 M12 Pharynx Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 12</h1>
+  <div class="sub">GA 0202 Module 12 &middot; <b>The Pharynx</b> &middot; the study spine that ties every drill back to what Dr. Maini actually emphasized in the pharynx lecture &mdash; cement each one, check it off, move on.</div>
+  <div class="voices">&#128266; Best voices in <b>Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+  <div class="meta-line">Dr. Seema Maini &middot; The Pharynx (Lecture 27) &middot; 🫁 SCUHS GA 0202</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for the pharynx. Each objective is derived from <b>what Dr. Maini stressed in Lecture 27 (The Pharynx)</b> and grounded in the <b>audited GA 0202 M12 Everything-MC bank</b>; every &ldquo;prove it&rdquo; bullet is sourced and cited as <b>[Pharynx L27 &middot; MM:SS]</b>. Quotes are transcribed from her Zoom recording; <span class="fix">[bracketed]</span> words are de-garbled spellings of what she said. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>The pharynx lecture is dense, so this page distills it to the <b>twelve things Dr. Maini actually drilled</b> &mdash; the parts and their boundaries, the walls, the muscles, and the clinical hooks she kept coming back to. For each one it spells out <b>exactly what &ldquo;done&rdquo; looks like</b>, hangs a <b>verbatim Maini quote</b> on it, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: Dr. Maini&rsquo;s <b>The Pharynx (Lecture 27)</b> Zoom recording + the <b>audited GA 0202 M12 Everything-MC bank</b> (facts already anti-fabrication verified).</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 12 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Frame the pharynx overall &mdash; what it is, its shape and extent, the wall it lacks, and its three parts.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 00:52&ndash;03:53</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Define it: the pharynx is the <b>common chamber for the respiratory AND digestive tracts</b> &mdash; both air and a swallowed bolus pass through it. It is <b>funnel-shaped, about 12 cm long</b>. <span class="cite">(L27 00:52&ndash;02:37)</span></li>
+        <li>Give the <b>extent</b>: from the <b>base of the skull</b> down to the <b>lower border of the cricoid cartilage</b> = <b>C6</b>, where it becomes continuous with the <b>esophagus</b>. The larynx and laryngopharynx share that same C6 inferior limit. <span class="cite">(L27 02:41&ndash;03:16)</span></li>
+        <li>State the shape trap: it is <b>C-shaped, not a complete tube</b> &mdash; it has essentially <b>no anterior wall</b> because it opens forward into the three cavities. <span class="cite">(L27 02:00&ndash;03:43)</span></li>
+        <li>Name the <b>three parts</b> top-to-bottom: <b>nasopharynx, oropharynx, laryngopharynx</b> &mdash; Maini&rsquo;s own picture is <b>&ldquo;three rooms and one common corridor&rdquo;</b> (nasal cavity, oral cavity, larynx are the rooms). <span class="cite">(L27 01:33, 03:53)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;So the pharynx is a common chamber for the respiratory and digestive tract &hellip; it&rsquo;s funnel-shaped, approximately 12 centimeters long &hellip; extends from the base of the skull to the lower border of cricoid cartilage.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:00:52&ndash;00:02:44</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The pharynx runs from the base of the skull to which cartilage / vertebral level, and which wall does it essentially lack?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Base of skull to the <b>lower border of the cricoid cartilage = C6</b>, then continuous with the <b>esophagus</b>. It is <b>C-shaped with no anterior wall</b> &mdash; it opens forward into the nasal cavity, oral cavity, and larynx (Maini&rsquo;s &ldquo;three rooms, one corridor&rdquo;). Funnel-shaped, ~12 cm.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">Characterize the nasopharynx &mdash; why it can&rsquo;t collapse, its boundaries, and its roof, floor, and posterior wall supports.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 05:04&ndash;09:12</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State its nature: the nasopharynx is <b>entirely respiratory</b>, and its walls are <b>rigid &mdash; they cannot be collapsed or obliterated</b> because they are <b>supported by bone almost all around</b>. <span class="cite">(L27 05:13&ndash;05:34)</span></li>
+        <li>Give the <b>extent</b>: from the <b>base of the skull</b> to the <b>level of the soft palate</b>. <span class="cite">(L27 05:40&ndash;05:48)</span></li>
+        <li>Support the <b>roof</b> (body of the <b>sphenoid</b> + <b>basilar part of the occipital</b> bone) and the <b>floor</b> (the <b>sloping upper surface of the soft palate</b>). <span class="cite">(L27 06:00&ndash;06:40)</span></li>
+        <li>Name the <b>pharyngeal isthmus</b> (the opening between the soft palate and the posterior pharyngeal wall) and the <b>posterior wall</b> support = the <b>anterior arch of the atlas (C1)</b>. <span class="cite">(L27 06:45&ndash;07:38)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Nasopharynx is entirely respiratory &hellip; its walls are relatively rigid and cannot be obliterated &hellip; supported by the bony structures almost all around, so it&rsquo;s rigid, it cannot be collapsed.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:05:13&ndash;00:05:34</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which two bones support the roof of the nasopharynx, and what supports its posterior wall?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Roof = <b>body of the sphenoid</b> + <b>basilar part of the occipital bone</b>. Posterior wall = <b>anterior arch of the atlas (C1)</b>. Floor = <b>sloping surface of the soft palate</b>; the opening there is the <b>pharyngeal isthmus</b>. Because it is boxed in by bone, the nasopharynx <b>cannot collapse</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the lateral wall of the nasopharynx &mdash; the auditory tube opening, torus tubarius, tubal tonsil, pharyngeal recess, and salpingopharyngeal fold.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 07:50&ndash;17:22</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Identify the <b>pharyngeal opening of the auditory (pharyngotympanic) tube</b>, which connects the nasopharynx to the <b>middle ear (tympanic cavity)</b>, opening into its <b>anterior wall</b>. <span class="cite">(L27 07:50&ndash;09:56)</span></li>
+        <li>Name the ridge the tube&rsquo;s cartilage raises &mdash; the <b>torus tubarius (tubal elevation)</b> &mdash; and the <b>tubal tonsils</b> that surround the tube opening. <span class="cite">(L27 10:11&ndash;10:44)</span></li>
+        <li>Locate the <b>pharyngeal recess</b>, a pocket <b>behind / above the torus tubarius</b>. <span class="cite">(L27 10:54&ndash;11:10)</span></li>
+        <li>Trace the <b>salpingopharyngeal fold</b> running down from the torus, overlying the <b>salpingopharyngeus muscle</b> &mdash; and know <b>&ldquo;salpingo&rdquo; (salpinx) means &ldquo;tube&rdquo;</b> (as in the fallopian tube / salpingitis). <span class="cite">(L27 16:18&ndash;17:06)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Lateral wall has pharyngeal opening of auditory tube, tubal elevation, salpingopharyngeal fold, and pharyngeal recess.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:07:50 (restated ~00:17:22)</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What is the ridge in the lateral nasopharyngeal wall called, what raises it, and what does &ldquo;salpingo-&rdquo; mean?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The ridge is the <b>torus tubarius</b>, raised by the cartilage of the <b>auditory (pharyngotympanic) tube</b>, which opens the nasopharynx to the <b>middle ear</b>. The <b>pharyngeal recess</b> sits behind it, and the <b>salpingopharyngeal fold</b> runs down from it. <b>Salpingo- = tube.</b></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the pharyngeal tonsil and adenoids &mdash; where it sits, what &ldquo;adenoids&rdquo; means, and the mouth-breather / adenoid-facies story.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 11:15&ndash;16:04</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Place it: a <b>single pharyngeal tonsil</b> sits in the <b>roof of the nasopharynx</b>. <span class="cite">(L27 11:15&ndash;11:26)</span></li>
+        <li>Define <b>adenoids</b> = the <b>inflamed / enlarged pharyngeal tonsil</b> (the clinical name). <span class="cite">(L27 11:47&ndash;12:10)</span></li>
+        <li>Trace the sequence: an enlarged pharyngeal tonsil <b>blocks the posterior nasal passage &rarr; nasal obstruction &rarr; the child becomes a mouth-breather</b>. <span class="cite">(L27 12:38&ndash;13:01)</span></li>
+        <li>Recognize <b>adenoid facies</b> (recessed/smaller mandible, flat face, habitually open mouth) and note that <b>early adenoidectomy can normalize it</b> because facial bones and paranasal sinuses keep developing until puberty. <span class="cite">(L27 14:45&ndash;15:32)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;You have a single pharyngeal tonsil in the roof of nasopharynx. The other name for this tonsil &hellip; is called as adenoids &hellip; Adenoids is inflamed pharyngeal tonsil.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:11:47&ndash;00:12:10</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">A chronic mouth-breathing child with a flat face and recessed jaw &mdash; what is the enlarged structure, and what is that facial pattern called?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Enlarged <b>pharyngeal tonsil = adenoids</b> in the roof of the nasopharynx, blocking the posterior nares. The pattern is <b>adenoid facies</b> (recessed/smaller mandible, flat face, open mouth). Caught early, <b>adenoidectomy</b> can let it normalize (bones develop until puberty).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">Detail the oropharynx &mdash; the digestive entrance, its boundaries, its tongue floor, and the folds and tonsils of its walls.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 17:30&ndash;22:14</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Frame it: the oropharynx is the <b>digestive entrance</b> of the chamber, extending from the <b>soft palate</b> to the <b>upper (superior) border of the epiglottis</b>. <span class="cite">(L27 17:30&ndash;17:52)</span></li>
+        <li>Give the <b>floor</b> = the <b>posterior one-third of the tongue</b>, carrying the <b>single lingual tonsil</b> at the tongue root; the <b>three glossoepiglottic folds</b> (one median + two lateral) connect tongue to epiglottis, with the <b>valleculae</b> (right and left) as the spaces between them. <span class="cite">(L27 18:46&ndash;20:24)</span></li>
+        <li>Read the <b>lateral wall</b>: the <b>palatoglossal</b> and <b>palatopharyngeal folds</b>, with the <b>tonsillar fossa</b> between them housing the <b>palatine tonsil</b>. <span class="cite">(L27 21:08&ndash;21:46)</span></li>
+        <li>Support the <b>posterior wall</b> = <b>body of C2</b>, upper part of the <b>body of C3</b>, and the <b>C2&ndash;C3 disc</b>; the anterior wall opens to the mouth via the <b>oropharyngeal isthmus</b>. <span class="cite">(L27 20:48&ndash;20:57)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Oropharynx represents the digestive entrance of the chamber. It extends from the soft palate to upper border of epiglottis &hellip; floor is formed by posterior one-third of the tongue.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:17:44&ndash;00:18:46</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The palatine tonsil sits between which two folds, and what are the valleculae?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>palatine tonsil</b> sits in the <b>tonsillar fossa</b>, between the <b>palatoglossal</b> and <b>palatopharyngeal folds</b>. The <b>valleculae</b> are the right and left spaces between the three <b>glossoepiglottic folds</b> (one median, two lateral) linking the tongue to the epiglottis.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">Work through the laryngopharynx and piriform fossa &mdash; its boundaries, the fossa&rsquo;s foreign-body trap, and the internal laryngeal nerve consequence.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 22:21&ndash;27:37</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Place it: the laryngopharynx lies <b>behind the laryngeal inlet and the posterior wall of the larynx</b>, extending from the <b>upper border of the epiglottis</b> to the <b>lower border of the cricoid cartilage (C6)</b>; it communicates <b>above with the oropharynx</b> and <b>below with the esophagus</b>. <span class="cite">(L27 22:21&ndash;23:15)</span></li>
+        <li>Identify the <b>piriform fossa</b>: a <b>pear-shaped, shallow depression on each side of the laryngeal inlet</b> &mdash; a spot where sharp <b>foreign bodies (e.g., a fishbone) can lodge</b>. <span class="cite">(L27 24:34&ndash;25:04)</span></li>
+        <li>Warn about the <b>internal laryngeal nerve</b> lying just deep to the piriform-fossa mucosa (sensory to the larynx <b>above the vocal folds</b>); a foreign body injuring it causes <b>loss of the gag reflex &rarr; aspiration &rarr; aspiration pneumonitis</b>. <span class="cite">(L27 25:13&ndash;26:33)</span></li>
+        <li>Support the walls: <b>posterior wall</b> = bodies of <b>C3&ndash;C6</b>; <b>lateral wall</b> = <b>thyroid cartilage + thyrohyoid membrane</b>, which Maini likens to <b>&ldquo;armor.&rdquo;</b> <span class="cite">(L27 27:16&ndash;27:37)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Pear-shaped fossae on each side of the laryngeal inlet &hellip; which is called as piriform fossa &hellip; lying right under the mucous membrane of the piriform fossa, we have internal laryngeal nerve.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:24:34&ndash;00:25:13</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">A fishbone lodges in the piriform fossa and injures the nerve beneath its mucosa &mdash; which nerve, and what is the clinical result?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>internal laryngeal nerve</b> (sensory to the larynx above the vocal folds). Injuring it causes <b>loss of the gag reflex &rarr; aspiration &rarr; aspiration pneumonitis</b>. The piriform fossa is a shallow, pear-shaped recess on each side of the laryngeal inlet.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Collect the four pharyngeal tonsils &mdash; name each, know where it sits, and which are single vs paired.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 10:44&ndash;21:46</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the four tonsils guarding the pharyngeal openings: <b>pharyngeal, tubal, palatine, and lingual</b>. <span class="cite">(L27 10:44&ndash;21:46)</span></li>
+        <li>Place each: <b>pharyngeal</b> tonsil in the <b>roof of the nasopharynx</b>; <b>tubal</b> tonsils <b>around the auditory-tube opening</b>; <b>palatine</b> tonsil in the <b>tonsillar fossa</b> (between palatoglossal and palatopharyngeal folds); <b>lingual</b> tonsil on the <b>root of the tongue</b>. <span class="cite">(L27 11:15, 10:44, 21:46, 19:11)</span></li>
+        <li>Flag which are <b>single (unpaired)</b>: the <b>pharyngeal</b> tonsil and the <b>lingual</b> tonsil. <span class="cite">(L27 16:04, 19:11)</span></li>
+        <li>Remember the <b>tubal</b> and <b>palatine</b> tonsils come as <b>a pair</b> (right and left), matching their paired tube openings and tonsillar fossae. <span class="cite">(L27 10:44, 21:46)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;How many pharyngeal tonsils do we have? Just one. Single &hellip; [and] we have a single lingual tonsil also.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:16:04 &amp; ~00:19:11</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the four tonsils of the pharynx and say which two are single.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Pharyngeal</b> (roof of nasopharynx), <b>tubal</b> (around the auditory-tube opening), <b>palatine</b> (tonsillar fossa), and <b>lingual</b> (root of tongue). The <b>pharyngeal</b> and <b>lingual</b> tonsils are <b>single</b>; the tubal and palatine are paired.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">Build the pharyngeal wall in layers &mdash; the epithelium (and why), the two fasciae, the muscle layers, and the retropharyngeal space.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 27:51&ndash;34:13</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the lining: <b>stratified squamous, non-keratinized</b> epithelium &mdash; <b>stratified</b> to withstand abrasion from the food bolus, <b>non-keratinized</b> because <b>keratin is found only in skin</b> (mucous membranes lack it). <span class="cite">(L27 29:08&ndash;29:54)</span></li>
+        <li>Order the layers <b>internal &rarr; external</b>: <b>mucosa &rarr; pharyngobasilar fascia (submucosa) &rarr; muscular layer &rarr; buccopharyngeal fascia</b>. <span class="cite">(L27 30:20&ndash;32:12)</span></li>
+        <li>Note the <b>pharyngobasilar fascia</b> is a strong fibrous sheet that <b>blends with the periosteum of the base-of-skull bones</b>; the muscular layer has an outer <b>circular (constrictor)</b> and inner <b>longitudinal</b> arrangement. <span class="cite">(L27 30:30&ndash;31:34)</span></li>
+        <li>Explain the <b>retropharyngeal space (space of Gillette/&ldquo;styles&rdquo;)</b>: <b>loose areolar connective tissue</b> that lets the pharynx <b>glide up and down during swallowing</b> &mdash; its <b>obliteration</b> (fibrosis, tumor, post-abscess) fixes the pharynx to the spine and causes <b>dysphagia</b>. <span class="cite">(L27 32:26&ndash;34:07)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Stratified squamous epithelial tissue &hellip; lines the pharynx &hellip; [it&rsquo;s] non-keratinized &hellip; keratin is found only in the skin &hellip; keratin makes the tissue tough, and you need that only in the skin.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:29:27&ndash;00:29:54</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">List the pharyngeal wall layers from inside out, and say what fills the retropharyngeal space and why it matters.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Mucosa &rarr; pharyngobasilar fascia &rarr; muscular layer (circular + longitudinal) &rarr; buccopharyngeal fascia.</b> The epithelium is <b>stratified squamous non-keratinized</b>. The <b>retropharyngeal space</b> holds <b>loose areolar tissue</b> that lets the pharynx glide when swallowing; obliterating it causes <b>dysphagia</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">Master the three constrictor muscles &mdash; their layer, origins and insertions (pharyngeal tubercle and raphe), and Maini&rsquo;s oblique-line exam trap.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 34:16&ndash;42:42</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State that the <b>three constrictors (superior, middle, inferior)</b> form the <b>external, circular layer</b> and <b>contract sequentially to propel the bolus</b> during swallowing. <span class="cite">(L27 34:37&ndash;34:50, 37:05)</span></li>
+        <li><b>Superior constrictor:</b> origin from the <b>pterygoid hamulus, pterygomandibular raphe, mylohyoid line, and side of the tongue</b> &rarr; inserts on the <b>pharyngeal tubercle</b> (center of the basilar occipital, just anterior to the foramen magnum). <b>Buccinator</b> lies anterior to it on the pterygomandibular raphe. <span class="cite">(L27 34:50&ndash;36:29)</span></li>
+        <li><b>Middle constrictor:</b> origin from the <b>stylohyoid ligament + greater and lesser horns of the hyoid</b> &rarr; inserts on the midline <b>pharyngeal raphe</b>. <span class="cite">(L27 37:14&ndash;37:47)</span></li>
+        <li>Nail Maini&rsquo;s trap: the inferior constrictor, <b>sternothyroid, and thyrohyoid</b> all attach to the <b>oblique line of the thyroid cartilage</b> &mdash; so &ldquo;which is NOT attached?&rdquo; the answer is <b>sternohyoid</b>. <span class="cite">(L27 41:55&ndash;42:42)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said (her own exam flag)</div>
+      <blockquote>&ldquo;So this makes a good question for me: which one of the following muscle is not attached to [the] oblique line of thyroid cartilage? Inferior constrictor is attached &hellip; sternothyroid and thyrohyoid.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:42:26&ndash;00:42:42</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Where does the superior constrictor insert, and which muscle is NOT attached to the oblique line of the thyroid cartilage?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The superior constrictor inserts on the <b>pharyngeal tubercle</b> (basilar occipital). Attached to the oblique line of the thyroid cartilage: <b>inferior constrictor, sternothyroid, thyrohyoid</b> &mdash; so the one <b>NOT</b> attached (Maini&rsquo;s trap) is <b>sternohyoid</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the inferior constrictor&rsquo;s two parts and the cricopharyngeus as the upper esophageal sphincter &mdash; plus the aerophagia consequence.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 37:58&ndash;41:32</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Split the inferior constrictor into its two named parts: <b>thyropharyngeus (upper)</b> and <b>cricopharyngeus (lower)</b>. <span class="cite">(L27 38:32&ndash;38:54)</span></li>
+        <li>Apply the raphe rule: <b>thyropharyngeus forms a raphe</b>, but <b>cricopharyngeus does NOT</b> &mdash; it encircles the <b>pharyngoesophageal junction</b> (Maini compares it to the puborectalis sling). <span class="cite">(L27 38:58&ndash;41:13)</span></li>
+        <li>Name its function: the <b>cricopharyngeus is the upper esophageal sphincter (UES)</b> &mdash; it <b>keeps the esophagus closed except during swallowing</b>. <span class="cite">(L27 39:31&ndash;40:15)</span></li>
+        <li>Give the clinical sequel: in old age the UES <b>loses tone &rarr; aerophagia</b> (swallowed air enters the stomach), producing <b>constant belching / eructation</b>. <span class="cite">(L27 40:23&ndash;40:48)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This is your upper esophageal sphincter &hellip; this muscle, when it contracts, it closes the upper end of esophagus &hellip; it keeps esophagus closed all the time, except for when you&rsquo;re swallowing.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:39:31&ndash;00:40:15</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which part of the inferior constrictor is the upper esophageal sphincter, and what does its loss of tone in old age cause?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>cricopharyngeus</b> (lower part of the inferior constrictor) is the <b>upper esophageal sphincter</b> &mdash; it keeps the esophagus closed except when swallowing and does <b>not</b> form a raphe. Loss of tone in old age causes <b>aerophagia</b> (swallowing air), i.e., constant belching.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Name the three longitudinal (inner) muscles &mdash; their origins, shared insertion, and elevating function.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 42:42&ndash;43:43</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the three <b>longitudinal (inner-layer)</b> muscles: <b>palatopharyngeus, salpingopharyngeus, and stylopharyngeus</b>. <span class="cite">(L27 42:42&ndash;43:27)</span></li>
+        <li>Give their origins: <b>palatopharyngeus</b> from the <b>hard palate + palatine aponeurosis</b> (it forms the <b>palatopharyngeal arch</b>); <b>salpingopharyngeus</b> from the <b>cartilage of the auditory tube</b>; <b>stylopharyngeus</b> from the <b>styloid process</b>. <span class="cite">(L27 42:51&ndash;43:27)</span></li>
+        <li>Note the shared insertion: <b>palatopharyngeus and stylopharyngeus insert onto the thyroid cartilage</b>, and all three blend together. <span class="cite">(L27 43:27&ndash;43:43)</span></li>
+        <li>State the function (vs the constrictors): the longitudinal muscles run lengthwise, so they <b>elevate / shorten the pharynx and larynx</b> to produce movement (they pull the structure up). <span class="cite">(L27 31:26&ndash;31:34)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;There is palatopharyngeus muscle &hellip; salpingopharyngeus &hellip; [and] stylopharyngeus muscle &hellip; originates from styloid process &hellip; [they are] inserted onto the thyroid cartilage.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:42:42&ndash;00:43:43</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the three longitudinal pharyngeal muscles and their overall function.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Palatopharyngeus</b> (hard palate/palatine aponeurosis), <b>salpingopharyngeus</b> (auditory-tube cartilage), and <b>stylopharyngeus</b> (styloid process). Running lengthwise, they <b>elevate / shorten the pharynx and larynx</b>; palatopharyngeus and stylopharyngeus insert on the thyroid cartilage.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Nail the pharyngeal innervation &mdash; the arch-to-vagus rule and the single stylopharyngeus exception.</div>
+        <div class="obj-src">content: <b>Pharynx L27 &middot; 34:16&ndash;44:49</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the rule: most pharyngeal muscles develop from the <b>4th and 6th pharyngeal arches</b>, so they are supplied by the <b>vagus nerve (CN X)</b>, via its <b>pharyngeal branch</b>. <span class="cite">(L27 34:16&ndash;34:30)</span></li>
+        <li>Give the <b>exception</b>: <b>stylopharyngeus</b> is the one pharyngeal muscle <b>not</b> supplied by the vagus &mdash; it is innervated by the <b>glossopharyngeal nerve (CN IX)</b> because it derives from the <b>3rd arch</b>. <span class="cite">(L27 43:45&ndash;44:26)</span></li>
+        <li>Use Maini&rsquo;s memory hook: <b>&ldquo;stylopharyngeus is so stylish, it has its own nerve&rdquo;</b> (CN IX). <span class="cite">(L27 44:34&ndash;44:43)</span></li>
+        <li>Separate sensation from motor: the <b>internal laryngeal nerve</b> (a vagus branch) carries <b>sensory</b> supply to the mucosa around the piriform fossa and the upper larynx. <span class="cite">(L27 25:37&ndash;26:15)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said (her memory hook)</div>
+      <blockquote>&ldquo;All the pharyngeal muscles are innervated by [the] 10th nerve, except for stylopharyngeus muscle, which is innervated by glossopharyngeal nerve &hellip; stylopharyngeus muscle is so stylish, it has its own nerve.&rdquo;<span class="cite">&mdash; The Pharynx (Lecture 27) &middot; ~00:43:45&ndash;00:44:43</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m12-pharynx-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; M12 Pharynx Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which nerve supplies most pharyngeal muscles, and which single muscle is the exception (and by which nerve)?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Most pharyngeal muscles (from arches 4 &amp; 6) are supplied by the <b>vagus (CN X)</b> pharyngeal branch. The exception is <b>stylopharyngeus</b> (3rd arch), supplied by the <b>glossopharyngeal nerve (CN IX)</b> &mdash; &ldquo;so stylish it has its own nerve.&rdquo;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 12 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>GA 0202 M12 Pharynx Hub</b> and drill exactly that topic.</p>
+    <p><b>3.</b> The <b>muscles + innervation</b> (Objectives 9&ndash;12) are where Dr. Maini&rsquo;s exam-style questions live &mdash; the <b>oblique-line trap</b> (answer: sternohyoid) and the <b>stylopharyngeus / CN IX exception</b>. Spend extra reps there.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t mix up the boundaries and vertebral levels.</b> The whole pharynx runs <b>base of skull &rarr; C6 (lower cricoid)</b>; the nasopharynx ends at the <b>soft palate</b>, the oropharynx at the <b>upper border of the epiglottis</b>. Posterior-wall supports climb the spine: nasopharynx = <b>C1 (anterior arch of atlas)</b>, oropharynx = <b>C2 + upper C3</b>, laryngopharynx = <b>C3&ndash;C6</b>. And keep the clinical quartet straight: <b>adenoids &rarr; mouth-breather / adenoid facies</b>, <b>internal laryngeal nerve &rarr; lost gag reflex / aspiration</b>, <b>retropharyngeal space obliterated &rarr; dysphagia</b>, <b>UES tone lost &rarr; aerophagia</b>.</div>
+    <p style="margin-top:6px">When all 12 boxes are ticked, you own what Dr. Maini emphasized across <b>The Pharynx</b> &mdash; the spine of the GA 0202 Module 12 material.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 12 (The Pharynx) &middot; Learning Objectives &middot; Dr. Seema Maini &middot; SCUHS<br>
+  <i>Objectives derived from Dr. Maini&rsquo;s lecture (The Pharynx, Lecture 27) and grounded in the audited GA 0202 M12 Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m12_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 General Anatomy — Dr. Maini
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Module 12 pharynx learning objectives.' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 12 pharynx learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy for the three parts of the pharynx or the cricopharyngeus as the upper esophageal sphincter.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the pharynx module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 General Anatomy with Dr. Maini at SCUHS (Module 12 — The Pharynx). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

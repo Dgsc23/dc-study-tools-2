@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎯 GA 0202 · Nose &amp; Mouth · Learning Objectives (Master the 12)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .voices{color:#fcd34d;font-size:12px;max-width:720px;margin:9px auto 0;background:rgba(0,0,0,0.18);border:1px solid rgba(245,158,11,0.35);border-radius:9px;padding:7px 12px}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 Nose &amp; Mouth Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 12</h1>
+  <div class="sub">GA 0202 Module 10 &middot; <b>Nose &amp; Mouth</b> (Nasal Cavity &amp; Oral Cavity) &middot; the study spine that ties every drill back to what Dr. Maini emphasizes across the nose and mouth lectures &mdash; cement each one, check it off, move on.</div>
+  <div class="voices">&#128266; Best voices in <b>Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+  <div class="meta-line">Dr. Maini &middot; Nasal Cavity &amp; Paranasal Sinuses (L23) + Oral Cavity (L25) &middot; 👃👅 SCUHS GA 0202</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for GA 0202 Module 10 &mdash; Nose &amp; Mouth. Each objective is derived from what <b>Dr. Maini actually emphasizes</b> across her <b>Nasal Cavity &amp; Paranasal Sinuses (L23)</b> and <b>Oral Cavity (L25)</b> lectures, and every &ldquo;prove it&rdquo; bullet is grounded in the module&rsquo;s <b>audited Everything-MC bank</b>, cited as <b>[L23/L25 &middot; HH:MM]</b>. Quotes are transcribed from her Zoom recordings; <span class="fix">[bracketed]</span> words are de-garbled spellings of what she said. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>This page takes the things <b>Dr. Maini actually drilled</b> across the two <b>Nose &amp; Mouth</b> lectures &mdash; the <b>Nasal Cavity &amp; Paranasal Sinuses</b> and the <b>Oral Cavity</b> &mdash; spells out <b>exactly what &ldquo;done&rdquo; looks like</b> for each, hangs a <b>verbatim Maini quote</b> on it, and gives you a <b>quick self-check</b>. Every fact is grounded in the module&rsquo;s anti-fabrication-audited <b>Everything-MC bank</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: Dr. Maini&rsquo;s <b>Lecture 23 (Nasal Cavity &amp; Paranasal Sinuses)</b> and <b>Lecture 25 (Oral Cavity)</b> recordings (SCUHS Canvas Zoom), plus the audited <b>GA 0202 Nose &amp; Mouth Everything-MC bank</b>.</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 12 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain what the nasal cavity does to inhaled air, name the parts of the nasal vestibule, and lay out the external nose&rsquo;s cartilaginous and bony framework.</div>
+        <div class="obj-src">content: <b>L23 &middot; ~00:47&ndash;00:52</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the three jobs done to inhaled air: it is <b>warmed (NOT cooled)</b>, <b>humidified</b>, and <b>filtered</b> &mdash; Maini&rsquo;s flagged &ldquo;silly question that people miss.&rdquo; <span class="cite">(L23 &middot; 00:48)</span></li>
+        <li>Add the drainage: the cavity also <b>receives secretions from the paranasal sinuses and the nasolacrimal duct</b> (tears). <span class="cite">(L23 &middot; 00:48)</span></li>
+        <li>Name the entrance: the <b>nasal vestibule</b> is the dilated space just inside the nostril aperture, lined by skin bearing stiff hairs called <b>vibrissae</b> (they trap dust and soot); posteriorly each cavity opens into the nasopharynx through the <b>choana</b>. <span class="cite">(L23 &middot; ~00:51)</span></li>
+        <li>Build the external nose: <b>cartilaginous</b> framework = <b>septal cartilage + greater &amp; lesser alar cartilages</b> (around the alae/nostrils); <b>bony</b> framework = <b>nasal bones + nasal part of the frontal bone + frontal process of the maxilla</b>; the root point where frontal meets nasal bones = the <b>nasion</b>. <span class="cite">(L23)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;&hellip; while it is passing through the nasal cavity, so it&rsquo;s <b>warmed, not cooled</b>, okay? You need to remember that. Very silly question, but people miss that.&rdquo;<span class="cite">&mdash; Nasal Cavity &amp; Paranasal Sinuses (L23) &middot; ~00:48:33</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">As air passes through the nasal cavity, is it warmed or cooled &mdash; and what are the stiff hairs of the vestibule called?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Air is <b>warmed (not cooled)</b>, humidified, and filtered &mdash; the classic trap is picking &ldquo;cooled.&rdquo; The stiff vestibule hairs are the <b>vibrissae</b>, which trap dust and soot. Posteriorly the cavity opens into the nasopharynx via the <b>choana</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">Build the nasal septum from its three main contributors, add the minor bone, and work the deviated-septum and lacrimal-bone traps.</div>
+        <div class="obj-src">content: <b>L23 &middot; ~00:53&ndash;00:56</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the <b>bony majority</b> (posterior part): the <b>perpendicular plate of the ethmoid</b> + the <b>vomer</b>. <span class="cite">(L23 &middot; 00:53)</span></li>
+        <li>Add the anterior support: <b>septal cartilage</b>; plus a small contribution from the <b>nasal crest of the palatine bone</b>. <span class="cite">(L23 &middot; 00:53)</span></li>
+        <li>Localize a deviation: a <b>deviated septum</b> is the <b>cartilaginous</b> part that bends (bone doesn&rsquo;t bend); a symptomatic one is fixed by a <b>submucous resection (SMR)</b> + septoplasty. <span class="cite">(L23 &middot; 00:53)</span></li>
+        <li>Beat Maini&rsquo;s &ldquo;sneak-in&rdquo; trap: the <b>lacrimal bone is NOT part of the septum</b> &mdash; it helps form the <b>medial orbital wall</b> and the <b>lateral wall of the nasal cavity</b>. <span class="cite">(L23 &middot; 00:55)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Most importantly, it is <b>perpendicular plate of ethmoid and vomer</b>&hellip; And the front of the septum, that is <b>septal cartilage</b>.&rdquo;<span class="cite">&mdash; Nasal Cavity &amp; Paranasal Sinuses (L23) &middot; ~00:53:18</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which two bones form the bony majority of the nasal septum, and if a septum is deviated, which part bends?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>perpendicular plate of the ethmoid + vomer</b> form the bony (posterior) majority; <b>septal cartilage</b> supports the front. A deviation is in the <b>cartilaginous</b> part (bone doesn&rsquo;t bend). The <b>lacrimal bone</b> is a distractor &mdash; it belongs to the orbit and lateral nasal wall, not the septum.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">Assign the bones that build the roof, floor, and lateral wall of the nasal cavity.</div>
+        <div class="obj-src">content: <b>L23 &middot; ~00:54&ndash;00:56</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Floor</b> = the <b>hard palate</b> (the same as the roof of the oral cavity): <b>palatine process of the maxilla + horizontal plate of the palatine bone</b>. <span class="cite">(L23 &middot; 00:54)</span></li>
+        <li><b>Roof</b>: <b>cribriform plate of the ethmoid</b> (transmits the olfactory nerves) + <b>body of the sphenoid</b> + <b>frontal bone</b> + <b>nasal bone</b>. <span class="cite">(L23)</span></li>
+        <li><b>Lateral wall</b>: the <b>frontal process of the maxilla</b> + the <b>medial pterygoid plate</b> (part of the sphenoid), among other contributions. <span class="cite">(L23)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;So, <b>floor is same as the roof of oral cavity</b>, right? <b>Maxilla and palatine bone</b>.&rdquo;<span class="cite">&mdash; Nasal Cavity &amp; Paranasal Sinuses (L23) &middot; ~00:54:46</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The floor of the nasal cavity is the same as the roof of what, and which two bones form it?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The floor of the nasal cavity = the <b>roof of the oral cavity</b> (the hard palate): <b>palatine process of the maxilla + horizontal plate of the palatine bone</b>. The roof&rsquo;s <b>cribriform plate</b> (ethmoid) transmits the olfactory nerves.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Sort the three conchae by their parent bone, state what they do, and name the recess and the spaces beneath them.</div>
+        <div class="obj-src">content: <b>L23 &middot; ~00:56</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Assign the conchae: the <b>superior and middle conchae</b> are projections of the <b>ethmoid bone</b>; the <b>inferior nasal concha</b> is a <b>separate bone</b> of its own. <span class="cite">(L23 &middot; 00:56)</span></li>
+        <li>Give their function: they <b>increase the surface area</b> of the lateral wall to <b>warm and humidify</b> inhaled air. <span class="cite">(L23)</span></li>
+        <li>Name the spaces: the pocket underneath each concha is a <b>meatus</b> (superior, middle, inferior); the recess above the superior concha is the <b>sphenoethmoidal recess</b>. <span class="cite">(L23)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;<b>Inferior nasal concha, which is a separate bone</b>, remember, right?&rdquo;<span class="cite">&mdash; Nasal Cavity &amp; Paranasal Sinuses (L23) &middot; ~00:56:23</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which conchae belong to the ethmoid, which stands alone as its own bone, and what is the space beneath a concha called?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Superior + middle conchae = projections of the <b>ethmoid</b>; the <b>inferior concha is a separate bone</b>. The space under each concha is a <b>meatus</b>; above the superior concha sits the <b>sphenoethmoidal recess</b>. Conchae exist to increase surface area for warming/humidifying air.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">Name the four paranasal sinuses and trace exactly where each one &mdash; plus the nasolacrimal duct &mdash; drains.</div>
+        <div class="obj-src">content: <b>L23 &middot; ~01:00&ndash;01:12</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>List the <b>four sinuses</b>, each named for its bone: <b>frontal, ethmoid, sphenoid, maxillary</b>; the <b>ethmoid is unusual</b> &mdash; a honeycomb of <b>anterior, middle &amp; posterior air cells</b>, each with its own opening. <span class="cite">(L23)</span></li>
+        <li>Drain the &ldquo;upper&rdquo; ones: <b>sphenoid sinus &rarr; sphenoethmoidal recess</b>; <b>posterior ethmoidal cells &rarr; superior meatus</b>. <span class="cite">(L23)</span></li>
+        <li>Drain into the <b>middle meatus</b>: the <b>middle ethmoidal cells</b> open on the <b>ethmoidal bulla</b>; along the <b>hiatus semilunaris</b> the <b>frontal sinus</b> enters at the <b>superior end</b> (via the infundibulum / frontonasal duct), the <b>anterior ethmoidal cells</b> at the middle, and the <b>maxillary sinus</b> at the <b>inferior end</b>. <span class="cite">(L23 &middot; 01:06)</span></li>
+        <li>Non-sinus drainage + clinic: the <b>nasolacrimal duct</b> opens into the <b>inferior meatus</b>; sinusitis is <b>slow to clear on antibiotics</b> because the sinuses are <b>poorly vascularized</b> (often ~3 weeks). <span class="cite">(L23 &middot; ~01:11)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;And the <b>inferior end, it has the opening of maxillary sinus</b>.&rdquo;<span class="cite">&mdash; Nasal Cavity &amp; Paranasal Sinuses (L23) &middot; ~01:06:35</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Into which meatus does the maxillary sinus drain, and which non-sinus structure drains into the inferior meatus?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>maxillary sinus</b> drains into the <b>middle meatus</b>, at the <b>inferior end of the hiatus semilunaris</b>. The <b>nasolacrimal duct</b> (tears) drains into the <b>inferior meatus</b>. Sphenoid &rarr; sphenoethmoidal recess; posterior ethmoid &rarr; superior meatus; frontal + anterior ethmoid &rarr; middle meatus.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">Supply the nasal cavity with blood and nerves &mdash; the two parent arteries, Kiesselbach&rsquo;s plexus, and the sensory nerves.</div>
+        <div class="obj-src">content: <b>L23 &middot; ~01:12&ndash;01:14</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the two parent arteries: the <b>maxillary</b> (an ECA branch) and the <b>ophthalmic</b> (an ICA branch); the ophthalmic gives the <b>anterior &amp; posterior ethmoidal arteries</b> through the ethmoidal foramina. <span class="cite">(L23)</span></li>
+        <li>Localize the nosebleed: <b>Kiesselbach&rsquo;s area (Little&rsquo;s area)</b> in the <b>anterior septum/vestibule</b> is the anastomosis of the <b>sphenopalatine, ethmoidal, and septal (superior labial branch of the facial) arteries</b> &mdash; the <b>most common site of anterior epistaxis</b>. <span class="cite">(L23 &middot; 01:13)</span></li>
+        <li>Route the nerves: <b>smell</b> = the <b>olfactory nerves</b> through the <b>cribriform plate of the ethmoid</b>; <b>general (touch/pain) sensation</b> = the <b>ophthalmic (V1)</b> and <b>maxillary (V2)</b> divisions of the trigeminal. <span class="cite">(L23)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This represents the anastomosis of &hellip; [spheno]palatine, ethmoidal arteries. It is located in the vestibule, and is a <b>common site of</b> [epistaxis]&hellip;&rdquo;<span class="cite">&mdash; Nasal Cavity &amp; Paranasal Sinuses (L23) &middot; ~01:13:32</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Where is the most common site of anterior nosebleeds, and which two divisions of CN V give the nasal cavity its general sensation?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Kiesselbach&rsquo;s (Little&rsquo;s) area</b> in the anterior septum &mdash; an anastomosis of <b>sphenopalatine, ethmoidal, and the septal branch</b> (superior labial of the facial). General sensation = <b>ophthalmic (V1) + maxillary (V2)</b>. Smell travels via the <b>olfactory nerves through the cribriform plate</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Name the four lingual papillae, split the tongue at the terminal sulcus, and lay out Maini&rsquo;s taste-by-location map.</div>
+        <div class="obj-src">content: <b>L25 &middot; ~00:03&ndash;00:21</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>List the four papillae: <b>filiform</b> (thread-like, blanket the dorsum), <b>fungiform</b> (mushroom-shaped, near the tip/periphery), <b>foliate</b>, and <b>circumvallate/vallate</b> (a <b>V-shaped row just anterior to the terminal sulcus</b>, taste buds sitting in a walled &ldquo;well&rdquo;). <span class="cite">(L25 &middot; 00:03)</span></li>
+        <li>Divide the tongue: the <b>terminal sulcus</b> (a backward-pointing V) separates the <b>anterior two-thirds</b> from the <b>posterior one-third</b>; the anterior 2/3 develops from the <b>1st pharyngeal arch</b>. <span class="cite">(L25)</span></li>
+        <li>Mark the midline pit: at the apex of the terminal sulcus is the <b>foramen cecum</b>, a blind remnant of the <b>thyroglossal duct</b> (where the thyroid began). <span class="cite">(L25 &middot; 00:21)</span></li>
+        <li>Map taste by receptor <b>location</b>: <b>sweet at the tip</b>, <b>salty on the sides of the tip</b> (Na+), <b>sour from acids</b> (H+), <b>bitter at the posterior tongue</b>, <b>umami centrally</b> (amino acids). <span class="cite">(L25)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;So this is foram[en] cecum. This is a <b>remnant of thyroglossal duct</b>. You can remember it like that.&rdquo;<span class="cite">&mdash; Oral Cavity (L25) &middot; ~00:21:07</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which papillae sit in a V-row anterior to the terminal sulcus, and what is the foramen cecum a remnant of?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Circumvallate (vallate) papillae</b> form the V-row anterior to the terminal sulcus, with taste buds in a walled well. The <b>foramen cecum</b>, at the apex of the sulcus, is a remnant of the <b>thyroglossal duct</b>. The four papillae: <b>filiform, fungiform, foliate, circumvallate</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">Separate the extrinsic from the intrinsic tongue muscles, give each extrinsic its origin and action, and explain the &ldquo;fence muscle.&rdquo;</div>
+        <div class="obj-src">content: <b>L25 &middot; ~00:22&ndash;00:27</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Genioglossus:</b> from the <b>mental spine (genial tubercle)</b> of the mandible; fan-shaped, forms the <b>main bulk</b> of the tongue; <b>protrudes</b> (posterior fibers) and <b>depresses</b> (anterior fibers) the tongue. <span class="cite">(L25)</span></li>
+        <li><b>Hyoglossus:</b> from the <b>body &amp; greater horn of the hyoid</b>; <b>depresses and retracts</b> the tongue; it&rsquo;s Maini&rsquo;s <b>&ldquo;fence muscle&rdquo;</b> &mdash; it separates the <b>nerves (hypoglossal, lingual) behind</b> it from the <b>arteries (lingual) in front</b>. <span class="cite">(L25 &middot; 00:27)</span></li>
+        <li><b>Styloglossus</b> (styloid process &rarr; <b>retract + elevate</b> the posterior tongue for swallowing) and <b>palatoglossus</b> (from the <b>palatine aponeurosis</b> &rarr; draws tongue &amp; soft palate together to close the oropharyngeal isthmus). <span class="cite">(L25)</span></li>
+        <li>Name the <b>four intrinsic muscles</b> (they alter the tongue&rsquo;s shape): <b>superior longitudinal, inferior longitudinal, transverse, and vertical</b>. <span class="cite">(L25)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This is called as a <b>fence muscle</b>&hellip; Fence muscle because it <b>separates nerves from arteries</b>.&rdquo;<span class="cite">&mdash; Oral Cavity (L25) &middot; ~00:27:07</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which extrinsic tongue muscle forms the main bulk and protrudes the tongue, and which one is the &ldquo;fence muscle&rdquo;?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Genioglossus</b> (from the genial tubercle) is the fan-shaped main bulk and the protruder. The <b>hyoglossus</b> is the &ldquo;fence muscle&rdquo; &mdash; nerves behind it, arteries in front. Intrinsic muscles (superior/inferior longitudinal, transverse, vertical) change the tongue&rsquo;s shape.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">Wire up the tongue &mdash; motor, general sensation, and taste for each region &mdash; then add its artery and lymph drainage.</div>
+        <div class="obj-src">content: <b>L25 &middot; ~00:16 + innervation block</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Motor:</b> every tongue muscle is <b>CN XII (hypoglossal)</b> EXCEPT the <b>palatoglossus</b>, which is <b>CN X (vagus)</b> &mdash; because it belongs to the palate. <span class="cite">(L25 &middot; 00:16)</span></li>
+        <li><b>Anterior two-thirds:</b> general sensation = <b>lingual nerve (V3)</b>, cell bodies in the <b>trigeminal ganglion</b>; taste = <b>chorda tympani (CN VII)</b>, cell bodies in the <b>geniculate ganglion</b>. <span class="cite">(L25)</span></li>
+        <li><b>Posterior one-third:</b> BOTH general sensation and taste = the <b>glossopharyngeal nerve (CN IX)</b>. <span class="cite">(L25)</span></li>
+        <li><b>Vessels &amp; lymph:</b> the <b>lingual artery</b> is the <b>2nd branch of the ECA</b>; lymph from the <b>tip &rarr; submental nodes</b>, from the <b>posterior third &rarr; superior deep cervical nodes</b>. <span class="cite">(L25)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;<b>Palatoglossus is innervated by 10th nerve</b>, because it also belongs to [the] palatine [group].&rdquo;<span class="cite">&mdash; Oral Cavity (L25) &middot; ~00:16:16</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Every tongue muscle is CN XII except which one &mdash; and which single nerve carries both taste and general sensation for the posterior third?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The exception is <b>palatoglossus (CN X, vagus)</b>. The posterior one-third gets <b>both taste and general sensation from CN IX (glossopharyngeal)</b>. Anterior 2/3: general = lingual/V3 (trigeminal ganglion), taste = chorda tympani/VII (geniculate ganglion).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Close the mouth off from the oropharynx &mdash; the palatoglossus action, the palatoglossal arch, and the lingual frenulum.</div>
+        <div class="obj-src">content: <b>L25 &middot; ~00:08&ndash;00:17</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the action: when the <b>palatoglossus</b> contracts it draws the <b>tongue and soft palate together</b> to <b>close the oropharyngeal isthmus</b> (the opening from the oral cavity into the oropharynx) while you chew. <span class="cite">(L25 &middot; 00:14)</span></li>
+        <li>Name the arch: the palatoglossus plus its overlying mucosa raises the <b>palatoglossal arch</b> on each side of that isthmus. <span class="cite">(L25 &middot; 00:17)</span></li>
+        <li>Tether the tongue: the <b>lingual frenulum</b> is the midline mucosal fold connecting the <b>underside of the tongue to the floor of the mouth</b>. <span class="cite">(L25 &middot; 00:08)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;[The palatoglossus] draws the <b>tongue and palate together</b>, and tries to <b>close oropharyngeal isthmus</b> while you are still chewing your food.&rdquo;<span class="cite">&mdash; Oral Cavity (L25) &middot; ~00:14:56</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What does the palatoglossus close during chewing, and what does the lingual frenulum connect?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>palatoglossus</b> closes the <b>oropharyngeal isthmus</b> (mouth-to-oropharynx opening) during chewing, raising the <b>palatoglossal arch</b>. The <b>lingual frenulum</b> tethers the underside of the tongue to the floor of the mouth.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Rank the three salivary glands and trace their autonomic supply &mdash; the parotid vs. submandibular/sublingual parasympathetic pathways.</div>
+        <div class="obj-src">content: <b>L25 &middot; ~00:32&ndash;00:40</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Rank them: the <b>parotid</b> is the <b>largest gland</b> (swells in mumps), but the <b>submandibular</b> produces the <b>greatest share of saliva (~60%)</b>. <span class="cite">(L25 &middot; 00:32)</span></li>
+        <li><b>Parotid parasympathetic:</b> <b>CN IX (glossopharyngeal)</b> &mdash; Maini&rsquo;s &ldquo;P is parotid, 9 is a mirror image of P&rdquo; &mdash; from the <b>inferior salivatory nucleus (medulla)</b>, synapsing in the <b>otic ganglion</b>, then riding the <b>auriculotemporal nerve</b>. <span class="cite">(L25 &middot; 00:34)</span></li>
+        <li><b>Submandibular &amp; sublingual parasympathetic:</b> <b>CN VII</b> via the <b>chorda tympani</b>, from the <b>superior salivatory nucleus (pons)</b>, synapsing in the <b>submandibular ganglion</b> (fibers hitch a ride on the <b>lingual nerve</b>). <span class="cite">(L25)</span></li>
+        <li><b>Sympathetic (all three):</b> from the <b>superior cervical ganglion</b>, postganglionic fibers form the <b>ECA plexus</b> and &ldquo;piggyback&rdquo; along its branches to the glands; note the <b>von Ebner glands</b> on the tongue secrete <b>lingual lipase</b>. <span class="cite">(L25 &middot; ~00:38)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;So, <b>P is parotid, 9 is almost a mirror image of P</b>&hellip; 9th nerve, glossopharyngeal.&rdquo;<span class="cite">&mdash; Oral Cavity (L25) &middot; ~00:34:13</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which gland is largest vs. produces the most saliva, and which cranial nerve carries parotid parasympathetics?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Parotid</b> = largest gland; <b>submandibular</b> = greatest secretion (~60%). Parotid parasympathetics = <b>CN IX</b> (inferior salivatory nucleus &rarr; otic ganglion &rarr; auriculotemporal). Submandibular/sublingual = <b>CN VII</b> via chorda tympani (superior salivatory nucleus &rarr; submandibular ganglion).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Separate the &ldquo;dys-&rdquo; terms Maini contrasts, then match each tongue/oral lesion to its cause.</div>
+        <div class="obj-src">content: <b>L25 &middot; ~00:00&ndash;00:30</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Dysarthria</b> = a <b>disorder of articulation</b> (the speech sounds, from a cerebellar or oral/tongue cause) with language itself intact. <span class="cite">(L25 &middot; 00:00)</span></li>
+        <li><b>Dysphagia</b> = <b>difficulty swallowing</b>; <b>dysphonia</b> is NOT a tongue problem &mdash; it reflects <b>laryngeal (voice-box) pathology</b>. <span class="cite">(L25)</span></li>
+        <li>Lesions: a <b>chancre</b> is the hard, sore tongue lesion of <b>syphilis</b>; a <b>canker sore (aphthous ulcer)</b> appears when immunity is low and heals faster with <b>vitamin C</b> (needed for collagen synthesis). <span class="cite">(L25)</span></li>
+        <li>Cancer: Maini notes <b>tongue/oral cancer</b> was very common where she trained, driven by <b>tobacco chewing</b>. <span class="cite">(L25)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;&hellip; there&rsquo;ll be dysarthria. What is dysarthria? This is a <b>disorder of articulation</b>&hellip;&rdquo;<span class="cite">&mdash; Oral Cavity (L25) &middot; ~00:00:23</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html">&#128220; GA 0202 &middot; Nose &amp; Mouth Hub</a>
+        <a class="chip" href="ga-0202-m10-nose-mouth-everything-mc-drill_PENDING_REVIEW.html">&#129504; Everything-MC drill</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What does dysarthria mean, and which &ldquo;dys-&rdquo; term points to the larynx rather than the tongue?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Dysarthria</b> = a disorder of articulation (speech sounds), with language intact. <b>Dysphonia</b> points to the <b>larynx</b> (voice), not the tongue; <b>dysphagia</b> = difficulty swallowing. Chancre = syphilis; canker sore heals with vitamin C; oral cancer is linked to tobacco chewing.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 12 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>GA 0202 Nose &amp; Mouth Hub</b> (or the <b>Everything-MC drill</b>) and drill exactly that topic.</p>
+    <p><b>3.</b> The <b>sinus drainage map</b> (Objective 5) and the <b>tongue&rsquo;s nerve supply</b> (Objective 9) are the densest &mdash; spend extra reps there.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t fall for Maini&rsquo;s flagged traps.</b> The air is <b>warmed, NOT cooled</b>; the <b>lacrimal bone</b> is orbit + lateral wall, <b>NOT septum</b>; a deviated septum bends at the <b>cartilage</b>, not the bone; and every tongue muscle is <b>CN XII EXCEPT the palatoglossus</b> (CN X). On drainage, the <b>maxillary sinus &rarr; middle meatus</b> (inferior end of the hiatus semilunaris), while tears drain to the <b>inferior meatus</b>.</div>
+    <p style="margin-top:6px">When all 12 boxes are ticked, you own Dr. Maini&rsquo;s objective list for <b>Nose &amp; Mouth</b> &mdash; the spine of GA 0202 Module 10.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 10 (Nose &amp; Mouth) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from Dr. Maini&rsquo;s lecture recordings (L23 Nasal Cavity &amp; Paranasal Sinuses; L25 Oral Cavity) + the audited Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m10_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 Gross Anatomy — Dr. Maini
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed'; rate.max = '3';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Module 10 nose & mouth (nasal cavity and oral cavity) learning objectives.' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 12 nose & mouth learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy for the paranasal sinus drainage map or the tongue nerve supply.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the nose & mouth module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 Gross Anatomy with Dr. Maini at SCUHS (Module 10 — Nose & Mouth: nasal cavity, paranasal sinuses, and oral cavity). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

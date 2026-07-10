@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · Module 9 — The Ear Mnemonics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin-bottom: 8px; font-style: italic; font-size: 0.95rem; }
+.edge-note { text-align: center; margin: 0 auto 10px; max-width: 720px; color: #9fd8c0; font-size: 0.8rem; background: #0f1e2e; border: 1px solid #1e5f4a; border-radius: 8px; padding: 6px 12px; line-height: 1.45; }
+.pending { display: block; width: fit-content; margin: 0 auto 18px; padding: 2px 10px; background: #3a2a0a; color: #fbbf24; border: 1px solid #b45309; border-radius: 6px; font-size: 11px; font-weight: 700; letter-spacing: .03em; }
+.scope-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.35); border-radius: 8px; padding: 10px 14px; margin: 0 auto 22px; max-width: 880px; color: #a7f3d0; font-size: 0.85rem; line-height: 1.55; }
+.scope-note b { color: #34d399; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #f59e0b; }
+.card.kinematics { border-left-color: #60a5fa; }
+.card.ligament { border-left-color: #a78bfa; }
+.card.muscle { border-left-color: #34d399; }
+.card.rule { border-left-color: #ef4444; }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 700; }
+.card .tag { display: inline-block; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 8px; border-radius: 10px; margin-bottom: 7px; }
+.card .tag-maini { background: rgba(16,185,129,0.16); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.45); }
+.card .tag-mine { background: rgba(148,163,184,0.12); color: #cbd5e1; border: 1px solid rgba(148,163,184,0.38); }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.kinematics .hook { color: #93c5fd; }
+.card.ligament .hook { color: #c4b5fd; }
+.card.muscle .hook { color: #6ee7b7; }
+.card.rule .hook { color: #fca5a5; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #f59e0b; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card.kinematics .like { border-left-color: #60a5fa; }
+.card.ligament .like { border-left-color: #a78bfa; }
+.card.muscle .like { border-left-color: #34d399; }
+.card.rule .like { border-left-color: #ef4444; }
+.card .like b { color: #fde68a; }
+.card .quote { margin-top: 8px; padding: 8px 11px; background: rgba(16,185,129,0.06); border-left: 3px solid #34d399; font-size: 0.86rem; color: #d1fae5; border-radius: 0 6px 6px 0; line-height: 1.55; font-style: italic; }
+.card .quote b { color: #6ee7b7; font-style: normal; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 900px; color: #94a3b8; font-size: 0.78rem; line-height: 1.7; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.legend span { margin: 0 8px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card .fact { color: #222; } .card .like { background: #fff; color: #000; } .card .quote { background: #fff; color: #000; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 GA 0202 &middot; The Ear &mdash; Memory Hooks</h1>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s ear anatomy, in &ldquo;think-of-it-like&rdquo; voice.</p>
+<div class="edge-note">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+<div class="pending">PENDING REVIEW</div>
+<div class="scope-note">
+  <b>Honest framing &mdash; two kinds of hooks on this page:</b> Cards tagged <b>&ldquo;Dr. Maini&rsquo;s own hook&rdquo;</b> quote her <b>actual words</b> from the Lecture&nbsp;22 recording (green quote box). Cards tagged <b>&ldquo;My study hook (illustrative)&rdquo;</b> are <b>my</b> memory devices &mdash; the acronym is mine, but every <b>fact</b> it encodes is verified in the audited Everything-MC bank and/or the transcript (cited on each card). I never put words in Dr. Maini&rsquo;s mouth: if it&rsquo;s not tagged as hers, she didn&rsquo;t say it.
+</div>
+<div class="legend">
+  <span><span class="swatch" style="background:#f59e0b;"></span>anatomy / structure</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>pathway / physiology</span>
+  <span><span class="swatch" style="background:#a78bfa;"></span>nerves / vessels</span>
+  <span><span class="swatch" style="background:#34d399;"></span>muscles</span>
+  <span><span class="swatch" style="background:#ef4444;"></span>clinical / exam trap</span>
+</div>
+
+<h2>Topic 1 &mdash; Three ears, one job</h2>
+<div class="topic-tagline">External and middle ear just carry the sound; the internal ear is where hearing actually happens.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Where hearing happens</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🎧 RECEPTORS LIVE DEEP INSIDE</div>
+<div class="fact">The <b>auditory receptors</b> that turn sound-wave vibrations into <b>action potentials</b> sit deep and protected in the <b>internal ear</b> &mdash; NOT on the eardrum, ossicles, or in the canal. From there the signal runs to the <b>temporal lobe</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Internal ear is the place where your receptors are located&hellip; those vibrations reach there and are converted into action potentials.&rdquo;</div>
+<div class="src">Maini L22 00:15 &middot; bank Q1</div>
+</div>
+
+<div class="card">
+<div class="label">Job of the outer two</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🚇 OUTER + MIDDLE = THE CONDUIT</div>
+<div class="fact">The <b>external</b> and <b>middle ear</b> are just a <b>conduit passage</b>: one structure hands the vibration to the next, to the next, until the receptors fire. They <b>hold no receptors</b> of their own.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;External and middle ear is kind of a conduit passage for the vibrations.&rdquo;</div>
+<div class="src">Maini L22 00:57 &middot; bank Q2</div>
+</div>
+
+<div class="card">
+<div class="label">Auricle cartilage</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🪀 ELASTIC = SNAPS BACK (auricle &amp; epiglottis)</div>
+<div class="fact">The <b>auricle</b> is one piece of <b>elastic cartilage</b> &mdash; bend it and it springs back. The other elastic-cartilage example Maini names is the <b>epiglottis</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Elastic cartilage has this property&hellip; you can distort it, it goes back to its shape.&rdquo; (auricle &amp; epiglottis)</div>
+<div class="like">💡 Two &ldquo;spring-back&rdquo; flaps in the body: the <b>ear you can fold</b> and the <b>epiglottis that flips over the larynx</b>. Both elastic cartilage.</div>
+<div class="src">Maini L22 02:25 &middot; bank Q4, Q5</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; The auricle: parts, nerves &amp; arteries</h2>
+<div class="topic-tagline">Maini said she has seen board questions on the named parts &mdash; and the nerve/artery lists are classic traps.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Auricle landmark</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🛶 SCAPHA = A BOAT</div>
+<div class="fact">The outer curved ridge is the <b>helix</b>; running parallel inside it is the <b>antihelix</b>. The boat-shaped groove <b>between helix and antihelix</b> is the <b>scapha</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Scapha means a boat. It&rsquo;s like a boat.&rdquo;</div>
+<div class="like">💡 Same root as <b>scaphoid</b> (&ldquo;boat-shaped&rdquo;). The long thin trough between the two ridges is your little canoe.</div>
+<div class="src">Maini L22 40:05 &middot; bank Q15, Q16</div>
+</div>
+
+<div class="card">
+<div class="label">Tragus &amp; the notch</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🎧 TRAGUS OUT FRONT &middot; NOTCH HOLDS AIRPODS</div>
+<div class="fact">The <b>tragus</b> is the flap <b>immediately anterior to the ear canal</b>; opposite it is the <b>antitragus</b>. The <b>intertragic notch</b> sits <b>between tragus and antitragus</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;What is the function of intertragic notch? To hold your AirPods&hellip; nature knew that one day will come when you&rsquo;ll have to put your AirPods in there.&rdquo;</div>
+<div class="src">Maini L22 40:35 &middot; bank Q17, Q18</div>
+</div>
+
+<div class="card">
+<div class="label">Earlobe</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">💎 LOBULE = FOR YOUR DIAMONDS</div>
+<div class="fact">The <b>lobule (earlobe)</b> is the one auricle part with <b>no cartilage</b> &mdash; just skin and soft tissue, and it&rsquo;s <b>very vascular</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;What is the function of lobule? To wear your diamonds.&rdquo;</div>
+<div class="like">💡 &ldquo;No cartilage&rdquo; is why an earring pierces the lobule painlessly &mdash; and why it bleeds well (very vascular).</div>
+<div class="src">Maini L22 41:08 &middot; bank Q6</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Sensory nerves of the auricle</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🔌 &ldquo;GALV&rdquo; SENSORY &middot; FACIAL = MOTOR</div>
+<div class="fact">Four sensory suppliers: <b>G</b>reat auricular (cervical plexus), <b>A</b>uriculotemporal (<b>V3</b>), <b>L</b>esser occipital (cervical plexus), and the auricular branch of the <b>V</b>agus (X, deep concha / canal). Separately, the <b>facial nerve (VII)</b> gives <b>MOTOR</b> to the rudimentary auricular muscles.</div>
+<div class="like">💡 Get a jolt of &ldquo;<b>GALV</b>&rdquo; sensation (Great auricular, Auriculotemporal, Lesser occipital, Vagus). The odd one out &mdash; the <b>Facial</b> &mdash; doesn&rsquo;t feel the ear, it <b>moves</b> it.</div>
+<div class="src">bank Q8, Q9, Q10, Q14 &middot; Maini L22 03:34, 04:39</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Arteries of the auricle</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🩸 3 BRANCHES, ALL OFF THE ECA</div>
+<div class="fact">The auricle&rsquo;s three arteries &mdash; <b>Superficial temporal</b>, <b>Posterior auricular</b>, and <b>Occipital</b> &mdash; are <b>all branches of the external carotid artery (ECA)</b>.</div>
+<div class="like">💡 &ldquo;<b>S.P.O.</b> off the ECA.&rdquo; If a stem lists all three feeding the ear, the single common parent is always the <b>external</b> carotid &mdash; not the internal.</div>
+<div class="src">bank Q7 &middot; Maini L22 03:15</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; Ear canal &amp; eardrum</h2>
+<div class="topic-tagline">The S-shaped tube, the wax trap, and the clock-face landmarks of the tympanic membrane.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">External acoustic meatus</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">〰️ SINUOUS = S-SHAPED (2.5 cm)</div>
+<div class="fact">The ear canal is a <b>sinuous (S-shaped)</b> tube about <b>2.5 cm</b> long. Support: <b>lateral one-third = elastic cartilage</b>, <b>medial two-thirds = temporal bone</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Sinuous means S-shaped.&rdquo;</div>
+<div class="like">💡 Cartilage on the <b>outside</b> (continuous with the auricle you can wiggle), bone on the <b>inside</b> (the hard part near the drum). Cartilage-out, bone-in.</div>
+<div class="src">Maini L22 06:48 &middot; bank Q11, Q12</div>
+</div>
+
+<div class="card">
+<div class="label">Cerumen (wax)</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🕸️ WAX + HAIR = A STICKY TRAP-MAT</div>
+<div class="fact">Ceruminous glands secrete <b>cerumen (wax)</b>; with the canal hairs it forms a <b>mat that traps dust, soot, and small insects</b> before they reach the drum.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Along with the hair, it creates a mat to trap dust particles, soot particles, sometimes tiny insects.&rdquo;</div>
+<div class="src">Maini L22 07:29 &middot; bank Q13</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Ear-canal vagus reflex</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🪥 CLEAN YOUR EAR &rarr; TICKLE IN THE THROAT</div>
+<div class="fact">The <b>auricular branch of the vagus (X)</b> carries <b>GSA</b> from the ear canal. Stimulating it while cleaning the canal fires the vagus and you feel it <b>in your throat</b> (a cough/irritation).</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Sometimes you&rsquo;re cleaning your&hellip; tube, you get this irritating sensation in your throat&hellip; this is because of the vagus nerve.&rdquo;</div>
+<div class="src">Maini L22 08:07 &middot; bank Q14</div>
+</div>
+
+<div class="card">
+<div class="label">Tympanic membrane</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🥁 EARDRUM = PEARLY-GRAY, 3 LAYERS</div>
+<div class="fact">The eardrum is a <b>thin, semi-transparent, oval, pearly-gray</b> membrane with <b>3 layers</b>: outer <b>skin</b>, middle <b>fibrous</b> core, inner <b>mucous membrane</b>. Sensory: outer surface = <b>auriculotemporal (V3)</b> + vagus; inner surface = <b>glossopharyngeal (IX)</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Semi-transparent, oval, fibrous, pearly-gray membrane&hellip; covered externally by thin skin, and internally by mucous membrane, with a core of dense fibrous tissue.&rdquo;</div>
+<div class="like">💡 Skin faces the outside world, mucosa faces the middle-ear cavity, dense fibrous filling in between makes it a drumhead. Different skin vs mucosa = different nerves.</div>
+<div class="src">Maini L22 09:07 &middot; bank Q19, Q20, Q29</div>
+</div>
+
+<div class="card">
+<div class="label">Umbo</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">☂️ UMBO = UMBRELLA (central dimple)</div>
+<div class="fact">The eardrum&rsquo;s <b>central depression</b>, where the malleus handle tents it inward, is the <b>umbo</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;It has a central depression called [the] umbo&hellip; [it] means umbrella, so it&rsquo;s not straight, and it has a slight depression in the middle.&rdquo;</div>
+<div class="src">Maini L22 09:59 &middot; bank Q21</div>
+</div>
+
+<div class="card">
+<div class="label">Cone of light</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🔦 RIGHT = 5 O&rsquo;CLOCK &middot; LEFT = 7 O&rsquo;CLOCK</div>
+<div class="fact">The <b>cone of light</b> radiates down-and-forward from the umbo: in the <b>right</b> ear it points to <b>5 o&rsquo;clock</b>, in the <b>left</b> ear to <b>7 o&rsquo;clock</b>. Maini flagged this as exam-worthy.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;In the right ear, 5 o&rsquo;clock. In the left ear, 7 o&rsquo;clock. This can appear as a question in your exam.&rdquo;</div>
+<div class="like">💡 <span class="tag tag-mine" style="margin:0;">my add-on</span> The two numbers add to 12, and <b>R</b>ight (earlier letter) takes the smaller number <b>5</b>; <b>L</b>eft takes <b>7</b>.</div>
+<div class="src">Maini L22 10:30 &middot; bank Q22</div>
+</div>
+
+<div class="card">
+<div class="label">Pars flaccida vs pars tensa</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🎈 TENSA = TENSED (lower) &middot; FLACCIDA = FLACCID (upper)</div>
+<div class="fact">The name tells you the feel: the <b>inferior</b>, taut majority is <b>pars TENSA</b>; the small <b>superior</b>, lax part is <b>pars FLACCIDA</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;The inferior part is called pars tensa&hellip; because the inferior part is tensed&hellip; the superior&hellip; is kind of flaccid. That&rsquo;s where it&rsquo;s called pars flaccida.&rdquo;</div>
+<div class="src">Maini L22 11:16 &middot; bank Q24</div>
+</div>
+
+<div class="card rule">
+<div class="label">Which quadrant to cut</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">⚠️ POSTERO-SUPERIOR = DANGER &middot; POSTERO-INFERIOR = DRAIN</div>
+<div class="fact">Behind the <b>posterosuperior</b> quadrant lurks the <b>chorda tympani</b> &mdash; don&rsquo;t cut there. The <b>posteroinferior</b> quadrant is the safe <b>myringotomy</b> site (nothing important behind it).</div>
+<div class="like">💡 &ldquo;<b>High-and-back = harm</b> (chorda); <b>low-and-back = let it out</b> (drain the pus).&rdquo; Both are posterior; the <b>up/down</b> is what flips danger vs safe.</div>
+<div class="src">Maini L22 11:47, 14:21 &middot; bank Q25, Q26</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; The middle-ear box: six walls</h2>
+<div class="topic-tagline">Maini turns the tympanic cavity into a cube so you can name all six walls and what each holds.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">The six walls</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">📦 ROOF-TILE &middot; JUG-FLOOR &middot; TUBE-FRONT &middot; MASTOID-BACK &middot; MAZE-MEDIAL &middot; DRUM-SIDE</div>
+<div class="fact">Six walls of the tympanic cavity (in the <b>petrous</b> temporal bone):<br>
+&bull; <b>Roof</b> = <b>tegmen tympani</b> (Roof-TILE)<br>
+&bull; <b>Floor</b> = roof of the <b>jugular</b> fossa (JUG)<br>
+&bull; <b>Anterior</b> = auditory <b>TUBE</b> + <b>tensor tympani</b> openings<br>
+&bull; <b>Posterior</b> = <b>MASTOID</b> wall (aditus, pyramid, facial canal)<br>
+&bull; <b>Medial</b> = labyrinth / <b>MAZE</b> wall (promontory, oval + round windows)<br>
+&bull; <b>Lateral</b> = the <b>eardruM</b> (DRUM)</div>
+<div class="like">💡 Read the box like a room: tiled roof up top, jug on the floor, the tube at the front door, the big mastoid out the back, the bony maze on the inside wall, the drum on the outside.</div>
+<div class="src">bank Q33, Q36&ndash;Q42, Q45, Q110</div>
+</div>
+
+<div class="card">
+<div class="label">Promontory (medial wall)</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🔨 PROMONTORY = A BUMP PUSHED INTO THE WALL</div>
+<div class="fact">The <b>promontory</b> is the rounded bulge on the <b>medial wall</b>, raised by the <b>basal turn of the cochlea</b> pressing into it.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;If you just push very hard on a wall, and you create a bump on the wall, it&rsquo;s like that. That is promontory.&rdquo;</div>
+<div class="src">Maini L22 22:54 &middot; bank Q39</div>
+</div>
+
+<div class="card">
+<div class="label">Mastoid antrum</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🕳️ ANTRUM = A CAVITY (air cells, not solid)</div>
+<div class="fact">Posteriorly the middle ear opens through the <b>aditus</b> into the <b>mastoid antrum</b>. &ldquo;Antrum&rdquo; = cavity: the mastoid is full of <b>air cells</b>, so infection can spread there &rarr; <b>mastoiditis</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Antrum means cavity of the mastoid bone&hellip; it has air cells.&rdquo;</div>
+<div class="src">Maini L22 16:38 &middot; bank Q34, Q35</div>
+</div>
+
+<div class="card">
+<div class="label">Medial-wall windows</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🪟 OVAL = STAPES IN &middot; ROUND = SECONDARY DRUM</div>
+<div class="fact">The medial wall carries two windows: the <b>oval window (fenestra vestibuli)</b> plugged by the <b>stapes footplate</b>, and the <b>round window (fenestra cochlea)</b> closed by the <b>secondary tympanic membrane</b>.</div>
+<div class="like">💡 &ldquo;Oval takes the stapes&rsquo; <b>foot</b>; round is the <b>give</b> valve.&rdquo; The stapes pushes IN at the oval, the round window bulges OUT to relieve the pressure wave.</div>
+<div class="src">bank Q40, Q76, Q110</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; Ossicles &amp; the two tiny muscles</h2>
+<div class="topic-tagline">The smallest bones in the body, their shapes, their joints, and the two muscles that guard against loud noise.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Ossicle order + shapes</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🔗 M-I-S: MALLEUS &middot; INCUS &middot; STAPES</div>
+<div class="fact">Three ossicles (tiniest bones in the body), from eardrum inward: <b>Malleus (hammer)</b> &rarr; <b>Incus (anvil)</b> &rarr; <b>Stapes (stirrup)</b>. The <b>malleus is the largest</b> and its <b>handle grips the eardrum</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;M-I-S, MES, or SIM, whatever you want to say&hellip; in that order.&rdquo; (malleus, incus, stapes)</div>
+<div class="like">💡 A little workshop: swing the <b>hammer</b>, hit the <b>anvil</b>, kick the <b>stirrup</b>. That&rsquo;s the order the vibration travels.</div>
+<div class="src">Maini L22 28:46, 29:14 &middot; bank Q43, Q44, Q45, Q46, Q47</div>
+</div>
+
+<div class="card">
+<div class="label">Stapes = stirrup</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🐴 STAPES = STIRRUP; ITS FOOT SITS IN THE OVAL WINDOW</div>
+<div class="fact">The <b>stapes</b> has a head, neck, two crura, and a <b>footplate</b> that sits in the <b>oval window</b>. Its shape is a horse-rider&rsquo;s stirrup. The muscle attached to its neck is named after it: <b>stapedius</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;When you&rsquo;re going for horse riding, that is how you stabilize your feet inside the stirrup&hellip; that&rsquo;s why its name is stapedius.&rdquo;</div>
+<div class="src">Maini L22 29:54, 35:46 &middot; bank Q47, Q53</div>
+</div>
+
+<div class="card">
+<div class="label">Ossicle joints</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🪑 M-I = SADDLE &middot; I-S = BALL-&amp;-SOCKET</div>
+<div class="fact">The <b>incudomalleolar</b> joint (malleus&ndash;incus) is a <b>saddle</b> joint; the <b>incudostapedial</b> joint (incus&ndash;stapes) is a <b>ball-and-socket</b> joint.</div>
+<div class="quote">🎙️ <b>Maini (states the facts):</b> &ldquo;Incus-malleolar joint is a saddle joint, and [incudo]stapedial joint is a ball-and-socket joint.&rdquo;</div>
+<div class="like">💡 The hook is mine: move <b>outward</b> along the chain and the joint gets <b>freer</b> &mdash; saddle first, then the roomier ball-and-socket at the stapes.</div>
+<div class="src">Maini L22 31:35 &middot; bank Q48, Q49</div>
+</div>
+
+<div class="card muscle">
+<div class="label">The two middle-ear muscles</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">💪 TENSOR TYMPANI = V3 tenses the drum &middot; STAPEDIUS = 7 stops the stapes</div>
+<div class="fact"><b>Tensor tympani</b>: from the auditory-tube cartilage, <b>nerve V3</b> (1st arch); it <b>draws the eardrum medially</b> to tense it. <b>Stapedius</b>: from the <b>pyramid</b>, <b>nerve VII</b>; it <b>dampens the stapes</b> by pulling its head posteriorly.</div>
+<div class="like">💡 Two number tricks: <b>Tensor Tympani</b> &rarr; T&hellip; think <b>trigeminal V3</b> (jaw muscles&rsquo; nerve). <b>Stapedius</b> &rarr; <b>Seven</b> (S = 7th nerve). Each muscle guards the ossicle chain from its own end.</div>
+<div class="src">bank Q50, Q51, Q52, Q53, Q54</div>
+</div>
+
+<div class="card muscle">
+<div class="label">Protective reflex</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🎚️ LOUD (DJ ROOM) &rarr; MUSCLES CLAMP (auditory reflex)</div>
+<div class="fact">In loud surroundings both muscles reflexively contract &mdash; the <b>auditory (acoustic) reflex</b> &mdash; stiffening the chain so violent vibrations don&rsquo;t reach the delicate receptors. Lose <b>stapedius</b> (facial-nerve lesion) and you get <b>hyperacusis</b>.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;You are in a DJ room&hellip; your stapedius muscle contracts, and prevents that transmission of those noises.&rdquo;</div>
+<div class="src">Maini L22 36:19 &middot; bank Q54, Q55, Q56</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; The auditory (pharyngotympanic) tube</h2>
+<div class="topic-tagline">One tube, three names, and one job that has nothing to do with hearing.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Three names, one tube</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🏷️ AUDITORY = PHARYNGOTYMPANIC = EUSTACHIAN</div>
+<div class="fact">One tube, three names: <b>auditory</b> = <b>pharyngotympanic</b> = <b>eustachian</b>. It runs from the middle ear to the <b>nasopharynx</b>, and its job is <b>pressure equalization</b> across the eardrum.</div>
+<div class="like">💡 Say all three names in your head every time you meet it (Maini&rsquo;s advice): <b>A-P-E</b> &mdash; Auditory, Pharyngotympanic, Eustachian.</div>
+<div class="src">bank Q57, Q58, Q59 &middot; Maini L22 38:47</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Why your ears pop</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">✈️ PLANE POPS YOUR EARS &rarr; YAWN TO EQUALIZE</div>
+<div class="fact">When cabin pressure changes on takeoff/landing, the two sides of the eardrum go out of balance. <b>Yawning</b> or a <b>Valsalva</b> forces air through the tube to <b>equalize the pressure</b>, and hearing clears.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;What happens when your plane is taking off?&hellip; you do the Valsalva maneuver, or you just yawn&hellip; you equalize the pressure on the two sides of tympanic membrane.&rdquo;</div>
+<div class="src">Maini L22 32:46 &middot; bank Q108</div>
+</div>
+
+<div class="card">
+<div class="label">Tube support &amp; guard</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🦴 1/3 BONE, 2/3 CARTILAGE &middot; TUBAL TONSIL AT THE DOOR</div>
+<div class="fact">The tube is <b>3.5&ndash;4 cm</b>: <b>posterior one-third bony</b>, <b>anterior two-thirds cartilaginous</b>. Lymphoid <b>tubal tonsil</b> guards its nasopharyngeal opening. Block it (long flu) &rarr; a <b>nasal twang</b>.</div>
+<div class="like">💡 Mirror-image of the ear canal: the <b>canal</b> is cartilage-out/bone-in, the <b>tube</b> is bone-back/cartilage-front. Don&rsquo;t mix them up.</div>
+<div class="src">bank Q60, Q61, Q109</div>
+</div>
+
+<div class="card rule">
+<div class="label">Classic confusion</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🚫 AUDITORY TUBE &ne; EAR CANAL</div>
+<div class="fact">The name is misleading: the <b>auditory tube</b> is for <b>pressure</b>, not sound. Don&rsquo;t confuse it with the <b>external acoustic meatus</b> (the canal that actually conducts sound).</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;The name can be misguiding. Auditory tube has got nothing to do with hearing&hellip; it&rsquo;s for pressure equalization.&rdquo;</div>
+<div class="src">Maini L22 34:44 &middot; bank Q119</div>
+</div>
+
+</div>
+
+<h2>Topic 7 &mdash; Internal ear: labyrinth, cochlea, vestibule &amp; canals</h2>
+<div class="topic-tagline">This is the internal-ear detail from the audited bank. Hooks here are my illustrative devices unless a green quote box is shown.</div>
+<div class="cards">
+
+<div class="card">
+<div class="label">Labyrinth &amp; its two fluids</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">💧 PERI = OUTSIDE (periphery) &middot; ENDO = INSIDE</div>
+<div class="fact">The internal ear (labyrinth) = a <b>bony labyrinth</b> housing a <b>membranous labyrinth</b>. <b>Perilymph</b> lies <b>between</b> bone and membrane (outside the membranous sac); <b>endolymph</b> <b>fills</b> the membranous labyrinth (inside).</div>
+<div class="like">💡 &ldquo;<b>Peri</b>-meter = around the outside; <b>Endo</b> = inside.&rdquo; The membranous tube floats inside its bony shell like a balloon (endolymph) in a jar of water (perilymph).</div>
+<div class="src">bank Q62, Q63, Q64</div>
+</div>
+
+<div class="card">
+<div class="label">Bony labyrinth parts</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🧩 &ldquo;C-V-C&rdquo;: COCHLEA &middot; VESTIBULE &middot; CANALS</div>
+<div class="fact">The bony labyrinth has three parts: <b>Cochlea</b> (hearing), <b>Vestibule</b> (holds utricle &amp; saccule), and the three <b>semicircular Canals</b> (rotation). Vestibule sits in the middle, cochlea in front, canals behind.</div>
+<div class="like">💡 &ldquo;<b>CVC</b>&rdquo; &mdash; front-to-back: Cochlea, then the central Vestibule, then the Canals. One for pitch, one for still-position, one for spin.</div>
+<div class="src">bank Q65, Q66, Q83</div>
+</div>
+
+<div class="card">
+<div class="label">Cochlea shape</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🐌 COCHLEA = A SNAIL (core = modiolus)</div>
+<div class="fact">The <b>cochlea</b> coils ~2.5 turns like a snail shell around a central bony core, the <b>modiolus</b>, which houses the <b>spiral ganglion</b> (first-order hearing neurons).</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;Cochlea is something like a snail. It looks like a snail.&rdquo;</div>
+<div class="like">💡 <span class="tag tag-mine" style="margin:0;">my add-on</span> Snail shell = cochlea, the pillar it winds around = modiolus (&ldquo;little hub&rdquo;) holding the ganglion.</div>
+<div class="src">Maini L22 24:24 &middot; bank Q67, Q68</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Cochlear duct: 3 scalae</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🥪 TOP + BOTTOM = PERILYMPH &middot; MIDDLE = ENDOLYMPH</div>
+<div class="fact">Two membranes split the cochlea into three: <b>scala vestibuli</b> (top, perilymph), <b>cochlear duct = scala media</b> (middle, endolymph), <b>scala tympani</b> (bottom, perilymph). <b>Vestibular membrane</b> = roof, <b>basilar membrane</b> = floor of the duct.</div>
+<div class="like">💡 A sandwich: two perilymph &ldquo;bread&rdquo; layers (vestibuli &amp; tympani) around the endolymph &ldquo;filling&rdquo; (scala media). Only the middle carries endolymph.</div>
+<div class="src">bank Q69, Q70, Q71, Q113</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Organ of Corti</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">👂 HAIR CELLS ON THE BASILAR FLOOR &middot; CILIA IN THE TECTORIAL GEL</div>
+<div class="fact">The <b>organ of Corti</b> (hearing receptor) sits on the <b>basilar membrane</b>; its <b>hair cells</b> poke cilia into the gelatinous <b>tectorial membrane</b>. As the basilar membrane vibrates, cilia bend against the tectorial roof &rarr; action potential.</div>
+<div class="like">💡 &ldquo;<b>B</b>asilar = <b>B</b>ase you stand on; <b>T</b>ectorial = <b>T</b>op tent the hairs brush.&rdquo; Bending the hairs is the trigger.</div>
+<div class="src">bank Q72, Q73, Q74, Q82</div>
+</div>
+
+<div class="card">
+<div class="label">The 3 receptor organs &amp; their gels</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🎯 CORTI&rarr;TECTORIAL &middot; MACULA&rarr;OTOLITHIC &middot; CRISTA&rarr;CUPULA</div>
+<div class="fact">Three inner-ear sense organs, each capped by its own gelatinous membrane: <b>Organ of Corti &rarr; tectorial membrane</b> (hearing); <b>Macula &rarr; otolithic membrane</b> with <b>otoliths</b> (static/linear); <b>Crista ampullaris &rarr; cupula</b> (rotation).</div>
+<div class="like">💡 Pair them off: <b>C</b>orti&ndash;<b>T</b>ectorial, <b>M</b>acula&ndash;<b>O</b>tolithic, <b>C</b>rista&ndash;<b>C</b>upula. Only the macula&rsquo;s gel carries stones (otoliths).</div>
+<div class="src">bank Q86, Q96, Q97, Q98</div>
+</div>
+
+<div class="card">
+<div class="label">Vestibule: utricle vs saccule</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🚗 UtRiCle = BIGGER / horizontal &middot; SaCCule = smaller / vertical</div>
+<div class="fact">The vestibule holds two sacs for <b>static equilibrium + linear acceleration</b>: the <b>utricle</b> (larger, horizontal macula &rarr; horizontal motion, e.g. a car) and the <b>saccule</b> (smaller, vertical macula &rarr; vertical motion, e.g. an elevator).</div>
+<div class="like">💡 &ldquo;<b>Utricle</b> = <b>U</b> drive a caR (horizontal); <b>Saccule</b> = <b>S</b>oaring elevator (vertical).&rdquo; Bigger sac = utricle.</div>
+<div class="src">bank Q84, Q86, Q87, Q114, Q115</div>
+</div>
+
+<div class="card">
+<div class="label">Semicircular canals</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🔄 3 CANALS AT 90° &middot; SPIN = CRISTA IN THE AMPULLA</div>
+<div class="fact">Three semicircular canals per ear sit at <b>right angles</b> to each other and sense <b>rotational (dynamic) equilibrium</b>. Each duct swells into an <b>ampulla</b> holding the <b>crista ampullaris</b>, whose hair cells sit in the <b>cupula</b>.</div>
+<div class="like">💡 Three canals = the three planes of a spinning head (like x-y-z). The sensor lives in the bulge (ampulla), gel-capped by the cupula.</div>
+<div class="src">bank Q89, Q90, Q95, Q96, Q97</div>
+</div>
+
+<div class="card">
+<div class="label">Canal orientation (board flag)</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🧭  vs POSTERIOR PETROUS: ANT = 90°, POST = along, LAT = horizontal</div>
+<div class="fact">Named relative to the <b>posterior surface of the petrous temporal bone</b>: <b>Anterior</b> canal = <b>right angle</b> to it; <b>Posterior</b> canal = <b>along (in line with)</b> it; <b>Lateral</b> canal = <b>horizontal</b>. Maini flagged this as board-style.</div>
+<div class="like">💡 &ldquo;<b>A</b>nterior is <b>A</b>cross (90°), <b>P</b>osterior is <b>P</b>arallel, <b>L</b>ateral <b>L</b>ies flat.&rdquo; Three canals, three orientations.</div>
+<div class="src">bank Q91, Q92, Q93, Q94</div>
+</div>
+
+<div class="card kinematics">
+<div class="label">Static vs dynamic</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">⚖️ maCUla = still &amp; straight &middot; CRIsta = spin</div>
+<div class="fact">Sort the balance organs: the <b>macula</b> (utricle/saccule) handles <b>static equilibrium + linear</b> motion; the <b>crista ampullaris</b> (canals) handles <b>dynamic / rotational</b> motion.</div>
+<div class="like">💡 &ldquo;<b>Macula</b> for the <b>map</b> (where&rsquo;s down, am I sliding straight?); <b>Crista</b> for the <b>carousel</b> (am I turning?).&rdquo;</div>
+<div class="src">bank Q84, Q90, Q120</div>
+</div>
+
+</div>
+
+<h2>Topic 8 &mdash; Nerves, vessels &amp; clinical</h2>
+<div class="topic-tagline">The glossopharyngeal detour, what rides through the internal acoustic meatus, and the exam-ready clinical calls.</div>
+<div class="cards">
+
+<div class="card ligament">
+<div class="label">Tympanic plexus pathway (IX)</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🔀 IX&rsquo;s DETOUR: TYMPANIC br &rarr; PLEXUS &rarr; LESSER PETROSAL &rarr; OTIC &rarr; PAROTID</div>
+<div class="fact">The <b>tympanic branch of glossopharyngeal (IX)</b> enters the middle ear, forms the <b>tympanic plexus</b> over the promontory, then leaves as the <b>lesser petrosal nerve</b> to the <b>otic ganglion</b> &mdash; ultimately (via auriculotemporal) to the <b>parotid gland</b>.</div>
+<div class="like">💡 IX &ldquo;had no business&rdquo; in the ear (Maini) &mdash; the middle ear was just on its way to the parotid. Chain: <b>tympanic &rarr; plexus &rarr; lesser petrosal &rarr; otic &rarr; parotid</b>.</div>
+<div class="src">Maini L22 26:33 &middot; bank Q102</div>
+</div>
+
+<div class="card ligament">
+<div class="label">Internal acoustic meatus</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🚪 IAM = 7 &amp; 8 + LABYRINTHINE VESSELS</div>
+<div class="fact">The <b>internal acoustic meatus</b> (on the posteromedial <b>petrous</b> surface) transmits <b>CN VII (facial)</b>, <b>CN VIII (vestibulocochlear)</b>, and the <b>labyrinthine artery &amp; vein</b>. The facial nerve then runs on in the <b>facial canal</b>.</div>
+<div class="like">💡 &ldquo;<b>7 &amp; 8 go on a date</b> through the IAM&rdquo; &mdash; plus their little blood supply (labyrinthine vessels). VIII is hearing + balance; VII motors the face.</div>
+<div class="src">bank Q99, Q100, Q103</div>
+</div>
+
+<div class="card rule">
+<div class="label">Which test, which function</div>
+<span class="tag tag-maini">Dr. Maini&rsquo;s own hook</span>
+<div class="hook">🌡️ CALORIC (warm/cold water) = BALANCE &middot; WEBER/RINNE = HEARING</div>
+<div class="fact">The <b>caloric test</b> (irrigating the ear with warm and cold water) checks <b>vestibular</b> function; <b>Weber&rsquo;s</b> and <b>Rinne&rsquo;s</b> are <b>hearing</b> tests.</div>
+<div class="quote">🎙️ <b>Maini:</b> &ldquo;In [the] caloric test, you irrigate your ear with warm and cold water&hellip; [it&rsquo;s] the test of vestibular function.&rdquo;</div>
+<div class="src">bank Q104, Q105</div>
+</div>
+
+<div class="card rule">
+<div class="label">Myringotomy vs spontaneous rupture</div>
+<span class="tag tag-mine">My study hook (illustrative)</span>
+<div class="hook">🩹 PLANNED CUT HEALS CLEAN &middot; RAGGED TEAR HEALS BAD</div>
+<div class="fact">A <b>myringotomy</b> drains a middle-ear collection through a clean cut in the <b>posteroinferior</b> quadrant and heals without scar. A <b>spontaneous rupture</b> has <b>serrated (ragged) margins</b> and may <b>not heal properly</b> &mdash; a ruptured/thickened/fibrosed drum causes <b>hearing impairment</b>.</div>
+<div class="like">💡 &ldquo;<b>Straight edge = good, torn edge = bad.</b>&rdquo; That&rsquo;s why you drain early with a neat cut instead of waiting for the pressure to blow a jagged hole.</div>
+<div class="src">Maini L22 12:56 &middot; bank Q26, Q27, Q106, Q107</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD &middot; GA 0202 Module 9 &mdash; The Ear Mnemonics</div>
+</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m09-ear-hub_PENDING_REVIEW.html" title="Return to the Ear Study Hub" aria-label="Return to the Ear Study Hub">📚</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

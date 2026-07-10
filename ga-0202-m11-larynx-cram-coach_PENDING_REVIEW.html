@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · The Larynx — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 11 — THE LARYNX
+   Dr. Seema Maini. Cram Coach (voiced, hands-free). PENDING REVIEW.
+   Built ONLY from Dr. Maini's GA lectures:
+     • The Oral Cavity contd. / The Larynx (L25) and The Larynx (L26)
+   Grounded in the audited Everything-MC bank (anti-fab verified). No new facts.
+   Analogies attributed to Maini ONLY where she says them in the transcript.
+   THEME: violet (cloned engine). Answer positions balanced across the drill.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m11-larynx-hub_PENDING_REVIEW.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (12 TOPICS) ===== */
+/* facts = shown on screen; say = clean spoken prose for the read-aloud coach. */
+const cram = [
+  {
+    n: 1, title: "The laryngeal skeleton — 9 cartilages", src: "Maini · Larynx L25-26",
+    facts: [
+      "The larynx has NINE cartilages in total: THREE large UNPAIRED (thyroid, cricoid, epiglottis) and THREE smaller PAIRED (arytenoid, corniculate, cuneiform).",
+      "Cartilage TYPE: the thyroid and cricoid are HYALINE; the epiglottis is ELASTIC, and so are the tiny corniculate and cuneiform ('yellow elastic').",
+      "Maini's trap: the TRITICEAL (triticeous) cartilage is NOT part of the larynx. It sits in the free posterior border of the thyrohyoid membrane.",
+    ],
+    flag: "9 total = 3 unpaired (thyroid, cricoid, epiglottis) + 3 paired (arytenoid, corniculate, cuneiform). Hyaline: thyroid, cricoid. Elastic: epiglottis, corniculate, cuneiform. Triticeal = NOT laryngeal (distractor).",
+    say: [
+      "Let's start with the laryngeal skeleton. The larynx has nine cartilages in total.",
+      "Three are large and unpaired: the thyroid, the cricoid, and the epiglottis.",
+      "Three are smaller and paired: the arytenoid, the corniculate, and the cuneiform.",
+      "For cartilage type, the thyroid and cricoid are hyaline, while the epiglottis and the little corniculate and cuneiform are elastic.",
+      "Maini flag. A common trap is the triticeal cartilage. It is not part of the larynx. It sits in the free back edge of the thyrohyoid membrane.",
+    ],
+  },
+  {
+    n: 2, title: "Thyroid cartilage", src: "Maini · Larynx L25",
+    facts: [
+      "The LARGEST laryngeal cartilage; unpaired, hyaline. Its two laminae FUSE anteriorly in the midline to form the LARYNGEAL PROMINENCE (Adam's apple), sharper in males.",
+      "It is POSTERIORLY DEFICIENT / incomplete (Maini: 'like a necklace with no posterior limb'). The posterior border runs up as the SUPERIOR HORN and down as the INFERIOR HORN.",
+      "The INFERIOR HORN meets the cricoid at the CRICOTHYROID JOINT. The oblique line gives attachment to sternothyroid and thyrohyoid.",
+      "Connected above to the hyoid by the THYROHYOID MEMBRANE, to the epiglottis by the THYROEPIGLOTTIC ligament, and to the arytenoid's vocal process by the VOCAL ligament.",
+    ],
+    flag: "Largest, hyaline, posteriorly deficient. Laryngeal prominence = fused laminae. Inferior horn + cricoid = cricothyroid joint. Thyrohyoid membrane to hyoid; thyroepiglottic lig to epiglottis.",
+    say: [
+      "Next, the thyroid cartilage, the largest of them all.",
+      "Its two plates fuse in front to make the laryngeal prominence, the Adam's apple, which is sharper in males.",
+      "It is deficient behind, incomplete, like a necklace with no back limb.",
+      "Its posterior border runs up as the superior horn and down as the inferior horn, and that inferior horn meets the cricoid at the cricothyroid joint.",
+      "Maini flag. The thyroid links to the hyoid by the thyrohyoid membrane, to the epiglottis by the thyroepiglottic ligament, and to the arytenoid's vocal process by the vocal ligament.",
+    ],
+  },
+  {
+    n: 3, title: "Cricoid cartilage — the only complete ring", src: "Maini · Larynx L25",
+    facts: [
+      "The ONLY laryngeal cartilage that forms a COMPLETE ring, encircling the airway. Maini explicitly flags this as 'a good exam question.'",
+      "Shaped like a SIGNET RING: a narrow anterior ARCH and a broad posterior LAMINA. It is hyaline.",
+      "Articulates with the thyroid (CRICOTHYROID joint) and the arytenoid (CRICOARYTENOID joint). Joined below to the trachea by the CRICOTRACHEAL ligament.",
+      "Its INFERIOR BORDER is the lowermost limit of the larynx; the trachea lies immediately below it.",
+    ],
+    flag: "Cricoid = the ONLY complete ring (Maini: 'makes a good question'). Signet ring: narrow arch front, broad lamina back. Cricotracheal ligament to trachea. Inferior border = end of the larynx.",
+    say: [
+      "Now the cricoid, and Maini says this one makes a good exam question.",
+      "It is the only laryngeal cartilage that forms a complete ring around the airway.",
+      "It is shaped like a signet ring, with a narrow arch in front and a broad lamina behind.",
+      "It joins the trachea below by the cricotracheal ligament, and its lower border is the very bottom of the larynx.",
+      "Maini flag. Only the cricoid is a complete ring. Signet ring shape: narrow arch in front, broad lamina at the back.",
+    ],
+  },
+  {
+    n: 4, title: "Arytenoid + the small cartilages", src: "Maini · Larynx L25",
+    facts: [
+      "ARYTENOID = paired, a THREE-SIDED PYRAMID sitting on the superior border of the cricoid lamina. It has a base, an apex, a VOCAL PROCESS, and a MUSCULAR PROCESS.",
+      "The VOCAL PROCESS (anterior) gives attachment to the vocal ligament; the MUSCULAR PROCESS (lateral) gives attachment to the intrinsic laryngeal muscles.",
+      "CORNICULATE = tiny cones sitting ON the APEX of each arytenoid, prolonging it backward and medially; enclosed in the aryepiglottic fold.",
+      "CUNEIFORM = rod-like cartilages lying WITHIN the aryepiglottic fold (the quadrangular membrane).",
+    ],
+    flag: "Arytenoid = 3-sided pyramid on the cricoid lamina. VOCAL process holds the cord; MUSCULAR process holds the muscles. Corniculate = on the apex; cuneiform = in the aryepiglottic fold.",
+    say: [
+      "The arytenoid and the small cartilages.",
+      "Each arytenoid is a three sided pyramid sitting on the cricoid lamina.",
+      "It has a vocal process in front for the vocal ligament, and a muscular process to the side for the intrinsic muscles.",
+      "The corniculate cartilages sit right on the apex of each arytenoid, and the cuneiform cartilages sit inside the aryepiglottic fold.",
+      "Maini flag. Remember the two processes: the vocal process holds the cord, and the muscular process holds the muscles.",
+    ],
+  },
+  {
+    n: 5, title: "Epiglottis", src: "Maini · Larynx L25-26",
+    facts: [
+      "A LEAF-shaped (spoon-shaped) ELASTIC cartilage. During swallowing it bends BACK over the laryngeal inlet to help keep food out of the airway.",
+      "In humans it is somewhat DEGENERATE (not essential to swallowing), so the vestibular folds provide the back-up closure.",
+      "'Epiglottis' means the LID to the GLOTTIS. It attaches to the hyoid by the HYOEPIGLOTTIC ligament (extrinsic) and to the tongue by the GLOSSOEPIGLOTTIC folds (one median + two lateral).",
+      "The hollows between those folds are the VALLECULAE, where food can lodge.",
+    ],
+    flag: "Epiglottis = elastic, leaf-shaped, 'the lid to the glottis.' Degenerate in humans (vestibular folds back it up). Hyoepiglottic lig = extrinsic. Valleculae = between the glossoepiglottic folds.",
+    say: [
+      "The epiglottis.",
+      "It is a leaf shaped elastic cartilage that bends back over the laryngeal inlet during swallowing, to keep food out of the airway.",
+      "In humans it is a bit degenerate, so the vestibular folds back it up.",
+      "Its name means the lid to the glottis. It links to the hyoid by the hyoepiglottic ligament, and to the tongue by the glossoepiglottic folds.",
+      "Maini flag. Between those folds are the valleculae, small hollows where food can get stuck.",
+    ],
+  },
+  {
+    n: 6, title: "Membranes & ligaments — extrinsic, quadrangular, conus elasticus", src: "Maini · Larynx L25-26",
+    facts: [
+      "Maini's rule: EXTRINSIC connectors join the larynx to a NON-laryngeal structure; INTRINSIC connectors link laryngeal parts to each other. The THREE extrinsic = THYROHYOID membrane, CRICOTRACHEAL ligament, HYOEPIGLOTTIC ligament.",
+      "The QUADRANGULAR MEMBRANE spans the epiglottis to the arytenoid. Its SUPERIOR border thickens into the ARYEPIGLOTTIC ligament (fold); its INFERIOR border into the VESTIBULAR ligament (the false cord).",
+      "The VOCAL ligament is the THYROARYTENOID ligament (thyroid to the arytenoid's vocal process).",
+      "The CONUS ELASTICUS = the MEDIAN cricothyroid ligament + the VOCAL ligaments + the LATERAL cricothyroid ligaments. Trap: the 'lateral cricothyroid ligament' attaches below to the cricoid but ABOVE to the vocal cords, NOT to the thyroid.",
+    ],
+    flag: "Extrinsic (3): thyrohyoid membrane, cricotracheal, hyoepiglottic. Quadrangular membrane: superior border = aryepiglottic, inferior = vestibular ligament. Vocal ligament = thyroarytenoid ligament. Conus elasticus = median CT + vocal ligs + lateral CT.",
+    say: [
+      "Membranes and ligaments. First, extrinsic versus intrinsic.",
+      "Extrinsic ligaments connect the larynx to something outside it. There are three: the thyrohyoid membrane, the cricotracheal ligament, and the hyoepiglottic ligament.",
+      "The quadrangular membrane runs from the epiglottis to the arytenoid. Its top edge is the aryepiglottic ligament, and its bottom edge is the vestibular ligament, the false cord.",
+      "The vocal ligament is the thyroarytenoid ligament. And the conus elasticus is the median cricothyroid ligament, plus the vocal ligaments, plus the lateral cricothyroid ligaments.",
+      "Maini flag. Watch the lateral cricothyroid ligament. Despite its name, it attaches below to the cricoid but above to the vocal cords, not to the thyroid.",
+    ],
+  },
+  {
+    n: 7, title: "Vocal vs vestibular folds", src: "Maini · Larynx L25-26",
+    facts: [
+      "VESTIBULAR folds = the FALSE vocal cords (inferior border of the quadrangular membrane). They have NO muscle and are NOT normally mobile.",
+      "Their job: they clamp shut by strong spasmodic muscle contraction to stop a foreign body from entering the airway (the anti-choke back-up for the degenerate epiglottis).",
+      "VOCAL folds = the TRUE cords (vocal ligament + mucosa). They are MOBILE: muscles abduct and adduct them. The vestibular folds lie SUPERIOR; the vocal folds lie DEEP (inferior) to them.",
+      "Maini's guitar-string analogy: the vocal cord is a string, and the ARYTENOID moves to change its tension, and that is how we change the voice. Inside each vocal fold: THYROARYTENOID laterally, VOCALIS medially.",
+    ],
+    flag: "Vestibular = FALSE cords (superior, immobile, protective). Vocal = TRUE cords (deep, mobile). Vocal cord = a guitar string; the arytenoid changes its tension. Thyroarytenoid lateral, vocalis medial inside the fold.",
+    say: [
+      "Vocal versus vestibular folds.",
+      "The vestibular folds are the false vocal cords. They have no muscle and do not normally move, but they clamp shut hard to block a foreign body from entering the airway.",
+      "The vocal folds are the true cords. Muscles move them, opening and closing them, and they sit deep, below the vestibular folds.",
+      "Maini compares the vocal cord to a guitar string. The arytenoid slides to change the tension in the string, and that is how we change the voice.",
+      "Maini flag. Inside each vocal fold, the thyroarytenoid lies to the side and the vocalis lies more medially.",
+    ],
+  },
+  {
+    n: 8, title: "Cavity parts + rima", src: "Maini · Larynx L26",
+    facts: [
+      "Three parts, top to bottom: VESTIBULE (inlet to the vestibular folds); VENTRICLE (narrow space between the vestibular and vocal folds); INFRAGLOTTIC cavity (vocal folds to the inferior border of the cricoid).",
+      "The ventricle has an anterior pocket, the SACCULE, whose mucous glands secrete mucus to LUBRICATE the vocal cords.",
+      "RIMA VESTIBULI = the gap between the two VESTIBULAR folds. RIMA GLOTTIDIS = the gap between the two VOCAL folds ('your actual glottis').",
+      "Laryngeal INLET boundaries: ANTERIOR = epiglottis; POSTERIOR = arytenoid cartilages (+ mucosa); LATERAL = aryepiglottic fold. Positions: quiet breathing = rima partly open; forced = wide open; phonation = cords approximated to a thin slit that vibrates.",
+    ],
+    flag: "Vestibule / ventricle (+ saccule) / infraglottic. Rima VESTIBULI (false cords) vs rima GLOTTIDIS (true cords = actual glottis). Inlet: anterior epiglottis, posterior arytenoids, lateral aryepiglottic fold.",
+    say: [
+      "The parts of the laryngeal cavity, top to bottom.",
+      "The vestibule runs from the inlet down to the vestibular folds.",
+      "The ventricle is the narrow space between the vestibular and vocal folds, and its front pocket, the saccule, has mucous glands that lubricate the cords.",
+      "The infraglottic cavity runs from the vocal folds down to the lower border of the cricoid.",
+      "Maini flag. The gap between the false cords is the rima vestibuli, and the gap between the true cords is the rima glottidis, which Maini calls your actual glottis.",
+    ],
+  },
+  {
+    n: 9, title: "Intrinsic muscles & actions", src: "Maini · Larynx L26",
+    facts: [
+      "CRICOTHYROID = the chief (or only) TENSOR: it pulls the thyroid down and forward, lengthening and STRETCHING the cords to change pitch. Origin: cricoid arch, to the inferior horn and lower border of the thyroid.",
+      "POSTERIOR CRICOARYTENOID = the SOLE ABDUCTOR, the only muscle that OPENS the rima glottidis. Origin: posterior cricoid lamina, to the muscular process.",
+      "ADDUCTORS (close the rima): the LATERAL CRICOARYTENOID plus the TRANSVERSE and OBLIQUE ARYTENOIDS.",
+      "SLACKENERS: the THYROARYTENOID and VOCALIS relax (shorten) the vocal folds; they lie within the fold itself.",
+    ],
+    flag: "Cricothyroid = chief TENSOR (stretches cords, pitch). Posterior cricoarytenoid = SOLE ABDUCTOR (only opener). Lateral cricoarytenoid + transverse/oblique arytenoid = ADDUCTORS. Thyroarytenoid + vocalis = slacken/relax.",
+    say: [
+      "The intrinsic muscles and their actions. This is high yield.",
+      "The cricothyroid is the chief tensor. It pulls the thyroid forward to lengthen and stretch the cords, which changes your pitch.",
+      "The posterior cricoarytenoid is the only abductor, the one muscle that opens the rima glottidis.",
+      "The adductors that close the cords are the lateral cricoarytenoid, and the transverse and oblique arytenoids.",
+      "Maini flag. The thyroarytenoid and vocalis slacken, or relax, the vocal folds.",
+    ],
+  },
+  {
+    n: 10, title: "Innervation — the vagus and its branches", src: "Maini · Larynx L26",
+    facts: [
+      "All intrinsic muscles develop from the 4th and 6th pharyngeal arches, so ALL are motor from the VAGUS (CN X), carrying SVE fibers.",
+      "The SUPERIOR laryngeal nerve splits into INTERNAL (purely sensory, GSA; pierces the thyrohyoid membrane; supplies mucosa DOWN TO the vocal folds) and EXTERNAL (motor SVE to just the CRICOTHYROID).",
+      "The RECURRENT laryngeal nerve is motor to ALL other intrinsic muscles and sensory BELOW the cords; its terminal part = the INFERIOR laryngeal nerve, running in the tracheoesophageal groove.",
+      "Maini's exam tip: for head/neck muscles do NOT default to GSE. A pharyngeal-arch muscle is SVE.",
+    ],
+    flag: "All intrinsics = vagus (CN X), SVE, arches 4 & 6. Cricothyroid = EXTERNAL laryngeal (the exception); all others = RECURRENT laryngeal. Sensory: internal laryngeal ABOVE the cords (GSA), recurrent laryngeal BELOW.",
+    say: [
+      "Innervation, another heavy topic.",
+      "Every intrinsic muscle comes from the fourth and sixth pharyngeal arches, so all of them are motor from the vagus, cranial nerve ten, carrying S V E fibers.",
+      "The superior laryngeal nerve splits in two. The internal branch is purely sensory. It pierces the thyrohyoid membrane and supplies the mucosa down to the vocal folds. The external branch is motor to just the cricothyroid.",
+      "The recurrent laryngeal nerve is motor to every other intrinsic muscle, and sensory below the cords. Its end part is the inferior laryngeal nerve, running in the tracheo esophageal groove.",
+      "Maini flag. Her exam tip: for head and neck muscles, do not default to G S E. A pharyngeal arch muscle is S V E.",
+    ],
+  },
+  {
+    n: 11, title: "Blood supply of the larynx", src: "Maini · Larynx L26",
+    facts: [
+      "SUPERIOR laryngeal artery = a branch of the SUPERIOR THYROID artery (from the EXTERNAL CAROTID); it pierces the thyrohyoid membrane with the internal laryngeal nerve and supplies the UPPER half.",
+      "INFERIOR laryngeal artery = a branch of the INFERIOR THYROID artery (from the THYROCERVICAL TRUNK of the subclavian); it supplies the LOWER half.",
+      "Veins: the superior laryngeal vein drains via the superior thyroid vein to the internal jugular; the inferior laryngeal vein drains to the inferior thyroid / brachiocephalic vein.",
+    ],
+    flag: "Superior laryngeal a. = superior thyroid a. = external carotid (upper half). Inferior laryngeal a. = inferior thyroid a. = thyrocervical trunk / subclavian (lower half).",
+    say: [
+      "Blood supply.",
+      "The superior laryngeal artery comes from the superior thyroid artery, which comes from the external carotid. It supplies the upper half.",
+      "The inferior laryngeal artery comes from the inferior thyroid artery, which comes from the thyrocervical trunk of the subclavian. It supplies the lower half.",
+      "Maini flag. The superior pair traces back to the external carotid, and the inferior pair traces back to the subclavian.",
+    ],
+  },
+  {
+    n: 12, title: "Clinical — the voice and airway", src: "Maini · Larynx L26",
+    facts: [
+      "MONOTONOUS voice (can speak, cannot change pitch) = CRICOTHYROID / EXTERNAL laryngeal nerve palsy (the pitch/tensor muscle is out).",
+      "INTERNAL laryngeal nerve damage = loss of the gag/cough reflex above the cords, so ASPIRATION risk rises.",
+      "BILATERAL posterior cricoarytenoid paralysis = cords stuck ADDUCTED, the rima cannot open, and the patient ASPHYXIATES (can be fatal) — the 'muscle important for your patient to live.'",
+      "THYROIDECTOMY: the EXTERNAL laryngeal nerve runs with the SUPERIOR thyroid artery (ligate close to origin); the RECURRENT laryngeal nerve runs with the INFERIOR thyroid artery. Any laryngeal pathology changing the voice = DYSPHONIA.",
+    ],
+    flag: "Monotone = cricothyroid / external laryngeal. Internal laryngeal damage = lost gag, aspiration. Bilateral posterior cricoarytenoid palsy = airway shut = asphyxia. Thyroidectomy: external laryngeal near superior thyroid a.; recurrent laryngeal near inferior thyroid a. Voice change = dysphonia.",
+    say: [
+      "Finally, the clinical picture.",
+      "A monotonous voice, where the patient can speak but cannot change pitch, means the cricothyroid, from the external laryngeal nerve, is out.",
+      "Damage to the internal laryngeal nerve removes the gag reflex above the cords, so the patient is prone to aspiration.",
+      "If both posterior cricoarytenoids are paralyzed, the cords stay shut, the airway cannot open, and the patient can suffocate. That is why Maini calls it the muscle important for your patient to live.",
+      "Maini flag. In thyroid surgery, the external laryngeal nerve runs with the superior thyroid artery, and the recurrent laryngeal nerve runs with the inferior thyroid artery. Any voice change from laryngeal disease is called dysphonia.",
+    ],
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "The cartilage roster: 9 total = 3 UNPAIRED (thyroid, cricoid, epiglottis) + 3 PAIRED (arytenoid, corniculate, cuneiform); and the types (thyroid + cricoid = hyaline, epiglottis + corniculate + cuneiform = elastic). The TRITICEAL cartilage is a trap — NOT laryngeal.", why: "Maini opens the lecture drilling the count and later warns the class that the triticeal cartilage (in the thyrohyoid membrane) is not part of the larynx.", src: "Maini · Larynx L25-26" },
+  { tag: "★★ Heavy", text: "Intrinsic muscle actions: CRICOTHYROID = chief TENSOR; POSTERIOR CRICOARYTENOID = the SOLE ABDUCTOR (the only opener of the rima glottidis); lateral cricoarytenoid + transverse/oblique arytenoids = ADDUCTORS; thyroarytenoid + vocalis = slacken.", why: "She calls the posterior cricoarytenoid the muscle 'very important for your patient to live' and the cricothyroid the pitch muscle — the classic action cluster.", src: "Maini · Larynx L26" },
+  { tag: "★★ Heavy", text: "Innervation split: CRICOTHYROID is the exception (EXTERNAL laryngeal nerve); ALL other intrinsics = RECURRENT laryngeal. Sensory: INTERNAL laryngeal ABOVE the cords (GSA), RECURRENT laryngeal BELOW. Everything is vagus (CN X), SVE, from arches 4 & 6.", why: "Her favorite exam cluster, tied to the SVE-not-GSE tip and the tracheoesophageal-groove course of the recurrent nerve.", src: "Maini · Larynx L26" },
+  { tag: "Cricoid", text: "The CRICOID is the ONLY laryngeal cartilage that forms a complete ring — signet-ring shape, narrow arch in front, broad lamina behind. Its inferior border is the bottom of the larynx.", why: "Maini literally says this 'makes a good question' — the single most-flagged cartilage fact.", src: "Maini · Larynx L25" },
+  { tag: "Membranes", text: "Quadrangular membrane: SUPERIOR border = ARYEPIGLOTTIC ligament/fold, INFERIOR border = VESTIBULAR ligament (false cord). CONUS ELASTICUS = median cricothyroid + vocal ligaments + lateral cricothyroid ligaments.", why: "She walks both borders slowly and names the conus elasticus components one by one — high-yield membrane anatomy.", src: "Maini · Larynx L26" },
+  { tag: "Cavity", text: "Three parts: VESTIBULE (inlet to vestibular folds), VENTRICLE (between the folds; anterior SACCULE lubricates the cords), INFRAGLOTTIC (vocal folds to cricoid). RIMA VESTIBULI (false cords) vs RIMA GLOTTIDIS (true cords = actual glottis).", why: "She repeats the three-part summary several times and stresses which rima is the 'actual glottis.'", src: "Maini · Larynx L26" },
+  { tag: "Folds", text: "VESTIBULAR folds = FALSE cords: no muscle, not mobile, but clamp shut to block a foreign body (back-up for the degenerate epiglottis). VOCAL folds = TRUE cords: mobile, moved by muscles, lie DEEP to the vestibular folds.", why: "The functional contrast (protective vs phonating; immobile vs mobile) is exactly how she frames a likely question.", src: "Maini · Larynx L26" },
+  { tag: "Clinical", text: "Monotonous voice = cricothyroid / EXTERNAL laryngeal palsy. INTERNAL laryngeal damage = lost gag reflex + aspiration. BILATERAL posterior cricoarytenoid palsy = airway can't open = asphyxia. Voice change from laryngeal disease = DYSPHONIA.", why: "Each of these was worked out loud as a cause-and-effect — the way she likes to test the nerves.", src: "Maini · Larynx L26" },
+  { tag: "Blood", text: "SUPERIOR laryngeal artery = superior thyroid a. = EXTERNAL CAROTID (upper half). INFERIOR laryngeal artery = inferior thyroid a. = THYROCERVICAL TRUNK / subclavian (lower half).", why: "She quizzes the parent-artery chain back to the external carotid and the subclavian.", src: "Maini · Larynx L26" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+/* Only analogies / rules / flags Dr. Maini actually states in the transcript. */
+const tips = [
+  { kind: "Analogy", title: "Cricoid = a signet ring", text: "Maini describes the cricoid as shaped like a signet ring: a narrow band (the arch) in front and a broad flat plate (the lamina) behind. Picture the ring and you have the shape, the orientation, and the fact that it's the ONE complete ring.", helps: "Locks in the narrow-arch-front / broad-lamina-back layout and that the cricoid fully encircles the airway.", src: "Maini · Larynx L25" },
+  { kind: "Analogy", title: "Thyroid cartilage = a necklace with no back / an armor", text: "She says the thyroid is 'posteriorly deficient... like a necklace which doesn't have a posterior limb,' and that it sits 'at the back of everything, like an armor.' Both images say the same thing: it's a broad front shield that's open behind.", helps: "Anchors that the thyroid is incomplete posteriorly — unlike the cricoid, which is the complete ring.", src: "Maini · Larynx L25" },
+  { kind: "Analogy", title: "Vocal cord = a guitar string", text: "Maini says the vocal cord is like a guitar string: 'to play it, you have to change tension in the strings,' and the arytenoid 'moves from here and there and changes the tension in the cord, and that is how we speak.'", helps: "Explains phonation and why the arytenoid-moving muscles (and the cricothyroid tensor) control the voice.", src: "Maini · Larynx L26" },
+  { kind: "Mnemonic", title: "Epiglottis = the lid to the glottis", text: "She points out the name directly: 'your epiglottis was named after glottis — epiglottis is the lid to glottis.' The glottis is the true-cord opening (rima glottidis); the epiglottis is its lid.", helps: "Ties the epiglottis, the glottis, and the rima glottidis together in one word.", src: "Maini · Larynx L26" },
+  { kind: "Rule", title: "Extrinsic vs intrinsic = does it leave the larynx?", text: "Maini's definition: 'anything that connects the larynx with an outside, non-laryngeal structure is extrinsic; intrinsic connects the structures of the larynx.' So the cricotracheal ligament is extrinsic (the trachea isn't laryngeal); the vocal ligament and quadrangular membrane are intrinsic.", helps: "Lets you classify any laryngeal ligament without memorizing a list.", src: "Maini · Larynx L25" },
+  { kind: "Trick", title: "Head & neck muscle? Guess SVE before GSE", text: "Her test-taking tip: 'when it comes to head and neck, do not always first guess GSE.' If the muscle is a pharyngeal-arch muscle (like all the laryngeal muscles, arches 4 & 6), the motor answer is SVE; only myotomal muscles (tongue, extraocular) are GSE.", helps: "Solves the fiber-type items for the external laryngeal and recurrent laryngeal nerves.", src: "Maini · Larynx L26" },
+  { kind: "Trap", title: "'Lateral cricothyroid ligament' is a misleading name", text: "She warns it 'is not the right name.' It does NOT connect the thyroid and cricoid laterally — it's attached to the cricoid below but to the VOCAL CORDS above (with only an indirect link to the thyroid through the cords). It's the side sheet of the conus elasticus.", helps: "Stops the obvious-but-wrong 'connects thyroid to cricoid' answer.", src: "Maini · Larynx L26" },
+  { kind: "Flag", title: "The cricoid 'makes a good question'", text: "Maini flags it herself: the cricoid is 'the only cartilage which completely encircles the larynx... which makes a good question.' When a professor tells you a fact is a good question, believe her.", helps: "Points you straight at the single highest-probability cartilage item.", src: "Maini · Larynx L25" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Original-phrasing items grounded in the audited Everything-MC bank (L25-26).
+   Answer positions balanced: 12 each A/B/C/D across 48 items. */
+const questions = [
+  { id: 1, topic: "Cartilages", src: "Maini · Larynx", q: "How many cartilages does the larynx contain in total?", opts: ["Nine (three unpaired + three paired)", "Six", "Twelve", "Three"], a: 0, h1: "Three big singles plus three little pairs.", h2: "An odd number.", exp: "Nine total: three large unpaired (thyroid, cricoid, epiglottis) and three smaller paired (arytenoid, corniculate, cuneiform)." },
+  { id: 2, topic: "Cartilages", src: "Maini · Larynx", q: "Which set lists the three LARGE, UNPAIRED cartilages?", opts: ["Arytenoid, corniculate, cuneiform", "Thyroid, cricoid, epiglottis", "Thyroid, arytenoid, cricoid", "Cricoid, cuneiform, epiglottis"], a: 1, h1: "The three you can nearly feel in the neck.", h2: "The big ones.", exp: "The large unpaired cartilages are the thyroid, cricoid, and epiglottis." },
+  { id: 3, topic: "Cartilages", src: "Maini · Larynx", q: "Which laryngeal cartilage is ELASTIC (not hyaline)?", opts: ["Thyroid", "Cricoid", "Epiglottis", "The cricoid lamina"], a: 2, h1: "The one that flops over the airway.", h2: "Same tissue as the ear.", exp: "The epiglottis is elastic cartilage; the thyroid and cricoid are hyaline." },
+  { id: 4, topic: "Cartilages", src: "Maini · Larynx", q: "The triticeal cartilage is a classic distractor because it is:", opts: ["The largest laryngeal cartilage", "A paired vocal-cord cartilage", "Another name for the corniculate", "NOT part of the larynx (it lies in the thyrohyoid membrane's border)"], a: 3, h1: "Location: in a membrane's free edge.", h2: "Maini: it is not laryngeal.", exp: "The triticeal cartilage sits in the free posterior border of the thyrohyoid membrane and is NOT a laryngeal cartilage." },
+  { id: 5, topic: "Thyroid", src: "Maini · Larynx", q: "The largest laryngeal cartilage is the:", opts: ["Thyroid cartilage", "Cricoid cartilage", "Epiglottis", "Arytenoid"], a: 0, h1: "Its laminae form the Adam's apple.", h2: "Unpaired and hyaline.", exp: "The thyroid is the largest laryngeal cartilage (unpaired, hyaline)." },
+  { id: 6, topic: "Thyroid", src: "Maini · Larynx", q: "The laryngeal prominence (Adam's apple) is formed by:", opts: ["The cricoid arch", "Midline fusion of the two thyroid laminae", "The hyoid body", "The superior horn"], a: 1, h1: "Two plates meeting in front.", h2: "Sharper in males.", exp: "The two thyroid laminae fuse anteriorly in the midline to form the laryngeal prominence." },
+  { id: 7, topic: "Thyroid", src: "Maini · Larynx", q: "Maini describes the thyroid cartilage posteriorly as:", opts: ["A complete ring", "Fused with the cricoid", "Deficient / incomplete (open behind)", "Continuous with the epiglottis"], a: 2, h1: "Like a necklace with no back.", h2: "The cricoid is the complete one, not this.", exp: "The thyroid cartilage is posteriorly deficient; only the cricoid forms a complete ring." },
+  { id: 8, topic: "Thyroid", src: "Maini · Larynx", q: "The inferior horn of the thyroid cartilage articulates with the cricoid at the:", opts: ["Cricoarytenoid joint", "Cricotracheal junction", "Thyrohyoid joint", "Cricothyroid joint"], a: 3, h1: "Thyroid plus cricoid.", h2: "Not the arytenoid.", exp: "The inferior horn meets the cricoid at the cricothyroid joint." },
+  { id: 9, topic: "Cricoid", src: "Maini · Larynx", q: "Which laryngeal cartilage is the ONLY one that forms a complete ring?", opts: ["Cricoid cartilage", "Thyroid cartilage", "Epiglottis", "Arytenoid"], a: 0, h1: "Maini calls it a good exam question.", h2: "It fully encircles the airway.", exp: "The cricoid is the only laryngeal cartilage that completely encircles the airway." },
+  { id: 10, topic: "Cricoid", src: "Maini · Larynx", q: "Maini compares the cricoid's shape to a:", opts: ["Leaf", "Signet ring (narrow front, broad back)", "Pyramid", "Shield"], a: 1, h1: "A ring with a wide plate on one side.", h2: "Broad posterior lamina.", exp: "The cricoid is shaped like a signet ring: a narrow anterior arch and a broad posterior lamina." },
+  { id: 11, topic: "Cricoid", src: "Maini · Larynx", q: "The cricoid is joined to the trachea below by the:", opts: ["Cricothyroid ligament", "Thyrohyoid membrane", "Cricotracheal ligament", "Conus elasticus"], a: 2, h1: "Its name states both structures it links.", h2: "It is an extrinsic ligament.", exp: "The cricotracheal ligament joins the cricoid to the trachea (an extrinsic ligament)." },
+  { id: 12, topic: "Cricoid", src: "Maini · Larynx", q: "The inferior border of the cricoid marks:", opts: ["The laryngeal inlet", "The vocal folds", "The top of the vestibule", "The lowermost limit of the larynx (trachea begins below)"], a: 3, h1: "Where does the larynx end?", h2: "The trachea is next.", exp: "The inferior border of the cricoid is the lowest limit of the larynx; the trachea lies below it." },
+  { id: 13, topic: "Arytenoid", src: "Maini · Larynx", q: "The arytenoid cartilage is shaped like a:", opts: ["Three-sided pyramid", "Signet ring", "Leaf", "Horseshoe"], a: 0, h1: "It has an apex, a base, and processes.", h2: "Three sides.", exp: "The arytenoid is a three-sided pyramid sitting on the cricoid lamina." },
+  { id: 14, topic: "Arytenoid", src: "Maini · Larynx", q: "The vocal ligament attaches to which arytenoid feature?", opts: ["Muscular process", "Vocal process", "Apex", "Base"], a: 1, h1: "Named for what it holds.", h2: "Not where the muscles attach.", exp: "The vocal ligament attaches to the vocal process of the arytenoid." },
+  { id: 15, topic: "Arytenoid", src: "Maini · Larynx", q: "Intrinsic laryngeal muscles attach mainly to the arytenoid's:", opts: ["Vocal process", "Apex", "Muscular process", "Corniculate tip"], a: 2, h1: "Named for what it holds.", h2: "Not the cord process.", exp: "Intrinsic muscles attach to the muscular process of the arytenoid." },
+  { id: 16, topic: "Arytenoid", src: "Maini · Larynx", q: "The corniculate cartilages sit:", opts: ["Within the vocal fold", "In the median cricothyroid ligament", "On the cricoid arch", "On the apex of the arytenoids (in the aryepiglottic fold)"], a: 3, h1: "They prolong the arytenoid.", h2: "On top of the pyramid's tip.", exp: "The corniculate cartilages sit on the apices of the arytenoids, enclosed in the aryepiglottic fold." },
+  { id: 17, topic: "Epiglottis", src: "Maini · Larynx", q: "The epiglottis is composed of:", opts: ["Elastic cartilage", "Hyaline cartilage", "Fibrocartilage", "Bone"], a: 0, h1: "It must bend and spring back.", h2: "Same tissue as the ear.", exp: "The epiglottis is elastic cartilage." },
+  { id: 18, topic: "Epiglottis", src: "Maini · Larynx", q: "During swallowing the epiglottis:", opts: ["Elevates the whole larynx", "Bends back over the laryngeal inlet to help close it", "Opens the rima glottidis", "Tenses the vocal cords"], a: 1, h1: "It guards the airway.", h2: "It folds backward.", exp: "During deglutition the epiglottis bends back over the laryngeal inlet to help keep food out of the airway." },
+  { id: 19, topic: "Epiglottis", src: "Maini · Larynx", q: "The name 'epiglottis' reflects that it is:", opts: ["The largest cartilage", "A paired cartilage", "The lid to the glottis", "Part of the trachea"], a: 2, h1: "Glottis plus a lid.", h2: "Maini's naming hook.", exp: "The epiglottis is the lid over the glottis." },
+  { id: 20, topic: "Epiglottis", src: "Maini · Larynx", q: "The shallow depressions between the glossoepiglottic folds, where food can lodge, are the:", opts: ["Piriform recesses", "Ventricles", "Saccules", "Valleculae"], a: 3, h1: "Between the epiglottis-to-tongue folds.", h2: "The word starts with a V.", exp: "The valleculae lie between the median and lateral glossoepiglottic folds." },
+  { id: 21, topic: "Membranes", src: "Maini · Larynx", q: "Maini's rule: an EXTRINSIC laryngeal ligament connects the larynx to:", opts: ["A non-laryngeal structure", "Two laryngeal cartilages", "The vocal process", "The conus elasticus"], a: 0, h1: "Extrinsic reaches outside.", h2: "For example, to the trachea or hyoid.", exp: "Extrinsic ligaments connect the larynx to a NON-laryngeal structure; intrinsic ones link laryngeal parts." },
+  { id: 22, topic: "Membranes", src: "Maini · Larynx", q: "The SUPERIOR border of the quadrangular membrane forms the:", opts: ["Vestibular ligament", "Aryepiglottic ligament (fold)", "Vocal ligament", "Cricotracheal ligament"], a: 1, h1: "It runs arytenoid to epiglottis along the top.", h2: "Same name as the fold at the inlet's side.", exp: "The superior border of the quadrangular membrane is the aryepiglottic ligament / fold." },
+  { id: 23, topic: "Membranes", src: "Maini · Larynx", q: "The INFERIOR border of the quadrangular membrane forms the:", opts: ["Aryepiglottic ligament", "Vocal ligament", "Vestibular ligament (false cord)", "Median cricothyroid ligament"], a: 2, h1: "The false cord.", h2: "It lies above the true cord.", exp: "The inferior border of the quadrangular membrane is the vestibular ligament (the false vocal cord)." },
+  { id: 24, topic: "Membranes", src: "Maini · Larynx", q: "The conus elasticus is made of the vocal ligaments plus the:", opts: ["Thyrohyoid and hyoepiglottic ligaments", "Aryepiglottic and quadrangular membranes", "Cricotracheal and thyroepiglottic ligaments", "Median and lateral cricothyroid ligaments"], a: 3, h1: "Two cricothyroid ligaments.", h2: "A cone from the cricoid up to the cords.", exp: "The conus elasticus = the median cricothyroid ligament + the vocal ligaments + the lateral cricothyroid ligaments." },
+  { id: 25, topic: "Folds", src: "Maini · Larynx", q: "The vestibular folds are also called the:", opts: ["False vocal cords", "True vocal cords", "Aryepiglottic folds", "Glossoepiglottic folds"], a: 0, h1: "Not the ones that phonate.", h2: "They sit above the true cords.", exp: "The vestibular folds are the false vocal cords." },
+  { id: 26, topic: "Folds", src: "Maini · Larynx", q: "A key difference: the vocal folds are mobile, whereas the vestibular folds:", opts: ["Are lined by cartilage", "Have no muscle and are not normally mobile", "Produce the voice", "Open the airway"], a: 1, h1: "Muscles act on the true cords.", h2: "The false cords just sit there.", exp: "Vocal folds are moved by muscles (abduct/adduct); vestibular folds have no muscle and are not normally mobile." },
+  { id: 27, topic: "Folds", src: "Maini · Larynx", q: "In Maini's guitar-string analogy, what changes the tension in the vocal 'string'?", opts: ["The epiglottis tilting", "The hyoid rising", "Movement of the arytenoid cartilage", "The cricoid ring closing"], a: 2, h1: "The cord runs to this cartilage.", h2: "It slides to tune the string.", exp: "Movement of the arytenoid changes the tension in the vocal cord, altering the voice." },
+  { id: 28, topic: "Folds", src: "Maini · Larynx", q: "Within each vocal fold, the two muscles are arranged as:", opts: ["Vocalis lateral, thyroarytenoid medial", "Cricothyroid lateral, vocalis medial", "Posterior cricoarytenoid lateral, vocalis medial", "Thyroarytenoid lateral, vocalis medial"], a: 3, h1: "Vocalis is the innermost.", h2: "Thyroarytenoid is more lateral.", exp: "Thyroarytenoid lies laterally and vocalis medially within the vocal fold." },
+  { id: 29, topic: "Cavity", src: "Maini · Larynx", q: "The vestibule of the larynx lies between:", opts: ["The laryngeal inlet and the vestibular folds", "The vestibular and vocal folds", "The vocal folds and the cricoid", "The two arytenoids"], a: 0, h1: "The topmost part.", h2: "Down to the false cords.", exp: "The vestibule runs from the laryngeal inlet to the vestibular folds." },
+  { id: 30, topic: "Cavity", src: "Maini · Larynx", q: "The laryngeal ventricle is the space between:", opts: ["The inlet and the vestibular folds", "The vestibular folds and the vocal folds", "The vocal folds and the trachea", "The epiglottis and the tongue"], a: 1, h1: "The narrow middle recess.", h2: "Between the false and true cords.", exp: "The ventricle is the narrow space between the vestibular and vocal folds." },
+  { id: 31, topic: "Cavity", src: "Maini · Larynx", q: "The saccule (anterior extension of the ventricle) functions to:", opts: ["Open the airway", "Tense the vocal cords", "Secrete mucus that lubricates the vocal cords", "Sense pitch"], a: 2, h1: "It is full of glands.", h2: "It keeps the cords from drying.", exp: "The saccule's mucous glands secrete mucus that lubricates the vocal cords." },
+  { id: 32, topic: "Cavity", src: "Maini · Larynx", q: "The rima glottidis is the space between the:", opts: ["Two vestibular folds", "Epiglottis and arytenoids", "Aryepiglottic folds", "Two vocal folds (the actual glottis)"], a: 3, h1: "Between the true cords.", h2: "Maini's 'actual glottis.'", exp: "The rima glottidis is the gap between the two vocal folds, the actual glottis (the rima vestibuli is between the vestibular folds)." },
+  { id: 33, topic: "Muscles", src: "Maini · Larynx", q: "The chief (or only) TENSOR of the vocal cords is the:", opts: ["Cricothyroid", "Posterior cricoarytenoid", "Thyroarytenoid", "Vocalis"], a: 0, h1: "It pulls the thyroid down and forward.", h2: "External laryngeal nerve.", exp: "The cricothyroid is the chief tensor; it lengthens and stretches the cords to change pitch." },
+  { id: 34, topic: "Muscles", src: "Maini · Larynx", q: "The SOLE ABDUCTOR of the vocal cords (the only opener of the rima glottidis) is the:", opts: ["Lateral cricoarytenoid", "Posterior cricoarytenoid", "Transverse arytenoid", "Cricothyroid"], a: 1, h1: "If both are paralyzed the airway shuts.", h2: "The posterior one.", exp: "The posterior cricoarytenoid is the only abductor; it opens the rima glottidis." },
+  { id: 35, topic: "Muscles", src: "Maini · Larynx", q: "The transverse and oblique arytenoid muscles:", opts: ["Tense the cords", "Abduct the cords", "Adduct the cords (close the rima glottidis)", "Elevate the larynx"], a: 2, h1: "They run between the two arytenoids.", h2: "They close the gap.", exp: "The transverse and oblique arytenoids adduct the vocal cords, closing the rima glottidis." },
+  { id: 36, topic: "Muscles", src: "Maini · Larynx", q: "The thyroarytenoid and vocalis muscles act to:", opts: ["Abduct the cords", "Tense the cords", "Elevate the larynx", "Slacken / relax the vocal folds"], a: 3, h1: "Opposite of the cricothyroid.", h2: "They shorten the cords.", exp: "The thyroarytenoid and vocalis slacken (relax) the vocal folds." },
+  { id: 37, topic: "Innervation", src: "Maini · Larynx", q: "All intrinsic laryngeal muscles are ultimately innervated by the:", opts: ["Vagus nerve (CN X)", "Glossopharyngeal nerve", "Hypoglossal nerve", "Facial nerve"], a: 0, h1: "Arches 4 and 6.", h2: "The tenth cranial nerve.", exp: "All intrinsic laryngeal muscles are supplied by the vagus (CN X)." },
+  { id: 38, topic: "Innervation", src: "Maini · Larynx", q: "The one intrinsic muscle NOT supplied by the recurrent laryngeal nerve is the:", opts: ["Posterior cricoarytenoid", "Cricothyroid (external laryngeal nerve)", "Vocalis", "Lateral cricoarytenoid"], a: 1, h1: "The tensor is the exception.", h2: "External laryngeal nerve.", exp: "The cricothyroid is the exception, supplied by the external laryngeal nerve; all others are recurrent laryngeal." },
+  { id: 39, topic: "Innervation", src: "Maini · Larynx", q: "The internal laryngeal nerve is:", opts: ["Motor to all adductors", "Motor to the cricothyroid", "Purely sensory, supplying mucosa down to the vocal folds", "Sensory only below the cords"], a: 2, h1: "It pierces the thyrohyoid membrane.", h2: "Sensory, above the cords.", exp: "The internal laryngeal nerve is purely sensory (GSA), supplying mucosa down to the level of the vocal folds." },
+  { id: 40, topic: "Innervation", src: "Maini · Larynx", q: "Sensation BELOW the vocal folds is carried by the:", opts: ["Internal laryngeal nerve", "External laryngeal nerve", "Superior laryngeal nerve", "Recurrent laryngeal nerve"], a: 3, h1: "The same nerve that supplies most muscles.", h2: "Below the cords.", exp: "The recurrent laryngeal nerve supplies sensation below the vocal folds (internal laryngeal is above)." },
+  { id: 41, topic: "Blood", src: "Maini · Larynx", q: "The superior laryngeal artery is a branch of the:", opts: ["Superior thyroid artery", "Inferior thyroid artery", "Thyrocervical trunk", "Internal carotid artery"], a: 0, h1: "It follows the superior thyroid.", h2: "It supplies the upper half.", exp: "The superior laryngeal artery branches from the superior thyroid artery." },
+  { id: 42, topic: "Blood", src: "Maini · Larynx", q: "The superior thyroid artery itself arises from the:", opts: ["Subclavian artery", "External carotid artery", "Internal carotid artery", "Thyrocervical trunk"], a: 1, h1: "The internal carotid gives no neck branches.", h2: "The external one.", exp: "The superior thyroid artery is a branch of the external carotid artery." },
+  { id: 43, topic: "Blood", src: "Maini · Larynx", q: "The inferior laryngeal artery is a branch of the:", opts: ["Superior thyroid artery", "External carotid artery", "Inferior thyroid artery", "Superior laryngeal artery"], a: 2, h1: "It mirrors the superior pair.", h2: "It supplies the lower half.", exp: "The inferior laryngeal artery branches from the inferior thyroid artery." },
+  { id: 44, topic: "Blood", src: "Maini · Larynx", q: "The inferior thyroid artery arises from the:", opts: ["External carotid artery", "Aortic arch", "Superior thyroid artery", "Thyrocervical trunk (of the subclavian)"], a: 3, h1: "A trunk off the subclavian.", h2: "The thyrocervical trunk.", exp: "The inferior thyroid artery arises from the thyrocervical trunk of the subclavian artery." },
+  { id: 45, topic: "Clinical", src: "Maini · Larynx", q: "A patient can speak but cannot vary pitch (monotonous voice). The lesion is the:", opts: ["Cricothyroid / external laryngeal nerve", "Posterior cricoarytenoid", "Recurrent laryngeal nerve", "Internal laryngeal nerve"], a: 0, h1: "The pitch / tensor muscle.", h2: "External laryngeal nerve.", exp: "A monotonous voice follows cricothyroid (external laryngeal nerve) palsy, the pitch-changing tensor." },
+  { id: 46, topic: "Clinical", src: "Maini · Larynx", q: "Damage to the internal laryngeal nerve most directly causes:", opts: ["A monotonous voice", "Loss of the gag reflex above the cords, with aspiration risk", "Complete airway closure", "Inability to adduct the cords"], a: 1, h1: "It is sensory above the cords.", h2: "No sensation means no reflex.", exp: "Internal laryngeal nerve damage abolishes the gag / cough reflex above the cords, raising the risk of aspiration." },
+  { id: 47, topic: "Clinical", src: "Maini · Larynx", q: "Bilateral paralysis of the posterior cricoarytenoid muscles causes:", opts: ["A hoarse but safe voice", "Monotone speech only", "Cords stuck adducted, the airway cannot open (asphyxia)", "Loss of taste"], a: 2, h1: "The only abductor, times two.", h2: "The airway can't open.", exp: "With both abductors gone, the cords stay adducted, the rima cannot open, and the patient can asphyxiate." },
+  { id: 48, topic: "Clinical", src: "Maini · Larynx", q: "In thyroidectomy, the RECURRENT laryngeal nerve is most at risk near the:", opts: ["Superior thyroid artery", "External carotid artery", "Thyrohyoid membrane", "Inferior thyroid artery"], a: 3, h1: "It pairs with the inferior artery.", h2: "The external laryngeal pairs with the superior artery.", exp: "The recurrent laryngeal nerve runs close to the inferior thyroid artery (the external laryngeal nerve pairs with the superior thyroid artery)." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.voicenote{color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:9px 13px;margin:12px 0 0;font-size:13px;font-weight:500;max-width:720px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.coachbar{position:sticky;top:53px;z-index:15;background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:14px 16px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.cb-row{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.cb-btn{border:none;background:rgba(255,255,255,.18);color:#fff;font:inherit;font-weight:700;font-size:13.5px;padding:9px 13px;border-radius:10px;cursor:pointer;transition:.14s;display:inline-flex;align-items:center;gap:6px}
+.cb-btn:hover{background:rgba(255,255,255,.30)}
+.cb-btn:disabled{opacity:.45;cursor:default}
+.cb-btn.play{background:#fff;color:var(--accent-deep)}
+.cb-slider{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;background:rgba(255,255,255,.14);padding:6px 11px;border-radius:10px}
+.cb-slider input[type=range]{accent-color:#fff;width:104px}
+.cb-select{border:none;border-radius:9px;padding:7px 10px;font:inherit;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:#fff;max-width:172px}
+.cb-now{font-size:12.5px;opacity:.96;margin-top:9px}
+.cb-now b{font-weight:700}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);scroll-margin-top:120px;transition:box-shadow .2s,outline .2s}
+.obj.speaking{outline:2px solid var(--accent);outline-offset:2px;box-shadow:0 16px 34px -18px rgba(124,58,237,.5)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.spk-badge{font-size:10.5px;font-weight:700;color:#fff;background:var(--accent);border-radius:6px;padding:2px 8px;letter-spacing:.03em}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 11 · Head &amp; Neck · Dr. Maini</span>
+          <h1 className="title serif">GA 0202 · The <em>Larynx</em> — Cram Coach</h1>
+          <p className="subtitle">A voiced, hands-free walkthrough of Dr. Maini&apos;s larynx must-knows — the nine cartilages, the membranes &amp; conus elasticus, the folds &amp; cavity, the intrinsic muscles &amp; their actions, the nerve supply, blood supply, and clinical hits — in her order, weighted by what she stresses, with a drill in her style and her own analogies.</p>
+          <p className="voicenote">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+          <div className="pill-row">
+            <span className="pill-date">🗣️ The Larynx · Dr. Maini · lectures L25–L26 (lecture + lab)</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA 0202 lectures on the Larynx (L25–L26). Grounded in the audited Everything-MC bank; questions are original, in her style, source-tagged per item. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------- Cram (voiced coach) ---- */
+function Cram() {
+  const segments = useMemo(() => {
+    const segs = [];
+    cram.forEach((c, ti) => { c.say.forEach((line) => segs.push({ t: ti, text: line })); });
+    return segs;
+  }, []);
+
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+
+  const [voices, setVoices] = useState([]);
+  const [voiceURI, setVoiceURI] = useState("");
+  const [rate, setRate] = useState(1);
+  const [cur, setCur] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [paused, setPaused] = useState(false);
+
+  const rateRef = useRef(1);
+  const voiceRef = useRef("");
+  const playingRef = useRef(false);
+  const pausedRef = useRef(false);
+  const segRef = useRef(0);
+  const tokenRef = useRef(0);
+  const cardRefs = useRef([]);
+
+  useEffect(() => { rateRef.current = rate; }, [rate]);
+  useEffect(() => { voiceRef.current = voiceURI; }, [voiceURI]);
+
+  useEffect(() => {
+    if (!supported) return;
+    const load = () => {
+      const vs = window.speechSynthesis.getVoices();
+      if (vs && vs.length) {
+        setVoices(vs);
+        setVoiceURI((prev) => {
+          if (prev) return prev;
+          const pick = (n) => vs.find((v) => (v.name || "").toLowerCase().includes(n));
+          const v = pick("ava") || pick("emma") || pick("andrew") || pick("aria") || pick("natural") || pick("google us") || vs.find((x) => /^en/i.test(x.lang)) || vs[0];
+          return v ? v.voiceURI : "";
+        });
+      }
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => {
+      try { window.speechSynthesis.onvoiceschanged = null; } catch (e) {}
+      playingRef.current = false; pausedRef.current = false;
+      try { window.speechSynthesis.cancel(); } catch (e) {}
+    };
+  }, [supported]);
+
+  // keep-alive nudge (Chrome cuts long sessions)
+  useEffect(() => {
+    if (!supported) return;
+    const iv = setInterval(() => {
+      if (playingRef.current && !pausedRef.current) { try { window.speechSynthesis.resume(); } catch (e) {} }
+    }, 9000);
+    return () => clearInterval(iv);
+  }, [supported]);
+
+  // auto-scroll the active card into view while playing
+  useEffect(() => {
+    if (playingRef.current) {
+      const el = cardRefs.current[cur];
+      if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }, [cur]);
+
+  const firstSeg = (t) => { for (let i = 0; i < segments.length; i++) if (segments[i].t === t) return i; return 0; };
+
+  const speakFrom = (si) => {
+    if (!supported) return;
+    const myToken = ++tokenRef.current;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    if (si >= segments.length) {
+      playingRef.current = false; pausedRef.current = false;
+      setPlaying(false); setPaused(false);
+      return;
+    }
+    segRef.current = si;
+    const seg = segments[si];
+    setCur(seg.t);
+    const u = new SpeechSynthesisUtterance(seg.text);
+    u.rate = rateRef.current;
+    const v = voices.find((x) => x.voiceURI === voiceRef.current);
+    if (v) u.voice = v;
+    u.onend = () => {
+      if (myToken !== tokenRef.current) return;
+      if (playingRef.current && !pausedRef.current) speakFrom(segRef.current + 1);
+    };
+    try { window.speechSynthesis.speak(u); } catch (e) {}
+  };
+
+  const onPlay = () => {
+    if (!supported) return;
+    if (playingRef.current && !pausedRef.current) {
+      try { window.speechSynthesis.pause(); } catch (e) {}
+      pausedRef.current = true; setPaused(true); return;
+    }
+    if (playingRef.current && pausedRef.current) {
+      try { window.speechSynthesis.resume(); } catch (e) {}
+      pausedRef.current = false; setPaused(false); return;
+    }
+    playingRef.current = true; pausedRef.current = false;
+    setPlaying(true); setPaused(false);
+    speakFrom(firstSeg(cur));
+  };
+
+  const onStop = () => {
+    playingRef.current = false; pausedRef.current = false;
+    setPlaying(false); setPaused(false);
+    tokenRef.current++;
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+  };
+
+  const jump = (t) => {
+    const nt = Math.max(0, Math.min(cram.length - 1, t));
+    setCur(nt);
+    if (playingRef.current) { pausedRef.current = false; setPaused(false); speakFrom(firstSeg(nt)); }
+    const el = cardRefs.current[nt];
+    if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" });
+  };
+
+  const onRate = (r) => { setRate(r); rateRef.current = r; if (playingRef.current && !pausedRef.current) speakFrom(segRef.current); };
+  const onVoice = (uri) => { setVoiceURI(uri); voiceRef.current = uri; if (playingRef.current && !pausedRef.current) speakFrom(segRef.current); };
+
+  const playLabel = playing && !paused ? "⏸ Pause" : (playing && paused ? "▶ Resume" : "▶ Play walkthrough");
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s larynx must-knows, in her order</div>
+        <p>Cartilages · thyroid · cricoid · arytenoid &amp; small cartilages · epiglottis · membranes &amp; ligaments · folds · cavity &amp; rima · intrinsic muscles · innervation · blood supply · clinical. Hit ▶ Play walkthrough to have it read aloud, hands-free — it highlights and scrolls each topic as it goes. The ⚑ flags are the high-yield hooks.</p>
+      </div>
+
+      <div className="coachbar">
+        <div className="cb-row">
+          <button className="cb-btn play" onClick={onPlay} disabled={!supported}>{playLabel}</button>
+          <button className="cb-btn" onClick={() => jump(cur - 1)} disabled={cur === 0}>⏮ Prev</button>
+          <button className="cb-btn" onClick={() => jump(cur + 1)} disabled={cur >= cram.length - 1}>Next ⏭</button>
+          <button className="cb-btn" onClick={onStop} disabled={!playing}>■ Stop</button>
+          <div className="cb-slider">Speed
+            <input type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => onRate(parseFloat(e.target.value))} />
+            <span>{rate.toFixed(1)}x</span>
+          </div>
+          {supported && voices.length > 0 && (
+            <select className="cb-select" value={voiceURI} onChange={(e) => onVoice(e.target.value)}>
+              {voices.map((v) => <option key={v.voiceURI} value={v.voiceURI}>{v.name}</option>)}
+            </select>
+          )}
+        </div>
+        <div className="cb-now">
+          {supported
+            ? <>Now reading: <b>Topic {cur + 1} of {cram.length}</b> — {cram[cur].title}</>
+            : "Your browser does not support read-aloud, but every topic below still works as a written cram sheet."}
+        </div>
+      </div>
+
+      {cram.map((c, i) => (
+        <div className={`obj ${playing && cur === i ? "speaking" : ""}`} key={c.n} ref={(el) => { cardRefs.current[i] = el; }}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            {playing && cur === i && <span className="spk-badge">🔊 reading</span>}
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Dr. Maini&apos;s emphasis and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Dr. Maini&apos;s own mnemonics, analogies, and tricks pulled straight from the larynx lectures — only the ones she actually says out loud.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the larynx</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 (Gross Anatomy), running a review of THE LARYNX from your two lectures (The Oral Cavity contd./The Larynx, and The Larynx). Teach ONLY from this content; do not invent cartilages, ligaments, membranes, muscle actions, nerves, arteries, or attachments. Warm and direct; you address students as "guys," constantly check "right?", "does that make sense?", "are we clear?", and you like to ask the student a question back and have them reason it out. Keep answers tight (3-6 sentences) and quiz the student.
+
+CARTILAGES: 9 total = 3 large UNPAIRED (thyroid, cricoid, epiglottis) + 3 smaller PAIRED (arytenoid, corniculate, cuneiform). Hyaline: thyroid, cricoid. Elastic: epiglottis, corniculate, cuneiform. The TRITICEAL cartilage is a trap - it is NOT part of the larynx (it sits in the free border of the thyrohyoid membrane).
+
+THYROID: largest, unpaired, hyaline; two laminae fuse in front = laryngeal prominence (Adam's apple, sharper in males); posteriorly DEFICIENT/incomplete ("necklace with no back"); posterior border = superior horn (up) + inferior horn (down); inferior horn + cricoid = cricothyroid joint; oblique line = sternothyroid + thyrohyoid; linked to hyoid by thyrohyoid membrane, to epiglottis by thyroepiglottic ligament, to arytenoid's vocal process by the vocal ligament.
+
+CRICOID: the ONLY complete ring (you call this "a good exam question"); signet-ring shape - narrow anterior ARCH, broad posterior LAMINA; hyaline; articulates with thyroid (cricothyroid joint) and arytenoid (cricoarytenoid joint); joined to trachea by cricotracheal ligament; its inferior border = lowest limit of the larynx (trachea below).
+
+ARYTENOID: paired, three-sided PYRAMID on the cricoid lamina; base, apex, VOCAL process (holds the vocal ligament) and MUSCULAR process (holds the intrinsic muscles). CORNICULATE = on the APEX of each arytenoid, in the aryepiglottic fold. CUNEIFORM = rod-like, within the aryepiglottic fold/quadrangular membrane.
+
+EPIGLOTTIS: leaf/spoon-shaped ELASTIC cartilage; bends back over the inlet during swallowing; somewhat degenerate in humans (vestibular folds back it up); "the lid to the glottis"; hyoepiglottic ligament to hyoid (extrinsic); glossoepiglottic folds (median + 2 lateral) to tongue; valleculae between them (food lodges there).
+
+MEMBRANES/LIGAMENTS: EXTRINSIC connect larynx to a non-laryngeal structure (thyrohyoid membrane, cricotracheal ligament, hyoepiglottic ligament); INTRINSIC connect laryngeal parts (quadrangular membrane, vocal ligament, conus elasticus). QUADRANGULAR MEMBRANE: epiglottis to arytenoid; SUPERIOR border = aryepiglottic ligament/fold, INFERIOR border = vestibular ligament (false cord). VOCAL ligament = thyroarytenoid ligament. CONUS ELASTICUS = median cricothyroid ligament + vocal ligaments + lateral cricothyroid ligaments; the "lateral cricothyroid ligament" is a misleading name - it attaches to the cricoid below but to the vocal cords above, not to the thyroid.
+
+FOLDS: VESTIBULAR folds = FALSE cords (inferior border of quadrangular membrane) - no muscle, not mobile, but clamp shut by strong spasmodic contraction to block foreign bodies (back-up for the degenerate epiglottis). VOCAL folds = TRUE cords (vocal ligament + mucosa) - mobile, muscles abduct/adduct; lie DEEP to the vestibular folds. Guitar-string analogy: the arytenoid moves to change cord tension. Inside each vocal fold: thyroarytenoid laterally, vocalis medially.
+
+CAVITY: VESTIBULE (inlet to vestibular folds); VENTRICLE (between vestibular and vocal folds; anterior SACCULE has mucous glands that lubricate the cords); INFRAGLOTTIC (vocal folds to inferior border of cricoid). RIMA VESTIBULI (between vestibular folds) vs RIMA GLOTTIDIS (between vocal folds = "your actual glottis"). Inlet: anterior epiglottis, posterior arytenoids + mucosa, lateral aryepiglottic fold. Positions: quiet breathing = rima partly open; forced = wide; phonation = cords approximated to a thin slit that vibrates.
+
+MUSCLES: CRICOTHYROID = chief/only TENSOR (pulls thyroid down/forward, lengthens & stretches cords, changes pitch; origin cricoid arch to inferior horn + lower border of thyroid). POSTERIOR CRICOARYTENOID = SOLE ABDUCTOR (only opener of the rima glottidis; origin posterior cricoid lamina to muscular process). ADDUCTORS = lateral cricoarytenoid + transverse & oblique arytenoids. SLACKENERS = thyroarytenoid + vocalis (within the fold).
+
+INNERVATION: all intrinsic muscles from arches 4 & 6, all motor = VAGUS (CN X), SVE fibers. Superior laryngeal nerve splits: INTERNAL (purely sensory, GSA; pierces thyrohyoid membrane; mucosa DOWN TO the vocal folds) and EXTERNAL (motor SVE to CRICOTHYROID only). RECURRENT laryngeal = motor to ALL other intrinsics + sensory BELOW the cords; terminal part = inferior laryngeal nerve; runs in the tracheoesophageal groove. Exam tip you give: for head & neck muscles don't default to GSE - a pharyngeal-arch muscle is SVE.
+
+BLOOD: superior laryngeal artery = superior thyroid artery = external carotid (upper half); inferior laryngeal artery = inferior thyroid artery = thyrocervical trunk/subclavian (lower half).
+
+CLINICAL: monotonous voice = cricothyroid/external laryngeal palsy (can speak, can't change pitch). Internal laryngeal damage = lost gag reflex + aspiration. Bilateral posterior cricoarytenoid palsy = cords stay adducted, airway can't open, asphyxia ("the muscle important for your patient to live"). Thyroidectomy: external laryngeal nerve runs with the superior thyroid artery; recurrent laryngeal nerve runs with the inferior thyroid artery. Voice change from laryngeal disease = dysphonia.
+
+Open by offering to drill the cartilages (9 = 3+3, and the cricoid "good exam question"), the membranes and conus elasticus, the folds and cavity parts, the intrinsic muscles and their actions, or the nerve supply (external vs recurrent laryngeal). When the student is wrong, name the rule and have them reason it out step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys — the larynx. Two things I always test hard: the cartilage roster (nine total — three unpaired: thyroid, cricoid, epiglottis, and three paired: arytenoid, corniculate, cuneiform), and the intrinsic muscles, especially the posterior cricoarytenoid — the SOLE abductor, the one muscle keeping the airway open, right? Where do you want to start: the cartilages (and why the cricoid 'makes a good question'), the membranes and conus elasticus, the folds and cavity parts, the intrinsic muscle actions, or the nerve supply — external versus recurrent laryngeal?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the 9 cartilages — unpaired, paired, and types",
+    "Why does the cricoid 'make a good question'?",
+    "Membranes: quadrangular membrane borders and the conus elasticus",
+    "The intrinsic muscles — which abducts, which adduct, which tense?",
+    "Nerve supply: external vs recurrent laryngeal (and the SVE tip)",
+    "Cavity parts and rima vestibuli vs rima glottidis",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her larynx lectures. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

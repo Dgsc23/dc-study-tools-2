@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>&#127919; GA 0202 &middot; Cranial Meninges &middot; Learning Objectives (Master the 12)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .voices-note{color:#fde68a;font-size:12px;max-width:720px;margin:0 auto 8px;background:rgba(0,0,0,0.18);border:1px solid #b45309;border-radius:8px;padding:6px 12px}
+.header .voices-note b{color:#fcd34d}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 Cranial Meninges Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 12</h1>
+  <div class="voices-note">&#128266; <b>Best voices in Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+  <div class="sub">GA 0202 Module 6 &middot; <b>Cranial Meninges &amp; the Brain Coverings</b> &middot; the study spine that ties every drill back to what Dr. Maini actually emphasized in her cranial-meninges lecture &mdash; cement each one, check it off, move on.</div>
+  <div class="meta-line">Dr. Maini &middot; Cranial Meninges (Lecture 13) &middot; &#129504; SCUHS GA 0202</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for the cranial-meninges block. Each objective is distilled from <b>Dr. Maini&rsquo;s own lecture</b> and grounded in the module&rsquo;s <b>audited Everything-MC bank</b>; every &ldquo;prove it&rdquo; bullet is sourced from her transcript, cited as <b>[L13 &middot; HH:MM]</b>. Quotes are transcribed from her Zoom recording; <span class="fix">[bracketed]</span> words are de-garbled spellings of what she said. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>These twelve objectives are the things Dr. Maini actually <b>drilled and repeated</b> across the <b>Cranial Meninges</b> lecture &mdash; the layers and their name-meanings, the CSF loop (who <b>makes</b> it vs who <b>absorbs</b> it), the dural septa, the venous sinuses, the spaces, and the bleeds. Each objective spells out <b>exactly what &ldquo;done&rdquo; looks like</b>, hangs a <b>verbatim Maini quote</b> on it, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: Dr. Maini&rsquo;s <b>Cranial Meninges</b> lecture recording (SCUHS Canvas Zoom, Lecture 13) + this module&rsquo;s audited <b>Everything-MC bank</b>.</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 12 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Read the brain surface &mdash; distinguish gyri from sulci, say why the cortex is folded, and separate gray matter from white matter.</div>
+        <div class="obj-src">content: <b>L13 &middot; 04:14&ndash;08:31</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the surface features correctly: the <b>raised ridges are gyri</b>, the <b>grooves between them are sulci</b> (sulcus/sulci, gyrus/gyri; a deep groove is a <b>fissure</b>). <span class="cite">(L13 05:22&ndash;05:50)</span></li>
+        <li>Explain <b>why the cortex is convoluted</b>: the folding lets it hold roughly <b>10,000 times more neurons</b> than a smooth brain would. <span class="cite">(L13 08:06&ndash;08:23)</span></li>
+        <li>Link it clinically: <b>smoothing / loss of convolutions</b> means <b>fewer cortical neurons</b>, which Dr. Maini ties to <b>dementia</b>. <span class="cite">(L13 08:31&ndash;08:54)</span></li>
+        <li>Separate the tissues: <b>gray matter = the outer cortex</b>, holding the <b>neuronal cell bodies</b>; <b>white matter = mostly myelinated fibers</b> (anything that looks white in the nervous system has a <b>myelin sheath</b>). <span class="cite">(L13 06:43&ndash;08:06)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The ridges, they are called as gyri. And the dips, the [grooves], they are called as sulci &hellip; your brain accommodates almost 10,000 times more neurons than if the brain was smooth.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:05:37&ndash;00:08:23</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Are gyri the ridges or the grooves, and where are the neuronal cell bodies &mdash; gray matter or white matter?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Gyri = the raised ridges</b>; sulci = the grooves. The <b>cell bodies live in the gray matter</b> (the outer cortex); white matter is mostly <b>myelinated fibers</b>. The folding exists to pack in about <b>10,000&times; more neurons</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">List the three meningeal layers from the skull inward, translate each name, and say why we specify &ldquo;cranial&rdquo; meninges.</div>
+        <div class="obj-src">content: <b>L13 &middot; 00:50&ndash;12:07</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Order them outside &rarr; in: <b>dura mater &rarr; arachnoid mater &rarr; pia mater</b>. <span class="cite">(L13 08:56&ndash;11:55)</span></li>
+        <li>Translate the names: <b>dura</b> = tough / durable (&ldquo;tough mother&rdquo;); <b>arachnoid</b> = spider-web (it has thread-like extensions); <b>pia</b> = tender / soft (&ldquo;soft mother&rdquo;). <span class="cite">(L13 04:14&ndash;04:46)</span></li>
+        <li>Say why she calls them <b>cranial</b> meninges: the three layers are <b>continuous with the spinal meninges</b>, but the <b>spaces and arrangement differ</b> between the cranial and spinal regions. <span class="cite">(L13 00:50&ndash;01:33)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;What does the word dura mean? Tough, durable &hellip; tough mother &hellip; [arachnoid] it&rsquo;s like [a] spider web, so that is why it&rsquo;s given the name arach[noid] &hellip; and innermost is pia mater &hellip; pia means tender, soft, tender mother.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:04:14&ndash;00:04:46</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">From the skull inward, name the three layers and what each name means.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Dura</b> (tough / &ldquo;tough mother&rdquo;) &rarr; <b>arachnoid</b> (spider-web) &rarr; <b>pia</b> (tender / &ldquo;soft mother&rdquo;). She says &ldquo;cranial&rdquo; because the same three layers <b>continue into the spine</b>, but the <b>spaces are arranged differently</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the pia mater &mdash; its make-up, how it hugs the brain, the vessels it carries, and why that makes a subarachnoid bleed venous.</div>
+        <div class="obj-src">content: <b>L13 &middot; 04:46&ndash;20:11</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give its make-up: a <b>thin, highly vascularized membrane of loose connective tissue</b>. <span class="cite">(L13 14:19&ndash;14:31)</span></li>
+        <li>Describe how it sits: it <b>invests the brain so closely</b> it dips into every sulcus and gyrus, <b>like an onion peel</b> &mdash; in the cadaver you need sharp forceps to lift it. <span class="cite">(L13 04:49&ndash;05:22)</span></li>
+        <li>Note what it carries: it <b>carries small blood vessels</b> into the sulci and forms a sheath around them. <span class="cite">(L13 14:41&ndash;15:14)</span></li>
+        <li>Draw the clinical link: <b>cerebral veins run on the pia within the subarachnoid space</b>, so a <b>subarachnoid hemorrhage is mostly venous, not arterial</b>. And with its vessels the pia helps form the <b>tela choroidea / filtration membrane</b> of the choroid plexus. <span class="cite">(L13 15:14&ndash;15:33, 20:07&ndash;20:18)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The pia mater, this is [a] thin, highly vascularized membrane, made up of loose connective tissue &hellip; cerebral veins, they run on pia mater within the subarach[noid] space &hellip; if we see a subarachnoid hemorrhage &hellip; that is mostly venous, and not arterial.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:14:19&ndash;00:15:33</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The pia carries which vessels in the subarachnoid space, and what does that imply about the source of a subarachnoid hemorrhage?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The pia carries the <b>cerebral veins</b> (on its surface, within the subarachnoid space), so a <b>subarachnoid hemorrhage is mostly venous</b>. The pia is thin, vascular loose CT that follows the brain <b>like an onion peel</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the arachnoid mater and its granulations &mdash; how it drapes the brain, and how the granulations act as the one-way CSF-absorption valve.</div>
+        <div class="obj-src">content: <b>L13 &middot; 22:02&ndash;30:26</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give its make-up: a <b>delicate, transparent, web-like membrane</b> that <b>passes over</b> the sulci and gyri (like a <b>sheet thrown over a chair</b>) rather than dipping in like the pia. <span class="cite">(L13 22:02&ndash;22:47)</span></li>
+        <li>Define <b>arachnoid granulations (villi)</b>: <b>tufted prolongations of pia-arachnoid</b> that <b>protrude through the meningeal layer of the dura</b> into a venous sinus. <span class="cite">(L13 26:08&ndash;26:33)</span></li>
+        <li>State their function: they <b>absorb CSF from the subarachnoid space and return it to the venous circulation</b>, draining specifically into the <b>superior sagittal sinus</b>. <span class="cite">(L13 26:33&ndash;28:45)</span></li>
+        <li>Nail the trap Dr. Maini flags as a board question &mdash; the <b>one-way valve for CSF absorption</b> is the <b>arachnoid granulation</b>; if debris/blood cells <b>block</b> them, intracranial pressure rises. <span class="cite">(L13 29:57&ndash;30:26)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The function of arach[noid] granulation is to absorb cerebrospinal fluid &hellip; This is a very frequently asked question in your board exam: which one of the following structure[s] acts as a one-way valve for absorption of cerebrospinal fluid?&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:26:33&ndash;00:30:00</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which structure is the &ldquo;one-way valve&rdquo; for CSF absorption, and into which sinus does it drain?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>arachnoid granulations (villi)</b> &mdash; tufts of pia-arachnoid pushing through the meningeal dura &mdash; are the one-way valve; they <b>absorb</b> CSF into the <b>superior sagittal sinus</b>. (The arachnoid itself <b>drapes over</b> the sulci; the pia dips in.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain cerebrospinal fluid &mdash; where it sits, its two functions, why the brain needs buoyancy, and why production must equal absorption.</div>
+        <div class="obj-src">content: <b>L13 &middot; 09:08&ndash;28:03</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Locate it: CSF fills the <b>ventricles inside the brain</b> and, in a thin layer, circulates in the <b>subarachnoid space</b> outside the brain (between arachnoid and pia). <span class="cite">(L13 09:08&ndash;09:41)</span></li>
+        <li>Give its two functions: <b>buoyancy</b> + <b>nutrition</b> (a balanced inflow of materials for the sensitive neurons). <span class="cite">(L13 13:36&ndash;13:55)</span></li>
+        <li>Justify the buoyancy: the brain <b>floats</b> so it does not rest on bone and bruise &mdash; especially the <b>base of the brain</b>; and because <b>neurons are non-mitotic</b> (not replaced if lost) they are heavily protected. <span class="cite">(L13 09:41&ndash;10:14, 14:02&ndash;14:19)</span></li>
+        <li>State the balance rule: CSF is secreted constantly, so it <b>must be removed at the same rate</b> &mdash; otherwise it accumulates, raising <b>intracranial tension</b>, which can compress blood flow (<b>ischemia, infection, stroke</b>). <span class="cite">(L13 27:00&ndash;27:46)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;That gives buoyancy to your brain, so your brain is kind of floating in that fluid &hellip; otherwise there&rsquo;ll be contusions &hellip; especially base of the brain &hellip; neurons, they are non-mitotic; if neurons are damaged, new neurons are not going to divide and replace the old ones.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:09:41&ndash;00:14:19</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name CSF&rsquo;s two functions, and what happens if it is not removed at the same rate it is made?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Buoyancy</b> (so the brain floats and doesn&rsquo;t bruise on bone, esp. the base) and <b>nutrition</b>. If removal doesn&rsquo;t match production, CSF <b>accumulates</b> &rarr; <b>raised intracranial tension</b> &rarr; compressed blood flow &rarr; ischemia, infection, stroke.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace CSF production at the choroid plexus &mdash; its location, its ependymal-cell lining, the four glial types, and how the tela choroidea forms it.</div>
+        <div class="obj-src">content: <b>L13 &middot; 15:59&ndash;20:11</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Locate it: the <b>choroid plexus sits in the roof of each ventricle</b> as cauliflower-like growths whose villi <b>secrete CSF into the ventricular cavity</b>. <span class="cite">(L13 16:18&ndash;16:47)</span></li>
+        <li>Name its lining: the plexus is lined by <b>ependymal cells</b>, which are one of the <b>four glial (neuroglia) types &mdash; astrocytes, oligodendrocytes, microglia, ependymal cells</b> (glia protect/support neurons; ependymal cells secrete CSF). <span class="cite">(L13 16:55&ndash;17:47)</span></li>
+        <li>Assemble it: the <b>pia + blood vessels form the tela choroidea</b>, which <b>fuses with the ependyma to form the choroid plexus</b>. <span class="cite">(L13 15:59&ndash;19:34)</span></li>
+        <li>Explain the mechanism: CSF is <b>formed by filtration from blood</b> (plasma components), with the <b>ependymal cells and pia</b> keeping its composition normal. <span class="cite">(L13 18:04&ndash;19:59)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The function of these villi is to secrete cerebrospinal fluid in the cavity of the ventricle &hellip; you have four different kinds of glial cells: astrocytes, oligodendrocytes, microglia, and ependymal cells.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:16:41&ndash;00:17:35</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Where is the choroid plexus, which cells line it, and what do those cells do?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">In the <b>roof of each ventricle</b>. It is lined by <b>ependymal cells</b> (one of four glial types), which <b>secrete CSF</b>. The plexus forms when the <b>tela choroidea</b> (pia + vessels) <b>fuses with the ependyma</b>; CSF is a <b>filtrate of blood</b>. Remember: the plexus <b>makes</b> CSF, arachnoid granulations <b>absorb</b> it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the dura mater &mdash; its make-up, its two layers, cranial vs spinal, its pain sensitivity, and why there is no cranial epidural space.</div>
+        <div class="obj-src">content: <b>L13 &middot; 08:56&ndash;33:26, 42:38</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give its make-up: the <b>outermost and toughest</b> covering of the CNS, made of <b>dense connective tissue</b>. <span class="cite">(L13 30:47&ndash;30:57)</span></li>
+        <li>Name its two layers: the <b>periosteal layer</b> (against bone) and the <b>meningeal layer</b> &mdash; and know only the <b>cranial</b> dura has both; <b>spinal dura has the meningeal layer only</b>. <span class="cite">(L13 30:57&ndash;31:19)</span></li>
+        <li>Explain the adhesion: the cranial dura is <b>stuck to the periosteum outside and the arachnoid inside</b>, so there is <b>no natural epidural or subdural space</b> in the head. <span class="cite">(L13 12:07&ndash;13:36)</span></li>
+        <li>Add two features: the dura is <b>rich in pain receptors</b> (stretching it &rarr; intense headache), and its <b>meningeal layer folds inward to form the four dural septa</b> and splits to house the venous sinuses. <span class="cite">(L13 31:19&ndash;33:26, 42:38&ndash;42:50)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Dura mater is the outermost and toughest layer &hellip; composed of dense connective tissue &hellip; a two-layered membrane: there is [a] periosteal layer and there is [a] meningeal [layer] &hellip; spinal dura mater does not have a periosteal layer, it only has meningeal.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:30:47&ndash;00:31:19</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which dural layer is missing in the spine, and why is there no epidural space in the head?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>periosteal layer</b> is absent spinally (spinal dura = meningeal only). Cranially the dura is <b>adherent to the skull&rsquo;s periosteum</b> (and to the arachnoid inside), so <b>no natural epidural or subdural space</b> exists in the head. The dura is <b>dense CT, packed with pain receptors</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">Name the four dural septa, what each partitions, and their key attachments &mdash; Dr. Maini flags this as heavy on the final.</div>
+        <div class="obj-src">content: <b>L13 &middot; 31:19&ndash;44:36</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Falx cerebri</b> (falx = &ldquo;sickle&rdquo;): a sickle-shaped vertical partition in the <b>longitudinal fissure between the two cerebral hemispheres</b>; anterior attachment <b>frontal crest / crista galli</b>, posterior <b>internal occipital crest</b>. <span class="cite">(L13 37:48&ndash;38:57, 43:37&ndash;43:57)</span></li>
+        <li><b>Tentorium cerebelli</b> (a &ldquo;tent&rdquo;): a wide arched shelf separating the <b>occipital lobe from the cerebellum</b>; attaches to the <b>posterior clinoid processes, superior petrous temporal bone, and grooves for the transverse sinuses</b>. <span class="cite">(L13 39:02&ndash;40:25, 44:02&ndash;44:30)</span></li>
+        <li><b>Falx cerebelli</b>: a <b>shallow</b> septum between the <b>two cerebellar hemispheres</b> (shallow because they sit close together). <span class="cite">(L13 40:29&ndash;41:35)</span></li>
+        <li><b>Diaphragma sellae</b>: a small horizontal sheet <b>roofing the sella turcica</b> (which holds the <b>pituitary</b>), with a <b>tiny central aperture for the pituitary stalk</b>. <span class="cite">(L13 41:37&ndash;43:08)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;It forms four inwardly projecting septa, or folds &hellip; the first one is falx cerebri &hellip; then we have tentorium cerebelli &hellip; [then] falx cerebelli &hellip; [and] diaphragma sellae. You&rsquo;ll have a lot of questions on this in your final exam.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:31:19&ndash;00:42:12 (final-exam flag ~00:37:29)</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which septum sits between the cerebral hemispheres, and which one roofs the pituitary (and how is it special)?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>falx cerebri</b> (sickle) sits in the longitudinal fissure between the cerebral hemispheres. The <b>diaphragma sellae</b> roofs the <b>sella turcica / pituitary</b> and has a <b>tiny aperture for the pituitary stalk</b>. (The other two: tentorium cerebelli = occipital lobe vs cerebellum; falx cerebelli = between cerebellar hemispheres.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the dural venous sinuses &mdash; what a sinus is, how it forms, the superior sagittal sinus, and the negative-pressure / air-embolism danger.</div>
+        <div class="obj-src">content: <b>L13 &middot; 21:11&ndash;37:22</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Define it: a <b>sinus literally means &ldquo;a space&rdquo;</b> &mdash; here a <b>venous, blood-filled space</b> that forms where the <b>periosteal and meningeal dura separate</b>. <span class="cite">(L13 21:11&ndash;21:45, 35:26&ndash;35:35)</span></li>
+        <li>Locate the <b>superior sagittal sinus</b>: a midline space along the <b>top of the head</b> running <b>anteroposteriorly</b> &mdash; and the sinus that <b>receives CSF</b> from the arachnoid granulations. <span class="cite">(L13 35:35&ndash;35:55, 28:45&ndash;29:12)</span></li>
+        <li>Give the pressure story: the sinuses have <b>negative pressure</b> (above the heart venous pressure falls below zero; that&rsquo;s why the <b>external jugular vein is normally collapsed</b>; at the feet it&rsquo;s about <b>+95 mmHg</b>). <span class="cite">(L13 35:55&ndash;36:31)</span></li>
+        <li>State the danger: a <b>tiny nick</b> in a sinus can <b>suck air in</b> (vacuum) &rarr; <b>air embolism</b> that travels to the heart and arteries &mdash; the patient can &ldquo;die on the table.&rdquo; <span class="cite">(L13 36:31&ndash;37:10)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The literal meaning of the word sinus is a space &hellip; the pressure is very negative in these sinuses. If &hellip; there is [a] tiny nick on this sinus &hellip; air can be sucked into these, and there can be air embolism &hellip; patient can die on the table.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:35:26&ndash;00:36:50</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Where does a dural venous sinus form, and why is a nick in one dangerous?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">A sinus is a <b>venous space where the two dural layers separate</b>. Because sinuses run at <b>negative pressure</b>, a nick can <b>suck air in</b> &rarr; <b>air embolism</b> to the heart/arteries (potentially fatal). The <b>superior sagittal sinus</b> (top, midline, front-to-back) is the one that receives CSF.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the subarachnoid cisterns &mdash; what they are, how they form, what fills them, the largest one, and why they matter clinically.</div>
+        <div class="obj-src">content: <b>L13 &middot; 22:47&ndash;26:01</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Define them: <b>cisterns are dilated portions of the subarachnoid space</b>, created where the <b>arachnoid passes over</b> (rather than dips into) the brain&rsquo;s contours &mdash; and, being subarachnoid, they are <b>filled with CSF</b>. <span class="cite">(L13 23:08&ndash;24:49)</span></li>
+        <li>Name the <b>largest</b>: the <b>cerebellomedullary cistern (cisterna magna)</b>, between the <b>cerebellum and the medulla</b>. <span class="cite">(L13 24:49&ndash;25:14)</span></li>
+        <li>List the others Dr. Maini names: <b>chiasmatic, interpeduncular, pontine, and superior</b> cisterns. <span class="cite">(L13 25:14&ndash;25:23)</span></li>
+        <li>Give the clinical reason: <b>bleeding in the subarachnoid space spreads through all these cisterns</b> if it isn&rsquo;t stopped in time &mdash; and you can visualize that on imaging. <span class="cite">(L13 25:46&ndash;26:01)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Arachnoid, it passes over the brain structures, and that way those spaces are created &hellip; they are called as cisterns &hellip; the largest one is located between the cerebellum and medulla &hellip; cerebello-medullary cistern, or cisterna magn[a].&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:24:31&ndash;00:25:00</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What is a cistern, what fills it, and which is the largest?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">A cistern is a <b>dilated pocket of the subarachnoid space</b> (where the arachnoid drapes over gaps), <b>filled with CSF</b>. The largest is the <b>cerebellomedullary cistern (cisterna magna)</b>, between cerebellum and medulla. A subarachnoid bleed can <b>track through all the cisterns</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Sort out the cranial meningeal spaces and the bleeds &mdash; which spaces are real, what a dura-off-bone image means, and arterial vs venous collections.</div>
+        <div class="obj-src">content: <b>L13 &middot; 12:07&ndash;15:59, 33:26&ndash;34:35</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State which spaces are real: cranially <b>only the subarachnoid space is a true, natural space</b> (it holds CSF, between arachnoid and pia); the <b>epidural</b> (dura&ndash;bone) and <b>subdural</b> (dura&ndash;arachnoid) are <b>only potential spaces</b> that appear with <b>bleeding</b>. <span class="cite">(L13 12:59&ndash;13:36, 22:47&ndash;23:08)</span></li>
+        <li>Read the image: a <b>separation of the dura from the bone is abnormal</b> &mdash; a collection of <b>blood (hematoma/hemorrhage) or pus</b>, because no epidural space normally exists cranially. <span class="cite">(L13 12:37&ndash;12:59, 33:26&ndash;34:35)</span></li>
+        <li>Contrast the bleeds: an <b>arterial</b> collection is <b>worse</b> &mdash; high pressure fills fast and compresses structures &ldquo;in no time&rdquo;; a <b>venous</b> collection is <b>slow</b>, sometimes unnoticed for <b>days to weeks</b>. <span class="cite">(L13 15:33&ndash;15:59)</span></li>
+        <li>Tie the layers to the bleed type: because the <b>cerebral veins run on the pia in the subarachnoid space</b>, a <b>subarachnoid hemorrhage is usually venous</b>. <span class="cite">(L13 15:21&ndash;15:33)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;When you&rsquo;re looking at an image, and it shows the separation of the dura mater from the bone &hellip; it is something abnormal &mdash; a collection: maybe there is blood, hematoma, hemorrhage, or &hellip; pus &hellip; arterial, because arterial pressure is very high, and blood is going to collect very fast.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:12:37&ndash;00:15:48</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which of the three cranial meningeal spaces is a true space, and is an arterial or venous collection worse?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Only the <b>subarachnoid space</b> is a true, natural cranial space (holds CSF). Epidural and subdural are <b>potential</b> spaces that only open up with a bleed. An <b>arterial</b> collection is worse (high pressure, fills fast); venous is slow (days&ndash;weeks). Dura pulled off bone on imaging = an <b>abnormal collection (blood/pus)</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Work through the module&rsquo;s clinical correlations &mdash; pituitary-adenoma headache, raised intracranial pressure, blocked granulations, and the sinus air embolism.</div>
+        <div class="obj-src">content: <b>L13 &middot; 27:29&ndash;43:08</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Pituitary adenoma &rarr; intense headache</b>: an enlarging pituitary <b>stretches the pain-sensitive diaphragma sellae</b>, and the dura&rsquo;s many pain receptors produce a severe headache. <span class="cite">(L13 42:38&ndash;43:08)</span></li>
+        <li><b>Raised intracranial pressure</b>: if CSF absorption fails and pressure rises, it can <b>compress cerebral blood flow &rarr; ischemia, infection, or stroke</b>. <span class="cite">(L13 27:29&ndash;27:46)</span></li>
+        <li><b>Blocked arachnoid granulations</b>: after a subarachnoid bleed or infection, <b>blood cells/particles can plug the granulations</b>, so CSF isn&rsquo;t absorbed and intracranial tension rises. <span class="cite">(L13 29:57&ndash;30:26)</span></li>
+        <li><b>Sinus air embolism</b>: a nicked, negative-pressure venous sinus can <b>draw in air</b>, which travels to the heart and arteries and can be immediately fatal &mdash; a key surgical warning. <span class="cite">(L13 36:31&ndash;37:10)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;If pituitary gland enlarges, it is going to stretch diaphragma[ sellae] &hellip; intense headache is one of the features of pituitary enlargement.&rdquo;<span class="cite">&mdash; Cranial Meninges (Lecture 13) &middot; ~00:42:50&ndash;00:43:08</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m06-cranial-meninges-brain-hub.html">&#128220; GA 0202 &middot; Cranial Meninges Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">By what mechanism does a pituitary adenoma cause a severe headache?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The enlarging pituitary <b>stretches the diaphragma sellae</b>; because the dura is <b>rich in pain receptors</b>, that stretch causes an <b>intense headache</b>. (Sister clinical facts: raised ICP &rarr; ischemia/stroke; blocked granulations &rarr; raised ICP; nicked sinus &rarr; air embolism.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 12 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>GA 0202 Cranial Meninges Hub</b> and drill exactly that topic.</p>
+    <p><b>3.</b> Dr. Maini flags two things as high-yield: the <b>one-way valve for CSF absorption</b> (Objective 4 &mdash; &ldquo;a very frequently asked board question&rdquo;) and the <b>four dural septa</b> (Objective 8 &mdash; &ldquo;you&rsquo;ll have a lot of questions on this in your final exam&rdquo;). Spend extra reps there.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t mix up who MAKES CSF with who ABSORBS it.</b> The <b>choroid plexus</b> (ependymal cells, roof of each ventricle) <b>secretes</b> CSF; the <b>arachnoid granulations</b> (the one-way valve, draining to the superior sagittal sinus) <b>absorb</b> it. And on the spaces: cranially <b>only the subarachnoid space is real</b> &mdash; the epidural and subdural are potential spaces that appear only with a bleed.</div>
+    <p style="margin-top:6px">When all 12 boxes are ticked, you own Dr. Maini&rsquo;s emphasis for the <b>cranial meninges</b> &mdash; the spine of the GA 0202 Module 6 material.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 6 (Cranial Meninges &amp; Brain Coverings) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from Dr. Maini&rsquo;s Cranial Meninges lecture recording + the audited Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m06_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 Gross Anatomy — Dr. Maini (Cranial Meninges)
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Cranial Meninges learning objectives (Dr. Maini) — for example the CSF loop.' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 12 cranial-meninges learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy for the difference between the choroid plexus (makes CSF) and the arachnoid granulations (absorb CSF).' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the cranial-meninges module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 Gross Anatomy with Dr. Maini at SCUHS (Module 6 — Cranial Meninges). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

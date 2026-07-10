@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · The Eye &amp; Orbit — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 8 — THE EYE & ORBIT
+   Dr. Seema Maini. Cram Coach. PENDING REVIEW.
+   Built ONLY from Dr. Maini's GA lectures 19-21 (The Orbit & Its Contents;
+   Testing of Eye Muscles, Arteries, Nerves, Ciliary Ganglion) and grounded
+   in the module's audited Everything-MC bank (facts anti-fab verified).
+   Original phrasing, in her style; no captured exam items. Source-tagged.
+   THEME: violet (cloned engine). Correct keys taught plainly; answer
+   positions shuffled/balanced.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m08-eye-hub_PENDING_REVIEW.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ==================================================== CRAM (14 TOPICS) ===== */
+const cram = [
+  {
+    n: 1, title: "The bony orbit — pyramid, walls, apex", src: "Maini · L19",
+    facts: [
+      "The orbit is a QUADRILATERAL PYRAMID: four walls (roof, floor, medial, lateral) that converge to an APEX at the back and open at a BASE in front. The apex is essentially the OPTIC CANAL, where the optic nerve leaves to enter the cranial cavity.",
+      "BASE (margin) = three bones: FRONTAL, MAXILLA, ZYGOMATIC. ROOF = orbital plate of the frontal bone + lesser wing of the sphenoid.",
+      "MEDIAL wall = ethmoid (the most prominent, recognised by its air cells), plus lacrimal (the papery-thin 'papyrus' bone), body of sphenoid, and frontal. FLOOR = mostly MAXILLA. LATERAL wall = frontal process of the zygomatic + greater wing of the sphenoid.",
+      "Orientation: the two MEDIAL walls are PARALLEL; the LATERAL walls meet at about a 90-degree angle. That is why the LATERAL (temporal) field of vision is the WIDEST, while the medial field is restricted by the nasal bone.",
+    ],
+    flag: "Apex = optic canal (optic nerve exits). Base bones = frontal, maxilla, zygomatic. Roof = orbital plate of frontal + lesser wing of sphenoid. Floor = mostly maxilla. Medial wall's tell = ethmoid air cells. Lateral field of vision is widest (walls at 90 degrees). Maini said she will test the PROMINENT bones, not tiny contributors like palatine.",
+  },
+  {
+    n: 2, title: "The three doorways — fissures, canal, foramina", src: "Maini · L19",
+    facts: [
+      "THREE doorways let structures enter/leave the orbit: SUPERIOR ORBITAL FISSURE, INFERIOR ORBITAL FISSURE, and the OPTIC CANAL.",
+      "OPTIC CANAL = part of the LESSER wing of the sphenoid; transmits the OPTIC NERVE and the OPHTHALMIC ARTERY; communicates with the middle cranial fossa.",
+      "SUPERIOR ORBITAL FISSURE = between the GREATER and LESSER wings of the sphenoid; carries the superior ophthalmic vein (and CN III, IV, VI, V1 branches); communicates with the MIDDLE CRANIAL FOSSA.",
+      "INFERIOR ORBITAL FISSURE = between the MAXILLA and the greater wing of sphenoid; it is OUTSIDE the cranial cavity, communicating with the PTERYGOPALATINE/infratemporal fossa. It transmits V2, the inferior ophthalmic vein, and (Maini stressed) the INFRAORBITAL ARTERY — the terminal branch of the maxillary artery, which finally exits through the infraorbital foramen (a maxilla foramen).",
+    ],
+    flag: "3 doorways: SOF, IOF, optic canal. Optic canal (lesser wing) = optic nerve + ophthalmic artery. SOF between greater & lesser sphenoid wings. IOF is OUTSIDE the cranium (to pterygopalatine fossa) and carries the infraorbital artery. Infraorbital artery = terminal branch of the maxillary artery, exiting the infraorbital foramen.",
+  },
+  {
+    n: 3, title: "Eyelids — layers & glands (stye vs chalazion)", src: "Maini · L19",
+    facts: [
+      "Eyelid layers, superficial to deep: SKIN, then superficial fascia containing ORBICULARIS OCULI (a muscle of facial expression, CN VII, closes the eye), then the TENDON of LEVATOR PALPEBRAE SUPERIORIS, then the TARSAL PLATE, and innermost the PALPEBRAL CONJUNCTIVA (which reflects onto the globe as the BULBAR conjunctiva).",
+      "Two MARGINAL glands: sebaceous GLANDS OF ZEIS (of the eyelashes) and sweat GLANDS OF MOLL. Deep in the tarsal plate are the TARSAL (MEIBOMIAN) glands — sebaceous — whose secretion keeps the closed lids AIRTIGHT so the tear film does not dry.",
+      "STYE (external hordeolum) = inflammation of a MARGINAL gland (Zeis/Moll) — a swelling AT THE LID MARGIN; it usually drains and is easy to treat.",
+      "CHALAZION (internal hordeolum) = inflammation of a TARSAL (Meibomian) gland — a firm lump on the BODY of the eyelid, not the margin; it often needs a minor surgical scoop because these glands have very narrow outlets.",
+    ],
+    flag: "Layers: skin, orbicularis oculi (CN VII), LPS tendon, tarsal plate, palpebral conjunctiva. Zeis = sebaceous of lashes; Moll = sweat; Meibomian/tarsal = sebaceous, keep lids airtight. STYE (external hordeolum) = MARGIN, easy. CHALAZION (internal hordeolum) = BODY of lid, needs scooping. Palpebral conjunctiva reflects to bulbar.",
+  },
+  {
+    n: 4, title: "Lacrimal apparatus — tears from gland to nose", src: "Maini · L19-20",
+    facts: [
+      "LACRIMAL GLAND (in a shallow fossa of the FRONTAL bone) secretes tears via many ducts onto the anterior globe; tears flow MEDIALLY to the LACRIMAL LAKE at the medial angle.",
+      "In the lacrimal lake: the LACRIMAL CARUNCLE (central elevation directing tears medially) and the PLICA SEMILUNARIS (curved conjunctival fold forming the lateral boundary). At the medial end of each lid margin sits a LACRIMAL PAPILLA topped by a tiny pore, the LACRIMAL PUNCTUM.",
+      "Drainage route: PUNCTA to LACRIMAL CANALICULI to LACRIMAL SAC to NASOLACRIMAL DUCT to the INFERIOR MEATUS of the nasal cavity. (The lacrimal fossa in the MEDIAL wall holds the SAC, not the gland.)",
+      "Clinical: DACRYOCYSTITIS = inflammation of the SAC; DACRYOADENITIS = inflammation of the GLAND (adeno = gland). Total loss of tears (xerophthalmia) endangers the avascular cornea — its anterior nutrition/oxygen come from TEARS and air — risking corneal ulcers and blindness. Parasympathetic (secretomotor) supply = CN VII via the greater petrosal nerve, relaying in the PTERYGOPALATINE ganglion.",
+    ],
+    flag: "Gland sits in the FRONTAL bone; the medial-wall lacrimal fossa holds the SAC. Flow: puncta > canaliculi > sac > nasolacrimal duct > inferior meatus. Dacryocystitis = sac; dacryoadenitis = gland. Cornea is avascular (fed by tears + air anteriorly). Lacrimal secretomotor = CN VII (greater petrosal) via the pterygopalatine ganglion.",
+  },
+  {
+    n: 5, title: "Levator palpebrae superioris & Horner syndrome", src: "Maini · L19-20",
+    facts: [
+      "LPS opens the UPPER lid (the lower lid has no levator). It originates from the undersurface of the LESSER wing of the sphenoid, above the optic canal.",
+      "LPS is UNIQUE: most of it is skeletal (CN III, GSE), but a slip is SMOOTH muscle — the SUPERIOR TARSAL MUSCLE — inserting on the superior tarsal plate and supplied by SYMPATHETIC fibers ONLY.",
+      "HORNER SYNDROME = unilateral sympathetic failure. Maini called it a BOARD FAVOURITE. Five features: PARTIAL PTOSIS (superior tarsal muscle fails, but CN III skeletal LPS is intact so it is not complete), MIOSIS (pupillary constriction), ANHIDROSIS (no sweating), FLUSHING of that side of the face, and ENOPHTHALMOS (sunken eye).",
+      "A common cause is a PANCOAST (apical lung) tumour compressing the cervical sympathetic chain. The postganglionic cell bodies for the face/eye are in the SUPERIOR CERVICAL GANGLION; the preganglionic neurons are in the LATERAL HORN at T1-T2.",
+    ],
+    flag: "LPS = mostly skeletal (CN III) + a smooth SUPERIOR TARSAL slip (SYMPATHETIC only). Horner = sympathetic failure: partial ptosis + miosis + anhidrosis + flushing + enophthalmos. Ptosis is PARTIAL because CN III is intact. Mydriasis is NOT in Horner. Common cause = Pancoast tumour. Postganglionic bodies = superior cervical ganglion; pregang = T1-T2 lateral horn.",
+  },
+  {
+    n: 6, title: "The eyeball's three coats + Tenon's capsule", src: "Maini · L20",
+    facts: [
+      "OUTER fibrous coat (tunica fibrosa) = SCLERA (opaque, posterior FIVE-SIXTHS) + CORNEA (transparent, avascular, anterior ONE-SIXTH). Jaundice shows FIRST in the sclera once bilirubin passes about 2 mg%. The perforated posterior sclera where the optic nerve pierces is the LAMINA CRIBROSA.",
+      "MIDDLE vascular coat (tunica vasculosa) = CHOROID (largest, posterior) that continues forward as the CILIARY BODY, with the IRIS attached to it. The pupil is the central iris aperture.",
+      "IRIS muscles: CIRCULAR fibers = SPHINCTER PUPILLAE (PARASYMPATHETIC, constriction/miosis); RADIAL fibers = DILATOR PUPILLAE (SYMPATHETIC, dilation/mydriasis). The ciliary body has ciliary processes (secrete aqueous humor) and the ciliary muscle.",
+      "INNER nervous coat (tunica nervosa) = RETINA. TENON'S CAPSULE (bulbar fascia) wraps the globe, separated from the sclera by the EPISCLERAL SPACE; it is left INTACT during enucleation so an artificial eye can be seated. Its extensions to the walls are the MEDIAL and LATERAL CHECK LIGAMENTS.",
+    ],
+    flag: "3 coats: fibrous (sclera 5/6 + cornea 1/6), vascular (choroid + ciliary body + iris), nervous (retina). Lamina cribrosa = where the optic nerve pierces the sclera (a favourite 'which layer / exclude it' trap). Sphincter pupillae = parasympathetic (constrict); dilator pupillae = sympathetic (dilate). Tenon's capsule / episcleral space; kept intact for an artificial eye.",
+  },
+  {
+    n: 7, title: "Retina & photoreceptors — disc, macula, ora serrata", src: "Maini · L20",
+    facts: [
+      "Retina = an outer PIGMENTED layer (melanin, ABSORBS stray light — deficient in ALBINISM) plus the neural layer. Cell order light-ward to inward: PHOTORECEPTORS (rods & cones) to BIPOLAR cells to GANGLION cells; the axons of the GANGLION cells form the OPTIC NERVE (CN II).",
+      "RODS = dim-light / NIGHT vision, NO colour. CONES = bright light, COLOUR vision.",
+      "OPTIC DISC = where the optic nerve exits; it has NO photoreceptors, so it is the physiological BLIND SPOT. Just medial to it, the MACULA LUTEA ('lutea' = yellow) carries the FOVEA CENTRALIS, densely packed with CONES — the point of maximum acuity.",
+      "MACULAR DEGENERATION = loss of CENTRAL vision with PRESERVED peripheral vision. The ORA SERRATA is the wavy, serrated anterior margin of the retina, just behind the ciliary body.",
+    ],
+    flag: "Rods = night, no colour; cones = colour, bright light. Chain: rods/cones > bipolar > ganglion cells; ganglion-cell axons = optic nerve (CN II). Optic disc = blind spot (no photoreceptors). Fovea centralis (in the macula lutea) = max cones = acute vision. Macular degeneration loses CENTRAL vision. Ora serrata = serrated anterior retinal margin.",
+  },
+  {
+    n: 8, title: "Aqueous humor, chambers & glaucoma", src: "Maini · L20",
+    facts: [
+      "AQUEOUS HUMOR is secreted by the CILIARY PROCESSES into the POSTERIOR chamber (between iris and lens).",
+      "Circulation: POSTERIOR chamber to PUPIL to ANTERIOR chamber (between CORNEA and IRIS) to the SINUS VENOSUS SCLERAE (CANAL OF SCHLEMM) to the venous blood. The canal sits at the IRIDOCORNEAL ANGLE.",
+      "GLAUCOMA = blockage of the canal of Schlemm (or a blocked angle) raises intraocular pressure; if prolonged it causes retinal degeneration and blindness (open- vs closed-angle types).",
+      "The VITREOUS chamber (between lens and retina) holds the VITREOUS BODY — a transparent gel that maintains the eyeball's shape.",
+    ],
+    flag: "Aqueous made by ciliary processes into the POSTERIOR chamber. Flow: posterior > pupil > anterior > canal of Schlemm (sinus venosus sclerae) at the IRIDOCORNEAL ANGLE > venous blood. Block it and intraocular pressure rises = GLAUCOMA. Anterior chamber = cornea-to-iris; posterior = iris-to-lens. Vitreous body = gel, keeps the globe's shape.",
+  },
+  {
+    n: 9, title: "Refraction & refractive errors", src: "Maini · L20",
+    facts: [
+      "Light passes, in order, through the refractive media: CORNEA to AQUEOUS HUMOR to LENS to VITREOUS HUMOR. The CORNEA is largely responsible for refraction.",
+      "MYOPIA (near-sighted): image focuses IN FRONT of the retina; corrected with a CONCAVE lens.",
+      "HYPEROPIA (far-sighted): image focuses BEHIND the retina; corrected with a CONVEX lens. ASTIGMATISM = irregular corneal curvature; corrected with a CYLINDRICAL lens.",
+      "PRESBYOPIA = age-related (after about 40) inability to focus on NEAR objects. CATARACT = opacity of the LENS due to ageing.",
+    ],
+    flag: "Media in order: cornea > aqueous > lens > vitreous (cornea does most refraction). MYopia = focus in front = concave (Minus) lens. Hyperopia = focus behind = convex lens. Astigmatism = irregular cornea = cylindrical lens. Presbyopia = age-related loss of NEAR focus (~40+). Cataract = ageing LENS opacity.",
+  },
+  {
+    n: 10, title: "Extraocular muscles — actions & nerves", src: "Maini · L21",
+    facts: [
+      "The four RECTI arise from a COMMON TENDINOUS RING around the optic canal; the extraocular muscles come from OCCIPITAL MYOTOMES and carry GSE fibers. Nerves by 'SO4, LR6, AO3': SUPERIOR OBLIQUE = CN IV; LATERAL RECTUS = CN VI; ALL OTHERS (SR, IR, MR, IO, plus LPS) = CN III.",
+      "Actions (recti = 'up/down and IN'): SUPERIOR RECTUS = elevation + adduction (up and in); INFERIOR RECTUS = depression + adduction (down and in); MEDIAL RECTUS = adduction; LATERAL RECTUS = abduction.",
+      "Obliques ('down/up and OUT'): SUPERIOR OBLIQUE = depression + abduction (down and out), its tendon threading the TROCHLEA (a fibrocartilaginous pulley); INFERIOR OBLIQUE = elevation + abduction (up and out). The INFERIOR OBLIQUE is the ONLY muscle from the FLOOR of the orbit — Maini said it shows up on board exams.",
+      "Torsion: BOTH SUPERIORS (SR + SO) cause INTORSION; the inferiors (IR + IO) cause EXTORSION. Intrinsic (smooth) eye muscles = sphincter pupillae, dilator pupillae, ciliary muscle.",
+    ],
+    flag: "SO4 (trochlear) · LR6 (abducent) · everything else + LPS = CN III. Recti pull the eye up/down and IN; obliques pull it up/down and OUT. Superior oblique = DOWN and OUT (via the trochlea). Inferior oblique = UP and OUT and is the ONLY muscle from the floor of the orbit (board point). Both SUPERIORS intort; inferiors extort.",
+  },
+  {
+    n: 11, title: "Clinical testing of the eye muscles (H-test)", src: "Maini · L21",
+    facts: [
+      "Rule for isolating a muscle: test the RECTI in ABDUCTION and the OBLIQUES in ADDUCTION.",
+      "SUPERIOR RECTUS: ask the patient to ABDUCT (look laterally) then look UP. INFERIOR RECTUS: abduct then look DOWN.",
+      "SUPERIOR OBLIQUE: ADDUCT (look medially) then look DOWN. INFERIOR OBLIQUE: adduct then look UP.",
+      "So when the eye is ABDUCTED by the lateral rectus, elevation is by SUPERIOR RECTUS and depression by INFERIOR RECTUS; when ADDUCTED, up = inferior oblique and down = superior oblique.",
+    ],
+    flag: "Recti tested in ABDUCTION, obliques in ADDUCTION. SR = abduct + up. IR = abduct + down. SO = adduct + down. IO = adduct + up. Counter-intuitive pairing (obliques do the vertical work in adduction) is the whole point of the H-test.",
+  },
+  {
+    n: 12, title: "Nerves, arteries & veins of the orbit", src: "Maini · L21",
+    facts: [
+      "OPTIC NERVE (CN II) carries SSA fibers (the eye is ectodermal). CN III enters via the superior orbital fissure and splits into SUPERIOR and INFERIOR divisions; CN IV (trochlear) supplies only the SUPERIOR OBLIQUE.",
+      "OPHTHALMIC nerve (V1) branches = 'NFL' — NASOCILIARY, FRONTAL, LACRIMAL. The FRONTAL gives supraorbital + supratrochlear; the NASOCILIARY gives the long ciliary, infratrochlear, and anterior/posterior ethmoidal nerves (the LONG CILIARY nerves carry SYMPATHETIC fibers to the dilator pupillae).",
+      "EXAM TRAP: the DEEP PETROSAL nerve is NOT a branch of CN VII — it carries SYMPATHETIC fibers from the internal carotid plexus. (Maini said ~45% of the class missed this.)",
+      "Arteries/veins: the OPHTHALMIC ARTERY branches from the INTERNAL CAROTID. The CENTRAL ARTERY OF THE RETINA runs inside the optic nerve to enter at the centre of the optic disc; the ANTERIOR CILIARY artery enters at the corneoscleral junction. The two OPHTHALMIC VEINS drain to the CAVERNOUS SINUS (the inferior one also to the PTERYGOID venous plexus via the IOF).",
+    ],
+    flag: "V1 branches = NFL (nasociliary, frontal, lacrimal). Frontal > supraorbital + supratrochlear. TRAP: deep petrosal nerve is NOT CN VII (it is sympathetic from the ICA plexus). Ophthalmic artery = from the internal carotid. Central retinal artery runs inside the optic nerve to the centre of the disc. Ophthalmic veins > cavernous sinus (a route for orbital infection to spread).",
+  },
+  {
+    n: 13, title: "Ciliary ganglion & eye autonomics", src: "Maini · L21",
+    facts: [
+      "The CILIARY GANGLION is a PARASYMPATHETIC ganglion sitting on the LATERAL side of the optic nerve.",
+      "Its PARASYMPATHETIC (motor) root brings preganglionic fibers from CN III; postganglionic fibers leave in the SHORT CILIARY nerves to the SPHINCTER PUPILLAE and the CILIARY MUSCLE (so CN III drives constriction and accommodation).",
+      "SYMPATHETIC fibers PASS STRAIGHT THROUGH the ganglion without synapsing (they already synapsed in the superior cervical ganglion). The SENSORY root comes from the NASOCILIARY nerve (V1). So the SHORT CILIARY nerves carry GSA + sympathetic + parasympathetic fibers.",
+      "Accommodation for NEAR: the CILIARY MUSCLE contracts, RELAXING the suspensory ligament, so the LENS thickens (more convex). For DISTANCE: ciliary muscle relaxes, suspensory ligament is TAUT, lens is thin.",
+    ],
+    flag: "Ciliary ganglion = PARASYMPATHETIC, lateral to the optic nerve. Motor root = CN III (pregang) > short ciliary nerves > sphincter pupillae + ciliary muscle. Sympathetics PASS THROUGH (already synapsed in the superior cervical ganglion). Sensory root = nasociliary (V1). Ciliary muscle contracts > lens thickens for NEAR (relaxes the suspensory ligament).",
+  },
+  {
+    n: 14, title: "Reflexes — light, accommodation, corneal", src: "Maini · L21",
+    facts: [
+      "PUPILLARY LIGHT REFLEX: afferent = OPTIC nerve (CN II) to the PRETECTAL nucleus of the midbrain to the EDINGER-WESTPHAL nucleus; efferent = CN III to the CILIARY GANGLION to the SHORT CILIARY nerves to the sphincter pupillae. Light in one eye constricts BOTH pupils (the other is the CONSENSUAL reflex).",
+      "Lesion logic: if the tested eye's OPTIC nerve (afferent) is dead, NEITHER pupil constricts; if only the CN III (efferent) to one eye is dead, that pupil will not constrict but the other still will.",
+      "ACCOMMODATION reflex (for near) = the '3 C's': CONVERGENCE (medial recti, somatic CN III), pupillary CONSTRICTION, and increased lens CONVEXITY. It is mainly a PARASYMPATHETIC reflex via CN III. ARGYLL ROBERTSON pupil (light reflex lost, accommodation preserved) is classic for SYPHILIS.",
+      "CORNEAL REFLEX: sensory = OPHTHALMIC (V1), motor = FACIAL (CN VII, closes the lids), centre = the SPINAL TRIGEMINAL nucleus. PAPILLEDEMA (swollen optic disc) signals raised INTRACRANIAL pressure; an abnormal white/asymmetric red reflex in a child raises congenital cataract or RETINOBLASTOMA.",
+    ],
+    flag: "Light reflex: afferent CN II > pretectal > E-W nucleus > efferent CN III > ciliary ganglion > short ciliary > sphincter. Afferent (optic) lesion = NEITHER pupil constricts; efferent (CN III) lesion = only that pupil fails. Accommodation = 3 C's (convergence, constriction, convexity), parasympathetic CN III. Argyll Robertson (light lost, accommodation kept) = SYPHILIS. Corneal reflex: in V1, out CN VII. Papilledema = raised intracranial pressure.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Board favourite", text: "Horner syndrome (unilateral sympathetic failure): PARTIAL ptosis (superior tarsal muscle fails; CN III LPS intact), MIOSIS, ANHIDROSIS, FLUSHING, and ENOPHTHALMOS. Common cause = a Pancoast apical lung tumour on the cervical sympathetic chain.", why: "Maini flat-out called it a board favourite and walked through all five signs and the Pancoast cause. Note MYDRIASIS is NOT part of it.", src: "Maini · L19-20" },
+  { tag: "★★ Board point", text: "The INFERIOR OBLIQUE is the ONLY extraocular muscle that arises from the FLOOR of the orbit. Its action is elevation + abduction (up and out).", why: "She explicitly said this detail shows up on board exams.", src: "Maini · L21" },
+  { tag: "★★ Exam trap", text: "The DEEP PETROSAL nerve is NOT a branch of the facial nerve (CN VII) — it carries SYMPATHETIC fibers from the internal carotid plexus and joins the greater petrosal to form the nerve of the pterygoid canal.", why: "Maini said she put it on an exam and about 45% of the class missed it — a classic 'which is NOT a branch of CN VII' trap.", src: "Maini · L20" },
+  { tag: "Muscles", text: "SO4, LR6, AO3: superior oblique = CN IV, lateral rectus = CN VI, all the rest (SR, IR, MR, IO) plus LPS = CN III. Recti pull up/down and IN; obliques pull up/down and OUT; superior oblique = DOWN and OUT via the trochlea.", why: "Her core mnemonic. Expect 'which nerve supplies X' and 'action of X' items, plus the counter-intuitive oblique directions.", src: "Maini · L21" },
+  { tag: "Testing", text: "Isolate the RECTI in ABDUCTION, the OBLIQUES in ADDUCTION. SR = abduct + up; IR = abduct + down; SO = adduct + down; IO = adduct + up.", why: "The H-test logic she drilled: in adduction the OBLIQUES do the vertical movement, which is what trips students.", src: "Maini · L21" },
+  { tag: "Reflexes", text: "Light reflex: afferent CN II > pretectal nucleus > Edinger-Westphal > efferent CN III > ciliary ganglion > short ciliary > sphincter pupillae. Afferent (optic) lesion = NEITHER pupil constricts; efferent (CN III) lesion = only that pupil fails.", why: "She ran several 'which nerve is out, which pupil constricts' scenarios — pure circuit logic worth rehearsing.", src: "Maini · L21" },
+  { tag: "Clinical", text: "Stye (external hordeolum) = a MARGINAL gland (Zeis/Moll) at the lid MARGIN, easy to treat. Chalazion (internal hordeolum) = a TARSAL/Meibomian gland on the BODY of the lid, often needing a surgical scoop.", why: "She contrasted the two directly and stressed WHERE the swelling sits and why chalazion is harder.", src: "Maini · L19" },
+  { tag: "Flow", text: "Aqueous humor: made by ciliary processes into the POSTERIOR chamber > pupil > ANTERIOR chamber > canal of Schlemm (sinus venosus sclerae) at the iridocorneal angle > venous blood. Blockage raises intraocular pressure = GLAUCOMA.", why: "A step-by-step pathway plus the clinical payoff (glaucoma) — an easy sequencing question.", src: "Maini · L20" },
+  { tag: "Coats", text: "Three coats: fibrous (sclera 5/6 + cornea 1/6), vascular (choroid + ciliary body + iris), nervous (retina). Sphincter pupillae = parasympathetic (constrict); dilator pupillae = sympathetic (dilate). Lamina cribrosa = where the optic nerve pierces the sclera.", why: "She warned that a simple part like the lamina cribrosa becomes a 'which layer / which to exclude' trap.", src: "Maini · L20" },
+  { tag: "Refraction", text: "Cornea > aqueous > lens > vitreous. Myopia = focus in front = concave lens; hyperopia = focus behind = convex lens; astigmatism = irregular cornea = cylindrical lens; presbyopia = age-related loss of NEAR focus; cataract = ageing lens opacity.", why: "A tidy cluster she covered together — easy points if you keep myopia (front/concave) vs hyperopia (behind/convex) straight.", src: "Maini · L20" },
+  { tag: "Special pupil", text: "Argyll Robertson pupil: the LIGHT reflex is lost but ACCOMMODATION is preserved — classically SYPHILIS. Accommodation = the 3 C's (convergence, constriction, increased convexity), a parasympathetic CN III reflex.", why: "A named clinical sign she tied to a disease — high-yield and easy to recall as 'accommodates but does not react.'", src: "Maini · L21" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  { kind: "Mnemonic", title: "SO4, LR6, AO3 — the eye-muscle nerves", text: "Superior Oblique is CN IV, Lateral Rectus is CN VI, and All Others (superior/inferior/medial rectus and inferior oblique, plus LPS) are CN III. Learn the two exceptions and everything else defaults to the oculomotor nerve.", helps: "Turns 'which nerve supplies this muscle' into a two-exception rule instead of six facts.", src: "Maini · L21" },
+  { kind: "Mnemonic", title: "'NFL' — the branches of V1", text: "The ophthalmic nerve (V1) splits into Nasociliary, Frontal, and Lacrimal — 'NFL, National Football League.' The Frontal then gives supraorbital and supratrochlear.", helps: "Her own class hook for the three V1 branches so you never miss one.", src: "Maini · L21" },
+  { kind: "Mnemonic", title: "'Both superiors intort; inferior people extort'", text: "The two SUPERIOR muscles (superior rectus + superior oblique) cause INTORSION; the two INFERIOR muscles (inferior rectus + inferior oblique) cause EXTORSION.", helps: "Pins the torsion pairs, which are otherwise easy to swap.", src: "Maini · L21" },
+  { kind: "Trick", title: "There's a 'D' in myDriasis", text: "Mydriasis (the longer word) = Dilation, driven by the sympathetic dilator pupillae. Miosis (the shorter word) = constriction, a parasympathetic sphincter-pupillae affair. Longer word, bigger pupil.", helps: "Her way to stop mixing up miosis and mydriasis and which autonomic division does each.", src: "Maini · L20" },
+  { kind: "Rule", title: "'Adeno' means gland; 'cyst' means sac", text: "DacryoADENitis is inflammation of the lacrimal GLAND (adeno = gland); dacryoCYSTitis is inflammation of the lacrimal SAC (cyst = sac). 'Dacryo' just means lacrimal.", helps: "Decodes the two lacrimal infections straight from the word roots.", src: "Maini · L20" },
+  { kind: "Rule", title: "Recti in abduction, obliques in adduction", text: "To isolate a rectus for testing, ABDUCT the eye; to isolate an oblique, ADDUCT it. That is why, with the eye turned IN, the OBLIQUES produce the up/down movement.", helps: "The single rule that makes the whole H-test make sense.", src: "Maini · L21" },
+  { kind: "Trick", title: "'Lutea' = yellow, 'cribrosa' = perforated", text: "Macula LUTEA is the YELLOW spot (like corpus luteum). Lamina CRIBROSA is the PERFORATED plate the optic nerve threads (same root as cribriform plate).", helps: "Two Latin roots that name-and-explain two retina/sclera landmarks at once.", src: "Maini · L20" },
+  { kind: "Analogy", title: "Fovea = aim the light for maximum detail", text: "When you look closely at something, you shift your gaze so the light rays land on the FOVEA CENTRALIS, which is saturated with cones — the point of sharpest, most detailed vision.", helps: "Explains why the fovea is the acuity 'sweet spot' and why we move our eyes to inspect detail.", src: "Maini · L20" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Original-phrasing items built on Maini's eye & orbit lectures (L19-21) and
+   the module's audited MC bank. Correct-answer-first authoring, then option
+   positions balanced across 58 items (A/B/C/D = 14/15/16/13, no A-skew). */
+const questions = [
+  { id: 1, topic: "Orbit", src: "Maini · L19", q: "The orbit is a quadrilateral pyramid. Which structure essentially marks its apex?", opts: ["The supraorbital margin at the base", "The optic canal, where the optic nerve leaves for the cranial cavity", "The inferior orbital fissure in the floor", "The lacrimal fossa in the medial wall"], a: 1, h1: "The apex points backward.", h2: "The optic nerve exits there.", exp: "The APEX is essentially the OPTIC CANAL, where the optic nerve leaves the orbit to enter the cranial cavity." },
+  { id: 2, topic: "Orbit", src: "Maini · L19", q: "The base (margin) of the orbit is formed by which three bones?", opts: ["Frontal, ethmoid, and lacrimal", "Nasal, frontal, and sphenoid", "Sphenoid, palatine, and maxilla", "Frontal, maxilla, and zygomatic"], a: 3, h1: "Ethmoid and lacrimal are medial-wall bones.", h2: "One frontal, one cheekbone, one upper jaw.", exp: "The margin/base = FRONTAL, MAXILLA, and ZYGOMATIC." },
+  { id: 3, topic: "Orbit", src: "Maini · L19", q: "The roof of the orbit is formed by:", opts: ["The orbital plate of the frontal bone and the lesser wing of the sphenoid", "The maxilla and the palatine", "The ethmoid and the lacrimal", "The greater wing of the sphenoid and the zygomatic"], a: 0, h1: "Recall the anterior cranial fossa floor.", h2: "Frontal plate plus a sphenoid wing.", exp: "ROOF = orbital plate of the FRONTAL bone + the LESSER wing of the sphenoid." },
+  { id: 4, topic: "Orbit", src: "Maini · L19", q: "On the medial wall, which bone is most prominent, recognised by its air cells?", opts: ["Maxilla", "Sphenoid body", "Ethmoid", "Lacrimal"], a: 2, h1: "It has multiple air sinus compartments.", h2: "Not the papery lacrimal.", exp: "The ETHMOID is the most prominent medial-wall bone, identified by its air cells." },
+  { id: 5, topic: "Orbit", src: "Maini · L19", q: "According to Maini, which bone forms most of the floor of the orbit?", opts: ["Palatine", "Maxilla", "Zygomatic", "Ethmoid"], a: 1, h1: "Palatine is only a tiny contributor she said she would not test.", h2: "The upper-jaw bone.", exp: "The FLOOR is mostly MAXILLA (with tiny palatine and zygomatic contributions)." },
+  { id: 6, topic: "Orbit", src: "Maini · L19", q: "How are the orbital walls oriented relative to each other?", opts: ["Both medial and lateral walls are parallel", "The lateral walls are parallel; the medial walls meet at 90 degrees", "All four walls are parallel front to back", "The medial walls are parallel; the lateral walls meet at about 90 degrees"], a: 3, h1: "Think about why the temporal field is so wide.", h2: "Medial parallel, lateral angled.", exp: "The MEDIAL walls are PARALLEL; the LATERAL walls meet at roughly a 90-degree angle." },
+  { id: 7, topic: "Orbit", src: "Maini · L19", q: "Because of orbital orientation, which field of vision is the widest?", opts: ["The lateral (temporal) field", "The medial (nasal) field", "The superior field", "The inferior field"], a: 0, h1: "Nothing bony blocks it.", h2: "The nasal bone restricts the medial side.", exp: "The LATERAL (temporal) field is widest; the medial field is restricted by the nasal bone." },
+  { id: 8, topic: "Fissures", src: "Maini · L19", q: "How many 'doorways' allow structures into or out of the orbit, and what are they?", opts: ["Two: the superior and inferior orbital fissures", "Four: two fissures, the optic canal, and the infraorbital foramen", "Three: superior orbital fissure, inferior orbital fissure, and optic canal", "Three: optic canal, foramen rotundum, and foramen ovale"], a: 2, h1: "Two fissures plus a canal.", h2: "Rotundum and ovale are not orbital doorways.", exp: "THREE doorways: the SUPERIOR orbital fissure, the INFERIOR orbital fissure, and the OPTIC CANAL." },
+  { id: 9, topic: "Fissures", src: "Maini · L19", q: "The optic canal is part of which bone and transmits which two structures?", opts: ["Greater wing of sphenoid; CN III and IV", "Lesser wing of the sphenoid; the optic nerve and the ophthalmic artery", "Maxilla; the maxillary nerve and infraorbital artery", "Frontal bone; the supraorbital nerve and vessels"], a: 1, h1: "The same wing that helps form the roof.", h2: "Optic nerve plus its companion artery.", exp: "The OPTIC CANAL (lesser wing of sphenoid) transmits the OPTIC NERVE and the OPHTHALMIC ARTERY." },
+  { id: 10, topic: "Fissures", src: "Maini · L19", q: "The superior orbital fissure lies between which parts of the sphenoid?", opts: ["The body and the greater wing", "The two pterygoid plates", "Between its greater and lesser wings", "The lesser wing and the frontal bone"], a: 2, h1: "Between the two wings.", h2: "Greater and lesser.", exp: "The SUPERIOR orbital fissure lies between the GREATER and LESSER wings of the sphenoid." },
+  { id: 11, topic: "Fissures", src: "Maini · L19", q: "Compared with the superior orbital fissure, the inferior orbital fissure:", opts: ["Is OUTSIDE the cranial cavity, communicating with the pterygopalatine fossa", "Communicates with the posterior cranial fossa", "Is the doorway for the optic nerve", "Lies entirely within the frontal bone"], a: 0, h1: "It does not open into the cranial cavity.", h2: "It leads toward the pterygopalatine/infratemporal region.", exp: "The INFERIOR orbital fissure is OUTSIDE the cranial cavity, communicating with the PTERYGOPALATINE/infratemporal fossa." },
+  { id: 12, topic: "Fissures", src: "Maini · L19", q: "The infraorbital artery (which Maini stressed passes through the inferior orbital fissure) is the terminal branch of which artery, exiting where?", opts: ["Facial artery; through the supraorbital notch", "Internal carotid; through the optic canal", "Maxillary artery; exiting through the infraorbital foramen", "Ophthalmic artery; through the anterior ethmoidal foramen"], a: 2, h1: "It is a branch of a major deep-face artery.", h2: "It exits a maxilla foramen of the same name.", exp: "The INFRAORBITAL artery = the terminal branch of the MAXILLARY artery; it exits through the INFRAORBITAL FORAMEN." },
+  { id: 13, topic: "Eyelids", src: "Maini · L19", q: "The sebaceous glands associated with the eyelashes at the lid margin are the:", opts: ["Tarsal (Meibomian) glands", "Glands of Zeis", "Glands of Moll", "Lacrimal glands"], a: 1, h1: "Sebaceous, right at the lashes.", h2: "Not the sweat glands (Moll).", exp: "The sebaceous glands of the eyelashes are the GLANDS OF ZEIS (the sweat glands are the glands of Moll)." },
+  { id: 14, topic: "Eyelids", src: "Maini · L19", q: "The sweat glands at the eyelid margin are the glands of:", opts: ["Zeis", "Meibom", "Wolfring", "Moll"], a: 3, h1: "Sweat, not sebaceous.", h2: "It rhymes with 'doll'.", exp: "The sweat glands at the lid margin are the GLANDS OF MOLL." },
+  { id: 15, topic: "Eyelids", src: "Maini · L19", q: "A firm lump on the BODY of the eyelid (not the margin), often needing a minor surgical scoop, is caused by inflammation of which gland?", opts: ["The tarsal (Meibomian) gland, producing a chalazion", "A gland of Zeis, producing a stye", "The lacrimal gland, producing dacryoadenitis", "A gland of Moll, producing an external hordeolum"], a: 0, h1: "It sits deep in the tarsal plate.", h2: "Chalazion = internal hordeolum.", exp: "A CHALAZION (internal hordeolum) comes from a TARSAL/MEIBOMIAN gland; the swelling is on the BODY of the lid." },
+  { id: 16, topic: "Eyelids", src: "Maini · L19", q: "An external hordeolum (stye) is caused by inflammation of:", opts: ["A tarsal (Meibomian) gland", "The lacrimal sac", "A marginal gland (of Zeis or Moll) at the lid margin", "The plica semilunaris"], a: 2, h1: "The swelling is AT the margin.", h2: "The marginal glands, not the deep tarsal ones.", exp: "A STYE (external hordeolum) is inflammation of a MARGINAL gland (Zeis or Moll) at the lid margin." },
+  { id: 17, topic: "Eyelids", src: "Maini · L19", q: "From superficial to deep, the correct eyelid layer sequence is:", opts: ["Tarsal plate, skin, orbicularis oculi, conjunctiva, LPS tendon", "Skin > orbicularis oculi (in superficial fascia) > LPS tendon > tarsal plate > palpebral conjunctiva", "Conjunctiva, tarsal plate, LPS tendon, orbicularis, skin", "Skin, tarsal plate, orbicularis oculi, conjunctiva"], a: 1, h1: "Skin is outermost, conjunctiva innermost.", h2: "Muscle, then levator tendon, then tarsal plate.", exp: "Skin > orbicularis oculi (superficial fascia) > LPS tendon > tarsal plate > palpebral conjunctiva." },
+  { id: 18, topic: "Lacrimal", src: "Maini · L19", q: "The lacrimal fossa in the MEDIAL wall of the orbit accommodates which structure?", opts: ["The lacrimal gland", "The inferior oblique origin", "The trochlea", "The lacrimal (nasolacrimal) sac, NOT the gland"], a: 3, h1: "The gland sits laterally, in the frontal bone.", h2: "This medial fossa holds the drainage sac.", exp: "The medial-wall lacrimal fossa holds the LACRIMAL SAC, not the gland." },
+  { id: 19, topic: "Lacrimal", src: "Maini · L20", q: "Which sequence correctly traces tear drainage from eye to nose?", opts: ["Puncta > canaliculi > lacrimal sac > nasolacrimal duct > inferior meatus of the nose", "Lacrimal gland > sac > superior meatus", "Puncta > nasolacrimal duct > lacrimal sac > canaliculi", "Caruncle > plica semilunaris > pupil > nose"], a: 0, h1: "Start at the tiny pores.", h2: "Sac, then duct, then the nose.", exp: "PUNCTA > CANALICULI > lacrimal SAC > NASOLACRIMAL DUCT > INFERIOR MEATUS of the nasal cavity." },
+  { id: 20, topic: "Lacrimal", src: "Maini · L20", q: "Inflammation of the lacrimal SAC is called:", opts: ["Dacryoadenitis", "Xerophthalmia", "Dacryocystitis", "Chalazion"], a: 2, h1: "'Cyst' means sac.", h2: "Not the 'adeno' (gland) one.", exp: "DACRYOCYSTITIS = inflammation of the lacrimal SAC (dacryoadenitis is the gland)." },
+  { id: 21, topic: "Lacrimal", src: "Maini · L20", q: "Parasympathetic (secretomotor) fibers reach the lacrimal gland via which nerve and ganglion?", opts: ["Oculomotor nerve; ciliary ganglion", "Facial nerve (greater petrosal), relaying in the pterygopalatine ganglion", "Trigeminal nerve; trigeminal ganglion", "Glossopharyngeal nerve; otic ganglion"], a: 1, h1: "The tear gland's parasympathetics are CN VII.", h2: "Greater petrosal to the pterygopalatine ganglion.", exp: "The lacrimal gland's parasympathetic supply = CN VII via the GREATER PETROSAL nerve, relaying in the PTERYGOPALATINE ganglion." },
+  { id: 22, topic: "LPS / Horner", src: "Maini · L19", q: "The smooth-muscle slip of levator palpebrae superioris (the superior tarsal muscle) is innervated by:", opts: ["The oculomotor nerve (CN III)", "The facial nerve (CN VII)", "Parasympathetic fibers", "Sympathetic fibers only"], a: 3, h1: "Smooth muscle means autonomic control.", h2: "It fails in Horner syndrome.", exp: "The SUPERIOR TARSAL muscle is supplied by SYMPATHETIC fibers only (the rest of LPS is CN III)." },
+  { id: 23, topic: "LPS / Horner", src: "Maini · L20", q: "Which finding is NOT part of Horner syndrome?", opts: ["Mydriasis (pupillary dilation)", "Partial ptosis", "Anhidrosis", "Enophthalmos"], a: 0, h1: "Sympathetic FAILURE cannot dilate the pupil.", h2: "You would expect the opposite pupil change.", exp: "MYDRIASIS is NOT in Horner syndrome; sympathetic failure gives MIOSIS. Horner = partial ptosis, miosis, anhidrosis, flushing, enophthalmos." },
+  { id: 24, topic: "LPS / Horner", src: "Maini · L20", q: "In Horner syndrome the ptosis is only PARTIAL because:", opts: ["The eyelid has no levator at all", "Only the conjunctiva is affected", "The CN III-supplied skeletal part of LPS is still intact; only the sympathetic superior tarsal muscle fails", "The orbicularis oculi is paralysed"], a: 2, h1: "Two muscle parts, two nerve supplies.", h2: "The skeletal, oculomotor part still works.", exp: "Only the SYMPATHETIC superior tarsal muscle fails; the CN III skeletal LPS is intact, so the ptosis is PARTIAL." },
+  { id: 25, topic: "LPS / Horner", src: "Maini · L20", q: "Which lesion did Maini name as a common cause of Horner syndrome?", opts: ["A middle cerebral artery stroke", "A Pancoast (apical lung) tumour compressing the cervical sympathetic chain", "A pituitary adenoma", "An acoustic neuroma"], a: 1, h1: "Think of the lung apex.", h2: "It presses on the sympathetic chain.", exp: "A PANCOAST (apical lung) TUMOUR compressing the cervical sympathetic chain is a common cause." },
+  { id: 26, topic: "Coats", src: "Maini · L20", q: "The outer fibrous coat of the eyeball consists of:", opts: ["Sclera (posterior five-sixths) and cornea (anterior one-sixth)", "Choroid and ciliary body", "Retina and optic disc", "Iris and pupil"], a: 0, h1: "White part plus the clear window.", h2: "5/6 opaque, 1/6 transparent.", exp: "The fibrous coat = SCLERA (posterior 5/6) + CORNEA (anterior 1/6)." },
+  { id: 27, topic: "Coats", src: "Maini · L20", q: "The middle vascular coat (tunica vasculosa) is composed of:", opts: ["Sclera, cornea, and lamina cribrosa", "Rods, cones, and ganglion cells", "Anterior, posterior, and vitreous chambers", "Choroid, ciliary body, and iris"], a: 3, h1: "The pigmented, blood-rich layer.", h2: "Choroid in back, iris in front.", exp: "The vascular coat = CHOROID + CILIARY BODY + IRIS." },
+  { id: 28, topic: "Coats", src: "Maini · L20", q: "The perforated posterior region of the sclera through which the optic nerve pierces is the:", opts: ["Ora serrata", "Canal of Schlemm", "Lamina cribrosa", "Lacrimal fossa"], a: 2, h1: "'Cribrosa' means perforated.", h2: "Same root as the cribriform plate.", exp: "The LAMINA CRIBROSA is the perforated posterior sclera where the optic nerve pierces it." },
+  { id: 29, topic: "Coats", src: "Maini · L20", q: "Tenon's capsule (bulbar fascia) is separated from the sclera by which space?", opts: ["The anterior chamber", "The episcleral space", "The vitreous chamber", "The iridocorneal angle"], a: 1, h1: "A thin space just outside the sclera.", h2: "'Epi' = upon the sclera.", exp: "Tenon's capsule is separated from the sclera by the EPISCLERAL SPACE." },
+  { id: 30, topic: "Retina", src: "Maini · L20", q: "Why is the optic disc a physiological blind spot?", opts: ["It lacks photoreceptors (no rods or cones)", "It is covered by the iris", "It has only cones and no rods", "It is where the macula lutea sits"], a: 0, h1: "It is where the nerve fibers leave.", h2: "No receptors can sit there.", exp: "The OPTIC DISC has NO photoreceptors (rods/cones), so it is the physiological BLIND SPOT." },
+  { id: 31, topic: "Retina", src: "Maini · L20", q: "The point of maximum visual acuity, densely packed with cones, is the:", opts: ["Optic disc", "Ora serrata", "Lamina cribrosa", "Fovea centralis of the macula lutea"], a: 3, h1: "You aim light here to see detail.", h2: "The centre of the yellow spot.", exp: "The FOVEA CENTRALIS (in the macula lutea) is saturated with cones = the point of acute vision." },
+  { id: 32, topic: "Retina", src: "Maini · L20", q: "Which photoreceptors provide dim-light (night) vision but cannot detect colour?", opts: ["Cones", "Bipolar cells", "Rods", "Ganglion cells"], a: 2, h1: "Active when the lights are low.", h2: "Not the colour ones.", exp: "RODS give dim-light/night vision and cannot detect colour; CONES handle bright-light colour vision." },
+  { id: 33, topic: "Retina", src: "Maini · L20", q: "Macular degeneration classically produces:", opts: ["Total blindness in one eye", "Loss of central vision with preserved peripheral vision", "Loss of peripheral vision with preserved central vision", "Sudden painful red eye"], a: 1, h1: "The macula serves the centre of the image.", h2: "The periphery is spared.", exp: "Macular degeneration = loss of CENTRAL vision with PRESERVED peripheral vision." },
+  { id: 34, topic: "Aqueous", src: "Maini · L20", q: "Which sequence correctly describes normal aqueous humor circulation?", opts: ["Posterior chamber > pupil > anterior chamber > canal of Schlemm > venous blood", "Anterior chamber > vitreous > retina > optic nerve", "Ciliary body > vitreous chamber > ora serrata", "Anterior chamber > pupil > posterior chamber > lens"], a: 0, h1: "It is made behind the iris.", h2: "It leaves through the canal at the angle.", exp: "Posterior chamber > PUPIL > anterior chamber > canal of SCHLEMM (sinus venosus sclerae) > venous blood." },
+  { id: 35, topic: "Aqueous", src: "Maini · L20", q: "Blockage of the canal of Schlemm at the iridocorneal angle causes:", opts: ["Cataract", "Macular degeneration", "Retinal detachment", "Glaucoma (raised intraocular pressure)"], a: 3, h1: "Aqueous cannot drain, so pressure builds.", h2: "It can lead to blindness if prolonged.", exp: "Blocking the canal of Schlemm raises intraocular pressure = GLAUCOMA." },
+  { id: 36, topic: "Refraction", src: "Maini · L20", q: "In myopia, the image focuses ___ the retina and is corrected with a ___ lens.", opts: ["Behind; convex", "In front of; concave", "On; cylindrical", "Behind; concave"], a: 1, h1: "The 'minus' error.", h2: "Focus falls short, so a diverging lens fixes it.", exp: "MYOPIA: image focuses IN FRONT of the retina; corrected with a CONCAVE lens." },
+  { id: 37, topic: "Refraction", src: "Maini · L20", q: "In hyperopia (farsightedness), the image focuses ___ the retina and is corrected with a ___ lens.", opts: ["In front of; concave", "On; cylindrical", "Behind; convex", "In front of; convex"], a: 2, h1: "The 'plus' error.", h2: "Focus falls beyond the retina.", exp: "HYPEROPIA: image focuses BEHIND the retina; corrected with a CONVEX lens." },
+  { id: 38, topic: "Refraction", src: "Maini · L20", q: "Presbyopia is best defined as:", opts: ["Age-related (after about 40) inability to focus on near objects", "Opacity of the lens due to ageing", "Irregular corneal curvature", "Loss of central vision"], a: 0, h1: "It is about age and near focus.", h2: "Not lens opacity (that is cataract).", exp: "PRESBYOPIA = age-related (about 40+) inability to focus on NEAR objects." },
+  { id: 39, topic: "Muscles", src: "Maini · L21", q: "The four recti of the eye share a common origin from:", opts: ["The floor of the orbit", "The trochlea", "The lesser wing of the sphenoid alone", "A common tendinous (fibrous) ring around the optic canal"], a: 3, h1: "A ring at the back of the orbit.", h2: "It surrounds the optic canal.", exp: "The four RECTI arise from a COMMON TENDINOUS RING around the optic canal." },
+  { id: 40, topic: "Muscles", src: "Maini · L21", q: "By 'SO4, LR6, AO3', which nerve supplies the superior oblique?", opts: ["Oculomotor (CN III)", "Trochlear nerve (CN IV)", "Abducent (CN VI)", "Ophthalmic (V1)"], a: 1, h1: "The '4' in the mnemonic.", h2: "The nerve named for the pulley.", exp: "SO4: the SUPERIOR OBLIQUE is supplied by the TROCHLEAR nerve (CN IV)." },
+  { id: 41, topic: "Muscles", src: "Maini · L21", q: "Which extraocular muscle is the ONLY one arising from the FLOOR of the orbit (a point Maini said appears on boards)?", opts: ["Superior oblique", "Medial rectus", "Inferior oblique", "Lateral rectus"], a: 2, h1: "It is an oblique, not a rectus.", h2: "It elevates and abducts (up and out).", exp: "The INFERIOR OBLIQUE is the only muscle that originates from the FLOOR of the orbit." },
+  { id: 42, topic: "Muscles", src: "Maini · L21", q: "The action of the superior oblique is:", opts: ["Depression + abduction (down and out)", "Elevation + adduction (up and in)", "Elevation + abduction (up and out)", "Pure adduction"], a: 0, h1: "Its tendon threads the trochlea.", h2: "It turns the eye down and out.", exp: "The SUPERIOR OBLIQUE depresses and abducts the eye (DOWN and OUT)." },
+  { id: 43, topic: "Muscles", src: "Maini · L21", q: "Intorsion of the eyeball ('both superiors') is produced by:", opts: ["Inferior rectus + inferior oblique", "Medial rectus + lateral rectus", "Lateral rectus + superior rectus", "Superior rectus + superior oblique"], a: 3, h1: "The two SUPERIOR muscles.", h2: "Rectus + oblique, both superior.", exp: "INTORSION = SUPERIOR RECTUS + SUPERIOR OBLIQUE (the inferiors extort)." },
+  { id: 44, topic: "Testing", src: "Maini · L21", q: "For clinical testing, the recti are isolated in ___ and the obliques in ___.", opts: ["Elevation; depression", "Abduction; adduction", "Adduction; abduction", "Convergence; divergence"], a: 1, h1: "Turn the eye OUT for the recti.", h2: "Turn it IN for the obliques.", exp: "RECTI are tested in ABDUCTION; OBLIQUES in ADDUCTION." },
+  { id: 45, topic: "Testing", src: "Maini · L21", q: "To test the superior oblique, ask the patient to:", opts: ["Abduct and look up", "Abduct and look down", "Adduct (look medially) and look down", "Adduct and look up"], a: 2, h1: "Obliques are tested in adduction.", h2: "Superior oblique still depresses.", exp: "Test the SUPERIOR OBLIQUE by ADDUCTING the eye and looking DOWN." },
+  { id: 46, topic: "Nerves", src: "Maini · L20", q: "Which statement about the deep petrosal nerve is correct?", opts: ["It carries sympathetic fibers from the internal carotid plexus and is NOT a branch of CN VII", "It is a parasympathetic branch of the facial nerve", "It supplies the lacrimal gland directly with taste fibers", "It is a branch of the optic nerve"], a: 0, h1: "A classic 'not a branch of CN VII' trap.", h2: "It is sympathetic, from the carotid plexus.", exp: "The DEEP PETROSAL nerve carries SYMPATHETIC fibers from the internal carotid plexus and is NOT a branch of CN VII." },
+  { id: 47, topic: "Nerves", src: "Maini · L21", q: "By the mnemonic 'NFL', the three branches of the ophthalmic nerve (V1) are:", opts: ["Nasal, facial, lingual", "Nasopalatine, frontal, lacrimal", "Nasociliary, facial, long ciliary", "Nasociliary, frontal, lacrimal"], a: 3, h1: "National Football League.", h2: "Nasociliary, Frontal, Lacrimal.", exp: "V1 branches = NASOCILIARY, FRONTAL, LACRIMAL ('NFL')." },
+  { id: 48, topic: "Arteries", src: "Maini · L21", q: "The ophthalmic artery is a branch of which vessel?", opts: ["The external carotid artery", "The internal carotid artery", "The maxillary artery", "The facial artery"], a: 1, h1: "The same artery that feeds the brain anteriorly.", h2: "Internal, not external.", exp: "The OPHTHALMIC ARTERY is a branch of the INTERNAL CAROTID artery." },
+  { id: 49, topic: "Ciliary ganglion", src: "Maini · L21", q: "The ciliary ganglion is functionally which type, and where does it lie relative to the optic nerve?", opts: ["A sympathetic ganglion, medial to the optic nerve", "A sensory ganglion, above the optic nerve", "A parasympathetic ganglion, on the lateral side of the optic nerve", "A sympathetic ganglion, within the optic nerve"], a: 2, h1: "It relays fibers for pupil constriction.", h2: "Parasympathetic, lateral to the nerve.", exp: "The CILIARY GANGLION is PARASYMPATHETIC and lies on the LATERAL side of the optic nerve." },
+  { id: 50, topic: "Ciliary ganglion", src: "Maini · L21", q: "How do sympathetic fibers behave at the ciliary ganglion?", opts: ["They synapse there before reaching the eye", "They form the parasympathetic root", "They supply the sphincter pupillae", "They pass straight through without synapsing (already synapsed in the superior cervical ganglion)"], a: 3, h1: "They already synapsed elsewhere.", h2: "No second synapse in the orbit.", exp: "SYMPATHETIC fibers PASS THROUGH the ciliary ganglion without synapsing (they synapsed in the superior cervical ganglion)." },
+  { id: 51, topic: "Ciliary ganglion", src: "Maini · L21", q: "Postganglionic parasympathetic fibers leave the ciliary ganglion in the short ciliary nerves to supply:", opts: ["The lateral rectus and LPS", "The sphincter pupillae and the ciliary muscle", "The dilator pupillae and superior tarsal muscle", "The lacrimal gland"], a: 1, h1: "Constriction and accommodation.", h2: "The sphincter plus the muscle that shapes the lens.", exp: "Short ciliary nerves carry parasympathetic fibers to the SPHINCTER PUPILLAE and the CILIARY MUSCLE." },
+  { id: 52, topic: "Reflexes", src: "Maini · L21", q: "In the pupillary light reflex, the afferent limb is which nerve and the reflex centre is where?", opts: ["Oculomotor nerve; Edinger-Westphal nucleus", "Facial nerve; spinal trigeminal nucleus", "Optic nerve (CN II); the pretectal nucleus of the midbrain", "Trigeminal nerve; the superior colliculus"], a: 2, h1: "Light comes in on the visual nerve.", h2: "Relays in the pretectal region.", exp: "Afferent = OPTIC nerve (CN II); the reflex centre is the PRETECTAL nucleus of the midbrain." },
+  { id: 53, topic: "Reflexes", src: "Maini · L21", q: "Light is shone into the RIGHT eye, but the RIGHT optic nerve (CN II) is non-functional. The result is:", opts: ["Neither pupil constricts", "Only the right pupil constricts", "Only the left pupil constricts", "Both pupils constrict normally"], a: 0, h1: "The signal never gets in.", h2: "No afferent means no response either side.", exp: "With a dead AFFERENT (optic) nerve, NEITHER pupil constricts (the light is not detected)." },
+  { id: 54, topic: "Reflexes", src: "Maini · L21", q: "The accommodation reflex for near vision involves which three changes (the '3 C's')?", opts: ["Convergence, dilation, and lens flattening", "Divergence, constriction, and lens flattening", "Convergence, constriction, and reduced convexity", "Convergence, pupillary constriction, and increased lens convexity"], a: 3, h1: "Eyes turn in, pupil narrows, lens fattens.", h2: "All three start with C.", exp: "Accommodation = CONVERGENCE + pupillary CONSTRICTION + increased lens CONVEXITY (a parasympathetic CN III reflex)." },
+  { id: 55, topic: "Reflexes", src: "Maini · L21", q: "An Argyll Robertson pupil (light reflex lost, accommodation preserved) is classically associated with:", opts: ["Diabetes", "Syphilis", "Hypertension", "Glaucoma"], a: 1, h1: "'Accommodates but does not react.'", h2: "A classic infectious cause.", exp: "The ARGYLL ROBERTSON pupil is classically associated with SYPHILIS." },
+  { id: 56, topic: "Reflexes", src: "Maini · L21", q: "In the corneal reflex, the sensory (afferent) and motor (efferent) limbs are:", opts: ["Optic nerve (in); oculomotor (out)", "Facial (in); trigeminal (out)", "Ophthalmic V1 (in); facial nerve CN VII (out)", "Maxillary V2 (in); abducent (out)"], a: 2, h1: "Sensation of the cornea is trigeminal.", h2: "Closing the lids is CN VII.", exp: "Corneal reflex: sensory = OPHTHALMIC (V1); motor = FACIAL nerve (CN VII), which closes the lids." },
+  { id: 57, topic: "Reflexes", src: "Maini · L21", q: "Papilledema (swelling of the optic disc) most importantly indicates:", opts: ["Raised intracranial pressure", "A refractive error", "Sympathetic failure", "A blocked nasolacrimal duct"], a: 0, h1: "Think pressure behind the eye.", h2: "It points into the skull, not the eye alone.", exp: "PAPILLEDEMA indicates raised INTRACRANIAL pressure/tension (e.g., tumour, haemorrhage, oedema)." },
+  { id: 58, topic: "Autonomics", src: "Maini · L20", q: "The circular fibers of the iris form which muscle, under which autonomic control?", opts: ["Dilator pupillae; sympathetic", "Ciliary muscle; parasympathetic", "Sphincter pupillae; parasympathetic (constriction)", "Superior tarsal; sympathetic"], a: 2, h1: "Circular fibers act like a drawstring.", h2: "Constriction is a parasympathetic job.", exp: "CIRCULAR iris fibers = SPHINCTER PUPILLAE, PARASYMPATHETIC, causing constriction (miosis)." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 8 · The Eye &amp; Orbit · Dr. Maini</span>
+          <h1 className="title serif">The <em>Eye &amp; Orbit</em></h1>
+          <p className="subtitle">One-surface cram for Maini&apos;s eye &amp; orbit lectures (L19-21) — the bony orbit and its doorways, eyelids &amp; lacrimal apparatus, Horner syndrome, the three coats of the globe, retina, aqueous flow &amp; glaucoma, refraction, the extraocular muscles and their testing, the orbital nerves/vessels, the ciliary ganglion, and the light/accommodation/corneal reflexes — in her order, with a drill in her style and her own mnemonics. Grounded in the module&apos;s audited MC bank.</p>
+          <div className="pill-row">
+            <span className="pill-date">👁️ The Orbit &amp; Its Contents · Testing of Eye Muscles, Arteries, Nerves &amp; Ciliary Ganglion (L19-21)</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s GA lectures 19-21 (The Eye &amp; Orbit) and the module&apos;s audited MC bank. Questions are original, in her style, source-tagged per item. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s eye &amp; orbit essentials, in her order</div>
+        <p>Bony orbit → three doorways → eyelids &amp; lacrimal apparatus → LPS &amp; Horner → the three coats → retina → aqueous &amp; glaucoma → refraction → extraocular muscles &amp; testing → nerves/vessels → ciliary ganglion → reflexes. The ⚑ flags are the high-yield hooks.</p>
+      </div>
+      {cram.map((c) => (
+        <div className="obj" key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match Maini&apos;s framework and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Mnemonics</div>
+        <p>Maini&apos;s own mnemonics and tricks pulled straight from the eye &amp; orbit lectures — the retention hooks to lean on when a rule won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the eye &amp; orbit</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Seema Maini, teaching GA 0202 (Gross Anatomy), running a review of THE EYE & ORBIT — from her lectures on The Orbit & Its Contents and the Testing of Eye Muscles, Arteries, Nerves & Ciliary Ganglion. Teach ONLY from this content; do not invent bones, foramina, muscle actions, nerves, or reflex circuits. Warm and direct; you say "right?" and "okay," love clinical stories, quiz students to wake them up, and push them to reason from roots and rules rather than memorise blindly. Keep answers tight (3-6 sentences) and quiz the student back.
+
+BONY ORBIT: quadrilateral pyramid; apex posterior (essentially the optic canal where the optic nerve exits to the cranial cavity), base anterior. Base bones: frontal, maxilla, zygomatic. Roof: orbital plate of frontal + lesser wing of sphenoid. Medial wall: ethmoid (air cells, most prominent), lacrimal (papery 'papyrus' bone), body of sphenoid, frontal. Floor: mostly maxilla. Lateral wall: frontal process of zygomatic + greater wing of sphenoid. Medial walls parallel; lateral walls meet at ~90 degrees, so the lateral (temporal) field of vision is widest; medial field restricted by the nasal bone.
+
+DOORWAYS: three - superior orbital fissure (between greater & lesser wings of sphenoid; superior ophthalmic vein + CN III, IV, VI, V1 branches; communicates with middle cranial fossa), inferior orbital fissure (between maxilla & greater wing; OUTSIDE the cranium, to the pterygopalatine/infratemporal fossa; V2, inferior ophthalmic vein, and the infraorbital artery - terminal branch of the maxillary artery, which exits the infraorbital foramen of the maxilla), and the optic canal (lesser wing; optic nerve + ophthalmic artery; to middle cranial fossa).
+
+EYELIDS: layers superficial to deep - skin, orbicularis oculi (facial expression muscle, CN VII, closes eye), LPS tendon, tarsal plate, palpebral conjunctiva (reflects to bulbar conjunctiva). Marginal glands: Zeis (sebaceous of lashes), Moll (sweat). Tarsal/Meibomian glands (sebaceous, in the plate) keep lids airtight. STYE (external hordeolum) = marginal gland at the MARGIN, easy; CHALAZION (internal hordeolum) = tarsal/Meibomian gland on the BODY of the lid, often needs surgical scooping.
+
+LACRIMAL: gland sits in the frontal bone; the medial-wall lacrimal fossa holds the SAC. Flow: gland > onto globe > lacrimal lake (with caruncle centrally, plica semilunaris laterally) > puncta (on lacrimal papillae) > canaliculi > lacrimal sac > nasolacrimal duct > inferior meatus of nose. Dacryocystitis = sac inflammation; dacryoadenitis = gland inflammation. Cornea is avascular (fed by tears + air anteriorly, aqueous posteriorly). Lacrimal parasympathetic = CN VII (greater petrosal) via the pterygopalatine ganglion.
+
+LPS & HORNER: LPS opens the upper lid (lower lid has no levator), origin undersurface of lesser wing of sphenoid. Mostly skeletal (CN III), plus a smooth slip = superior tarsal muscle (SYMPATHETIC only). HORNER syndrome (board favourite) = unilateral sympathetic failure: partial ptosis (CN III LPS intact so not complete), miosis, anhidrosis, flushing, enophthalmos. Mydriasis is NOT in Horner. Common cause = Pancoast apical lung tumour. Postganglionic bodies = superior cervical ganglion; preganglionic = T1-T2 lateral horn.
+
+EYEBALL COATS: outer fibrous = sclera (opaque, posterior 5/6) + cornea (transparent avascular anterior 1/6); jaundice shows first in sclera above ~2 mg% bilirubin; lamina cribrosa = perforated posterior sclera for the optic nerve. Middle vascular = choroid (largest) > ciliary body (ciliary processes secrete aqueous; ciliary muscle) > iris (sphincter pupillae = circular fibers, PARASYMPATHETIC, constrict/miosis; dilator pupillae = radial fibers, SYMPATHETIC, dilate/mydriasis). Inner nervous = retina. Tenon's capsule (bulbar fascia) is separated from sclera by the episcleral space, left intact for an artificial eye; its wall extensions = medial & lateral check ligaments.
+
+RETINA: outer pigmented layer (melanin absorbs stray light; deficient in albinism) + neural layer. Chain: rods/cones > bipolar cells > ganglion cells; ganglion-cell axons = optic nerve (CN II). Rods = night vision, no colour; cones = colour, bright light. Optic disc = blind spot (no photoreceptors). Fovea centralis (in the macula lutea, 'lutea' = yellow) = max cones = acute vision. Macular degeneration = central vision lost, peripheral preserved. Ora serrata = serrated anterior retinal margin.
+
+AQUEOUS & CHAMBERS: aqueous made by ciliary processes into the POSTERIOR chamber > pupil > ANTERIOR chamber (cornea to iris) > canal of Schlemm (sinus venosus sclerae) at the iridocorneal angle > venous blood. Block it = raised intraocular pressure = GLAUCOMA (open/closed angle). Vitreous body (in the vitreous chamber, between lens and retina) = gel that keeps the globe's shape.
+
+REFRACTION: media in order - cornea > aqueous > lens > vitreous (cornea does most refraction). Myopia = focus in front = concave lens; hyperopia = focus behind = convex lens; astigmatism = irregular cornea = cylindrical lens; presbyopia = age-related loss of near focus (~40+); cataract = ageing lens opacity.
+
+EXTRAOCULAR MUSCLES: four recti from a common tendinous ring around the optic canal; muscles from occipital myotomes (GSE). Nerves by SO4, LR6, AO3: superior oblique = CN IV, lateral rectus = CN VI, all others (SR, IR, MR, IO) + LPS = CN III. Actions: SR up+in, IR down+in, MR adduction, LR abduction, SO down+out (tendon through the trochlea), IO up+out. Inferior oblique is the ONLY muscle from the floor of the orbit (board point). Both superiors intort; inferiors extort. Intrinsic smooth muscles = sphincter pupillae, dilator pupillae, ciliary muscle.
+
+TESTING (H-test): recti isolated in ABDUCTION, obliques in ADDUCTION. SR = abduct + up; IR = abduct + down; SO = adduct + down; IO = adduct + up.
+
+NERVES/VESSELS: optic nerve (CN II) = SSA. CN III enters via SOF, splits into superior + inferior divisions; CN IV supplies only superior oblique. V1 branches = NFL (nasociliary, frontal, lacrimal); frontal > supraorbital + supratrochlear; nasociliary > long ciliary (sympathetic to dilator pupillae), infratrochlear, anterior/posterior ethmoidal, sensory root to ciliary ganglion. TRAP: deep petrosal nerve is NOT a branch of CN VII - it is sympathetic from the ICA plexus. Ophthalmic artery = from internal carotid; central retinal artery runs in the optic nerve to the centre of the disc; anterior ciliary artery enters at the corneoscleral junction. Ophthalmic veins drain to the cavernous sinus (inferior also to the pterygoid plexus).
+
+CILIARY GANGLION: parasympathetic ganglion, lateral to the optic nerve. Motor root = CN III (preganglionic) > synapse > short ciliary nerves > sphincter pupillae + ciliary muscle. Sympathetics pass through without synapsing (already synapsed in the superior cervical ganglion). Sensory root = nasociliary (V1). Short ciliary nerves carry GSA + sympathetic + parasympathetic. Ciliary muscle contracts > relaxes suspensory ligament > lens thickens for NEAR.
+
+REFLEXES: light reflex - afferent CN II > pretectal nucleus > Edinger-Westphal > efferent CN III > ciliary ganglion > short ciliary > sphincter pupillae; light in one eye constricts both (consensual is the other eye). Afferent (optic) lesion = neither pupil constricts; efferent (CN III) lesion = only that pupil fails. Accommodation (near) = 3 C's: convergence (medial recti, somatic CN III), constriction, increased convexity; a parasympathetic CN III reflex. Argyll Robertson pupil (light lost, accommodation kept) = syphilis. Corneal reflex: sensory V1, motor CN VII, centre = spinal trigeminal nucleus. Papilledema = raised intracranial pressure. Abnormal white/asymmetric red reflex in a child = congenital cataract or retinoblastoma.
+
+Open by offering to drill the extraocular muscles (nerves via SO4 LR6 AO3, actions, and the H-test), Horner syndrome, the light/accommodation reflexes, aqueous flow & glaucoma, the coats of the eyeball, or the orbit's bones & doorways. When the student is wrong, name the rule and have them re-derive step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay, the eye and orbit. Two clusters trip everyone up, right? First, the extraocular muscles - which nerve (SO4, LR6, and everything else is the third nerve), which action (recti pull up/down and IN, obliques up/down and OUT), and the H-test (recti tested in abduction, obliques in adduction). Second, the reflex circuits - the light reflex (afferent optic, efferent third nerve through the ciliary ganglion) and the accommodation reflex (the 3 C's). Want me to drill the eye muscles and their testing, Horner syndrome, the light/accommodation reflexes, the aqueous flow and glaucoma, the three coats of the eyeball, or the bones and doorways of the orbit? Where do you want to start?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill the extraocular muscles - nerves (SO4 LR6 AO3), actions, and the H-test",
+    "Quiz me on Horner syndrome",
+    "The light reflex - which nerve is out, which pupil constricts?",
+    "Aqueous humor flow and glaucoma",
+    "The three coats of the eyeball",
+    "The bones and doorways of the orbit",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her eye &amp; orbit lectures. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

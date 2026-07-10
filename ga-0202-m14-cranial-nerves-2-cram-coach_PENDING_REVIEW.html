@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · Cranial Nerves (part 2) — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — MODULE 14 — CRANIAL NERVES (part 2) · CN IV–XII
+   Dr. Maini. Cram Coach. PENDING REVIEW.
+   Grounded ONLY in the module's AUDITED Everything-MC bank (105 items, anti-fab
+   verified) + Dr. Maini's lecture quotes captured there. NO new unverified facts.
+   Web Speech read-aloud walkthrough. THEME: violet (gold-engine clone).
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m14-cranial-nerves-2-hub_PENDING_REVIEW.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (9 TOPICS) ===== */
+const cram = [
+  {
+    n: 1, title: "The map — how the 12 nerves leave the skull", src: "Maini · L01 Osteology / L19 Orbit",
+    facts: [
+      "There are TWELVE pairs of cranial nerves. Part 2 walks CN IV, V, VI, VII, VIII, IX, X, XI and XII, and the fastest points to bank are the shared exits, because several nerves leave through one opening.",
+      "SUPERIOR ORBITAL FISSURE carries CN III, CN IV, CN VI and V1 (the ophthalmic division). FORAMEN ROTUNDUM carries V2 (maxillary). FORAMEN OVALE carries V3 (mandibular). Maini's middle-fossa order from medial to lateral is superior orbital fissure, then rotundum, then ovale, then spinosum.",
+      "INTERNAL ACOUSTIC MEATUS carries CN VII and CN VIII together, which is why one tumour there can hit both. CN VIII never leaves the skull, it ends in the inner ear inside the petrous temporal bone, while CN VII keeps going through the facial canal and exits at the STYLOMASTOID foramen.",
+      "JUGULAR FORAMEN carries CN IX, CN X and CN XI, and the sigmoid sinus becomes the internal jugular vein right there. The HYPOGLOSSAL CANAL, in the occipital bone, carries CN XII. The cavernous sinus wall runs CN III, IV, VI and V1 with V2.",
+    ],
+    flag: "SOF = III · IV · VI · V1. Rotundum = V2. Ovale = V3. IAM = VII + VIII. Jugular foramen = IX · X · XI. Hypoglossal canal = XII. Middle fossa medial to lateral: SOF, rotundum, ovale, spinosum.",
+  },
+  {
+    n: 2, title: "The eye-muscle nerves — SO4 · LR6 · AO3 (CN IV & VI)", src: "Maini · L20 The Orbit",
+    facts: [
+      "Maini's eye-muscle mnemonic is SO4, LR6, AO3. The Superior Oblique is run by CN 4, the trochlear. The Lateral Rectus is run by CN 6, the abducens. All Other extraocular muscles are run by CN 3, the oculomotor.",
+      "CN IV, the trochlear, is purely motor to just one muscle, the superior oblique, and it is the only cranial nerve that emerges from the DORSAL, or posterior, surface of the brainstem, at the midbrain. It enters the orbit through the superior orbital fissure.",
+      "The superior oblique tendon threads through the TROCHLEA, a fibrocartilaginous pulley, which is exactly why the nerve is called trochlear. The muscle pulls the eye DOWN and OUT, so a CN IV palsy gives trouble looking down and in, classically trouble going down stairs.",
+      "CN VI, the abducens, is purely motor to one muscle, the lateral rectus, which ABDUCTS the eye, turning it outward, hence the name. A CN VI lesion lets the eye drift MEDIALLY on the unopposed medial rectus with horizontal double vision, and its long intracranial course makes it the eye nerve most often hit first by raised intracranial pressure.",
+    ],
+    flag: "SO4 = superior oblique = IV, action 'down and out'. LR6 = lateral rectus = VI, abducts. AO3 = all others = III. CN IV is the ONLY nerve off the dorsal brainstem. CN VI lesion → eye pulled medial + horizontal diplopia; first hit by raised ICP.",
+  },
+  {
+    n: 3, title: "CN V — Trigeminal (the great sensory nerve of the face)", src: "Maini · L10/L11 Infratemporal Fossa",
+    facts: [
+      "The trigeminal has THREE divisions. V1, the ophthalmic, leaves through the superior orbital fissure. V2, the maxillary, leaves through the foramen ROTUNDUM. V3, the mandibular, leaves through the foramen OVALE.",
+      "V3 is the odd division, because it is BOTH sensory and motor, while V1 and V2 are sensory only. The motor part of V3 supplies the MUSCLES OF MASTICATION, that is temporalis, masseter and the two pterygoids, and nearly all V3 branches are given off in the INFRATEMPORAL FOSSA.",
+      "The large TRIGEMINAL GANGLION sits at the apex of the petrous temporal bone. It is a SENSORY ganglion, holding the cell bodies of general sensory fibres, so it is not an autonomic or parasympathetic ganglion. As Maini asks, it is not one of the 'cops'.",
+      "For the front of the tongue, general touch and pain of the anterior two-thirds travel on the LINGUAL nerve, a branch of V3, and the chorda tympani from CN VII rides along the lingual nerve to carry taste. The corneal blink reflex has its sensory limb on V1 and its motor limb on CN VII. Trigeminal neuralgia gives sudden shock-like pain in the V2 or V3 territory, and V3 with the muscles of mastication comes from the first pharyngeal arch.",
+    ],
+    flag: "V1 → SOF, V2 → rotundum, V3 → ovale. ONLY V3 is mixed (motor = muscles of mastication, arch 1). Trigeminal ganglion = SENSORY, at the petrous apex. Anterior two-thirds tongue: general = lingual (V3), taste = chorda tympani (VII) riding the lingual. Corneal reflex: in = V1, out = VII.",
+  },
+  {
+    n: 4, title: "CN VII — Facial (expression, taste and its bony journey)", src: "Maini · L08 Face & Scalp",
+    facts: [
+      "The facial nerve enters the skull with CN VIII through the INTERNAL ACOUSTIC MEATUS, runs through the facial canal, exits at the STYLOMASTOID foramen, and then immediately passes through the PAROTID gland, where it splits into its five terminal branches.",
+      "At the bend, or genu, of the facial canal sits the GENICULATE GANGLION, named because it is at the genu. It holds the cell bodies of TASTE fibres from the anterior two-thirds of the tongue.",
+      "CN VII is motor to the muscles of FACIAL EXPRESSION, such as orbicularis oculi, and also to the posterior belly of digastric, the stylohyoid and the stapedius. It carries taste from the anterior two-thirds of the tongue, and parasympathetic secretomotor fibres, through the chorda tympani, to the SUBMANDIBULAR and SUBLINGUAL glands.",
+      "The five terminal branches in the parotid are temporal, zygomatic, buccal, marginal mandibular and cervical. Idiopathic paralysis of one whole side of the face is BELL'S PALSY, and Bell's phenomenon is the eyeball rolling UP when the patient tries but fails to close the eye. Ramsay Hunt, herpes zoster oticus, hits the geniculate ganglion of VII along with CN VIII, giving ear vesicles with facial palsy and hearing symptoms.",
+    ],
+    flag: "IAM → facial canal → geniculate ganglion (taste cell bodies) → stylomastoid foramen → parotid → 5 branches. VII = facial expression + posterior digastric, stylohyoid, stapedius; taste anterior two-thirds; secretomotor to submandibular & sublingual. Whole side of face weak = Bell's palsy.",
+  },
+  {
+    n: 5, title: "CN VIII — Vestibulocochlear (hearing and balance)", src: "Maini · L22 The Ear",
+    facts: [
+      "CN VIII enters the skull through the INTERNAL ACOUSTIC MEATUS with CN VII, and it is distinctive because it does NOT leave the skull, ending in the inner ear inside the petrous temporal bone.",
+      "It is purely SENSORY, and it has two components. The COCHLEAR part carries hearing, and the VESTIBULAR part carries balance and equilibrium.",
+      "A cochlear lesion gives tinnitus, a ringing, and deafness. A vestibular lesion gives vertigo and loss of balance.",
+      "Because CN VII and CN VIII travel together in the internal acoustic meatus, an ACOUSTIC NEUROMA, a vestibular schwannoma growing there, can knock out both nerves at once.",
+    ],
+    flag: "CN VIII = purely sensory, two parts: cochlear (hearing → tinnitus, deafness) and vestibular (balance → vertigo). Rides the IAM with VII; never exits the skull. IAM acoustic neuroma hits VII + VIII together.",
+  },
+  {
+    n: 6, title: "CN IX — Glossopharyngeal (posterior tongue, parotid, gag)", src: "Maini · L28 Pharynx / L10 Infratemporal",
+    facts: [
+      "The glossopharyngeal exits the skull through the JUGULAR FORAMEN, alongside CN X and CN XI. Its only motor muscle is the STYLOPHARYNGEUS, which is the one pharyngeal muscle NOT supplied by the vagus.",
+      "For the POSTERIOR one-third of the tongue it carries both general sensation AND taste, so unlike the front of the tongue, where the two are split, at the back CN IX does both jobs.",
+      "It carries parasympathetic secretomotor fibres to the PAROTID gland, relayed through the OTIC GANGLION, and CN IX is the nerve that brings the preganglionic fibres to that ganglion.",
+      "CN IX is the sensory, afferent limb of the GAG reflex, it carries the carotid SINUS baroreceptor and carotid BODY chemoreceptor afferents on the carotid sinus nerve, and its tympanic nerve of Jacobson forms the tympanic plexus in the middle ear. It is the nerve of the third pharyngeal arch.",
+    ],
+    flag: "IX = jugular foramen · one muscle (STYLOPHARYNGEUS) · posterior one-third tongue (general + taste) · parotid secretomotor via the OTIC ganglion · gag AFFERENT · carotid sinus & body. Arch 3.",
+  },
+  {
+    n: 7, title: "CN X — Vagus (the wanderer: larynx, viscera, gag motor)", src: "Maini · L26 The Larynx / L05 Cervical",
+    facts: [
+      "The vagus exits the JUGULAR FORAMEN with IX and XI. In the neck it runs inside the CAROTID SHEATH with the common carotid artery and the internal jugular vein, which Maini calls the three musketeers.",
+      "In the larynx, the RECURRENT LARYNGEAL NERVE supplies ALL the intrinsic laryngeal muscles EXCEPT the CRICOTHYROID, and that one exception is supplied by the external laryngeal nerve, from the superior laryngeal. The recurrent laryngeal ascends in the groove between the trachea and the oesophagus.",
+      "Cutting ONE recurrent laryngeal nerve gives HOARSENESS, which a posteriorly enlarging thyroid or thyroid surgery can cause, while cutting BOTH gives aphonia and inspiratory stridor. Sensation ABOVE the vocal folds is the internal laryngeal nerve, and BELOW the folds is the recurrent laryngeal nerve.",
+      "CN X is the motor, efferent limb of the GAG reflex. The one tongue muscle it supplies, rather than CN XII, is the PALATOGLOSSUS. It also gives parasympathetic supply to the thoracic and most abdominal viscera, reaching the gut as far as the left colic flexure.",
+    ],
+    flag: "X = jugular foramen; carotid sheath with CCA + IJV. RLN = every intrinsic larynx muscle EXCEPT cricothyroid (= external laryngeal). One RLN cut → hoarseness; both → aphonia + stridor. Above folds = internal laryngeal, below = RLN. Gag MOTOR. Palatoglossus = the vagus tongue muscle.",
+  },
+  {
+    n: 8, title: "CN XI & XII — Accessory and Hypoglossal (the pure-motor movers)", src: "Maini · L28 Prevertebral / L06 Pharyngeal",
+    facts: [
+      "CN XI, the spinal accessory, is purely motor to the STERNOCLEIDOMASTOID and the TRAPEZIUS, joined by C2, C3 and C4 fibres. Its spinal root first ASCENDS through the FORAMEN MAGNUM, then exits through the JUGULAR FORAMEN, and it runs exposed in the POSTERIOR TRIANGLE, where it is surgically vulnerable.",
+      "A CN XI lesion gives a weak shoulder shrug, difficulty turning the head, and a drooping shoulder with scapular winging. One sternocleidomastoid, acting alone, turns the head to the OPPOSITE side. A small cranial root of XI joins the vagus.",
+      "CN XII, the hypoglossal, is purely motor to ALL the tongue muscles EXCEPT the PALATOGLOSSUS, which belongs to the vagus. It exits through the HYPOGLOSSAL CANAL in the occipital bone, and the genioglossus is the muscle that protrudes the tongue.",
+      "In a one-sided hypoglossal lesion the protruded tongue DEVIATES TOWARD the affected side, because the healthy genioglossus pushes unopposed. C1 fibres hitchhike on CN XII and go on to the superior root of the ansa cervicalis, for the infrahyoid muscles, plus the thyrohyoid and geniohyoid.",
+    ],
+    flag: "XI = SCM + trapezius (test = shrug + turn head vs resistance); spinal root goes UP through the foramen magnum then OUT the jugular foramen; posterior triangle. XII = all tongue muscles EXCEPT palatoglossus; tongue deviates TOWARD the lesion; hypoglossal canal. Both are PURELY MOTOR.",
+  },
+  {
+    n: 9, title: "The synthesis — maps, ganglia and Maini's traps", src: "Maini · Big-picture synthesis",
+    facts: [
+      "The FOUR parasympathetic cranial nerves are CN III, VII, IX and X, the cranial outflow. Their autonomic ganglia are the ciliary for III, the otic for IX going to the parotid, and the submandibular and pterygopalatine for VII. Those autonomic ganglia are Maini's 'cops'.",
+      "The SENSORY ganglia hold cell bodies of afferent fibres and are NOT autonomic. They are the trigeminal ganglion, the geniculate ganglion of VII, and the spiral and vestibular ganglia of VIII.",
+      "The purely MOTOR nerves include III, IV, VI, XI and XII. The purely SENSORY nerves are CN I, the olfactory, CN II, the optic, and CN VIII, the vestibulocochlear.",
+      "For the tongue map: anterior two-thirds general sensation is lingual from V3, taste is chorda tympani from VII; the posterior one-third does both general and taste on IX; the muscles are CN XII, except the palatoglossus, which is CN X. The single-exception traps to memorise are that IX supplies only stylopharyngeus, the recurrent laryngeal supplies everything in the larynx except cricothyroid, and XII supplies every tongue muscle except palatoglossus.",
+    ],
+    flag: "Parasympathetic CNs = 3 · 7 · 9 · 10. Sensory ganglia (trigeminal, geniculate, spiral/vestibular) are NOT autonomic. Palatoglossus = the odd tongue muscle (X, not XII). Tongue deviates TOWARD a XII lesion. Cavernous sinus: III, IV, VI, V1/V2.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "The eye-muscle rule SO4, LR6, AO3: Superior Oblique = CN IV (trochlear), Lateral Rectus = CN VI (abducens), All Other extraocular muscles = CN III (oculomotor).", why: "Maini repeats this mnemonic verbatim and hangs the trochlear and abducens questions on it, so learn the three tags and you own two whole nerves.", src: "Maini · L20 Orbit" },
+  { tag: "★★ Heavy", text: "The exit map: SOF = III, IV, VI, V1 · rotundum = V2 · ovale = V3 · IAM = VII + VIII · jugular foramen = IX, X, XI · hypoglossal canal = XII. Middle-fossa order medial to lateral: SOF, rotundum, ovale, spinosum.", why: "She has you list the middle-fossa foramina in order and match each nerve to its opening, and the shared exits (SOF, IAM, jugular foramen) are prime clustering questions.", src: "Maini · L01 Osteology / L19 Orbit" },
+  { tag: "★★ Heavy", text: "The tongue map: anterior two-thirds general = lingual (V3), taste = chorda tympani (VII); posterior one-third both general and taste = IX; all tongue muscles = XII EXCEPT palatoglossus = X.", why: "This four-way split is Maini's favourite integrative trap because it mixes sensation, taste and motor across four different nerves.", src: "Maini · L06 Pharyngeal / L08 Face" },
+  { tag: "Traps", text: "The single-exception set: IX supplies only stylopharyngeus; the recurrent laryngeal supplies all intrinsic larynx muscles EXCEPT cricothyroid (external laryngeal); XII supplies all tongue muscles EXCEPT palatoglossus (vagus).", why: "Each is a classic 'which one is the exception' item, and the palatoglossus and cricothyroid answers are the ones students miss.", src: "Maini · L26 Larynx / L06 Pharyngeal" },
+  { tag: "Reflexes", text: "Reflex limbs come in pairs: corneal (blink) reflex, sensory limb = V1, motor limb = VII; gag reflex, sensory limb = IX, motor limb = X.", why: "She pairs afferent with efferent for each reflex, so expect a 'which limb is which nerve' question.", src: "Maini · L21 Orbit / L28 Pharynx" },
+  { tag: "Deviations", text: "Lesion pictures: a CN VI lesion lets the eye drift MEDIALLY with horizontal diplopia; a CN XII lesion makes the protruded tongue deviate TOWARD the weak side.", why: "These directions are predictable and testable, and the reasoning (unopposed antagonist) explains both.", src: "Maini · L17 Brain / L06 Pharyngeal" },
+  { tag: "Ganglia", text: "Sensory ganglia (trigeminal, geniculate of VII, spiral/vestibular of VIII) are NOT autonomic. The autonomic (parasympathetic) ganglia go with III (ciliary) and IX (otic → parotid).", why: "Maini explicitly quizzes whether a named ganglion is autonomic, asking if it is 'one of the cops'.", src: "Maini · L11 Infratemporal" },
+  { tag: "Fiber types", text: "Purely motor: III, IV, VI, XI, XII. Purely sensory: I, II, VIII. Parasympathetic (cranial outflow): III, VII, IX, X.", why: "These classification lists give you fast, high-confidence answers on the big-picture questions.", src: "Maini · Big-picture synthesis" },
+  { tag: "Clinical", text: "Bell's palsy = idiopathic paralysis of one whole side of the face (VII), with Bell's phenomenon (eye rolls up on attempted closure); recurrent laryngeal injury → hoarseness; acoustic neuroma in the IAM hits VII + VIII; CN VI is first hit by raised ICP.", why: "She ties every nerve to a lesion picture, so the clinical hook is often the actual stem.", src: "Maini · L08 Face / L22 Ear / L26 Larynx" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+const tips = [
+  { kind: "Mnemonic", title: "SO4 · LR6 · AO3 — Maini's eye-muscle rule", text: "Maini teaches it out loud: Superior Oblique goes with CN 4 (trochlear), Lateral Rectus goes with CN 6 (abducens), and All Other extraocular muscles go with CN 3 (oculomotor). Filter out the superior oblique and the lateral rectus, and the rest are all CN III.", helps: "Two nerves (IV and VI) and the whole 'everything else = III' pattern in one line.", src: "Maini · L20 Orbit (her words)" },
+  { kind: "Analogy", title: "Superior oblique = 'down and out'", text: "Maini says to remember the superior oblique's action as 'down and out' — it rotates the eyeball downward and laterally. That is why a trochlear (CN IV) palsy shows up as trouble looking down and in, like going down stairs.", helps: "Anchors both the muscle's action and the CN IV palsy picture with one phrase.", src: "Maini · L20 Orbit (her words)" },
+  { kind: "Rule", title: "Trochlea = a pulley; the nerve is named after it", text: "Maini points out the superior oblique tendon passes through a fibrocartilaginous pulley called the trochlea. 'Trochlea' means pulley, and that is exactly where the 'trochlear' nerve gets its name.", helps: "Links the muscle, the pulley and the nerve name so none of the three slips.", src: "Maini · L20 Orbit (her words)" },
+  { kind: "Mnemonic", title: "Geniculate = at the genu (the bend)", text: "Maini explains the geniculate ganglion is called geniculate because it sits at the genu, the bend of the facial nerve in the facial canal.", helps: "The name itself tells you both the location (the bend) and that it is the facial-nerve taste ganglion.", src: "Maini · L08 Face (her words)" },
+  { kind: "Analogy", title: "The carotid sheath's 'three musketeers'", text: "Maini calls the common carotid artery, the internal jugular vein and the vagus nerve the three musketeers, wrapped together in the carotid sheath.", helps: "Fixes the three contents of the carotid sheath, including that the vagus runs with them.", src: "Maini · L05 Cervical (her words)" },
+  { kind: "Trick", title: "Is this ganglion 'one of the cops'?", text: "Maini asks whether a named ganglion is an autonomic ganglion — 'is it one of the cops?' If it is a sensory ganglion (trigeminal, geniculate, spiral or vestibular), the answer is no.", helps: "A quick sorting test for autonomic (parasympathetic) versus sensory ganglia.", src: "Maini · L11 Infratemporal (her words)" },
+  { kind: "Rule", title: "The 'EXCEPT' three", text: "Three high-yield exceptions travel together in your memory: the only pharyngeal muscle NOT run by the vagus is stylopharyngeus (IX); the only intrinsic larynx muscle NOT run by the recurrent laryngeal is cricothyroid (external laryngeal); the only tongue muscle NOT run by the hypoglossal is palatoglossus (X).", helps: "Learn the three exceptions once and several stems collapse to one answer.", src: "Study hook (grounded in the bank)" },
+  { kind: "Rule", title: "The tongue points at the problem", text: "In a one-sided hypoglossal (CN XII) lesion the protruded tongue deviates TOWARD the weak side, because the intact genioglossus on the good side pushes unopposed across the midline.", helps: "Turns a memorised direction into a mechanism you can re-derive.", src: "Study hook (grounded in the bank)" },
+];
+
+/* =============================================================== DRILL ===== */
+/* All 105 items ported verbatim from the module's AUDITED Everything-MC bank
+   (anti-fab verified). Correct-answer positions come straight from the bank
+   (already balanced: 26 A / 25 B / 29 C / 25 D). */
+const questions = [
+  { id: 1, topic: "CN IV · Trochlear", src: "Maini · L20 The Orbit", q: "Which extraocular muscle does the trochlear nerve (CN IV) supply?", opts: ["Superior oblique","Inferior oblique","Medial rectus","Lateral rectus"], a: 0, h1: "'S-O-4': Superior Oblique = 4th nerve.", h2: "Study point: CN IV — Motor Target.", exp: "In Dr. Maini's SO4 / LR6 / AO3 mnemonic, the Superior Oblique is supplied by CN 4 (trochlear) — one muscle only.  [Maini] 'It goes like SO4, LR6, AO3... superior oblique, that is your trochlear nerve.'" },
+  { id: 2, topic: "CN IV · Trochlear", src: "Maini · L17 The Brain", q: "CN IV is unique because it emerges from which surface of the brainstem?", opts: ["Between the pyramid and the olive","The anterior surface of the medulla","The posterior (dorsal) surface of the midbrain","The anterior surface of the pons"], a: 2, h1: "The only CN to leave the BACK of the brainstem.", h2: "Study point: CN IV — Brainstem Origin.", exp: "The trochlear nerve is the ONLY cranial nerve to emerge from the dorsal (posterior) surface of the brainstem, at the midbrain.  [Maini] 'Fourth nerve, trochlear, emerging from the midbrain dorsally.'" },
+  { id: 3, topic: "CN IV · Trochlear", src: "Maini · L20 The Orbit", q: "The tendon of the superior oblique passes through a fibrocartilaginous pulley called the:", opts: ["Annulus of Zinn (common tendinous ring)","Tarsal plate","Palpebral raphe","Trochlea"], a: 3, h1: "'Trochlea' = pulley → 'trochlear' nerve.", h2: "Study point: CN IV — Trochlea.", exp: "The superior oblique tendon threads through the trochlea, a fibrocartilaginous ring — this pulley is what gives the nerve its name 'trochlear'.  [Maini] 'Superior oblique muscle actually passes through a fibrocartilaginous pulley, which is called the trochlea.'" },
+  { id: 4, topic: "CN IV · Trochlear", src: "Maini · L20 The Orbit", q: "What is the resulting movement of the eyeball when the superior oblique (CN IV) acts?", opts: ["Down and in","Down and out (depression and lateral rotation)","Up and in","Up and out"], a: 1, h1: "Down and OUT.", h2: "Study point: CN IV — Action.", exp: "Because it hooks through the trochlea, the superior oblique moves the eye 'down and out' — Dr. Maini's memory phrase.  [Maini] 'It rotates the eyeball down and laterally. So you can remember this as down and out.'" },
+  { id: 5, topic: "CN IV · Trochlear", src: "Maini · L19/L20 The Orbit", q: "Through which opening does the trochlear nerve enter the orbit?", opts: ["Superior orbital fissure","Foramen rotundum","Optic canal","Inferior orbital fissure"], a: 0, h1: "Same slit as III, VI, and V1.", h2: "Study point: CN IV — Orbital Entry.", exp: "CN IV enters the orbit through the superior orbital fissure, along with CN III, CN VI, and V1." },
+  { id: 6, topic: "CN IV · Trochlear", src: "Maini · L20 The Orbit", q: "The trochlear nerve is functionally classified as:", opts: ["Motor plus parasympathetic","Purely motor (somatic efferent)","Purely sensory","Sensory plus special taste"], a: 1, h1: "One muscle, motor only.", h2: "Study point: CN IV — Fiber Type.", exp: "CN IV is a pure motor nerve to a single muscle (superior oblique) — no sensory or autonomic fibers." },
+  { id: 7, topic: "CN IV · Trochlear", src: "Maini · L20/L21 Orbit", q: "A patient with a CN IV (trochlear) palsy will have the most difficulty directing the eye:", opts: ["Directly laterally","Straight upward","Downward and inward (e.g., trouble descending stairs)","Directly medially at rest"], a: 2, h1: "Trouble going DOWN the stairs.", h2: "Study point: CN IV — Palsy.", exp: "Loss of the superior oblique impairs looking down-and-in, so patients classically report trouble reading or going down stairs, often tilting the head to compensate." },
+  { id: 8, topic: "CN IV · Trochlear", src: "Maini · L20 The Orbit", q: "In Dr. Maini's 'AO3' part of the eye-muscle mnemonic, which nerve supplies 'All Other' extraocular muscles besides the superior oblique and lateral rectus?", opts: ["CN VI (abducens)","CN VII (facial)","CN III (oculomotor)","CN IV (trochlear)"], a: 2, h1: "AO3 = All Others by the 3rd nerve.", h2: "Study point: CN IV — Mnemonic.", exp: "SO4/LR6/AO3: after filtering out the superior oblique (IV) and lateral rectus (VI), the remaining four extraocular muscles are 'All Others = 3' (oculomotor).  [Maini] 'If you filter out superior oblique and lateral rectus, then rest 4 of them... all the four.'" },
+  { id: 9, topic: "CN VI · Abducens", src: "Maini · L20 The Orbit", q: "The abducens nerve (CN VI) supplies which extraocular muscle?", opts: ["Lateral rectus","Superior oblique","Medial rectus","Superior rectus"], a: 0, h1: "'L-R-6': Lateral Rectus = 6th nerve.", h2: "Study point: CN VI — Motor Target.", exp: "'LR6': the Lateral Rectus is supplied by CN 6 (abducens) — one muscle only.  [Maini] 'Lateral rectus is played by abducent nerve.'" },
+  { id: 10, topic: "CN VI · Abducens", src: "Maini · L17 The Brain", q: "The name 'abducens' reflects that the muscle it supplies:", opts: ["Depresses the eye","Adducts the eye (turns it inward)","Elevates the eye","Abducts the eye (turns it outward/laterally)"], a: 3, h1: "Ab-DUCT = away = out.", h2: "Study point: CN VI — Name/Action.", exp: "The lateral rectus abducts the eye, so its nerve is the 'abducens'.  [Maini] 'This nerve supplies the abductor of the eye, so abducens.'" },
+  { id: 11, topic: "CN VI · Abducens", src: "Maini · L20 Orbit", q: "A lesion of the abducens nerve (CN VI) causes the affected eye to:", opts: ["Lose the pupillary light reflex","Deviate down and out","Develop ptosis (drooping lid)","Deviate medially (unopposed medial rectus) with horizontal diplopia"], a: 3, h1: "Eye pulled toward the nose.", h2: "Study point: CN VI — Palsy.", exp: "With the lateral rectus paralyzed, the unopposed medial rectus pulls the eye medially, and the patient reports horizontal double vision." },
+  { id: 12, topic: "CN VI · Abducens", src: "Maini · L19/L20 The Orbit", q: "Through which opening does the abducens nerve enter the orbit?", opts: ["Optic canal","Foramen ovale","Superior orbital fissure","Foramen rotundum"], a: 2, h1: "The big slit in the sphenoid.", h2: "Study point: CN VI — Orbital Entry.", exp: "CN VI enters the orbit through the superior orbital fissure (with III, IV, and V1)." },
+  { id: 13, topic: "CN VI · Abducens", src: "Maini · L19 The Orbit", q: "Besides CN VI, which cranial nerves also pass through the superior orbital fissure?", opts: ["CN II and V2","CN VII and CN VIII","CN III, CN IV, and V1 (ophthalmic)","V2 and V3"], a: 2, h1: "3, 4, 6, and V1 share the slit.", h2: "Study point: CN VI — SOF Contents.", exp: "The superior orbital fissure transmits CN III, IV, VI and the ophthalmic division (V1) of the trigeminal." },
+  { id: 14, topic: "CN VI · Abducens", src: "Maini · L20 Orbit", q: "The abducens nerve is functionally:", opts: ["Purely sensory","Purely motor to one muscle","Mixed motor and sensory","Motor with parasympathetic fibers"], a: 1, h1: "One muscle, motor only.", h2: "Study point: CN VI — Fiber Type.", exp: "CN VI is a pure somatic motor nerve to the lateral rectus only." },
+  { id: 15, topic: "CN VI · Abducens", src: "Maini · standard ref", q: "Because of its long intracranial course, which nerve is often the first extraocular nerve affected by raised intracranial pressure, producing horizontal diplopia?", opts: ["Optic (CN II)","Abducens (CN VI)","Oculomotor (CN III)","Trochlear (CN IV)"], a: 1, h1: "Longest course = most vulnerable.", h2: "Study point: CN VI — Clinical.", exp: "The abducens has a long intracranial course and is classically the first extraocular nerve compromised by raised intracranial pressure." },
+  { id: 16, topic: "CN VI · Abducens", src: "Maini · L21 Testing of Eye Muscles", q: "When testing the six cardinal directions of gaze, the lateral rectus (CN VI) is isolated when the patient looks:", opts: ["Up and in","Down and out","Down and in","Straight laterally (temporally) with that eye"], a: 3, h1: "Look toward the temple.", h2: "Study point: CN VI — Testing.", exp: "Straight lateral (temporal) gaze isolates the lateral rectus and therefore tests CN VI." },
+  { id: 17, topic: "CN V · Trigeminal", src: "Maini · L11 Infratemporal Fossa", q: "How many divisions does the trigeminal nerve (CN V) have, and what are they?", opts: ["Three: V1 ophthalmic, V2 maxillary, V3 mandibular","Three: all purely sensory","Four: one per facial quadrant","Two: sensory and motor roots only"], a: 0, h1: "'Tri' = three.", h2: "Study point: CN V — Divisions.", exp: "'Tri-geminal' = three divisions: ophthalmic (V1), maxillary (V2), and mandibular (V3).  [Maini] 'This is your mandibular, V3, V1, V2... this is trigeminal, 5th nerve.'" },
+  { id: 18, topic: "CN V · Trigeminal", src: "Maini · L01 Osteology / L19 Orbit", q: "The ophthalmic division (V1) leaves the skull through which opening?", opts: ["Superior orbital fissure","Foramen ovale","Foramen rotundum","Foramen spinosum"], a: 0, h1: "V1 shares the SOF with III/IV/VI.", h2: "Study point: CN V — V1 Exit.", exp: "V1 (ophthalmic) passes through the superior orbital fissure to reach the orbit and forehead." },
+  { id: 19, topic: "CN V · Trigeminal", src: "Maini · L01 Osteology", q: "The maxillary division (V2) leaves the skull through which foramen?", opts: ["Foramen ovale","Superior orbital fissure","Foramen rotundum","Foramen spinosum"], a: 2, h1: "Rotundum = Round = V2.", h2: "Study point: CN V — V2 Exit.", exp: "V2 (maxillary) exits through the foramen rotundum." },
+  { id: 20, topic: "CN V · Trigeminal", src: "Maini · L01 Osteology / L10 Infratemporal Fossa", q: "The mandibular division (V3) leaves the skull through which foramen?", opts: ["Jugular foramen","Foramen rotundum","Superior orbital fissure","Foramen ovale"], a: 3, h1: "Ovale = Oval = V3.", h2: "Study point: CN V — V3 Exit.", exp: "V3 (mandibular) exits through the foramen ovale into the infratemporal fossa." },
+  { id: 21, topic: "CN V · Trigeminal", src: "Maini · L10 Infratemporal Fossa", q: "Which trigeminal division is unusual because it is BOTH sensory and motor?", opts: ["V3 (mandibular)","V1 (ophthalmic)","None — all three are purely sensory","V2 (maxillary)"], a: 0, h1: "Only the 'chewing' division is motor.", h2: "Study point: CN V — V3 Is Mixed.", exp: "V3 is the only division that also carries motor fibers — to the muscles of mastication." },
+  { id: 22, topic: "CN V · Trigeminal", src: "Maini · L10 Infratemporal Fossa", q: "The motor fibers of V3 supply which group of muscles?", opts: ["The extraocular muscles","The muscles of mastication","The pharyngeal constrictors","The muscles of facial expression"], a: 1, h1: "V3 runs the chewing muscles.", h2: "Study point: CN V — V3 Motor.", exp: "V3 motor fibers drive the muscles of mastication (temporalis, masseter, medial and lateral pterygoids).  [Maini] 'Which nerve controls muscles of mastication?' (V3)" },
+  { id: 23, topic: "CN V · Trigeminal", src: "Maini · L10/L12 Infratemporal Fossa & Lab", q: "Which of the following IS a muscle of mastication (V3 motor)?", opts: ["Temporalis","Buccinator","Occipitofrontalis","Orbicularis oris"], a: 0, h1: "Temporalis, masseter, pterygoids.", h2: "Study point: CN V — Mastication Muscles.", exp: "Temporalis is one of the four muscles of mastication supplied by V3." },
+  { id: 24, topic: "CN V · Trigeminal", src: "Maini · L11 Infratemporal Fossa", q: "The large sensory ganglion of the trigeminal nerve sits at the apex of which bone?", opts: ["The greater wing of the sphenoid","The basilar part of the occipital bone","The cribriform plate of the ethmoid","The petrous part of the temporal bone"], a: 3, h1: "The petrous 'rock'.", h2: "Study point: CN V — Ganglion Location.", exp: "The trigeminal (semilunar/Gasserian) ganglion lies at the apex of the petrous temporal bone.  [Maini] 'This huge, big structure, that is trigeminal ganglion.'" },
+  { id: 25, topic: "CN V · Trigeminal", src: "Maini · L11 Infratemporal Fossa", q: "Is the trigeminal ganglion an autonomic (parasympathetic) ganglion?", opts: ["Yes — it is parasympathetic","It contains only motor cell bodies","No — it is a sensory ganglion (cell bodies of general sensory fibers)","Yes — it is sympathetic"], a: 2, h1: "Sensory, not one of the autonomic 'cops'.", h2: "Study point: CN V — Ganglion Type.", exp: "The trigeminal ganglion is a SENSORY ganglion; Dr. Maini contrasts it with the autonomic 'cops' (ciliary, otic, etc.).  [Maini] 'Is it an autonomic ganglion, trigeminal ganglion? Is it one of the cops?' (No.)" },
+  { id: 26, topic: "CN V · Trigeminal", src: "Maini · trigeminal clinical", q: "Trigeminal neuralgia (tic douloureux) classically produces:", opts: ["Drooping of one side of the face","Sudden, severe, shock-like pain in the V2 or V3 dermatome","Progressive painless facial numbness","Loss of taste on the tongue"], a: 1, h1: "Electric-shock face pain.", h2: "Study point: CN V — Clinical.", exp: "Tic douloureux causes brief, severe, shock-like paroxysms of pain in the V2/V3 territory, often triggered by light touch." },
+  { id: 27, topic: "CN V · Trigeminal", src: "Maini · L06 Pharyngeal Apparatus", q: "General (touch/pain) sensation from the anterior two-thirds of the tongue is carried by which nerve?", opts: ["The internal laryngeal nerve (CN X)","The chorda tympani (CN VII)","The lingual nerve (a branch of V3)","The glossopharyngeal nerve (CN IX)"], a: 2, h1: "General sensation front 2/3 = lingual (V3).", h2: "Study point: CN V — Tongue Sensation.", exp: "General sensation of the anterior 2/3 of the tongue travels in the lingual branch of V3.  [Maini] 'It receives its sensory innervation from the lingual branch of the mandibular division of the fifth cranial nerve.'" },
+  { id: 28, topic: "CN V · Trigeminal", src: "Maini · L06 Pharyngeal Apparatus", q: "The chorda tympani (from CN VII) joins which nerve to reach the tongue and carry taste from the anterior two-thirds?", opts: ["The lingual nerve (branch of V3)","The auriculotemporal nerve","The buccal nerve","The inferior alveolar nerve"], a: 0, h1: "VII taste rides V3's lingual nerve.", h2: "Study point: CN V — Lingual/Chorda Tympani.", exp: "The chorda tympani hitchhikes onto the lingual nerve (V3) to reach the anterior 2/3 of the tongue.  [Maini] 'The corda tympani branch joins with the lingual branch of the mandibular division of the trigeminal.'" },
+  { id: 29, topic: "CN V · Trigeminal", src: "Maini · standard ref", q: "The sensory (afferent) limb of the corneal blink reflex is carried by which nerve, while the motor (efferent) limb is CN VII?", opts: ["CN III (oculomotor)","CN II (optic)","V1 (ophthalmic division of CN V)","CN VI (abducens)"], a: 2, h1: "Feel = V1; blink = VII.", h2: "Study point: CN V — Corneal Reflex.", exp: "Touching the cornea is sensed via V1 (nasociliary); the blink response is executed by CN VII (orbicularis oculi)." },
+  { id: 30, topic: "CN V · Trigeminal", src: "Maini · L10 Infratemporal Fossa", q: "Nearly all the branches of V3 are given off in which region?", opts: ["The orbit","The posterior cranial fossa","The parotid gland","The infratemporal fossa"], a: 3, h1: "V3 branches live in the infratemporal fossa.", h2: "Study point: CN V — V3 Branching.", exp: "Dr. Maini emphasized that almost all branches of V3 arise within the infratemporal fossa after V3 exits foramen ovale.  [Maini] 'Almost all the branches of the V3 are given off within this fossa.'" },
+  { id: 31, topic: "CN V · Trigeminal", src: "Maini · L01 Osteology of the Skull", q: "In the middle cranial fossa, which is the correct medial-to-lateral order of the sphenoid foramina Dr. Maini has you list?", opts: ["Foramen ovale → rotundum → SOF → spinosum","Optic canal → rotundum → SOF → ovale","Superior orbital fissure → foramen rotundum → foramen ovale → foramen spinosum","Foramen spinosum → ovale → rotundum → SOF"], a: 2, h1: "SOF, Rotundum, Ovale, Spinosum.", h2: "Study point: CN V — Foramina Order.", exp: "The classic sequence is superior orbital fissure, foramen rotundum, foramen ovale, foramen spinosum.  [Maini] 'Superior orbital fissure, foramen rotundum, ovale, foramen spinosum.'" },
+  { id: 32, topic: "CN V · Trigeminal", src: "Maini · L10 Infratemporal Fossa", q: "The trigeminal nerve and the muscles of mastication develop from which pharyngeal arch?", opts: ["The third pharyngeal arch","The second pharyngeal arch","The fourth pharyngeal arch","The first pharyngeal arch"], a: 3, h1: "1st arch = V = chewing.", h2: "Study point: CN V — Pharyngeal Arch.", exp: "CN V is the nerve of the first pharyngeal arch, which forms the muscles of mastication.  [Maini] 'V3, muscles of mastication, first pharyngeal arch.'" },
+  { id: 33, topic: "CN VII · Facial", src: "Maini · L22 The Ear / L08 Face & Scalp", q: "CN VII and CN VIII enter the skull together through which opening?", opts: ["The foramen ovale","The stylomastoid foramen","The internal acoustic meatus","The jugular foramen"], a: 2, h1: "The 'ear canal' of the skull base.", h2: "Study point: CN VII — Skull Entry.", exp: "The facial and vestibulocochlear nerves enter the internal acoustic meatus together (in the petrous temporal bone)." },
+  { id: 34, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "After running through the facial canal, CN VII exits the skull through which foramen?", opts: ["The jugular foramen","The foramen spinosum","The stylomastoid foramen","The internal acoustic meatus"], a: 2, h1: "Between styloid and mastoid.", h2: "Study point: CN VII — Skull Exit.", exp: "CN VII exits at the stylomastoid foramen (between the styloid and mastoid processes).  [Maini] 'Facial nerve exits the skull through stylomastoid foramen.'" },
+  { id: 35, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "Immediately after exiting the stylomastoid foramen, CN VII passes through which structure?", opts: ["The parotid gland","The masseter muscle","The submandibular gland","The maxillary sinus"], a: 0, h1: "It fans out inside the parotid.", h2: "Study point: CN VII — Parotid.", exp: "CN VII passes into and through the substance of the parotid gland, dividing into its terminal branches there.  [Maini] 'Right after that, it passes through the substance of the parotid gland.'" },
+  { id: 36, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "The bend ('genu') of the facial nerve within the facial canal is marked by which ganglion?", opts: ["The otic ganglion","The submandibular ganglion","The trigeminal ganglion","The geniculate ganglion"], a: 3, h1: "Genu = knee = bend.", h2: "Study point: CN VII — Geniculate Ganglion.", exp: "At the genu (bend) of CN VII lies the geniculate ganglion — named for the 'knee'-like bend.  [Maini] 'It is called geniculate because it is at the genu, the bend.'" },
+  { id: 37, topic: "CN VII · Facial", src: "Maini · L09 Week-4 Lab", q: "The geniculate ganglion contains the cell bodies of which fibers?", opts: ["Motor fibers to facial muscles","Taste (special sensory) fibers from the anterior 2/3 of the tongue","General sensory fibers from the cornea","Parasympathetic postganglionic fibers to the parotid"], a: 1, h1: "Taste from front 2/3 sits here.", h2: "Study point: CN VII — Taste Cell Bodies.", exp: "The geniculate ganglion houses cell bodies of the taste (SVA) fibers that travel with CN VII from the anterior 2/3 of the tongue.  [Maini] 'This geniculate ganglion contains the cell bodies of SVA fibers coming from anterior two-thirds of tongue.'" },
+  { id: 38, topic: "CN VII · Facial", src: "Maini · L06 Pharyngeal Apparatus", q: "CN VII carries TASTE from which part of the tongue?", opts: ["The posterior one-third","The entire dorsum","The root and epiglottis","The anterior two-thirds"], a: 3, h1: "Front 2/3 taste = VII.", h2: "Study point: CN VII — Taste Territory.", exp: "Via the chorda tympani, CN VII carries taste from the anterior 2/3 of the tongue." },
+  { id: 39, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "CN VII provides motor supply to which muscle group?", opts: ["The pharyngeal constrictors","The muscles of mastication","The muscles of facial expression","The extraocular muscles"], a: 2, h1: "It moves your face.", h2: "Study point: CN VII — Motor Group.", exp: "CN VII is the motor nerve to the muscles of facial expression (2nd pharyngeal arch)." },
+  { id: 40, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "Which of the following is a muscle of facial expression supplied by CN VII?", opts: ["Medial pterygoid","Orbicularis oculi","Masseter","Temporalis"], a: 1, h1: "Eye-closer = orbicularis oculi.", h2: "Study point: CN VII — Muscle ID.", exp: "Orbicularis oculi (eye closure) is a muscle of facial expression supplied by CN VII." },
+  { id: 41, topic: "CN VII · Facial", src: "Maini · L08/L09 Face & Scalp", q: "Besides the muscles of facial expression, CN VII also supplies which of the following?", opts: ["Sternocleidomastoid and trapezius","Genioglossus and hyoglossus","Posterior belly of digastric and stylohyoid (and stapedius)","Anterior belly of digastric and mylohyoid"], a: 2, h1: "Posterior belly of digastric + stylohyoid.", h2: "Study point: CN VII — Other Muscles.", exp: "CN VII supplies the posterior belly of digastric, stylohyoid, and stapedius — in addition to facial expression muscles.  [Maini] 'This is the branch to posterior belly of digastric and stylohyoid.'" },
+  { id: 42, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "Which of the following is one of the five terminal branches of CN VII within the parotid gland?", opts: ["Lingual nerve","Marginal mandibular branch","Auriculotemporal nerve","Great auricular nerve"], a: 1, h1: "Temporal, Zygomatic, Buccal, Marginal, Cervical.", h2: "Study point: CN VII — Terminal Branches.", exp: "The five terminal branches are Temporal, Zygomatic, Buccal, Marginal mandibular, and Cervical." },
+  { id: 43, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "The chorda tympani (a branch of CN VII) carries parasympathetic secretomotor fibers to which glands?", opts: ["The submandibular and sublingual glands","The thyroid gland","The parotid gland","The lacrimal gland only"], a: 0, h1: "Chorda tympani → submandibular/sublingual.", h2: "Study point: CN VII — Secretomotor.", exp: "The chorda tympani carries taste (anterior 2/3) plus parasympathetic secretomotor fibers to the submandibular and sublingual glands (via the submandibular ganglion)." },
+  { id: 44, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "Idiopathic paralysis of the facial nerve, causing weakness of one whole side of the face, is called:", opts: ["Eagle's syndrome","Trigeminal neuralgia","Bell's palsy","Horner syndrome"], a: 2, h1: "Idiopathic whole-side facial weakness.", h2: "Study point: CN VII — Bell's Palsy.", exp: "Idiopathic lower-motor-neuron facial paralysis is Bell's palsy — Dr. Maini calls it very common.  [Maini] 'Idiopathic, it's very common. It's called Bell's palsy.'" },
+  { id: 45, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "'Bell's phenomenon,' which becomes visible in a patient with Bell's palsy, refers to:", opts: ["Deviation of the tongue","Loss of the corneal reflex","The eyeball rolling upward when the patient tries to close the eye","Drooping of the lower lip"], a: 2, h1: "Eye rolls up when you can't close it.", h2: "Study point: CN VII — Bell's Phenomenon.", exp: "Bell's phenomenon is the normal upward roll of the eyeball on attempted closure; it becomes visible in Bell's palsy because the eyelid cannot close.  [Maini] 'When you close your eyes... you can see this in patients with Bell's palsy, because eyes are not closed.'" },
+  { id: 46, topic: "CN VII · Facial", src: "Maini · L08 Face & Scalp", q: "Herpes zoster affecting the geniculate ganglion of CN VII together with CN VIII (herpes zoster oticus / Ramsay Hunt) is diagnosed partly by:", opts: ["Loss of smell","A fixed dilated pupil","Vesicular eruptions around the ear with facial palsy and hearing symptoms","Painless facial numbness"], a: 2, h1: "Ear vesicles + facial palsy + CN VIII.", h2: "Study point: CN VII — Clinical (Ramsay Hunt).", exp: "Dr. Maini noted herpes zoster oticus involves the geniculate ganglion of CN VII and CN VIII, producing ear vesicles, facial palsy, and hearing/balance symptoms.  [Maini] 'Herpes zoster oticus affects 8th nerve, as well as geniculate ganglia of 7th nerve.'" },
+  { id: 47, topic: "CN VIII · Vestibulocochlear", src: "Maini · L22 The Ear", q: "The vestibulocochlear nerve (CN VIII) enters the skull through which opening?", opts: ["The jugular foramen","The internal acoustic meatus","The stylomastoid foramen","The external acoustic meatus"], a: 1, h1: "With CN VII in the internal acoustic meatus.", h2: "Study point: CN VIII — Skull Entry.", exp: "CN VIII travels through the internal acoustic meatus together with CN VII." },
+  { id: 48, topic: "CN VIII · Vestibulocochlear", src: "Maini · L22 The Ear", q: "CN VIII has two functional components. What are they?", opts: ["Motor and sensory to the ear muscles","Taste and general sensation","Sympathetic and parasympathetic","Cochlear (hearing) and vestibular (balance/equilibrium)"], a: 3, h1: "Cochlea = hear; vestibule = balance.", h2: "Study point: CN VIII — Two Divisions.", exp: "The cochlear part carries hearing; the vestibular part carries balance/equilibrium." },
+  { id: 49, topic: "CN VIII · Vestibulocochlear", src: "Maini · L22 The Ear", q: "A lesion of the COCHLEAR fibers of CN VIII typically causes:", opts: ["Anosmia","Tinnitus (ringing) and/or deafness","Vertigo and loss of balance","Loss of taste"], a: 1, h1: "Cochlea = hearing → ringing/deafness.", h2: "Study point: CN VIII — Cochlear Lesion.", exp: "Cochlear-fiber damage produces tinnitus and, if severe, sensorineural hearing loss (deafness)." },
+  { id: 50, topic: "CN VIII · Vestibulocochlear", src: "Maini · L22 The Ear", q: "A lesion of the VESTIBULAR fibers of CN VIII typically causes:", opts: ["Ringing in the ears only","Facial droop","Vertigo and disturbance of balance","Hoarseness"], a: 2, h1: "Vestibule = balance → vertigo.", h2: "Study point: CN VIII — Vestibular Lesion.", exp: "Vestibular-fiber damage causes vertigo and balance disturbance." },
+  { id: 51, topic: "CN VIII · Vestibulocochlear", src: "Maini · L22 The Ear", q: "The vestibulocochlear nerve is functionally:", opts: ["Purely motor","Purely sensory (special somatic afferent)","Mixed motor and sensory","Autonomic"], a: 1, h1: "Sensory only.", h2: "Study point: CN VIII — Fiber Type.", exp: "CN VIII is a pure special sensory nerve (hearing and balance)." },
+  { id: 52, topic: "CN VIII · Vestibulocochlear", src: "Maini · L22 The Ear", q: "Which cranial nerve is responsible for hearing?", opts: ["CN VII (facial)","CN VIII (vestibulocochlear)","CN V (trigeminal)","CN IX (glossopharyngeal)"], a: 1, h1: "Eighth = hearing + balance.", h2: "Study point: CN VIII — Function.", exp: "The cochlear division of CN VIII carries hearing." },
+  { id: 53, topic: "CN VIII · Vestibulocochlear", src: "Maini · L22 The Ear", q: "An acoustic neuroma (vestibular schwannoma) growing in the internal acoustic meatus can affect BOTH CN VII and CN VIII because:", opts: ["They travel together through the internal acoustic meatus","They both exit the stylomastoid foramen","They both pass through the jugular foramen","They are both branches of the trigeminal nerve"], a: 0, h1: "Shared canal = shared risk.", h2: "Study point: CN VIII — Clinical.", exp: "Because CN VII and VIII share the internal acoustic meatus, a mass there can compress both, causing facial weakness plus hearing/balance loss." },
+  { id: 54, topic: "CN VIII · Vestibulocochlear", src: "Maini · L22 The Ear", q: "Unlike CN VII, the vestibulocochlear nerve is distinctive because it:", opts: ["Supplies taste to the tongue","Does not leave the skull; it ends in the inner ear within the petrous temporal bone","Exits through the stylomastoid foramen","Carries motor fibers to the stapedius"], a: 1, h1: "It stays inside the inner ear.", h2: "Study point: CN VIII — No Skull Exit.", exp: "CN VIII does not exit the skull — it terminates in the cochlea and vestibular apparatus inside the petrous temporal bone." },
+  { id: 55, topic: "CN IX · Glossopharyngeal", src: "Maini · L28 Pharynx/Prevertebral", q: "The glossopharyngeal, vagus, and accessory nerves all leave the skull through which foramen?", opts: ["The foramen magnum","The hypoglossal canal","The foramen ovale","The jugular foramen"], a: 3, h1: "The lower-CN exit: IX, X, XI.", h2: "Study point: CN IX — Skull Exit.", exp: "CN IX, X, and XI all exit together through the jugular foramen." },
+  { id: 56, topic: "CN IX · Glossopharyngeal", src: "Maini · L28 Pharynx", q: "The ONLY pharyngeal muscle NOT supplied by the vagus is the stylopharyngeus. Which nerve supplies it?", opts: ["CN X (vagus)","CN XI (accessory)","CN IX (glossopharyngeal)","CN XII (hypoglossal)"], a: 2, h1: "Only muscle of IX.", h2: "Study point: CN IX — Stylopharyngeus.", exp: "In Maini's 'all-except' rule, every pharyngeal muscle is vagus EXCEPT stylopharyngeus, which is glossopharyngeal (CN IX)." },
+  { id: 57, topic: "CN IX · Glossopharyngeal", src: "Maini · L06 Pharyngeal Apparatus", q: "General sensation AND taste from the posterior one-third of the tongue are carried by which nerve?", opts: ["CN X (vagus)","CN IX (glossopharyngeal)","V3 (mandibular)","CN VII (facial)"], a: 1, h1: "Back 1/3 = 9 (both taste + touch).", h2: "Study point: CN IX — Posterior Tongue.", exp: "CN IX carries both general sensation and taste from the posterior 1/3 of the tongue.  [Maini] 'The mucosa overlying this area of the tongue receives its sensory innervation from the ninth cranial nerve, the glossopharyngeal.'" },
+  { id: 58, topic: "CN IX · Glossopharyngeal", src: "Maini · L10 Infratemporal Fossa", q: "CN IX provides parasympathetic secretomotor fibers to which gland?", opts: ["The lacrimal gland","The submandibular gland","The sublingual gland","The parotid gland"], a: 3, h1: "IX → parotid.", h2: "Study point: CN IX — Parotid Secretomotor.", exp: "CN IX supplies parasympathetic secretomotor fibers to the parotid gland (relaying in the otic ganglion)." },
+  { id: 59, topic: "CN IX · Glossopharyngeal", src: "Maini · L10 Infratemporal Fossa", q: "The otic ganglion, which relays parasympathetic fibers to the parotid gland, receives its preganglionic fibers from which nerve?", opts: ["CN VII (facial)","CN IX (glossopharyngeal)","CN V (trigeminal)","CN X (vagus)"], a: 1, h1: "Otic ganglion = 9th nerve → parotid.", h2: "Study point: CN IX — Otic Ganglion.", exp: "The otic ganglion sits in the infratemporal fossa and relays CN IX preganglionic parasympathetics to the parotid.  [Maini] 'Ninth nerve carries preganglionic parasympathetic fibers to this ganglion... they go to the parotid gland. That is otic ganglion.'" },
+  { id: 60, topic: "CN IX · Glossopharyngeal", src: "Maini · standard ref", q: "In the gag reflex, which nerve carries the SENSORY (afferent) limb from the pharynx?", opts: ["CN XII (hypoglossal)","CN IX (glossopharyngeal)","CN VII (facial)","CN V (trigeminal)"], a: 1, h1: "Feel the gag = 9; do the gag = 10.", h2: "Study point: CN IX — Gag Reflex (Afferent).", exp: "CN IX is the afferent (sensory) limb of the gag reflex; CN X is the efferent (motor) limb." },
+  { id: 61, topic: "CN IX · Glossopharyngeal", src: "Maini · L08 Face & Scalp", q: "The tympanic nerve (of Jacobson), which contributes to the tympanic plexus in the middle ear, is a branch of which cranial nerve?", opts: ["CN IX (glossopharyngeal)","CN VII (facial)","CN VIII (vestibulocochlear)","CN V (trigeminal)"], a: 0, h1: "Jacobson's nerve = IX.", h2: "Study point: CN IX — Tympanic Plexus.", exp: "The tympanic nerve is a branch of CN IX; it forms the tympanic plexus and continues as the lesser petrosal nerve to the otic ganglion.  [Maini] '9th... tympanic, tympanic plexus.'" },
+  { id: 62, topic: "CN IX · Glossopharyngeal", src: "Maini · standard ref", q: "The carotid sinus (baroreceptor) and carotid body (chemoreceptor) send their afferent signals mainly via which nerve?", opts: ["CN VII (facial)","CN XI (accessory)","CN IX (glossopharyngeal), via the carotid sinus nerve","CN V (trigeminal)"], a: 2, h1: "Carotid sinus nerve = branch of IX.", h2: "Study point: CN IX — Carotid Sinus/Body.", exp: "The carotid sinus nerve, a branch of CN IX, carries baroreceptor/chemoreceptor afferents (with a small vagal contribution)." },
+  { id: 63, topic: "CN IX · Glossopharyngeal", src: "Maini · pharyngeal arch derivation", q: "Glossopharyngeal (CN IX) is the nerve of which pharyngeal arch?", opts: ["The fourth pharyngeal arch","The first pharyngeal arch","The third pharyngeal arch","The second pharyngeal arch"], a: 2, h1: "3rd arch → stylopharyngeus.", h2: "Study point: CN IX — Pharyngeal Arch.", exp: "CN IX is the nerve of the third pharyngeal arch, which forms the stylopharyngeus." },
+  { id: 64, topic: "CN IX · Glossopharyngeal", src: "Maini · L06 Pharyngeal Apparatus", q: "A lesion of CN IX would most directly impair which of the following?", opts: ["Closing of the eyelid","Movement of the tongue on protrusion","Sensation and taste of the posterior 1/3 of the tongue","Shrugging the shoulders"], a: 2, h1: "Back-of-tongue sensation and gag.", h2: "Study point: CN IX — Deficits.", exp: "CN IX carries general sensation and taste from the posterior 1/3 of the tongue, plus the gag afferent." },
+  { id: 65, topic: "CN X · Vagus", src: "Maini · L28 Pharynx/Prevertebral", q: "The vagus nerve (CN X) leaves the skull through which foramen?", opts: ["The internal acoustic meatus","The hypoglossal canal","The foramen ovale","The jugular foramen"], a: 3, h1: "Jugular foramen: IX, X, XI.", h2: "Study point: CN X — Skull Exit.", exp: "CN X exits through the jugular foramen with CN IX and CN XI." },
+  { id: 66, topic: "CN X · Vagus", src: "Maini · L05 Cervical Viscera", q: "Within the carotid sheath in the neck, the vagus nerve travels alongside which two structures ('three musketeers')?", opts: ["The common carotid artery and the internal jugular vein","The external carotid artery and the external jugular vein","The trachea and esophagus","The subclavian artery and vein"], a: 0, h1: "Artery + vein + vagus.", h2: "Study point: CN X — Carotid Sheath.", exp: "The carotid sheath contains the common carotid artery, internal jugular vein, and vagus nerve — Maini's 'three musketeers'.  [Maini] 'Common carotid and vagus... three musketeers... wrapped in the carotid sheath.'" },
+  { id: 67, topic: "CN X · Vagus", src: "Maini · L26 The Larynx", q: "The recurrent laryngeal nerve (a branch of the vagus) supplies which laryngeal muscles?", opts: ["All intrinsic laryngeal muscles EXCEPT the cricothyroid","Only the cricothyroid","The extrinsic tongue muscles","All the pharyngeal constrictors"], a: 0, h1: "All intrinsics EXCEPT cricothyroid.", h2: "Study point: CN X — Recurrent Laryngeal.", exp: "The recurrent laryngeal nerve supplies all intrinsic laryngeal muscles except the cricothyroid." },
+  { id: 68, topic: "CN X · Vagus", src: "Maini · L03/L26 Larynx", q: "The cricothyroid muscle is supplied by which nerve?", opts: ["The recurrent laryngeal nerve","The external laryngeal nerve (branch of the superior laryngeal, from CN X)","The glossopharyngeal nerve","The internal laryngeal nerve"], a: 1, h1: "Cricothyroid = external laryngeal.", h2: "Study point: CN X — Cricothyroid.", exp: "The cricothyroid is the exception — supplied by the external laryngeal nerve (from the superior laryngeal branch of the vagus)." },
+  { id: 69, topic: "CN X · Vagus", src: "Maini · L05 Cervical Viscera", q: "Injury to ONE recurrent laryngeal nerve (e.g., during thyroid surgery or from a posteriorly enlarging thyroid) causes:", opts: ["Hoarseness of voice (dysphonia)","Loss of smell","Inability to protrude the tongue","Complete loss of voice with stridor"], a: 0, h1: "One nerve = hoarse voice.", h2: "Study point: CN X — Unilateral RLN Injury.", exp: "A unilateral recurrent laryngeal lesion produces hoarseness (dysphonia); Maini linked posterior thyroid enlargement to hoarseness.  [Maini] 'If the enlargement is more posterior... patient sometimes presents with hoarseness of voice.'" },
+  { id: 70, topic: "CN X · Vagus", src: "Maini · L26 The Larynx", q: "Damage to BOTH recurrent laryngeal nerves typically produces:", opts: ["Aphonia and inspiratory stridor","Mild hoarseness only","No symptoms","Loss of taste"], a: 0, h1: "Both out = no voice + stridor.", h2: "Study point: CN X — Bilateral RLN Injury.", exp: "A bilateral recurrent laryngeal lesion causes aphonia (loss of voice) and inspiratory stridor due to adducted cords." },
+  { id: 71, topic: "CN X · Vagus", src: "Maini · L05 Cervical Viscera", q: "The recurrent laryngeal nerve ascends to the larynx in the groove between which two structures?", opts: ["The trachea and the esophagus (tracheoesophageal groove)","The esophagus and the vertebral bodies","The carotid artery and the jugular vein","The trachea and the thyroid isthmus"], a: 0, h1: "In the tracheoesophageal groove.", h2: "Study point: CN X — RLN Course.", exp: "The recurrent laryngeal nerve ascends in the tracheoesophageal groove on each side.  [Maini] 'Recurrent laryngeal nerve ascends on either side of the grooves between trachea and esophagus.'" },
+  { id: 72, topic: "CN X · Vagus", src: "Maini · L06 Pharyngeal Apparatus / L26 Larynx", q: "General sensation of the laryngeal mucosa ABOVE the vocal folds (and the epiglottic/root-of-tongue region) is carried by which nerve?", opts: ["The internal laryngeal nerve (from CN X)","The recurrent laryngeal nerve","The external laryngeal nerve","The lingual nerve (V3)"], a: 0, h1: "Above the cords + root of tongue = internal laryngeal.", h2: "Study point: CN X — Internal Laryngeal.", exp: "The internal laryngeal nerve (a branch of the superior laryngeal, from CN X) carries sensation above the vocal folds and to the epiglottic region.  [Maini] 'This area of the tongue receives its innervation from the 10th cranial nerve, the vagus, via internal laryngeal nerve.'" },
+  { id: 73, topic: "CN X · Vagus", src: "Maini · L06 Pharyngeal Apparatus", q: "Which single tongue muscle is supplied by the vagus (CN X) rather than the hypoglossal nerve?", opts: ["Palatoglossus","Genioglossus","Styloglossus","Hyoglossus"], a: 0, h1: "'Palato-' muscle = palate crowd = vagus.", h2: "Study point: CN X — Palatoglossus.", exp: "Palatoglossus is the exception — supplied by the vagus (via the pharyngeal plexus), not CN XII." },
+  { id: 74, topic: "CN X · Vagus", src: "Maini · standard ref", q: "In the gag reflex, which nerve provides the MOTOR (efferent) limb to the pharyngeal muscles?", opts: ["CN V (trigeminal)","CN X (vagus)","CN XII (hypoglossal)","CN IX (glossopharyngeal)"], a: 1, h1: "Do the gag = 10.", h2: "Study point: CN X — Gag Reflex (Efferent).", exp: "CN X (vagus) is the motor/efferent limb of the gag reflex; CN IX is the sensory/afferent limb." },
+  { id: 75, topic: "CN X · Vagus", src: "Maini · standard ref", q: "Which cranial nerve provides parasympathetic supply to the thoracic and most abdominal viscera (heart, lungs, and gut to the left colic flexure)?", opts: ["CN IX (glossopharyngeal)","CN XI (accessory)","CN X (vagus)","CN VII (facial)"], a: 2, h1: "'Vagus' = wanderer, down to the gut.", h2: "Study point: CN X — Parasympathetic Extent.", exp: "The vagus is the great parasympathetic nerve of the thorax and most of the abdomen." },
+  { id: 76, topic: "CN X · Vagus", src: "Maini · L26 The Larynx", q: "Sensation of the laryngeal mucosa BELOW the vocal folds is carried by which nerve?", opts: ["The recurrent laryngeal nerve","The internal laryngeal nerve","The external laryngeal nerve","The glossopharyngeal nerve"], a: 0, h1: "Below the cords = recurrent laryngeal.", h2: "Study point: CN X — Subglottic Sensation.", exp: "The recurrent laryngeal nerve carries sensation below the vocal folds (as well as motor to most intrinsic muscles)." },
+  { id: 77, topic: "CN XI · Accessory", src: "Maini · L03 Cervical Triangles", q: "The spinal root of the accessory nerve (CN XI) supplies which two muscles?", opts: ["Masseter and temporalis","Stylopharyngeus and stylohyoid","Sternocleidomastoid and trapezius","Genioglossus and hyoglossus"], a: 2, h1: "SCM + trapezius.", h2: "Study point: CN XI — Muscles.", exp: "The spinal accessory nerve supplies the sternocleidomastoid and trapezius, tested by head-turn and shoulder shrug.  [Maini] 'Sternocleidomastoid and trapezius, they are innervated by spinal accessory, which is a cranial nerve.'" },
+  { id: 78, topic: "CN XI · Accessory", src: "Maini · L28 Pharynx/Prevertebral", q: "The spinal root of CN XI is unusual because, to reach the skull, it first ascends through which opening before exiting via the jugular foramen?", opts: ["The foramen magnum","The stylomastoid foramen","The hypoglossal canal","The carotid canal"], a: 0, h1: "It climbs UP into the skull first.", h2: "Study point: CN XI — Foramen Magnum Ascent.", exp: "The spinal root arises from the upper cervical cord, ascends through the foramen magnum into the skull, joins the cranial root, then the nerve exits the jugular foramen." },
+  { id: 79, topic: "CN XI · Accessory", src: "Maini · L28 Pharynx/Prevertebral", q: "CN XI ultimately exits the skull through which foramen (with CN IX and CN X)?", opts: ["The jugular foramen","The foramen ovale","The foramen magnum","The hypoglossal canal"], a: 0, h1: "Jugular foramen with IX and X.", h2: "Study point: CN XI — Skull Exit.", exp: "CN XI exits through the jugular foramen along with CN IX and CN X." },
+  { id: 80, topic: "CN XI · Accessory", src: "Maini · L03 Cervical Triangles", q: "Which spinal nerve fibers join the spinal accessory nerve to help supply the trapezius and sternocleidomastoid?", opts: ["The phrenic nerve (C3–C5)","C2, C3, and C4","C7 and C8","T1 and T2"], a: 1, h1: "C2–C4 join the spinal accessory.", h2: "Study point: CN XI — Cervical Contribution.", exp: "Fibers from C2, C3, and C4 join the spinal accessory nerve (Maini).  [Maini] 'C2, C3, C4 fibers, they join spinal accessory nerve.'" },
+  { id: 81, topic: "CN XI · Accessory", src: "Maini · L03/L05 Cervical Triangles", q: "How is the accessory nerve (CN XI) tested clinically?", opts: ["Ask the patient to shrug the shoulders and turn the head against resistance","Check the corneal blink reflex","Test taste on the posterior tongue","Ask the patient to say 'ahh' and watch the palate"], a: 0, h1: "Shrug + turn the head.", h2: "Study point: CN XI — Testing.", exp: "Shoulder shrug (trapezius) and head-turn against resistance (SCM) test CN XI." },
+  { id: 82, topic: "CN XI · Accessory", src: "Maini · CN XI clinical (spinal accessory)", q: "A lesion of the spinal accessory nerve produces which combination of findings?", opts: ["Hoarseness of the voice","Loss of the light reflex","Weak shoulder shrug, difficulty turning the head, and a drooping shoulder with scapular winging","Tongue deviation on protrusion"], a: 2, h1: "Droopy shoulder + weak head-turn.", h2: "Study point: CN XI — Lesion.", exp: "CN XI palsy weakens the trapezius and SCM, producing a drooping shoulder, scapular winging, and weak head rotation." },
+  { id: 83, topic: "CN XI · Accessory", src: "Maini · L03 Cervical Triangles", q: "The sternocleidomastoid, when acting on one side, turns the head:", opts: ["Downward toward the chest only","To the OPPOSITE side (and tilts toward the same side)","To the same side only","Straight up with no rotation"], a: 1, h1: "Right SCM turns head to the left.", h2: "Study point: CN XI — SCM Action.", exp: "One SCM rotates the head to the contralateral (opposite) side; both together flex the neck." },
+  { id: 84, topic: "CN XI · Accessory", src: "Maini · L05 Cervical Viscera", q: "In which triangle of the neck does the spinal accessory nerve run its exposed (surgically vulnerable) course?", opts: ["The muscular triangle","The digastric (submandibular) triangle","The submental triangle","The posterior triangle"], a: 3, h1: "Superficial in the posterior triangle.", h2: "Study point: CN XI — Posterior Triangle.", exp: "CN XI courses through the posterior triangle, where it is superficial and vulnerable during surgery/biopsy." },
+  { id: 85, topic: "CN XI · Accessory", src: "Maini · standard ref", q: "The small cranial root of the accessory nerve joins which nerve to be distributed to the pharynx and larynx?", opts: ["CN X (vagus)","CN VII (facial)","CN XII (hypoglossal)","CN IX (glossopharyngeal)"], a: 0, h1: "Cranial root hitchhikes on the vagus.", h2: "Study point: CN XI — Cranial Root.", exp: "The cranial root of CN XI joins the vagus (CN X) and is distributed with it to pharyngeal/laryngeal muscles." },
+  { id: 86, topic: "CN XII · Hypoglossal", src: "Maini · L03 Cervical Triangles / L01 Osteology", q: "The hypoglossal nerve (CN XII) leaves the cranial cavity through which opening?", opts: ["The jugular foramen","The foramen magnum","The stylomastoid foramen","The hypoglossal canal"], a: 3, h1: "Its own canal in the occipital bone.", h2: "Study point: CN XII — Skull Exit.", exp: "CN XII exits through its own named canal — the hypoglossal canal, in the occipital bone near the foramen magnum.  [Maini] 'Hypoglossal nerve emerges from hypoglossal canal.'" },
+  { id: 87, topic: "CN XII · Hypoglossal", src: "Maini · L06 Pharyngeal Apparatus", q: "The hypoglossal nerve supplies all the muscles of the tongue EXCEPT which one?", opts: ["Palatoglossus","Styloglossus","Hyoglossus","Genioglossus"], a: 0, h1: "All tongue muscles EXCEPT palatoglossus.", h2: "Study point: CN XII — The Exception.", exp: "CN XII supplies all intrinsic and extrinsic tongue muscles EXCEPT palatoglossus (which is vagus).  [Maini] 'The motor innervation of tongue muscles comes from the hypoglossal nerve... except the palatoglossus muscle.'" },
+  { id: 88, topic: "CN XII · Hypoglossal", src: "Maini · CN XII clinical (hypoglossal)", q: "In a unilateral hypoglossal (CN XII) lesion, on protrusion the tongue deviates:", opts: ["Straight, with fasciculations only","Away from the affected side","Upward toward the palate","Toward the affected (lesioned) side"], a: 3, h1: "It points TOWARD the problem.", h2: "Study point: CN XII — Lesion.", exp: "The tongue deviates TOWARD the lesioned side because the normal-side genioglossus pushes it across unopposed." },
+  { id: 89, topic: "CN XII · Hypoglossal", src: "Maini · tongue muscles (CN XII)", q: "Which tongue muscle is chiefly responsible for protruding (sticking out) the tongue?", opts: ["Genioglossus","Hyoglossus","Styloglossus","Palatoglossus"], a: 0, h1: "Genioglossus sticks the tongue out.", h2: "Study point: CN XII — Protrusion.", exp: "The genioglossus protrudes the tongue; a unilateral CN XII lesion lets the intact genioglossus push the tongue toward the weak side." },
+  { id: 90, topic: "CN XII · Hypoglossal", src: "Maini · L03 Cervical Triangles", q: "C1 fibers that hitchhike along the hypoglossal nerve are distributed to which structures?", opts: ["The sternocleidomastoid and trapezius","The muscles of mastication","The muscles of facial expression","The superior root of the ansa cervicalis (to infrahyoid muscles) plus thyrohyoid and geniohyoid"], a: 3, h1: "C1 rides XII → ansa cervicalis root.", h2: "Study point: CN XII — C1 Hitchhikers.", exp: "C1 fibers travel with CN XII, then leave it to form the superior root of the ansa cervicalis and to supply thyrohyoid and geniohyoid.  [Maini] 'C1 fibers, as soon as they exit, they join hypoglossal nerve.'" },
+  { id: 91, topic: "CN XII · Hypoglossal", src: "Maini · L06 Pharyngeal Apparatus", q: "The hypoglossal nerve is functionally classified as:", opts: ["Mixed motor and sensory","Autonomic","Purely sensory","Purely motor (somatic efferent)"], a: 3, h1: "Motor to the tongue.", h2: "Study point: CN XII — Fiber Type.", exp: "CN XII is a pure somatic motor nerve to the tongue muscles." },
+  { id: 92, topic: "CN XII · Hypoglossal", src: "Maini · L06 Pharyngeal Apparatus", q: "Which of the following extrinsic tongue muscles is NOT supplied by CN XII?", opts: ["Hyoglossus","Genioglossus","Styloglossus","Palatoglossus"], a: 3, h1: "The '-glossus' with 'palato-' is vagus.", h2: "Study point: CN XII — Extrinsic Muscles.", exp: "Palatoglossus is the exception — it is supplied by the vagus (CN X), not CN XII." },
+  { id: 93, topic: "CN XII · Hypoglossal", src: "Maini · L01 Osteology", q: "The hypoglossal canal is located in which bone?", opts: ["The sphenoid bone","The temporal bone","The maxilla","The occipital bone (in the walls near the foramen magnum)"], a: 3, h1: "In the occipital bone by the foramen magnum.", h2: "Study point: CN XII — Bone.", exp: "The hypoglossal canal lies in the occipital bone, within the thick walls bounding the foramen magnum." },
+  { id: 94, topic: "CN XII · Hypoglossal", src: "Maini · CN XII clinical", q: "A patient shows tongue wasting and deviation to the LEFT on protrusion. Which nerve is lesioned, and on which side?", opts: ["Right vagus (CN X)","Right hypoglossal (CN XII)","Left hypoglossal (CN XII)","Left glossopharyngeal (CN IX)"], a: 2, h1: "Deviates toward the lesioned side.", h2: "Study point: CN XII — Localization.", exp: "Deviation toward the left with left-sided wasting indicates a LEFT hypoglossal lesion (tongue points to the lesion)." },
+  { id: 95, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · Cranial Nerves overview", q: "How many pairs of cranial nerves are there in total?", opts: ["Eight","Twelve","Ten","Thirty-one"], a: 1, h1: "I through XII.", h2: "Study point: Big Picture — Count.", exp: "There are twelve pairs of cranial nerves (CN I–XII)." },
+  { id: 96, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · L01 Osteology / L28", q: "Which grouping of openings correctly matches the nerves passing through them?", opts: ["Foramen ovale: VII — Foramen rotundum: VIII — SOF: XII","Jugular foramen: VII, VIII — Hypoglossal canal: XI — IAM: IX, X","Jugular foramen: XII — Hypoglossal canal: IX — IAM: XI","Jugular foramen: IX, X, XI — Hypoglossal canal: XII — Internal acoustic meatus: VII, VIII"], a: 3, h1: "Lower nerves: IX-X-XI jugular, XII its own canal.", h2: "Study point: Big Picture — Foramina Map.", exp: "Jugular foramen = IX/X/XI; hypoglossal canal = XII; internal acoustic meatus = VII/VIII." },
+  { id: 97, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · standard ref", q: "Which four cranial nerves carry PARASYMPATHETIC (cranial outflow) fibers?", opts: ["CN IV, VI, XI, and XII","CN I, II, V, and VIII","CN III, VII, IX, and X","CN V, VII, IX, and XII"], a: 2, h1: "'1973' rule: III, VII, IX, X.", h2: "Study point: Big Picture — Parasympathetic CNs.", exp: "The cranial parasympathetic outflow travels in CN III, VII, IX, and X." },
+  { id: 98, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · L10/L11 Infratemporal Fossa", q: "Which parasympathetic ganglion is functionally associated with CN IX (glossopharyngeal)?", opts: ["The pterygopalatine ganglion","The otic ganglion","The ciliary ganglion","The submandibular ganglion"], a: 1, h1: "Otic ganglion = IX → parotid.", h2: "Study point: Big Picture — Ganglia (IX).", exp: "The otic ganglion relays CN IX parasympathetics to the parotid gland.  [Maini] 'Otic ganglion... Ninth nerve carries preganglionic parasympathetic fibers to this ganglion.'" },
+  { id: 99, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · L11 Infratemporal Fossa", q: "The ciliary ganglion (in the orbit) is functionally associated with which cranial nerve?", opts: ["CN IV (trochlear)","CN III (oculomotor)","CN VI (abducens)","CN V (trigeminal)"], a: 1, h1: "Ciliary ganglion = 3rd nerve.", h2: "Study point: Big Picture — Ganglia (III).", exp: "The ciliary ganglion relays CN III parasympathetics to the sphincter pupillae and ciliary muscle.  [Maini] 'Ciliary ganglion is associated with third nerve.'" },
+  { id: 100, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · L06 Pharyngeal Apparatus", q: "Match the tongue's innervation. Which combination is correct for the ANTERIOR two-thirds?", opts: ["General sensation = IX; taste = IX","General sensation = X; taste = X","General sensation = VII; taste = V3","General sensation = lingual (V3); taste = chorda tympani (VII)"], a: 3, h1: "Front 2/3: touch V3, taste VII.", h2: "Study point: Big Picture — Tongue Map.", exp: "Anterior 2/3: general sensation via lingual (V3), taste via chorda tympani (VII)." },
+  { id: 101, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · L14 Cranial Meninges", q: "Which cranial nerves run in or along the wall of the cavernous sinus?", opts: ["CN IX, X and XI","CN I, II and XII","CN VII, VIII and IX","CN III, IV, VI and V1/V2"], a: 3, h1: "III, IV, VI, V1, V2 in the sinus.", h2: "Study point: Big Picture — Cavernous Sinus.", exp: "CN III, IV, and VI plus the V1 and V2 divisions of the trigeminal pass in or along the cavernous sinus wall." },
+  { id: 102, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · Cranial Nerves overview", q: "Which of the following cranial nerves is PURELY motor?", opts: ["CN V (trigeminal)","CN XII (hypoglossal)","CN IX (glossopharyngeal)","CN VII (facial)"], a: 1, h1: "Motor only: 3, 4, 6, 11, 12.", h2: "Study point: Big Picture — Motor-Only CNs.", exp: "CN XII is purely motor (like CN III, IV, VI, and XI)." },
+  { id: 103, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · L09/L11", q: "The geniculate ganglion, trigeminal ganglion, and spiral/vestibular ganglia are all what type of ganglion?", opts: ["Parasympathetic ganglia","Sympathetic ganglia","Motor nuclei","Sensory ganglia (cell bodies of afferent fibers)"], a: 3, h1: "Geniculate/trigeminal = sensory.", h2: "Study point: Big Picture — Sensory Ganglia.", exp: "These are sensory ganglia — collections of afferent cell bodies — as opposed to the autonomic (parasympathetic) head ganglia." },
+  { id: 104, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · Cranial Nerves overview", q: "Which set of cranial nerves is PURELY sensory?", opts: ["CN V, VII, and IX","CN X, XI, and XII","CN I (olfactory), CN II (optic), and CN VIII (vestibulocochlear)","CN III, IV, and VI"], a: 2, h1: "Sensory only: 1, 2, 8.", h2: "Study point: Big Picture — Sensory-Only CNs.", exp: "CN I, II, and VIII are the three purely sensory cranial nerves." },
+  { id: 105, topic: "Big Picture · Foramina, Ganglia & Maps", src: "Maini · L14/L15 Cranial Meninges", q: "After the sigmoid sinus passes through the jugular foramen it becomes which vessel — the same foramen that transmits CN IX, X, and XI?", opts: ["The vertebral vein","The external jugular vein","The internal jugular vein","The internal carotid artery"], a: 2, h1: "Sigmoid sinus → IJV at the jugular foramen.", h2: "Study point: Big Picture — Jugular Foramen.", exp: "At the jugular foramen the sigmoid sinus becomes the internal jugular vein, alongside CN IX, X, and XI.  [Maini] 'Sigmoid sinus becomes internal jugular vein and leaves the cranial cavity.'" },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.voicenote{font-size:13px;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:8px 0 4px;max-width:720px}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.reader{position:sticky;top:52px;z-index:15;background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:14px;padding:13px 15px;margin:8px 0 16px;box-shadow:0 16px 34px -22px var(--accent-deep)}
+.reader-title{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:15px;margin-bottom:9px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.reader-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.rbtn{border:none;background:rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:600;font-size:13px;padding:8px 14px;border-radius:9px;cursor:pointer;transition:.14s}
+.rbtn:hover{background:rgba(255,255,255,.28)}
+.rbtn.primary{background:#fff;color:var(--accent-deep)}
+.rbtn:disabled{opacity:.45;cursor:default}
+.reader-meta{font-size:12px;opacity:.93;margin-left:auto;white-space:nowrap}
+.reader-ctl{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-top:11px}
+.rate-wrap{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600}
+.rate-wrap input[type=range]{width:130px;accent-color:#fff}
+.rate-val{font-weight:700;background:rgba(255,255,255,.18);padding:2px 8px;border-radius:6px;min-width:46px;text-align:center}
+.voice-sel{font:inherit;font-size:12.5px;padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;max-width:240px}
+.voice-sel option{color:#111}
+.nospeech{font-size:12.5px;opacity:.94;margin-top:4px}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);scroll-margin-top:130px;transition:box-shadow .2s,outline .2s}
+.obj.reading{outline:2px solid var(--accent);outline-offset:2px;box-shadow:0 0 0 5px var(--accent-tint),0 12px 28px -20px rgba(124,58,237,.5)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* =========================================================== SPEECH ======= */
+function forSpeech(s) {
+  return s
+    .replace(/→/g, " to ")
+    .replace(/&/g, " and ")
+    .replace(/·/g, ", ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/* Flatten the cram content into an ordered list of spoken segments. */
+const speechSegments = (() => {
+  const segs = [];
+  cram.forEach((c, ti) => {
+    segs.push({ ti, text: `Topic ${c.n}. ${c.title}.` });
+    c.facts.forEach((f) => segs.push({ ti, text: forSpeech(f) }));
+    if (c.flag) segs.push({ ti, text: "Maini flag. " + forSpeech(c.flag) });
+  });
+  return segs;
+})();
+
+function useVoices() {
+  const [voices, setVoices] = useState([]);
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const load = () => {
+      const v = window.speechSynthesis.getVoices() || [];
+      if (v.length) setVoices(v);
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => { try { window.speechSynthesis.onvoiceschanged = null; } catch (e) {} };
+  }, []);
+  return voices;
+}
+
+/* --------------------------------------------------- Cram reader bar ------ */
+function CramReader({ activeTopic, setActiveTopic }) {
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+  const voices = useVoices();
+  const [status, setStatus] = useState("idle"); // idle | playing | paused
+  const [rate, setRate] = useState(1);
+  const [voiceURI, setVoiceURI] = useState("");
+  const [pos, setPos] = useState(0);
+  const idxRef = useRef(0);
+  const playingRef = useRef(false);
+  const rateRef = useRef(1);
+  const voiceRef = useRef("");
+
+  useEffect(() => { rateRef.current = rate; }, [rate]);
+  useEffect(() => { voiceRef.current = voiceURI; }, [voiceURI]);
+
+  // Prefer a natural English voice by default (Edge ships Ava / Emma / Andrew).
+  useEffect(() => {
+    if (!voices.length || voiceURI) return;
+    const pick =
+      voices.find((v) => /ava|emma|andrew/i.test(v.name) && /en/i.test(v.lang)) ||
+      voices.find((v) => /natural/i.test(v.name) && /en/i.test(v.lang)) ||
+      voices.find((v) => /en-US/i.test(v.lang)) ||
+      voices.find((v) => /^en/i.test(v.lang)) ||
+      voices[0];
+    if (pick) setVoiceURI(pick.voiceURI);
+  }, [voices, voiceURI]);
+
+  // Stop speech if the component unmounts (e.g. switching tabs).
+  useEffect(() => {
+    return () => { if (supported) { try { window.speechSynthesis.cancel(); } catch (e) {} } };
+  }, [supported]);
+
+  const speakFrom = (i) => {
+    if (!supported) return;
+    if (i >= speechSegments.length) {
+      playingRef.current = false;
+      setStatus("idle");
+      setPos(0);
+      idxRef.current = 0;
+      return;
+    }
+    idxRef.current = i;
+    setPos(i);
+    const seg = speechSegments[i];
+    setActiveTopic(seg.ti);
+    try {
+      const el = document.getElementById("cram-topic-" + cram[seg.ti].n);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    } catch (e) {}
+    const u = new SpeechSynthesisUtterance(seg.text);
+    u.rate = rateRef.current;
+    const v = voices.find((x) => x.voiceURI === voiceRef.current);
+    if (v) u.voice = v;
+    u.onend = () => { if (playingRef.current) speakFrom(idxRef.current + 1); };
+    u.onerror = () => { if (playingRef.current) speakFrom(idxRef.current + 1); };
+    window.speechSynthesis.speak(u);
+  };
+
+  const play = () => {
+    if (!supported) return;
+    if (status === "paused") {
+      window.speechSynthesis.resume();
+      playingRef.current = true;
+      setStatus("playing");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    playingRef.current = true;
+    setStatus("playing");
+    speakFrom(idxRef.current || 0);
+  };
+  const pause = () => {
+    if (!supported || status !== "playing") return;
+    window.speechSynthesis.pause();
+    playingRef.current = false;
+    setStatus("paused");
+  };
+  const stop = () => {
+    if (!supported) return;
+    playingRef.current = false;
+    window.speechSynthesis.cancel();
+    setStatus("idle");
+    idxRef.current = 0;
+    setPos(0);
+    setActiveTopic(null);
+  };
+  const restart = () => {
+    if (!supported) return;
+    playingRef.current = false;
+    window.speechSynthesis.cancel();
+    idxRef.current = 0;
+    setPos(0);
+    setTimeout(() => play(), 60);
+  };
+
+  return (
+    <div className="reader">
+      <div className="reader-title">🔊 Hands-free walkthrough
+        <span style={{ fontWeight: 400, fontSize: "12.5px", opacity: .9 }}>— it reads every must-know aloud, top to bottom.</span>
+      </div>
+      {supported ? (
+        <>
+          <div className="reader-row">
+            {status !== "playing"
+              ? <button className="rbtn primary" onClick={play}>{status === "paused" ? "▶ Resume" : "▶ Play walkthrough"}</button>
+              : <button className="rbtn primary" onClick={pause}>⏸ Pause</button>}
+            <button className="rbtn" onClick={stop} disabled={status === "idle"}>⏹ Stop</button>
+            <button className="rbtn" onClick={restart}>↺ Restart</button>
+            <span className="reader-meta">{status === "idle" ? `${speechSegments.length} lines` : `Reading ${pos + 1} / ${speechSegments.length}`}</span>
+          </div>
+          <div className="reader-ctl">
+            <label className="rate-wrap">Speed
+              <input type="range" min="0.5" max="3" step="0.1" value={rate} onChange={(e) => setRate(parseFloat(e.target.value))} />
+              <span className="rate-val">{rate.toFixed(1)}x</span>
+            </label>
+            {voices.length > 0 && (
+              <label className="rate-wrap">Voice
+                <select className="voice-sel" value={voiceURI} onChange={(e) => setVoiceURI(e.target.value)}>
+                  {voices.filter((v) => /^en/i.test(v.lang)).map((v) => (
+                    <option key={v.voiceURI} value={v.voiceURI}>{v.name}</option>
+                  ))}
+                </select>
+              </label>
+            )}
+          </div>
+        </>
+      ) : (
+        <div className="nospeech">Your browser does not support the Web Speech API. Open this page in Microsoft Edge or Chrome to hear the walkthrough.</div>
+      )}
+    </div>
+  );
+}
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · Module 14 · Head &amp; Neck · Dr. Maini</span>
+          <h1 className="title serif">Cranial Nerves — <em>part 2</em> (IV–XII)</h1>
+          <div className="voicenote">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+          <p className="subtitle">A one-surface cram for Dr. Maini&apos;s cranial nerves — nerve by nerve (IV, VI, V, VII, VIII, IX, X, XI, XII), the foramina map, the tongue map, the reflex limbs, and her own mnemonics — with a hands-free read-aloud walkthrough, a 105-question drill straight from the audited bank, and her tips and analogies.</p>
+          <div className="pill-row">
+            <span className="pill-date">🧠 Cranial Nerves (part 2) · CN IV–XII · lecture + lab</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Grounded in the module&apos;s audited Everything-MC bank (105 items, anti-fabrication verified) and Dr. Maini&apos;s lecture quotes captured there. No new unverified facts. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  const [activeTopic, setActiveTopic] = useState(null);
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s cranial-nerve essentials, in order</div>
+        <p>The exit map → the eye-muscle nerves (SO4 · LR6 · AO3) → trigeminal → facial → vestibulocochlear → glossopharyngeal → vagus → accessory &amp; hypoglossal → the synthesis. Hit ▶ to have it all read aloud, hands-free. The ⚑ flags are the high-yield hooks.</p>
+      </div>
+      <CramReader activeTopic={activeTopic} setActiveTopic={setActiveTopic} />
+      {cram.map((c, ti) => (
+        <div className={`obj ${activeTopic === ti ? "reading" : ""}`} id={"cram-topic-" + c.n} key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, organized to match how Dr. Maini frames the nerves and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Dr. Maini&apos;s own mnemonics and analogies pulled straight from the lectures, plus a couple of safe study hooks (marked as such — never put in her mouth).</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across CN IV–XII</div>
+        <p>Four options, two progressive hints, an explanation with Dr. Maini&apos;s own words, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Maini, teaching GA 0202 (Gross Anatomy, head & neck), running a review of CRANIAL NERVES part 2 — CN IV, V, VI, VII, VIII, IX, X, XI, and XII. Teach ONLY from the content below; do not invent nerves, muscles, foramina, ganglia, actions, or reflex limbs. Warm and direct; you say "right?" and "okay," love your mnemonics, and push students to reason instead of guessing. Keep answers tight (3-6 sentences) and quiz the student.
+
+EXITS / FORAMINA MAP: Superior orbital fissure = CN III, IV, VI and V1. Foramen rotundum = V2. Foramen ovale = V3. Internal acoustic meatus = VII and VIII together. Jugular foramen = IX, X, XI (sigmoid sinus becomes the internal jugular vein here). Hypoglossal canal = XII. Stylomastoid foramen = the exit of VII after the facial canal. Middle-fossa foramina medial to lateral: superior orbital fissure, rotundum, ovale, spinosum. Cavernous sinus wall carries III, IV, VI, V1/V2. There are 12 pairs of cranial nerves.
+
+EYE MUSCLES (SO4/LR6/AO3): Superior Oblique = CN IV (trochlear); Lateral Rectus = CN VI (abducens); All Other extraocular muscles = CN III (oculomotor). CN IV is purely motor, the ONLY nerve to emerge from the dorsal (posterior) brainstem (midbrain); superior oblique threads the trochlea (a fibrocartilaginous pulley = the name); action is "down and out"; palsy = trouble looking down and in (descending stairs). CN VI is purely motor to lateral rectus (abducts); lesion = eye deviates medially with horizontal diplopia; long course makes it first hit by raised intracranial pressure.
+
+CN V TRIGEMINAL: three divisions - V1 ophthalmic (superior orbital fissure), V2 maxillary (foramen rotundum), V3 mandibular (foramen ovale). ONLY V3 is both sensory and motor; V3 motor = muscles of mastication (temporalis, masseter, medial & lateral pterygoids); nearly all V3 branches given off in the infratemporal fossa; V3 + mastication = first pharyngeal arch. Trigeminal ganglion = SENSORY, at the petrous apex (NOT autonomic - not "one of the cops"). Anterior two-thirds of tongue: general sensation = lingual nerve (V3); taste = chorda tympani (VII) riding the lingual. Corneal reflex: sensory limb V1, motor limb VII. Trigeminal neuralgia = shock-like pain in V2/V3.
+
+CN VII FACIAL: internal acoustic meatus -> facial canal -> geniculate ganglion (at the genu/bend; holds TASTE cell bodies for anterior 2/3) -> stylomastoid foramen -> parotid gland (splits into 5 terminal branches: temporal, zygomatic, buccal, marginal mandibular, cervical). Motor to muscles of facial expression (e.g. orbicularis oculi), plus posterior belly of digastric, stylohyoid, stapedius. Taste anterior 2/3 (chorda tympani). Parasympathetic secretomotor (chorda tympani) to submandibular and sublingual glands. Bell's palsy = idiopathic paralysis of one whole side of the face; Bell's phenomenon = eyeball rolls up on attempted eye closure; Ramsay Hunt (herpes zoster oticus) hits geniculate ganglion of VII + CN VIII.
+
+CN VIII VESTIBULOCOCHLEAR: internal acoustic meatus with VII; does NOT leave the skull (ends in the inner ear, petrous temporal). Purely sensory. Two parts: cochlear (hearing; lesion = tinnitus/deafness) and vestibular (balance; lesion = vertigo). Acoustic neuroma in the IAM can hit VII and VIII together.
+
+CN IX GLOSSOPHARYNGEAL: jugular foramen. Only motor muscle = stylopharyngeus (the one pharyngeal muscle NOT from the vagus). Posterior one-third of tongue = both general sensation AND taste. Parasympathetic secretomotor to the parotid via the OTIC ganglion (IX carries the preganglionic fibers). Sensory (afferent) limb of the gag reflex. Carotid sinus (baroreceptor) and carotid body (chemoreceptor) afferents via the carotid sinus nerve. Tympanic nerve (of Jacobson) -> tympanic plexus. Nerve of the third pharyngeal arch.
+
+CN X VAGUS: jugular foramen; runs in the carotid sheath with the common carotid artery and internal jugular vein ("three musketeers"). Recurrent laryngeal nerve = all intrinsic laryngeal muscles EXCEPT cricothyroid (= external laryngeal nerve, from the superior laryngeal); RLN ascends in the tracheoesophageal groove. One RLN injury = hoarseness (posteriorly enlarging thyroid, thyroid surgery); both = aphonia + inspiratory stridor. Sensation above the vocal folds = internal laryngeal nerve; below = recurrent laryngeal. Motor (efferent) limb of the gag reflex. Palatoglossus = the one tongue muscle supplied by the vagus. Parasympathetic to thoracic and most abdominal viscera (to the left colic flexure).
+
+CN XI ACCESSORY: spinal root supplies sternocleidomastoid and trapezius (C2-C4 join in); spinal root ascends through the foramen magnum then exits the jugular foramen; runs exposed in the posterior triangle. Lesion = weak shrug, difficulty turning the head, drooping shoulder / scapular winging. One SCM turns the head to the OPPOSITE side. Small cranial root joins the vagus. Test = shrug shoulders + turn head against resistance.
+
+CN XII HYPOGLOSSAL: purely motor to all tongue muscles EXCEPT palatoglossus (that's the vagus); exits the hypoglossal canal (occipital bone); genioglossus protrudes the tongue; a unilateral lesion makes the protruded tongue deviate TOWARD the lesioned/weak side (intact genioglossus pushes unopposed). C1 fibers hitchhike on XII -> superior root of ansa cervicalis (infrahyoid muscles) + thyrohyoid + geniohyoid.
+
+BIG PICTURE: parasympathetic cranial nerves = III, VII, IX, X. Sensory ganglia (NOT autonomic) = trigeminal, geniculate, spiral/vestibular. Autonomic ganglia = ciliary (III), otic (IX). Purely motor = III, IV, VI, XI, XII. Purely sensory = I, II, VIII. Tongue map: anterior 2/3 general = lingual (V3), taste = chorda tympani (VII); posterior 1/3 both = IX; muscles = XII except palatoglossus (X).
+
+Open by offering to drill the eye-muscle mnemonic (SO4/LR6/AO3), the foramina map, the tongue map, the trigeminal, the facial nerve course, or the vagus/larynx. When the student is wrong, name the rule and have them re-derive step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay — cranial nerves, part two, CN four through twelve. Two things carry a lot of the marks: the exits (which nerves share the superior orbital fissure, the internal acoustic meatus, and the jugular foramen), and the tongue map (front two-thirds versus back one-third, sensation versus taste versus muscles). Want me to drill the eye-muscle mnemonic (SO4, LR6, AO3), the foramina map, the trigeminal, the facial nerve's journey, the vagus and the larynx, or the tongue map? Where do you want to start, right?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on SO4 / LR6 / AO3 and the eye muscles",
+    "Quiz the foramina — which nerves share each opening?",
+    "The tongue map — sensation, taste, and muscles",
+    "Trigeminal: divisions, foramina, and the mastication muscles",
+    "The facial nerve's journey and Bell's palsy",
+    "Vagus and the larynx — recurrent laryngeal vs cricothyroid",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her cranial-nerve lectures. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

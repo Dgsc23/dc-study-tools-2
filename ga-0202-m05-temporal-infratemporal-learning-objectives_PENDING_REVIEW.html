@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎯 GA 0202 M05 — Temporal & Infratemporal Fossa · Learning Objectives (Master the 13)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .voices{color:#fde68a;font-size:12px;margin:10px auto 0;max-width:720px;background:rgba(0,0,0,0.18);border:1px solid rgba(245,158,11,0.35);border-radius:9px;padding:7px 12px;line-height:1.5}
+.header .voices b{color:#fcd34d}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:10px;letter-spacing:0.3px}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="fab201-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m05-temporal-infratemporal-hub.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 M05 Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 13</h1>
+  <div class="sub">GA 0202 &middot; <b>Temporal &amp; Infratemporal Fossa</b> &middot; the study spine that ties every drill back to what Dr. Maini actually emphasizes across the two Temporal &amp; Infratemporal Fossa lectures &mdash; cement each one, check it off, move on.</div>
+  <div class="voices">&#128266; Best voices in <b>Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+  <div class="meta-line">Dr. Seema Maini &middot; Temporal &amp; Infratemporal Fossa (Lectures 10&ndash;11) &middot; &#129504; SCUHS GA 0202</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for the Temporal &amp; Infratemporal Fossa module. Each objective below is distilled from what <b>Dr. Maini actually drilled</b> in Lectures 10&ndash;11; every &ldquo;prove it&rdquo; bullet is grounded in the module&rsquo;s <b>audited Everything-MC bank</b> (its facts are already anti-fabrication verified) and cited to the lecture. Quotes are transcribed from her Zoom recordings; <span class="fix">[bracketed]</span> words are de-garbled spellings of what she said. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>Dr. Maini teaches this module as a running quiz &mdash; &ldquo;Which bone has temporal lines? &hellip; parietal, right?&rdquo; This page takes the <b>thirteen things she keeps circling back to</b> across the two <b>Temporal &amp; Infratemporal Fossa</b> lectures, spells out <b>exactly what &ldquo;done&rdquo; looks like</b>, hangs a <b>verbatim Maini quote</b> on each, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: Dr. Maini&rsquo;s <b>Temporal &amp; Infratemporal Fossa (L10)</b> and <b>(L11, contd.)</b> lecture recordings + this module&rsquo;s audited Everything-MC bank (SCUHS Canvas Zoom).</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 13 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Delineate the temporal fossa &mdash; its four boundaries, its floor, what fills it, and the vessels that cross it.</div>
+        <div class="obj-src">content: <b>L10 &middot; Temporal fossa</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give the <b>boundaries</b>: superior &amp; posterior = the <b>temporal lines</b> (which sit on the <b>parietal bone</b>); anterior = frontal &amp; zygomatic bones; <b>lateral = the zygomatic arch</b> (making it a shallow pocket); <b>inferior = the infratemporal crest</b>. <span class="cite">(L10 &middot; boundaries)</span></li>
+        <li>State the <b>floor</b>: the same <b>four bones that meet at the pterion</b> (frontal, parietal, temporal, greater wing of sphenoid). <span class="cite">(L10 &middot; floor / pterion)</span></li>
+        <li>Name the <b>contents</b>: the fossa is almost entirely occupied by the <b>temporalis</b> muscle (under the temporal fascia). <span class="cite">(L10 &middot; contents)</span></li>
+        <li>Track the <b>vessels</b>: the <b>superficial temporal artery</b> is one of the <b>two terminal branches of the external carotid</b>; the superficial temporal vein unites with the maxillary vein to form the <b>retromandibular vein</b>. <span class="cite">(L10 &middot; superficial temporal vessels)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Which bone has temporal lines? &hellip; parietal, right? &hellip; Superficial temporal artery is one of the two terminal branches of &hellip; external carotid artery, good.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L10) &middot; ~00:05:46</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which bone bears the temporal lines, what muscle fills the fossa, and where do its four floor-bones meet?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>temporal lines are on the parietal bone</b>; the <b>temporalis</b> fills the fossa; the four floor-bones meet at the <b>pterion</b>. The lateral wall is the <b>zygomatic arch</b>, the inferior boundary is the <b>infratemporal crest</b>, and the superficial temporal artery is a terminal branch of the external carotid.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the boundaries and contents of the infratemporal fossa &mdash; the six walls and what lives inside.</div>
+        <div class="obj-src">content: <b>L10&ndash;L11 &middot; Infratemporal fossa</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give the <b>walls</b>: <b>roof = greater wing of the sphenoid</b> (NOT the zygomatic arch); <b>lateral = ramus of the mandible</b>; <b>medial = lateral pterygoid plate</b>; <b>anterior = posterior surface of the maxilla</b>; <b>posterior = styloid + mastoid process + tympanic plate</b>; <b>floor = the medial pterygoid muscle</b>. <span class="cite">(L10&ndash;L11 &middot; boundaries)</span></li>
+        <li>List the <b>contents</b>: the two pterygoid muscles, the <b>maxillary artery + pterygoid venous plexus</b>, the <b>mandibular nerve (V3)</b> and its branches, the <b>chorda tympani</b>, and the <b>otic ganglion</b>. <span class="cite">(L10&ndash;L11 &middot; contents)</span></li>
+        <li>Flag the trap: the <b>parotid gland is NOT</b> a content of the fossa, and the <b>chorda tympani is a branch of the facial nerve (CN VII), not V3</b>. <span class="cite">(L10&ndash;L11 &middot; chorda tympani)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Greater wing of the sphenoid is the right answer. Zygomatic arch cannot be the roof &hellip; medial pterygoid also forms a floor of infratemporal fossa &hellip; Is chorda tympani a branch of V3 or not? &hellip; No, it&rsquo;s a branch of facial, good.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L10&ndash;L11) &middot; boundaries &amp; contents</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What forms the roof vs the floor of the infratemporal fossa, and is the chorda tympani a branch of V3?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Roof = greater wing of the sphenoid</b>; <b>floor = medial pterygoid muscle</b>. The chorda tympani is a branch of the <b>facial nerve (VII)</b>, not V3. Lateral wall = ramus of mandible; medial = lateral pterygoid plate; anterior = posterior maxilla; and the <b>parotid gland is not</b> a content.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">Identify the four muscles of mastication &mdash; their common arch and nerve, and each muscle&rsquo;s attachments.</div>
+        <div class="obj-src">content: <b>L10 &middot; Muscles of mastication</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the shared origin: all four develop from the <b>first pharyngeal arch</b> and are innervated by the <b>mandibular nerve (V3)</b>. <span class="cite">(L10 &middot; overview)</span></li>
+        <li><b>Temporalis:</b> from the temporal fossa &rarr; inserts on the <b>coronoid process &amp; anterior border of the ramus</b>. <span class="cite">(L10 &middot; temporalis)</span></li>
+        <li><b>Masseter:</b> from the <b>zygomatic arch + maxillary process of the zygomatic bone</b> &rarr; inserts on the <b>angle &amp; lateral surface of the ramus</b>. <span class="cite">(L10 &middot; masseter)</span></li>
+        <li><b>Medial pterygoid:</b> from the <b>medial surface of the lateral pterygoid plate, pyramidal process of the palatine, &amp; tuberosity of the maxilla</b>. <b>Lateral pterygoid:</b> from the <b>infratemporal surface/greater wing of the sphenoid + the LATERAL surface of the lateral pterygoid plate</b> &rarr; inserts on the pterygoid fovea <b>plus the joint capsule &amp; articular disc</b> of the TMJ. <span class="cite">(L10 &middot; pterygoids)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;V3, muscles of mastication, first pharyngeal arch. &hellip; This muscle [lateral pterygoid], it originates from lateral surface of pterygoid plate, and then it moves forward &hellip; inserted into the joint capsule and articular disc.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L10) &middot; ~00:33:32, ~00:39:30</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">From which arch and nerve do all four muscles of mastication come, and where does the lateral pterygoid uniquely insert?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">All four are <b>first-pharyngeal-arch</b> muscles innervated by <b>V3</b>. The <b>lateral pterygoid</b> inserts on the pterygoid fovea of the condyle <b>plus the joint capsule and articular disc</b> of the TMJ &mdash; the reason it can pull the disc forward.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Apply Maini&rsquo;s four movement rules &mdash; which muscles elevate, depress, protrude, and retract the mandible.</div>
+        <div class="obj-src">content: <b>L10&ndash;L11 &middot; Muscle actions</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li><b>Elevation:</b> temporalis, masseter, medial pterygoid &mdash; but <b>NOT</b> the lateral pterygoid. <span class="cite">(L10 &middot; elevation)</span></li>
+        <li><b>Depression:</b> the <b>lateral pterygoid</b> is the <b>sole depressor</b>. <b>Retraction:</b> the <b>temporalis</b> is the <b>only retractor</b> (its horizontal posterior fibers; the vertical anterior fibers elevate). <span class="cite">(L10&ndash;L11 &middot; depression / retraction)</span></li>
+        <li><b>Protrusion (protraction):</b> lateral pterygoid, medial pterygoid, masseter &mdash; but <b>NOT the temporalis</b>, because it is a retractor. <span class="cite">(L10 &middot; protrusion)</span></li>
+        <li>Use Maini&rsquo;s pairings: the <b>masseter &amp; medial pterygoid run parallel</b>, so they share the same two actions &mdash; <b>elevate + protract</b>; and by her <b>chair analogy</b>, the lateral pterygoid pulling the head forward while the body drops gives <b>protraction with depression</b>. <span class="cite">(L10&ndash;L11 &middot; pairings)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Temporalis is the retractor. Only retractor &hellip; Lateral pterygoid is the sole depressor &hellip; Temporalis is not a protruder, because it is what? It is a retractor. &hellip; Masseter and medial pterygoid, they only elevate and protract.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L10&ndash;L11) &middot; muscle actions</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which single muscle is the sole depressor of the mandible, and which is the only retractor?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>lateral pterygoid</b> is the sole <b>depressor</b>; the <b>temporalis</b> is the only <b>retractor</b>. Because the temporalis retracts, it is <b>not</b> a protruder &mdash; the protruders are lateral pterygoid, medial pterygoid, and masseter.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">Describe the structure of the TMJ &mdash; joint type, stability rank, articulating surfaces, disc, tubercle, ligaments, and supply.</div>
+        <div class="obj-src">content: <b>L10&ndash;L11 &middot; TMJ structure</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Classify it: a <b>synovial joint</b>, one of the most mobile and least stable in the body &mdash; <b>second only to the shoulder</b> (glenohumeral). <span class="cite">(L10 &middot; ~00:16:02)</span></li>
+        <li>Name the surfaces: the <b>mandibular fossa of the temporal bone</b> + the <b>head of the condylar process</b>, with an <b>articular disc</b> that divides the cavity into a <b>superior and inferior compartment</b>; the <b>articular tubercle</b> just anterior limits anterior dislocation of the head. <span class="cite">(L10 &middot; disc / tubercle)</span></li>
+        <li>Give the two <b>extrinsic ligaments</b>: <b>sphenomandibular</b> (spine of sphenoid &rarr; <b>lingula</b>) and <b>stylomandibular</b> (styloid process &rarr; <b>angle</b> of the mandible). <span class="cite">(L11 &middot; ligaments)</span></li>
+        <li>State supply: <b>synovial fluid lubricates AND nourishes the avascular hyaline cartilage</b>; sensation is mainly the <b>auriculotemporal nerve</b> (plus masseteric &amp; deep temporal); blood from the <b>maxillary + superficial temporal arteries</b>. <span class="cite">(L11 &middot; supply)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This joint also is one of the most mobile and least stable joint in our body, second to shoulder joint &hellip; Sphenomandibular ligament &hellip; it is lingula. Because lingula is more internal. &hellip; Auriculotemporal &hellip; is the best choice, good.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L10&ndash;L11) &middot; ~00:16:02 &amp; TMJ</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The TMJ is second in mobility to which joint, and where does the sphenomandibular ligament attach on the mandible?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Second only to the <b>shoulder (glenohumeral)</b> joint. The <b>sphenomandibular</b> ligament runs from the spine of the sphenoid to the <b>lingula</b> (the stylomandibular runs to the <b>angle</b>). The articular disc splits the cavity into <b>superior + inferior</b> compartments; innervation is the <b>auriculotemporal</b> nerve.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">State the movements of the TMJ and Maini&rsquo;s flexion/extension convention &mdash; including lateral deviation.</div>
+        <div class="obj-src">content: <b>L10 &middot; TMJ movements</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>List the <b>movements</b>: <b>gliding</b> (protrusion/retraction), <b>rotation</b>, and <b>elevation/depression</b>. <span class="cite">(L10 &middot; movement repertoire)</span></li>
+        <li>Use her <b>convention</b>: at the TMJ, <b>flexion = elevation</b> and <b>extension = depression</b> (used interchangeably) &mdash; flexion <b>decreases</b> the joint angle, extension <b>increases</b> it. <span class="cite">(L10 &middot; ~00:18:35)</span></li>
+        <li>Work <b>lateral deviation</b>: when the mandible deviates to the <b>right</b>, the <b>left</b> condyle <b>glides forward (protracts)</b>. <span class="cite">(L10 &middot; lateral deviation)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;There is flexion. Flexion is elevation &hellip; flexion and elevation, when it comes to TMJ &hellip; they are used interchangeably &hellip; angle decreases, that is flexion. When angle increases, that is extension.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L10) &middot; ~00:18:35</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">At the TMJ, flexion corresponds to which movement &mdash; and if the LEFT condyle protracts, which way does the jaw deviate?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Flexion = elevation</b> (extension = depression). If the <b>left</b> condyle glides forward (protracts), the jaw deviates to the <b>right</b>. The three movement families are gliding, rotation, and elevation/depression.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace the maxillary artery and its key branches &mdash; and the middle-meningeal / pterion bleed.</div>
+        <div class="obj-src">content: <b>L11 &middot; Maxillary artery</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Place its origin: the <b>maxillary artery is the LARGER of the two terminal branches of the external carotid</b>, arising within the <b>parotid gland</b> behind the neck of the mandible. <span class="cite">(L11 &middot; ~00:03:45)</span></li>
+        <li>Flag the clinical branch: the <b>middle meningeal artery</b> enters the cranium via the <b>foramen spinosum</b> to supply the dura; rupture &mdash; classically a <b>pterion fracture</b> &mdash; gives an <b>extradural (epidural) hemorrhage</b>. <span class="cite">(L11 &middot; middle meningeal)</span></li>
+        <li>Add the other named branches: the <b>inferior alveolar</b> (gives a mylohyoid branch before the mandibular foramen), the <b>deep auricular &amp; anterior tympanic</b> (to the ear), and the <b>sphenopalatine</b> (medially into the nasal cavity). <span class="cite">(L11 &middot; branches)</span></li>
+        <li>Finish the course: it <b>terminates as the infraorbital artery</b> and leaves the fossa to enter the pterygopalatine fossa through the <b>pterygomaxillary fissure</b>. <span class="cite">(L11 &middot; ~00:52:16)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Larger of the two terminal branches &hellip; very frequently asked question is, which one of the following is terminal branch of maxillary artery? That is infraorbital. Which artery passes from pterygopalatine fossa to the nasal cavity is [s]phenopalatine.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L11) &middot; ~00:03:45 &amp; ~00:52:16</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What is the terminal branch of the maxillary artery, and which branch bleeds in an extradural hematoma?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The terminal branch is the <b>infraorbital artery</b>. The <b>middle meningeal artery</b> (through the <b>foramen spinosum</b>, torn at the <b>pterion</b>) causes an <b>extradural / epidural hemorrhage</b>. The maxillary artery itself is the larger terminal branch of the external carotid.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">Explain the pterygoid venous plexus &mdash; where it sits, where it drains, and why it spreads infection.</div>
+        <div class="obj-src">content: <b>L11 &middot; Pterygoid venous plexus</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Locate it: a venous network <b>between the temporalis and pterygoid muscles</b>, surrounding the maxillary artery. <span class="cite">(L11 &middot; location)</span></li>
+        <li>State its drainage: it drains <b>posteriorly into the maxillary vein</b>. <span class="cite">(L11 &middot; drainage)</span></li>
+        <li>Give the danger: it <b>communicates with the cavernous sinus and with the facial vein</b>, so it is a route for <b>infection to spread from the face to the cavernous sinus</b>. <span class="cite">(L11 &middot; ~00:13:07)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Cavernous sinus on one side, and with facial vein &hellip; a via media for spread of infections from the facial region to the cavernous sinus, right?&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L11) &middot; ~00:13:07</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Into which vein does the pterygoid venous plexus drain, and why is it clinically dangerous?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">It drains into the <b>maxillary vein</b>. Because it connects to the <b>cavernous sinus</b> and the <b>facial vein</b>, a facial infection can travel through it to the cavernous sinus.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">Dissect the mandibular nerve (V3) &mdash; its exit, its branches by division, and the auriculotemporal signature.</div>
+        <div class="obj-src">content: <b>L11 &middot; Mandibular nerve (V3)</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Give its exit and nature: V3 leaves the skull through the <b>foramen ovale</b> as a <b>mixed (sensory + motor) nerve</b>, then descends between the <b>tensor veli palatini (medial)</b> and the <b>lateral pterygoid (lateral)</b>. <span class="cite">(L11 &middot; ~00:14 / foramen ovale)</span></li>
+        <li>Read the <b>main trunk</b>: the <b>meningeal branch</b> + the <b>nerve to medial pterygoid</b>. <span class="cite">(L11 &middot; trunk)</span></li>
+        <li>Split the divisions: the <b>anterior division is largely motor</b>, with the <b>buccal nerve as its one sensory branch</b>; the <b>posterior division</b> gives the <b>inferior alveolar</b> (continues as the <b>mental nerve</b> at the mental foramen), the <b>lingual</b>, and the <b>auriculotemporal</b>. <span class="cite">(L11 &middot; divisions)</span></li>
+        <li>Nail the auriculotemporal signature: it has <b>two roots pierced by the middle meningeal artery</b> &mdash; the &ldquo;nerve with a passage&rdquo; on a diagram. <span class="cite">(L11 &middot; auriculotemporal)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;V3 passes through foramen ovale &hellip; V2 passes through foramen rotundum. Rotundum means round. &hellip; Anytime you look at a nerve which has a passage &hellip; it&rsquo;s auriculotemporal, because it is pierced by middle meningeal artery.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L11) &middot; V3 branches</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Through which foramen does V3 exit, and what identifies the auriculotemporal nerve on a diagram?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">V3 exits the <b>foramen ovale</b>. The <b>auriculotemporal nerve</b> is the one with <b>two roots pierced by the middle meningeal artery</b>. Its anterior division is mostly motor (buccal = the one sensory branch); the posterior division carries the inferior alveolar, lingual, and auriculotemporal.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Follow the chorda tympani + lingual nerve to the submandibular ganglion &mdash; the taste-and-saliva pathway.</div>
+        <div class="obj-src">content: <b>L11 &middot; Lingual nerve &amp; chorda tympani</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Start with the <b>lingual nerve</b> (a branch of V3): before it is joined, it carries <b>general sensation (GSA) from the anterior two-thirds of the tongue</b>. <span class="cite">(L11 &middot; lingual GSA)</span></li>
+        <li>Add the <b>chorda tympani</b>: a branch of the <b>facial nerve (VII)</b> that reaches the lingual nerve through the <b>petrotympanic fissure</b>, carrying <b>taste (SVA) from the anterior two-thirds + preganglionic parasympathetic</b> fibers. <span class="cite">(L11 &middot; chorda tympani)</span></li>
+        <li>Route the parasympathetics: those preganglionic fibers <b>synapse in the submandibular ganglion</b>; the postganglionic fibers then supply the <b>submandibular and sublingual salivary glands</b>. <span class="cite">(L11 &middot; submandibular ganglion)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Is chorda tympani a branch of V3 or not? &hellip; No, it&rsquo;s a branch of facial, good.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L10&ndash;L11) &middot; chorda tympani</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The chorda tympani carries which two fiber types, and its parasympathetics relay in which ganglion?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Taste (SVA)</b> from the anterior two-thirds of the tongue + <b>preganglionic parasympathetic</b> fibers. They relay in the <b>submandibular ganglion</b>, whose postganglionic fibers supply the <b>submandibular + sublingual</b> glands. The lingual nerve alone carries GSA from the anterior two-thirds.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace the otic-ganglion pathway to the parotid gland &mdash; CN IX in, auriculotemporal out.</div>
+        <div class="obj-src">content: <b>L10&ndash;L11 &middot; Otic ganglion</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Place it and its target: the <b>otic ganglion</b> lies <b>deep (medial) to V3, just below the foramen ovale</b>, and is <b>secretomotor to the parotid gland</b> (Maini&rsquo;s rhyme: p<b>arot</b>id / <b>ot</b>ic). <span class="cite">(L10 &middot; ~00:14:50)</span></li>
+        <li>Give the <b>input</b>: preganglionic fibers from the <b>glossopharyngeal nerve (CN IX)</b>, with cell bodies in the <b>inferior salivatory nucleus of the medulla</b>. <span class="cite">(L10 &middot; ~00:15:05, L11 &middot; ~00:26:01)</span></li>
+        <li>Trace the relay: <b>tympanic nerve (IX) &rarr; tympanic plexus &rarr; lesser petrosal nerve &rarr; otic ganglion</b>. <span class="cite">(L11 &middot; lesser petrosal)</span></li>
+        <li>Finish the ride: the <b>postganglionic fibers hitch-hike on the auriculotemporal nerve</b> to reach the parotid. <span class="cite">(L11 &middot; otic &rarr; auriculotemporal)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;parotid gland, otic ganglion &hellip; Ninth nerve carries preganglionic parasympathetic fibers to this ganglion. Postganglionic parasympathetic fibers, they go to parotid gland.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L10) &middot; ~00:14:50&ndash;00:15:05</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The otic ganglion&rsquo;s preganglionic fibers come from which nerve, and its postganglionic fibers ride which nerve to the parotid?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Preganglionic fibers come from <b>CN IX (glossopharyngeal)</b> via the <b>lesser petrosal nerve</b> (cell bodies in the inferior salivatory nucleus). Postganglionic fibers <b>hitch-hike on the auriculotemporal nerve</b> to the <b>parotid gland</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Command the COPS mnemonic &mdash; the four parasympathetic ganglia of the head, their nerves, and the pterygoid-canal trap.</div>
+        <div class="obj-src">content: <b>L11 &middot; Parasympathetic ganglia (COPS)</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Spell Maini&rsquo;s mnemonic: <b>COPS = Ciliary, Otic, Pterygopalatine, Submandibular</b> &mdash; the four parasympathetic (cranial) ganglia of the head/neck. <span class="cite">(L11 &middot; ~00:25:01)</span></li>
+        <li>Assign the <b>nerves</b>: <b>Ciliary &larr; CN III</b>; <b>Otic &larr; CN IX</b>; <b>Pterygopalatine &amp; Submandibular &larr; CN VII</b>. (The head/neck/body preganglionic outflow rides CN III, VII, IX, and X.) <span class="cite">(L11 &middot; COPS nerves)</span></li>
+        <li>Dodge the trap: the <b>trigeminal (semilunar) ganglion is NOT a COPS ganglion &mdash; it is a sensory ganglion</b>; and the <b>deep petrosal nerve is sympathetic (from the internal carotid plexus), NOT a branch of VII</b>. <span class="cite">(L11 &middot; ~00:42:27)</span></li>
+        <li>Assemble the pterygoid canal: the <b>nerve of the pterygoid canal = greater petrosal (parasympathetic, from VII) + deep petrosal (sympathetic)</b>, and the <b>pterygopalatine ganglion</b> supplies the <b>lacrimal, nasal, and palatine glands</b>. <span class="cite">(L11 &middot; pterygoid canal)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;there are 4 parasympathetic ganglia in the head and neck region &hellip; a [mnemonic] corpse, right? C, O, P, and S. &hellip; C is ciliary. Ciliary ganglion is associated with third nerve.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L11) &middot; ~00:25:01</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What does COPS stand for, and which cranial nerve supplies the ciliary vs the otic ganglion?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>C</b>iliary, <b>O</b>tic, <b>P</b>terygopalatine, <b>S</b>ubmandibular. <b>Ciliary &larr; CN III</b>; <b>otic &larr; CN IX</b>; pterygopalatine &amp; submandibular &larr; <b>CN VII</b>. The <b>deep petrosal</b> nerve is sympathetic (not a branch of VII), and the trigeminal ganglion is a <b>sensory</b> ganglion.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 13 ===================== -->
+  <div class="lo" id="lo13">
+    <div class="lo-head">
+      <div class="lo-num">13</div>
+      <div class="lo-obj">
+        <div class="obj-text">Situate the pterygopalatine fossa &mdash; its boundaries, its three communications, and its contents.</div>
+        <div class="obj-src">content: <b>L11 &middot; Pterygopalatine fossa</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo13"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Locate it: between the <b>pterygoid process of the sphenoid (posterior)</b> and the <b>posterior surface of the maxilla (anterior)</b>; roof = greater wing of the sphenoid; <b>floor = pyramidal process of the palatine bone</b>. <span class="cite">(L11 &middot; ~00:45:14)</span></li>
+        <li>Give the three <b>communications</b>: <b>laterally with the infratemporal fossa via the pterygomaxillary fissure</b>; <b>medially with the nasal cavity via the sphenopalatine foramen</b>; <b>posteriorly with the middle cranial fossa via the foramen rotundum (which transmits V2)</b>. <span class="cite">(L11 &middot; ~00:46:38)</span></li>
+        <li>List the <b>contents</b>: the <b>pterygopalatine ganglion</b>, the <b>maxillary nerve (V2)</b>, and the <b>terminal (third) part of the maxillary artery</b>. <span class="cite">(L11 &middot; ~00:48:12)</span></li>
+        <li>Add V2&rsquo;s continuations: V2 continues as the <b>infraorbital nerve</b> (through the infraorbital foramen), and its <b>zygomatic nerve divides into zygomaticofacial + zygomaticotemporal</b>. <span class="cite">(L11 &middot; V2 branches)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;posteriorly, with middle cranial fossa through foramen rotundum &hellip; So, V2 passes through forum[en] rotundum. Rotundum means round. &hellip; Medially, with the nasal cavity, through sphenopalatine foramen.&rdquo;<span class="cite">&mdash; Temporal &amp; Infratemporal Fossa (L11) &middot; ~00:46:10&ndash;00:54:49</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="ga-0202-m05-temporal-infratemporal-everything-mc-drill_PENDING_REVIEW.html">&#129513; Drill it &middot; Everything-MC</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The pterygopalatine fossa talks to the nasal cavity through which opening, and to the middle cranial fossa through which foramen?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">To the <b>nasal cavity via the sphenopalatine foramen</b> (where the sphenopalatine artery passes); to the <b>middle cranial fossa via the foramen rotundum</b>, which transmits <b>V2</b>. Its contents are the pterygopalatine ganglion, V2, and the terminal maxillary artery.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 13 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump into the <b>Everything-MC drill</b> and grind exactly that topic.</p>
+    <p><b>3.</b> The <b>parasympathetic story</b> (Objectives 10&ndash;12 &mdash; chorda tympani, otic ganglion, and COPS) is where Maini&rsquo;s &ldquo;which nerve carries which fibers to which gland&rdquo; questions live. Spend extra reps there.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t mix up the &ldquo;which nerve?&rdquo; traps.</b> The <b>chorda tympani is a branch of the facial nerve (VII), not V3</b>; the <b>deep petrosal is sympathetic, not a branch of VII</b>; the <b>otic ganglion takes CN IX in and sends postganglionics out on the auriculotemporal</b> to the parotid; and the <b>auriculotemporal is the nerve pierced by the middle meningeal artery</b>. On the muscles: the <b>lateral pterygoid is the sole depressor</b> and the <b>temporalis is the only retractor</b>.</div>
+    <p style="margin-top:6px">When all 13 boxes are ticked, you own Dr. Maini&rsquo;s objective list for the <b>Temporal &amp; Infratemporal Fossa</b> &mdash; the spine of the GA 0202 Module 5 material.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 5 (Temporal &amp; Infratemporal Fossa) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from Dr. Maini&rsquo;s lecture recordings (Temporal &amp; Infratemporal Fossa, L10&ndash;L11) + the audited Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m05_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 Gross Anatomy (Head & Neck) — Dr. Seema Maini
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Temporal & Infratemporal Fossa learning objectives (Dr. Maini).' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 13 Temporal & Infratemporal Fossa learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy for the four parasympathetic ganglia (COPS) or the maxillary-artery branches.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the Temporal & Infratemporal Fossa module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 Gross Anatomy (Head & Neck) with Dr. Seema Maini at SCUHS (Module 5 — Temporal & Infratemporal Fossa). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

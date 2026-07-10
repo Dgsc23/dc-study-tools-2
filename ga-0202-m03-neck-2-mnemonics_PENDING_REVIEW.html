@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · The Neck (part 2) — Mnemonics</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+       background: #0f172a; color: #e2e8f0; padding: 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+h1 { color: #fbbf24; font-size: 1.8rem; margin-bottom: 6px; text-align: center; }
+.subtitle { color: #94a3b8; text-align: center; margin-bottom: 8px; font-style: italic; font-size: 0.95rem; }
+.edge-note { color: #93c5fd; text-align: center; margin: 0 auto 22px; max-width: 880px; font-size: 0.82rem; line-height: 1.5; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.28); border-radius: 8px; padding: 8px 12px; }
+.scope-note { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.35); border-radius: 8px; padding: 10px 14px; margin: 0 auto 14px; max-width: 880px; color: #a7f3d0; font-size: 0.85rem; line-height: 1.55; }
+.scope-note b { color: #34d399; }
+.scope-note .gold { color: #fbbf24; }
+h2 { color: #60a5fa; font-size: 1.25rem; margin: 32px 0 12px; border-bottom: 1px solid #334155; padding-bottom: 6px; }
+.topic-tagline { color: #94a3b8; font-size: 0.85rem; font-style: italic; margin-top: -8px; margin-bottom: 14px; padding-left: 4px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 14px; margin-bottom: 20px; }
+.card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 14px 16px; border-left: 4px solid #f59e0b; }
+.card.embryo { border-left-color: #60a5fa; }
+.card.vessel { border-left-color: #a78bfa; }
+.card.nerve { border-left-color: #34d399; }
+.card.rule { border-left-color: #ef4444; }
+.card.maini { border-left-color: #fbbf24; background: #241f13; box-shadow: 0 0 0 1px rgba(251,191,36,0.25); }
+.card .prov { display: inline-block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 9px; border-radius: 999px; margin-bottom: 8px; }
+.prov.maini-tag { background: rgba(251,191,36,0.16); color: #fbbf24; border: 1px solid rgba(251,191,36,0.55); }
+.prov.aid-tag { background: rgba(148,163,184,0.12); color: #94a3b8; border: 1px solid rgba(148,163,184,0.32); }
+.card .label { font-size: 0.72rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; font-weight: 700; }
+.card .hook { color: #fbbf24; font-weight: 700; font-size: 1.05rem; margin-bottom: 8px; font-family: "Courier New", monospace; letter-spacing: 0.3px; line-height: 1.4; }
+.card.embryo .hook { color: #93c5fd; }
+.card.vessel .hook { color: #c4b5fd; }
+.card.nerve .hook { color: #6ee7b7; }
+.card.rule .hook { color: #fca5a5; }
+.card.maini .hook { color: #fde68a; }
+.card .fact { color: #cbd5e1; font-size: 0.92rem; line-height: 1.55; margin-bottom: 8px; }
+.card .fact b { color: #fde68a; }
+.card .like { margin-top: 8px; padding: 9px 11px; background: #0b1220; border-left: 3px solid #f59e0b; font-size: 0.88rem; color: #e2e8f0; border-radius: 0 6px 6px 0; line-height: 1.55; }
+.card.embryo .like { border-left-color: #60a5fa; }
+.card.vessel .like { border-left-color: #a78bfa; }
+.card.nerve .like { border-left-color: #34d399; }
+.card.rule .like { border-left-color: #ef4444; }
+.card.maini .like { border-left-color: #fbbf24; }
+.card .like b { color: #fde68a; }
+.card .mainiquote { margin-top: 8px; padding: 10px 13px; background: #0b1220; border-left: 3px solid #fbbf24; font-size: 0.88rem; color: #fde68a; border-radius: 0 6px 6px 0; line-height: 1.6; font-style: italic; }
+.card .src { font-size: 0.74rem; color: #64748b; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155; font-style: italic; }
+.legend { text-align: center; margin: 0 auto 18px; padding: 10px 14px; background: #131c2e; border-radius: 8px; border: 1px solid #1e293b; max-width: 880px; color: #94a3b8; font-size: 0.78rem; line-height: 1.7; }
+.legend .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; vertical-align: middle; margin-right: 4px; }
+.legend span { margin: 0 8px; white-space: nowrap; }
+.footer { text-align: center; margin-top: 36px; padding-top: 16px; border-top: 1px solid #334155; color: #94a3b8; font-size: 0.82rem; }
+@media print { body { background: #fff; color: #000; } .card { background: #f8f8f8; color: #000; } .card.maini { background: #fffbe6; } .card .fact { color: #222; } .card .like, .card .mainiquote { background: #fff; color: #000; } }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🧠 GA 0202 &middot; The Neck (part 2) &mdash; Mnemonics</h1>
+<p class="subtitle">Memory hooks for Dr. Maini&rsquo;s cervical viscera &amp; head-and-neck embryology &mdash; the hardest lists, in &ldquo;think-of-it-like&rdquo; voice.</p>
+<div class="edge-note">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+<div class="scope-note">
+  <b>Honest framing &mdash; two kinds of card:</b> <span class="gold">Gold-bordered cards (&ldquo;Dr. Maini&rsquo;s own words&rdquo;)</span> quote a hook <b>Dr. Maini actually said</b> in Lecture 05/06, verbatim with a timestamp. Every other card is <b>my study aid</b> &mdash; the hook is mine, but the <b>fact</b> it encodes is verified in this module&rsquo;s audited Everything-MC bank and the Maini transcripts (cited on each card). I never dress up an invented mnemonic as hers.
+</div>
+<div class="legend">
+  <span><span class="swatch" style="background:#fbbf24;"></span>Dr. Maini&rsquo;s own words</span>
+  <span><span class="swatch" style="background:#f59e0b;"></span>gland / anatomy</span>
+  <span><span class="swatch" style="background:#a78bfa;"></span>vessel / vein</span>
+  <span><span class="swatch" style="background:#34d399;"></span>nerve / innervation</span>
+  <span><span class="swatch" style="background:#60a5fa;"></span>embryology</span>
+  <span><span class="swatch" style="background:#ef4444;"></span>clinical / trap</span>
+</div>
+
+<h2>Topic 1 &mdash; 🎓 Dr. Maini&rsquo;s OWN hooks (her exact words)</h2>
+<div class="topic-tagline">Learn these first. She said each one in lecture &mdash; the quote is printed under the hook.</div>
+<div class="cards">
+
+<div class="card maini">
+<div class="prov maini-tag">⭐ Dr. Maini&rsquo;s own words</div>
+<div class="label">Carotid sheath contents</div>
+<div class="hook">🗡️ THE 3 MUSKETEERS = CCA + IJV + VAGUS</div>
+<div class="fact">The <b>carotid sheath</b> wraps three structures together: the <b>common carotid artery</b>, the <b>internal jugular vein</b>, and the <b>vagus nerve (CN X)</b>. Dr. Maini calls them the &ldquo;three musketeers.&rdquo; (At this level it is the <b>common</b> carotid &mdash; the bifurcation into internal/external is higher, at the superior border of the thyroid cartilage.)</div>
+<div class="mainiquote">&ldquo;It descends in the neck, within the carotid sheath, along with&hellip; Common carotid and vagus, right? Three musketeers.&rdquo; &mdash; and again, &ldquo;3 musketeers and wrapped, in the carotid sheath.&rdquo;</div>
+<div class="src">Maini L05 @ 00:05:29, 00:18:50</div>
+</div>
+
+<div class="card maini">
+<div class="prov maini-tag">⭐ Dr. Maini&rsquo;s own words</div>
+<div class="label">Hypothyroidism picture</div>
+<div class="hook">🦥 HYPOTHYROID = &ldquo;SLUGGISH LIKE A SLOTH&rdquo;</div>
+<div class="fact">Low T3/T4 slows the whole body: <b>slow metabolism</b>, <b>weight gain despite poor appetite</b>, <b>bradycardia</b>, <b>slow breathing</b>, <b>low body temperature / cold intolerance</b>, and <b>lethargy</b>. Dr. Maini&rsquo;s image for the whole sluggish syndrome is a <b>sloth</b>.</div>
+<div class="mainiquote">&ldquo;They will be very slow, sluggish, like a sloth. Some of the books even say, sluggish like a sloth.&rdquo;</div>
+<div class="src">Maini L05 @ 00:28:44 (hypo signs 00:28:53&ndash;00:29:14)</div>
+</div>
+
+<div class="card maini">
+<div class="prov maini-tag">⭐ Dr. Maini&rsquo;s own words</div>
+<div class="label">Word-root hook &mdash; thyroglossal duct</div>
+<div class="hook">👅 GLOSSAL = TONGUE</div>
+<div class="fact">The developing thyroid stays tethered to its start-point by the <b>thyroGLOSSAL duct</b>. Because <b>glossal means tongue</b>, the name itself tells you the duct runs from the <b>thyroid</b> to the <b>tongue</b> &mdash; and its tongue-end leaves the <b>foramen cecum</b>.</div>
+<div class="mainiquote">&ldquo;What does the word glossal mean? Tongue&hellip; this duct&hellip; it connects the developing thyroid with the developing tongue. That&rsquo;s why this duct is called as thyroglossal duct.&rdquo;</div>
+<div class="src">Maini L06 @ 00:50:44, 00:50:55</div>
+</div>
+
+<div class="card maini">
+<div class="prov maini-tag">⭐ Dr. Maini&rsquo;s own words</div>
+<div class="label">Word-root hook &mdash; foramen cecum</div>
+<div class="hook">🕳️ CECUM = BLIND (leads nowhere)</div>
+<div class="fact">The <b>foramen cecum</b> at the midpoint of the sulcus terminalis is the tongue-surface mark of where the thyroid began. Its name warns you it is a <b>blind pit</b> &mdash; it does not open onto the other side; it is a <b>remnant of the thyroglossal duct</b>.</div>
+<div class="mainiquote">&ldquo;A blind foramen, which doesn&rsquo;t lead anywhere&hellip; This foramen does not open on the other side&hellip; Cecum is blind.&rdquo;</div>
+<div class="src">Maini L06 @ 00:54:43</div>
+</div>
+
+<div class="card maini">
+<div class="prov maini-tag">⭐ Dr. Maini&rsquo;s own words</div>
+<div class="label">Word-root hook &mdash; inferior thyroid artery</div>
+<div class="hook">🩸 &ldquo;THYRO&rdquo; NAMES THE THYROCERVICAL TRUNK</div>
+<div class="fact">The <b>inferior thyroid artery</b> is a branch of the <b>thyrocervical trunk</b> (itself off the <b>subclavian</b>). Dr. Maini&rsquo;s hook: the trunk carries &ldquo;thyro&rdquo; right in its <b>first name</b>, so it must feed the thyroid. (Contrast: the <b>superior</b> thyroid artery is the first branch of the <b>external carotid</b>.)</div>
+<div class="mainiquote">&ldquo;Thyrocervical trunk&hellip; That&rsquo;s how Thyrocervical trunk gets its first name, &lsquo;thyro.&rsquo;&hellip; which is a branch of subclavian.&rdquo;</div>
+<div class="src">Maini L05 @ 00:23:03&ndash;00:23:27</div>
+</div>
+
+<div class="card maini">
+<div class="prov maini-tag">⭐ Dr. Maini&rsquo;s own words</div>
+<div class="label">Bifid uvula</div>
+<div class="hook">🎭 BIFID UVULA = &ldquo;DIFFERENTLY UVULATED&rdquo;</div>
+<div class="fact">A <b>bifid (split) uvula</b> comes from incomplete midline fusion of the palate&rsquo;s soft-tissue tip. It is a <b>normal variant with no abnormal consequences</b>. Dr. Maini says she remembers it from a <b>Big Bang Theory</b> joke about &ldquo;differently uvulated people.&rdquo;</div>
+<div class="mainiquote">&ldquo;Bifid uvula&hellip; which is normal, doesn&rsquo;t have any abnormal consequences&hellip; that&rsquo;s how I remember&rdquo; (via the show&rsquo;s &ldquo;differently uvulated people&rdquo; line).</div>
+<div class="src">Maini L06 @ 01:17:57&ndash;01:18:44</div>
+</div>
+
+</div>
+
+<h2>Topic 2 &mdash; Veins, carotid sheath &amp; lymph drainage</h2>
+<div class="topic-tagline">The venous funnel of the head and neck, plus which duct each side drains into. (Hooks below are my study aids.)</div>
+<div class="cards">
+
+<div class="card vessel">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Internal jugular vein tributaries</div>
+<div class="hook">🎶 &ldquo;I PLAY LOUD FUNKY SONGS, MAN &mdash; OK!&rdquo;</div>
+<div class="fact">The IJV collects, top to bottom: <b>I</b>nferior petrosal sinus, <b>P</b>haryngeal veins, <b>L</b>ingual, <b>F</b>acial (common facial), <b>S</b>uperior thyroid, <b>M</b>iddle thyroid, and <b>O</b>ccipital vein. The IJV is the <b>main large vein of the head &amp; neck</b> and drains brain, face, and neck.</div>
+<div class="like">💡 First letters: <b>I&middot;P&middot;L&middot;F&middot;S&middot;M&middot;O</b> &rarr; &ldquo;<b>I Play Loud Funky Songs, Man, Ok.</b>&rdquo; The <b>inferior petrosal sinus</b> is the only brain sinus that leaves the skull to join the IJV from outside.</div>
+<div class="src">Maini L05 @ 00:03:26, 00:05:53&ndash;00:07:18</div>
+</div>
+
+<div class="card vessel">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Origin of the IJV</div>
+<div class="hook">🔵 SIGMOID SINUS &rarr; IJV (at the jugular foramen)</div>
+<div class="fact">All the brain&rsquo;s dural venous sinuses funnel into the <b>sigmoid sinus</b>, which exits the skull through the <b>jugular foramen</b> and continues as the <b>internal jugular vein</b>. Exam favorite: &ldquo;which sinus continues as the IJV?&rdquo; &rarr; <b>sigmoid</b>.</div>
+<div class="like">💡 Think of it like a stadium&rsquo;s exit funnel: every venous &ldquo;aisle&rdquo; empties into the sigmoid, and the sigmoid is the single door (jugular foramen) out to the IJV.</div>
+<div class="src">Maini L05 @ 00:04:11&ndash;00:05:12</div>
+</div>
+
+<div class="card vessel">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Neck lymph &rarr; venous return</div>
+<div class="hook">➡️ RIGHT &rarr; RIGHT DUCT &middot; LEFT &rarr; THORACIC DUCT</div>
+<div class="fact">Head-and-neck lymph nodes drain into <b>right and left jugular trunks</b>. The <b>right</b> jugular trunk empties into the <b>right lymphatic duct</b>; the <b>left</b> empties into the <b>thoracic duct</b> (or sometimes directly into the brachiocephalic veins).</div>
+<div class="like">💡 <b>R</b>ight side keeps it small &mdash; the little <b>R</b>ight lymphatic duct. Everything else (left side) rides the big <b>Thoracic</b> duct. Same rule as the rest of the body.</div>
+<div class="src">Maini L05 @ 00:07:47, 00:08:31</div>
+</div>
+
+<div class="card vessel">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Subclavian vein landmarks</div>
+<div class="hook">🚪 AXILLARY &rarr; SUBCLAVIAN AT THE 1ST RIB, ANTERIOR TO THE SCALENE</div>
+<div class="fact">The <b>subclavian vein</b> is the continuation of the <b>axillary vein</b> at the <b>outer border of the first rib</b>. It passes <b>anterior to the anterior scalene</b> muscle (the artery goes behind it), then unites with the <b>IJV</b> to form the <b>brachiocephalic vein</b>.</div>
+<div class="like">💡 Vein in front, artery behind: at the anterior scalene the <b>V</b>ein takes the <b>V</b>estibule (front). The first rib is the &ldquo;name-change checkpoint&rdquo; for both vessels.</div>
+<div class="src">Maini L05 @ 00:02:34&ndash;00:03:04, 00:02:48</div>
+</div>
+
+</div>
+
+<h2>Topic 3 &mdash; Thyroid &amp; parathyroid glands</h2>
+<div class="topic-tagline">Relations, blood supply, and the numbers Dr. Maini says the boards love. (Hooks below are my study aids.)</div>
+<div class="cards">
+
+<div class="card">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Isthmus &amp; the trachea</div>
+<div class="hook">3️⃣ ISTHMUS = RINGS 2&ndash;3&ndash;4 (count up from 2)</div>
+<div class="fact">The thyroid&rsquo;s <b>isthmus</b> crosses the midline in front of the <b>2nd, 3rd, and 4th tracheal rings</b>. Dr. Maini flags this as a board-exam trap &mdash; they will offer 1-2-3, 2-3-4, 4-5-6 to confuse you. The answer is <b>2-3-4</b>.</div>
+<div class="like">💡 Just count &ldquo;<b>2, 3, 4</b>&rdquo; &mdash; three rings starting at ring 2. (Upper pole reaches the oblique line of the thyroid cartilage; lower pole reaches about the 4th&ndash;5th ring.)</div>
+<div class="src">Maini L05 @ 00:20:58&ndash;00:21:11, 00:46:57</div>
+</div>
+
+<div class="card">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Thyroid arterial supply</div>
+<div class="hook">⬆️ SUPERIOR &larr; EXTERNAL CAROTID &middot; ⬇️ INFERIOR &larr; THYROCERVICAL</div>
+<div class="fact">Dual supply. The <b>superior thyroid artery</b> is the first branch of the <b>external carotid</b>. The <b>inferior thyroid artery</b> is a branch of the <b>thyrocervical trunk</b> (off the <b>subclavian</b>). An inconstant <b>thyroid ima</b> artery exists in ~10% &mdash; Maini won&rsquo;t test it.</div>
+<div class="like">💡 Both &ldquo;top-of-the-neck&rdquo; players pair up: the <b>Superior</b> thyroid rides the <b>external carotid</b>; the <b>Inferior</b> thyroid rides the <b>thyrocervical trunk</b> (see Topic 1 for Maini&rsquo;s &ldquo;thyro&rdquo; hook).</div>
+<div class="src">Maini L05 @ 00:19:18&ndash;00:23:27</div>
+</div>
+
+<div class="card">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Thyroid venous drainage</div>
+<div class="hook">🩸 SUP + MID &rarr; IJV &middot; INF &rarr; BRACHIOCEPHALIC (odd one out)</div>
+<div class="fact">Three thyroid veins. <b>Superior</b> and <b>middle</b> thyroid veins drain into the <b>internal jugular vein</b>. The <b>inferior</b> thyroid vein breaks the pattern and drains into the <b>brachiocephalic vein</b>. Maini: &ldquo;because inferior has different drainage&rdquo; &mdash; a favorite question.</div>
+<div class="like">💡 Two go up to the IJV, one dives down to the brachiocephalic. Spot the <b>odd one out = inferior</b>, and you&rsquo;ve got the whole card.</div>
+<div class="src">Maini L05 @ 00:24:16&ndash;00:25:08, 00:27:52</div>
+</div>
+
+<div class="card rule">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Relations of the thyroid</div>
+<div class="hook">🧭 FRONT = STRAPS &middot; SIDE-BACK = SHEATH &middot; MIDDLE = AIRWAY + RLN</div>
+<div class="fact"><b>Anterolateral</b> = the <b>infrahyoid (strap) muscles</b> (sternothyroid, sternohyoid, superior omohyoid, anterior border of SCM). <b>Posterolateral</b> = the <b>carotid sheath</b> (the 3 musketeers). <b>Medial/posterior</b> = <b>trachea &amp; larynx</b>, <b>esophagus</b>, and the <b>recurrent laryngeal nerve</b>.</div>
+<div class="like">💡 Clock the thyroid: 12 o&rsquo;clock straps, 4&ndash;8 o&rsquo;clock carotid sheaths, 6 o&rsquo;clock airway + food-pipe + the nerve that guards your voice.</div>
+<div class="src">Maini L05 @ 00:17:28&ndash;00:20:44</div>
+</div>
+
+<div class="card">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Parathyroid glands</div>
+<div class="hook">🫛 4 PEAS ON THE BACK &middot; PTH PULLS Ca UP</div>
+<div class="fact"><b>Four</b> pea-sized parathyroid glands (2 superior, 2 inferior) sit on the <b>posterior surface</b> of the thyroid. Their <b>PTH</b> is the body&rsquo;s main calcium-raiser: it pulls Ca from <b>bone</b>, boosts Ca reabsorption in the <b>kidney</b>, and (via vitamin D) the <b>gut</b>. Supplied by the superior &amp; inferior thyroid arteries.</div>
+<div class="like">💡 <b>4 peas</b> hiding behind the thyroid; <b>PTH = &ldquo;Pull To High&rdquo; calcium</b> from Bone, Kidney, Gut. Calcitonin (from the thyroid&rsquo;s C-cells) barely matters in humans.</div>
+<div class="src">Maini L05 @ 00:36:45&ndash;00:38:32</div>
+</div>
+
+<div class="card rule">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Recurrent laryngeal nerve</div>
+<div class="hook">🎙️ RLN HIDES IN THE T-E GROOVE (squeeze &rarr; hoarse)</div>
+<div class="fact">The <b>recurrent laryngeal nerve</b> ascends in the <b>tracheoesophageal groove</b>, right against the <b>posterior surface</b> of the thyroid. So a thyroid enlarging <b>posteriorly</b> can compress it &mdash; the patient presents with <b>hoarseness</b> even before a lump is seen.</div>
+<div class="like">💡 The RLN is &ldquo;squished in the corner&rdquo; between trachea and esophagus. Posterior goiter pinches the voice nerve first &rarr; hoarse voice is the early clue.</div>
+<div class="src">Maini L05 @ 00:16:58&ndash;00:17:13, 00:20:22</div>
+</div>
+
+</div>
+
+<h2>Topic 4 &mdash; Embryology: thyroid &amp; tongue origins</h2>
+<div class="topic-tagline">Where the thyroid came from, which arch built which part of the tongue, and salivary timing. (Hooks below are my study aids.)</div>
+<div class="cards">
+
+<div class="card embryo">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Thyroid migration path</div>
+<div class="hook">🧵 CECUM &rarr; HYOID &rarr; FRONT OF TRACHEA (done by wk 7)</div>
+<div class="fact">The thyroid starts as an <b>endodermal thickening in the floor of the primordial pharynx</b> (the future <b>foramen cecum</b>), migrates down <b>close to the hyoid bone</b>, then settles <b>anterior to the trachea</b>. By <b>week 7</b> it has its definitive shape and final site. No relation to the pharyngeal arches.</div>
+<div class="like">💡 Trace the string: <b>tongue (cecum) &rarr; past the hyoid &rarr; in front of the windpipe</b>. Any leftover tissue on that string = accessory/cervical thyroid, pyramidal lobe, or a thyroglossal cyst.</div>
+<div class="src">Maini L06 @ 00:51:17&ndash;00:52:44; bank Q (thyroid_development)</div>
+</div>
+
+<div class="card embryo">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Tongue arch derivation</div>
+<div class="hook">1️⃣ FRONT = ARCH 1 &middot; 3️⃣ BACK = ARCH 3 (+4)</div>
+<div class="fact">The <b>anterior two-thirds</b> mucosa comes mainly from the <b>1st pharyngeal arch</b> (tuberculum impar + lateral lingual swellings). The <b>posterior one-third</b> comes mainly from the <b>3rd arch</b> (hypobranchial eminence; 3rd + 4th), which overgrows the <b>copula</b> (2nd/3rd arch).</div>
+<div class="like">💡 Odd numbers, front to back: arch <b>1</b> up front, arch <b>3</b> in the back. The sulcus terminalis is the seam where the two building crews meet.</div>
+<div class="src">Maini L06 @ 01:03:56&ndash;01:04:06; bank Q (tongue_development)</div>
+</div>
+
+<div class="card embryo">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Arch &rarr; nerve master key</div>
+<div class="hook">🔑 ARCH NERVE = 1:V &middot; 2:VII &middot; 3:IX &middot; 4:X</div>
+<div class="fact">Each arch keeps its own nerve, and that nerve serves the tongue mucosa the arch built. So <b>arch 1 &rarr; V</b> (anterior touch), <b>arch 2 &rarr; VII</b> (its dispersed cells make anterior taste buds), <b>arch 3 &rarr; IX</b> (posterior third), <b>arch 4 &rarr; X</b> (root). This is exactly Maini&rsquo;s reasoning (&ldquo;nerve of second arch, facial nerve&rdquo;).</div>
+<div class="like">💡 This one key unlocks all of Topic 5: match the arch number to its nerve (V, VII, IX, X), and the tongue&rsquo;s sensory map falls out automatically.</div>
+<div class="src">Maini L06 @ 01:05:06&ndash;01:05:29; bank Q (tongue_innervation)</div>
+</div>
+
+<div class="card embryo">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Salivary gland appearance order</div>
+<div class="hook">🥇 PAROTID first &rarr; SUBMANDIBULAR &rarr; SUBLINGUAL last</div>
+<div class="fact"><b>Parotid</b> appears first (early week 6), <b>submandibular</b> next (late week 6), and <b>sublingual</b> is the <b>last</b> to appear. (Note the twist: parotid is first to <i>appear</i>, even though it is often described as last to become encapsulated.)</div>
+<div class="like">💡 Alphabetical-ish and top-down: <b>P</b>arotid, then the two S&rsquo;s &mdash; and among the S&rsquo;s, <b>subMandibular before subLingual</b> (M before L).</div>
+<div class="src">Maini L06 @ 01:09:55; bank Q (salivary_glands)</div>
+</div>
+
+</div>
+
+<h2>Topic 5 &mdash; Tongue innervation (the nerve-branch monster)</h2>
+<div class="topic-tagline">The single most-tested list in this module. One number line ties it together. (Hooks below are my study aids.)</div>
+<div class="cards">
+
+<div class="card nerve">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Whole tongue in one line</div>
+<div class="hook">🧠 5&middot;7&middot;9&middot;10&middot;12 = FEEL&middot;TASTE&middot;BOTH&middot;ROOT&middot;MOVE</div>
+<div class="fact">The master line: <b>V</b> feels the front, <b>VII</b> tastes the front, <b>IX</b> does both for the back third, <b>X</b> handles the root, and <b>XII</b> moves the muscles. Everything below is just this line unpacked.</div>
+<div class="like">💡 Count the odd cranial nerves 5-7-9, then 10 and 12: <b>Feel, Taste, Both, Root, Move.</b> Learn this order and each detail card becomes a reminder, not new memorization.</div>
+<div class="src">Maini L06 @ 01:04:06&ndash;01:07:28; bank Qs (tongue_innervation)</div>
+</div>
+
+<div class="card nerve">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Anterior two-thirds</div>
+<div class="hook">👅 FRONT: FEEL with 5 (V3) &middot; TASTE with 7 (VII)</div>
+<div class="fact">Anterior 2/3: <b>general touch (GSA) = lingual branch of V3</b> (mandibular). <b>Taste (SVA) = chorda tympani of VII</b> (facial), which hitchhikes on the lingual nerve. Two different nerves for one patch of tongue.</div>
+<div class="like">💡 Clinical trap: lose taste but keep touch on the front &rarr; the <b>chorda tympani (VII)</b> is out, V3 is fine. &ldquo;Touch = 5, Taste = 7.&rdquo;</div>
+<div class="src">Maini L06 @ 01:04:06, 01:06:21; bank Q (tongue_innervation)</div>
+</div>
+
+<div class="card nerve">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Posterior one-third &amp; root</div>
+<div class="hook">👅 BACK = 9 (both) &middot; ROOT = 10 (X)</div>
+<div class="fact">Posterior 1/3: <b>both touch (GSA) and taste (SVA) = glossopharyngeal (IX)</b> &mdash; one nerve does it all. The <b>root / most-posterior</b> part is <b>vagus (X)</b>, via the internal laryngeal nerve.</div>
+<div class="like">💡 Behind the sulcus terminalis, <b>9 covers everything</b>; step onto the very root and you hand off to <b>10</b>. Simple, because the back arches (3 and 4) carry IX and X.</div>
+<div class="src">Maini L06 @ 01:04:23&ndash;01:06:36; bank Qs (tongue_innervation)</div>
+</div>
+
+<div class="card nerve">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Motor supply &amp; the exception</div>
+<div class="hook">💪 MOVE = 12 (XII) &mdash; EXCEPT PALATOGLOSSUS (X)</div>
+<div class="fact">All tongue muscles are moved by <b>CN XII (hypoglossal)</b>, carrying <b>general somatic efferent (GSE/GSC)</b> fibers because the muscles come from <b>occipital somites</b> &mdash; not the branchial (SVE) fibers. The <b>one exception is palatoglossus</b>, supplied by <b>vagus (X)</b>.</div>
+<div class="like">💡 <b>PALATO</b>glossus votes with the <b>palate</b> (vagus X), not the tongue crowd (XII). And because the muscles are somite-derived, XII carries somatic (GSE), not branchial (SVE) motor.</div>
+<div class="src">Maini L06 @ 01:07:01&ndash;01:07:28; bank Qs (tongue_innervation)</div>
+</div>
+
+</div>
+
+<h2>Topic 6 &mdash; Face &amp; palate development + clinical</h2>
+<div class="topic-tagline">Which facial process builds what, how the palate closes, and the clefts that follow. (Hooks below are my study aids.)</div>
+<div class="cards">
+
+<div class="card embryo">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Facial process map</div>
+<div class="hook">🏗️ FRONTO=top &middot; MEDIAL nasal=septum &middot; LATERAL nasal=sides</div>
+<div class="fact"><b>Frontonasal</b> prominence &rarr; forehead + <b>dorsum &amp; apex of nose</b>. <b>Medial nasal</b> &rarr; <b>nasal septum</b>. <b>Lateral nasal</b> &rarr; <b>sides of the nose</b>. <b>Maxillary</b> &rarr; upper cheek + <b>most</b> of upper lip. <b>Mandibular</b> &rarr; chin, lower lip, lower cheek.</div>
+<div class="like">💡 The nose splits its jobs: <b>medial nasal = the middle wall (septum)</b>, <b>lateral nasal = the outer walls (sides)</b>. Everything &ldquo;upper&rdquo; is maxillary; everything &ldquo;lower&rdquo; is mandibular.</div>
+<div class="src">Maini L06 @ 01:10:16&ndash;01:10:53; bank Qs (face_development)</div>
+</div>
+
+<div class="card embryo">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Intermaxillary segment</div>
+<div class="hook">🦷 PHILTRUM + BRIDGE + 4 UPPER INCISORS + PRIMARY PALATE</div>
+<div class="fact">When the two <b>medial nasal processes</b> meet, they form the <b>intermaxillary segment</b>, which becomes the <b>philtrum (center of upper lip)</b>, the <b>bridge of the nose</b>, the <b>middle of the maxillary bone</b>, the <b>four upper incisor teeth</b>, and the <b>primary palate</b>.</div>
+<div class="like">💡 The midline &ldquo;middle-man&rdquo; segment owns the midline face: the little dip under your nose (philtrum), the nose bridge, and the four front top teeth.</div>
+<div class="src">Maini L06 @ 01:13:47 (L06 video); bank Q (face_development)</div>
+</div>
+
+<div class="card embryo">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Secondary palate closure</div>
+<div class="hook">🪟 SHELVES DROP, TONGUE DROPS, SHELVES LIFT &amp; FUSE (wk 12)</div>
+<div class="fact"><b>Palatine shelves</b> grow <b>vertically down</b> beside the tongue; as the mandible grows the <b>tongue descends</b>, giving the shelves room to <b>swing horizontal</b> and fuse with each other and the primary palate. Done by <b>week 12</b>. Critical face/palate window: <b>weeks 6&ndash;12</b>.</div>
+<div class="like">💡 Three-beat rhythm: <b>shelves point down &rarr; tongue drops out of the way &rarr; shelves flip up and zip shut.</b> If the tongue doesn&rsquo;t drop, the shelves can&rsquo;t meet.</div>
+<div class="src">Maini L06 @ 01:15:23&ndash;01:16:12 (L06 video); bank Qs (palate_development)</div>
+</div>
+
+<div class="card rule">
+<div class="prov aid-tag">🧩 Study aid &mdash; my hook</div>
+<div class="label">Clefts &amp; tongue anomalies</div>
+<div class="hook">😬 CLEFT LIP = maxillary misses medial nasal &middot; CLEFT PALATE = shelves miss</div>
+<div class="fact"><b>Cleft lip</b> = the <b>maxillary process fails to fuse with the medial nasal process</b> (can be uni-/bilateral, median, or oblique). <b>Cleft palate</b> = the <b>palatine shelves / septum fail to fuse</b>. Both cause <b>feeding difficulty + upper-respiratory infections</b>; repair at ~3&ndash;6 months.</div>
+<div class="like">💡 Tongue traps too: <b>big tongue (macroglossia)</b> = hypothyroid/cretinism (papillae hypertrophy is the Down-syndrome finding); <b>tongue-tie (ankyloglossia)</b> = a too-short lingual frenulum &rarr; delayed speech, fixed by snipping it.</div>
+<div class="src">Maini L06 @ 01:08:47&ndash;01:09:37, 01:13:27, 01:17:06&ndash;01:19:25; bank Qs</div>
+</div>
+
+</div>
+
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD &middot; GA 0202 &middot; The Neck (part 2) &mdash; Mnemonics (Dr. Maini, L05&ndash;L06)</div>
+</div>
+
+<div id="pending-review-badge" style="position:fixed;top:14px;right:14px;z-index:100001;padding:6px 12px;background:linear-gradient(135deg,#78350f,#b45309);color:#fff;border:1px solid #f59e0b;border-radius:10px;font-size:0.72rem;font-weight:700;letter-spacing:.5px;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">⚠ PENDING REVIEW</div>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+</style>
+<a class="fab-back-to-hub-btn" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m03-neck-2-hub.html" title="Return to the M03 Neck (part 2) Study Hub" aria-label="Return to the M03 Neck (part 2) Study Hub">📚</a>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about these mnemonics..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Topic:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>🎯 GA 0202 · Face & Scalp · Learning Objectives (Master the 12)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0e1a 0%,#161003 100%);color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#451a03,#92400e);padding:30px 20px 22px;text-align:center;border-bottom:2px solid #f59e0b;box-shadow:0 4px 20px rgba(245,158,11,0.3)}
+.header h1{font-size:26px;color:#fff;margin-bottom:8px;font-weight:700}
+.header .sub{color:#fde68a;font-size:14px;max-width:780px;margin:0 auto}
+.header .sub b{color:#fcd34d;font-weight:700}
+.header .voices{color:#fcd34d;font-size:12px;max-width:760px;margin:10px auto 0;background:rgba(0,0,0,0.18);border:1px solid rgba(245,158,11,0.4);border-radius:9px;padding:7px 12px;line-height:1.5}
+.header .meta-line{color:#fbbf24;font-size:12px;margin-top:8px;letter-spacing:0.3px}
+
+.wrap{max-width:900px;margin:0 auto;padding:26px 20px 60px}
+
+.status-banner{max-width:800px;margin:0 auto 22px;background:rgba(245,158,11,0.08);border:1px solid #b45309;border-radius:12px;padding:14px 18px;color:#fde68a;font-size:13px;line-height:1.6}
+.status-banner b{color:#fcd34d}
+.status-banner .live{color:#fbbf24;font-weight:700}
+
+.intro-card{max-width:800px;margin:0 auto 22px;background:#16130c;border:1px solid #3a3017;border-left:4px solid #f59e0b;border-radius:14px;padding:20px 22px}
+.intro-card h2{color:#fde68a;font-size:18px;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.intro-card p{color:#cbd5e1;font-size:13.5px;margin-bottom:8px}
+.intro-card .src{color:#9c8a63;font-size:11.5px;margin-top:6px}
+.intro-card .src b{color:#fbbf24}
+
+/* Progress tracker */
+.tracker{max-width:800px;margin:0 auto 26px;background:#13100a;border:1px solid #332a17;border-radius:12px;padding:16px 20px;text-align:center}
+.tracker .count{font-size:15px;color:#e2e8f0;font-weight:700;margin-bottom:10px}
+.tracker .count b{color:#fbbf24;font-size:22px}
+.bar{height:12px;background:#1e293b;border-radius:999px;overflow:hidden;border:1px solid #44391f}
+.bar .fill{height:100%;background:linear-gradient(90deg,#d97706,#fbbf24);width:0%;transition:width .3s}
+.tracker .reset{margin-top:11px;background:rgba(100,116,139,0.18);color:#94a3b8;border:1px solid #475569;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer}
+.tracker .reset:hover{background:rgba(100,116,139,0.3);color:#cbd5e1}
+.tracker .note{color:#64748b;font-size:10.5px;margin-top:8px}
+
+/* Objective card */
+.lo{max-width:800px;margin:0 auto 18px;background:#1a1610;border:1px solid #3a3017;border-radius:14px;padding:0;overflow:hidden;transition:border-color .2s}
+.lo.done{border-color:#f59e0b;box-shadow:0 0 0 1px rgba(245,158,11,0.3)}
+.lo-head{display:flex;align-items:flex-start;gap:13px;padding:17px 20px 14px;background:#16130c;border-bottom:1px solid #332a17;position:relative}
+.lo-num{flex-shrink:0;width:34px;height:34px;background:#f59e0b;color:#231603;border-radius:50%;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.lo.done .lo-num{background:#fbbf24}
+.lo-obj{flex:1}
+.lo-obj .obj-text{color:#f8fafc;font-size:15px;font-weight:700;line-height:1.45}
+.lo-obj .obj-src{color:#9c8a63;font-size:11px;margin-top:4px}
+.lo-obj .obj-src b{color:#fbbf24;font-weight:700}
+.lo-check{flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;user-select:none}
+.lo-check input{width:22px;height:22px;accent-color:#f59e0b;cursor:pointer}
+.lo-check span{font-size:9px;color:#7c6f4d;font-weight:700;letter-spacing:.3px;text-transform:uppercase}
+
+.lo-body{padding:16px 20px 18px}
+.sect-label{font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;margin:14px 0 7px;display:flex;align-items:center;gap:6px}
+.sect-label:first-child{margin-top:0}
+.sect-label.prove{color:#fbbf24}
+.sect-label.said{color:#fcd34d}
+.sect-label.cement{color:#7dd3fc}
+.sect-label.check{color:#c4b5fd}
+
+.prove-list{list-style:none}
+.prove-list li{position:relative;padding:5px 0 5px 24px;font-size:13.5px;color:#e7e0d2;line-height:1.55}
+.prove-list li::before{content:'\2713';position:absolute;left:0;top:5px;color:#f59e0b;font-weight:800}
+.prove-list li b{color:#fde68a;font-weight:600}
+.prove-list li .cite{color:#7c6f4d;font-size:11px}
+
+blockquote{margin:6px 0;padding:9px 14px;background:#120d04;border-left:3px solid #f59e0b;border-radius:0 9px 9px 0;font-style:italic;color:#fde9c8;font-size:13px}
+blockquote .cite{display:block;font-style:normal;color:#94a3b8;font-size:11px;margin-top:5px}
+blockquote .fix{color:#fcd34d;font-style:normal}
+
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(125,211,252,0.08);color:#7dd3fc;border:1px solid rgba(125,211,252,0.35);border-radius:8px;padding:6px 11px;font-size:12px;font-weight:600;text-decoration:none;transition:all .15s}
+.chip:hover{background:rgba(125,211,252,0.2);color:#bae6fd;transform:translateY(-1px)}
+.chip.ref{color:#cbd5e1;border-color:#475569;background:rgba(100,116,139,0.1)}
+.chip.ref:hover{color:#fff;background:rgba(100,116,139,0.25)}
+
+.selfcheck{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.3);border-radius:9px;padding:11px 14px;margin-top:4px}
+.selfcheck .q{color:#ddd6fe;font-size:13px;font-weight:600}
+.selfcheck .reveal-btn{margin-top:8px;background:rgba(167,139,250,0.18);color:#c4b5fd;border:1px solid rgba(167,139,250,0.4);border-radius:7px;padding:5px 12px;font-size:11.5px;font-weight:600;cursor:pointer}
+.selfcheck .reveal-btn:hover{background:rgba(167,139,250,0.32);color:#ede9fe}
+.selfcheck .ans{display:none;margin-top:9px;padding-top:9px;border-top:1px dashed #3b3160;color:#e2e8f0;font-size:13px;line-height:1.55}
+.selfcheck .ans.open{display:block}
+.selfcheck .ans b{color:#fde68a}
+
+.tieit{max-width:800px;margin:30px auto 0;background:#1a1610;border:1px solid #3a3017;border-radius:12px;padding:20px 22px}
+.tieit h3{color:#fde68a;font-size:15px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.tieit p{color:#cbd5e1;font-size:13px;margin-bottom:8px}
+.tieit .flag{background:rgba(239,68,68,0.10);border-left:3px solid #ef4444;padding:10px 14px;border-radius:0 6px 6px 0;color:#fecaca;font-size:12.5px;margin:8px 0}
+.tieit .flag b{color:#fca5a5}
+
+footer{text-align:center;padding:26px 20px;color:#64748b;font-size:12px;border-top:1px solid #1e293b;margin-top:40px}
+footer b{color:#94a3b8}
+
+@media (max-width:640px){
+  .header h1{font-size:21px}
+  .lo-head{padding:14px 14px 12px}
+  .lo-body{padding:14px}
+  .obj-text{font-size:14px}
+}
+</style>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn{position:fixed;bottom:24px;right:24px;z-index:9998;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:26px;cursor:pointer;box-shadow:0 4px 16px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center;padding:0}
+.fab-ai-btn:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 8px 24px rgba(99,102,241,0.6)}
+.fab-ai-btn:active{transform:scale(0.95)}
+.fab-ai-panel{position:fixed;top:0;right:0;bottom:0;width:min(480px,94vw);background:#0f172a;border-left:2px solid #334155;box-shadow:-8px 0 32px rgba(0,0,0,0.5);z-index:9999;display:flex;flex-direction:column;transform:translateX(100%);transition:transform 0.28s ease-out}
+.fab-ai-panel.open{transform:translateX(0)}
+.fab-ai-header{padding:12px 16px;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;display:flex;align-items:center;gap:8px}
+.fab-ai-header h3{font-size:15px;font-weight:700;margin:0;flex:1}
+.fab-ai-hdr-btn{background:rgba(255,255,255,0.15);color:#fff;border:none;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600}
+.fab-ai-hdr-btn:hover{background:rgba(255,255,255,0.28)}
+.fab-ai-close{background:rgba(255,255,255,0.15);color:#fff;border:none;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:18px;line-height:1;padding:0}
+.fab-ai-close:hover{background:rgba(255,255,255,0.3)}
+.fab-ai-body{flex:1;overflow-y:auto;padding:14px 16px;color:#e2e8f0;font-size:13px;line-height:1.6;display:flex;flex-direction:column;gap:10px}
+.fab-ai-qpreview{padding:8px 12px;background:rgba(129,140,248,0.08);border-left:3px solid #818cf8;border-radius:6px;font-size:12px;color:#94a3b8;max-height:100px;overflow-y:auto;flex-shrink:0}
+.fab-ai-qpreview b{color:#cbd5e1}
+.fab-ai-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:4px 0}
+.fab-ai-sug{background:rgba(99,102,241,0.12);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);border-radius:14px;padding:6px 12px;font-size:12px;cursor:pointer;font-weight:500;transition:all .15s}
+.fab-ai-sug:hover{background:rgba(99,102,241,0.25);color:#dbeafe;transform:translateY(-1px)}
+.fab-ai-msg{display:flex;gap:6px;max-width:100%}
+.fab-ai-msg.user{justify-content:flex-end}
+.fab-ai-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.55;max-width:92%;word-wrap:break-word}
+.fab-ai-msg.user .fab-ai-bubble{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;border-bottom-right-radius:4px}
+.fab-ai-msg.ai .fab-ai-bubble{background:#1e293b;color:#e2e8f0;border-bottom-left-radius:4px;border:1px solid #334155}
+.fab-ai-msg.ai .fab-ai-bubble strong,.fab-ai-msg.ai .fab-ai-bubble b{color:#a5b4fc}
+.fab-ai-msg.ai .fab-ai-bubble ul{margin:6px 0;padding-left:20px}
+.fab-ai-msg.ai .fab-ai-bubble li{margin:3px 0}
+.fab-ai-msg.ai .fab-ai-bubble p{margin:0 0 8px 0}
+.fab-ai-msg.ai .fab-ai-bubble p:last-child{margin-bottom:0}
+.fab-ai-msg.ai .fab-ai-bubble h3{font-size:13px;margin:8px 0 4px 0;color:#c4b5fd}
+.fab-ai-msg.ai .fab-ai-bubble code{background:#0f172a;padding:1px 5px;border-radius:3px;font-size:11px}
+.fab-ai-tts-row{display:flex;align-items:center;gap:6px;margin-top:6px;padding-top:6px;border-top:1px solid #334155}
+.fab-ai-tts-btn{background:rgba(129,140,248,0.15);color:#c4b5fd;border:1px solid rgba(129,140,248,0.35);border-radius:14px;padding:3px 10px;font-size:11px;cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:4px}
+.fab-ai-tts-btn:hover{background:rgba(129,140,248,0.3);color:#ddd6fe}
+.fab-ai-tts-btn.playing{background:rgba(239,68,68,0.18);color:#fca5a5;border-color:rgba(239,68,68,0.4)}
+.fab-ai-tts-rate{background:#0f172a;color:#cbd5e1;border:1px solid #334155;border-radius:6px;padding:2px 6px;font-size:11px;cursor:pointer}
+.fab-ai-status{padding:10px 14px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:8px;color:#a5b4fc;font-size:12px}
+.fab-ai-status.err{background:rgba(239,68,68,0.12);border-color:rgba(239,68,68,0.4);color:#fca5a5}
+.fab-ai-loading{display:flex;align-items:center;gap:8px;color:#94a3b8;padding:4px 6px;font-size:12px}
+.fab-ai-spinner{width:12px;height:12px;border:2px solid #334155;border-top-color:#818cf8;border-radius:50%;animation:fab-ai-spin 0.8s linear infinite}
+@keyframes fab-ai-spin{to{transform:rotate(360deg)}}
+.fab-ai-followup{padding:12px;background:#1e293b;border-top:1px solid #334155;display:flex;gap:8px;align-items:flex-end}
+.fab-ai-mini-close{background:#334155;color:#94a3b8;border:1px solid #475569;width:32px;height:36px;border-radius:8px;cursor:pointer;font-size:16px;line-height:1;padding:0;font-weight:600;flex-shrink:0}
+.fab-ai-mini-close:hover{background:#475569;color:#f87171;border-color:#ef4444}
+.fab-ai-followup textarea{flex:1;background:#0f172a;color:#e2e8f0;border:1px solid #334155;border-radius:8px;padding:8px 10px;font-size:13px;font-family:inherit;resize:none;min-height:36px;max-height:120px}
+.fab-ai-followup textarea:focus{outline:none;border-color:#818cf8}
+.fab-ai-followup button{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border:none;padding:0 14px;border-radius:8px;font-weight:600;cursor:pointer;font-size:13px;white-space:nowrap}
+.fab-ai-followup button:hover{transform:translateY(-1px)}
+.fab-ai-followup button:disabled{opacity:0.5;cursor:not-allowed}
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#451a03,#92400e);color:#fff;text-decoration:none;border:1px solid #f59e0b;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4)">&larr; Back to GA 0202 Face &amp; Scalp Hub</a>
+
+<div class="header">
+  <h1>&#127919; Learning Objectives &mdash; Master the 12</h1>
+  <div class="sub">GA 0202 Module 04 &middot; <b>The Face &amp; Scalp</b> &middot; the study spine that ties every drill back to what Dr. Maini actually emphasized across the two face &amp; scalp lectures &mdash; cement each one, check it off, move on.</div>
+  <div class="voices">&#128266; Best voices in <b>Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+  <div class="meta-line">Dr. Seema Maini &middot; Face &amp; Scalp (Lectures 07&ndash;08) &middot; &#129504; SCUHS GA 0202</div>
+</div>
+
+<div class="wrap">
+
+  <div class="status-banner">
+    <b>&#128679; PENDING REVIEW.</b> This page is the <span class="live">objective-by-objective study spine</span> for the Face &amp; Scalp module. Each objective below is distilled from <b>what Dr. Maini actually drilled</b> across the two lectures, and every &ldquo;prove it&rdquo; bullet is grounded in the module&rsquo;s audited <b>Everything-MC bank</b> and her transcripts, cited as <b>[lecture &middot; HH:MM]</b>. Quotes are transcribed from her Zoom recordings; <span class="fix">[bracketed]</span> words are de-garbled spellings of what she said. <i>David to audit each item against Dr. Maini&rsquo;s slides before this goes fully live.</i>
+  </div>
+
+  <div class="intro-card">
+    <h2>&#129504; What this page is</h2>
+    <p>The Face &amp; Scalp block is a &ldquo;name the layer, name the nerve, name the trap&rdquo; module. This page takes the twelve things Dr. Maini actually pounded across <b>Lectures 07 and 08</b>, spells out <b>exactly what &ldquo;done&rdquo; looks like</b>, hangs a <b>verbatim Maini quote</b> on each, and gives you a <b>quick self-check</b>.</p>
+    <p>Tick the &ldquo;Got it&rdquo; box on each one as you master it &mdash; the tracker below fills up. (Your ticks are saved only in <i>this</i> browser; nothing is shared.)</p>
+    <div class="src">Sources: Dr. Maini&rsquo;s <b>Face &amp; Scalp (Lecture 07)</b> and <b>Face &amp; Scalp part 2 (Lecture 08)</b> recordings (SCUHS Canvas Zoom) + the audited <b>Everything-MC drill (101Q)</b>.</div>
+  </div>
+
+  <div class="tracker">
+    <div class="count"><b id="trkNum">0</b> / 12 objectives marked mastered</div>
+    <div class="bar"><div class="fill" id="trkFill"></div></div>
+    <button class="reset" id="trkReset">Reset all ticks</button>
+    <div class="note">Saved locally in this browser only &middot; no scores are shared</div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 1 ===================== -->
+  <div class="lo" id="lo1">
+    <div class="lo-head">
+      <div class="lo-num">1</div>
+      <div class="lo-obj">
+        <div class="obj-text">Recite the 5 layers of the scalp (SCALP), identify the &ldquo;danger area,&rdquo; and explain why the first three layers move as one.</div>
+        <div class="obj-src">content: <b>L07 &middot; 00:35&ndash;06:30</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo1"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Recite <b>SCALP</b>, superficial to deep: <b>S</b> = Skin (hair-bearing); <b>C</b> = dense subcutaneous <b>Connective tissue</b> (fibro-fatty, holds the vessels); <b>A</b> = <b>Aponeurosis</b> (epicranial aponeurosis / galea aponeurotica, formed by <b>occipitofrontalis</b>); <b>L</b> = <b>Loose areolar</b> connective tissue; <b>P</b> = <b>Pericranium</b> (periosteum of the skull). <span class="cite">(L07 00:35&ndash;06:24)</span></li>
+        <li>Explain that the outer <b>3 layers (S-C-A) are bound together and glide as one unit</b> over the loose areolar layer &mdash; that&rsquo;s why you can slide your scalp forward-back and side to side. <span class="cite">(L07 03:39&ndash;04:16)</span></li>
+        <li>Flag the <b>loose areolar (4th) layer as the &ldquo;danger area&rdquo;</b>: its abundant potential space lets <b>pus and blood/haematoma spread easily</b>, and it&rsquo;s the <b>plane of scalp avulsion</b> (the outer 3 layers peel off the pericranium here). <span class="cite">(L07 03:39&ndash;04:16)</span></li>
+        <li>Contrast the <b>pericranium</b> = periosteum firmly bound to bone, so collections here are limited by the sutures. <span class="cite">(L07 06:00&ndash;06:24)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Along this layer, you can move the outer layers over the deeper layer &hellip; you can move your scalp anteroposteriorly or side to side because of this loose areolar connective tissue layer.&rdquo;<span class="cite">&mdash; Face &amp; Scalp (Lecture 07) &middot; ~00:04:16</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What does each letter of SCALP stand for, and which layer is the &ldquo;danger area&rdquo; and why?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>S</b>kin, dense <b>C</b>onnective tissue, <b>A</b>poneurosis (galea, from occipitofrontalis), <b>L</b>oose areolar tissue, <b>P</b>ericranium. The <b>loose areolar (4th) layer</b> is the danger area: it has abundant free space, so pus and blood spread easily and it&rsquo;s the plane of avulsion. The first 3 layers move as one over it.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 2 ===================== -->
+  <div class="lo" id="lo2">
+    <div class="lo-head">
+      <div class="lo-num">2</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the scalp&rsquo;s blood supply, sensory nerves, and venous drainage &mdash; and the three clinical consequences of that anatomy.</div>
+        <div class="obj-src">content: <b>L07 &middot; scalp vessels, nerves &amp; clinical</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo2"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Split the arteries by source: from the <b>ECA</b> &mdash; <b>occipital, posterior auricular, superficial temporal</b>; from the <b>ICA</b> &mdash; <b>supraorbital &amp; supratrochlear</b> (branches of the <b>ophthalmic artery</b>, which comes off the internal carotid). <span class="cite">(L07 &middot; scalp arterial supply)</span></li>
+        <li>Split the sensory nerves front vs back: <b>anterior scalp = trigeminal</b> &mdash; V1 (supraorbital + supratrochlear), V2 (zygomaticotemporal), V3 (auriculotemporal); <b>posterior scalp = spinal nerves</b> &mdash; <b>lesser occipital (C2&ndash;C3, ventral rami)</b> and <b>greater / third occipital (dorsal rami)</b>. <span class="cite">(L07 &middot; scalp sensory nerves)</span></li>
+        <li>Trace the venous drainage: it follows the arteries; the <b>facial vein</b> feeds the <b>common facial vein &rarr; internal jugular</b>, and the superficial temporal + maxillary veins form the <b>retromandibular vein</b>. <span class="cite">(L07 &middot; scalp venous drainage)</span></li>
+        <li>State the three clinical payoffs: the scalp <b>bleeds profusely</b> (rich anastomoses, vessels held open by dense connective tissue), <b>transverse wounds gape</b> (occipitofrontalis pulls the edges apart), and it <b>heals well</b> because it is so vascular. <span class="cite">(L07 &middot; scalp clinical)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Supraorbital and supratrochlear are branches of ophthalmic, which is a branch of internal carotid &hellip; on the scalp you have blood flowing from both directions &hellip; because there is connection between the arteries.&rdquo;<span class="cite">&mdash; Face &amp; Scalp (Lecture 07) &middot; scalp arterial supply / clinical</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which two scalp arteries come from the internal carotid system, and why does the scalp bleed so heavily?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>supraorbital and supratrochlear</b> arteries (from the <b>ophthalmic &rarr; internal carotid</b>) &mdash; everything else on the scalp is from the ECA. It bleeds heavily because of <b>rich anastomoses</b> (blood from both directions) and vessel walls held open by the dense connective tissue, which is also why it heals well.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 3 ===================== -->
+  <div class="lo" id="lo3">
+    <div class="lo-head">
+      <div class="lo-num">3</div>
+      <div class="lo-obj">
+        <div class="obj-text">State the general rules of the muscles of facial expression &mdash; one nerve, one arch, where they insert, and how Botox works on them.</div>
+        <div class="obj-src">content: <b>L07 &middot; 23:29&ndash;24:00 + Botox</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo3"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the one thing they all share: <b>every muscle of facial expression is innervated by CN VII (the facial nerve)</b>. <span class="cite">(L07 &middot; facial muscles general)</span></li>
+        <li>Give their developmental origin: they are <b>2nd pharyngeal (branchial) arch</b> derivatives, so their fibers are <b>SVE / branchial motor</b>. <span class="cite">(L08 &middot; facial nerve fiber types)</span></li>
+        <li>Describe how they move the face: they lie in the <b>superficial fascia</b> (no deep fascia), mostly <b>arise from skull bones and insert into the skin</b> of the face &mdash; so they move skin, not joints. <span class="cite">(L07 23:29&ndash;23:43)</span></li>
+        <li>Explain <b>Botox</b>: it blocks neuromuscular transmission by <b>blocking acetylcholine at its receptor</b>, paralyzing the muscle (softens wrinkles). <span class="cite">(L07 &middot; facial muscles Botox)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;What is one thing common between the muscles of facial expression? Innervation, seventh nerve, facial nerve &hellip; they lie within superficial fascia of the face &hellip; they arise mostly from the skull bones, and they are inserted onto the skin of the face.&rdquo;<span class="cite">&mdash; Face &amp; Scalp (Lecture 07) &middot; ~00:23:29</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">What nerve supplies ALL muscles of facial expression, which arch are they from, and what do they insert into?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">All are supplied by <b>CN VII (facial nerve)</b>, are <b>2nd pharyngeal arch</b> derivatives (SVE fibers), and insert into the <b>skin of the face</b> (within superficial fascia). Botox paralyzes them by blocking acetylcholine at the neuromuscular junction.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 4 ===================== -->
+  <div class="lo" id="lo4">
+    <div class="lo-head">
+      <div class="lo-num">4</div>
+      <div class="lo-obj">
+        <div class="obj-text">Identify the specific muscles of facial expression by action &mdash; the sphincters, the buccinator, and the &ldquo;imposter&rdquo; that isn&rsquo;t one.</div>
+        <div class="obj-src">content: <b>L07&ndash;L08 &middot; specific facial muscles</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo4"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Name the two sphincters: <b>orbicularis oculi closes the eye</b> (palpebral part = gentle blink, orbital part = forced closure); <b>orbicularis oris closes / purses the lips</b>. Flag the imposter: <b>levator palpebrae superioris OPENS the eye and is CN III &mdash; NOT a facial-expression muscle</b>. <span class="cite">(L07&ndash;L08 &middot; orbicularis / LPS)</span></li>
+        <li>Nail the <b>buccinator</b>: the <b>&ldquo;trumpeter&rsquo;s muscle&rdquo;</b> (compresses the cheek, keeps food on the teeth); origin = <b>alveolar margins of maxilla/mandible + pterygomandibular raphe</b>; it is <b>pierced by the parotid duct</b>; paralysis &rarr; food pools in the vestibule / drooling. <span class="cite">(L08 12:00&ndash;13:01)</span></li>
+        <li>Assign the brow/forehead group: <b>occipitofrontalis</b> (frontal belly raises brows &ndash; surprise; occipital belly retracts scalp), <b>corrugator supercilii</b> (vertical frown lines), <b>procerus</b> (transverse wrinkle at the nasal bridge). <span class="cite">(L07 &middot; facial muscles specific)</span></li>
+        <li>Round out the set: <b>zygomaticus major</b> (smile), <b>risorius</b> (grin), <b>nasalis</b> (compressor + dilator naris), <b>LLSAN</b> (levator labii superioris alaeque nasi &ndash; elevates upper lip + flares nostril), <b>mentalis</b> (chin pucker), <b>platysma</b> (the only facial muscle in the neck), <b>auricular muscles</b> (rudimentary in humans). <span class="cite">(L08 &middot; facial muscles specific)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;[Buccinator is] also called as trumpeteer&rsquo;s muscle, because you need to do that action to play your trumpet &hellip; both orbicularis oculi and orbicularis oris, they help to close the openings.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~00:13:00</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which &ldquo;facial muscle&rdquo; is actually NOT one (and what nerve runs it), and what&rsquo;s the buccinator&rsquo;s nickname and duct relationship?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Levator palpebrae superioris</b> opens the eye and is <b>CN III</b> &mdash; not a facial-expression muscle (orbicularis oculi <i>closes</i> the eye, CN VII). The <b>buccinator</b> = the <b>&ldquo;trumpeter&rsquo;s muscle&rdquo;</b> and is <b>pierced by the parotid duct</b>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 5 ===================== -->
+  <div class="lo" id="lo5">
+    <div class="lo-head">
+      <div class="lo-num">5</div>
+      <div class="lo-obj">
+        <div class="obj-text">List the 5 motor branches of the facial nerve (Maini&rsquo;s mnemonic), where it exits, and what each branch supplies.</div>
+        <div class="obj-src">content: <b>L08 &middot; ~00:31:42 + motor branches</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo5"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Trace the exit: CN VII leaves the skull at the <b>stylomastoid foramen</b>, enters the <b>parotid gland</b>, and forms the <b>parotid plexus</b> that splits into 5 terminal motor branches. <span class="cite">(L08 &middot; facial nerve exit / parotid plexus)</span></li>
+        <li>Recite <b>Maini&rsquo;s mnemonic &mdash; &ldquo;To Zambia by motor car&rdquo;</b>: <b>T</b>emporal, <b>Z</b>ygomatic, <b>B</b>uccal, <b>M</b>arginal mandibular, <b>C</b>ervical. <span class="cite">(L08 00:31:42)</span></li>
+        <li>Assign territories: <b>Temporal</b> &rarr; upper face (frontal belly, upper orbicularis oculi, corrugator) &mdash; <b>not mentalis</b>; <b>Buccal</b> &rarr; buccinator + upper lip; <b>Marginal mandibular</b> &rarr; lower lip; <b>Cervical</b> &rarr; <b>platysma</b>. <span class="cite">(L08 &middot; motor branch territories)</span></li>
+        <li>Add the <b>posterior auricular branch</b> &rarr; occipital belly of occipitofrontalis, and remember <b>platysma is the only facial muscle in the neck</b>. <span class="cite">(L08 &middot; posterior auricular / cervical branch)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;To Zambia by motor car &hellip; T temporal, zygomatic, buccal, marginal mandibular, and cervical &hellip; there&rsquo;s only one muscle of facial expression in the neck, platysma.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~00:31:42</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name Maini&rsquo;s mnemonic and the 5 motor branches &mdash; and which branch supplies platysma?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>&ldquo;To Zambia by motor car&rdquo;</b> = <b>Temporal, Zygomatic, Buccal, Marginal mandibular, Cervical</b>. The <b>cervical branch</b> supplies <b>platysma</b> (the only facial muscle in the neck). CN VII exits at the stylomastoid foramen and branches inside the parotid.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 6 ===================== -->
+  <div class="lo" id="lo6">
+    <div class="lo-head">
+      <div class="lo-num">6</div>
+      <div class="lo-obj">
+        <div class="obj-text">Follow the facial nerve&rsquo;s intracranial course &mdash; the geniculate ganglion and its three canal branches (greater petrosal, nerve to stapedius, chorda tympani).</div>
+        <div class="obj-src">content: <b>L08 &middot; 20:44&ndash;55:12</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo6"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Trace the entry: CN VII enters the <b>internal acoustic meatus</b> (with CN VIII), runs in the <b>facial canal</b>; at the <b>genu (bend)</b> sits the <b>geniculate ganglion</b> &mdash; &ldquo;geniculate because it is at the genu.&rdquo; <span class="cite">(L08 ~00:44:53)</span></li>
+        <li>Branch 1 &mdash; <b>greater petrosal nerve</b>: carries <b>preganglionic parasympathetic</b> fibers; joined by the <b>deep petrosal</b> (postganglionic sympathetic from the ICA plexus) to form the <b>nerve of the pterygoid canal &rarr; pterygopalatine ganglion</b> (fibers then ride V2 to the lacrimal / nasal / palatine glands). <span class="cite">(L08 ~00:54:01)</span></li>
+        <li>Branch 2 &mdash; <b>nerve to stapedius</b>: dampens the stapes; losing it causes <b>hyperacusis</b> (extra-sensitive to sound). <span class="cite">(L08 00:48:41, 00:55:12)</span></li>
+        <li>Branch 3 &mdash; <b>chorda tympani</b>: <b>taste to the anterior 2/3 tongue</b> + preganglionic parasympathetic to the <b>submandibular ganglion</b> (&rarr; submandibular &amp; sublingual glands); exits via the <b>petrotympanic fissure</b>. This week&rsquo;s three parasympathetic ganglia: <b>pterygopalatine, submandibular, otic</b>. <span class="cite">(L08 &middot; chorda tympani / parasympathetic ganglia)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;The ganglion at the turn is called as geniculate ganglion. You know why it is called as geniculate, because it is at the genu, the bend.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~00:44:53</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Name the facial nerve&rsquo;s three facial-canal branches &mdash; and losing which one causes hyperacusis?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Greater petrosal</b> (preganglionic parasympathetic &rarr; pterygopalatine ganglion), <b>nerve to stapedius</b>, and <b>chorda tympani</b> (taste ant. 2/3 tongue + submandibular ganglion). Losing the <b>nerve to stapedius</b> causes <b>hyperacusis</b>. The genu holds the geniculate ganglion.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 7 ===================== -->
+  <div class="lo" id="lo7">
+    <div class="lo-head">
+      <div class="lo-num">7</div>
+      <div class="lo-obj">
+        <div class="obj-text">Work the facial nerve lesions &mdash; Bell&rsquo;s palsy (LMN, whole side), the eye complications, Ramsay-Hunt, and Frey&rsquo;s syndrome.</div>
+        <div class="obj-src">content: <b>L08 &middot; 59:38&ndash;68:00</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo7"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Define <b>Bell&rsquo;s palsy</b> = idiopathic <b>lower motor neuron (LMN)</b> palsy of CN VII &rarr; paralyzes the <b>WHOLE side</b> of the face (<b>forehead NOT spared</b>), unlike an <b>UMN</b> lesion (stroke) which <b>spares the forehead</b>; an LMN palsy risks <b>residual paralysis</b> without physiotherapy. <span class="cite">(L08 00:59:38, 01:00:36)</span></li>
+        <li>Chain the eye complications: <b>orbicularis oculi palsy &rarr; lagophthalmos</b> (can&rsquo;t close the eye) &rarr; cornea dries &rarr; <b>corneal ulcer / blindness</b> risk; <b>ectropion</b> (lower lid everts, tears spill). <span class="cite">(L08 &middot; palsy signs / lagophthalmos / ectropion)</span></li>
+        <li>Separate <b>Bell&rsquo;s phenomenon</b> (eyeball rolls up on attempted closure &mdash; a <b>normal</b> reflex you can just <i>see</i> in Bell&rsquo;s palsy because the lids don&rsquo;t close) from <b>Bell&rsquo;s palsy</b> (the paralysis itself). <span class="cite">(L08 &middot; Bell&rsquo;s phenomenon)</span></li>
+        <li>Add the named syndromes: <b>Ramsay-Hunt</b> = VZV reactivation hitting CN VIII + the <b>geniculate ganglion</b> of CN VII (facial palsy + ear vesicles); <b>Frey&rsquo;s syndrome</b> = <b>gustatory sweating</b> after parotid surgery (misdirected auriculotemporal parasympathetics). <span class="cite">(L08 &middot; Ramsay-Hunt / Frey&rsquo;s)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This third one, idiopathic, it&rsquo;s very common. It&rsquo;s called as Bell&rsquo;s palsy &hellip; if it is lower motor neuron palsy, then there might be residual paralysis if you do not start physiotherapy.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~00:59:38&ndash;01:01:00</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Bell&rsquo;s palsy &mdash; is it UMN or LMN, and is the forehead spared or paralyzed?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Bell&rsquo;s palsy is an <b>LMN</b> palsy of CN VII &rarr; the <b>whole side</b> of the face is paralyzed, so the <b>forehead is NOT spared</b> (an UMN / stroke lesion spares the forehead). Watch for lagophthalmos &rarr; corneal drying; don&rsquo;t confuse it with the normal Bell&rsquo;s <i>phenomenon</i>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 8 ===================== -->
+  <div class="lo" id="lo8">
+    <div class="lo-head">
+      <div class="lo-num">8</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the trigeminal nerve as the sensory nerve of the face &mdash; the V1/V2/V3 zones, corneal sensation, and the two &ldquo;buccal&rdquo; nerves trap.</div>
+        <div class="obj-src">content: <b>L08 &middot; ~01:06:32 + dermatomes</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo8"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the big split: <b>CN V (trigeminal) is the great sensory nerve of the face &amp; scalp</b>, while CN VII is motor. <span class="cite">(L08 ~01:06:32)</span></li>
+        <li>Assign the three zones: <b>V1 (ophthalmic)</b> &rarr; forehead, upper eyelid, tip/bridge of nose (+ branches supraorbital / supratrochlear); <b>V2 (maxillary)</b> &rarr; upper lip, cheek, lower eyelid; <b>V3 (mandibular)</b> &rarr; lower lip, chin, jaw. <span class="cite">(L08 &middot; trigeminal dermatomes)</span></li>
+        <li>Lock in <b>corneal sensation = V1</b> (the afferent limb of the corneal blink reflex). <span class="cite">(L08 &middot; corneal sensation)</span></li>
+        <li>Spot the traps: the two <b>&ldquo;buccal&rdquo; nerves</b> &mdash; buccal branch of the <b>facial nerve = MOTOR</b> (to buccinator) vs the buccal nerve of <b>V3 = SENSORY</b> (cheek). And the <b>auriculotemporal nerve (V3)</b> carries <b>parotid secretomotor fibers + GSA</b>. <span class="cite">(L08 &middot; buccal nerves / auriculotemporal)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;[The sensory nerve of the face] is trigeminal, 5th nerve.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~01:06:32</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which trigeminal division carries corneal sensation, and how do you tell the two &ldquo;buccal&rdquo; nerves apart?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>Corneal sensation = V1 (ophthalmic).</b> Zones: V1 forehead/upper eyelid/nose-tip, V2 upper lip/cheek, V3 lower lip/chin. The <b>buccal branch of CN VII is MOTOR</b> (buccinator); the <b>buccal nerve of V3 is SENSORY</b> (cheek).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 9 ===================== -->
+  <div class="lo" id="lo9">
+    <div class="lo-head">
+      <div class="lo-num">9</div>
+      <div class="lo-obj">
+        <div class="obj-text">Work the trigeminal clinical conditions &mdash; trigeminal neuralgia (V2/V3, carbamazepine) and herpes zoster ophthalmicus (V1, cornea risk).</div>
+        <div class="obj-src">content: <b>L08 &middot; 01:10:37&ndash;01:12:27</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo9"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Describe <b>trigeminal neuralgia</b> (tic douloureux): sudden severe lancinating facial pain, usually in the <b>V2/V3</b> territory, <b>triggered by light touch</b> (chewing, brushing, shaving). <span class="cite">(L08 ~01:10:37)</span></li>
+        <li>Name the drug: <b>carbamazepine</b> (an anti-epileptic) is the <b>drug of choice</b>. <span class="cite">(L08 ~01:11:41)</span></li>
+        <li>Describe <b>herpes zoster ophthalmicus</b>: reactivation of VZV in the <b>V1 (ophthalmic) division</b> &rarr; vesicular rash over forehead/nose with a <b>risk to the cornea</b>. <span class="cite">(L08 ~01:12:27)</span></li>
+        <li>Connect the dots: because <b>V1 supplies both the nose tip and the cornea</b>, nose-tip vesicles are a warning sign for eye involvement. <span class="cite">(L08 &middot; herpes zoster ophthalmicus)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;There is this another clinical condition called as trigeminal neuralgia &hellip; you have to take anti-epileptic medications. Carbamazepine is the drug of choice &hellip; [herpes zoster] affecting the skin supplied by ophthalmic division of trigeminal nerve.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~01:10:37&ndash;01:12:27</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Which trigeminal division does herpes zoster ophthalmicus hit, and what&rsquo;s the drug of choice for trigeminal neuralgia?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">Herpes zoster ophthalmicus hits <b>V1 (ophthalmic)</b> &mdash; threatening the cornea. <b>Carbamazepine</b> is the drug of choice for <b>trigeminal neuralgia</b>, which strikes the <b>V2/V3</b> zones and is triggered by light touch.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 10 ===================== -->
+  <div class="lo" id="lo10">
+    <div class="lo-head">
+      <div class="lo-num">10</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace the parotid gland&rsquo;s secretomotor pathway (CN IX &rarr; otic ganglion &rarr; auriculotemporal) and its key facts and clinical points.</div>
+        <div class="obj-src">content: <b>L08 &middot; 14:44&ndash;23:02</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo10"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>State the gland facts: parotid = the <b>largest salivary gland (~30% of saliva)</b>; a serous secretion rich in <b>amylase</b> (begins carbohydrate digestion); duct opens into the oral vestibule <b>opposite the upper 2nd molar</b> (pierces buccinator). <span class="cite">(L08 14:44, 17:26)</span></li>
+        <li>Trace the <b>parasympathetic (secretomotor) chain</b>: <b>CN IX (glossopharyngeal)</b> &rarr; tympanic nerve/plexus &rarr; <b>lesser petrosal nerve</b> &rarr; <b>otic ganglion</b> (relay) &rarr; postganglionic fibers ride the <b>auriculotemporal nerve (V3)</b> to the gland. <span class="cite">(L08 20:44&ndash;23:02)</span></li>
+        <li>Add the <b>sympathetics</b>: relay in the <b>superior cervical ganglion</b>, travel on the external carotid plexus (reduce/thicken saliva). <span class="cite">(L08 &middot; sympathetic pathway)</span></li>
+        <li>Explain <b>parotitis</b> (e.g., mumps): the gland swells inside its tough fibrous <b>parotid sheath</b> &rarr; the stretched sheath causes severe pain. <span class="cite">(L08 &middot; parotitis pain)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;It gets its parasympathetic fibers through 9th nerve &hellip; they synapse in a ganglion called as otic ganglion &hellip; postganglionic fibers, they are carried by auriculotemporal nerve.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~00:20:44&ndash;00:21:00</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">Trace the parasympathetic secretomotor path to the parotid (nerve &rarr; ganglion &rarr; delivery nerve), and where does the duct open?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans"><b>CN IX &rarr; lesser petrosal &rarr; otic ganglion &rarr; auriculotemporal nerve (V3) &rarr; parotid.</b> The duct opens opposite the <b>upper 2nd molar</b>. Parotid is the largest salivary gland (~30% of saliva, amylase); parotitis hurts because its tough sheath is stretched.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 11 ===================== -->
+  <div class="lo" id="lo11">
+    <div class="lo-head">
+      <div class="lo-num">11</div>
+      <div class="lo-obj">
+        <div class="obj-text">Map the arteries of the face &mdash; the facial artery &amp; its branches, the superficial temporal, and the two &ldquo;source&rdquo; traps.</div>
+        <div class="obj-src">content: <b>L08 &middot; ~01:13:59 + facial arteries</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo11"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Place the <b>facial artery</b>: a branch of the <b>ECA</b>; <b>tortuous</b> as it climbs to the medial canthus (where it becomes the <b>angular artery</b>), giving <b>inferior labial, superior labial, lateral nasal, angular</b> (+ submental below the mandible). <span class="cite">(L08 ~01:13:59)</span></li>
+        <li>Place the <b>superficial temporal artery</b> (terminal branch of ECA): gives the <b>transverse facial artery</b> + frontal &amp; parietal branches. <span class="cite">(L08 &middot; superficial temporal)</span></li>
+        <li>Spring the <b>transverse facial trap</b>: the transverse facial artery is a branch of the <b>superficial temporal</b>, <b>NOT</b> of the facial artery. <span class="cite">(L08 &middot; facial arteries trick question)</span></li>
+        <li>Spring the <b>source trap</b>: the <b>ophthalmic artery</b> is a branch of the <b>INTERNAL carotid</b> &mdash; so not everything on the face comes from the ECA (supraorbital / supratrochlear / dorsal nasal reach the face via it). <span class="cite">(L08 &middot; ophthalmic artery)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;Transverse facial is not a branch of facial &hellip; it&rsquo;s a branch of superficial temporal &hellip; facial artery is a branch of external carotid artery.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~01:13:59</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The transverse facial artery is a branch of what &mdash; and which facial vessel comes from the INTERNAL carotid?</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The <b>transverse facial artery</b> branches from the <b>superficial temporal</b> (not the facial artery). The <b>ophthalmic artery</b> is the face&rsquo;s branch of the <b>internal carotid</b>. The facial artery itself is a branch of the <b>ECA</b> and is tortuous.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== OBJECTIVE 12 ===================== -->
+  <div class="lo" id="lo12">
+    <div class="lo-head">
+      <div class="lo-num">12</div>
+      <div class="lo-obj">
+        <div class="obj-text">Trace the facial vein and explain the &ldquo;danger area&rdquo; of the face &mdash; the valveless connections to the cavernous sinus and why infection is serious.</div>
+        <div class="obj-src">content: <b>L08 &middot; 01:22:06&ndash;01:22:29</b></div>
+      </div>
+      <label class="lo-check"><input type="checkbox" data-lo="lo12"><span>Got it</span></label>
+    </div>
+    <div class="lo-body">
+      <div class="sect-label prove">&#9989; To prove you&rsquo;ve got it, you can:</div>
+      <ul class="prove-list">
+        <li>Trace the <b>facial vein</b>: from the medial canthus (as the angular vein) down the face, joining the anterior retromandibular vein to form the <b>common facial vein &rarr; internal jugular</b> (Maini&rsquo;s trap: <b>not</b> the external jugular). <span class="cite">(L07/L08 &middot; facial vein drainage)</span></li>
+        <li>Note it is <b>valveless</b> and connects to the <b>cavernous sinus two ways</b>: <b>directly</b> via the superior/inferior <b>ophthalmic veins</b>, and <b>indirectly</b> via the <b>deep facial vein &rarr; pterygoid venous plexus &rarr; cavernous sinus</b>. <span class="cite">(L08 &middot; facial vein cavernous connections)</span></li>
+        <li>Define the <b>danger triangle</b>: from the corners of the mouth to the bridge of the nose (<b>nose + upper lip</b>). <span class="cite">(L08 ~01:22:29)</span></li>
+        <li>Explain the danger: infection here (e.g., squeezing a pimple) can spread <b>retrograde</b> through the valveless vein to the cavernous sinus &rarr; <b>cavernous sinus thrombosis, meningitis, encephalitis</b>. <span class="cite">(L08 ~01:22:06)</span></li>
+      </ul>
+      <div class="sect-label said">&#127908; Dr. Maini said</div>
+      <blockquote>&ldquo;This infection can spread to the cavernous sinus, leading to intracranial infection &hellip; meningitis, encephalitis. That is why this area around the nose and upper lip is called as danger zone, or danger triangle.&rdquo;<span class="cite">&mdash; Face &amp; Scalp part 2 (Lecture 08) &middot; ~01:22:06&ndash;01:22:29</span></blockquote>
+      <div class="sect-label cement">&#127919; Cement it</div>
+      <div class="chips">
+        <a class="chip ref" href="https://dgsc23.github.io/dc-study-tools/ga-0202-m04-face-scalp-hub.html">&#128220; GA 0202 &middot; M04 Face &amp; Scalp Hub</a>
+      </div>
+      <div class="sect-label check">&#129514; Quick self-check</div>
+      <div class="selfcheck">
+        <div class="q">The facial vein drains into which vein, and name the two routes an infection can reach the cavernous sinus.</div>
+        <button class="reveal-btn" onclick="this.nextElementSibling.classList.toggle('open')">Reveal answer</button>
+        <div class="ans">The facial vein &rarr; common facial vein &rarr; <b>internal jugular</b> (not external). Two routes to the cavernous sinus: <b>directly via the ophthalmic veins</b>, and <b>indirectly via the deep facial vein &rarr; pterygoid plexus</b>. The valveless vein is why the nose/upper-lip &ldquo;danger triangle&rdquo; is serious.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== TIE IT TOGETHER ===================== -->
+  <div class="tieit">
+    <h3>&#128279; How to use these 12 to study</h3>
+    <p><b>1.</b> Read each objective out loud, then try the <b>self-check</b> before revealing the answer. If you nailed it, tick <b>Got it</b>.</p>
+    <p><b>2.</b> For any objective you miss, jump back to the <b>GA 0202 M04 Face &amp; Scalp Hub</b> and drill exactly that topic.</p>
+    <p><b>3.</b> The <b>facial nerve</b> (Objectives 5&ndash;7) and the <b>parasympathetic pathways</b> (Objectives 6 &amp; 10) are where Dr. Maini&rsquo;s &ldquo;name the ganglion, name the delivery nerve&rdquo; questions live. Spend extra reps there.</p>
+    <div class="flag"><b>&#9888;&#65039; Don&rsquo;t mix up the two nerves of the face.</b> The <b>facial nerve (CN VII)</b> is <b>motor</b> to the muscles of expression; the <b>trigeminal (CN V)</b> is the <b>sensory</b> nerve of the face. And watch the &ldquo;source&rdquo; traps: <b>supraorbital / supratrochlear / ophthalmic</b> come from the <b>internal carotid</b>, while most of the face is from the <b>ECA</b>; the <b>transverse facial</b> is from the <b>superficial temporal</b>, not the facial artery; the facial vein drains to the <b>internal</b> (not external) jugular.</div>
+    <p style="margin-top:6px">When all 12 boxes are ticked, you own Dr. Maini&rsquo;s objective list for the <b>Face &amp; Scalp</b> module &mdash; the spine of the GA 0202 Module 04 material.</p>
+  </div>
+
+</div><!-- /wrap -->
+
+<footer>
+  <b>DC Study Supply</b> &mdash; Built by Dr. David Gramling, PHD<br>
+  GA 0202 Module 04 (Face &amp; Scalp) &middot; Learning Objectives &middot; Dr. Maini &middot; SCUHS<br>
+  <i>Objectives built from Dr. Maini&rsquo;s lecture recordings (Face &amp; Scalp, Lectures 07&ndash;08) + the audited Everything-MC bank &middot; PENDING REVIEW</i>
+</footer>
+
+<script>
+// ---- Mastery tracker (localStorage only; nothing shared) ----
+(function(){
+  var KEY = 'ga0202_m04_lo_mastery';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.lo-check input[data-lo]'));
+  var TOTAL = boxes.length;
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+
+  function paint(){
+    var n = 0;
+    boxes.forEach(function(b){
+      var on = !!state[b.getAttribute('data-lo')];
+      b.checked = on;
+      var card = b.closest('.lo');
+      if (card) card.classList.toggle('done', on);
+      if (on) n++;
+    });
+    var numEl = document.getElementById('trkNum');
+    var fillEl = document.getElementById('trkFill');
+    if (numEl) numEl.textContent = n;
+    if (fillEl) fillEl.style.width = Math.round((n/TOTAL)*100) + '%';
+  }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+  boxes.forEach(function(b){
+    b.addEventListener('change', function(){
+      state[b.getAttribute('data-lo')] = b.checked;
+      save(); paint();
+    });
+  });
+  var reset = document.getElementById('trkReset');
+  if (reset) reset.addEventListener('click', function(){
+    state = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // GA 0202 General Anatomy — Dr. Maini (Module 04, Face & Scalp)
+  let panel = null;
+  let history = [];
+  let currentQKey = null;
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+  function stripForTts(text){
+    return text.replace(/\*\*/g, '').replace(/`([^`]+)`/g, '$1').replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '').replace(/\n{2,}/g, '. ').replace(/\s+/g, ' ').trim();
+  }
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) { alert('Your browser does not support text-to-speech.'); return; }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+      currentUtter = null; return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => { b.classList.remove('playing'); b.innerHTML = '🔊 Read'; });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    u.onerror = () => { btn.classList.remove('playing'); btn.innerHTML = '🔊 Read'; currentUtter = null; };
+    currentUtter = u; btn.classList.add('playing'); btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      const row = document.createElement('div'); row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button'); btn.className = 'fab-ai-tts-btn'; btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select'); rate.className = 'fab-ai-tts-rate'; rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option'); o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true; rate.appendChild(o);
+      });
+      row.appendChild(btn); row.appendChild(rate); bub.appendChild(row);
+    } else { bub.textContent = text; }
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return bub;
+  }
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody'); if (!body) return null;
+    const wrap = document.createElement('div'); wrap.className = 'fab-ai-msg ai'; wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div'); bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub); body.appendChild(wrap); body.scrollTop = body.scrollHeight; return wrap;
+  }
+  function removeLoading(){ const el = document.getElementById('fabAiLoading'); if (el) el.remove(); }
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    const div = document.createElement('div'); div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text; body.appendChild(div); body.scrollTop = body.scrollHeight;
+  }
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody'); if (!body) return;
+    if (ctx.question) {
+      const qp = document.createElement('div'); qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    const sug = document.createElement('div'); sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    chips.push({ label: '🧠 Explain a concept', q: 'Explain a core concept from the GA 0202 Module 04 Face & Scalp learning objectives.' });
+    chips.push({ label: '🎯 Quiz me', q: 'Ask me a question about one of the 12 Face & Scalp learning objectives, then check my answer.' });
+    chips.push({ label: '🌟 Use an analogy', q: 'Give me a memorable analogy for the facial nerve branches or the parotid secretomotor pathway.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button'); btn.className = 'fab-ai-sug'; btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q); sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody'); if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) { const ctx = readCurrentQ(); renderSuggestions(ctx); }
+  }
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ(); const key = qKey(ctx);
+    if (key !== currentQKey) { currentQKey = key; clearChat(true); }
+  }
+  function buildPanel() {
+    const el = document.createElement('div'); el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about the Face & Scalp module..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el); return el;
+  }
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) { return { error: String(e.message || e) }; }
+  }
+  function clipboardFallback(ctx, userQ) {
+    let prompt = "I'm studying GA 0202 General Anatomy with Dr. Maini at SCUHS (Module 04 — The Face & Scalp). ";
+    if (userQ) prompt += 'My question: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => { appendStatus('Could not copy. Please select manually.', true); });
+  }
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ(); currentQKey = qKey(ctx);
+    appendMsg('user', userText); history.push({ role: 'user', content: userText }); appendLoading();
+    const payload = Object.assign({}, ctx, { userQuestion: userText, history: history.slice(-10), className: CLASS_NAME });
+    const result = await callWorker(payload); removeLoading();
+    if (result.clipboardFallback) { clipboardFallback(ctx, userText); return; }
+    if (result.error) { appendStatus('Error: ' + result.error, true); return; }
+    appendMsg('ai', result.reply); history.push({ role: 'model', content: result.reply });
+  }
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup'); const q = (ta && ta.value || '').trim();
+    if (!q) return; ta.value = ''; sendMessage(q);
+  };
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button'); btn.className = 'fab-ai-btn'; btn.id = 'fabAiBtn';
+    btn.textContent = '🩺'; btn.title = 'Open AI Study Tutor'; btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', install); } else { install(); }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 -->
+<style>
+.dc-study-watermark{position:fixed;bottom:6px;right:10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:10px;font-weight:400;color:rgba(0,0,0,0.30);letter-spacing:0.3px;pointer-events:none;z-index:2147483647;user-select:none}
+.dc-study-watermark.dc-hidden{display:none !important}
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark'); if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') { wm.classList.add('dc-hidden'); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1; if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body); if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = 'rgba(255, 255, 255, 0.30)'; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<!-- Med-Term staple v1 -->
+<style>
+.mt-staple{position:fixed;left:10px;bottom:6px;z-index:2147483646;text-decoration:none;font:600 12px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:rgba(14,27,46,.92);color:#22d3ee;border:1px solid #22d3ee;border-radius:7px;padding:7px 11px;opacity:.85;pointer-events:auto}
+.mt-staple:hover{opacity:1}
+@media print{.mt-staple{display:none}}
+</style>
+<a class="mt-staple" href="medterm-hub.html" title="Medical Terminology study hub — roots, drills, audio">&#129516; Med-Term</a>
+<!-- /Med-Term staple -->
+</body>
+</html>

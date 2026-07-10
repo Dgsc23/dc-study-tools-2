@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GA 0202 · The Brain — Cram Coach</title>
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+<style>html,body{margin:0;padding:0}</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" data-presets="react">
+/** @jsxRuntime classic */
+const { useState, useMemo, useEffect, useRef } = React;
+
+
+/* ============================================================================
+   GA 0202 — THE BRAIN (Modules / Lectures 16 & 17) · Dr. Maini
+   Cram Coach. PENDING REVIEW. Voiced, hands-free (Web Speech).
+   Built ONLY from Dr. Maini's brain lectures (Lecture 16 + Lecture 17) and the
+   module's AUDITED Everything-MC bank. Facts anti-fab verified; no new claims.
+   Analogies are attributed to Maini ONLY where she actually says them.
+   THEME: violet. Correct keys taught plainly; answer positions balanced.
+   ========================================================================== */
+
+const HUB = "https://dgsc23.github.io/dc-study-tools/ga-0202-m07-brain-hub_PENDING_REVIEW.html";
+
+const TABS = [
+  { id: "cram", label: "Cram" },
+  { id: "study", label: "What to Study" },
+  { id: "tips", label: "Prof's Tips" },
+  { id: "drill", label: "Drill" },
+  { id: "coach", label: "AI Coach" },
+];
+
+/* ===================================================== CRAM (15 TOPICS) ==== */
+const cram = [
+  {
+    n: 1, title: "The big picture — the four parts of the brain", src: "Maini · L16",
+    facts: [
+      "CEREBRUM — the largest part; Maini stresses it is so large it covers and masks essentially ALL underlying structures EXCEPT the brainstem. It is the seat of higher (executive) functions.",
+      "DIENCEPHALON — the deep 'connecting part,' made mostly of ascending & descending pathways linking the lower brain to the cerebrum; it houses the thalamus and hypothalamus.",
+      "CEREBELLUM — the 'small brain,' tucked under the occipital lobe; its chief job is COORDINATION of movement (it refines the plan the motor cortex lays down).",
+      "BRAINSTEM — three parts from superior to inferior: MIDBRAIN → PONS → MEDULLA OBLONGATA. The medulla is directly continuous with the spinal cord past the foramen magnum.",
+    ],
+    flag: "Four parts. Cerebrum masks everything but the brainstem. Diencephalon = connecting relay (thalamus + hypothalamus). Cerebellum = coordination. Brainstem top-to-bottom = midbrain · pons · medulla (medulla → cord).",
+  },
+  {
+    n: 2, title: "Cortex organization — gray vs white, fissures, sulci & gyri", src: "Maini · L16",
+    facts: [
+      "The LONGITUDINAL fissure splits the two hemispheres; the FALX CEREBRI (a dural fold) dips into it, and the CORPUS CALLOSUM (largest commissure) connects the hemispheres across the floor.",
+      "GRAY matter = the peripheral CORTEX (neuron cell bodies); WHITE matter = the interior (myelinated fibers that look white).",
+      "Maini insists on the term BASAL NUCLEI, not 'basal ganglia' — a GANGLION is a cluster of cell bodies OUTSIDE the CNS, so inside the CNS the correct word is nucleus.",
+      "A SULCUS (or fissure) is a groove; a GYRUS is a raised ridge. A groove deeper than about an inch is often called a fissure.",
+    ],
+    flag: "Longitudinal fissure + falx cerebri divide the hemispheres; corpus callosum connects them. Cortex = gray (cell bodies) · interior = white (myelin). BASAL NUCLEI, not ganglia (ganglion = OUTSIDE the CNS). Sulcus = groove, gyrus = ridge.",
+  },
+  {
+    n: 3, title: "Basal nuclei, the capsules & the contralateral rule", src: "Maini · L16 / L17",
+    facts: [
+      "The three basal nuclei: CAUDATE nucleus, PUTAMEN, and GLOBUS PALLIDUS. Putamen + globus pallidus = the LENTIFORM (lens-shaped) nucleus; add the caudate and all three = the CORPUS STRIATUM.",
+      "INTERNAL capsule — an L-shaped white band between the caudate / globus pallidus and the THALAMUS. The CORTICOSPINAL (motor) tract funnels through it, so a lesion here (a very common stroke site) causes CONTRALATERAL paralysis, because the fibers later cross in the medulla.",
+      "EXTERNAL capsule lies between the PUTAMEN and the CLAUSTRUM; the EXTREME capsule lies between the CLAUSTRUM and the INSULAR gray. The CLAUSTRUM is the thin gray strip sandwiched between the two capsules.",
+      "Dysfunction of the basal nuclei → PARKINSONISM and a RESTING (pill-rolling) tremor — the hallmark of basal-nuclear disease (contrast the cerebellar INTENTION tremor).",
+    ],
+    flag: "Caudate + putamen + globus pallidus. Lentiform = putamen + globus pallidus; + caudate = corpus striatum. Internal capsule carries the corticospinal tract → lesion = CONTRALATERAL paralysis. Basal-nuclei disease = RESTING tremor (cerebellum = INTENTION tremor).",
+  },
+  {
+    n: 4, title: "The five lobes & their boundaries", src: "Maini · L16",
+    facts: [
+      "FIVE lobes: frontal, parietal, temporal, occipital on the surface, PLUS the INSULA — the hidden deep 5th lobe under the lateral fissure.",
+      "CENTRAL SULCUS = the border between the FRONTAL lobe (in front) and the PARIETAL lobe (behind).",
+      "LATERAL sulcus (fissure) separates the TEMPORAL lobe below from the frontal & parietal lobes above; retract it to expose the insula.",
+      "No deep sulcus marks the occipital lobe laterally, so Maini draws a hypothetical LINE from the PREOCCIPITAL NOTCH to the superior end of the PARIETO-OCCIPITAL sulcus.",
+    ],
+    flag: "5 lobes (frontal · parietal · temporal · occipital + INSULA deep). Central sulcus = frontal | parietal. Lateral sulcus = temporal below vs frontal/parietal above. Occipital boundary = preoccipital notch → top of the parieto-occipital sulcus (an imaginary line).",
+  },
+  {
+    n: 5, title: "The functional cortex map (Maini's Mentimeter)", src: "Maini · L16 / L17",
+    facts: [
+      "Primary MOTOR cortex = FRONTAL lobe (precentral gyrus). Primary SENSORY (somesthetic) cortex = PARIETAL lobe (postcentral gyrus).",
+      "Primary VISUAL cortex = OCCIPITAL lobe. Primary AUDITORY cortex (and the olfactory / smell area) = TEMPORAL lobe.",
+      "Primary GUSTATORY (taste) cortex = the INSULA — the deep 5th lobe.",
+      "The PREFRONTAL area (reasoning, judgment, personality) is the last to mature: it keeps developing from about 16–17 years until roughly 25 years.",
+    ],
+    flag: "MOTOR = frontal · SENSORY = parietal · VISUAL = occipital · AUDITORY + smell = temporal · TASTE = insula. Prefrontal (judgment) matures ~25. These are Maini's exact Menti answers — memorize them cold.",
+  },
+  {
+    n: 6, title: "Motor & sensory pathways + the homunculus", src: "Maini · L16 / L17",
+    facts: [
+      "MOTOR = a TWO-neuron pathway: the upper motor neuron sits in the precentral gyrus → the corticospinal tract descends → the lower (alpha) motor neuron sits in the ANTERIOR / ventral horn of the spinal cord.",
+      "SENSORY = a FOUR-neuron pathway: 1st neuron in the GANGLION (dorsal root) → 2nd in the MEDULLA → 3rd in the THALAMUS → 4th in the postcentral gyrus.",
+      "HOMUNCULUS: body regions that need fine coordination or have dense receptors (face, hands, tongue) get the LARGEST cortical map; big, uncoordinated muscles like the back get little.",
+      "The strip just ANTERIOR to the primary motor cortex controls EYE movements — the frontal eye field.",
+    ],
+    flag: "Motor = 2 neurons (cortex UMN → anterior-horn LMN). Sensory = 4 neurons (ganglion → medulla → thalamus → postcentral gyrus). Homunculus favors fine-control / dense-receptor parts. Frontal eye field sits just anterior to the motor cortex.",
+  },
+  {
+    n: 7, title: "Gyri & the speech areas — Broca vs Wernicke", src: "Maini · L16",
+    facts: [
+      "Anterior frontal lobe = superior, middle & inferior frontal gyri (three gyri split by two sulci); the INFERIOR frontal gyrus divides into pars ORBITALIS, TRIANGULARIS, and OPERCULARIS. Temporal lobe = superior, middle & inferior temporal gyri. The SUPRAMARGINAL gyrus caps the end of the lateral fissure.",
+      "BROCA'S area = FRONTAL lobe = the MOTOR (expressive) speech area — it finds and produces the words.",
+      "WERNICKE'S area = POSTERIOR TEMPORAL lobe = the SENSORY speech area — it lets you comprehend spoken and written language.",
+      "BROCA'S aphasia (motor): the patient COMPREHENDS but is 'short of words' — non-fluent, effortful speech. WERNICKE'S aphasia (sensory): the patient speaks FLUENTLY but in meaningless 'word salad' with NO comprehension.",
+    ],
+    flag: "Broca = FRONTAL, motor / expressive, 'short of words' (comprehension intact). Wernicke = POSTERIOR TEMPORAL, sensory, fluent 'word salad' (no comprehension). Inferior frontal gyrus = orbitalis · triangularis · opercularis.",
+  },
+  {
+    n: 8, title: "Medial surface & the limbic system", src: "Maini · L16",
+    facts: [
+      "On a mid-sagittal cut: the CORPUS CALLOSUM arches over everything, its posterior end called the SPLENIUM; the SEPTUM PELLUCIDUM is the thin sheet you scrape through to enter the lateral ventricle.",
+      "Around the calcarine sulcus: the CUNEUS lies between the calcarine and parieto-occipital sulci; the LINGUAL gyrus (named for its shape, not the tongue) lies below the calcarine sulcus.",
+      "The FORNIX is a fiber component of the LIMBIC system.",
+      "Maini groups the limbic cortex as the UNCUS, PARAHIPPOCAMPAL gyrus, the ISTHMUS, and the CINGULATE gyrus — dealing with reward/punishment, aggression, pleasure, emotion, and memory. The isthmus links the parahippocampal and cingulate gyri.",
+    ],
+    flag: "Splenium = posterior end of the corpus callosum. Septum pellucidum overlies the lateral ventricle. Cuneus between calcarine & parieto-occipital sulci; lingual gyrus below. Limbic = uncus · parahippocampal · isthmus · cingulate (the fornix is part of it).",
+  },
+  {
+    n: 9, title: "Diencephalon — thalamus, hypothalamus, epithalamus", src: "Maini · L16 / L17",
+    facts: [
+      "THALAMUS — the great sensory RELAY CENTER for essentially ALL ascending sensations on their way to the cortex. The ONE exception is SMELL (olfaction), which bypasses the thalamus. The two thalami may join across the 3rd ventricle at the INTERTHALAMIC ADHESION (a.k.a. massa intermedia / intermediate mass).",
+      "HYPOTHALAMUS — the master controller of the autonomic nervous system and the endocrine system (it controls the pituitary); it is the body's THERMOSTAT and also governs thirst, hunger, and the sleep-wake cycle.",
+      "EPITHALAMUS / PINEAL gland — secretes MELATONIN, which regulates the sleep-wakefulness cycle. After about age 40 it commonly calcifies as CORPORA ARENACEA ('brain sand') — a normal finding.",
+      "OPTIC CHIASMA — the crossing point of the two optic nerves, sitting just above the pituitary; an enlarging pituitary tumor compresses it, so visual disturbance (bitemporal hemianopsia) is often an early sign.",
+    ],
+    flag: "Thalamus = relay for ALL ascending sensation EXCEPT smell (interthalamic adhesion = massa intermedia). Hypothalamus = autonomic + endocrine + THERMOSTAT. Pineal = melatonin (sleep-wake); corpora arenacea = normal pineal calcification after ~40. Optic chiasma over the pituitary → tumor = visual loss.",
+  },
+  {
+    n: 10, title: "Brainstem & midbrain internals", src: "Maini · L16 / L17",
+    facts: [
+      "Dorsal midbrain = the CORPORA QUADRIGEMINA ('four bodies'): two SUPERIOR colliculi (VISUAL pathway) and two INFERIOR colliculi (AUDITORY pathway). The CEREBRAL AQUEDUCT runs through the midbrain, ringed by PERIAQUEDUCTAL GRAY.",
+      "In cross-section the SUBSTANTIA NIGRA sits ON TOP of the RED NUCLEUS — Maini's 'angry man' picture, substantia nigra = the eyebrows, red nucleus = the eyes. Other midbrain parts: the cerebral peduncles and the INTERPEDUNCULAR FOSSA (where CN III emerges).",
+      "Medulla: the anterior PYRAMIDS carry the CORTICOSPINAL (pyramidal) tract; at the PYRAMIDAL DECUSSATION the fibers CROSS, so a one-sided lesion causes paralysis on the OPPOSITE side. The OLIVE is the lateral bulge; the posterior columns end in NUCLEUS GRACILIS and NUCLEUS CUNEATUS.",
+      "The RETICULAR FORMATION (activating system) is a network of gray & white matter in the medulla and pons that keeps you awake and alert.",
+    ],
+    flag: "Corpora quadrigemina = 2 superior (VISUAL) + 2 inferior (AUDITORY) colliculi. Substantia nigra ON TOP of the red nucleus ('eyebrows over the eyes'). Pyramids = corticospinal tract; decussation → CONTRALATERAL paralysis. Reticular formation (medulla + pons) = arousal / alertness.",
+  },
+  {
+    n: 11, title: "Cranial-nerve attachments (where each nerve exits)", src: "Maini · L17",
+    facts: [
+      "CN I (olfactory) → olfactory bulb & tract on the orbital surface. CN III → the INTERPEDUNCULAR FOSSA of the midbrain. CN IV (trochlear) is UNIQUE — the only nerve emerging from the DORSAL brainstem, just below the inferior colliculus.",
+      "CN V (trigeminal) → the SIDE of the pons (the thickest cranial nerve); its motor root supplies the muscles of MASTICATION plus tensor tympani, tensor veli palatini, mylohyoid, and the anterior belly of digastric. CN VI (abducens) → the middle of the PONTOMEDULLARY sulcus; it supplies the lateral rectus.",
+      "CN VII (facial) & CN VIII (vestibulocochlear) run with the LABYRINTHINE artery through the INTERNAL ACOUSTIC MEATUS.",
+      "CN IX, X & XI ('three close friends') → the POST-olivary sulcus, exiting together through the JUGULAR foramen. CN XII → the PRE-olivary sulcus; it is motor to the tongue.",
+    ],
+    flag: "III = interpeduncular fossa. IV = only DORSAL nerve (below inferior colliculus). V = side of the pons. VI = pontomedullary sulcus. VII + VIII + labyrinthine artery = internal acoustic meatus. IX/X/XI = post-olivary sulcus → jugular foramen. XII = pre-olivary sulcus (tongue).",
+  },
+  {
+    n: 12, title: "Cerebellum — coordination & its signs", src: "Maini · L16",
+    facts: [
+      "A mid-sagittal cut shows the ARBOR VITAE ('tree of life') — the branching tree pattern of white matter within the gray cortex. The surface folds are FOLIA ('leaves').",
+      "The VERMIS is the worm-like (caterpillar) band that connects the two cerebellar hemispheres.",
+      "The cerebellum refines movement by COMPARING the planned movement (a copy from the motor cortex) with the performed movement (feedback via the SPINOCEREBELLAR tract) and correcting the error.",
+      "Cerebellar dysfunction → an INTENTION tremor (worse as you reach a target), finger-to-nose OVERSHOOT (past-pointing), dysarthria, and hypotonia. (Contrast the basal-nuclear RESTING tremor.)",
+    ],
+    flag: "Arbor vitae = branching tree of cerebellar white matter; folia = the folds. Vermis = worm connecting the two hemispheres. Cerebellum COMPARES planned vs performed (spinocerebellar feedback). Cerebellar sign = INTENTION tremor + overshoot (basal nuclei = RESTING tremor).",
+  },
+  {
+    n: 13, title: "Ventricles & CSF flow", src: "Maini · L16 / L17",
+    facts: [
+      "LATERAL ventricles = anterior horn (frontal), posterior horn (occipital), inferior horn (temporal). The 3rd VENTRICLE is the slit between the two thalami; the INTERVENTRICULAR foramen (of Monro) connects each lateral ventricle to it.",
+      "The CEREBRAL AQUEDUCT (through the midbrain) links the 3rd and 4th ventricles. The 4th VENTRICLE (diamond-shaped) has the pons & medulla in front and the cerebellum behind.",
+      "CSF leaves the 4th ventricle into the subarachnoid space through TWO lateral foramina of LUSCHKA and ONE median foramen of MAGENDIE. CSF is SECRETED by the CHOROID PLEXUS and ABSORBED by the ARACHNOID GRANULATIONS into the SUPERIOR SAGITTAL SINUS.",
+      "Full path: lateral ventricles → interventricular foramina → 3rd ventricle → cerebral aqueduct → 4th ventricle → subarachnoid space → arachnoid granulations → superior sagittal sinus. If infection BLOCKS the granulations, CSF is still made but not absorbed → raised intracranial pressure (hydrocephalus).",
+    ],
+    flag: "Lateral (ant=frontal, post=occipital, inf=temporal) → IVF (Monro) → 3rd (between thalami) → aqueduct → 4th → 2 Luschka + 1 Magendie → subarachnoid → arachnoid granulations → superior sagittal sinus. Choroid plexus MAKES it; granulations ABSORB it. Blocked granulations = raised ICP.",
+  },
+  {
+    n: 14, title: "Blood supply & the Circle of Willis", src: "Maini · L17",
+    facts: [
+      "The brain is fed by TWO pairs — the INTERNAL CAROTID arteries (anterior circulation) and the VERTEBRAL arteries (posterior). It is ~2% of body weight but takes ~15% of cardiac output. The ICA has 4 parts: cervical, petrous, cavernous, cerebral.",
+      "The ICA ends as the ANTERIOR CEREBRAL artery (ACA — medial surface of frontal & parietal lobes) and the MIDDLE CEREBRAL artery (MCA — insula + lateral surface of frontal/parietal/temporal lobes and the posterior internal capsule). The MCA is the artery MOST often obstructed in stroke.",
+      "The two VERTEBRAL arteries (each from the subclavian) unite to form the BASILAR artery, which ends as the two POSTERIOR CEREBRAL arteries (supplying the occipital lobe). The LABYRINTHINE artery reaches the inner ear via the internal acoustic meatus.",
+      "The CIRCLE OF WILLIS = posterior cerebral, posterior communicating, internal carotid, anterior cerebral, and anterior communicating arteries, encircling the optic chiasma, infundibulum & mammillary bodies. Its purpose is COLLATERAL flow — an alternate route if one feeding artery is blocked.",
+    ],
+    flag: "Supply = internal carotid (anterior) + vertebral (posterior). Brain = 2% weight / 15% output. ICA → ACA (medial) + MCA (lateral, commonest stroke). 2 vertebrals → basilar → 2 PCAs (occipital). Circle of Willis = PCA · P-comm · ICA · ACA · A-comm = collateral / alternate supply.",
+  },
+  {
+    n: 15, title: "Hemorrhages, venous drainage & development", src: "Maini · L17",
+    facts: [
+      "EPIDURAL (extradural) hematoma — an ARTERIAL bleed from the torn MIDDLE MENINGEAL artery, classically after a blow to the PTERION; it develops FAST. SUBDURAL — a VENOUS bleed from BRIDGING veins, common in the ELDERLY (from brain atrophy), developing SLOWLY over days to weeks. SUBARACHNOID — mostly ARTERIAL, usually a ruptured ANEURYSM; it can block arachnoid granulations and raise ICP.",
+      "Venous drainage: dural sinuses → the SIGMOID sinus → becomes the INTERNAL JUGULAR VEIN, exiting through the jugular foramen. Cerebral veins are VALVELESS because venous pressure in the head is very low (even negative above the heart).",
+      "A rupture of the ICA within the CAVERNOUS sinus can produce PULSATILE EXOPHTHALMOS.",
+      "Development: the entire CNS forms from the NEURAL TUBE (ECTODERM). Forebrain → telencephalon (cerebral hemispheres) + diencephalon (thalami, hypothalamus, infundibulum, pineal, mammillary bodies). Hindbrain → metencephalon (pons + cerebellum) + myelencephalon (medulla).",
+    ],
+    flag: "Epidural = ARTERIAL (middle meningeal, pterion, FAST). Subdural = VENOUS (bridging veins, elderly, SLOW). Subarachnoid = ARTERIAL aneurysm rupture. Sigmoid sinus → internal jugular (jugular foramen); cerebral veins valveless. Neural tube from ECTODERM; telencephalon → hemispheres, metencephalon → pons + cerebellum.",
+  },
+];
+
+/* ============================================== WHAT TO STUDY (FLAGS) ===== */
+const flags = [
+  { tag: "★★ Heavy", text: "The CONTRALATERAL rule: the corticospinal (pyramidal) tract funnels through the INTERNAL CAPSULE, then CROSSES at the pyramidal decussation in the medulla. So a lesion on one side (internal capsule or pyramid) causes paralysis on the OPPOSITE side.", why: "Maini hits this twice — the internal capsule as the classic stroke site and the pyramidal decussation. 'Left brain, right body.'", src: "Maini · L16 / L17" },
+  { tag: "★★ Heavy", text: "The whole CSF pathway in order: lateral ventricles → interventricular foramina → 3rd ventricle → cerebral aqueduct → 4th ventricle → (2 Luschka + 1 Magendie) → subarachnoid space → arachnoid granulations → superior sagittal sinus. Choroid plexus SECRETES; granulations ABSORB.", why: "She dictated the flowchart and the exits, then linked a blocked granulation to hydrocephalus / raised ICP.", src: "Maini · L17" },
+  { tag: "★★ Heavy", text: "Circle of Willis = posterior cerebral, posterior communicating, internal carotid, anterior cerebral, anterior communicating — encircling the optic chiasma, infundibulum & mammillary bodies. Purpose = COLLATERAL (alternate) blood supply.", why: "Expect a 'which arteries complete the circle' item and a 'what is its purpose' item.", src: "Maini · L17" },
+  { tag: "Diencephalon", text: "The THALAMUS relays ALL ascending sensations to the cortex — with ONE exception: SMELL bypasses it. The hypothalamus is the THERMOSTAT / autonomic & endocrine controller; the pineal makes MELATONIN.", why: "The 'which sense skips the thalamus' trap and the hypothalamus-function item are near-certain.", src: "Maini · L16 / L17" },
+  { tag: "Basal nuclei", text: "Say BASAL NUCLEI, not basal ganglia. The three are CAUDATE + PUTAMEN + GLOBUS PALLIDUS; putamen + globus pallidus = lentiform; all three = corpus striatum. Dysfunction = Parkinsonism + a RESTING tremor.", why: "Maini corrects the terminology out loud and contrasts the resting (basal) tremor with the cerebellar intention tremor.", src: "Maini · L16" },
+  { tag: "Speech", text: "BROCA (frontal, MOTOR/expressive, 'short of words,' comprehension intact) vs WERNICKE (posterior temporal, SENSORY, fluent 'word salad,' no comprehension).", why: "The two aphasias are a favorite compare-and-contrast — nail the lobe, the type, and the clinical picture of each.", src: "Maini · L16" },
+  { tag: "Cranial nerves", text: "Attachment landmarks: III = interpeduncular fossa · IV = only DORSAL nerve (below inferior colliculus) · V = side of pons · VI = pontomedullary sulcus · VII+VIII = internal acoustic meatus (with the labyrinthine artery) · IX/X/XI = post-olivary sulcus → jugular foramen · XII = pre-olivary sulcus.", why: "Maini walks each nerve to its exact exit; the trochlear 'only dorsal nerve' and the IX/X/XI jugular-foramen grouping are classic.", src: "Maini · L17" },
+  { tag: "Cortex map", text: "Functional areas: MOTOR = frontal · SENSORY = parietal · VISUAL = occipital · AUDITORY (+ smell) = temporal · TASTE = insula. Motor = 2-neuron pathway; sensory = 4-neuron (ganglion → medulla → thalamus → cortex).", why: "These are her literal Mentimeter answers — free points if memorized.", src: "Maini · L16 / L17" },
+  { tag: "Hemorrhages", text: "EPIDURAL = arterial (middle meningeal artery, pterion, fast). SUBDURAL = venous (bridging veins, elderly, slow). SUBARACHNOID = arterial aneurysm rupture (can block granulations → raised ICP).", why: "The three-way hemorrhage compare (vessel type, cause, tempo) is high-yield clinical content she spends time on.", src: "Maini · L17" },
+  { tag: "Midbrain", text: "Colliculi: SUPERIOR = visual, INFERIOR = auditory. Substantia nigra sits ON TOP of the red nucleus ('eyebrows over the eyes'). The cerebral aqueduct runs through the midbrain.", why: "She tests the colliculi pairing and uses the 'man with the eyes and eyebrows' image to lock the midbrain cross-section.", src: "Maini · L16 / L17" },
+];
+
+/* ===================================================== PROF'S TIPS ======== */
+/* Only analogies/phrasings Maini ACTUALLY uses in Lectures 16 & 17. */
+const tips = [
+  { kind: "Rule", title: "Basal NUCLEI, not 'basal ganglia'", text: "Maini corrects the class: inside the CNS these gray islands are NUCLEI. A GANGLION, by definition, is a group of cell bodies OUTSIDE the central nervous system — so 'basal ganglia' is technically the wrong word.", helps: "Locks in both the correct term and the nucleus-vs-ganglion definition she tests.", src: "Maini · L16" },
+  { kind: "Analogy", title: "The midbrain 'man' — eyes & eyebrows", text: "In her midbrain cross-section, Maini draws a face: the SUBSTANTIA NIGRA is the eyebrows and the RED NUCLEUS is the eyes underneath. 'Do you remember that man with the eyes and eyebrows?'", helps: "Fixes that the substantia nigra sits ON TOP of the red nucleus.", src: "Maini · L16" },
+  { kind: "Analogy", title: "Thalamus = the relay center", text: "Maini calls the thalamus a RELAY CENTER (relay station) for all your ascending sensations on their way to the cortex — everything checks in there before going up.", helps: "Anchors the thalamus's one job — and reminds you SMELL is the exception that skips it.", src: "Maini · L16" },
+  { kind: "Analogy", title: "Hypothalamus = the thermostat", text: "'Hypothalamus is your thermostat.' She also calls it a MASTER controller — it runs the autonomic nervous system and, through the pituitary, the endocrine system.", helps: "One word ('thermostat') triggers the whole hypothalamus-function answer.", src: "Maini · L17" },
+  { kind: "Analogy", title: "Arbor vitae = the tree of life", text: "The branching gray-and-white pattern in a sagittal cerebellum is the ARBOR VITAE — Maini says it's 'like a branching tree.'", helps: "Names the cerebellar interior on sight; pair it with 'folia' (leaves) for the folds.", src: "Maini · L16" },
+  { kind: "Analogy", title: "Vermis = the worm / caterpillar", text: "The band joining the two cerebellar hemispheres 'looks like a caterpillar, or a worm' — which is exactly what VERMIS means.", helps: "The word literally is the picture: vermis = worm connecting the hemispheres.", src: "Maini · L16" },
+  { kind: "Terminology", title: "Wernicke's = 'word salad'", text: "For fluent-but-meaningless speech Maini uses the class term 'word salad' — they speak too much and none of it makes sense.", helps: "The phrase instantly separates Wernicke's (fluent nonsense) from Broca's (short of words).", src: "Maini · L16" },
+  { kind: "Analogy", title: "The skull = a hard, solid cake", text: "The brain sits inside a non-collapsible, non-expandable chamber — 'your skull is like a hard, solid cake.' So if blood, fluid, or a tumor grows, the pressure inside must rise.", helps: "Explains WHY a blocked granulation or a bleed raises intracranial pressure.", src: "Maini · L17" },
+  { kind: "Rule", title: "Circle of Willis = the safety detour", text: "Maini frames the circle as an ALTERNATE ROUTE: if one feeding artery is blocked, the anastomotic ring reroutes blood to the threatened region.", helps: "Turns 'what is the purpose of the Circle of Willis?' into one word — collateral.", src: "Maini · L17" },
+];
+
+/* =============================================================== DRILL ===== */
+/* Items drawn from the module's AUDITED Everything-MC bank (anti-fab verified),
+   re-tagged to Maini's lectures. Option positions rebalanced 15/15/15/15
+   across A/B/C/D so answer position carries no signal. */
+const questions = [
+  { id: 1, topic: "Overview", src: "Maini · L16", q: "A brain is lifted intact out of the skull. Which single part covers and masks essentially all the underlying structures except the brainstem?", opts: ["Cerebrum","Cerebellum","Diencephalon","Brainstem"], a: 0, h1: "Largest, executive, seat of higher functions.", h2: "Cerebrum is the largest, masking part", exp: "Maini stresses the cerebrum is the largest part and is so large it masks all underlying structures except the brainstem. [Maini] 'Cerebrum is so large that it covers almost all the parts of the brain except for brain stem.'" },
+  { id: 2, topic: "Overview", src: "Maini · L16", q: "Maini calls the cerebellum the 'small brain.' What is its remarkable chief function?", opts: ["Relay of ascending sensation","Coordination of movements","Seat of judgment and personality","Secretion of cerebrospinal fluid"], a: 1, h1: "It refines the plan the motor cortex lays down.", h2: "Cerebellum coordinates movement", exp: "The cerebellum is the seat of coordination - it fine-tunes and balances the movements planned by the motor cortex. [Maini] 'Cerebellum ... is the seat of coordination of your movements.'" },
+  { id: 3, topic: "Overview", src: "Maini · L16", q: "According to Maini, the brainstem is composed of which three parts, listed from superior to inferior?", opts: ["Pons, midbrain, medulla oblongata","Midbrain, medulla oblongata, pons","Midbrain, pons, medulla oblongata","Diencephalon, pons, medulla oblongata"], a: 2, h1: "Top to bottom, medulla meets the cord.", h2: "Brainstem order: midbrain > pons > medulla", exp: "Maini gives the order midbrain, then pons, then medulla oblongata (continuous with the spinal cord)." },
+  { id: 4, topic: "Cortex & basal nuclei", src: "Maini · L16", q: "In the cerebrum, where are the neuronal cell bodies (gray matter) concentrated, and what fills the interior?", opts: ["White matter in the cortex; gray matter inside","Gray matter throughout, no white matter","White matter throughout, no gray matter","Gray matter in the peripheral cortex; white matter (myelinated fibers) inside"], a: 3, h1: "Myelin makes the inside look white.", h2: "Cortex = gray; interior = white", exp: "Cell bodies sit peripherally in the cerebral cortex; the interior is white matter - myelinated fibers that look white." },
+  { id: 5, topic: "Cortex & basal nuclei", src: "Maini · L16", q: "Maini insists on the correct term for the islands of gray matter buried inside the cerebral white matter. Which term does she say is correct?", opts: ["Basal nuclei","Basal ganglia","Basal cortex","Basal commissures"], a: 0, h1: "A ganglion is a group of cell bodies OUTSIDE the CNS.", h2: "Basal nuclei (not ganglia) is correct", exp: "Maini says 'basal nuclei' is the right term; 'basal ganglia' is technically wrong because a ganglion lies outside the CNS. [Maini] 'Nuclei is the best terminology, basal ganglia is not the right terminology.'" },
+  { id: 6, topic: "Cortex & basal nuclei", src: "Maini · L16", q: "Which three structures does Maini name as the basal nuclei of the cerebrum?", opts: ["Thalamus, hypothalamus, and pineal gland","Caudate nucleus, putamen, and globus pallidus","Caudate nucleus, thalamus, and claustrum","Putamen, red nucleus, and substantia nigra"], a: 1, h1: "Two of these together form the lentiform nucleus.", h2: "Caudate + putamen + globus pallidus", exp: "Maini lists caudate nucleus, putamen, and globus pallidus (putamen + globus pallidus = lentiform; all three = corpus striatum)." },
+  { id: 7, topic: "Cortex & basal nuclei", src: "Maini · L16", q: "Maini defines the lentiform nucleus as the combination of which two structures?", opts: ["Caudate nucleus and putamen","Caudate nucleus and globus pallidus","Putamen and globus pallidus","Claustrum and putamen"], a: 2, h1: "Lens-shaped pair; add caudate for the striatum.", h2: "Lentiform = putamen + globus pallidus", exp: "Putamen + globus pallidus = lentiform nucleus; adding the caudate makes the corpus striatum." },
+  { id: 8, topic: "Cortex & basal nuclei", src: "Maini · L16", q: "How does Maini distinguish a sulcus (fissure) from a gyrus?", opts: ["A sulcus is a ridge; a gyrus is a groove","Both are grooves of different depth only","A sulcus is gray matter; a gyrus is white matter","A sulcus/fissure is a groove; a gyrus is a raised ridge"], a: 3, h1: "Valleys versus hills on the cortex.", h2: "Sulcus = groove, gyrus = ridge", exp: "Sulci/fissures are grooves; gyri are the raised ridges. (A groove deeper than ~1 inch is often called a fissure.)" },
+  { id: 9, topic: "Lobes & areas", src: "Maini · L16", q: "Maini says each cerebral hemisphere is divided into how many lobes, and which lobe is the hidden deep one?", opts: ["Five lobes; the insula is the deep 5th lobe","Four lobes; there is no deep lobe","Six lobes; the limbic lobe is deepest","Five lobes; the cingulate is the deep 5th"], a: 0, h1: "Retract the lateral fissure to find the hidden one.", h2: "5 lobes; insula is the deep 5th", exp: "Four lobes are on the surface (frontal, parietal, temporal, occipital); the 5th, the insula, lies deep to the lateral fissure." },
+  { id: 10, topic: "Lobes & areas", src: "Maini · L16", q: "The lateral sulcus (lateral fissure) forms the boundary between which lobes?", opts: ["Frontal from parietal lobe","Temporal lobe (inferiorly) from the frontal and parietal lobes (superiorly)","Occipital from parietal lobe","Temporal from occipital lobe"], a: 1, h1: "The insula hides deep to it.", h2: "Lateral sulcus: temporal below, frontal/parietal above", exp: "The lateral sulcus demarcates the temporal lobe below from the frontal and parietal lobes above." },
+  { id: 11, topic: "Lobes & areas", src: "Maini · L16", q: "Because there is no deep sulcus on the lateral surface, how does Maini say you demarcate the occipital lobe?", opts: ["Follow the central sulcus posteriorly","Follow the calcarine sulcus around the pole","Draw a hypothetical line from the preoccipital notch to the superior end of the parieto-occipital sulcus","Draw a line along the lateral sulcus"], a: 2, h1: "Two landmarks, one imaginary line.", h2: "Occipital line: preoccipital notch to parieto-occipital sulcus", exp: "She joins two landmarks - the preoccipital notch (inferior border) and the superior end of the parieto-occipital sulcus - to mark off the occipital lobe." },
+  { id: 12, topic: "Lobes & areas", src: "Maini · L17", q: "On her Mentimeter, Maini asks in which lobe the primary motor cortex is located. What is the answer?", opts: ["Parietal lobe","Temporal lobe","Occipital lobe","Frontal lobe"], a: 3, h1: "Precentral gyrus lives here.", h2: "Primary motor cortex = frontal lobe", exp: "The primary motor cortex (precentral gyrus) is in the frontal lobe." },
+  { id: 13, topic: "Lobes & areas", src: "Maini · L17", q: "Maini's Mentimeter asks in which lobe the primary sensory (somesthetic) cortex is located. What is the answer?", opts: ["Parietal lobe","Frontal lobe","Temporal lobe","Occipital lobe"], a: 0, h1: "Postcentral gyrus - 'somesthetic' is the other name.", h2: "Primary sensory cortex = parietal lobe", exp: "The primary somatosensory cortex (postcentral gyrus) is in the parietal lobe." },
+  { id: 14, topic: "Lobes & areas", src: "Maini · L17", q: "In which lobe is the primary visual cortex located?", opts: ["Parietal lobe","Occipital lobe","Temporal lobe","Frontal lobe"], a: 1, h1: "Back of the brain, near the calcarine sulcus.", h2: "Primary visual cortex = occipital lobe", exp: "The occipital lobe houses the primary visual cortex." },
+  { id: 15, topic: "Lobes & areas", src: "Maini · L17", q: "The primary auditory cortex - and the primary olfactory cortex - are located in which lobe?", opts: ["Parietal lobe","Occipital lobe","Temporal lobe","Insula"], a: 2, h1: "Hearing and smell both land here.", h2: "Auditory (and olfactory) cortex = temporal lobe", exp: "Maini places the primary auditory cortex in the temporal lobe, and notes the sense of smell also ends in the temporal lobe." },
+  { id: 16, topic: "Lobes & areas", src: "Maini · L17", q: "Maini's Mentimeter asks where the primary gustatory (taste) cortex is located. What is the answer?", opts: ["Temporal lobe","Parietal lobe","Frontal lobe","Insula"], a: 3, h1: "Hidden lobe under the lateral fissure.", h2: "Gustatory cortex = insula", exp: "The insula (the deep 5th lobe) is the seat of the primary gustatory cortex." },
+  { id: 17, topic: "Lobes & areas", src: "Maini · L16", q: "Maini says the prefrontal cortex is the area for reasoning and judgment. What does she note about its development?", opts: ["It is not developed until about 16-17 years and keeps developing until about 25 years","It is fully developed at birth","It stops developing at age 10","It never fully develops in anyone"], a: 0, h1: "Why teenagers lack full judgment.", h2: "Prefrontal (reasoning/judgment) matures ~25", exp: "She explains the prefrontal area (reasoning/judgment) matures late - beginning ~16-17 and continuing to ~25 years." },
+  { id: 18, topic: "Motor/sensory cortex", src: "Maini · L16", q: "The precentral gyrus, lying immediately anterior to the central sulcus, corresponds to which functional cortex?", opts: ["Primary sensory cortex","Primary motor cortex","Primary visual cortex","Broca's motor speech area"], a: 1, h1: "'Pre' = in front of the central sulcus.", h2: "Precentral gyrus = primary motor cortex", exp: "The precentral gyrus is the primary motor cortex - every skeletal muscle takes command from a neuron here." },
+  { id: 19, topic: "Motor/sensory cortex", src: "Maini · L16", q: "The postcentral gyrus, immediately posterior to the central sulcus, is which functional cortex?", opts: ["Primary motor cortex","Primary auditory cortex","Primary sensory (somesthetic) cortex","Prefrontal association cortex"], a: 2, h1: "'Post' = behind the central sulcus; somesthetic.", h2: "Postcentral gyrus = primary sensory cortex", exp: "The postcentral gyrus is the primary somatosensory (somesthetic) area for general sensations." },
+  { id: 20, topic: "Motor/sensory cortex", src: "Maini · L16", q: "Maini describes the motor system as a two-neuron pathway. Where are the two neurons located for a limb muscle?", opts: ["Both neurons in the precentral gyrus","First in the thalamus; second in the cortex","First in the posterior horn; second in the cortex","Upper motor neuron in the precentral gyrus; lower (alpha) motor neuron in the anterior/ventral horn of the spinal cord"], a: 3, h1: "Anterior/ventral horn is motor.", h2: "Motor = 2 neurons (cortex to anterior horn)", exp: "The first (upper) motor neuron sits in the primary motor cortex; the corticospinal tract descends to the second (lower/alpha) motor neuron in the anterior horn." },
+  { id: 21, topic: "Motor/sensory cortex", src: "Maini · L17", q: "Per Maini's Lecture 17, the sensory pathway is a four-neuron pathway. Where are the four neurons located, in order?", opts: ["Ganglion (dorsal root), medulla, thalamus, postcentral gyrus","Cortex, midbrain, pons, spinal cord","Thalamus, medulla, ganglion, cortex","Ganglion, thalamus, medulla, cortex"], a: 0, h1: "Thalamus is the 3rd relay before cortex.", h2: "Sensory = 4 neurons (ganglion>medulla>thalamus>cortex)", exp: "Maini lists first neuron in the ganglion, second in the medulla, third in the thalamus, fourth in the postcentral gyrus." },
+  { id: 22, topic: "Motor/sensory cortex", src: "Maini · L16", q: "On the motor and sensory homunculus, which body regions receive the largest cortical representation?", opts: ["The back and trunk muscles","Regions needing fine coordination or with dense receptors (face, hands, tongue)","The proximal limb muscles only","All body parts equally"], a: 1, h1: "Think huge hands and face, tiny back.", h2: "Homunculus favors fine-control / dense-receptor areas", exp: "Maini says muscles needing fine coordination (and skin with dense receptors) - face, hands, tongue - get the largest representation; large uncoordinated muscles like the back get little." },
+  { id: 23, topic: "Gyri", src: "Maini · L16", q: "Maini divides the inferior frontal gyrus into three named parts. Which three?", opts: ["Pars superior, pars media, pars inferior","Pars centralis, pars lateralis, pars medialis","Pars orbitalis, pars triangularis, and pars opercularis","Superior, middle, and inferior frontal gyri"], a: 2, h1: "Broca's area sits in the triangular and opercular parts.", h2: "IFG parts: orbitalis, triangularis, opercularis", exp: "The inferior frontal gyrus has three parts: pars orbitalis, pars triangularis, and pars opercularis ('pars' = part)." },
+  { id: 24, topic: "Speech areas", src: "Maini · L16", q: "Where is Broca's area located, and what is its function?", opts: ["Posterior temporal lobe; sensory speech area","Occipital lobe; visual word area","Parietal lobe; general sensory area","Frontal lobe; it is the motor (expressive) speech area"], a: 3, h1: "Motor = making the words come out.", h2: "Broca's = frontal, motor (expressive) speech", exp: "Broca's area lies in the frontal lobe and is the motor speech area - it finds the appropriate words to express." },
+  { id: 25, topic: "Speech areas", src: "Maini · L16", q: "Where is Wernicke's area located, and what is its function?", opts: ["Posterior temporal lobe; it is the sensory speech area for comprehension","Frontal lobe; motor speech area","Insula; gustatory speech area","Occipital lobe; visual speech output"], a: 0, h1: "Sensory = understanding the words.", h2: "Wernicke's = posterior temporal, comprehension", exp: "Wernicke's area sits posteriorly in the temporal lobe and is the sensory speech area - it lets you comprehend spoken or read language." },
+  { id: 26, topic: "Speech areas", src: "Maini · L16", q: "A patient understands everything said to them but is short of words and cannot produce fluent speech. Which lesion does Maini describe?", opts: ["Wernicke's aphasia (sensory aphasia)","Broca's aphasia (motor aphasia)","Cerebellar dysarthria","Global aphasia"], a: 1, h1: "Non-fluent but understands you.", h2: "Broca's aphasia: short of words, comprehension intact", exp: "In Broca's (motor) aphasia the patient comprehends but is short of words - non-fluent, effortful speech." },
+  { id: 27, topic: "Speech areas", src: "Maini · L16", q: "A patient speaks fluently but in meaningless 'word salad' and cannot comprehend what is said to them. Which lesion is this?", opts: ["Broca's aphasia (motor aphasia)","Cerebellar dysarthria","Wernicke's aphasia (sensory aphasia)","Conduction aphasia"], a: 2, h1: "Talks a lot, none of it makes sense.", h2: "Wernicke's aphasia: fluent word salad, no comprehension", exp: "Wernicke's (sensory) aphasia gives fluent but senseless 'word salad' with poor comprehension." },
+  { id: 28, topic: "Capsules", src: "Maini · L17", q: "Maini's Mentimeter asks: the internal capsule is located between which two structures?", opts: ["The putamen and the claustrum","The claustrum and the insular gray matter","The two cerebral hemispheres","The caudate nucleus and the globus pallidus (medially, next to the thalamus)"], a: 3, h1: "The corticospinal tract funnels through it.", h2: "Internal capsule: caudate/globus pallidus (L-shaped)", exp: "The L-shaped internal capsule lies between the caudate nucleus/globus pallidus and the thalamus." },
+  { id: 29, topic: "Capsules", src: "Maini · L16", q: "Maini calls the internal capsule clinically very important. Which tract passes through it, and what results from a lesion there?", opts: ["The corticospinal (motor) tract passes through; a lesion causes contralateral paralysis","The optic tract passes through; a lesion causes blindness","The spinothalamic tract passes through; a lesion causes deafness","No important tract passes through; lesions are silent"], a: 0, h1: "A very common cause of stroke paralysis.", h2: "Corticospinal tract through internal capsule; lesion = contralateral paralysis", exp: "The corticospinal tract funnels through the internal capsule; ischemia there (a common stroke site) causes paralysis on the opposite side, since fibers cross in the medulla." },
+  { id: 30, topic: "Capsules", src: "Maini · L16", q: "Maini teaches that a resting tremor is the hallmark of dysfunction in which structures?", opts: ["The cerebellum","The basal nuclei","The thalamus","The primary motor cortex"], a: 1, h1: "Contrast with the cerebellar intention tremor.", h2: "Resting tremor = basal-nuclear dysfunction", exp: "A resting tremor points to basal-nuclear dysfunction; an intention tremor points to the cerebellum." },
+  { id: 31, topic: "Medial surface & limbic", src: "Maini · L16", q: "Maini says the fornix is a part of which system?", opts: ["The visual pathway","The corticospinal (motor) pathway","The limbic system","The ventricular system"], a: 2, h1: "Emotion and memory circuitry.", h2: "Fornix = limbic system", exp: "The fornix is a component of the limbic system (limbic cortex)." },
+  { id: 32, topic: "Medial surface & limbic", src: "Maini · L16", q: "On the inferior surface, which four structures does Maini group together as the limbic cortex/system?", opts: ["Cuneus, precuneus, lingual gyrus, and straight gyrus","Precentral, postcentral, supramarginal, and angular gyri","Superior, middle, and inferior temporal gyri plus insula","Uncus, parahippocampal gyrus, isthmus, and cingulate gyrus"], a: 3, h1: "Reward, punishment, aggression, pleasure.", h2: "Limbic: uncus, parahippocampal, isthmus, cingulate", exp: "She lists uncus, parahippocampal gyrus, the isthmus, and the cingulate gyrus as the limbic cortex - dealing with reward/punishment, aggression, pleasure, emotion, and memory." },
+  { id: 33, topic: "Diencephalon", src: "Maini · L16", q: "What is the chief function of the thalamus, per Maini?", opts: ["It is the relay center for essentially all ascending sensations on their way to the cortex","It coordinates skilled movement","It secretes melatonin","It regulates body temperature"], a: 0, h1: "The layover before the cortex.", h2: "Thalamus = sensory relay center", exp: "The thalamus is the great sensory relay for almost every sensation ascending to the cortex. [Maini] 'Thalamus is a relay center for all your sensations, which are ascending.'" },
+  { id: 34, topic: "Diencephalon", src: "Maini · L16", q: "Which single sensation does Maini say bypasses the thalamus entirely?", opts: ["Vision","Smell (olfaction)","Hearing","Taste"], a: 1, h1: "The nose has a direct line to the cortex.", h2: "Only smell bypasses the thalamus", exp: "All special and general sensations relay through the thalamus except olfaction - smell bypasses it." },
+  { id: 35, topic: "Diencephalon", src: "Maini · L17", q: "Which of the following is a function Maini attributes to the hypothalamus?", opts: ["Coordination of skilled voluntary movement","Relay of ascending general sensation","Body temperature regulation (the body's thermostat)","Comprehension of spoken language"], a: 2, h1: "Thirst, hunger, temperature, hormones, sleep-wake.", h2: "Hypothalamus = autonomic/endocrine/thermostat", exp: "The hypothalamus is the thermostat and also controls thirst, hunger, endocrine output, the sleep-wake cycle, and the autonomic nervous system." },
+  { id: 36, topic: "Diencephalon", src: "Maini · L16", q: "The pineal gland secretes which hormone, and what does it regulate?", opts: ["Cortisol, which regulates stress","Thyroxine, which regulates metabolism","Oxytocin, which regulates labor","Melatonin, which regulates the sleep-wakefulness cycle"], a: 3, h1: "The 'sleep hormone'.", h2: "Pineal secretes melatonin (sleep-wake)", exp: "Maini identifies melatonin - the 'sleep hormone' - secreted by the pineal gland to regulate the sleep-wake cycle." },
+  { id: 37, topic: "Diencephalon", src: "Maini · L16", q: "Maini stresses the close proximity of the optic chiasma to the pituitary gland. What is the optic chiasma, and why is the relationship clinically important?", opts: ["It is the crossing point of the two optic nerves; a pituitary adenoma can compress it and cause visual disturbance (bitemporal hemianopsia)","It is the crossing of the trochlear nerves; a lesion causes deafness","It is the pituitary stalk; damage causes diabetes insipidus","It is a venous sinus; thrombosis causes headache only"], a: 0, h1: "Tumor from below squeezes the crossing fibers.", h2: "Optic chiasma crossing; pituitary tumor compresses it", exp: "The optic chiasma is where the optic nerves cross; an enlarging pituitary adenoma compresses it, so visual loss is often an early sign." },
+  { id: 38, topic: "Brainstem & midbrain", src: "Maini · L16", q: "The posterior part of the midbrain shows four bulges. What is this region called, and what are the four bulges?", opts: ["Cerebral peduncles - two crura on each side","Corpora quadrigemina - two superior and two inferior colliculi","Mammillary bodies - two paired nuclei","Pyramids - two anterior columns"], a: 1, h1: "'Quadri' = four bodies on the back of the midbrain.", h2: "Corpora quadrigemina = 2 superior + 2 inferior colliculi", exp: "Corpora quadrigemina ('four bodies') are the two superior and two inferior colliculi of the dorsal midbrain." },
+  { id: 39, topic: "Brainstem & midbrain", src: "Maini · L17", q: "Maini assigns the superior and inferior colliculi to which pathways?", opts: ["Superior = auditory; inferior = visual","Superior = motor; inferior = sensory","Superior colliculi = visual pathway; inferior colliculi = auditory pathway","Superior = olfactory; inferior = gustatory"], a: 2, h1: "See with the top, hear with the bottom.", h2: "Superior colliculi visual; inferior colliculi auditory", exp: "The superior colliculi are part of the visual pathway; the inferior colliculi are an important part of the auditory pathway." },
+  { id: 40, topic: "Brainstem & midbrain", src: "Maini · L16", q: "In Maini's midbrain cross-section, what is the position of the substantia nigra relative to the red nucleus?", opts: ["It lies inferior to the medulla","It surrounds the cerebral aqueduct","It replaces the red nucleus","It lies on top of the red nucleus (like the 'eyebrows' above the 'eyes')"], a: 3, h1: "Eyebrows over the eyes.", h2: "Substantia nigra sits atop the red nucleus", exp: "In her 'angry man' picture, substantia nigra sits atop the red nucleus - eyebrows above the eyes." },
+  { id: 41, topic: "Brainstem & midbrain", src: "Maini · L17", q: "What is the clinical significance of the pyramidal decussation in the lower medulla?", opts: ["The corticospinal fibers cross to the opposite side, so a lesion on one side causes paralysis on the other","The optic nerves cross, causing bitemporal hemianopsia","The sensory fibers of smell cross to relay in the thalamus","The two cerebellar hemispheres exchange fibers"], a: 0, h1: "Left brain, right body.", h2: "Pyramidal decussation: corticospinal crosses > contralateral paralysis", exp: "At the pyramidal decussation the corticospinal tract switches sides; hence a left-sided lesion causes right-sided paralysis." },
+  { id: 42, topic: "Brainstem & midbrain", src: "Maini · L17", q: "Maini describes the reticular formation (reticular activating system). Where is it, and what does it do?", opts: ["A cortical band that comprehends speech","A network of gray and white matter in the medulla and pons that keeps you awake and alert","A cerebellar network that coordinates movement","A thalamic nucleus that relays vision"], a: 1, h1: "It wakes you when the alarm rings.", h2: "Reticular formation (medulla+pons) = arousal/alertness", exp: "The reticular formation/activating system lies in the medulla and pons; sensory input through it keeps the brain alert and awake." },
+  { id: 43, topic: "Cranial nerves", src: "Maini · L17", q: "What makes the trochlear nerve (CN IV) unique among the cranial nerves in its site of emergence?", opts: ["It is the only nerve emerging from the pons","It is the only purely sensory cranial nerve","It is the only cranial nerve that emerges from the dorsal (posterior) aspect of the brainstem, just below the inferior colliculus","It is the only nerve exiting the jugular foramen"], a: 2, h1: "Trochlear sneaks around from the back.", h2: "CN IV: only nerve from the dorsal brainstem", exp: "CN IV is the sole cranial nerve arising dorsally, emerging from the midbrain below the inferior colliculus and then curving anteriorly." },
+  { id: 44, topic: "Cranial nerves", src: "Maini · L17", q: "The trigeminal nerve (CN V) is seen as a very thick nerve emerging from which part of the brainstem?", opts: ["The interpeduncular fossa","The middle of the pontomedullary sulcus","The post-olivary sulcus","The side of the pons"], a: 3, h1: "Thickest cranial nerve, off the pons.", h2: "CN V emerges from the side of the pons", exp: "Maini shows the thick trigeminal nerve coming out of the lateral aspect of the pons." },
+  { id: 45, topic: "Cranial nerves", src: "Maini · L17", q: "Maini calls CN IX, X, and XI 'three close friends.' From which sulcus do they emerge, and through which foramen do they exit the skull?", opts: ["They emerge from the post-olivary sulcus and exit through the jugular foramen","From the pre-olivary sulcus; through the hypoglossal canal","From the interpeduncular fossa; through the superior orbital fissure","From the side of the pons; through the internal acoustic meatus"], a: 0, h1: "Three friends leaving by the same door.", h2: "CN IX/X/XI: post-olivary sulcus, jugular foramen", exp: "The glossopharyngeal, vagus, and accessory nerves emerge from the post-olivary sulcus and leave together via the jugular foramen." },
+  { id: 46, topic: "Cranial nerves", src: "Maini · L17", q: "Which three structures pass together through the internal acoustic meatus, per Maini?", opts: ["Optic nerve, ophthalmic artery, and CN III","Facial nerve (VII), vestibulocochlear nerve (VIII), and the labyrinthine artery","CN IX, X, XI and the internal jugular vein","CN V, the middle meningeal artery, and CN VI"], a: 1, h1: "Two nerves and one small artery to the ear.", h2: "IAM: CN VII, CN VIII, labyrinthine artery", exp: "The internal acoustic meatus transmits CN VII, CN VIII, and the labyrinthine artery." },
+  { id: 47, topic: "Cerebellum", src: "Maini · L16", q: "What does Maini call the branching tree-like arrangement of gray and white matter seen in a sagittal section of the cerebellum?", opts: ["Corpus striatum","Corpora quadrigemina","Arbor vitae","Falx cerebelli"], a: 2, h1: "Latin for 'tree of life'.", h2: "Arbor vitae = cerebellar branching tree pattern", exp: "The arbor vitae ('tree of life') is the branching pattern of cerebellar white matter within the gray cortex." },
+  { id: 48, topic: "Cerebellum", src: "Maini · L16", q: "What is the vermis of the cerebellum?", opts: ["The C-shaped band connecting the two cerebral hemispheres","The gray matter tuft that secretes CSF","The stalk attaching the cerebellum to the brainstem","A worm-like band of tissue connecting the two cerebellar hemispheres"], a: 3, h1: "'Vermis' = worm.", h2: "Vermis connects the cerebellar hemispheres", exp: "Maini describes the vermis as the caterpillar/worm-shaped band that connects the two cerebellar hemispheres." },
+  { id: 49, topic: "Cerebellum", src: "Maini · L16", q: "How does Maini say the cerebellum refines a movement over time?", opts: ["It compares the planned movement (a copy from the motor cortex) with the performed movement (feedback via the spinocerebellar tract) and corrects it","It sends the only motor command directly to muscles","It relays all sensation to the cortex","It secretes hormones that improve muscle tone"], a: 0, h1: "A copy of the plan plus feedback from the periphery.", h2: "Cerebellum compares planned vs performed (spinocerebellar feedback)", exp: "The cerebellum receives a copy of the motor plan and peripheral feedback through the spinocerebellar tract, compares them, and makes each movement more precise." },
+  { id: 50, topic: "Ventricles & CSF", src: "Maini · L17", q: "Cerebrospinal fluid escapes the fourth ventricle into the subarachnoid space through which foramina?", opts: ["A single interventricular foramen","Two lateral foramina of Luschka and one median foramen of Magendie","The cerebral aqueduct only","Two foramina of Magendie and one of Luschka"], a: 1, h1: "Two on the sides, one in the midline.", h2: "4th ventricle exits: 2 Luschka (lateral) + 1 Magendie (median)", exp: "CSF exits the fourth ventricle via the two foramina of Luschka (lateral) and the single foramen of Magendie (median)." },
+  { id: 51, topic: "Ventricles & CSF", src: "Maini · L17", q: "Which sequence correctly traces cerebrospinal fluid circulation, per Maini's flowchart?", opts: ["Third ventricle > lateral ventricles > cerebral aqueduct > fourth ventricle > superior sagittal sinus","Fourth ventricle > cerebral aqueduct > third ventricle > lateral ventricles > subarachnoid space","Lateral ventricles > interventricular foramina > third ventricle > cerebral aqueduct > fourth ventricle > subarachnoid space > arachnoid granulations > superior sagittal sinus","Lateral ventricles > cerebral aqueduct > third ventricle > fourth ventricle > arachnoid granulations"], a: 2, h1: "Follow the ventricles in numeric order.", h2: "CSF path: lateral > IVF > 3rd > aqueduct > 4th > subarachnoid > granulations > SSS", exp: "This is exactly the pathway Maini dictated for CSF circulation and reabsorption." },
+  { id: 52, topic: "Ventricles & CSF", src: "Maini · L17", q: "Maini explains hydrocephalus/raised intracranial pressure can result when meningitis blocks which structures?", opts: ["The choroid plexus, so CSF is not secreted","The optic chiasma, causing visual loss","The pyramidal decussation, causing paralysis","The arachnoid granulations, so CSF is secreted but not absorbed"], a: 3, h1: "Secretion continues but drainage stops.", h2: "Blocked arachnoid granulations > raised ICP", exp: "If infection blocks the arachnoid granulations, CSF keeps being secreted but is not absorbed, raising intracranial pressure." },
+  { id: 53, topic: "Blood supply", src: "Maini · L17", q: "The middle cerebral artery supplies which regions, and why is it clinically important?", opts: ["The insula and lateral surface of the frontal, parietal, and temporal lobes (and posterior internal capsule); it is the artery most often obstructed in atherosclerotic stroke","The medial surface of the frontal lobe; it is rarely involved in stroke","The occipital lobe; obstruction causes deafness","The cerebellum; obstruction causes intention tremor only"], a: 0, h1: "Lateral surface; posterior limb of internal capsule.", h2: "MCA = lateral cortex + insula; commonest stroke artery", exp: "The MCA supplies the insula and lateral cortex plus the posterior limb of the internal capsule; it is the most frequently obstructed artery in stroke, causing contralateral paralysis." },
+  { id: 54, topic: "Blood supply", src: "Maini · L17", q: "The two vertebral arteries unite to form which single artery?", opts: ["The internal carotid artery","The basilar artery","The anterior cerebral artery","The middle meningeal artery"], a: 1, h1: "Two become one at the pons.", h2: "Two vertebrals unite to form the basilar artery", exp: "Maini highlights that the two vertebral arteries unite to form the single basilar artery (vertebro-basilar system)." },
+  { id: 55, topic: "Blood supply", src: "Maini · L17", q: "Which arteries form the Circle of Willis?", opts: ["Only the two vertebral and the basilar arteries","The middle cerebral, ophthalmic, and labyrinthine arteries","The posterior cerebral, posterior communicating, internal carotid, anterior cerebral, and anterior communicating arteries","The superior sagittal, straight, and sigmoid sinuses"], a: 2, h1: "Posterior and anterior communicating arteries close the ring.", h2: "Circle: PCA, P-comm, ICA, ACA, A-comm", exp: "Maini lists the posterior cerebral, posterior communicating, internal carotid, anterior cerebral, and anterior communicating arteries as completing the circle." },
+  { id: 56, topic: "Blood supply", src: "Maini · L17", q: "What is the functional purpose of the anastomosis formed by the Circle of Willis?", opts: ["It speeds venous drainage from the brain","It secretes cerebrospinal fluid","It filters the blood before it reaches the cortex","If one feeding artery is blocked, the circle provides an alternate route of blood to the ischemic region"], a: 3, h1: "A safety detour for blood flow.", h2: "Circle of Willis = collateral/alternate supply if one artery blocks", exp: "The anastomotic ring allows collateral flow, so if one artery is occluded, other vessels can partly perfuse the threatened area and limit permanent damage." },
+  { id: 57, topic: "Hemorrhages", src: "Maini · L17", q: "Maini describes an epidural (extradural) hematoma. What is its typical cause and nature?", opts: ["An arterial bleed from a torn middle meningeal artery, often after a blow to the pterion in the temporal region","A venous bleed from bridging veins, common in the elderly","An arterial bleed from a ruptured aneurysm into the subarachnoid space","A slow venous ooze that takes months to appear"], a: 0, h1: "Pterion + middle meningeal artery.", h2: "Epidural = arterial, middle meningeal, pterion, fast", exp: "Epidural hematoma is an arterial bleed, classically from the middle meningeal artery after a blow to the pterion; symptoms develop rapidly." },
+  { id: 58, topic: "Hemorrhages", src: "Maini · L17", q: "How does Maini characterize a subdural hematoma, and in whom is it common?", opts: ["An arterial bleed from the middle meningeal artery that develops fast","A venous bleed from bridging veins, common in the elderly (from brain atrophy), that develops slowly over days to weeks or months","An arterial aneurysm rupture into the subarachnoid space","A bleed into the ventricles from the choroid plexus"], a: 1, h1: "Slow venous bleed in an atrophied brain.", h2: "Subdural = venous bridging veins, elderly, slow", exp: "Subdural hematoma is a venous bleed from stretched bridging veins, common in elderly brains that have atrophied; it develops slowly." },
+  { id: 59, topic: "Hemorrhages", src: "Maini · L17", q: "What is the typical nature of a subarachnoid hemorrhage, per Maini?", opts: ["Venous, from bridging veins, common in the elderly","Arterial, from the middle meningeal artery at the pterion","Mostly arterial, commonly from rupture of an aneurysm, and it may block arachnoid granulations to raise intracranial pressure","Always trivial with no rise in intracranial pressure"], a: 2, h1: "Aneurysm bleeding around the brain.", h2: "Subarachnoid = arterial, aneurysm rupture", exp: "Subarachnoid hemorrhage is usually arterial, often from a ruptured aneurysm, and can obstruct arachnoid granulations, raising intracranial pressure." },
+  { id: 60, topic: "Development", src: "Maini · L17", q: "From which germ layer does the neural tube (and thus the entire CNS) develop?", opts: ["Mesoderm","Endoderm","Notochord","Ectoderm"], a: 3, h1: "The top (outer) germ layer.", h2: "Neural tube from ectoderm", exp: "Maini reviews that the neural tube - giving rise to the brain and spinal cord - forms from ectoderm." },
+];
+
+/* =============================================================== STYLES ==== */
+const css = `
+:root{
+  --accent:#7c3aed; --accent-deep:#6d28d9; --accent-mid:#8b5cf6; --accent-soft:#c4b5fd;
+  --accent-tint:#ede9fe; --accent-wash:#f5f3ff; --ink:#2e1065; --ink-soft:#5b4a8a;
+  --paper:#faf9ff; --card:#ffffff; --line:#ddd0f5;
+  --good:#0e7a52; --good-bg:#e7f8ef; --good-line:#bfe6d2;
+  --bad:#b42318; --bad-bg:#fdeceb; --bad-line:#f3c6c2;
+  --gold:#9a6a2b; --gold-bg:#fffaf0; --gold-line:#ecd6a8;
+}
+*{box-sizing:border-box}
+.fb-root{font-family:'Outfit','SF Pro Text',system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);
+  background:radial-gradient(880px 420px at 100% -8%, var(--accent-tint), transparent 60%),radial-gradient(680px 360px at -10% 110%, #e4ddf8, transparent 55%),var(--paper);
+  min-height:100vh;line-height:1.55;padding:0 0 64px}
+.fb-wrap{max-width:900px;margin:0 auto;padding:0 18px}
+.serif{font-family:'Fraunces','Iowan Old Style',Georgia,serif}
+.hero{padding:30px 0 12px}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:6px 12px;border-radius:999px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+h1.title{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:14px 0 6px;font-weight:600;letter-spacing:-.02em}
+h1.title em{font-style:italic;color:var(--accent-mid)}
+.subtitle{color:var(--ink-soft);max-width:720px;font-size:15.5px}
+.voicenote{margin:12px 0 0;font-size:12.5px;color:var(--ink-soft);background:var(--accent-wash);border:1px solid var(--line);border-radius:10px;padding:9px 13px;max-width:720px}
+.voicenote b{color:var(--accent-deep)}
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pill-date{display:inline-block;font-size:12.5px;font-weight:600;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.pill-review{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;color:#8a4b00;background:#fff6e6;border:1px solid #f0d49a;padding:7px 12px;border-radius:999px}
+.hublink{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:#fff;background:var(--accent);border:none;text-decoration:none;padding:7px 13px;border-radius:999px;box-shadow:0 6px 16px -8px var(--accent)}
+.hublink:hover{background:var(--accent-mid)}
+.tabbar{position:sticky;top:0;z-index:20;background:rgba(250,249,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);margin-top:16px}
+.tabs{display:flex;gap:4px;max-width:900px;margin:0 auto;padding:8px 14px;overflow-x:auto}
+.tab{flex:0 0 auto;border:none;background:none;font:inherit;font-weight:600;font-size:14.5px;color:var(--ink-soft);padding:9px 15px;border-radius:10px;cursor:pointer;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--accent-deep);background:var(--accent-wash)}
+.tab.active{color:#fff;background:var(--accent);box-shadow:0 4px 14px -4px var(--accent)}
+.section{padding:24px 0 8px;animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.banner{background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:16px;padding:18px 20px;margin:8px 0 16px;box-shadow:0 18px 40px -24px var(--accent-deep)}
+.banner .bt{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:19px;margin-bottom:6px}
+.banner p{font-size:13.5px;opacity:.93;margin:4px 0 0}
+.coachbar{position:sticky;top:47px;z-index:15;display:flex;flex-wrap:wrap;gap:8px;align-items:center;background:linear-gradient(180deg,var(--accent-deep),var(--accent-mid));color:#fff;border-radius:14px;padding:12px 14px;margin:8px 0 16px;box-shadow:0 14px 30px -20px var(--accent-deep)}
+.coachbar .cbtn{border:none;background:rgba(255,255,255,.18);color:#fff;font:inherit;font-weight:600;font-size:13.5px;padding:8px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.coachbar .cbtn:hover{background:rgba(255,255,255,.32)}
+.coachbar .cbtn.play{background:#fff;color:var(--accent-deep)}
+.coachbar .cbtn:disabled{opacity:.4;cursor:default}
+.coachbar .spd{display:flex;align-items:center;gap:7px;margin-left:auto;font-size:12.5px;font-weight:600}
+.coachbar .spd input[type=range]{width:118px;accent-color:#fff}
+.coachbar .spdval{min-width:40px;text-align:center;background:rgba(255,255,255,.22);border-radius:6px;padding:2px 7px;font-weight:700}
+.coachbar .now{flex-basis:100%;font-size:12px;opacity:.92;margin-top:2px}
+.obj{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:14px;padding:16px 18px;margin:14px 0;box-shadow:0 12px 28px -24px rgba(124,58,237,.3);scroll-margin-top:120px;transition:box-shadow .2s,outline .2s}
+.obj.speaking{outline:3px solid var(--accent);outline-offset:2px;box-shadow:0 0 0 5px var(--accent-tint),0 14px 30px -20px var(--accent)}
+.obj-head{display:flex;align-items:baseline;gap:10px;margin-bottom:4px;flex-wrap:wrap}
+.obj-num{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:20px;color:var(--accent-soft)}
+.obj-title{font-weight:700;font-size:15.5px;color:var(--ink);flex:1;min-width:200px}
+.src{font-size:10.5px;font-weight:700;color:var(--accent-deep);background:var(--accent-wash);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap}
+.obj-facts{margin:8px 0 0;padding-left:18px}
+.obj-facts li{margin:5px 0;font-size:13.5px;color:var(--ink-soft)}
+.objflag{margin-top:10px;font-size:12.5px;color:#6b4a14;background:var(--gold-bg);border:1px dashed var(--gold-line);border-radius:9px;padding:8px 12px}
+.objflag::before{content:"⚑ Maini flag";display:block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#9a5b00;margin-bottom:3px}
+.readbtn{margin-top:10px;border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:12px;padding:5px 12px;border-radius:8px;cursor:pointer;transition:.14s}
+.readbtn:hover{background:var(--accent-wash)}
+.flagcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;margin:10px 0;display:flex;gap:12px;align-items:flex-start;box-shadow:0 10px 24px -22px rgba(124,58,237,.3)}
+.flagtag{flex:0 0 auto;font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#fff;background:var(--accent);padding:4px 9px;border-radius:6px;margin-top:2px;max-width:124px;text-align:center;line-height:1.25}
+.flagtag.star{background:#a16207}
+.flagbody .ft{font-size:14px;font-weight:600;color:var(--ink)}
+.flagbody .fw{font-size:12.5px;color:var(--ink-soft);margin-top:3px}
+.flagbody .fs{font-size:10.5px;font-weight:700;color:var(--accent-deep);margin-top:4px}
+.drillbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:6px 0 10px}
+.progress{font-size:13.5px;color:var(--ink-soft)}
+.progress b{color:var(--accent-deep)}
+.scorepill{font-weight:700;font-size:13px;color:#fff;background:var(--accent);padding:6px 12px;border-radius:999px}
+.modetog{display:flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px}
+.modetog button{border:none;background:none;font:inherit;font-weight:600;font-size:12.5px;color:var(--ink-soft);padding:6px 12px;border-radius:999px;cursor:pointer;transition:.14s}
+.modetog button.on{background:var(--accent);color:#fff}
+.navgrid{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 4px}
+.navbtn{min-width:30px;height:30px;padding:0 6px;border-radius:8px;border:1px solid var(--line);background:#fff;font:inherit;font-size:11.5px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.12s}
+.navbtn:hover{border-color:var(--accent-soft)}
+.navbtn.cur{outline:2px solid var(--accent);outline-offset:1px}
+.navbtn.ok{background:var(--good-bg);border-color:var(--good-line);color:var(--good)}
+.navbtn.no{background:var(--bad-bg);border-color:var(--bad-line);color:var(--bad)}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 14px 34px -24px rgba(124,58,237,.4)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.qtopic{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-deep);background:var(--accent-wash);padding:3px 9px;border-radius:6px}
+.qsrc{font-size:11px;font-weight:700;color:#6b4a14;background:var(--gold-bg);border:1px solid var(--gold-line);padding:3px 9px;border-radius:6px}
+.qtext{font-size:16.5px;font-weight:600;color:var(--ink);margin:2px 0 14px;line-height:1.4}
+.opt{display:flex;gap:11px;align-items:flex-start;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;margin:8px 0;font:inherit;font-size:15px;color:var(--ink);cursor:pointer;transition:.14s}
+.opt:hover{border-color:var(--accent-soft);background:var(--accent-wash)}
+.opt .key{flex:0 0 24px;height:24px;border-radius:7px;background:var(--accent-wash);color:var(--accent-deep);font-weight:700;font-size:13px;display:grid;place-items:center;border:1px solid var(--line)}
+.opt-correct{border-color:var(--good-line);background:var(--good-bg);cursor:default}
+.opt-correct .key{background:var(--good);color:#fff;border-color:var(--good)}
+.opt-wrong{border-color:var(--bad-line);background:var(--bad-bg);cursor:default}
+.opt-wrong .key{background:var(--bad);color:#fff;border-color:var(--bad)}
+.opt-locked{opacity:.62;cursor:default}
+.opt-locked:hover{border-color:var(--line);background:#fff}
+.hintrow{display:flex;gap:8px;margin:12px 0 2px;flex-wrap:wrap}
+.ghost{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-weight:600;font-size:13px;padding:7px 13px;border-radius:9px;cursor:pointer;transition:.14s}
+.ghost:hover{background:var(--accent-wash)}
+.ghost:disabled{opacity:.4;cursor:default}
+.hintbox{background:var(--accent-wash);border:1px dashed var(--accent-soft);border-radius:10px;padding:10px 13px;margin:9px 0 0;font-size:14px;color:var(--accent-deep)}
+.exp{margin-top:14px;border-top:1px solid var(--line);padding-top:13px}
+.exp .tag{font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:5px}
+.exp.correct .tag{color:var(--good)}
+.exp.incorrect .tag{color:var(--bad)}
+.exp.keyed .tag{color:var(--accent-deep)}
+.exp p{font-size:14.5px;color:var(--ink);margin:0}
+.navfoot{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.btn{border:none;font:inherit;font-weight:600;font-size:14.5px;padding:11px 18px;border-radius:11px;cursor:pointer;transition:.15s}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 20px -8px var(--accent)}
+.btn-primary:hover{background:var(--accent-mid)}
+.btn-ghost{background:#fff;color:var(--ink-soft);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent-soft);color:var(--accent-deep)}
+.btn:disabled{opacity:.4;cursor:default;box-shadow:none}
+.coach-pills{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.cpill{border:1px solid var(--accent-soft);background:#fff;color:var(--accent-deep);font:inherit;font-size:13px;font-weight:500;padding:8px 12px;border-radius:999px;cursor:pointer;text-align:left;transition:.14s}
+.cpill:hover{background:var(--accent-wash)}
+.chatlog{display:flex;flex-direction:column;gap:12px;margin:14px 0;max-height:46vh;overflow-y:auto;padding:4px 2px}
+.msg{max-width:88%;padding:12px 15px;border-radius:14px;font-size:14.5px;line-height:1.5;white-space:pre-wrap}
+.msg.user{align-self:flex-end;background:var(--accent);color:#fff;border-bottom-right-radius:5px}
+.msg.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);color:var(--ink);border-bottom-left-radius:5px}
+.msg.bot .who{font-weight:700;font-size:12px;color:var(--accent-deep);margin-bottom:4px;letter-spacing:.03em}
+.composer{display:flex;gap:8px;margin-top:6px}
+.composer textarea{flex:1;resize:none;border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:14.5px;color:var(--ink);min-height:48px;background:#fff}
+.composer textarea:focus{outline:none;border-color:var(--accent-soft)}
+.btn-primary{background:var(--accent);color:#fff}
+.typing{font-size:13px;color:var(--accent-deep);font-style:italic;padding:4px 2px}
+.tinynote{font-size:12px;color:var(--ink-soft);margin-top:8px}
+.footer{margin-top:34px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-soft);text-align:center}
+`;
+
+/* ============================================================ SPEECH ======= */
+function useVoice() {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window)) return;
+    const pick = () => {
+      const vs = window.speechSynthesis.getVoices() || [];
+      const find = (re) => vs.find((v) => re.test(v.name));
+      ref.current =
+        find(/microsoft.*ava.*natural/i) ||
+        find(/microsoft.*emma.*natural/i) ||
+        find(/microsoft.*andrew.*natural/i) ||
+        find(/google us english/i) ||
+        find(/en[-_]us/i) ||
+        vs[0] || null;
+    };
+    pick();
+    window.speechSynthesis.onvoiceschanged = pick;
+    return () => { try { window.speechSynthesis.onvoiceschanged = null; } catch (e) {} };
+  }, []);
+  return ref;
+}
+
+/* ================================================================ APP ====== */
+function App() {
+  const [tab, setTab] = useState("cram");
+  useEffect(() => {
+    const id = "fb-fonts";
+    if (!document.getElementById(id)) {
+      const l = document.createElement("link");
+      l.id = id; l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Outfit:wght@400;500;600;700&display=swap";
+      document.head.appendChild(l);
+    }
+  }, []);
+
+  return (
+    <div className="fb-root">
+      <style>{css}</style>
+      <div className="fb-wrap">
+        <header className="hero">
+          <span className="kicker"><span className="dot" />GA 0202 · The Brain · Dr. Maini</span>
+          <h1 className="title serif">GA 0202 · The <em>Brain</em></h1>
+          <p className="subtitle">A voiced, hands-free cram for Maini&apos;s brain lectures (16 &amp; 17) — the four parts, cortex &amp; basal nuclei, the lobes &amp; functional areas, motor/sensory pathways, the speech areas, the diencephalon, the brainstem &amp; cranial nerves, the cerebellum, ventricles &amp; CSF, blood supply, and the hemorrhages — in her order, grounded in the audited question bank, with a drill in her style and her own analogies. Open the Cram tab and press play.</p>
+          <p className="voicenote">🔊 <b>Best voices in Microsoft Edge</b> (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p>
+          <div className="pill-row">
+            <span className="pill-date">🧠 The Brain · Lectures 16 &amp; 17 · lecture + Mentimeter</span>
+            <a className="hublink" href={HUB}>← Back to hub</a>
+            <span className="pill-review">PENDING REVIEW</span>
+          </div>
+        </header>
+      </div>
+
+      <nav className="tabbar">
+        <div className="tabs">
+          {TABS.map((t) => (
+            <button key={t.id} className={`tab ${tab === t.id ? "active" : ""}`} onClick={() => setTab(t.id)}>{t.label}</button>
+          ))}
+        </div>
+      </nav>
+
+      <div className="fb-wrap">
+        {tab === "cram" && <Cram />}
+        {tab === "study" && <Study />}
+        {tab === "tips" && <Tips />}
+        {tab === "drill" && <Drill bank={questions} />}
+        {tab === "coach" && <Coach />}
+
+        <div className="footer">
+          Built from Dr. Maini&apos;s brain lectures (Lectures 16 &amp; 17) and the module&apos;s audited Everything-MC bank. Facts are anti-fabrication verified and source-tagged per item; analogies are attributed to Maini only where she says them. PENDING REVIEW.
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------- Cram ----- */
+function Cram() {
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+  const voiceRef = useVoice();
+  const [rate, setRate] = useState(1);
+  const [cur, setCur] = useState(-1);
+  const [playing, setPlaying] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const rateRef = useRef(rate); useEffect(() => { rateRef.current = rate; }, [rate]);
+  const curRef = useRef(cur); useEffect(() => { curRef.current = cur; }, [cur]);
+  const stopRef = useRef(false);
+
+  const clean = (s) => s.replace(/→/g, " leads to ").replace(/[·•]/g, ", ").replace(/[—–]/g, " - ").replace(/[★⚑]/g, "").replace(/\s+/g, " ").trim();
+  const blockText = (c) => clean("Topic " + c.n + ". " + c.title + ". " + c.facts.join(" ") + " Key point: " + c.flag);
+
+  const speakIdx = (i) => {
+    if (!supported) return;
+    if (i >= cram.length) { stopRef.current = true; window.speechSynthesis.cancel(); setPlaying(false); setPaused(false); setCur(-1); return; }
+    setCur(i);
+    const el = document.getElementById("cram-" + cram[i].n);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+    const u = new SpeechSynthesisUtterance(blockText(cram[i]));
+    u.rate = Math.min(3, Math.max(0.5, rateRef.current));
+    if (voiceRef.current) { u.voice = voiceRef.current; u.lang = voiceRef.current.lang || "en-US"; }
+    u.onend = () => { if (stopRef.current) return; speakIdx(i + 1); };
+    window.speechSynthesis.speak(u);
+  };
+
+  const startAt = (i) => {
+    if (!supported) return;
+    stopRef.current = true;
+    window.speechSynthesis.cancel();
+    setTimeout(() => { stopRef.current = false; setPlaying(true); setPaused(false); speakIdx(i); }, 70);
+  };
+  const playAll = () => startAt(curRef.current >= 0 && curRef.current < cram.length ? curRef.current : 0);
+  const pause = () => { if (supported) window.speechSynthesis.pause(); setPaused(true); };
+  const resume = () => { if (supported) window.speechSynthesis.resume(); setPaused(false); };
+  const stopAll = () => { stopRef.current = true; if (supported) window.speechSynthesis.cancel(); setPlaying(false); setPaused(false); setCur(-1); };
+  const jump = (d) => { const base = curRef.current < 0 ? 0 : curRef.current; let t = base + d; if (t < 0) t = 0; if (t >= cram.length) t = cram.length - 1; startAt(t); };
+
+  useEffect(() => () => { try { if (supported) { stopRef.current = true; window.speechSynthesis.cancel(); } } catch (e) {} }, []);
+
+  const nowText = !supported
+    ? "Text-to-speech is not available in this browser — the cram below still works to read."
+    : cur >= 0
+      ? `Reading ${cur + 1} / ${cram.length}: ${cram[cur].title}`
+      : "Press play for a hands-free walkthrough of all 15 topics.";
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚡ Cram — Maini&apos;s brain essentials, in her order</div>
+        <p>Four parts → cortex &amp; basal nuclei → lobes &amp; functional map → motor/sensory pathways → speech → limbic → diencephalon → brainstem &amp; cranial nerves → cerebellum → ventricles &amp; CSF → blood supply → hemorrhages. The ⚑ flags are the high-yield hooks.</p>
+      </div>
+
+      <div className="coachbar">
+        {(!playing || (playing && paused)) && (
+          <button className="cbtn play" onClick={paused ? resume : playAll} disabled={!supported}>{paused ? "▶ Resume" : "▶ Play walkthrough"}</button>
+        )}
+        {playing && !paused && <button className="cbtn" onClick={pause} disabled={!supported}>⏸ Pause</button>}
+        <button className="cbtn" onClick={() => jump(-1)} disabled={!supported}>⏮ Prev</button>
+        <button className="cbtn" onClick={() => jump(1)} disabled={!supported}>⏭ Next</button>
+        <button className="cbtn" onClick={stopAll} disabled={!supported || (!playing && cur < 0)}>⏹ Stop</button>
+        <div className="spd">
+          <span>Speed</span>
+          <input type="range" min="0.5" max="3" step="0.25" value={rate} onChange={(e) => setRate(parseFloat(e.target.value))} />
+          <span className="spdval">{rate.toFixed(2)}x</span>
+        </div>
+        <div className="now">{nowText}</div>
+      </div>
+
+      {cram.map((c, i) => (
+        <div className={`obj ${cur === i ? "speaking" : ""}`} id={`cram-${c.n}`} key={c.n}>
+          <div className="obj-head">
+            <span className="obj-num serif">{c.n}</span>
+            <span className="obj-title">{c.title}</span>
+            <span className="src">{c.src}</span>
+          </div>
+          <ul className="obj-facts">{c.facts.map((f, j) => <li key={j}>{f}</li>)}</ul>
+          {c.flag && <div className="objflag">{c.flag}</div>}
+          {supported && <button className="readbtn" onClick={() => startAt(i)}>🔊 Read this topic</button>}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Study ---- */
+function Study() {
+  const tagClass = (t) => t.includes("★") ? "flagtag star" : "flagtag";
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">⚑ What to study</div>
+        <p>The highest-yield hooks, weighted by what Maini stresses in the brain lectures and the way she writes questions.</p>
+      </div>
+      {flags.map((f, i) => (
+        <div className="flagcard" key={i}>
+          <span className={tagClass(f.tag)}>{f.tag}</span>
+          <div className="flagbody">
+            <div className="ft">{f.text}</div>
+            <div className="fw">{f.why}</div>
+            <div className="fs">{f.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Tips ----- */
+function Tips() {
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">💡 Prof&apos;s Tips &amp; Analogies</div>
+        <p>Dr. Maini&apos;s own mnemonics, analogies, and phrasings pulled straight from the brain lectures — the retention hooks to lean on when a fact won&apos;t stick.</p>
+      </div>
+      {tips.map((t, i) => (
+        <div className="flagcard" key={i}>
+          <span className="flagtag">{t.kind}</span>
+          <div className="flagbody">
+            <div className="ft">{t.title}</div>
+            <div className="fw">{t.text}</div>
+            <div className="fw" style={{ marginTop: "5px", fontStyle: "italic", opacity: 0.85 }}>Why it helps: {t.helps}</div>
+            <div className="fs">{t.src}</div>
+          </div>
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Drill ---- */
+function Drill({ bank }) {
+  const [idx, setIdx] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [hintLevel, setHintLevel] = useState({});
+  const [mode, setMode] = useState("study");
+
+  const safeIdx = Math.min(idx, Math.max(0, bank.length - 1));
+  const q = bank[safeIdx];
+
+  const score = useMemo(
+    () => Object.entries(answers).reduce((n, [id, v]) => {
+      const qq = bank.find((x) => x.id === Number(id));
+      return n + (qq && v === qq.a ? 1 : 0);
+    }, 0),
+    [answers, bank]
+  );
+
+  if (!bank.length) return <section className="section"><div className="banner"><div className="bt">Drill</div></div></section>;
+
+  const keyMode = mode === "key";
+  const sel = answers[q.id];
+  const answered = sel !== undefined;
+  const hl = hintLevel[q.id] || 0;
+  const done = Object.keys(answers).length;
+
+  const select = (i) => {
+    if (keyMode) return;
+    if (answers[q.id] !== undefined) return;
+    setAnswers((p) => ({ ...p, [q.id]: i }));
+  };
+  const bumpHint = () => setHintLevel((p) => ({ ...p, [q.id]: Math.min((p[q.id] || 0) + 1, 2) }));
+  const optClass = (i) => {
+    if (keyMode) return i === q.a ? "opt opt-correct" : "opt opt-locked";
+    if (!answered) return "opt";
+    if (i === q.a) return "opt opt-correct";
+    if (i === sel) return "opt opt-wrong";
+    return "opt opt-locked";
+  };
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🎯 Drill — {bank.length} questions across the brain</div>
+        <p>Four options, two progressive hints, an explanation, and a lecture source per question. Tap to self-test, or flip to the Answer Key to review.</p>
+      </div>
+
+      <div className="drillbar">
+        <div className="progress">Question <b>{safeIdx + 1}</b> / {bank.length}{!keyMode && <> · answered <b>{done}</b></>}</div>
+        <div className="modetog">
+          <button className={mode === "study" ? "on" : ""} onClick={() => setMode("study")}>Study (tap)</button>
+          <button className={mode === "key" ? "on" : ""} onClick={() => setMode("key")}>Answer key</button>
+        </div>
+        {!keyMode && <div className="scorepill">Score {score}/{done || 0}</div>}
+      </div>
+
+      <div className="navgrid">
+        {bank.map((qq, i) => {
+          let cls = "";
+          if (keyMode) cls = "ok";
+          else { const a = answers[qq.id]; cls = a === undefined ? "" : a === qq.a ? "ok" : "no"; }
+          return <button key={qq.id} className={`navbtn ${cls} ${i === safeIdx ? "cur" : ""}`} onClick={() => setIdx(i)}>{i + 1}</button>;
+        })}
+      </div>
+
+      <div className="qcard">
+        <div className="badges"><span className="qtopic">{q.topic}</span><span className="qsrc">{q.src}</span></div>
+        <div className="qtext">{q.q}</div>
+
+        {q.opts.map((o, i) => (
+          <button key={i} className={optClass(i)} onClick={() => select(i)}>
+            <span className="key">{String.fromCharCode(65 + i)}</span><span>{o}</span>
+          </button>
+        ))}
+
+        {!keyMode && !answered && (
+          <>
+            <div className="hintrow">
+              <button className="ghost" onClick={bumpHint} disabled={hl >= 2}>{hl === 0 ? "Need a hint?" : "Bigger hint"}</button>
+            </div>
+            {hl >= 1 && <div className="hintbox">💡 {q.h1}</div>}
+            {hl >= 2 && <div className="hintbox">🔎 {q.h2}</div>}
+          </>
+        )}
+
+        {keyMode && <div className="exp keyed"><div className="tag">✦ Answer · {q.src}</div><p>{q.exp}</p></div>}
+        {!keyMode && answered && (
+          <div className={`exp ${sel === q.a ? "correct" : "incorrect"}`}>
+            <div className="tag">{sel === q.a ? "✓ Correct" : "✗ Not quite"} · {q.src}</div>
+            <p>{q.exp}</p>
+          </div>
+        )}
+
+        <div className="navfoot">
+          <button className="btn btn-ghost" onClick={() => setIdx(Math.max(0, safeIdx - 1))} disabled={safeIdx === 0}>← Prev</button>
+          <button className="btn btn-primary" onClick={() => setIdx(Math.min(bank.length - 1, safeIdx + 1))} disabled={safeIdx >= bank.length - 1}>Next →</button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* --------------------------------------------------------------- Coach ---- */
+const COACH_SYSTEM = `You are Dr. Maini, teaching GA 0202 Gross Anatomy, running a review of THE BRAIN (Lectures 16 & 17). Teach ONLY from this content; do not invent terms, structures, functions, arteries, foramina, or pathways. Warm and encouraging; you ask "right?", "okay?", "you guys remember?" and push students to reason step by step instead of guessing. Keep answers tight (3-6 sentences) and quiz the student back.
+
+FOUR PARTS: cerebrum (largest; so large it covers/masks all underlying parts EXCEPT the brainstem; peripheral gray cortex, white matter inside; higher functions). Diencephalon (the connecting part, mostly ascending/descending pathways; houses thalamus + hypothalamus). Cerebellum (the "small brain"; seat of COORDINATION). Brainstem, superior to inferior = midbrain, pons, medulla oblongata (medulla is continuous with the spinal cord past the foramen magnum).
+
+CORTEX & BASAL NUCLEI: longitudinal fissure splits the hemispheres, falx cerebri dips in, corpus callosum connects them. Gray = peripheral cortex (cell bodies); white = interior (myelin). Insist BASAL NUCLEI, not "basal ganglia" (a ganglion is cell bodies OUTSIDE the CNS). The three basal nuclei = caudate, putamen, globus pallidus; putamen + globus pallidus = lentiform; all three = corpus striatum. Sulcus/fissure = groove, gyrus = ridge. Internal capsule (L-shaped, between caudate/globus pallidus and the thalamus) carries the corticospinal tract -> a lesion causes CONTRALATERAL paralysis. External capsule = putamen to claustrum; extreme capsule = claustrum to insular gray; claustrum = thin strip between them. Basal-nuclei disease = Parkinsonism + RESTING tremor (cerebellum = INTENTION tremor).
+
+LOBES & FUNCTIONAL MAP: 5 lobes - frontal, parietal, temporal, occipital + the INSULA (deep 5th, under the lateral fissure). Central sulcus = frontal/parietal border; lateral sulcus = temporal below vs frontal/parietal above; occipital demarcated by a line from the preoccipital notch to the top of the parieto-occipital sulcus. Functional areas: MOTOR = frontal (precentral gyrus), SENSORY/somesthetic = parietal (postcentral gyrus), VISUAL = occipital, AUDITORY (and smell) = temporal, TASTE = insula. Prefrontal (judgment) matures ~16-17 to ~25. Motor = 2-neuron pathway (upper in precentral gyrus -> lower in the anterior/ventral horn). Sensory = 4-neuron pathway (ganglion -> medulla -> thalamus -> postcentral gyrus). Homunculus favors fine-control/dense-receptor parts (face, hands, tongue). Frontal eye field is just anterior to the motor cortex.
+
+GYRI & SPEECH: inferior frontal gyrus = pars orbitalis, triangularis, opercularis; temporal = superior/middle/inferior gyri; supramarginal gyrus caps the end of the lateral fissure. BROCA = frontal, MOTOR/expressive speech (finds the words); Broca's aphasia = comprehends but is "short of words," non-fluent. WERNICKE = posterior temporal, SENSORY speech (comprehension); Wernicke's aphasia = fluent but meaningless "word salad," no comprehension.
+
+MEDIAL SURFACE & LIMBIC: corpus callosum (posterior end = splenium); septum pellucidum overlies the lateral ventricle; cuneus between calcarine and parieto-occipital sulci; lingual gyrus below the calcarine (named for shape); fornix is part of the limbic system; limbic cortex = uncus, parahippocampal gyrus, isthmus, cingulate gyrus (reward/punishment, emotion, memory).
+
+DIENCEPHALON: thalamus = relay center for ALL ascending sensation EXCEPT smell (interthalamic adhesion = massa intermedia = intermediate mass). Hypothalamus = autonomic + endocrine master control + thermostat (thirst, hunger, sleep-wake). Pineal = melatonin (sleep-wake); corpora arenacea = normal pineal calcification after ~40. Optic chiasma = crossing of the optic nerves, over the pituitary; a pituitary tumor compresses it (bitemporal hemianopsia).
+
+BRAINSTEM & MIDBRAIN: corpora quadrigemina = 2 superior colliculi (visual) + 2 inferior colliculi (auditory); cerebral aqueduct through the midbrain, periaqueductal gray around it; substantia nigra sits ON TOP of the red nucleus ("eyebrows over the eyes"). Cerebral peduncles + interpeduncular fossa (CN III). Medulla: pyramids = corticospinal tract; pyramidal decussation -> fibers cross -> contralateral paralysis; olive = lateral bulge; nucleus gracilis + cuneatus posteriorly. Reticular formation (medulla + pons) = arousal/alertness.
+
+CRANIAL NERVE ATTACHMENTS: I = olfactory bulb/tract; III = interpeduncular fossa; IV = only DORSAL nerve (below the inferior colliculus); V = side of the pons (thickest; motor to mastication + tensor tympani/veli palatini, mylohyoid, anterior digastric); VI = pontomedullary sulcus (lateral rectus); VII + VIII + labyrinthine artery = internal acoustic meatus; IX/X/XI = post-olivary sulcus -> jugular foramen; XII = pre-olivary sulcus (tongue).
+
+CEREBELLUM: arbor vitae ("tree of life") = branching white matter; folia = the folds; vermis = worm-like band connecting the two hemispheres. It compares the planned movement (copy from the motor cortex) with the performed movement (spinocerebellar feedback) and corrects it. Cerebellar signs = intention tremor, finger-nose overshoot, dysarthria, hypotonia.
+
+VENTRICLES & CSF: lateral ventricle horns = anterior (frontal), posterior (occipital), inferior (temporal). 3rd ventricle = slit between the thalami; interventricular foramen (Monro) connects lateral to 3rd; cerebral aqueduct connects 3rd to 4th (through the midbrain); 4th ventricle = pons/medulla in front, cerebellum behind; exits = 2 foramina of Luschka (lateral) + 1 of Magendie (median). Choroid plexus SECRETES CSF; arachnoid granulations ABSORB it into the superior sagittal sinus. Path: lateral -> IVF -> 3rd -> aqueduct -> 4th -> subarachnoid -> arachnoid granulations -> superior sagittal sinus. Blocked granulations = raised ICP/hydrocephalus.
+
+BLOOD SUPPLY: internal carotids (anterior) + vertebrals (posterior); brain = ~2% weight, ~15% cardiac output. ICA parts = cervical, petrous, cavernous, cerebral; ICA -> ACA (medial frontal/parietal) + MCA (lateral cortex + insula + posterior internal capsule; commonest stroke artery). 2 vertebrals (from the subclavians) -> basilar -> 2 posterior cerebral arteries (occipital). Labyrinthine artery to the inner ear via the internal acoustic meatus. Circle of Willis = PCA, posterior communicating, ICA, ACA, anterior communicating, around the optic chiasma/infundibulum/mammillary bodies; purpose = collateral (alternate) supply.
+
+HEMORRHAGES & DEVELOPMENT: epidural = arterial (middle meningeal artery, pterion, fast); subdural = venous (bridging veins, elderly, slow); subarachnoid = arterial aneurysm rupture (can block granulations, raise ICP). Sigmoid sinus -> internal jugular vein (jugular foramen); cerebral veins are valveless (low/negative venous pressure). Cavernous ICA rupture -> pulsatile exophthalmos. Neural tube from ectoderm; telencephalon -> cerebral hemispheres; diencephalon -> thalami/hypothalamus/infundibulum/pineal/mammillary bodies; metencephalon -> pons + cerebellum; myelencephalon -> medulla.
+
+Open by offering to drill the four parts, the functional cortex map, the basal nuclei/capsules and the contralateral rule, the diencephalon (thalamus/hypothalamus/pineal), the brainstem & cranial-nerve attachments, the CSF pathway, or the Circle of Willis & the hemorrhages. When the student is wrong, name the structure or rule and have them re-derive step by step.`;
+
+function Coach() {
+  const [log, setLog] = useState([
+    { role: "assistant", content: "Okay guys - the brain. A few big things to nail: the cerebrum masks everything except the brainstem; the thalamus relays ALL ascending sensation except smell; the corticospinal tract crosses (internal capsule and the pyramidal decussation) so a lesion gives CONTRALATERAL paralysis; and the CSF pathway plus the Circle of Willis. Where do you want to start - the four parts, the functional cortex map, the basal nuclei and the capsules, the diencephalon, the brainstem and cranial-nerve attachments, the CSF flow, or the blood supply and hemorrhages?" },
+  ]);
+  const [input, setInput] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  const logRef = useRef(null);
+
+  useEffect(() => { if (logRef.current) logRef.current.scrollTop = logRef.current.scrollHeight; }, [log, busy]);
+
+  const send = async (text) => {
+    const msg = (text ?? input).trim();
+    if (!msg || busy) return;
+    setErr("");
+    const next = [...log, { role: "user", content: msg }];
+    setLog(next);
+    setInput("");
+    setBusy(true);
+    try {
+      const res = await fetch("https://fab-ai.dgync1.workers.dev/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: COACH_SYSTEM,
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await res.json();
+      const reply = (data.reply || (data.content || []).filter((b) => b.type === "text").map((b) => b.text).join("\n") || "").trim();
+      setLog((p) => [...p, { role: "assistant", content: reply || "Say that again for me?" }]);
+    } catch (e) {
+      setErr("Could not reach the tutor. If you're running this outside the wrapped app, the API call needs a valid endpoint/key.");
+      setLog((p) => p.slice(0, -1).concat({ role: "user", content: msg }));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const prompts = [
+    "Drill me on the four parts of the brain",
+    "Quiz the functional cortex map (motor, sensory, visual, auditory, taste)",
+    "Basal nuclei, the capsules, and the contralateral rule",
+    "The diencephalon - thalamus, hypothalamus, and pineal",
+    "Cranial-nerve attachments on the brainstem",
+    "Walk me through the CSF pathway and the Circle of Willis",
+  ];
+
+  return (
+    <section className="section">
+      <div className="banner">
+        <div className="bt">🧑‍⚕️ AI Coach — Dr. Maini&apos;s voice</div>
+        <p>Grounded in her brain lectures. It quizzes you and makes you reason step by step instead of guessing.</p>
+      </div>
+
+      <div className="coach-pills">
+        {prompts.map((p, i) => <button key={i} className="cpill" onClick={() => send(p)}>{p}</button>)}
+      </div>
+
+      <div className="chatlog" ref={logRef}>
+        {log.map((m, i) => (
+          <div key={i} className={`msg ${m.role === "user" ? "user" : "bot"}`}>
+            {m.role === "assistant" && <div className="who">Dr. Maini</div>}
+            {m.content}
+          </div>
+        ))}
+        {busy && <div className="typing">Dr. Maini is typing…</div>}
+      </div>
+
+      <div className="composer">
+        <textarea
+          value={input}
+          placeholder="Ask Dr. Maini… (Enter to send, Shift+Enter for a new line)"
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
+        />
+        <button className="btn btn-primary" onClick={() => send()} disabled={busy || !input.trim()}>Send</button>
+      </div>
+      {err && <div className="tinynote" style={{ color: "var(--bad)" }}>{err}</div>}
+      <div className="tinynote">Tutor answers are AI-generated in a teaching persona — trust the lecture/slides first if anything ever conflicts.</div>
+    </section>
+  );
+}
+
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
