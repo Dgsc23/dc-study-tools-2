@@ -2947,5 +2947,97 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["a 62yearold smoker has a tumor at the apex of the right lung on the ri", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l19-orbit-lecture.mp3", "s": 2673, "l": "The Orbit — part 1"}], ["dr maini lists the features of horner syndrome which of the following", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l19-orbit-lecture.mp3", "s": 2759, "l": "The Orbit — part 1"}], ["in horner syndrome the ptosis is only partial not complete loss of whi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l19-orbit-lecture.mp3", "s": 2420, "l": "The Orbit — part 1"}], ["a patient has complete drooping of one upper lid when the lid is lifte", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l19-orbit-lecture.mp3", "s": 2420, "l": "The Orbit — part 1"}], ["a patients right eye cannot move laterally past the midline and sits t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 4888, "l": "The Orbit — part 2"}], ["to clinically isolate the right superior rectus on the htest which way", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l21-eye-testing-lecture.mp3", "s": 144, "l": "Eye Muscles, Arteries & Nerves"}], ["shine light in the right eye neither pupil constricts shine light in t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 2023, "l": "The Orbit — part 2"}], ["in the pupillary light reflex which pathway carries the motor efferent", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 3933, "l": "The Orbit — part 2"}], ["a patient shifts gaze from a far object to a near one which set of cha", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 4210, "l": "The Orbit — part 2"}], ["when the ciliary muscle contracts to focus on a near object what happe", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l21-eye-testing-lecture.mp3", "s": 1625, "l": "Eye Muscles, Arteries & Nerves"}], ["a patients small pupils constrict briskly when focusing on a near targ", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 4505, "l": "The Orbit — part 2"}], ["trace the correct drainage path of tears from the eye surface to the n", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l19-orbit-lecture.mp3", "s": 1775, "l": "The Orbit — part 1"}], ["after an untreated conjunctivitis a patient develops a red painful swe", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 498, "l": "The Orbit — part 2"}], ["a patient with no tear secretion develops corneal drying and ulcers wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l19-orbit-lecture.mp3", "s": 1827, "l": "The Orbit — part 1"}], ["a firm lump within the eyelid not at the lash margin needs a minor sur", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l19-orbit-lecture.mp3", "s": 1406, "l": "The Orbit — part 1"}], ["a patient has raised intraocular pressure with headache and blurred vi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 3019, "l": "The Orbit — part 2"}], ["where is aqueous humor produced and what is its normal flow before it", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 3001, "l": "The Orbit — part 2"}], ["a young patients eyeball is longer than normal and images focus in fro", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 3663, "l": "The Orbit — part 2"}], ["in the corneal blink reflex which nerves form the sensory afferent and", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 4579, "l": "The Orbit — part 2"}], ["you suspect jaundice in a patient according to dr maini which part of", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 1381, "l": "The Orbit — part 2"}], ["fundoscopy shows swelling of the optic disc papilledema what does this", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 3456, "l": "The Orbit — part 2"}], ["an elderly patient loses the center of faces and print but keeps perip", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 2694, "l": "The Orbit — part 2"}], ["a patient can make out shapes in a dim room but cannot tell colors unt", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 2318, "l": "The Orbit — part 2"}], ["an infection in the facial danger area spreads to the cavernous sinus", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l21-eye-testing-lecture.mp3", "s": 756, "l": "Eye Muscles, Arteries & Nerves"}], ["sudden painless total blindness in one eye follows occlusion of a smal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l21-eye-testing-lecture.mp3", "s": 736, "l": "Eye Muscles, Arteries & Nerves"}], ["which structures pass through the optic canal as opposed to the superi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l19-orbit-lecture.mp3", "s": 733, "l": "The Orbit — part 1"}], ["which cranial nerve carries the parasympathetic secretomotor fibers to", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l20-orbit-2-lecture.mp3", "s": 654, "l": "The Orbit — part 2"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

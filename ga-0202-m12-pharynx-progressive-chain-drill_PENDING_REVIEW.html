@@ -7937,5 +7937,97 @@ try{ if(window._audioBar && _audioBar.parentNode){_audioBar.parentNode.removeChi
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["foundation  the pharynx is a single common chamber which two systems s", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 44, "l": "The Pharynx"}], ["level  that lower border of the cricoid cartilage lies at which verteb", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 173, "l": "The Pharynx"}], ["parts  from that skullbasetoc6 chamber name the three parts from super", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 128, "l": "The Pharynx"}], ["foundation  start in the top room functionally the nasopharynx is", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 300, "l": "The Pharynx"}], ["why  unlike the other parts the nasopharynx cannot be collapsed or obl", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 300, "l": "The Pharynx"}], ["roof  that rigid roof of the nasopharynx is propped up by which two bo", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 482, "l": "The Pharynx"}], ["floor  the nasopharynx ends inferiorly at which structure whose slopin", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 128, "l": "The Pharynx"}], ["structure  on which wall of the nasopharynx do you find the pharyngeal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 438, "l": "The Pharynx"}], ["connects  follow the auditory pharyngotympanic tube from the nasophary", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 575, "l": "The Pharynx"}], ["ridge  the cartilage of that tube bulges the lateral mucosa into a rid", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 598, "l": "The Pharynx"}], ["recess  just behind and above the torus tubarius lies a pocket name it", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1348, "l": "The Pharynx"}], ["structure  in the roof of the nasopharynx sits a single tonsil which o", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1144, "l": "The Pharynx"}], ["clinical name  when that pharyngeal tonsil becomes inflamed and enlarg", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 738, "l": "The Pharynx"}], ["consequence  that enlarged tonsil sits in the roof of the nasopharynx", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 758, "l": "The Pharynx"}], ["facies  that chronic mouthbreathing child develops a typical appearanc", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 800, "l": "The Pharynx"}], ["treatment window  maini says early adenoidectomy can let those facial", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 923, "l": "The Pharynx"}], ["foundation  drop to the middle room the oropharynx represents which en", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1048, "l": "The Pharynx"}], ["extent  the oropharynx extends from the soft palate down to which land", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 82, "l": "The Pharynx"}], ["lateral wall  in the lateral wall of the oropharynx sit two mucosal fo", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1287, "l": "The Pharynx"}], ["tonsil  between those two folds lies the tonsillar fossa what does it", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1287, "l": "The Pharynx"}], ["tonsil  attached to the root posterior part of that tongue is a single", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1144, "l": "The Pharynx"}], ["folds  how many folds connect the tongue to the epiglottis and what ar", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1199, "l": "The Pharynx"}], ["spaces  the spaces right and left between those glossoepiglottic folds", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1199, "l": "The Pharynx"}], ["location  enter the lowest room the laryngopharynx lies where", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1348, "l": "The Pharynx"}], ["extent  the laryngopharynx runs from the upper border of the epiglotti", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1644, "l": "The Pharynx"}], ["communications  the laryngopharynx opens superiorly into the oropharyn", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1368, "l": "The Pharynx"}], ["structure  on each side of the laryngeal inlet is a small depression w", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1453, "l": "The Pharynx"}], ["clinical risk  why does that shallow piriform fossa matter for swallow", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1471, "l": "The Pharynx"}], ["nerve  running just deep to the mucosa of the piriform fossa dangerous", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1496, "l": "The Pharynx"}], ["function  that internal laryngeal nerve provides sensation gsa to whic", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1546, "l": "The Pharynx"}], ["lesion  a fishbone injuring the internal laryngeal nerve in the pirifo", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1558, "l": "The Pharynx"}], ["epithelium  what type of epithelium lines the pharynx", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1756, "l": "The Pharynx"}], ["why stratified  why is that lining stratified many layers rather than", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1742, "l": "The Pharynx"}], ["submucosa  immediately deep to the mucosa the submucosa is a strong fi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1816, "l": "The Pharynx"}], ["layer order  list the pharyngeal wall layers from internal lumen to ex", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1906, "l": "The Pharynx"}], ["space  between the pharynx and the vertebral column lies the retrophar", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1944, "l": "The Pharynx"}], ["function  what is the main functional role of that loosetissue retroph", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 1965, "l": "The Pharynx"}], ["pathology  if that space is obliterated by fibrosis after an abscess h", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2005, "l": "The Pharynx"}], ["layer  the three constrictor muscles make up which layer of the pharyn", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2059, "l": "The Pharynx"}], ["parts  the inferior constrictor has two named parts what are they", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2476, "l": "The Pharynx"}], ["function  the lower part cricopharyngeus encircles the pharyngoesophag", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2459, "l": "The Pharynx"}], ["clinical  in old age this ues loses tone mainis term for the resulting", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2405, "l": "The Pharynx"}], ["origin  the thyropharyngeus part of the inferior constrictor arises fr", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2286, "l": "The Pharynx"}], ["neighbors  besides the inferior constrictor which two other muscles at", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2499, "l": "The Pharynx"}], ["exam trap  maini flags this as a good exam question which muscle is no", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2516, "l": "The Pharynx"}], ["arches  most pharyngeal muscles develop from which pharyngeal arches", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 800, "l": "The Pharynx"}], ["rule  because they come from the 4th and 6th arches most pharyngeal mu", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2225, "l": "The Pharynx"}], ["exception  one pharyngeal muscle breaks the vagus rule which muscle is", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2600, "l": "The Pharynx"}], ["why  stylopharyngeus is supplied by which nerve and why", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l27-pharynx-lecture.mp3", "s": 2618, "l": "The Pharynx"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

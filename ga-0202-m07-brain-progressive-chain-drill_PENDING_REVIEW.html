@@ -575,5 +575,97 @@ init();
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["foundation  lift the brain intact from the skull one single part is so", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 102, "l": "The Brain — part 1"}], ["build  inside that cerebrum the cortex is gray matter but islands of g", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 514, "l": "The Brain — part 1"}], ["clinical  a patient shows slowness sluggish movement and a resting tre", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 5665, "l": "The Brain — part 1"}], ["build  the upper motor neuron in that precentral cortex sends the cort", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 5010, "l": "The Brain — part 1"}], ["foundation  using her london heathrow analogy maini calls which dience", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 2988, "l": "The Brain — part 1"}], ["build  maini stresses one special sensation is the exception that bypa", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 3055, "l": "The Brain — part 1"}], ["clinical  for the other general sensations pain touch temperature main", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 1401, "l": "The Brain — part 1"}], ["foundation  where is brocas area located and what is its function", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 2319, "l": "The Brain — part 1"}], ["clinical  a patient understands everything said to them but is short o", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 2238, "l": "The Brain — part 1"}], ["build  now the comprehension area where is wernickes area located and", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 2208, "l": "The Brain — part 1"}], ["clinical  a patient speaks fluently but in meaningless word salad and", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 2208, "l": "The Brain — part 1"}], ["foundation  maini calls the cerebellum the small brain what is its rem", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 220, "l": "The Brain — part 1"}], ["build  how does the cerebellum refine a movement over time", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 5525, "l": "The Brain — part 1"}], ["build  when the cerebellum fails the hallmark tremor is which type and", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 5665, "l": "The Brain — part 1"}], ["clinical  a patient overshoots on the fingertonose test has slurred dy", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 5649, "l": "The Brain — part 1"}], ["clinical  because the chiasma sits right above the pituitary an enlarg", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 3275, "l": "The Brain — part 1"}], ["synthesis  that same optic chiasma is also encircled at the base of th", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4341, "l": "The Brain — part 2"}], ["foundation  maini says the brain has a dual arterial supply which two", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4779, "l": "The Brain — part 2"}], ["build  follow the internal carotid after giving off the ophthalmic art", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3595, "l": "The Brain — part 2"}], ["clinical  of those two which supplies the insula and the lateral surfa", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3857, "l": "The Brain — part 2"}], ["synthesis  if that mca is blocked what anastomotic structure can still", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4367, "l": "The Brain — part 2"}], ["foundation  turn to the posterior supply the two vertebral arteries un", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3682, "l": "The Brain — part 2"}], ["clinical  because of this a posteriorcirculation vertebrobasilar strok", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4229, "l": "The Brain — part 2"}], ["foundation  what structure found in each ventricle secretes the cerebr", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 3396, "l": "The Brain — part 1"}], ["build  after circulating through the ventricles csf escapes the fourth", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 2877, "l": "The Brain — part 2"}], ["build  from the subarachnoid space csf is finally absorbed by which st", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 3396, "l": "The Brain — part 1"}], ["clinical  if meningitis blocks those arachnoid granulations csf is sti", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3073, "l": "The Brain — part 2"}], ["foundation  a blow to the pterion in the temporal region tears which a", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4641, "l": "The Brain — part 2"}], ["build  a torn middle meningeal artery produces which fast arterial ble", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4662, "l": "The Brain — part 2"}], ["contrast  now the slow one a venous bleed from torn bridging veins com", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4662, "l": "The Brain — part 2"}], ["clinical  finally a bleed from rupture of a berry aneurysm into the sp", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4641, "l": "The Brain — part 2"}], ["synthesis  the gray matter forming a sleeve around that cerebral aqued", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 4376, "l": "The Brain — part 1"}], ["foundation  maini groups two basal nuclei into the lentiform lensshape", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 602, "l": "The Brain — part 1"}], ["build  medial to the lentiform nucleus between the caudateglobus palli", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 33, "l": "The Brain — part 2"}], ["build  moving laterally the next thin white band lies between the puta", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 33, "l": "The Brain — part 2"}], ["synthesis  the most lateral band lies between the claustrum and the in", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 33, "l": "The Brain — part 2"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

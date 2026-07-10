@@ -472,5 +472,97 @@ init();
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["a 66yearold man is brought in after a stroke he follows every command", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 2238, "l": "The Brain — part 1"}], ["a patient after a stroke speaks rapidly and fluently but the sentences", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 2208, "l": "The Brain — part 1"}], ["a 70yearold shows slowness and sluggishness of movement plus a tremor", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 558, "l": "The Brain — part 1"}], ["on exam a patient overshoots when reaching for the target on fingerton", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 5649, "l": "The Brain — part 1"}], ["two patients each have a hand tremor in patient a the tremor is worst", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 5665, "l": "The Brain — part 1"}], ["an embolus lodges in the artery maini calls the one most often obstruc", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3857, "l": "The Brain — part 2"}], ["a hypertensive patient has a small deep infarct in the internal capsul", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3088, "l": "The Brain — part 2"}], ["a patient has a lesion of the corticospinal fibers just above the pyra", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3088, "l": "The Brain — part 2"}], ["a ruptured aneurysm in the circle of willis blocks one internal caroti", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4381, "l": "The Brain — part 2"}], ["a trauma patient develops a pulsating protruding eye pulsatile exophth", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3595, "l": "The Brain — part 2"}], ["a young man is struck at the temple pterion briefly recovers then rapi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4662, "l": "The Brain — part 2"}], ["an elderly patient with brain atrophy has a minor head knock then over", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4662, "l": "The Brain — part 2"}], ["a patient collapses with a sudden severe headache ct shows blood in th", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3073, "l": "The Brain — part 2"}], ["during a procedure a surgeon accidentally nicks a cerebral vein with t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4509, "l": "The Brain — part 2"}], ["a stroke destroys the postcentral gyrus of one hemisphere which defici", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 1401, "l": "The Brain — part 1"}], ["a lesion damages one thalamus based on mainis relay center teaching wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 3039, "l": "The Brain — part 1"}], ["a patient after a frontal head injury shows poor judgment impaired rea", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l16-brain-lecture.mp3", "s": 980, "l": "The Brain — part 1"}], ["a patient in a coma is found to have damage to the network of gray and", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 2262, "l": "The Brain — part 2"}], ["a patient with an enlarging pituitary adenoma first has headaches and", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4127, "l": "The Brain — part 2"}], ["a patient has disordered bodytemperature control abnormal thirst and h", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 682, "l": "The Brain — part 2"}], ["on a skull film of a healthy 55yearold a small calcified opacity is se", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 788, "l": "The Brain — part 2"}], ["a brainstem lesion involves the depression between the two cerebral pe", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 1497, "l": "The Brain — part 2"}], ["a cranial nerve is injured as it emerges from the dorsal posterior sur", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 1519, "l": "The Brain — part 2"}], ["a patient cannot abduct turn outward the right eye maini ties this mus", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 1709, "l": "The Brain — part 2"}], ["after a skullbase injury a patients tongue is weak and the nerve that", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 1896, "l": "The Brain — part 2"}], ["a skullbase tumor at the jugular foramen threatens the three nerves ma", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 1870, "l": "The Brain — part 2"}], ["a patient develops progressive hearing loss and imbalance from a mass", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 4127, "l": "The Brain — part 2"}], ["after bacterial meningitis a patient develops raised intracranial pres", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3073, "l": "The Brain — part 2"}], ["a patient loses vision in part of the visual field after an infarct of", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l17-brain-lecture.mp3", "s": 3955, "l": "The Brain — part 2"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

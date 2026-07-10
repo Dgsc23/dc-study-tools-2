@@ -2979,5 +2979,97 @@ try{ if(window._audioBar && _audioBar.parentNode){_audioBar.parentNode.removeChi
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["foundation you are on the side of the skull the temporal lines that ma", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 114, "l": "Temporal & Infratemporal — part 1"}], ["build the parietal you just found meets the frontal temporal and sphen", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 183, "l": "Temporal & Infratemporal — part 1"}], ["build that middle meningeal artery enters the cranium to reach the dur", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 529, "l": "Temporal & Infratemporal — part 2"}], ["clinical a blow that fractures the pterion tears the middle meningeal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 679, "l": "Temporal & Infratemporal — part 2"}], ["foundation the four muscles of mastication all develop from which phar", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 1512, "l": "Temporal & Infratemporal — part 1"}], ["build because they are firstarch muscles the muscles of mastication ar", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 1512, "l": "Temporal & Infratemporal — part 1"}], ["build that mandibular nerve v3 leaves the skull into the infratemporal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 529, "l": "Temporal & Infratemporal — part 2"}], ["build just below the foramen ovale v3 descends between tensor veli pal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 1370, "l": "Temporal & Infratemporal — part 2"}], ["function that same lateral pterygoid is one of mainis two mustmemorize", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 1512, "l": "Temporal & Infratemporal — part 1"}], ["foundation besides the pterygoid fovea of the condyle the lateral pter", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 2016, "l": "Temporal & Infratemporal — part 1"}], ["build that articular disc sits in the middle of the joint cavity it di", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 1186, "l": "Temporal & Infratemporal — part 1"}], ["build a cavity a capsule synovial fluid and hyaline articular surfaces", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 1220, "l": "Temporal & Infratemporal — part 1"}], ["clinical because that hyaline articular cartilage is avascular the syn", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l10-temporal-lecture.mp3", "s": 1245, "l": "Temporal & Infratemporal — part 1"}], ["autonomic those secretomotor fibers riding the auriculotemporal nerve", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2309, "l": "Temporal & Infratemporal — part 2"}], ["foundation the otic ganglion a parasympathetic ganglion of the infrate", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2309, "l": "Temporal & Infratemporal — part 2"}], ["build the cell bodies for those cn ix preganglionic fibers sit in whic", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 1787, "l": "Temporal & Infratemporal — part 2"}], ["apply on dissection the otic ganglion is hidden just below the foramen", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2668, "l": "Temporal & Infratemporal — part 2"}], ["foundation before the chorda tympani joins it the lingual nerve a bran", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 1428, "l": "Temporal & Infratemporal — part 2"}], ["build that chorda tympani leaves the skull to reach the lingual nerve", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 1130, "l": "Temporal & Infratemporal — part 2"}], ["build the chorda tympani adds which two fiber types to the lingual ner", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 1130, "l": "Temporal & Infratemporal — part 2"}], ["apply those preganglionic parasympathetic fibers synapse in the subman", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2121, "l": "Temporal & Infratemporal — part 2"}], ["foundation the maxillary artery is best described as which of the foll", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 209, "l": "Temporal & Infratemporal — part 2"}], ["build where does the maxillary artery begin behind the neck of the man", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2668, "l": "Temporal & Infratemporal — part 2"}], ["build to leave the infratemporal fossa and enter the pterygopalatine f", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2738, "l": "Temporal & Infratemporal — part 2"}], ["build maini frequently asks for the terminal branch of the maxillary a", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 3119, "l": "Temporal & Infratemporal — part 2"}], ["clinical within the pterygopalatine fossa which branch passes medially", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2935, "l": "Temporal & Infratemporal — part 2"}], ["build just before it enters the bone the inferior alveolar nerve gives", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 984, "l": "Temporal & Infratemporal — part 2"}], ["clinical the inferior alveolar nerve runs through the mandible and exi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 1023, "l": "Temporal & Infratemporal — part 2"}], ["foundation the pterygoid venous plexus which surrounds the maxillary a", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 730, "l": "Temporal & Infratemporal — part 2"}], ["build posteriorly the pterygoid venous plexus drains primarily into wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 730, "l": "Temporal & Infratemporal — part 2"}], ["build that maxillary vein then unites with the superficial temporal ve", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 730, "l": "Temporal & Infratemporal — part 2"}], ["clinical why is the pterygoid venous plexus an important route for the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 749, "l": "Temporal & Infratemporal — part 2"}], ["foundation the pterygopalatine fossa communicates medially with the na", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2784, "l": "Temporal & Infratemporal — part 2"}], ["build posteriorly the pterygopalatine fossa opens into the middle cran", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 3150, "l": "Temporal & Infratemporal — part 2"}], ["apply that maxillary nerve v2 reaches the face through the infraorbita", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 3341, "l": "Temporal & Infratemporal — part 2"}], ["foundation mainis mnemonic cops names the four parasympathetic ganglia", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 1499, "l": "Temporal & Infratemporal — part 2"}], ["build the preganglionic parasympathetic outflow that feeds those gangl", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2148, "l": "Temporal & Infratemporal — part 2"}], ["build of those which cranial nerve supplies both the pterygopalatine g", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 2121, "l": "Temporal & Infratemporal — part 2"}], ["apply trap maini asks which of the following is not a branch of the fa", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l11-temporal-2-lecture.mp3", "s": 221, "l": "Temporal & Infratemporal — part 2"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

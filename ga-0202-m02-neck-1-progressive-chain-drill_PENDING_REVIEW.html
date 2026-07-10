@@ -575,5 +575,97 @@ init();
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["clinical  because the subclavian artery and the brachial plexus share", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5401, "l": "Cervical Triangles & Vessels"}], ["foundation  a different plexus lives higher in the neck the cervical p", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 218, "l": "Cervical Triangles & Vessels"}], ["build  those upper cervical rami form a plexus related to which vein w", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 218, "l": "Cervical Triangles & Vessels"}], ["build  four of its cutaneous branches all surface at one spot on the p", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 342, "l": "Cervical Triangles & Vessels"}], ["clinical  that exception is the phrenic nerve the sole motor supply to", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 461, "l": "Cervical Triangles & Vessels"}], ["build  which spinal nerves mainly form the inferior root that complete", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 673, "l": "Cervical Triangles & Vessels"}], ["clinical  those c1 fibers reach thyrohyoid and geniohyoid by riding th", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 579, "l": "Cervical Triangles & Vessels"}], ["foundation  switch to the front of the neck what are the boundaries of", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 900, "l": "Cervical Triangles & Vessels"}], ["foundation  the digastric has two bellies its posterior belly originat", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1797, "l": "Cervical Triangles & Vessels"}], ["synthesis  that nerve to mylohyoid is a branch of the inferior alveola", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2126, "l": "Cervical Triangles & Vessels"}], ["foundation  as a group what is the shared action of the suprahyoid mus", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1736, "l": "Cervical Triangles & Vessels"}], ["build  the broadest suprahyoid forms the floor of the mouth the mylohy", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2481, "l": "Cervical Triangles & Vessels"}], ["build  where do the anterior fibers of the mylohyoid meet in the midli", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2571, "l": "Cervical Triangles & Vessels"}], ["build  riding on top of the mylohyoid is the geniohyoid it originates", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2789, "l": "Cervical Triangles & Vessels"}], ["link  what is the positional relationship of the geniohyoid to the myl", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 2789, "l": "Cervical Triangles & Vessels"}], ["build  one strap muscle is unusual in its bony reach which infrahyoid", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3058, "l": "Cervical Triangles & Vessels"}], ["build  the omohyoids intermediate tendon is held in place by a fascial", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3083, "l": "Cervical Triangles & Vessels"}], ["foundation  begin at the source the right common carotid artery arises", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3803, "l": "Cervical Triangles & Vessels"}], ["build  and the left common carotid arises directly from which structur", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3803, "l": "Cervical Triangles & Vessels"}], ["build  how can you tell the internal from the external carotid apart i", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3915, "l": "Cervical Triangles & Vessels"}], ["clinical  the branchless internal carotid heads for the brain through", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4321, "l": "Cervical Triangles & Vessels"}], ["foundation  at the base of the internal carotid sits a dilatation wher", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3965, "l": "Cervical Triangles & Vessels"}], ["build  the carotid sinus contains which type of receptor", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4180, "l": "Cervical Triangles & Vessels"}], ["build  its neighbor the carotid body holds chemoreceptors that sense w", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4245, "l": "Cervical Triangles & Vessels"}], ["clinical  both the carotid sinus and the carotid body send their impul", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4094, "l": "Cervical Triangles & Vessels"}], ["foundation  the external carotid is the branchgiver of the neck how ma", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4426, "l": "Cervical Triangles & Vessels"}], ["build  which of those anterior branches descends to supply the upper p", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4448, "l": "Cervical Triangles & Vessels"}], ["foundation  back to the root of the neck the right subclavian artery a", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 132, "l": "Neck Vessels & Viscera"}], ["build  the anterior scalene crosses the subclavian dividing it into ho", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5034, "l": "Cervical Triangles & Vessels"}], ["link  follow the vertebral artery upward it ascends through which stru", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5051, "l": "Cervical Triangles & Vessels"}], ["build  the necks great vein begins at the jugular foramen the internal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 228, "l": "Neck Vessels & Viscera"}], ["build  the ijv then descends in the carotid sheath alongside which two", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 303, "l": "Neck Vessels & Viscera"}], ["link  at the root of the neck the subclavian vein unites with which ve", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1009, "l": "Cervical Triangles & Vessels"}], ["build  into which vein do the superior and middle thyroid veins drain", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["clinical  and the oddoneout inferior thyroid vein drains into which ve", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["foundation  lymph from the head and neck ultimately joins to form whic", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 440, "l": "Neck Vessels & Viscera"}], ["build  those jugular lymph trunks drain into which structures", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 486, "l": "Neck Vessels & Viscera"}], ["clinical  on palpation which lymph node finding is more worrisome for", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 562, "l": "Neck Vessels & Viscera"}], ["landmark  the lesser supraclavicular fossa is the surface depression l", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 631, "l": "Neck Vessels & Viscera"}], ["landmark  the greater supraclavicular fossa overlies which triangle wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 132, "l": "Neck Vessels & Viscera"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

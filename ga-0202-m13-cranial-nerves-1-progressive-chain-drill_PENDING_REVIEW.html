@@ -7931,5 +7931,97 @@ try{ if(window._audioBar && _audioBar.parentNode){_audioBar.parentNode.removeChi
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["step 1  foundation  you are tracing cranial nerve i what functional fi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4766, "l": "Cranial Nerves"}], ["step 2  those sva smell fibres are the axons of receptor neurons where", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 890, "l": "Cranial Nerves"}], ["step 3  from that epithelium in the roof of the nose the olfactory axo", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 890, "l": "Cranial Nerves"}], ["step 4  having passed through the cribriform plate the olfactory axons", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 901, "l": "Cranial Nerves"}], ["step 5  clinical  a head injury shears those fibres as they cross the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4790, "l": "Cranial Nerves"}], ["step 1  foundation  moving to cranial nerve ii what fibre type does ma", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1879, "l": "Cranial Nerves"}], ["step 3  those ganglioncell axons leave the eyeball and exit the orbit", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 158, "l": "Cranial Nerves"}], ["step 4  clinical  a tumour completely severs one optic nerve before th", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3974, "l": "Cranial Nerves"}], ["step 3  lesion  a midline mass compresses the crossing nasal fibres ri", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 811, "l": "Cranial Nerves"}], ["step 4  cause  what is the commonest lesion maini gives for this bitem", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4056, "l": "Cranial Nerves"}], ["step 5  pearl  maini adds a clinical pearl a patient with an undiagnos", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 4790, "l": "Cranial Nerves"}], ["step 2  and rods pick mainis description", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 158, "l": "Cranial Nerves"}], ["step 1  foundation  cranial nerve iii is motor to eye muscles but main", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3473, "l": "Cranial Nerves"}], ["step 3  through its parasympathetic fibres cn iii also supplies which", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["step 5  clinical  in the same complete cn iii palsy what happens to th", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3299, "l": "Cranial Nerves"}], ["step 2  in horner syndrome what is the pupil and which muscle lost its", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["step 4  key trap  cn iii palsy gives an obvious squint downandout eye", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2327, "l": "Cranial Nerves"}], ["step 3  clinical  in cn iii palsy the near accommodation reflex is los", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3985, "l": "Cranial Nerves"}], ["step 1  foundation  the muscles of the pharynx are driven through the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2189, "l": "Cranial Nerves"}], ["step 2  of those two nerves which one actually delivers the motor supp", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1860, "l": "Cranial Nerves"}], ["step 4  that exception makes sense embryologically stylopharyngeus and", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1818, "l": "Cranial Nerves"}], ["step 1  foundation  maini maps sensation onto the three floors of the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["step 2  drop to the middle floor the oropharynx mucosa and the posteri", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3493, "l": "Cranial Nerves"}], ["step 3  the lowest floor the mucosa around the entrance to the larynx", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["step 4  clinical  a swallowed fish bone lodges in the piriform fossa w", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["step 1  foundation  the cervical part of the sympathetic trunk carries", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2454, "l": "Cranial Nerves"}], ["step 2  what kind of neuron cell bodies sit in those cervical ganglia", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2454, "l": "Cranial Nerves"}], ["step 3  those postganglionic neurons are switched on by preganglionic", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2454, "l": "Cranial Nerves"}], ["step 4  highyield  maini stresses a board fact about 99 of head and ne", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2454, "l": "Cranial Nerves"}], ["step 5  where does maini locate that superior cervical ganglion and wh", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2454, "l": "Cranial Nerves"}], ["step 3  why does every spinal nerve need a gray ramus of sympathetic f", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}], ["step 4  contrast  so do the spinal nerves also carry parasympathetic f", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3473, "l": "Cranial Nerves"}], ["step 1  foundation  maini names the layers of the deep cervical fascia", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 3299, "l": "Cranial Nerves"}], ["step 2  the investing layer splits to enclose which two muscles", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2607, "l": "Cranial Nerves"}], ["step 1  foundation  how many prevertebral muscles does maini say to ma", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 1265, "l": "Cranial Nerves"}], ["step 4  what is the nerve supply of these prevertebral muscles for exa", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l28-cranial-nerves-lecture.mp3", "s": 2439, "l": "Cranial Nerves"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

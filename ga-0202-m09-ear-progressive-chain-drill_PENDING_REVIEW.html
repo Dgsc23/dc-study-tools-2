@@ -7990,5 +7990,97 @@ try{ if(window._audioBar && _audioBar.parentNode){_audioBar.parentNode.removeChi
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["foundation  dr maini splits the ear into external middle and internal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2561, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  take the first part the auricle pinna strip off its skin and you", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 3068, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  follow the funnel inward to the external acoustic meatus its cer", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 3085, "l": "Ear, Nasal Cavity & Sinuses"}], ["clinical  a patient coughs when you clean deep in that same canal whic", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1687, "l": "Ear, Nasal Cavity & Sinuses"}], ["foundation  blood to the auricle arrives via the superficial temporal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2479, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  most of the auricles skin sensation is carried by the great auri", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4453, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  the front of the auricle and the meatus share a second sensory n", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2499, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  those are the sensory lines which nerve provides the motor suppl", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2499, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  most of the drum is taut pars tensa but a small superior part is", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 3544, "l": "Ear, Nasal Cavity & Sinuses"}], ["clinical  on otoscopy you look for the reflected cone of light in the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1564, "l": "Ear, Nasal Cavity & Sinuses"}], ["foundation  cross the drum into the middle ear tympanic cavity within", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1865, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  the middle ear has a roof separating it from the middle cranial", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1611, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  look at the posterior wall through which opening does the middle", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1687, "l": "Ear, Nasal Cavity & Sinuses"}], ["clinical  maini notes the mastoid process is honeycombed with air cell", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2592, "l": "Ear, Nasal Cavity & Sinuses"}], ["foundation  turn to the medial wall of the middle ear it bulges as the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 656, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  two windows pierce this medial wall the oval window fenestra ves", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1687, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  name the pair of openings on this medial wall that the base of t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1687, "l": "Ear, Nasal Cavity & Sinuses"}], ["foundation  three tiny ossicles bridge the drum to the oval window nam", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 656, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  the last ossicle looks like a stirrup and ends in a flat footpla", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1362, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  trace the vibration once sound hits the eardrum which route is c", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2575, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  the stapes pushes perilymph through the scala vestibuli over the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1362, "l": "Ear, Nasal Cavity & Sinuses"}], ["synthesis  as that wave travels the cochlea pitch is mapped along the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2752, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  the second muscle the stapedius attaches to the neck of the stap", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4348, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  in loud surroundings the tensor tympani and stapedius contract t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 241, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  where does the far pharyngeal end of this tube open", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 3022, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  maini stresses this tube has nothing to do with hearing what is", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2592, "l": "Ear, Nasal Cavity & Sinuses"}], ["clinical  on an airplane your ears feel blocked as cabin pressure chan", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1667, "l": "Ear, Nasal Cavity & Sinuses"}], ["clinical  a prolonged flu can swell this tube shut besides ear fullnes", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 3022, "l": "Ear, Nasal Cavity & Sinuses"}], ["foundation  enter the internal ear which maini calls the labyrinth it", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 73, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  a fluid fills the gap between the bony shell and the membranous", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 105, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  and the fluid inside the membranous labyrinth is", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 86, "l": "Ear, Nasal Cavity & Sinuses"}], ["synthesis  the bony labyrinth itself has three regions which set is co", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 73, "l": "Ear, Nasal Cavity & Sinuses"}], ["foundation  zoom into the cochlea two membranes split the cochlear can", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1706, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  the hearing receptor apparatus the organ of corti rests on which", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 928, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  as the basilar membrane vibrates what is the immediate mechanica", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2642, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  those action potentials leave the cochlea on which nerve divisio", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1472, "l": "Ear, Nasal Cavity & Sinuses"}], ["clinical  to bedsidetest this whole hearing pathway maini groups weber", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 3778, "l": "Ear, Nasal Cavity & Sinuses"}], ["foundation  leave hearing behind and enter the vestibule the central c", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1865, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  each sac has a sensory patch called the macula covered by a gela", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2245, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  embedded in that gel are tiny weights that make it topheavy what", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2055, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  because those stones respond to gravity and straightline motion", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1564, "l": "Ear, Nasal Cavity & Sinuses"}], ["synthesis  maini notes the macula sacculi is oriented vertically what", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1993, "l": "Ear, Nasal Cavity & Sinuses"}], ["foundation  the last innerear region the semicircular canals how many", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2145, "l": "Ear, Nasal Cavity & Sinuses"}], ["then  each canals duct swells at one end into an ampulla inside sits t", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2201, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  the hair cells of the crista are buried in a gelatinous dome tha", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2055, "l": "Ear, Nasal Cavity & Sinuses"}], ["next  because endolymph lags and bends the cupula when you spin the se", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2226, "l": "Ear, Nasal Cavity & Sinuses"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

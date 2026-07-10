@@ -2742,5 +2742,97 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["a 60yearold eats a very salty meal and his blood pressure climbs the w", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3981, "l": "Cervical Triangles & Vessels"}], ["a clinician gently presses over the carotid bifurcation and the patien", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3952, "l": "Cervical Triangles & Vessels"}], ["a patient hypoventilates during sedation arterial co2 and hydrogen ion", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4196, "l": "Cervical Triangles & Vessels"}], ["which of the following would the carotid body chemoreceptors not respo", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 3981, "l": "Cervical Triangles & Vessels"}], ["a patient with a cervical rib develops arm ischemia and hand tingling", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 984, "l": "Neck Vessels & Viscera"}], ["in classic scalene syndrome the subclavian artery is compressed but th", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5401, "l": "Cervical Triangles & Vessels"}], ["after a neck dissection a patient reports numb skin over the lower ear", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 415, "l": "Cervical Triangles & Vessels"}], ["to listen for a carotid bruit at the bifurcation of the common carotid", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 2357, "l": "Neck Vessels & Viscera"}], ["a clinician palpates a pulse just in front of the tragus of the ear wi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4775, "l": "Cervical Triangles & Vessels"}], ["during a thyroidectomy the surgeon ligates the artery supplying the up", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 4448, "l": "Cervical Triangles & Vessels"}], ["to palpate the subclavian artery a clinician presses downward and back", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 672, "l": "Neck Vessels & Viscera"}], ["a patient develops posteriorcirculation symptoms after forceful neck r", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 5051, "l": "Cervical Triangles & Vessels"}], ["while placing a central venous catheter into the internal jugular vein", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 274, "l": "Neck Vessels & Viscera"}], ["the internal jugular vein begins at the jugular foramen as the direct", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 228, "l": "Neck Vessels & Viscera"}], ["during thyroid surgery the surgeon notes that the superior and middle", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 1443, "l": "Neck Vessels & Viscera"}], ["a patient has an enlarged cervical lymph node which combination of fea", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 562, "l": "Neck Vessels & Viscera"}], ["a slowgrowing mass in the carotid triangle could compress the cranial", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l05-neck-viscera-lecture.mp3", "s": 2357, "l": "Neck Vessels & Viscera"}], ["a patient has a swollen tender gland in the digastric submandibular tr", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l03-neck-lecture.mp3", "s": 1335, "l": "Cervical Triangles & Vessels"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>

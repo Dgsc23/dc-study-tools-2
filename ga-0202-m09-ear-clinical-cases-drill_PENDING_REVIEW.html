@@ -2915,5 +2915,97 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
 
 </script>
 <!--/dc-drill-telemetry-v1-->
+
+
+
+
+<style id="dc-prof-anchor-css">
+#dcProfPill{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99998;display:none;
+ align-items:center;gap:10px;background:linear-gradient(135deg,#4c0519,#1f2937);border:1px solid #fb7185;
+ color:#fecdd3;border-radius:999px;padding:9px 16px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",sans-serif;
+ box-shadow:0 6px 22px rgba(251,113,133,.28);cursor:pointer}
+#dcProfPill:hover{border-color:#fda4af}
+#dcProfBar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:99999;display:none;
+ align-items:center;gap:8px;background:#0f1626;border:1px solid #fb7185;border-radius:14px;padding:9px 12px;
+ font:600 12px/1 system-ui,sans-serif;color:#fecdd3;box-shadow:0 6px 22px rgba(0,0,0,.5);flex-wrap:wrap;max-width:94vw}
+#dcProfBar button{background:#1e293b;border:1px solid #475569;color:#e2e8f0;border-radius:7px;padding:5px 9px;cursor:pointer;font:600 12px system-ui}
+#dcProfBar button:hover{border-color:#fb7185}
+#dcProfBar .lbl{color:#94a3b8;font-weight:500;max-width:230px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#dcProfBar .spd.on{background:#4c0519;border-color:#fb7185;color:#fecdd3}
+</style>
+<div id="dcProfPill"></div>
+<div id="dcProfBar">
+  <button id="dcpPlay">&#9654;&#65038; Play</button>
+  <button id="dcpBack">&#171; 10s</button>
+  <button id="dcpFwd">10s &#187;</button>
+  <span style="color:#64748b">speed</span>
+  <button class="spd" data-r="1">1x</button><button class="spd" data-r="1.5">1.5x</button>
+  <button class="spd" data-r="2">2x</button><button class="spd" data-r="2.5">2.5x</button><button class="spd" data-r="3">3x</button>
+  <span class="lbl" id="dcpLbl"></span>
+  <span id="dcpTime" style="color:#94a3b8">0:00</span>
+  <button id="dcpClose">&times;</button>
+</div>
+<script id="dc-prof-anchor-engine">
+(function(){
+  var ANCHORS = [["during an otoscopic exam of a patients right ear you locate the cone o", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 241, "l": "Ear, Nasal Cavity & Sinuses"}], ["a child with a chronic middleear effusion needs the fluid drained the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4388, "l": "Ear, Nasal Cavity & Sinuses"}], ["a patients tympanic membrane has become thickened and fibrosed after r", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4528, "l": "Ear, Nasal Cavity & Sinuses"}], ["a patient with untreated otitis media develops redness and tenderness", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4543, "l": "Ear, Nasal Cavity & Sinuses"}], ["through which opening does the middleear cavity communicate posteriorl", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1687, "l": "Ear, Nasal Cavity & Sinuses"}], ["dr maini explains that a severe throat pharyngeal infection can travel", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2499, "l": "Ear, Nasal Cavity & Sinuses"}], ["during middleear surgery the operator must avoid the bony facial canal", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4331, "l": "Ear, Nasal Cavity & Sinuses"}], ["a patient with a facial nerve lesion proximal to the branch supplying", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4528, "l": "Ear, Nasal Cavity & Sinuses"}], ["the stapedius dampens loudsound vibrations by pulling the head of the", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4348, "l": "Ear, Nasal Cavity & Sinuses"}], ["while cleaning her ear canal with a cotton swab a patient suddenly fee", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4475, "l": "Ear, Nasal Cavity & Sinuses"}], ["a slowgrowing tumor within the internal acoustic meatus gradually comp", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2499, "l": "Ear, Nasal Cavity & Sinuses"}], ["as a passengers plane climbs cabin pressure falls the eardrum bulges o", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1667, "l": "Ear, Nasal Cavity & Sinuses"}], ["after a prolonged bout of flu a patient develops a nasal twang in her", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4528, "l": "Ear, Nasal Cavity & Sinuses"}], ["dr maini repeatedly warns students not to confuse the auditory tube wi", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2899, "l": "Ear, Nasal Cavity & Sinuses"}], ["trace a sound vibration from the eardrum to the innerear fluid which s", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2592, "l": "Ear, Nasal Cavity & Sinuses"}], ["the footplate of the stapes sits in a window on the medial wall and pu", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1667, "l": "Ear, Nasal Cavity & Sinuses"}], ["after the stapes drives pressure waves through the perilymph and over", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1667, "l": "Ear, Nasal Cavity & Sinuses"}], ["which auditory ossicle has its handle manubrium attached to the tympan", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2575, "l": "Ear, Nasal Cavity & Sinuses"}], ["a patient reports a spinning sensation brought on by rotational head m", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2226, "l": "Ear, Nasal Cavity & Sinuses"}], ["in an elevator that suddenly accelerates upward which innerear recepto", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1594, "l": "Ear, Nasal Cavity & Sinuses"}], ["a patient presents with a hearing complaint which pair of tests groupe", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 2311, "l": "Ear, Nasal Cavity & Sinuses"}], ["dr maini notes she has seen board questions on the parts of the auricl", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 1818, "l": "Ear, Nasal Cavity & Sinuses"}], ["to straighten the ear canal during otoscopy you gently move the auricl", {"a": "https://dgsc23.github.io/dc-finals-audio/ga-0202-l23-ear-nasal-lecture.mp3", "s": 4005, "l": "Ear, Nasal Cavity & Sinuses"}]];      // [ [normStem, {a:audioUrl, s:startSec, l:partLabel}] , ... ]
+  var PROF = "Dr. Maini";
+  var audio = new Audio(); audio.preload='none';
+  var pill=document.getElementById('dcProfPill'), bar=document.getElementById('dcProfBar');
+  var lbl=document.getElementById('dcpLbl'), tEl=document.getElementById('dcpTime'), playBtn=document.getElementById('dcpPlay');
+  var cur=null;
+  function fmt(x){x=Math.max(0,Math.floor(x||0));var m=Math.floor(x/60),s=x%60;return m+':'+(s<10?'0':'')+s;}
+  function norm(s){return (s||'').toLowerCase().replace(/[^a-z0-9 ]/g,'').slice(0,70).trim();}
+
+  function findAnchor(){
+    var txt = norm(document.body.innerText||'');
+    if(!txt) return null;
+    // the displayed question stem will appear verbatim in the page text
+    for(var i=0;i<ANCHORS.length;i++){ if(txt.indexOf(ANCHORS[i][0])>=0) return ANCHORS[i][1]; }
+    return null;
+  }
+  var scanning=false;
+  function scan(){
+    if(scanning) return; scanning=true;
+    setTimeout(function(){
+      scanning=false;
+      var a=findAnchor();
+      if(a && (!cur || a.s!==cur.s || a.a!==cur.a)){
+        cur=a;
+        if(bar.style.display!=='flex'){
+          pill.innerHTML='&#127897;&#65039; Hear '+PROF+' teach this &nbsp;<b>&#9654;&#65038; '+fmt(a.s)+'</b>';
+          pill.style.display='flex';
+        }
+      } else if(!a && bar.style.display!=='flex'){ pill.style.display='none'; cur=null; }
+    }, 180);
+  }
+  new MutationObserver(scan).observe(document.body,{childList:true,subtree:true,characterData:true});
+  scan();
+
+  function open(){
+    if(!cur) return;
+    if(audio.src!==cur.a){ audio.src=cur.a; }
+    audio.currentTime=cur.s; audio.play().catch(function(){});
+    lbl.textContent=cur.l||''; pill.style.display='none'; bar.style.display='flex';
+    playBtn.innerHTML='&#10073;&#10073; Pause';
+  }
+  pill.addEventListener('click', open);
+  playBtn.addEventListener('click', function(){
+    if(audio.paused){ audio.play(); playBtn.innerHTML='&#10073;&#10073; Pause'; }
+    else { audio.pause(); playBtn.innerHTML='&#9654;&#65038; Play'; }
+  });
+  document.getElementById('dcpBack').addEventListener('click',function(){audio.currentTime=Math.max(0,audio.currentTime-10);});
+  document.getElementById('dcpFwd').addEventListener('click',function(){audio.currentTime+=10;});
+  document.getElementById('dcpClose').addEventListener('click',function(){audio.pause();bar.style.display='none';playBtn.innerHTML='&#9654;&#65038; Play';scan();});
+  Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'), function(b){
+    b.addEventListener('click', function(){
+      audio.playbackRate=parseFloat(b.dataset.r);
+      Array.prototype.forEach.call(document.querySelectorAll('#dcProfBar .spd'),function(x){x.classList.remove('on');});
+      b.classList.add('on');
+    });
+  });
+  audio.addEventListener('timeupdate', function(){ tEl.textContent=fmt(audio.currentTime); });
+})();
+</script>
+
 </body>
 </html>
