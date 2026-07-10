@@ -216,5 +216,80 @@ updateNowPlaying(0);
 
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
 <!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+
+<style id="dc-r2-video-css">
+#dcVidBtn{position:fixed;right:18px;bottom:18px;z-index:99997;background:linear-gradient(135deg,#2e1065,#1f2937);
+ border:1px solid #a78bfa;color:#ddd6fe;border-radius:999px;padding:10px 16px;font:600 13px system-ui;cursor:pointer;
+ box-shadow:0 6px 20px rgba(167,139,250,.3)}
+#dcVidBtn:hover{border-color:#c4b5fd}
+#dcVidBox{position:fixed;right:18px;bottom:18px;z-index:99999;display:none;flex-direction:column;gap:0;
+ background:#0f1626;border:1px solid #a78bfa;border-radius:12px;overflow:hidden;box-shadow:0 10px 34px rgba(0,0,0,.6);width:380px;max-width:92vw}
+#dcVidBar{display:flex;align-items:center;gap:8px;padding:7px 10px;background:#1e1b4b;color:#ddd6fe;font:600 12px system-ui}
+#dcVidBar .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#c4b5fd;font-weight:500}
+#dcVidBar button{background:#312e81;border:1px solid #6d28d9;color:#e9d5ff;border-radius:6px;padding:3px 8px;cursor:pointer;font:600 12px system-ui}
+#dcVid{width:100%;display:block;background:#000}
+#dcVidBox.min #dcVid{display:none}
+</style>
+<button id="dcVidBtn">&#127916; Watch the lecture</button>
+<div id="dcVidBox">
+  <div id="dcVidBar">
+    <span class="t" id="dcVidTitle">Lecture video</span>
+    <button id="dcVidMin">&#8211;</button><button id="dcVidClose">&times;</button>
+  </div>
+  <video id="dcVid" controls playsinline preload="none"></video>
+</div>
+<script id="dc-r2-video-popout">
+(function(){
+  var VIDEO_FOR = {"https://dgsc23.github.io/dc-finals-audio/ga-0202-l07-face-scalp-lecture.mp3": "https://pub-7fb2bb3e5a0b4096a57fc578b5a16078.r2.dev/ga0202/m04/L07-33590f6a.mp4", "https://dgsc23.github.io/dc-finals-audio/ga-0202-l08-face-scalp-2-lecture.mp3": "https://pub-7fb2bb3e5a0b4096a57fc578b5a16078.r2.dev/ga0202/m04/L08-83f04fa6.mp4"};          // audioUrl -> videoUrl
+  var audio = document.querySelector('audio'); if(!audio) return;
+  var btn=document.getElementById('dcVidBtn'), box=document.getElementById('dcVidBox'),
+      vid=document.getElementById('dcVid'), ttl=document.getElementById('dcVidTitle');
+  var on=false, syncing=false;
+
+  function videoFor(src){
+    if(!src) return null;
+    if(VIDEO_FOR[src]) return VIDEO_FOR[src];
+    for(var k in VIDEO_FOR){ if(src.indexOf(k.split('/').pop())>=0) return VIDEO_FOR[k]; }
+    return null;
+  }
+  function ensureSrc(){
+    var v = videoFor(audio.currentSrc || audio.src);
+    if(!v) return false;
+    if(vid.getAttribute('data-src') !== v){ vid.src=v; vid.setAttribute('data-src', v); }
+    return true;
+  }
+  function open(){
+    if(!ensureSrc()) return;
+    on=true; box.style.display='flex'; btn.style.display='none';
+    syncing=true; audio.pause(); vid.currentTime = audio.currentTime || 0; syncing=false;
+    vid.play().catch(function(){});
+  }
+  function close(){
+    on=false; box.style.display='none'; btn.style.display='block';
+    var t=vid.currentTime; vid.pause();
+    try{ audio.currentTime=t; }catch(e){}
+  }
+  btn.addEventListener('click', open);
+  document.getElementById('dcVidClose').addEventListener('click', close);
+  document.getElementById('dcVidMin').addEventListener('click', function(){ box.classList.toggle('min'); });
+
+  // MIRROR the audio element: transcript-line clicks drive audio -> we follow, and mute audio.
+  audio.addEventListener('play', function(){
+    if(!on) return;
+    if(syncing) return;
+    syncing=true; audio.pause(); syncing=false;
+    if(ensureSrc()){ vid.currentTime = audio.currentTime; vid.play().catch(function(){}); }
+  });
+  audio.addEventListener('seeked', function(){
+    if(!on || syncing) return;
+    if(ensureSrc()) vid.currentTime = audio.currentTime;
+  });
+  // part switch changes audio.src
+  audio.addEventListener('loadedmetadata', function(){ if(on) ensureSrc(); });
+  // hide the button entirely if this page has no verified video for its current audio
+  if(!videoFor(audio.currentSrc || audio.src)) btn.style.display='none';
+})();
+</script>
+
 </body>
 </html>
