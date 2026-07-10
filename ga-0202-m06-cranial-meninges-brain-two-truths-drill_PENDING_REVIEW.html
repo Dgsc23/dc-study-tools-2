@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>GA 0202 M06 - Cranial Meninges - Two Truths</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;padding:16px}
+.wrap{max-width:780px;margin:0 auto}
+.hdr{text-align:center;margin-bottom:16px}
+.hdr h1{font-size:clamp(20px,4vw,28px);color:#5fc28b}
+.hdr .sub{color:#94a3b8;font-size:13px;margin-top:4px}
+.hdr .pending{display:inline-block;margin-top:6px;padding:2px 10px;background:#3a2a0a;color:#fbbf24;border:1px solid #b45309;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.03em}
+.voicebanner{margin:10px auto 0;max-width:620px;padding:6px 12px;background:#0f1626;border:1px solid #1e3a5f;border-radius:8px;color:#94a3b8;font-size:12px;line-height:1.45}
+.scorebar{display:flex;justify-content:space-around;background:#0f1626;padding:10px;border-radius:10px;margin-bottom:14px;font-size:13px}
+.scorebar .k{color:#94a3b8}.scorebar .v{color:#fff;font-weight:700;font-size:16px}
+.scorebar .v.ok{color:#5fc28b}.scorebar .v.bad{color:#ff8888}
+.card{background:#101725;padding:20px;border-radius:12px;margin-bottom:14px}
+.tag{display:inline-block;padding:3px 10px;background:#1e3a5f;color:#5fc28b;border-radius:6px;font-size:12px;font-weight:700;margin-bottom:10px}
+.q-prompt{font-size:15px;color:#cbd5e1;margin-bottom:14px}
+.q-prompt b{color:#fbbf24}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:14px 16px;background:#0a0e1a;border:2px solid #334155;border-radius:10px;cursor:pointer;transition:all .15s;line-height:1.55;color:#cbd5e1}
+.opt:hover{border-color:#5fc28b;background:#0f1626}
+.opt .n{display:inline-block;width:24px;height:24px;border-radius:50%;background:#1e3a5f;color:#5fc28b;text-align:center;font-weight:700;margin-right:10px;line-height:24px;font-size:13px}
+.opt.picked-true{border-color:#5fc28b;background:#0f2a1a;color:#86efac}
+.opt.picked-true .n{background:#5fc28b;color:#0a0e1a}
+.opt.picked-lie{border-color:#86efac;background:#0a2a14;color:#86efac;font-weight:600}
+.opt.picked-lie .n{background:#22c55e;color:#0a0e1a}
+.opt.picked-lie::after{content:" ✓ THE LIE";color:#86efac;font-weight:700}
+.opt.was-true{border-color:#475569;background:#0f1626;color:#94a3b8}
+.opt.was-true::before{content:"✓ TRUE — ";color:#5fc28b;font-weight:700}
+.opt.was-lie-missed{border-color:#ff8888;background:#2a0a0a;color:#fca5a5}
+.opt.was-lie-missed::before{content:"✗ THIS WAS THE LIE — ";color:#ff8888;font-weight:700}
+.exp{margin-top:14px;padding:12px 16px;background:#0a2a14;border-left:3px solid #5fc28b;border-radius:0 8px 8px 0;color:#86efac;font-size:13px;line-height:1.6;display:none}
+.exp.bad{background:#2a0a0a;border-color:#ff8888;color:#fca5a5}
+.btn-row{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.btn{padding:11px 24px;border:2px solid #5fc28b;background:transparent;color:#5fc28b;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+.btn:hover{background:#5fc28b;color:#0a0e1a}
+.btn.primary{background:#5fc28b;color:#0a0e1a}
+.btn.primary:hover{background:#86efac}
+.summary{display:none;background:#101725;padding:30px;border-radius:12px;text-align:center}
+.summary h2{color:#5fc28b;margin-bottom:14px}
+.summary .pct{font-size:48px;font-weight:900;margin:14px 0}
+.summary .pct.great{color:#5fc28b}.summary .pct.ok{color:#fbbf24}.summary .pct.bad{color:#ff8888}
+.footer{text-align:center;padding:24px;color:#546e7a;font-size:.85em;border-top:1px solid #1e3a5f;margin-top:40px}
+@media(max-width:600px){.opt{padding:12px;font-size:14px}}
+</style>
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+</head><body>
+<a id="ga0202-back-to-hub" href="ga-0202-m06-cranial-meninges-brain-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:100001;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">&larr; Back to M06 Hub</a>
+<div class="wrap">
+<div class="hdr"><h1>🎯 Two Truths and a Lie</h1><div class="sub">GA 0202 · Module 06 · Cranial Meninges &amp; Brain · Dr. Maini · Pick the LIE</div><div class="pending">PENDING REVIEW</div><div class="voicebanner">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div></div>
+<div class="scorebar">
+  <div><div class="k">Question</div><div class="v" id="qNum">1 / 39</div></div>
+  <div><div class="k">Correct</div><div class="v ok" id="okN">0</div></div>
+  <div><div class="k">Wrong</div><div class="v bad" id="badN">0</div></div>
+  <div><div class="k">Streak</div><div class="v" id="strk">0</div></div>
+</div>
+<div class="card" id="card">
+  <div class="tag" id="tag">Topic</div>
+  <div class="q-prompt"><b>Two are true, one is the LIE.</b> Click the lie.</div>
+  <div class="opts" id="opts"></div>
+  <div class="exp" id="exp"></div>
+  <div class="btn-row">
+    <button class="btn" id="retryBtn" onclick="retry()" style="display:none;background:#7c3aed;color:#fff">↻ Retry this one</button>
+    <button class="btn primary" id="nextBtn" onclick="next()" style="display:none">Next ▶</button>
+    <button class="btn" id="restartBtn" onclick="confirmRestart()" style="background:#1e293b;color:#94a3b8;border:1px solid #334155;font-size:0.78rem">↺ Restart drill</button>
+    <button class="btn" onclick="if(confirm('Restart from Q1?'))init()">↻ Restart</button>
+  </div>
+</div>
+<div class="summary" id="summary">
+  <h2>Done!</h2>
+  <div class="pct" id="pct">0%</div>
+  <div id="msg"></div>
+  <button class="btn primary" onclick="init()" style="margin-top:20px">↻ Restart</button>
+</div>
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD</div>
+</div>
+<script>
+const BANK=[
+{n:1,topic:"Gyri vs Sulci",opts:["The gyri are the raised folds you see on the cortical surface, and the sulci are the grooves that dip between them.","The sulci are the raised ridges of the cortex, and the gyri are the grooves running between those ridges.","A fissure is an especially deep groove, deeper than an ordinary sulcus."],lie:1,exp:"Maini: the ridges are the gyri and the dips (grooves) are the sulci. Statement 2 reverses the two. A fissure is simply a deep groove. (L13, Gyri & sulci)"},
+{n:2,topic:"Cortical Folding & Dementia",opts:["The cortical folding lets the brain accommodate roughly 10,000 times more neurons than a smooth brain would.","Loss of the brain's convolutions (surface smoothing) is associated with dementia, reflecting fewer neurons in the cerebral cortex.","Smoothing and loss of the cortical convolutions is a hallmark of hydrocephalus, because CSF can no longer be absorbed."],lie:2,exp:"Maini links loss of convolutions to dementia (fewer cortical neurons), not hydrocephalus. Hydrocephalus is CSF accumulation, a separate problem. (L13, Convolutions & dementia)"},
+{n:3,topic:"Gray vs White Matter",opts:["Gray matter is the deep inner core of the cerebrum and is made mostly of myelinated fibers.","Gray matter is the outer cortex and holds the cell bodies of the neurons.","White matter looks white because it is mostly myelinated fibers; anything white in the nervous system has a myelin sheath."],lie:0,exp:"Maini: gray matter is the OUTER cortex with the neuronal cell bodies; the deep myelinated core is WHITE matter. Statement 1 describes white matter but calls it gray. (L13, Gray vs white matter)"},
+{n:4,topic:"Order of the Three Meninges",opts:["From the skull inward the three meningeal layers are dura mater, then arachnoid mater, then pia mater.","The cranial meninges are continuous with the spinal meninges, though the spaces and arrangement differ between the two regions.","From the skull inward the order is pia mater, then arachnoid mater, then dura mater against the brain."],lie:2,exp:"Dura is the tough OUTER layer against the skull and pia is the delicate INNER layer on the brain. Statement 3 has the order inside-out. (L13, Three meningeal layers)"},
+{n:5,topic:"Meanings of the Meninges",opts:["'Dura' means tough or durable, giving the dura mater its nickname the tough mother.","'Arachnoid' means tender or soft, which is why the arachnoid is called the soft mother.","'Pia' means tender or soft, so the pia mater is the tender mother."],lie:1,exp:"Tender/soft is the meaning of PIA, not arachnoid. Arachnoid means spider-like, named for its web-like, thread-like extensions. Statement 2 gives the arachnoid the pia's meaning. (L13, Meaning of layers)"},
+{n:6,topic:"Pia Dips In, Arachnoid Drapes Over",opts:["The arachnoid mater dips down into every sulcus and gyrus, while the pia passes straight over them like a sheet thrown over a chair.","The pia mater follows every contour of the brain, dipping into each sulcus and gyrus like an onion peel.","The arachnoid mater passes over the sulci rather than tucking into them, like a sheet draped over a chair."],lie:0,exp:"Maini's rule: the PIA tucks into the sulci and gyri; the ARACHNOID drapes over them. Statement 1 swaps the two layers. (L13, Pia vs arachnoid contours)"},
+{n:7,topic:"Pia Mater Structure",opts:["The pia mater is a thin, highly vascularized membrane made of loose connective tissue.","The pia mater is a tough, two-layered membrane of dense connective tissue applied to the brain surface.","The pia is applied so closely to the brain that a cadaver dissector must peel it off with sharp forceps, like an onion peel."],lie:1,exp:"Thin, vascular, loose connective tissue describes the pia; tough, two-layered, DENSE connective tissue describes the DURA. Statement 2 gives the pia the dura's structure. (L13, Pia composition)"},
+{n:8,topic:"Pia, Cerebral Vessels & SAH",opts:["As the pia dips into the sulci it carries small blood vessels with it and forms a sheath around them.","Because the cerebral veins run on the pia within the subarachnoid space, a subarachnoid hemorrhage is mostly venous.","Because the cerebral arteries run on the pia in the subarachnoid space, a subarachnoid hemorrhage is almost always arterial and immediately fatal."],lie:2,exp:"Maini: it is the cerebral VEINS that lie on the pia in the subarachnoid space, so a subarachnoid hemorrhage is mostly VENOUS, not arterial. Statement 3 swaps veins for arteries. (L13, Cerebral veins & SAH)"},
+{n:9,topic:"Arachnoid & Its Granulations",opts:["The arachnoid mater is a delicate, transparent membrane made of web-like tissue.","Arachnoid granulations are cauliflower-like growths sitting in the roof of the ventricles.","Arachnoid granulations (villi) are tufted prolongations of pia-arachnoid that protrude through the meningeal layer of the dura."],lie:1,exp:"Cauliflower-like growths in the roof of the ventricles are the CHOROID PLEXUS. Arachnoid granulations are pia-arachnoid tufts that push through the meningeal dura. Statement 2 confuses the two. (L13, Arachnoid granulations)"},
+{n:10,topic:"Granulations Absorb CSF",opts:["Arachnoid granulations absorb cerebrospinal fluid from the subarachnoid space and return it to the venous circulation.","On a board question, the structure acting as a one-way valve for CSF absorption is the arachnoid granulations (villi).","The arachnoid granulations secrete cerebrospinal fluid into the subarachnoid space."],lie:2,exp:"Granulations ABSORB CSF (the one-way valve into venous blood). SECRETION of CSF is the choroid plexus's job. Statement 3 reverses the direction. (L13, One-way valve board Q)"},
+{n:11,topic:"Where Granulations Return CSF",opts:["Arachnoid granulations return CSF into the venous blood at the cavernous sinus.","Arachnoid granulations return CSF into the venous circulation at the superior sagittal sinus.","If blood cells or debris plug the arachnoid granulations, CSF is not absorbed and intracranial pressure rises."],lie:0,exp:"Maini: only the superior sagittal sinus receives CSF, and the granulations sit at its margin, not at the cavernous sinus. Statement 1 names the wrong sinus. (L13, Granulations & superior sagittal sinus)"},
+{n:12,topic:"Impressions on the Calvaria",opts:["On the inner calvaria you see the midline groove of the superior sagittal sinus.","Flanking that midline groove on the inner calvaria are the impressions of the choroid plexuses.","The inner calvaria also shows impressions of the arachnoid granulations and of the middle meningeal vessels."],lie:1,exp:"The calvarial impressions Maini lists are the superior sagittal sinus, arachnoid granulations, and middle meningeal vessels. The CHOROID PLEXUS sits inside the ventricles and leaves no calvarial mark. (L13, Calvarial impressions)"},
+{n:13,topic:"The Subarachnoid Space",opts:["CSF is found within the ventricles inside the brain and, in a thin layer, in the subarachnoid space outside the brain.","The subarachnoid space, which holds CSF, lies between the arachnoid and the pia.","The subarachnoid space, which holds CSF, is the space between the dura and the arachnoid."],lie:2,exp:"Sub-arachnoid means BENEATH the arachnoid, that is between arachnoid and pia. The space between dura and arachnoid is the (potential) subdural space, which holds no CSF normally. Statement 3 names the wrong boundary. (L13, Subarachnoid space)"},
+{n:14,topic:"Functions of CSF",opts:["The two main functions of CSF are producing myelin for the white matter and removing carbon dioxide.","CSF provides buoyancy so the brain floats and is not bruised against the skull.","CSF supplies nutrition and a balanced environment for the sensitive neurons."],lie:0,exp:"Maini gives the two functions as buoyancy and nutrition. CSF does not make myelin. Statement 1 invents roles the fluid does not have. (L13, Functions of CSF)"},
+{n:15,topic:"Why the Brain Needs Buoyancy",opts:["CSF gives the brain buoyancy so it floats in fluid rather than resting on the skull bones.","Without buoyancy it is the vertex (top) of the brain that would suffer contusions against the skull.","Maini says the base of the brain in particular would be bruised against bone without CSF buoyancy."],lie:1,exp:"Maini names the BASE of the brain as the vulnerable region without buoyancy, not the vertex. Statement 2 moves the injury to the wrong surface. (L13, Base of brain contusions)"},
+{n:16,topic:"Neurons & Glial Cells",opts:["Neurons are non-mitotic: if damaged, new neurons will not divide to replace them, which is why they are so protected.","Glial cells (neuroglia) provide protection and support to the delicate neurons.","Neurons divide rapidly, so the nervous system easily replaces any that are damaged."],lie:2,exp:"Maini stresses that neurons are NON-mitotic and are not replaced once lost, the opposite of statement 3. That is why they get so many protective coverings. (L13, Neurons non-mitotic)"},
+{n:17,topic:"Choroid Plexus Location",opts:["The choroid plexus sits in the subarachnoid space, draped over the cerebellum.","The choroid plexus sits in the roof of each ventricle of the brain.","The choroid plexus is a cauliflower-like tuft of villi that secretes CSF into the cavity of the ventricle."],lie:0,exp:"Maini places the choroid plexus in the ROOF OF EACH VENTRICLE, not the subarachnoid space. Statement 1 relocates it. (L13, Choroid plexus location)"},
+{n:18,topic:"Ependymal Cells",opts:["The ependymal cells lining the choroid plexus secrete cerebrospinal fluid.","The ependymal cells of the choroid plexus absorb CSF and return it to the venous sinuses.","Ependymal cells are one type of glial cell, alongside astrocytes, oligodendrocytes, and microglia."],lie:1,exp:"Ependymal cells SECRETE CSF; ABSORPTION back into venous blood is the arachnoid granulations' role. Statement 2 gives the ependymal cells the granulations' job. (L13, Ependymal cell function)"},
+{n:19,topic:"The Glial Cell Types",opts:["Maini lists four glial cell types: astrocytes, oligodendrocytes, microglia, and ependymal cells.","Ependymal cells are counted among the glial cells (neuroglia), not among the neurons.","Maini lists five glial cell types here, including Schwann cells and satellite cells."],lie:2,exp:"Maini names FOUR glial types (astrocytes, oligodendrocytes, microglia, ependymal cells). Statement 3 pads the list to five with cells she does not include here. (L13, Four glial cell types)"},
+{n:20,topic:"Forming the Choroid Plexus",opts:["The pia and its blood vessels form the tela choroidea, which then fuses with the arachnoid granulations to form the choroid plexus.","The pia and its blood vessels form the tela choroidea, which fuses with the ependyma to form the choroid plexus.","CSF is formed by filtration of components from the blood, with the ependymal cells and pia keeping its composition normal."],lie:0,exp:"The tela choroidea fuses with the EPENDYMA (the ependymal layer) to build the choroid plexus, not with the arachnoid granulations. Statement 1 swaps in the wrong partner. (L13, Tela choroidea)"},
+{n:21,topic:"CSF Turnover",opts:["The choroid plexus secretes CSF continuously, so CSF must be absorbed at the same rate to keep pressure stable.","If CSF is not removed it simply drains harmlessly into the cisterns, so intracranial pressure stays normal.","If CSF accumulates, intracranial tension rises and can compress cerebral blood flow, causing ischemia, infection, or stroke."],lie:1,exp:"Maini warns that un-removed CSF ACCUMULATES and RAISES intracranial pressure; the cisterns are part of that same subarachnoid space, not a safe drain. Statement 2 denies the pressure rise. (L13, CSF turnover)"},
+{n:22,topic:"Dura Mater Structure",opts:["The dura mater is the outermost and toughest covering of the CNS, made of dense connective tissue.","The cranial dura is a two-layered membrane with a periosteal layer and a meningeal layer.","The cranial dura is a thin, transparent, web-like membrane, the most delicate of the three meninges."],lie:2,exp:"Thin, transparent, web-like describes the ARACHNOID. The dura is the tough, dense, outermost layer. Statement 3 gives the dura the arachnoid's description. (L13, Dura composition)"},
+{n:23,topic:"Cranial vs Spinal Dura",opts:["The spinal dura has both a periosteal and a meningeal layer, while the cranial dura has only the meningeal layer.","The cranial dura has both a periosteal and a meningeal layer; the spinal dura has only the meningeal layer.","Traced from head to spine, the meningeal layer of dura continues while the periosteal layer is lost."],lie:0,exp:"It is the CRANIAL dura that has both layers; the SPINAL dura keeps only the meningeal layer. Statement 1 reverses which region has two layers. (L13, Cranial vs spinal dura)"},
+{n:24,topic:"No Cranial Epidural Space",opts:["Because the cranial dura is adherent to the periosteum of the skull, there is normally no cranial epidural space.","The head normally contains a large, fat-filled epidural space between the dura and the skull.","On imaging, any separation of the cranial dura from the bone means an abnormal collection such as blood or pus."],lie:1,exp:"The fat-filled epidural space is a SPINAL feature; cranially the dura is stuck to bone, so there is no normal epidural space. Statement 2 imports the spinal arrangement into the head. (L13, No cranial epidural space)"},
+{n:25,topic:"Dural Septa & Venous Sinuses",opts:["The meningeal layer of the dura forms four inwardly projecting septa (folds).","The dural venous sinuses lie where the periosteal and meningeal layers of the dura separate.","The dural venous sinuses lie within the subarachnoid space, between the arachnoid and the pia."],lie:2,exp:"Venous sinuses sit between the two DURAL layers where they split apart. The space between arachnoid and pia is the subarachnoid space, which holds CSF, not venous blood. Statement 3 puts the sinuses in the wrong space. (L13, Dural sinuses between layers)"},
+{n:26,topic:"Dura & Headache",opts:["The dura mater is richly supplied with pain receptors, so stretching it produces intense pain and headache.","The dura mater has almost no sensory supply, which is why it can be cut without pain.","An enlarging pituitary gland can stretch the pain-sensitive diaphragma sellae and cause an intense headache."],lie:1,exp:"Maini stresses the dura carries a LARGE number of pain receptors, so stretching it hurts intensely. Statement 2 denies the very innervation that explains dural headache. (L13, Dura pain receptors)"},
+{n:27,topic:"Falx Cerebri",opts:["The falx cerebri is a tent-like shelf that separates the occipital lobe from the cerebellum.","The falx cerebri is a sickle-shaped vertical partition in the longitudinal fissure between the two cerebral hemispheres.","Anteriorly the falx cerebri attaches to the frontal crest and the crista galli."],lie:0,exp:"A tent-like shelf between the occipital lobe and cerebellum is the TENTORIUM cerebelli. The falx cerebri is the sickle in the midline between the cerebral hemispheres. Statement 1 describes the wrong septum. (L13, Falx cerebri)"},
+{n:28,topic:"Tentorium Cerebelli",opts:["The tentorium cerebelli is a wide, arched, tent-like fold separating the occipital lobe of the cerebrum from the cerebellum.","The tentorium cerebelli attaches anteriorly to the frontal crest and the crista galli.","The tentorium cerebelli attaches to the posterior clinoid processes, the petrous temporal bone, and the grooves for the transverse sinuses."],lie:1,exp:"The frontal crest and crista galli are the FALX CEREBRI's anterior attachments. The tentorium attaches at the clinoids, petrous temporal, and transverse sinus grooves. Statement 2 borrows the falx's attachment. (L13, Tentorium attachments)"},
+{n:29,topic:"Falx Cerebelli vs Diaphragma Sellae",opts:["The falx cerebelli is a shallow septum lying between the two cerebellar hemispheres.","The diaphragma sellae is a small horizontal sheet that roofs the sella turcica, with a central aperture for the pituitary stalk.","The falx cerebelli is the horizontal sheet that roofs the sella turcica, with a hole for the pituitary stalk."],lie:2,exp:"Roofing the sella turcica is the DIAPHRAGMA SELLAE's job. The falx cerebelli is the shallow vertical septum between the cerebellar hemispheres. Statement 3 swaps the two septa. (L13, Falx cerebelli / diaphragma sellae)"},
+{n:30,topic:"The Sella Turcica",opts:["The sella turcica, roofed by the diaphragma sellae, houses the pineal gland.","The sella turcica, roofed by the diaphragma sellae, houses the pituitary gland.","The diaphragma sellae has a tiny central aperture that transmits the pituitary stalk."],lie:0,exp:"The sella turcica (the Turkish saddle) holds the PITUITARY gland, not the pineal gland, which sits in the epithalamus. Statement 1 puts the wrong gland in the saddle. (L13, Sella turcica / pituitary)"},
+{n:31,topic:"Meaning of Sinus & the SSS",opts:["The literal meaning of the word sinus is a space, here a venous, blood-filled space.","The superior sagittal sinus is an artery that grooves the inner surface of the calvaria.","The superior sagittal sinus is a midline venous space running front-to-back along the top of the head, between the two dural layers."],lie:1,exp:"The superior sagittal sinus is a dural VENOUS sinus (a blood-filled space), not an artery. Statement 2 turns a venous sinus into an artery. (L13, Superior sagittal sinus)"},
+{n:32,topic:"Dural Sinus Pressure",opts:["A dural venous sinus forms where the periosteal and meningeal layers of dura separate and the space fills with venous blood.","The dural venous sinuses carry negative pressure, below zero, above the level of the heart.","The dural venous sinuses carry very high positive pressure and pulsate, just like arteries."],lie:2,exp:"Maini: the sinuses have very NEGATIVE pressure (below zero above the heart) and do not pulsate like arteries. Statement 3 gives them arterial behavior. (L13, Sinus negative pressure)"},
+{n:33,topic:"Venous Pressure Gradient",opts:["Venous pressure is highest up at the head and negative down at the feet.","Venous pressure is about zero at the heart, roughly +95 mmHg at the feet, and negative above the heart.","The negative pressure above the heart is why the external jugular vein is normally collapsed."],lie:0,exp:"The gradient runs the other way: about +95 mmHg at the FEET and negative at the HEAD. Statement 1 flips the gradient upside down. (L13, Venous pressure gradient)"},
+{n:34,topic:"The Air Embolism Danger",opts:["Because the dural sinuses have negative pressure, a small nick can suck air into the sinus and cause an air embolism.","A nicked dural sinus is dangerous because its high arterial pressure sprays blood and rapidly exsanguinates the patient.","Air drawn into a sinus travels to the heart and arteries, where it can block vessels and cause stroke or myocardial infarction."],lie:1,exp:"The sinus danger is air being SUCKED IN by the negative pressure (air embolism), not an arterial spray. Sinuses are low-pressure venous spaces. Statement 2 treats a vein like an artery. (L13, Air embolism risk)"},
+{n:35,topic:"Cisterns",opts:["Cisterns are dilated pockets of the subarachnoid space, formed where the arachnoid passes over the brain's contours instead of dipping in.","Because cisterns are still between arachnoid and pia, they are filled with cerebrospinal fluid.","Cisterns are dilated pockets between the two dural layers and are filled with venous blood."],lie:2,exp:"Cisterns are part of the SUBARACHNOID space and hold CSF. Blood-filled spaces between the dural layers are the venous SINUSES. Statement 3 confuses a cistern with a sinus. (L13, Cisterns)"},
+{n:36,topic:"The Largest Cistern",opts:["The largest cistern is the interpeduncular cistern, lying between the cerebral peduncles.","The largest cistern is the cerebellomedullary cistern (cisterna magna), between the cerebellum and the medulla.","Other named cisterns include the chiasmatic, interpeduncular, pontine, and superior cisterns."],lie:0,exp:"Maini names the cisterna magna (cerebellomedullary cistern) as the LARGEST. The interpeduncular cistern is one of the smaller named cisterns. Statement 1 crowns the wrong cistern. (L13, Cisterna magna)"},
+{n:37,topic:"Cranial Meningeal Spaces",opts:["Of the three meningeal spaces, only the subarachnoid space is a true, naturally present cranial space filled with CSF.","The epidural and subdural spaces are large, naturally present cranial spaces, just like in the spine.","The subdural space, between dura and arachnoid, is only a potential space that appears when there is bleeding."],lie:1,exp:"Cranially the epidural and subdural spaces are only POTENTIAL spaces that open up with bleeding; only the subarachnoid space is truly present. Statement 2 treats the potential spaces as real. (L13, Cranial meningeal spaces)"},
+{n:38,topic:"Arterial vs Venous Bleed",opts:["An arterial hemorrhage is worse because the high arterial pressure makes blood collect fast and compress structures quickly.","A venous collection accumulates slowly and may not be noticed for days or even weeks.","A venous hemorrhage is worse than an arterial one because venous blood is under negative pressure and floods the space instantly."],lie:2,exp:"Maini says the ARTERIAL bleed is worse and faster (high pressure fills quickly), while venous collections are slow. Statement 3 makes the slow venous bleed the fast, dangerous one. (L13, Arterial vs venous bleed)"},
+{n:39,topic:"Pituitary Adenoma Headache",opts:["A pituitary adenoma causes intense headache by blocking the arachnoid granulations and stopping CSF absorption.","A pituitary adenoma causes intense headache because the enlarging gland stretches the pain-sensitive diaphragma sellae.","The dura and its septa are rich in pain receptors, so stretching a structure like the diaphragma sellae produces intense pain."],lie:0,exp:"Maini's mechanism is the growing pituitary STRETCHING the pain-rich diaphragma sellae. Blocked granulations raise ICP but are not the adenoma-headache mechanism. Statement 1 swaps in the wrong cause. (L13, Pituitary adenoma headache)"}
+];
+let order=[],idx=0,ok=0,bad=0,strk=0,bestStrk=0,answered=false;
+let scoredThisRound=false;  // ensures retry doesn't double-count score
+function init(){
+  order=BANK.map((_,i)=>i);
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  idx=0;ok=0;bad=0;strk=0;bestStrk=0;answered=false;
+  document.getElementById('summary').style.display='none';
+  document.getElementById('card').style.display='block';
+  upd();show();
+}
+function show(){
+  answered=false;
+  scoredThisRound=false;
+  const q=BANK[order[idx]];
+  document.getElementById('qNum').textContent=(idx+1)+' / '+BANK.length;
+  document.getElementById('tag').textContent=q.topic;
+  const o=document.getElementById('opts');o.innerHTML='';
+  q.opts.forEach((s,i)=>{
+    const d=document.createElement('div');d.className='opt';d.dataset.i=i;
+    d.innerHTML='<span class="n">'+(i+1)+'</span>'+s;
+    d.onclick=()=>pick(i);
+    o.appendChild(d);
+  });
+  document.getElementById('exp').style.display='none';
+  document.getElementById('exp').classList.remove('bad');
+  document.getElementById('nextBtn').style.display='none';
+}
+function pick(i){
+  if(answered)return;answered=true;
+  const q=BANK[order[idx]];const opts=document.querySelectorAll('.opt');
+  const correct=(i===q.lie);
+  if(!scoredThisRound){
+    if(correct){ok++;strk++;if(strk>bestStrk)bestStrk=strk;}else{bad++;strk=0;}
+    scoredThisRound=true;
+  }
+  opts.forEach((el,n)=>{
+    el.style.cursor='default';el.onclick=null;
+    if(n===q.lie){el.classList.add(correct?'picked-lie':'was-lie-missed');}
+    else if(n===i){el.classList.add('picked-true');}
+    else{el.classList.add('was-true');}
+  });
+  const exp=document.getElementById('exp');
+  exp.textContent=q.exp;exp.style.display='block';
+  if(!correct)exp.classList.add('bad');
+  document.getElementById('nextBtn').style.display='inline-block';
+  document.getElementById('retryBtn').style.display=correct?'none':'inline-block';
+  upd();
+}
+function retry(){
+  // Reset answered state and option styles in place
+  answered=false;
+  scoredThisRound=true;  // already scored — don't re-count
+  const opts=document.querySelectorAll('.opt');
+  opts.forEach((el,n)=>{
+    el.classList.remove('picked-lie','was-lie-missed','picked-true','was-true');
+    el.style.cursor='pointer';
+    el.onclick=()=>pick(n);
+  });
+  document.getElementById('exp').style.display='none';
+  document.getElementById('exp').classList.remove('bad');
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('retryBtn').style.display='none';
+}
+function confirmRestart(){
+  if(idx>0||ok>0||bad>0){
+    if(!confirm('Restart drill from the beginning? Current progress ('+ok+' correct, '+bad+' missed) will be cleared.'))return;
+  }
+  init();
+}
+function next(){
+  idx++;
+  if(idx>=BANK.length){end();return;}
+  show();upd();
+}
+function upd(){
+  document.getElementById('qNum').textContent=(idx+1)+' / '+BANK.length;
+  document.getElementById('okN').textContent=ok;
+  document.getElementById('badN').textContent=bad;
+  document.getElementById('strk').textContent=strk;
+}
+function end(){
+  document.getElementById('card').style.display='none';
+  document.getElementById('summary').style.display='block';
+  const tot=ok+bad;const pct=tot?Math.round(ok/tot*100):0;
+  const p=document.getElementById('pct');p.textContent=pct+'%';
+  p.className='pct '+(pct>=85?'great':pct>=70?'ok':'bad');
+  document.getElementById('msg').innerHTML='You got <b>'+ok+'</b> of <b>'+tot+'</b> right · best streak <b>'+bestStrk+'</b>';
+}
+init();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (Gross Anatomy) with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body></html>

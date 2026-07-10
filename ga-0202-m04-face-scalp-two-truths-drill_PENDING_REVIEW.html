@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>GA 0202 M04 - Face & Scalp - Two Truths</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;padding:16px}
+.wrap{max-width:780px;margin:0 auto}
+.hdr{text-align:center;margin-bottom:16px}
+.hdr h1{font-size:clamp(20px,4vw,28px);color:#5fc28b}
+.hdr .sub{color:#94a3b8;font-size:13px;margin-top:4px}
+.hdr .pending{display:inline-block;margin-top:6px;padding:2px 10px;background:#3a2a0a;color:#fbbf24;border:1px solid #b45309;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.03em}
+.scorebar{display:flex;justify-content:space-around;background:#0f1626;padding:10px;border-radius:10px;margin-bottom:14px;font-size:13px}
+.scorebar .k{color:#94a3b8}.scorebar .v{color:#fff;font-weight:700;font-size:16px}
+.scorebar .v.ok{color:#5fc28b}.scorebar .v.bad{color:#ff8888}
+.card{background:#101725;padding:20px;border-radius:12px;margin-bottom:14px}
+.tag{display:inline-block;padding:3px 10px;background:#1e3a5f;color:#5fc28b;border-radius:6px;font-size:12px;font-weight:700;margin-bottom:10px}
+.q-prompt{font-size:15px;color:#cbd5e1;margin-bottom:14px}
+.q-prompt b{color:#fbbf24}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:14px 16px;background:#0a0e1a;border:2px solid #334155;border-radius:10px;cursor:pointer;transition:all .15s;line-height:1.55;color:#cbd5e1}
+.opt:hover{border-color:#5fc28b;background:#0f1626}
+.opt .n{display:inline-block;width:24px;height:24px;border-radius:50%;background:#1e3a5f;color:#5fc28b;text-align:center;font-weight:700;margin-right:10px;line-height:24px;font-size:13px}
+.opt.picked-true{border-color:#5fc28b;background:#0f2a1a;color:#86efac}
+.opt.picked-true .n{background:#5fc28b;color:#0a0e1a}
+.opt.picked-lie{border-color:#86efac;background:#0a2a14;color:#86efac;font-weight:600}
+.opt.picked-lie .n{background:#22c55e;color:#0a0e1a}
+.opt.picked-lie::after{content:" ✓ THE LIE";color:#86efac;font-weight:700}
+.opt.was-true{border-color:#475569;background:#0f1626;color:#94a3b8}
+.opt.was-true::before{content:"✓ TRUE — ";color:#5fc28b;font-weight:700}
+.opt.was-lie-missed{border-color:#ff8888;background:#2a0a0a;color:#fca5a5}
+.opt.was-lie-missed::before{content:"✗ THIS WAS THE LIE — ";color:#ff8888;font-weight:700}
+.exp{margin-top:14px;padding:12px 16px;background:#0a2a14;border-left:3px solid #5fc28b;border-radius:0 8px 8px 0;color:#86efac;font-size:13px;line-height:1.6;display:none}
+.exp.bad{background:#2a0a0a;border-color:#ff8888;color:#fca5a5}
+.btn-row{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.btn{padding:11px 24px;border:2px solid #5fc28b;background:transparent;color:#5fc28b;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+.btn:hover{background:#5fc28b;color:#0a0e1a}
+.btn.primary{background:#5fc28b;color:#0a0e1a}
+.btn.primary:hover{background:#86efac}
+.summary{display:none;background:#101725;padding:30px;border-radius:12px;text-align:center}
+.summary h2{color:#5fc28b;margin-bottom:14px}
+.summary .pct{font-size:48px;font-weight:900;margin:14px 0}
+.summary .pct.great{color:#5fc28b}.summary .pct.ok{color:#fbbf24}.summary .pct.bad{color:#ff8888}
+.footer{text-align:center;padding:24px;color:#546e7a;font-size:.85em;border-top:1px solid #1e3a5f;margin-top:40px}
+@media(max-width:600px){.opt{padding:12px;font-size:14px}}
+.voice-banner{max-width:680px;margin:10px auto 0;padding:8px 14px;background:#0f2a1a;border:1px solid #1e5f3a;border-radius:8px;color:#86efac;font-size:12px;line-height:1.5;text-align:center}
+</style>
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+</head><body>
+<a id="fab201-back-to-hub" href="ga-0202-m04-face-scalp-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:100001;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">&larr; Back to Face &amp; Scalp Hub</a>
+<div class="wrap">
+<div class="hdr"><h1>🎯 Two Truths and a Lie</h1><div class="sub">GA 0202 · Module 4 · Face &amp; Scalp · Dr. Maini · Pick the LIE</div><div class="pending">PENDING REVIEW</div><div class="voice-banner">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div></div>
+<div class="scorebar">
+  <div><div class="k">Question</div><div class="v" id="qNum">1 / 38</div></div>
+  <div><div class="k">Correct</div><div class="v ok" id="okN">0</div></div>
+  <div><div class="k">Wrong</div><div class="v bad" id="badN">0</div></div>
+  <div><div class="k">Streak</div><div class="v" id="strk">0</div></div>
+</div>
+<div class="card" id="card">
+  <div class="tag" id="tag">Topic</div>
+  <div class="q-prompt"><b>Two are true, one is the LIE.</b> Click the lie.</div>
+  <div class="opts" id="opts"></div>
+  <div class="exp" id="exp"></div>
+  <div class="btn-row">
+    <button class="btn" id="retryBtn" onclick="retry()" style="display:none;background:#7c3aed;color:#fff">↻ Retry this one</button>
+    <button class="btn primary" id="nextBtn" onclick="next()" style="display:none">Next ▶</button>
+    <button class="btn" id="restartBtn" onclick="confirmRestart()" style="background:#1e293b;color:#94a3b8;border:1px solid #334155;font-size:0.78rem">↺ Restart drill</button>
+    <button class="btn" onclick="if(confirm('Restart from Q1?'))init()">↻ Restart</button>
+  </div>
+</div>
+<div class="summary" id="summary">
+  <h2>Done!</h2>
+  <div class="pct" id="pct">0%</div>
+  <div id="msg"></div>
+  <button class="btn primary" onclick="init()" style="margin-top:20px">↻ Restart</button>
+</div>
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD</div>
+</div>
+<script>
+const BANK=[
+{"n": 1, "topic": "Scalp Layers - Danger Area", "opts": ["The pericranium is the periosteum on the outer surface of the skull bones and is the deepest (5th) layer of the scalp.", "The tough epicranial aponeurosis is the layer in which haematoma and pus collect most easily.", "The loose areolar connective tissue (4th layer) is the 'danger area of the scalp,' where blood and pus spread most readily."], "lie": 1, "exp": "The aponeurosis is a tough tendinous sheet, so fluid cannot pool within it. Blood and pus collect in the loose areolar (4th) layer, the danger area of the scalp. (Maini, L07)"},
+{"n": 2, "topic": "SCALP Mnemonic", "opts": ["In SCALP, 'P' stands for the pericranium, the periosteum of the skull bones.", "In SCALP, 'A' stands for the aponeurosis (galea aponeurotica), the 3rd layer.", "In SCALP, 'L' stands for the ligaments that bind the scalp to the skull."], "lie": 2, "exp": "'L' is the Loose areolar connective tissue layer, not ligaments. SCALP = Skin, Connective tissue, Aponeurosis, Loose areolar tissue, Pericranium. (Maini, L07)"},
+{"n": 3, "topic": "Aponeurotic Layer & Occipitofrontalis", "opts": ["The aponeurotic (3rd) layer is formed by occipitofrontalis (frontal and occipital bellies) joined by the epicranial aponeurosis.", "The occipital belly of occipitofrontalis takes origin from the mastoid process.", "The first three layers (skin, connective tissue, aponeurosis) are bound firmly and move together over the loose areolar layer."], "lie": 1, "exp": "The occipital belly arises from the lateral two-thirds of the superior nuchal line, not the mastoid process (which gives origin to sternocleidomastoid). (Maini, L07)"},
+{"n": 4, "topic": "Scalp Arteries - Source", "opts": ["The supraorbital and supratrochlear arteries are branches of the ophthalmic artery, from the internal carotid.", "The superficial temporal artery is a branch of the internal carotid artery.", "The occipital and posterior auricular arteries are external carotid branches that supply the scalp."], "lie": 1, "exp": "The superficial temporal artery is one of the two terminal branches of the EXTERNAL carotid, not the internal carotid. (Maini, L07)"},
+{"n": 5, "topic": "Scalp Sensory Nerves", "opts": ["The zygomaticotemporal nerve is a branch of V1 (ophthalmic).", "The auriculotemporal nerve, supplying part of the temporal scalp, is a branch of V3 (mandibular).", "The supraorbital and supratrochlear nerves of the anterior scalp are branches of V1 (ophthalmic)."], "lie": 0, "exp": "The zygomaticotemporal nerve is a branch of V2 (maxillary), not V1. V1 gives the supraorbital/supratrochlear nerves and V3 gives the auriculotemporal. (Maini, L07)"},
+{"n": 6, "topic": "Posterior Scalp Nerves", "opts": ["The greater occipital and third occipital nerves arise from the dorsal rami of C2 and C3.", "The greater occipital nerve is a branch of the trigeminal nerve.", "The lesser occipital nerve arises from the cervical plexus (ventral rami of C2-C3)."], "lie": 1, "exp": "The greater occipital nerve comes from the dorsal ramus of C2, not the trigeminal. The trigeminal supplies the anterior scalp; the posterior scalp is supplied by cervical nerves. (Maini, L07)"},
+{"n": 7, "topic": "Scalp Clinical - Bleeding & Healing", "opts": ["Scalp lacerations bleed profusely because the arteries anastomose richly, so both cut ends of a divided vessel bleed.", "Scalp wounds heal poorly because the scalp has a very poor blood supply.", "A transverse scalp wound gapes widely because the galea (aponeurosis) fibers run longitudinally, front to back."], "lie": 1, "exp": "The scalp is HIGHLY vascular, so wounds there heal well. That same rich blood supply is why they bleed so much. (Maini, L07)"},
+{"n": 8, "topic": "Scalp & Facial Venous Drainage", "opts": ["The facial vein joins the anterior division of the retromandibular vein to form the common facial vein.", "The superficial temporal vein unites with the maxillary vein to form the retromandibular vein.", "The common facial vein drains into the external jugular vein."], "lie": 2, "exp": "The common facial vein drains into the INTERNAL jugular vein, not the external jugular - a point Maini stressed. (Maini, L07/L08)"},
+{"n": 9, "topic": "Facial Muscles - General Rule", "opts": ["All muscles of facial expression are innervated by the facial nerve (CN VII).", "The muscles of facial expression develop from the second pharyngeal arch and insert into the skin of the face.", "The muscles of facial expression are innervated by the trigeminal nerve (CN V)."], "lie": 2, "exp": "The trigeminal (CN V) is the SENSORY nerve of the face and motor to mastication. Every facial-expression muscle is supplied by the facial nerve (CN VII). (Maini, L07)"},
+{"n": 10, "topic": "Forehead & Eyebrow Muscles", "opts": ["Procerus is the sphincter of the eye that closes the eyelid.", "The frontal belly of occipitofrontalis elevates the eyebrows and produces horizontal forehead wrinkling, the 'surprised' look.", "Corrugator supercilii draws the eyebrows medially and produces vertical (frown-line) wrinkling."], "lie": 0, "exp": "Orbicularis oculi is the sphincter that closes the eye. Procerus pulls down the medial eyebrow and wrinkles the skin over the bridge of the nose. (Maini, L07)"},
+{"n": 11, "topic": "Eye & Mouth Sphincters", "opts": ["Levator palpebrae superioris opens the eye, is supplied by CN III, and is NOT a muscle of facial expression.", "Orbicularis oculi is the sphincter of the eye and closes the eyelid (CN VII).", "Orbicularis oris compresses the cheek against the teeth and is pierced by the parotid duct."], "lie": 2, "exp": "Buccinator compresses the cheek and is pierced by the parotid duct. Orbicularis oris is the sphincter of the mouth that closes and purses the lips. (Maini, L07/L08)"},
+{"n": 12, "topic": "Cheek & Smile Muscles", "opts": ["Zygomaticus major pulls the angle of the mouth downward and medially.", "Buccinator, the 'trumpeter's muscle,' compresses the cheek against the teeth and is pierced by the parotid duct.", "Orbicularis oris is the sphincter of the mouth, closing and pursing the lips for whistling or pouting."], "lie": 0, "exp": "Zygomaticus major pulls the angle of the mouth UPWARD and laterally, the classic smiling action. Downward pull is depressor anguli oris. (Maini, L08)"},
+{"n": 13, "topic": "Buccinator & Parotid Duct", "opts": ["Loss of buccinator makes food and saliva pool in the cheek vestibule, with drooling from the corner of the mouth.", "The parotid duct opens into the mouth opposite the lower (mandibular) second molar.", "Buccinator arises from the alveolar margins of the maxilla and mandible opposite the molars and from the pterygomandibular raphe."], "lie": 1, "exp": "The parotid duct opens opposite the UPPER (maxillary) second molar after piercing buccinator. (Maini, L08)"},
+{"n": 14, "topic": "Named Facial Muscles", "opts": ["Risorius runs horizontally from the angle of the mouth and produces a grin.", "Platysma is the only muscle of facial expression in the neck; it is supplied by the cervical branch of the facial nerve.", "Mentalis pulls the angle of the mouth downward, producing a frown."], "lie": 2, "exp": "Mentalis puckers the skin of the chin. Pulling the angle of the mouth downward is depressor anguli oris. (Maini, L08)"},
+{"n": 15, "topic": "Nasalis, Levator Labii & Procerus", "opts": ["Procerus arises from the frontal bone and is supplied by the temporal branch of the facial nerve.", "Nasalis has a compressor naris that compresses the nostril and a dilator naris that flares the nostril open.", "Levator labii superioris alaeque nasi elevates the upper lip and dilates (flares) the nostril."], "lie": 0, "exp": "Procerus arises from the NASAL bone and is supplied by the ZYGOMATIC branch of the facial nerve. (Maini, L07)"},
+{"n": 16, "topic": "Auricular Muscles, Botox & Insertion", "opts": ["Every muscle of facial expression inserts into bone, which is how it moves the face.", "The auricular muscles are rudimentary in humans; wiggling the ears is a genetic trait some people have.", "Botulinum toxin reduces wrinkles by blocking neuromuscular transmission (acetylcholine action), paralyzing the muscle."], "lie": 0, "exp": "Facial-expression muscles insert into the SKIN of the face (they lie in the superficial fascia); that skin insertion is how they move the face. (Maini, L07)"},
+{"n": 17, "topic": "Facial Nerve - Five Motor Branches", "opts": ["The cervical branch of the facial nerve supplies platysma.", "The five terminal motor branches of the facial nerve are Temporal, Zygomatic, Buccal, Marginal mandibular, and Cervical.", "The buccal branch of the facial nerve supplies sternocleidomastoid."], "lie": 2, "exp": "Sternocleidomastoid is supplied by the accessory nerve (CN XI). The buccal branch supplies buccinator and the upper-lip muscles. (Maini, L08)"},
+{"n": 18, "topic": "Facial Nerve Branch Territories", "opts": ["The temporal branch supplies the upper-face muscles: frontal belly, orbicularis oculi, corrugator, and the anterior and superior auricular muscles.", "The marginal mandibular branch supplies the frontal belly of occipitofrontalis.", "The buccal branch supplies buccinator plus muscles of the upper lip and nostril."], "lie": 1, "exp": "The frontal belly is supplied by the TEMPORAL branch. The marginal mandibular branch supplies the muscles of the lower lip. (Maini, L08)"},
+{"n": 19, "topic": "Facial Nerve Exit & Parotid", "opts": ["Within the parotid gland the facial nerve forms a plexus and gives off its motor branches.", "The facial nerve exits the skull base through the stylomastoid foramen, then enters the parotid gland.", "The facial nerve exits the skull through the foramen ovale."], "lie": 2, "exp": "The foramen ovale transmits V3 (the mandibular nerve). The facial nerve exits through the stylomastoid foramen, between the styloid and mastoid processes. (Maini, L08)"},
+{"n": 20, "topic": "Facial Nerve Entry & Chorda Tympani", "opts": ["The chorda tympani exits the skull through the foramen ovale to join the lingual nerve.", "The facial nerve enters the temporal bone through the internal acoustic meatus, then runs in the facial canal.", "The sensory ganglion at the genu (bend) of the facial nerve is the geniculate ganglion."], "lie": 0, "exp": "The chorda tympani exits through the petrotympanic fissure. The foramen ovale transmits V3. (Maini, L08)"},
+{"n": 21, "topic": "Greater & Deep Petrosal Nerves", "opts": ["The deep petrosal nerve carries postganglionic sympathetic fibers from the internal carotid plexus.", "The greater petrosal nerve carries preganglionic parasympathetic fibers toward the pterygopalatine ganglion.", "The greater petrosal and deep petrosal nerves unite to form the chorda tympani."], "lie": 2, "exp": "The greater petrosal (parasympathetic) and deep petrosal (sympathetic) unite to form the nerve of the pterygoid canal, not the chorda tympani. (Maini, L08)"},
+{"n": 22, "topic": "Pterygopalatine Distribution & Stapedius", "opts": ["Postganglionic fibers from the pterygopalatine ganglion travel with branches of V2 to the lacrimal, nasal, and palatine glands.", "The greater petrosal nerve carries motor (SVE) fibers to the muscles of facial expression.", "Paralysis of the stapedius muscle causes hyperacusis (abnormal sensitivity to loud sound)."], "lie": 1, "exp": "The greater petrosal carries preganglionic PARASYMPATHETIC (secretomotor) fibers. The SVE motor fibers to facial muscles stay in the main facial trunk. (Maini, L08)"},
+{"n": 23, "topic": "Chorda Tympani", "opts": ["Chorda tympani parasympathetic fibers relay in the otic ganglion.", "The chorda tympani leaves the skull through the petrotympanic fissure to join the lingual nerve.", "The chorda tympani carries taste from the anterior two-thirds of the tongue and preganglionic parasympathetic fibers to the submandibular ganglion."], "lie": 0, "exp": "Chorda tympani parasympathetics relay in the SUBMANDIBULAR ganglion (for the submandibular and sublingual glands). The otic ganglion relays parotid fibers from CN IX. (Maini, L08)"},
+{"n": 24, "topic": "Parasympathetic Ganglia", "opts": ["The pterygopalatine ganglion relays parasympathetic fibers to the parotid gland.", "The submandibular ganglion relays parasympathetic fibers to the submandibular and sublingual glands.", "The three parasympathetic ganglia introduced this week were the otic, pterygopalatine, and submandibular."], "lie": 0, "exp": "The pterygopalatine ganglion serves the lacrimal, nasal, and palatine glands. The parotid is served by the OTIC ganglion. (Maini, L08)"},
+{"n": 25, "topic": "Parotid Secretomotor Pathway", "opts": ["Preganglionic parasympathetic fibers to the parotid gland are carried by the facial nerve (CN VII).", "Parotid parasympathetic fibers relay in the otic ganglion, then ride the auriculotemporal nerve (V3) to the gland.", "Preganglionic parasympathetic fibers for the parotid gland travel in CN IX (glossopharyngeal), via the tympanic branch and lesser petrosal nerve."], "lie": 0, "exp": "The parotid's secretomotor fibers come from CN IX (glossopharyngeal), not CN VII. CN VII serves the submandibular, sublingual, lacrimal, nasal, and palatine glands. (Maini, L08)"},
+{"n": 26, "topic": "Auriculotemporal Nerve", "opts": ["The auriculotemporal nerve carries taste fibers from the anterior two-thirds of the tongue.", "The auriculotemporal nerve also carries general sensory (GSA) fibers from part of the temporal scalp.", "The auriculotemporal nerve (a V3 branch) carries hitchhiking postganglionic parasympathetic fibers from the otic ganglion to the parotid gland."], "lie": 0, "exp": "Taste from the anterior two-thirds of the tongue travels in the chorda tympani, not the auriculotemporal nerve. (Maini, L08)"},
+{"n": 27, "topic": "Facial Nerve Palsy - Signs", "opts": ["A lower-motor-neuron facial palsy causes loss of forehead wrinkling, inability to close the eye, and a smile deviated to the normal side.", "In a lower-motor-neuron facial palsy the forehead is spared and only the lower face is weak.", "Bell's palsy is an idiopathic lower-motor-neuron facial paralysis, often following exposure to cold."], "lie": 1, "exp": "Forehead SPARING points to an upper-motor-neuron lesion. A lower-motor-neuron facial palsy weakens the WHOLE side, including the forehead. (Maini, L08)"},
+{"n": 28, "topic": "Orbicularis Oculi Palsy", "opts": ["Loss of blinking dries the cornea (xerophthalmia), which can progress to abrasion, opacity, and blindness.", "Inability to fully close the eye, seen with orbicularis oculi paralysis, is called lagophthalmos.", "Ectropion means drooping of the upper eyelid due to levator palpebrae superioris weakness."], "lie": 2, "exp": "Ectropion is eversion (out-turning) of the LOWER eyelid. Drooping of the UPPER eyelid is ptosis. (Maini, L08)"},
+{"n": 29, "topic": "Facial Nerve - Named Syndromes", "opts": ["Frey's syndrome is gustatory sweating over the parotid region after parotidectomy, from misdirected regenerating parasympathetic fibers.", "Bell's phenomenon is the facial paralysis itself, seen after a cold draft.", "Ramsay-Hunt syndrome (herpes zoster oticus) affects CN VIII and the geniculate ganglion of CN VII, with vesicles."], "lie": 1, "exp": "Bell's PHENOMENON is the normal upward-and-outward rolling of the eyeball on attempted eye closure, made visible in palsy. The paralysis itself is Bell's PALSY. (Maini, L08)"},
+{"n": 30, "topic": "Facial Sensation - Trigeminal Zones", "opts": ["The forehead and upper eyelid are supplied by V1 (ophthalmic); the tip and bridge of the nose are also V1.", "The upper lip and cheek are supplied by V2 (maxillary), largely via the infraorbital nerve.", "The lower lip and chin are supplied by V2 (maxillary) via the mental nerve."], "lie": 2, "exp": "The lower lip and chin are supplied by V3 (mandibular) via the mental nerve, not V2. (Maini, L08)"},
+{"n": 31, "topic": "Trigeminal Branches", "opts": ["The supraorbital nerve is a branch of V1 (ophthalmic).", "The infraorbital nerve is a branch of V3 (mandibular).", "The mental and auriculotemporal nerves are branches of V3 (mandibular)."], "lie": 1, "exp": "The infraorbital nerve is a branch of V2 (maxillary). V3 gives the mental and auriculotemporal nerves. (Maini, L08)"},
+{"n": 32, "topic": "Buccal Nerves, Cornea & Zoster", "opts": ["General sensation from the cornea is carried by V1 (ophthalmic), so corneal lesions can threaten sight.", "The buccal BRANCH of the facial nerve is motor to buccinator; the buccal NERVE of V3 is sensory to the cheek.", "Herpes zoster ophthalmicus is reactivation of varicella-zoster virus in the V2 (maxillary) distribution."], "lie": 2, "exp": "Herpes zoster ophthalmicus affects the V1 (ophthalmic) distribution, which is why the cornea is at risk. (Maini, L08)"},
+{"n": 33, "topic": "Trigeminal Neuralgia", "opts": ["Trigeminal neuralgia is reliably relieved by simple analgesics such as paracetamol.", "Trigeminal neuralgia (tic douloureux) causes lightning-like facial pain in a V2/V3 distribution, triggered by touch such as shaving or chewing.", "Carbamazepine, an anti-epileptic, is the drug of choice for trigeminal neuralgia."], "lie": 0, "exp": "Simple analgesics do NOT relieve trigeminal neuralgia; carbamazepine (an anti-seizure drug) is the treatment of choice. (Maini, L08)"},
+{"n": 34, "topic": "Parotid Gland & Saliva", "opts": ["The parotid is the largest of the three paired salivary glands and contributes about 30% of total saliva.", "Parotitis pain is intense because the tough fibrous parotid sheath, rich in pain receptors, is stretched by the swollen gland.", "Salivary amylase begins the digestion of protein in the mouth."], "lie": 2, "exp": "Salivary amylase begins the digestion of CARBOHYDRATE (starch), not protein. Protein digestion begins with pepsin in the stomach. (Maini, L08)"},
+{"n": 35, "topic": "Facial Artery", "opts": ["The transverse facial artery is a branch of the facial artery.", "The facial artery is a branch of the external carotid artery and is the main arterial supply to the face.", "The facial artery gives the submental, inferior labial, superior labial, lateral nasal, and angular branches."], "lie": 0, "exp": "Despite its name, the transverse facial artery is a branch of the SUPERFICIAL TEMPORAL artery, not the facial artery - a classic board trap. (Maini, L08)"},
+{"n": 36, "topic": "Temporal & Maxillary Artery Branches", "opts": ["The superficial temporal artery gives the transverse facial, frontal, and parietal branches.", "The mental and infraorbital arteries are branches of the facial artery.", "The ophthalmic artery, a branch of the internal carotid, gives the supraorbital, supratrochlear, and dorsal nasal arteries."], "lie": 1, "exp": "The mental and infraorbital arteries are branches of the MAXILLARY artery, not the facial artery. (Maini, L08)"},
+{"n": 37, "topic": "Facial Vein - Cavernous Sinus", "opts": ["The facial vein has no connection with the cavernous sinus, which is why facial infections are harmless.", "The facial vein connects INDIRECTLY to the cavernous sinus via the deep facial vein and the pterygoid venous plexus.", "The facial vein connects DIRECTLY to the cavernous sinus via the superior and inferior ophthalmic veins."], "lie": 0, "exp": "The facial vein connects to the cavernous sinus both directly (ophthalmic veins) and indirectly (pterygoid plexus), which is exactly why infections in the danger area can be lethal. (Maini, L08)"},
+{"n": 38, "topic": "Danger Area & Common Facial Vein", "opts": ["Infection there can spread through facial-vein connections to the cavernous sinus, causing cavernous sinus thrombosis, meningitis, or encephalitis.", "The danger area (danger triangle) of the face is around the nose and upper lip.", "The common facial vein is formed by the facial vein joining the posterior division of the retromandibular vein."], "lie": 2, "exp": "The facial vein joins the ANTERIOR division of the retromandibular vein to form the common facial vein. The POSTERIOR division joins the posterior auricular vein to form the external jugular. (Maini, L07/L08)"}
+];
+let order=[],idx=0,ok=0,bad=0,strk=0,bestStrk=0,answered=false;
+let scoredThisRound=false;  // ensures retry doesn't double-count score
+function init(){
+  order=BANK.map((_,i)=>i);
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  idx=0;ok=0;bad=0;strk=0;bestStrk=0;answered=false;
+  document.getElementById('summary').style.display='none';
+  document.getElementById('card').style.display='block';
+  upd();show();
+}
+function show(){
+  answered=false;
+  scoredThisRound=false;
+  const q=BANK[order[idx]];
+  document.getElementById('qNum').textContent=(idx+1)+' / '+BANK.length;
+  document.getElementById('tag').textContent=q.topic;
+  const o=document.getElementById('opts');o.innerHTML='';
+  q.opts.forEach((s,i)=>{
+    const d=document.createElement('div');d.className='opt';d.dataset.i=i;
+    d.innerHTML='<span class="n">'+(i+1)+'</span>'+s;
+    d.onclick=()=>pick(i);
+    o.appendChild(d);
+  });
+  document.getElementById('exp').style.display='none';
+  document.getElementById('exp').classList.remove('bad');
+  document.getElementById('nextBtn').style.display='none';
+}
+function pick(i){
+  if(answered)return;answered=true;
+  const q=BANK[order[idx]];const opts=document.querySelectorAll('.opt');
+  const correct=(i===q.lie);
+  if(!scoredThisRound){
+    if(correct){ok++;strk++;if(strk>bestStrk)bestStrk=strk;}else{bad++;strk=0;}
+    scoredThisRound=true;
+  }
+  opts.forEach((el,n)=>{
+    el.style.cursor='default';el.onclick=null;
+    if(n===q.lie){el.classList.add(correct?'picked-lie':'was-lie-missed');}
+    else if(n===i){el.classList.add('picked-true');}
+    else{el.classList.add('was-true');}
+  });
+  const exp=document.getElementById('exp');
+  exp.textContent=q.exp;exp.style.display='block';
+  if(!correct)exp.classList.add('bad');
+  document.getElementById('nextBtn').style.display='inline-block';
+  document.getElementById('retryBtn').style.display=correct?'none':'inline-block';
+  upd();
+}
+function retry(){
+  // Reset answered state and option styles in place
+  answered=false;
+  scoredThisRound=true;  // already scored — don't re-count
+  const opts=document.querySelectorAll('.opt');
+  opts.forEach((el,n)=>{
+    el.classList.remove('picked-lie','was-lie-missed','picked-true','was-true');
+    el.style.cursor='pointer';
+    el.onclick=()=>pick(n);
+  });
+  document.getElementById('exp').style.display='none';
+  document.getElementById('exp').classList.remove('bad');
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('retryBtn').style.display='none';
+}
+function confirmRestart(){
+  if(idx>0||ok>0||bad>0){
+    if(!confirm('Restart drill from the beginning? Current progress ('+ok+' correct, '+bad+' missed) will be cleared.'))return;
+  }
+  init();
+}
+function next(){
+  idx++;
+  if(idx>=BANK.length){end();return;}
+  show();upd();
+}
+function upd(){
+  document.getElementById('qNum').textContent=(idx+1)+' / '+BANK.length;
+  document.getElementById('okN').textContent=ok;
+  document.getElementById('badN').textContent=bad;
+  document.getElementById('strk').textContent=strk;
+}
+function end(){
+  document.getElementById('card').style.display='none';
+  document.getElementById('summary').style.display='block';
+  const tot=ok+bad;const pct=tot?Math.round(ok/tot*100):0;
+  const p=document.getElementById('pct');p.textContent=pct+'%';
+  p.className='pct '+(pct>=85?'great':pct>=70?'ok':'bad');
+  document.getElementById('msg').innerHTML='You got <b>'+ok+'</b> of <b>'+tot+'</b> right · best streak <b>'+bestStrk+'</b>';
+}
+init();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px; font-weight: 400; color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px; pointer-events: none; z-index: 2147483647; user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById("dcStudyWatermark");
+    if (!wm) return;
+    if (localStorage.getItem("dcDavidView") === "1") { wm.classList.add("dc-hidden"); return; }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || "";
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) { wm.style.color = "rgba(255, 255, 255, 0.30)"; }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body></html>

@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · Cranial Meninges · Rapid Recall</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.header { text-align: center; padding: 24px 16px 12px; width: 100%; max-width: 700px; }
+.header h1 { font-size: 22px; color: #60a5fa; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; color: #94a3b8; }
+.score-bar { display: flex; gap: 16px; justify-content: center; padding: 10px; font-size: 14px; font-weight: 600; }
+.score-bar .got { color: #4ade80; } .score-bar .missed { color: #f87171; } .score-bar .remain { color: #94a3b8; }
+.progress-track { width: 100%; max-width: 700px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #60a5fa); transition: width 0.4s ease; border-radius: 3px; }
+.card-container { width: 100%; max-width: 700px; padding: 0 16px; flex: 1; }
+.card { background: #1e293b; border: 2px solid #334155; border-radius: 16px; padding: 32px 28px; text-align: center; min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: border-color 0.3s; }
+.card:hover { border-color: #475569; }
+.card-number { font-size: 12px; color: #64748b; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.term { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; line-height: 1.3; }
+.answer { font-size: 15px; line-height: 1.7; color: #cbd5e1; max-width: 600px; padding: 16px 20px; background: #0f172a; border-radius: 10px; border-left: 4px solid #3b82f6; text-align: left; display: none; margin-bottom: 16px; }
+.answer.show { display: block; animation: fadeIn 0.3s ease; }
+.prof-tip { font-size: 13px; color: #fbbf24; margin-top: 8px; font-style: italic; display: none; text-align: left; max-width: 600px; padding: 10px 16px; background: #1a0a0a; border-left: 3px solid #ef4444; border-radius: 0 10px 10px 0; }
+.prof-tip.show { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 12px 28px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn:active { transform: scale(0.96); }
+.btn-reveal { background: #3b82f6; color: white; } .btn-reveal:hover { background: #2563eb; }
+.btn-got { background: #166534; color: #4ade80; display: none; } .btn-got:hover { background: #15803d; }
+.btn-missed { background: #7f1d1d; color: #f87171; display: none; } .btn-missed:hover { background: #991b1b; }
+.btn-back { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-back:hover { background: #475569; }
+.btn-skip { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-skip:hover { background: #475569; }
+.btn-continue { background: #1e40af; color: #93c5fd; display: none; } .btn-continue:hover { background: #1d4ed8; }
+.btn-redo { background: #7c3aed; color: #c4b5fd; display: none; } .btn-redo:hover { background: #6d28d9; }
+.btn-redoback { background: #7c3aed; color: #c4b5fd; padding: 10px 20px; font-size: 13px; } .btn-redoback:hover { background: #6d28d9; }
+.browse-label { font-size: 11px; color: #f59e0b; margin-bottom: 8px; display: none; }
+.controls { padding: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.ctrl-btn { padding: 8px 16px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.ctrl-btn:hover { background: #334155; color: #e2e8f0; } .ctrl-btn.active { border-color: #3b82f6; color: #60a5fa; }
+.summary { display: none; text-align: center; padding: 40px 20px; width: 100%; max-width: 700px; }
+.summary h2 { font-size: 28px; color: #60a5fa; margin-bottom: 20px; }
+.summary .final-score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.summary .final-score.great { color: #4ade80; } .summary .final-score.ok { color: #fbbf24; } .summary .final-score.rough { color: #f87171; }
+.missed-list { text-align: left; max-width: 500px; margin: 20px auto; background: #1e293b; border-radius: 12px; padding: 16px 20px; }
+.missed-list h3 { color: #f87171; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.missed-list li { color: #cbd5e1; padding: 6px 0; border-bottom: 1px solid #334155; font-size: 14px; list-style: none; } .missed-list li:last-child { border: none; }
+.kb-hint { font-size: 11px; color: #475569; text-align: center; padding: 8px; }
+.index-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.95); z-index: 100; flex-direction: column; align-items: center; padding: 20px; overflow-y: auto; }
+.index-overlay h2 { color: #60a5fa; font-size: 20px; margin-bottom: 16px; }
+.index-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; } .index-close:hover { color: #e2e8f0; }
+.index-grid { max-width: 700px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.index-chip { padding: 10px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; cursor: pointer; font-size: 13px; color: #cbd5e1; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.index-chip:hover { background: #334155; border-color: #60a5fa; }
+.index-chip .chip-num { color: #64748b; font-size: 11px; min-width: 30px; }
+.chip-got { border-left: 3px solid #4ade80; } .chip-got .chip-status { color: #4ade80; }
+.chip-missed { border-left: 3px solid #f87171; } .chip-missed .chip-status { color: #f87171; }
+.chip-current { border-left: 3px solid #60a5fa; background: #1e3a5f; } .chip-current .chip-status { color: #60a5fa; }
+.chip-status { font-size: 11px; min-width: 50px; text-align: right; }
+</style>
+
+
+
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+
+<style id="ga0202-cleanup-v9">
+/* Hide legacy FAB Lecture Final hub buttons (we have our own ga0202-back-to-hub) */
+.fab-back-to-hub-btn,
+.sh-fab,
+.sh-back-to-start-fab,
+button[onclick*="fabBackToHub"],
+button[onclick*="shBackToStart"] { display: none !important; }
+/* Make sure draw button + AI button don't overlap */
+.fab-stack { bottom: 90px !important; right: 24px !important; z-index: 9999 !important; }
+.fab-stack button { pointer-events: auto !important; }
+#draw-btn { z-index: 10000 !important; }
+.draw-toolbar { z-index: 10001 !important; bottom: 158px !important; right: 90px !important; }
+.draw-canvas { z-index: 9990 !important; }
+#ai-btn, #ai-aug-btn, #ai-modal { display: none !important; }
+</style>
+<script id="ga0202-cleanup-v9-js">
+// Override legacy redirect functions to point to OUR hub instead
+window.fabBackToHub = function() { window.location.href = 'ga-0202-m06-cranial-meninges-brain-hub_PENDING_REVIEW.html'; };
+window.shBackToStart = function() { window.location.href = 'ga-0202-m06-cranial-meninges-brain-hub_PENDING_REVIEW.html'; };
+</script>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="ga-0202-m06-cranial-meninges-brain-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to M06 Hub</a>
+
+<div class="header">
+  <h1>⚡ GA 0202 · Cranial Meninges · Rapid Recall</h1>
+  <div class="subtitle">Dr. Maini · Cranial Meninges & Brain — 80 Cards | See prompt. Say it. Reveal to check.</div>
+</div>
+<div class="score-bar">
+  <span class="got" id="gotCount">0 Got It</span>
+  <span class="missed" id="missedCount">0 Missed</span>
+  <span class="remain" id="remainCount">0 Left</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="card-container" id="cardArea">
+  <div class="card">
+    <div class="browse-label" id="browseLabel">BROWSING — already answered</div>
+    <div class="card-number" id="cardNum"></div>
+    <div class="term" id="termText"></div>
+    <div class="answer" id="answerText"></div>
+    <div class="prof-tip" id="profTip"></div>
+    <div class="btn-row">
+      <button class="btn btn-reveal" id="btnReveal" onclick="doReveal()">Reveal Answer</button>
+      <button class="btn btn-got" id="btnGot" onclick="grade(true)">Got It</button>
+      <button class="btn btn-missed" id="btnMissed" onclick="grade(false)">Missed It</button>
+      <button class="btn btn-continue" id="btnContinue" onclick="resumeQuiz()">Continue &rarr;</button>
+      <button class="btn btn-redo" id="btnRedo" onclick="redoPrev()">Redo</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" id="btnBack" onclick="goBack()">&larr; Back</button>
+      <button class="btn btn-redoback" id="btnRedoBack" onclick="redoBack()">Redo Back</button>
+      <button class="btn btn-skip" onclick="skip()">Skip</button>
+    </div>
+  </div>
+</div>
+<div class="summary" id="summaryArea">
+  <h2>Drill Complete</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="finalMsg" style="color:#94a3b8;margin-bottom:20px;"></p>
+  <div class="missed-list" id="missedListBox" style="display:none;"><h3>Review These</h3><ul id="missedListUl"></ul></div>
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-reveal" onclick="startDrill('all')">Restart All</button>
+    <button class="btn btn-missed" id="btnRedrill" style="display:inline-block;" onclick="startDrill('missed')">Re-Drill Missed</button>
+  </div>
+</div>
+<div class="controls">
+  <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">Shuffle</button>
+  <button class="ctrl-btn" onclick="toggleIndex()">Card Index</button>
+  <button class="ctrl-btn" onclick="startDrill('all')">Reset</button>
+</div>
+<div class="kb-hint">Space = Reveal | G = Got It | M = Missed | S = Skip | B = Back | D = Redo Back | R = Redo | I = Index</div>
+<div class="index-overlay" id="indexOverlay">
+  <button class="index-close" onclick="toggleIndex()">&times;</button>
+  <h2>Card Index</h2>
+  <div class="index-grid" id="indexGrid"></div>
+</div>
+<script>
+const BANK = [{"term": "[Brain Surface] What are the raised folds on the brain surface called, and what are the grooves between them called?", "answer": "The raised folds (ridges) are GYRI; the grooves/dips between them are SULCI (singular: gyrus, sulcus). Maini: 'the ridges are called gyri; the dips, the grooves, are called sulci.'", "tip": "The bump you SEE = gyrus; the ditch = sulcus. A fissure is just a deep sulcus."}, {"term": "[Brain Surface] Why is the cerebral surface folded into gyri and sulci instead of being smooth?", "answer": "To pack in far MORE neurons \u2014 the folding lets the cortex hold roughly 10,000 times more neurons than a smooth brain. Maini: 'your brain accommodates almost 10,000 times more neurons than if the brain was smooth.'", "tip": "More folds = more surface area = more cortex = more neurons."}, {"term": "[Brain Surface] Smoothing / loss of the brain's convolutions is associated with which condition, and why?", "answer": "DEMENTIA \u2014 the loss of surface folds reflects a REDUCTION in the number of neurons in the cerebral cortex. Maini links cortical smoothing to fewer cortical neurons.", "tip": "Fewer folds \u2192 fewer cortical neurons \u2192 dementia."}, {"term": "[Brain Surface] Where is the brain's GRAY matter located, and what is it made of?", "answer": "The OUTER cortex \u2014 it contains the CELL BODIES of neurons. Maini: 'gray matter, it's the outer cortex... it has the cell body of the neurons.'", "tip": "Gray = cell bodies on the OUTSIDE (cortex); white = fibers inside."}, {"term": "[Brain Surface] Why does the WHITE matter of the brain look white?", "answer": "Because it is mostly MYELINATED fibers \u2014 anything that looks white in the nervous system has a myelin sheath. Maini: 'anything that looks white in the nervous system has myelin sheath.'", "tip": "White = myelin. White matter = mostly myelinated fibers (with islands of gray)."}, {"term": "[Meninges] Name the three cranial meningeal layers from the skull inward.", "answer": "DURA mater \u2192 ARACHNOID mater \u2192 PIA mater (outermost to innermost).", "tip": "Skull \u2192 Dura \u2192 Arachnoid \u2192 Pia \u2192 brain. 'DAP' from outside in."}, {"term": "[Meninges] What does the word 'dura' (dura mater) literally mean?", "answer": "TOUGH / durable \u2014 the 'tough mother.' Maini: 'what does the word dura mean? Tough, durable... tough mother.'", "tip": "Dura = durable = the tough outer mother."}, {"term": "[Meninges] Why is the arachnoid mater named 'arachnoid'?", "answer": "Because it has thread-like extensions resembling a SPIDER'S WEB. Maini: 'it's like a spider web, so that is why it's given the name arachnoid.'", "tip": "Arachnid = spider \u2192 arachnoid = spider-web membrane."}, {"term": "[Meninges] 'Pia' means 'tender/soft mother.' How closely does the pia sit on the brain?", "answer": "Extremely closely \u2014 it INVESTS the brain surface, dipping into every sulcus and gyrus like an ONION PEEL, following every contour; in a cadaver you need sharp forceps to peel it off. Maini: 'investing the outer surface... just like the onion peel... it dips along with the sulci and gyri.'", "tip": "Pia = tender mother, glued on like an onion skin, following every fold."}, {"term": "[Meninges] In Maini's 'sheet over a chair' analogy, how do the pia and arachnoid differ over the sulci?", "answer": "The PIA DIPS INTO the sulci and gyri (tucked in); the ARACHNOID PASSES OVER them (draped like a sheet thrown over a chair). Maini: 'pia is going to follow the sulci and gyri... arachnoid is going to pass over.'", "tip": "Pia tucks in; arachnoid drapes over. The gap left under the arachnoid = subarachnoid space (CSF)."}, {"term": "[Meninges] Why does Maini specify 'CRANIAL' meninges rather than just 'meninges'?", "answer": "Because the three layers are CONTINUOUS with the spinal meninges, but the SPACES and ARRANGEMENT differ between the cranial and spinal regions. Maini: they continue as the spinal meninges but the spaces are arranged differently.", "tip": "Same 3 layers cranium\u2192spine, but the SPACES between them differ (e.g., no cranial epidural space)."}, {"term": "[Pia] What kind of membrane is the pia mater?", "answer": "A THIN, HIGHLY VASCULARIZED membrane made of LOOSE connective tissue. Maini: 'the pia mater, this is a thin, highly vascularized membrane, made up of loose connective tissue.'", "tip": "Pia = thin + vessel-rich + loose CT."}, {"term": "[Pia] As the pia dips into the sulci and fissures, what does it carry with it?", "answer": "SMALL BLOOD VESSELS \u2014 it forms a sheath/layer around them. Maini: 'it carries small blood vessels with it... it also forms a layer around the blood vessel.'", "tip": "Pia is the vessels' escort into the brain \u2014 it wraps around them."}, {"term": "[Pia] Cerebral veins run on the pia within the subarachnoid space. What does Maini say this implies about a subarachnoid hemorrhage?", "answer": "That a subarachnoid hemorrhage is usually VENOUS (not arterial) in origin \u2014 because the cerebral veins lie on the pia in that space. Maini: 'a subarachnoid hemorrhage is mostly venous, not arterial.'", "tip": "Veins ride on the pia in the SA space \u2192 SAH is typically venous."}, {"term": "[Pia] Which meningeal layer is applied so closely that a cadaver dissector must peel it off 'like an onion peel' with sharp forceps?", "answer": "The PIA MATER. Maini: 'you have to use your very sharp forceps to separate pia mater from the brain surface... just like the onion peel.'", "tip": "Only the pia is glued to the brain surface itself \u2014 the onion-peel layer."}, {"term": "[Pia] Besides covering the brain, the pia helps form what CSF-related structure?", "answer": "The CHOROID PLEXUS \u2014 the pia (with blood vessels) forms the tela choroidea and acts as a FILTRATION MEMBRANE for CSF production. Maini: 'pia forms a part of choroid plexus... makes a filtration membrane also.'", "tip": "Pia isn't just a cover \u2014 it's part of the CSF 'filter' in the choroid plexus."}, {"term": "[Arachnoid] What kind of membrane is the arachnoid mater?", "answer": "A DELICATE, TRANSPARENT membrane composed of WEB-LIKE tissue. Maini: 'arachnoid \u2014 delicate, transparent membrane composed of web-like tissue.'", "tip": "See-through spider-web membrane between dura and pia."}, {"term": "[Arachnoid] What are arachnoid granulations (villi)?", "answer": "TUFTED PROLONGATIONS of the pia-arachnoid that PROTRUDE THROUGH the meningeal layer of the dura (into the venous sinuses). Maini: 'tufted prolongations of pia-arachnoid which protrude through the meningeal layer of dura.'", "tip": "Little arachnoid 'tufts' poking up through the dura into the sinus."}, {"term": "[Arachnoid] What is the function of the arachnoid granulations?", "answer": "To ABSORB cerebrospinal fluid from the subarachnoid space and RETURN it to the VENOUS circulation. Maini: 'the function of arachnoid granulation is to absorb cerebrospinal fluid.'", "tip": "Granulations = the CSF drains. Choroid plexus makes CSF; granulations soak it back into venous blood."}, {"term": "[Arachnoid] Board favorite: which structure acts as a ONE-WAY VALVE for the absorption of CSF?", "answer": "The ARACHNOID GRANULATIONS (villi). Maini flags this as 'a very frequently asked board question.'", "tip": "One-way valve for CSF absorption = arachnoid granulations. Memorize for boards."}, {"term": "[Arachnoid] Arachnoid granulations return CSF to the venous circulation at which specific sinus?", "answer": "The SUPERIOR SAGITTAL SINUS \u2014 the granulations sit at its margin, and Maini says only the sagittal sinus receives CSF. 'granulations lie at the margin of the superior sagittal sinus.'", "tip": "CSF drains into the SUPERIOR SAGITTAL sinus via the granulations."}, {"term": "[Arachnoid] After a subarachnoid hemorrhage or infection, why can intracranial pressure rise?", "answer": "Blood cells / particles can BLOCK the arachnoid granulations, preventing CSF absorption, so CSF backs up and intracranial tension rises. Maini: 'blood cells can block arachnoid granulations... increased intracranial tension.'", "tip": "Clog the drains (granulations) \u2192 CSF backs up \u2192 pressure climbs."}, {"term": "[Arachnoid] On the inside of the calvaria, the midline impression of the superior sagittal sinus is flanked by impressions of what?", "answer": "ARACHNOID GRANULATIONS (and, laterally, the MIDDLE MENINGEAL vessels). Maini: 'the impression of the superior sagittal sinus in the middle, and impressions of arachnoid granulations, and middle meningeal vessels.'", "tip": "Calvaria inside = sagittal sinus groove (midline) + granulation pits + middle meningeal vessel grooves."}, {"term": "[Arachnoid] Which structure is NOT imprinted on the inner calvaria \u2014 sagittal sinus, arachnoid granulations, middle meningeal vessels, or choroid plexus?", "answer": "The CHOROID PLEXUS \u2014 it lies INSIDE the ventricles, so it leaves no mark on the skull. The other three do imprint the calvaria.", "tip": "Choroid plexus is intraventricular \u2014 deep inside the brain, never touching the skull."}, {"term": "[CSF] Where is cerebrospinal fluid found in relation to the brain?", "answer": "INSIDE the ventricles within the brain, and \u2014 in a thin layer \u2014 OUTSIDE the brain in the SUBARACHNOID space. Maini: 'a thin amount of CSF also circulates outside the brain, within the subarachnoid space.'", "tip": "CSF is both inside (ventricles) and outside (subarachnoid space) \u2014 the brain floats in it."}, {"term": "[CSF] What exactly does 'subarachnoid' mean, and what does that space contain?", "answer": "BENEATH the arachnoid \u2014 i.e., the space BETWEEN the arachnoid and the pia. It contains CEREBROSPINAL FLUID. Maini: 'subarachnoid means beneath the arachnoid... between arachnoid and pia.'", "tip": "Sub-arachnoid = below the arachnoid, above the pia = the CSF space."}, {"term": "[CSF] What are the TWO main functions of CSF per Maini?", "answer": "(1) BUOYANCY \u2014 floats/cushions the brain; and (2) NUTRITION / a balanced chemical environment for the sensitive neurons. Maini: 'it provides buoyancy and nutrition.'", "tip": "CSF = float + feed. Buoyancy + nutrition."}, {"term": "[CSF] Why does the brain need CSF buoyancy?", "answer": "So it FLOATS and doesn't rest on the skull bones \u2014 otherwise it would get CONTUSIONS (bruises), especially at the BASE of the brain. Maini: 'your brain is kind of floating... otherwise there'll be contusions.'", "tip": "No buoyancy \u2192 brain bruises on bone, worst at the skull base."}, {"term": "[CSF] Without CSF buoyancy, which part of the brain would especially suffer contusions?", "answer": "The BASE of the brain \u2014 because it would press against the bones of the skull base. Maini singles out the base of the brain.", "tip": "Base of the brain sits on the bony floor \u2192 most vulnerable without the CSF cushion."}, {"term": "[CSF] Why does Maini say neurons are protected by multiple mechanisms?", "answer": "Because neurons are NON-MITOTIC \u2014 if damaged, they do NOT divide to make new neurons to replace them. Maini: 'neurons are non-mitotic... not going to divide and replace the old ones.'", "tip": "You can't grow new neurons \u2192 the body over-protects the ones you have."}, {"term": "[Choroid Plexus] Where is the choroid plexus located?", "answer": "In the ROOF of EACH ventricle. Maini: 'the choroid plexus, in the roof of each ventricle.'", "tip": "Choroid plexus hangs from each ventricle's roof \u2014 cauliflower-like."}, {"term": "[Choroid Plexus] The choroid plexus looks like cauliflower with many villi. What is its function?", "answer": "To SECRETE cerebrospinal fluid into the cavity of the ventricle. Maini: 'the function of these villi is to secrete CSF in the cavity of the ventricle.'", "tip": "Choroid plexus = the CSF factory in each ventricle."}, {"term": "[Choroid Plexus] The choroid plexus is lined by ependymal cells. What broader cell family do ependymal cells belong to?", "answer": "GLIAL cells (neuroglia) \u2014 alongside astrocytes, oligodendrocytes, and microglia. Maini: 'ependymal cells are one type of glial cells.'", "tip": "Ependymal cells = the 4th glial type (the CSF-lining glia)."}, {"term": "[Choroid Plexus] Name the four types of glial cells (neuroglia).", "answer": "ASTROCYTES, OLIGODENDROCYTES, MICROGLIA, and EPENDYMAL cells. Maini: 'four different kinds of glial cells: astrocytes, oligodendrocytes, microglia, and ependymal cells.'", "tip": "A-O-M-E: Astro, Oligo, Micro, Ependymal."}, {"term": "[Choroid Plexus] What is the general function of glial cells (neuroglia)?", "answer": "To PROTECT and SUPPORT the neurons (which are delicate). Maini: 'the function of glial cells is to provide protection to neurons.'", "tip": "Glia = the neurons' support staff / bodyguards."}, {"term": "[Choroid Plexus] What specific function do the EPENDYMAL cells of the choroid plexus perform?", "answer": "They SECRETE cerebrospinal fluid. Maini: 'the function of ependymal cells is to secrete cerebrospinal fluid.'", "tip": "Ependymal cells line the plexus AND secrete the CSF."}, {"term": "[Choroid Plexus] The pia + blood vessels form the tela choroidea, which fuses with WHAT to form the choroid plexus?", "answer": "The EPENDYMA (ependymal cell layer). Maini: 'pia forms tela choroidea and fuses with ependyma to form choroid plexus.'", "tip": "Tela choroidea (pia + vessels) + ependyma = choroid plexus."}, {"term": "[Choroid Plexus] How is CSF actually formed?", "answer": "By FILTRATION of components (plasma) from the BLOOD, regulated by the ependymal cells and pia to keep its composition normal. Maini: 'it is formed by filtration from blood.'", "tip": "CSF = filtered blood plasma, fine-tuned by ependyma + pia."}, {"term": "[CSF] The choroid plexus makes CSF constantly. What must happen to keep intracranial pressure stable?", "answer": "CSF must be ABSORBED / removed at the SAME RATE it is produced \u2014 otherwise it accumulates. Maini: 'CSF should also be removed at the same rate.'", "tip": "Production must equal absorption. Faucet rate = drain rate."}, {"term": "[CSF] If CSF is NOT removed and accumulates, what does Maini warn results?", "answer": "INCREASED INTRACRANIAL TENSION, which can compress cerebral blood flow \u2192 ischemia, infection, or STROKE. Maini: 'increased intracranial tension... ischemia, infection, stroke.'", "tip": "CSF backup \u2192 pressure up \u2192 blood flow squeezed \u2192 ischemia/stroke."}, {"term": "[Dura] The dura mater is the outermost, toughest CNS covering. What tissue is it made of?", "answer": "DENSE connective tissue. Maini: 'the outermost and toughest layer... composed of dense connective tissue.'", "tip": "Tough mother = dense CT armor."}, {"term": "[Dura] The cranial dura is a two-layered membrane. Name the two layers.", "answer": "The PERIOSTEAL layer (against the skull bone) and the MENINGEAL layer (inner). Maini: 'dura mater has two layers, periosteal and meningeal.'", "tip": "Outer = periosteal (on bone); inner = meningeal (forms the septa)."}, {"term": "[Dura] How does cranial dura differ from spinal dura?", "answer": "CRANIAL dura has BOTH periosteal and meningeal layers; SPINAL dura has ONLY the meningeal layer (no periosteal). Maini: 'spinal dura does not have a periosteal layer, it only has meningeal.'", "tip": "Cranial = 2 layers; spinal = 1 (meningeal only). That's why the spine HAS an epidural space and the skull doesn't."}, {"term": "[Dura] The cranial dura is adherent to the periosteum of the cranium. What is the consequence?", "answer": "There is NO epidural (extradural) space in the head under normal conditions. Maini: 'cranial dura is adherent to periosteum... there is no epidural space.'", "tip": "Skull dura is glued to bone \u2192 no natural cranial epidural space (unlike the spine)."}, {"term": "[Dura] The meningeal layer of the cranial dura forms how many inwardly projecting septa?", "answer": "FOUR \u2014 falx cerebri, tentorium cerebelli, falx cerebelli, and diaphragma sellae. Maini: 'it forms four inwardly projecting septa.'", "tip": "4 dural septa: 2 falces + tentorium + diaphragma sellae."}, {"term": "[Dura] Where within the dura are the dural venous sinuses located?", "answer": "BETWEEN the periosteal and meningeal layers, at points where the two layers SEPARATE. Maini: 'these two layers separate to accommodate venous sinuses.'", "tip": "Sinuses live in the split between dura's two layers."}, {"term": "[Dura] The dura is richly supplied with WHAT, explaining why stretching it causes intense headache?", "answer": "PAIN RECEPTORS \u2014 the dura has a large number of them, so stretching it produces intense pain. Maini: 'dura has a large number of pain receptors.'", "tip": "The brain itself feels no pain \u2014 but the dura does. Stretch the dura = headache."}, {"term": "[Dura] Which layer of the cranial dura projects inward to form the dural septa?", "answer": "The MENINGEAL layer. Maini: 'the meningeal layer has these inwardly directed extensions, which are called dural septa.'", "tip": "Periosteal stays on the bone; the MENINGEAL layer dives in to make the septa."}, {"term": "[Dura] Tracing the dura from head to spinal cord, which layer continues and which is lost?", "answer": "The MENINGEAL layer CONTINUES; the PERIOSTEAL layer is LOST (spinal dura is meningeal only). Maini confirms spinal dura keeps meningeal only.", "tip": "Periosteal layer stops at the foramen magnum; meningeal carries on down the spine."}, {"term": "[Dura] The cranial dura is adherent to periosteum OUTSIDE and to which layer on the INSIDE, so no natural space lies on either side?", "answer": "The ARACHNOID mater \u2014 the cranial dura sticks to periosteum externally and to arachnoid internally, so there's no natural cranial epidural OR subdural space. Maini: 'no space on each side of dura.'", "tip": "Dura is sandwiched tight: bone outside, arachnoid inside \u2192 both 'spaces' are only potential."}, {"term": "[Dural Septa] 'Falx' means 'sickle.' Where does the falx cerebri sit?", "answer": "In the LONGITUDINAL FISSURE, as a vertical sickle-shaped partition BETWEEN the left and right CEREBRAL hemispheres. Maini: 'a sickle-shaped vertical partition in the longitudinal fissure between left and right cerebral hemispheres.'", "tip": "Falx cerebri = the sickle curtain down the midline between the two cerebral hemispheres."}, {"term": "[Dural Septa] What are the attachments of the falx cerebri?", "answer": "ANTERIORLY: the FRONTAL CREST and CRISTA GALLI. POSTERIORLY: the INTERNAL OCCIPITAL crest/protuberance. Maini: 'attached to frontal crest and crista galli... posteriorly to internal occipital crest.'", "tip": "Falx cerebri anchors front (crista galli) to back (internal occipital crest)."}, {"term": "[Dural Septa] 'Tentorium' means 'tent.' What does the tentorium cerebelli separate, and what shape is it?", "answer": "It is a WIDE, ARCHED, tent-like fold (a shelf) that separates the OCCIPITAL LOBE of the cerebrum from the CEREBELLUM. Maini: 'a tent over the cerebellum... separates the occipital lobe from the cerebellum.'", "tip": "Tentorium = the 'tent' roofing the cerebellum, separating it from the occipital lobe above."}, {"term": "[Dural Septa] What are the attachments of the tentorium cerebelli?", "answer": "The POSTERIOR CLINOID processes, the SUPERIOR part of the PETROUS temporal bone, and the GROOVES for the TRANSVERSE SINUSES. Maini lists all three.", "tip": "Tentorium anchors: posterior clinoids \u2192 petrous ridge \u2192 transverse sinus grooves."}, {"term": "[Dural Septa] Which dural septum lies between the two CEREBELLAR hemispheres, and why is it shallow?", "answer": "The FALX CEREBELLI \u2014 it is shallow because the cerebellar hemispheres are NOT as widely separated as the cerebral hemispheres. Maini: 'a very shallow septum between two cerebellar hemispheres.'", "tip": "Falx cerebelli = the little sickle between cerebellar hemispheres (shallow, because they sit close)."}, {"term": "[Dural Septa] The fourth dural septum roofs the sella turcica. Name it and its special feature.", "answer": "The DIAPHRAGMA SELLAE \u2014 a small horizontal sheet with a CENTRAL APERTURE for the PITUITARY STALK. Maini: 'the roof of the sella turcica is the diaphragma sellae... a tiny aperture for the pituitary stalk.'", "tip": "Diaphragma sellae = the lid over the pituitary, with a hole for its stalk."}, {"term": "[Dural Septa] The diaphragma sellae roofs the sella turcica. What does the sella turcica house?", "answer": "The PITUITARY GLAND. Maini: the sella turcica contains the pituitary, roofed by the diaphragma sellae.", "tip": "Sella turcica ('Turkish saddle') = the bony seat of the pituitary gland."}, {"term": "[Venous Sinuses] What is the literal meaning of the word 'sinus'?", "answer": "A SPACE \u2014 here a venous, blood-filled space. Maini: 'literal meaning of the word sinus is a space.'", "tip": "Sinus = space. A dural venous sinus = a blood-filled space between the dural layers."}, {"term": "[Venous Sinuses] What is the superior sagittal sinus and where does it run?", "answer": "A MIDLINE venous blood-filled space running ANTEROPOSTERIORLY along the TOP of the head, between the two dural layers. Maini: 'superior means on the top; sagittal means anteroposteriorly... filled with venous blood.'", "tip": "Superior sagittal sinus = the big midline drainpipe along the top, front-to-back."}, {"term": "[Venous Sinuses] How is a dural venous sinus (e.g., superior sagittal sinus) formed?", "answer": "The PERIOSTEAL and MENINGEAL dural layers SEPARATE, and the space created fills with VENOUS blood. Maini: 'dura splits into two layers, and by this separation a space is created \u2014 that is the venous sinus.'", "tip": "Split the two dura layers \u2192 the gap fills with venous blood \u2192 sinus."}, {"term": "[Venous Sinuses] What unusual PRESSURE property do the dural venous sinuses have?", "answer": "NEGATIVE pressure (below zero). Maini: 'the pressure is very negative in these sinuses.'", "tip": "Sinuses suck \u2014 negative pressure. That's why a nick can pull in air (embolism)."}, {"term": "[Venous Sinuses] Describe the venous pressure gradient in an upright person (heart, feet, above heart).", "answer": "About 0 mmHg AT THE HEART; more POSITIVE below the heart (about +95 mmHg at the FEET when standing); and NEGATIVE (below zero) ABOVE the heart. Maini walks through this gradient.", "tip": "Gravity: +95 at feet, 0 at heart, negative in the head \u2192 sinuses run negative."}, {"term": "[Venous Sinuses] Maini uses negative venous pressure above the heart to explain what everyday finding?", "answer": "That the EXTERNAL JUGULAR VEIN is normally COLLAPSED. Maini: 'your external jugular vein is always collapsed because of negative pressure.'", "tip": "Negative pressure up top \u2192 EJV collapses (same reason air can enter a nicked sinus)."}, {"term": "[Venous Sinuses] Why must surgeons fear a small NICK in a dural venous sinus?", "answer": "The NEGATIVE (vacuum) pressure can SUCK AIR into the sinus, causing an AIR EMBOLISM. Maini: 'because of negative pressure, air can be sucked into these... air embolism... patient can die on the table.'", "tip": "Nicked sinus + vacuum \u2192 air sucked in \u2192 air embolism \u2192 possible death on the table."}, {"term": "[Venous Sinuses] Where does an air embolus from a sinus travel, and what can it cause?", "answer": "To the HEART and ARTERIES, where it can BLOCK vessels \u2192 STROKE, myocardial infarction, or tissue infarction/ischemia. Maini: 'it goes straight to the heart, to the arteries, and can block the arteries.'", "tip": "Air bubble \u2192 heart \u2192 arteries \u2192 blocks flow anywhere \u2192 stroke/MI/infarct."}, {"term": "[Venous Sinuses] The tentorium cerebelli's posterior attachment lies in the groove for which venous sinus?", "answer": "The TRANSVERSE sinus. Maini: 'groove for the transverse sinuses at the back.'", "tip": "Tentorium's back edge follows the transverse sinus grooves."}, {"term": "[Cisterns] What are the dilated portions of the subarachnoid space called, and how are they created?", "answer": "CISTERNS \u2014 created where the ARACHNOID PASSES OVER (rather than dips into) the brain's contours, leaving enlarged CSF pockets. Maini: 'arachnoid passes over the brain structures, and those spaces are created \u2014 they are called cisterns.'", "tip": "Where the draped arachnoid can't reach into a valley, a CSF-filled pocket (cistern) forms."}, {"term": "[Cisterns] What fills the subarachnoid cisterns?", "answer": "CEREBROSPINAL FLUID \u2014 they are part of the subarachnoid space (between pia and arachnoid). Maini: 'they're filled with cerebrospinal fluid.'", "tip": "Cisterns = wide CSF reservoirs of the subarachnoid space."}, {"term": "[Cisterns] Which is the LARGEST cistern, and where is it?", "answer": "The CEREBELLOMEDULLARY cistern (CISTERNA MAGNA) \u2014 between the CEREBELLUM and the MEDULLA. Maini: 'the largest is between the cerebellum and medulla \u2014 cisterna magna.'", "tip": "Cisterna MAGNA = biggest = cerebellum \u2194 medulla (a common CSF-tap target)."}, {"term": "[Cisterns] Besides the cisterna magna, name the other cisterns Maini lists.", "answer": "The CHIASMATIC, INTERPEDUNCULAR, PONTINE, and SUPERIOR cisterns. Maini: 'chiasmatic cistern, interpeduncular cistern, pontine, and superior cistern.'", "tip": "Magna + Chiasmatic + Interpeduncular + Pontine + Superior."}, {"term": "[Cisterns] Why do the cisterns matter clinically?", "answer": "Because a BLEED in the subarachnoid space can SPREAD through ALL the cisterns if it isn't stopped in time (they're continuous). Maini: 'bleeding in the subarachnoid space is going to spread in all these spaces.'", "tip": "Cisterns are all connected \u2192 subarachnoid blood tracks through every one of them."}, {"term": "[Bleeds] On a head image, what does a SEPARATION of the dura from the bone indicate?", "answer": "An ABNORMAL collection \u2014 blood (hematoma/hemorrhage) or pus \u2014 because cranially there is NO natural epidural space. Maini: 'separation of the dura from the bone... is abnormal, a collection.'", "tip": "Dura peeled off bone on imaging = something (blood/pus) pried it off. Never normal in the skull."}, {"term": "[Bleeds] In the cranium, the (potential) SUBDURAL space lies between which two layers, and when does it appear?", "answer": "Between the DURA and the ARACHNOID \u2014 it is NOT a natural cranial space and appears ONLY with BLEEDING. Maini: 'the space between dura and arachnoid occurs only if there is bleeding.'", "tip": "Subdural = dura\u2194arachnoid, a potential space that only opens up when blood gets in."}, {"term": "[Bleeds] Which cranial meningeal 'spaces' are only potential, and which is a true space?", "answer": "The EPIDURAL and SUBDURAL spaces are only POTENTIAL cranially (appear with bleeding); only the SUBARACHNOID space is a TRUE, CSF-filled space. Maini's teaching.", "tip": "Cranium: epidural & subdural = potential (blood-made); subarachnoid = real (CSF)."}, {"term": "[Bleeds] Which is worse \u2014 arterial or venous hemorrhage \u2014 and why?", "answer": "ARTERIAL \u2014 the high arterial pressure makes blood collect QUICKLY, compressing structures 'in no time.' Maini: 'arterial, because arterial pressure is very high and blood collects very fast.'", "tip": "Arterial = fast, high-pressure, rapid compression \u2192 worse/more urgent."}, {"term": "[Bleeds] What is the time course of a VENOUS collection?", "answer": "SLOW \u2014 it may not be noticed for DAYS or even WEEKS. Maini: 'venous collection is very slow, and is noticed over days, sometimes weeks.'", "tip": "Venous bleed = slow drip \u2192 symptoms creep in over days/weeks (e.g., chronic subdural)."}, {"term": "[Bleeds] A subarachnoid hemorrhage is typically which kind of bleed, and why?", "answer": "VENOUS \u2014 because the cerebral veins run on the pia WITHIN the subarachnoid space. Maini: 'a subarachnoid hemorrhage is mostly venous, not arterial.'", "tip": "Veins live in the subarachnoid space \u2192 SAH is usually venous."}, {"term": "[Clinical] How does a pituitary adenoma cause intense headache?", "answer": "The enlarging pituitary STRETCHES the pain-sensitive DIAPHRAGMA SELLAE (rich in pain receptors) \u2192 intense headache. Maini: 'if the pituitary enlarges, it stretches the diaphragma sellae... intense headache.'", "tip": "Big pituitary pushes up on its dural roof (diaphragma sellae) \u2192 dura stretch \u2192 headache."}, {"term": "[Clinical] After CSF absorption fails and intracranial pressure rises, what is the danger (Maini's chain of reasoning)?", "answer": "COMPRESSION of cerebral BLOOD FLOW \u2192 ISCHEMIA, infection, or STROKE. Maini: 'if it compresses blood flow to the brain, there'll be ischemia, infection, stroke.'", "tip": "High ICP squeezes the brain's own blood supply \u2192 ischemic damage/stroke."}, {"term": "[Clinical] What immediate, life-threatening danger can a nicked dural venous sinus cause on the operating table?", "answer": "AIR EMBOLISM \u2014 the negative-pressure sinus sucks in air, which travels to the heart and arteries and can KILL the patient. Maini: 'air can be sucked in... patient can die on the table.'", "tip": "Open a negative-pressure sinus \u2192 air rushes in \u2192 embolism \u2192 sudden death risk."}];
+
+
+const LS_KEY = "ga_0202_m06_cranial_meninges_rapid_recall_v1";
+let deck = [], quizIdx = 0, viewIdx = 0;
+let got = 0, missed = 0, missedTerms = [], shuffleOn = false, revealed = false;
+let answered = {};
+function loadState(){try{const s=JSON.parse(localStorage.getItem(LS_KEY));if(s&&s.deck){deck=s.deck;quizIdx=s.quizIdx||0;viewIdx=s.viewIdx||s.idx||0;got=s.got;missed=s.missed;missedTerms=s.missedTerms||[];shuffleOn=s.shuffleOn||false;answered=s.answered||{};if(shuffleOn)document.getElementById("btnShuffle").classList.add("active");return true;}}catch(e){}return false;}
+function saveState(){localStorage.setItem(LS_KEY,JSON.stringify({deck,quizIdx,viewIdx,got,missed,missedTerms,shuffleOn,answered}));}
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startDrill(mode){if(mode==='missed'&&missedTerms.length>0){deck=missedTerms.map(t=>BANK.findIndex(b=>b.term===t)).filter(i=>i>=0);}else{deck=BANK.map((_,i)=>i);}if(shuffleOn)shuffleArr(deck);quizIdx=0;viewIdx=0;got=0;missed=0;missedTerms=[];answered={};document.getElementById("summaryArea").style.display="none";document.getElementById("cardArea").style.display="block";showCard();saveState();}
+function showCard(){if(viewIdx>=deck.length){showSummary();return;}const item=BANK[deck[viewIdx]];const isBrowse=viewIdx<quizIdx;document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnRedoBack").style.display=viewIdx>0?"inline-block":"none";document.getElementById("browseLabel").style.display="none";revealed=false;if(isBrowse){document.getElementById("browseLabel").style.display="block";doReveal();document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="inline-block";document.getElementById("btnRedo").style.display="inline-block";}updateScores();}
+function doReveal(){document.getElementById("answerText").classList.add("show");if(BANK[deck[viewIdx]].tip)document.getElementById("profTip").classList.add("show");document.getElementById("btnReveal").style.display="none";if(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)){document.getElementById("btnGot").style.display="inline-block";document.getElementById("btnMissed").style.display="inline-block";}revealed=true;}
+function grade(correct){const isRedo=viewIdx<quizIdx&&answered[viewIdx]===undefined;if(viewIdx<quizIdx&&!isRedo)return;answered[viewIdx]=correct?'got':'missed';if(correct){got++;}else{missed++;missedTerms.push(BANK[deck[viewIdx]].term);}if(isRedo){viewIdx=quizIdx;}else{quizIdx=viewIdx+1;viewIdx=quizIdx;}showCard();saveState();}
+function goBack(){if(viewIdx>0){viewIdx--;showCard();saveState();}}
+function resumeQuiz(){viewIdx=quizIdx;showCard();saveState();}
+function redoBack(){if(viewIdx<=0)return;viewIdx--;if(viewIdx<quizIdx){const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];}document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";const item=BANK[deck[viewIdx]];document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";revealed=false;updateScores();saveState();}
+function redoPrev(){if(viewIdx>=quizIdx)return;const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";revealed=false;updateScores();saveState();}
+function skip(){if(viewIdx>=quizIdx){deck.push(deck[viewIdx]);deck.splice(viewIdx,1);quizIdx=viewIdx;showCard();saveState();}}
+function updateScores(){const remain=deck.length-quizIdx;document.getElementById("gotCount").textContent=got+" Got It";document.getElementById("missedCount").textContent=missed+" Missed";document.getElementById("remainCount").textContent=remain+" Left";const pct=deck.length>0?((got+missed)/deck.length)*100:0;document.getElementById("progressFill").style.width=pct+"%";}
+function showSummary(){document.getElementById("cardArea").style.display="none";document.getElementById("summaryArea").style.display="block";const total=got+missed;const pct=total>0?Math.round((got/total)*100):0;const el=document.getElementById("finalScore");el.textContent=pct+"%";el.className="final-score "+(pct>=85?"great":pct>=65?"ok":"rough");document.getElementById("finalMsg").textContent=got+" of "+total+" — "+(pct>=90?"All terms locked in.":pct>=75?"Solid. Hit the missed ones again.":"Keep drilling. Re-do the missed cards.");document.getElementById("progressFill").style.width="100%";const listBox=document.getElementById("missedListBox"),ul=document.getElementById("missedListUl"),rd=document.getElementById("btnRedrill");if(missedTerms.length>0){listBox.style.display="block";rd.style.display="inline-block";ul.innerHTML=missedTerms.map(t=>"<li>"+t+"</li>").join("");}else{listBox.style.display="none";rd.style.display="none";}updateScores();}
+function toggleShuffle(){shuffleOn=!shuffleOn;document.getElementById("btnShuffle").classList.toggle("active",shuffleOn);saveState();}
+function toggleIndex(){const ov=document.getElementById("indexOverlay");if(ov.style.display==="flex"){ov.style.display="none";return;}ov.style.display="flex";renderIndex();}
+function renderIndex(){const g=document.getElementById("indexGrid");g.innerHTML="";for(let i=0;i<deck.length;i++){const item=BANK[deck[i]];const d=document.createElement("div");d.className="index-chip";let status="";if(i<quizIdx){if(answered[i]==='got'){d.classList.add("chip-got");status="Got It";}else if(answered[i]==='missed'){d.classList.add("chip-missed");status="Missed";}}else if(i===quizIdx){d.classList.add("chip-current");status="Current";}d.innerHTML='<span><span class="chip-num">'+(i+1)+'.</span> '+item.term+'</span><span class="chip-status">'+status+'</span>';d.onclick=(function(idx){return function(){viewIdx=idx;document.getElementById("indexOverlay").style.display="none";showCard();saveState();};})(i);g.appendChild(d);}}
+document.addEventListener("keydown",e=>{if(document.getElementById("indexOverlay").style.display==="flex"){if(e.key==="Escape"||e.key==="i"||e.key==="I")toggleIndex();return;}if(e.key===" "||e.code==="Space"){e.preventDefault();if(!revealed)doReveal();}if(e.key==="g"||e.key==="G"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(true);}if(e.key==="m"||e.key==="M"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(false);}if(e.key==="s"||e.key==="S"){if(!revealed)skip();}if(e.key==="b"||e.key==="B"){goBack();}if(e.key==="d"||e.key==="D"){redoBack();}if(e.key==="r"||e.key==="R"){if(viewIdx<quizIdx)redoPrev();}if(e.key==="i"||e.key==="I"){toggleIndex();}if(e.key==="Enter"&&viewIdx<quizIdx){resumeQuiz();}});
+if(!loadState()||quizIdx>=deck.length){startDrill('all');}else{showCard();}
+</script>
+
+
+
+
+<div style="margin:30px auto;padding:14px;border-top:1px solid #334155;color:#94a3b8;font-size:.8rem;text-align:center;max-width:780px">DC Study Supply — Built by Dr. David Gramling, PHD</div>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    // Auto-detect bg luminance: body first, fall back to html element if transparent
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body>
+</html>

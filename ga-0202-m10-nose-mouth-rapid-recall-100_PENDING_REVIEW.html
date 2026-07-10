@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · Nose &amp; Mouth · Rapid Recall</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.header { text-align: center; padding: 24px 16px 12px; width: 100%; max-width: 700px; }
+.header h1 { font-size: 22px; color: #60a5fa; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; color: #94a3b8; }
+.score-bar { display: flex; gap: 16px; justify-content: center; padding: 10px; font-size: 14px; font-weight: 600; }
+.score-bar .got { color: #4ade80; } .score-bar .missed { color: #f87171; } .score-bar .remain { color: #94a3b8; }
+.progress-track { width: 100%; max-width: 700px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #60a5fa); transition: width 0.4s ease; border-radius: 3px; }
+.card-container { width: 100%; max-width: 700px; padding: 0 16px; flex: 1; }
+.card { background: #1e293b; border: 2px solid #334155; border-radius: 16px; padding: 32px 28px; text-align: center; min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: border-color 0.3s; }
+.card:hover { border-color: #475569; }
+.card-number { font-size: 12px; color: #64748b; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.term { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; line-height: 1.3; }
+.answer { font-size: 15px; line-height: 1.7; color: #cbd5e1; max-width: 600px; padding: 16px 20px; background: #0f172a; border-radius: 10px; border-left: 4px solid #3b82f6; text-align: left; display: none; margin-bottom: 16px; }
+.answer.show { display: block; animation: fadeIn 0.3s ease; }
+.prof-tip { font-size: 13px; color: #fbbf24; margin-top: 8px; font-style: italic; display: none; text-align: left; max-width: 600px; padding: 10px 16px; background: #1a0a0a; border-left: 3px solid #ef4444; border-radius: 0 10px 10px 0; }
+.prof-tip.show { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 12px 28px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn:active { transform: scale(0.96); }
+.btn-reveal { background: #3b82f6; color: white; } .btn-reveal:hover { background: #2563eb; }
+.btn-got { background: #166534; color: #4ade80; display: none; } .btn-got:hover { background: #15803d; }
+.btn-missed { background: #7f1d1d; color: #f87171; display: none; } .btn-missed:hover { background: #991b1b; }
+.btn-back { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-back:hover { background: #475569; }
+.btn-skip { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-skip:hover { background: #475569; }
+.btn-continue { background: #1e40af; color: #93c5fd; display: none; } .btn-continue:hover { background: #1d4ed8; }
+.btn-redo { background: #7c3aed; color: #c4b5fd; display: none; } .btn-redo:hover { background: #6d28d9; }
+.btn-redoback { background: #7c3aed; color: #c4b5fd; padding: 10px 20px; font-size: 13px; } .btn-redoback:hover { background: #6d28d9; }
+.browse-label { font-size: 11px; color: #f59e0b; margin-bottom: 8px; display: none; }
+.controls { padding: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.ctrl-btn { padding: 8px 16px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.ctrl-btn:hover { background: #334155; color: #e2e8f0; } .ctrl-btn.active { border-color: #3b82f6; color: #60a5fa; }
+.summary { display: none; text-align: center; padding: 40px 20px; width: 100%; max-width: 700px; }
+.summary h2 { font-size: 28px; color: #60a5fa; margin-bottom: 20px; }
+.summary .final-score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.summary .final-score.great { color: #4ade80; } .summary .final-score.ok { color: #fbbf24; } .summary .final-score.rough { color: #f87171; }
+.missed-list { text-align: left; max-width: 500px; margin: 20px auto; background: #1e293b; border-radius: 12px; padding: 16px 20px; }
+.missed-list h3 { color: #f87171; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.missed-list li { color: #cbd5e1; padding: 6px 0; border-bottom: 1px solid #334155; font-size: 14px; list-style: none; } .missed-list li:last-child { border: none; }
+.kb-hint { font-size: 11px; color: #475569; text-align: center; padding: 8px; }
+.index-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.95); z-index: 100; flex-direction: column; align-items: center; padding: 20px; overflow-y: auto; }
+.index-overlay h2 { color: #60a5fa; font-size: 20px; margin-bottom: 16px; }
+.index-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; } .index-close:hover { color: #e2e8f0; }
+.index-grid { max-width: 700px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.index-chip { padding: 10px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; cursor: pointer; font-size: 13px; color: #cbd5e1; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.index-chip:hover { background: #334155; border-color: #60a5fa; }
+.index-chip .chip-num { color: #64748b; font-size: 11px; min-width: 30px; }
+.chip-got { border-left: 3px solid #4ade80; } .chip-got .chip-status { color: #4ade80; }
+.chip-missed { border-left: 3px solid #f87171; } .chip-missed .chip-status { color: #f87171; }
+.chip-current { border-left: 3px solid #60a5fa; background: #1e3a5f; } .chip-current .chip-status { color: #60a5fa; }
+.chip-status { font-size: 11px; min-width: 50px; text-align: right; }
+</style>
+
+
+
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+
+<style id="ga0202-cleanup-v9">
+/* Hide legacy FAB Lecture Final hub buttons (we have our own ga0202-back-to-hub) */
+.fab-back-to-hub-btn,
+.sh-fab,
+.sh-back-to-start-fab,
+button[onclick*="fabBackToHub"],
+button[onclick*="shBackToStart"] { display: none !important; }
+/* Make sure draw button + AI button don't overlap */
+.fab-stack { bottom: 90px !important; right: 24px !important; z-index: 9999 !important; }
+.fab-stack button { pointer-events: auto !important; }
+#draw-btn { z-index: 10000 !important; }
+.draw-toolbar { z-index: 10001 !important; bottom: 158px !important; right: 90px !important; }
+.draw-canvas { z-index: 9990 !important; }
+#ai-btn, #ai-aug-btn, #ai-modal { display: none !important; }
+</style>
+<script id="ga0202-cleanup-v9-js">
+// Override legacy redirect functions to point to OUR hub instead
+window.fabBackToHub = function() { window.location.href = 'ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html'; };
+window.shBackToStart = function() { window.location.href = 'ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html'; };
+</script>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="ga-0202-m10-nose-mouth-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to Hub</a>
+
+<div class="header">
+  <h1>⚡ GA 0202 · Nose &amp; Mouth · Rapid Recall</h1>
+  <div class="subtitle">Dr. Maini · Nasal &amp; Oral Cavity — 88 Cards | See the prompt. Say it. Reveal to check.</div>
+</div>
+<div class="score-bar">
+  <span class="got" id="gotCount">0 Got It</span>
+  <span class="missed" id="missedCount">0 Missed</span>
+  <span class="remain" id="remainCount">0 Left</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="card-container" id="cardArea">
+  <div class="card">
+    <div class="browse-label" id="browseLabel">BROWSING — already answered</div>
+    <div class="card-number" id="cardNum"></div>
+    <div class="term" id="termText"></div>
+    <div class="answer" id="answerText"></div>
+    <div class="prof-tip" id="profTip"></div>
+    <div class="btn-row">
+      <button class="btn btn-reveal" id="btnReveal" onclick="doReveal()">Reveal Answer</button>
+      <button class="btn btn-got" id="btnGot" onclick="grade(true)">Got It</button>
+      <button class="btn btn-missed" id="btnMissed" onclick="grade(false)">Missed It</button>
+      <button class="btn btn-continue" id="btnContinue" onclick="resumeQuiz()">Continue &rarr;</button>
+      <button class="btn btn-redo" id="btnRedo" onclick="redoPrev()">Redo</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" id="btnBack" onclick="goBack()">&larr; Back</button>
+      <button class="btn btn-redoback" id="btnRedoBack" onclick="redoBack()">Redo Back</button>
+      <button class="btn btn-skip" onclick="skip()">Skip</button>
+    </div>
+  </div>
+</div>
+<div class="summary" id="summaryArea">
+  <h2>Drill Complete</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="finalMsg" style="color:#94a3b8;margin-bottom:20px;"></p>
+  <div class="missed-list" id="missedListBox" style="display:none;"><h3>Review These</h3><ul id="missedListUl"></ul></div>
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-reveal" onclick="startDrill('all')">Restart All</button>
+    <button class="btn btn-missed" id="btnRedrill" style="display:inline-block;" onclick="startDrill('missed')">Re-Drill Missed</button>
+  </div>
+</div>
+<div class="controls">
+  <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">Shuffle</button>
+  <button class="ctrl-btn" onclick="toggleIndex()">Card Index</button>
+  <button class="ctrl-btn" onclick="startDrill('all')">Reset</button>
+</div>
+<div class="kb-hint">Space = Reveal | G = Got It | M = Missed | S = Skip | B = Back | D = Redo Back | R = Redo | I = Index</div>
+<div class="index-overlay" id="indexOverlay">
+  <button class="index-close" onclick="toggleIndex()">&times;</button>
+  <h2>Card Index</h2>
+  <div class="index-grid" id="indexGrid"></div>
+</div>
+<script>
+const BANK = [
+  {"term": "[Nasal Cavity] Dr. Maini calls this a 'very silly question that people miss.' As air passes through the nasal cavity, it is:", "answer": "Warmed (not cooled), humidified, and filtered. Maini stresses the air is WARMED, not cooled, as well as humidified and filtered \u2014 the classic trap is choosing 'cooled.'", "tip": "Maini's 'silly question' \u2014 warmed, NOT cooled."},
+  {"term": "[Nasal Cavity] Among its functions, the nasal cavity receives secretions from which two sources?", "answer": "The paranasal sinuses and the nasolacrimal duct. Maini lists 'reception of secretions from paranasal sinuses and nasolacrimal duct' as a nasal function.", "tip": "Sinuses drain in; tears drain in."},
+  {"term": "[Nasal Cavity] The dilated space just inside the nostril aperture, lined by skin bearing stiff hairs, is called the:", "answer": "Nasal vestibule. Maini: 'Inside the aperture of nostril is a dilatation called as vestibule,' lined by skin.", "tip": "The skin-lined 'entrance hall' of the nose."},
+  {"term": "[Nasal Cavity] The stiff hairs on the skin of the nasal vestibule are called vibrissae. What is their function?", "answer": "They trap dust and soot to filter inhaled air. Maini: with the mucus they 'create a mat to trap dust particles, soot' so the air is filtered.", "tip": "Nasal 'whiskers' that filter air."},
+  {"term": "[Nasal Cavity] Each nasal cavity opens posteriorly into the nasopharynx through an aperture called the:", "answer": "Choana. Maini: 'The opening of nasal cavity into nasopharynx, this is called as choana.'", "tip": "Posterior nasal aperture into the nasopharynx."},
+  {"term": "[External Nose] The external nose has a cartilaginous and a bony framework \u2014 name the parts of the CARTILAGINOUS framework.", "answer": "Maini lists the cartilaginous framework as lateral nasal cartilage, septal cartilage, and greater/lesser alar cartilages.", "tip": "The part of the nose that can be 'deviated.'"},
+  {"term": "[External Nose] The bony framework of the external nose includes the nasal bones, the nasal part of the frontal bone, and which process of the maxilla?", "answer": "Frontal process of the maxilla. Maini names the frontal process of the maxilla as part of the bony framework of the nose.", "tip": "The process that reaches up toward the frontal bone."},
+  {"term": "[External Nose] The greater and lesser alar cartilages help form the framework around which part of the external nose?", "answer": "The alae (around the nostrils). The greater and lesser alar cartilages support the alae ('wings') around the nostrils.", "tip": "'Ala' = wing of the nose, around each nostril."},
+  {"term": "[External Nose] Maini points to the midline point where the frontal bone meets the nasal bones (the 'root' of the nose). This surface point is called the:", "answer": "Nasion. Maini identifies the frontonasal junction point as the nasion.", "tip": "Named for the nose; frontonasal suture point."},
+  {"term": "[Nasal Septum] Which two structures form the MAJORITY (the bony posterior part) of the nasal septum?", "answer": "Perpendicular plate of the ethmoid and the vomer. Maini: 'Most importantly, it is perpendicular plate of ethmoid and vomer.'", "tip": "Ethmoid plate + the 'plowshare' bone."},
+  {"term": "[Nasal Septum] Which structure supports the ANTERIOR part of the nasal septum?", "answer": "Septal cartilage. Maini: the septal cartilage 'supports the anterior part of nasal septum.'", "tip": "Anterior septum = cartilage."},
+  {"term": "[Nasal Septum] In a patient with a deviated nasal septum, which part of the septum is typically deviated?", "answer": "The cartilaginous part (septal cartilage). Maini: 'That is the cartilaginous portion, which is deviated, not the bony part.'", "tip": "Bone doesn't bend; cartilage does."},
+  {"term": "[Nasal Septum] Maini describes surgery for a symptomatic deviated septum in which the deviated cartilage is removed and a septoplasty is done. What is this procedure called (abbreviated)?", "answer": "Submucous resection (SMR). Maini: they 'go for submucous resection, SMR... and do septoplasty.'", "tip": "'Sub-mucous' removal of the septal cartilage."},
+  {"term": "[Nasal Septum] Maini says she likes to 'sneak in' the lacrimal bone as a distractor on septum questions. Which statement about the lacrimal bone is correct?", "answer": "It is NOT part of the septum; it helps form the medial orbital wall and the lateral wall of the nasal cavity. Maini: the lacrimal bone 'cannot be a part of septum... it's the orbit and the lateral wall.'", "tip": "Tears + orbit + lateral wall, NOT septum."},
+  {"term": "[Nasal Septum] Besides the perpendicular plate of ethmoid, vomer, and septal cartilage, what else makes a SMALL contribution to the nasal septum?", "answer": "Maini lists small contributors: crest of sphenoid, nasal crest of palatine bone, nasal crest of maxilla, nasal bone, and nasal spine of the frontal bone.", "tip": "The palatine bone has a nasal crest."},
+  {"term": "[Nasal Walls] The floor of the nasal cavity is the same as the roof of the oral cavity (hard palate). Which two bones form it?", "answer": "Palatine process of the maxilla and horizontal plate of the palatine bone. Maini: 'floor is same as the roof of oral cavity... maxilla and palatine bone' \u2014 the palatine process of the maxilla and the horizontal plate of the palatine bone.", "tip": "Same two bones as the hard palate."},
+  {"term": "[Nasal Walls] The roof of the nasal cavity is formed by several bones. Which bone's CRIBRIFORM PLATE forms the part of the roof that transmits the olfactory nerves?", "answer": "Ethmoid bone. The cribriform plate of the ethmoid forms the middle roof and transmits the olfactory nerve fibers.", "tip": "The sieve-like plate that smell fibers pierce."},
+  {"term": "[Nasal Walls] Which bones form the roof of the nasal cavity?", "answer": "Cribriform plate of ethmoid, body of sphenoid, frontal bone, and nasal bone. Maini: 'Cribriform plate, sphenoid, frontal, and nasal' form the roof.", "tip": "Four bones: cribriform + sphenoid + frontal + nasal."},
+  {"term": "[Nasal Walls] Which bone contributes its frontal process to the LATERAL WALL of the nasal cavity?", "answer": "Frontal process of the maxilla. Maini lists the frontal process of the maxilla among the lateral wall bones.", "tip": "The same process that helps build the bony external nose."},
+  {"term": "[Nasal Walls] Maini notes the medial pterygoid plate contributes to the lateral wall of the nasal cavity. The medial pterygoid plate is part of which bone?", "answer": "Sphenoid bone. The medial (and lateral) pterygoid plates project from the sphenoid bone.", "tip": "Pterygoid plates hang off this bone."},
+  {"term": "[Conchae & Meatuses] The superior and middle nasal conchae are projections of which bone?", "answer": "The ethmoid bone. Maini: 'superior and middle conchae of the ethmoid bone.'", "tip": "Two of the three conchae come off one bone."},
+  {"term": "[Conchae & Meatuses] Which nasal concha is a SEPARATE bone (not part of the ethmoid)?", "answer": "Inferior nasal concha. Maini: 'Inferior nasal concha, which is a separate bone, remember.'", "tip": "The lowest concha stands alone as its own bone."},
+  {"term": "[Conchae & Meatuses] What is the main functional purpose of the nasal conchae?", "answer": "They increase the surface area of the lateral wall to warm and humidify inhaled air. Maini: the conchae 'increase the surface area' so more moisture can be added and the air is humidified.", "tip": "More surface area = more warming/moistening."},
+  {"term": "[Conchae & Meatuses] The recess located ABOVE (superior to) the superior nasal concha is called the:", "answer": "Sphenoethmoidal recess. Maini: 'Superior to superior nasal concha, there is a recess called as sphenoethmoidal recess.'", "tip": "Named for two bones; it sits above the top concha."},
+  {"term": "[Conchae & Meatuses] The space or pocket located UNDERNEATH each concha is called a:", "answer": "Meatus. Maini calls the pockets underneath the conchae the superior, middle, and inferior meatuses.", "tip": "Superior, middle, inferior ___."},
+  {"term": "[Paranasal Sinuses] How many paranasal air sinuses are there, and which bones contain them?", "answer": "Four \u2014 frontal, ethmoid, sphenoid, and maxillary. Maini: 'There are 4 of them \u2014 frontal, ethmoid, sphenoid, and maxilla,' named for the bones that house them.", "tip": "Named after the bones that house them."},
+  {"term": "[Paranasal Sinuses] Unlike the other paranasal sinuses (each with a single opening), the ETHMOID sinus is unusual. How is it organized?", "answer": "As multiple ethmoidal air cells (anterior, middle, posterior groups), each with its own separate opening. Maini: the ethmoid sinus is 'not a single cavity' \u2014 it is many air cells in anterior, middle, and posterior groups, each with separate openings.", "tip": "A honeycomb of cells, not one room."},
+  {"term": "[Paranasal Sinuses] The SPHENOID sinus drains into which location?", "answer": "The sphenoethmoidal recess. Maini: 'sphenoethmoidal recess contains the opening of sphenoidal air sinus.'", "tip": "Drains above the superior concha."},
+  {"term": "[Paranasal Sinuses] The POSTERIOR ethmoidal air cells drain into which meatus?", "answer": "Superior meatus. Maini: 'posterior ethmoidal air cells, they open into the superior meatus.'", "tip": "Posterior cells \u2192 the top meatus."},
+  {"term": "[Paranasal Sinuses] In the middle meatus, the rounded bulge that carries the openings of the MIDDLE ethmoidal air cells is the:", "answer": "Ethmoidal bulla. Maini: the ethmoidal bulla is a bulge (projection of ethmoidal air cells) whose openings drain the MIDDLE ethmoidal cells.", "tip": "'Bulla' = bubble/bulge."},
+  {"term": "[Paranasal Sinuses] The hiatus semilunaris is a curved cleft in the middle meatus. Which sinus opens at its INFERIOR end?", "answer": "Maxillary sinus. Maini: 'the inferior end, it has the opening of maxillary sinus.'", "tip": "Bottom of the crescent = the big cheek sinus."},
+  {"term": "[Paranasal Sinuses] The FRONTAL sinus drains into the middle meatus at the superior end of the hiatus semilunaris, by way of which passage?", "answer": "The ethmoidal infundibulum / frontonasal duct. Maini: the hiatus is 'continuous anteriorly with the ethmoidal infundibulum, which leads to frontal sinus... the frontonasal duct.'", "tip": "A 'funnel' (infundibulum) leading up to the frontal sinus."},
+  {"term": "[Paranasal Sinuses] The ANTERIOR ethmoidal air cells open into the middle meatus at which part of the hiatus semilunaris?", "answer": "The middle part of the hiatus semilunaris. Maini places the openings of the anterior ethmoidal cells in the MIDDLE of the hiatus semilunaris.", "tip": "Anterior cells sit mid-crescent."},
+  {"term": "[Paranasal Sinuses] Which structure \u2014 NOT a paranasal sinus \u2014 opens into the INFERIOR meatus?", "answer": "The nasolacrimal duct. Maini: 'inferior meatus contains the opening of nasolacrimal duct.'", "tip": "Where tears drain when you cry."},
+  {"term": "[Paranasal Sinuses] A CT shows fluid trapped in the maxillary sinus. Into which meatus does the maxillary sinus normally drain?", "answer": "Middle meatus (via the hiatus semilunaris). The maxillary sinus opens at the inferior end of the hiatus semilunaris in the middle meatus.", "tip": "Same crescent as the frontal sinus, but the lower end."},
+  {"term": "[Paranasal Sinuses] Maini explains that sinusitis can be slow to treat with antibiotics. Why?", "answer": "The sinuses are poorly vascularized, so antibiotics take a long time (often ~3 weeks) to reach them. Maini: sinusitis is hard to treat 'because they are not very vascularized... you'll need a course for at least 3 weeks.'", "tip": "Poor blood supply = slow drug delivery."},
+  {"term": "[Nasal Vessels & Nerves] The arterial supply to the nasal cavity comes MAINLY from branches of which two arteries?", "answer": "The maxillary and ophthalmic arteries. Maini: nasal supply is 'mainly through the branches of maxillary and ophthalmic arteries.'", "tip": "One ECA branch (maxillary), one ICA branch (ophthalmic)."},
+  {"term": "[Nasal Vessels & Nerves] Which two branches of the OPHTHALMIC artery supply the nasal cavity, entering through the ethmoidal foramina?", "answer": "Anterior and posterior ethmoidal arteries. Maini names the anterior and posterior ethmoidal arteries as the ophthalmic branches to the nose.", "tip": "Named for the bone whose foramina they pass through."},
+  {"term": "[Nasal Vessels & Nerves] Kiesselbach's area (Little's area) is the common site of anterior epistaxis. It is the anastomosis of the sphenopalatine, ethmoidal, and which additional artery?", "answer": "The septal branch (of the superior labial branch of the facial artery). Maini: the septal artery, 'a branch of superior labial of the facial artery,' joins the sphenopalatine and ethmoidal arteries in Kiesselbach's plexus.", "tip": "Includes a branch of the facial artery's superior labial branch."},
+  {"term": "[Nasal Vessels & Nerves] A patient has profuse anterior nosebleeds from Kiesselbach's area. Where is this anastomotic plexus located, and what is its clinical significance?", "answer": "In the anterior nasal septum/vestibule; it is the most common site of epistaxis. Maini: Kiesselbach's (Little's) area lies anteriorly in the septum/vestibule and is 'a common site of epistaxis,' treated with anterior nasal packing.", "tip": "Anterior septum; nosebleed central."},
+  {"term": "[Nasal Vessels & Nerves] The olfactory nerves reach the olfactory mucosa in the roof of the nasal cavity by passing through which structure?", "answer": "The cribriform plate of the ethmoid. Maini: 'olfactory nerves pass through cribriform plate... supply the olfactory mucosa.'", "tip": "A sieve-like plate in the roof."},
+  {"term": "[Nasal Vessels & Nerves] General (touch/pain) sensation of the nasal cavity is carried by which two divisions of the trigeminal nerve?", "answer": "Ophthalmic (V1) and maxillary (V2) divisions. Maini: general sensation is via 'the ophthalmic and maxillary divisions, V1 and V2,' with V1 anterior and V2 posterior.", "tip": "The two upper divisions of CN V."},
+  {"term": "[Papillae & Taste] Maini lists the four types of lingual papillae. Which set is correct?", "answer": "Filiform, fungiform, foliate, and circumvallate (vallate). Maini names filiform, fungiform, foliate, and circumvallate (vallate) papillae.", "tip": "Fili-, fungi-, foli-, and circumvallate."},
+  {"term": "[Papillae & Taste] Which papillae are arranged in a V-shaped row just anterior to the terminal sulcus and hold taste buds in a surrounding 'well'?", "answer": "Circumvallate (vallate) papillae. Maini: the circumvallate papillae lie 'parallel to the terminal sulcus,' with taste buds located within the well of the papilla.", "tip": "'Vallate' = walled; they sit in a moat anterior to the sulcus."},
+  {"term": "[Papillae & Taste] According to Maini, which papillae are located close to the TIP and peripheral part of the tongue?", "answer": "Fungiform papillae. Maini: 'fungiform papillae... are located close to the tip of the tongue and peripheral part.'", "tip": "Mushroom-shaped, near the tip."},
+  {"term": "[Papillae & Taste] Which papillae are scattered throughout the DORSUM of the tongue?", "answer": "Filiform papillae. Maini: 'filiform papillae, they are scattered throughout the dorsum of the tongue.'", "tip": "Thread-like; blanket the whole dorsum."},
+  {"term": "[Papillae & Taste] The V-shaped groove that separates the anterior two-thirds from the posterior one-third of the tongue is the:", "answer": "Terminal sulcus (sulcus terminalis). Maini: the terminal sulcus is the V-shaped sulcus separating anterior 2/3 from posterior 1/3.", "tip": "A backward-pointing 'V.'"},
+  {"term": "[Papillae & Taste] At the apex of the terminal sulcus lies a small blind pit that is a remnant of the thyroglossal duct. It is called the:", "answer": "Foramen cecum. Maini: the foramen cecum marks where the thyroglossal duct/thyroid diverticulum arose; it is a blind pit ('does not lead to another cavity').", "tip": "Blind pit; marks the thyroid gland's origin."},
+  {"term": "[Papillae & Taste] Maini teaches that all taste receptors work similarly, so the tongue tells tastes apart by receptor LOCATION. Where are receptors for SWEET taste concentrated?", "answer": "Near the tip of the tongue. Maini: 'The receptors for sweet taste... are located close to the tip of the tongue.'", "tip": "The tip."},
+  {"term": "[Papillae & Taste] According to Maini's taste map, BITTER taste is appreciated along which part of the tongue?", "answer": "The posterior part of the tongue. Maini: 'bitter taste, it is tasted along the posterior part of the tongue.'", "tip": "The back of the tongue."},
+  {"term": "[Papillae & Taste] Maini links each taste to a chemical class. UMAMI taste (localized centrally) is produced by which chemicals?", "answer": "Amino acids (protein-rich foods). Maini: umami 'comes from the amino acid component' of protein-rich foods.", "tip": "The savory fifth taste, from proteins."},
+  {"term": "[Papillae & Taste] A substance that is acidic (contains hydrogen ions) produces which taste?", "answer": "Sour. Maini: 'anything that is acidic will taste sour' (hydrogen ions).", "tip": "Acids = H+ ions."},
+  {"term": "[Papillae & Taste] By Maini's scheme, which taste is produced by SODIUM ions and localized to the sides of the tip of the tongue?", "answer": "Salty. Maini: 'anything that has sodium ions will taste salty,' toward the sides of the tip.", "tip": "Na+ ions, sides of the tip."},
+  {"term": "[Papillae & Taste] The anterior two-thirds of the tongue develops from which pharyngeal arch?", "answer": "The first pharyngeal arch. Maini: 'most of the anterior two-thirds is first arch' (hence V3/lingual general sensation).", "tip": "Anterior = arch 1 (V3 territory)."},
+  {"term": "[Tongue Muscles] Which EXTRINSIC tongue muscle originates from the mental spine (genial tubercle) of the mandible, is fan-shaped, and forms the main bulk of the tongue?", "answer": "Genioglossus. Maini: genioglossus 'originates from mental spine of the mandible... main bulk of the tongue is formed by this muscle.'", "tip": "'Genio-' = chin (mandible)."},
+  {"term": "[Tongue Muscles] Based on its fiber direction, what are the actions of the genioglossus?", "answer": "Protrusion (posterior fibers) and depression (anterior fibers) of the tongue. Maini: 'the action of genioglossus is protrusion and depression' (posterior fibers protrude, anterior fibers depress).", "tip": "Sticks the tongue OUT and pulls it DOWN."},
+  {"term": "[Tongue Muscles] The hyoglossus muscle originates from which bone?", "answer": "The body and greater horn of the hyoid bone. Maini: 'Hyoglossus originates from body and greater horn of the hyoid bone, as the name suggests.'", "tip": "'Hyo-' = hyoid bone."},
+  {"term": "[Tongue Muscles] What are the actions of the hyoglossus?", "answer": "Depression and retraction of the tongue. Maini: the action of hyoglossus is 'retraction, depression.'", "tip": "Pulls the tongue DOWN and BACK."},
+  {"term": "[Tongue Muscles] Maini calls the hyoglossus the 'fence muscle.' Why?", "answer": "It separates the nerves (hypoglossal and lingual) behind it from the arteries (lingual artery and branches) in front of it. Maini: 'Fence muscle because it separates nerves from arteries' \u2014 nerves lie posterior, arteries anterior.", "tip": "A curtain: nerves behind, arteries in front."},
+  {"term": "[Tongue Muscles] The styloglossus originates from the styloid process (and stylohyoid ligament). What are its actions?", "answer": "Retraction and elevation of the posterior part of the tongue. Maini: styloglossus produces 'retraction and elevation of the posterior part of the tongue.'", "tip": "Pulls the tongue UP and BACK for swallowing."},
+  {"term": "[Tongue Muscles] The palatoglossus draws the tongue and soft palate together to close the oropharyngeal isthmus during chewing. From what does it originate?", "answer": "The palatine aponeurosis of the soft palate. Maini: palatoglossus 'originates from palatine aponeurosis of the soft palate.'", "tip": "It belongs to the palate (palatine aponeurosis)."},
+  {"term": "[Tongue Muscles] Which four muscles are the INTRINSIC muscles of the tongue (which alter its shape)?", "answer": "Superior longitudinal, inferior longitudinal, transverse, and vertical. Maini: the intrinsic muscles are superior longitudinal, inferior longitudinal, transverse, and vertical.", "tip": "They run in different planes to reshape the tongue."},
+  {"term": "[Tongue Innervation] All tongue muscles are innervated by the hypoglossal nerve (CN XII) EXCEPT one. Which is the exception, and what innervates it?", "answer": "Palatoglossus \u2014 innervated by the vagus nerve (CN X). Maini's 'exception rule': all tongue muscles are CN XII except palatoglossus, which is CN X (it is really a palatine muscle).", "tip": "The 'palato-' one belongs to the palate \u2192 CN X."},
+  {"term": "[Tongue Innervation] GENERAL (touch/pain) sensation from the ANTERIOR two-thirds of the tongue is carried by which nerve?", "answer": "The lingual branch of V3 (mandibular division of the trigeminal nerve). Maini: anterior 2/3 GSA fibers are 'carried by lingual branch of V3.'", "tip": "Trigeminal, lower division (lingual nerve)."},
+  {"term": "[Tongue Innervation] Where are the cell bodies of the general sensory (GSA) fibers from the anterior two-thirds of the tongue located?", "answer": "The trigeminal ganglion. Maini: GSA fibers travel with V3, so their cell bodies are in the trigeminal ganglion.", "tip": "Any V branch reports to the three-pronged ganglion."},
+  {"term": "[Tongue Innervation] TASTE (special sensation) from the anterior two-thirds of the tongue is carried by the chorda tympani (a branch of CN VII). Where are its cell bodies?", "answer": "The geniculate ganglion. Maini: the SVA (taste) fibers of the anterior 2/3 travel via chorda tympani (facial) with cell bodies in the geniculate ganglion.", "tip": "Chorda tympani = facial \u2192 geniculate ganglion."},
+  {"term": "[Tongue Innervation] BOTH general sensation and taste from the POSTERIOR one-third of the tongue are carried by which single nerve?", "answer": "The glossopharyngeal nerve (CN IX). Maini: posterior 1/3 GSA and SVA fibers 'are carried by glossopharyngeal' (9th nerve).", "tip": "CN IX handles the back third (both modalities)."},
+  {"term": "[Tongue Innervation] The lingual artery, which supplies the tongue, is a branch of which artery?", "answer": "The external carotid artery (its second branch). Maini: the lingual artery is the 'second branch of external carotid' (order: Superior thyroid, Lingual, Facial).", "tip": "S-L-F: Superior thyroid, Lingual, Facial."},
+  {"term": "[Tongue Innervation] Lymph from the TIP of the tongue drains primarily to which nodes?", "answer": "Submental lymph nodes. Maini: 'From the tip of the tongue, lymph goes to submental lymph nodes.'", "tip": "Under the chin (sub-MENTAL)."},
+  {"term": "[Tongue Innervation] Lymph from the POSTERIOR one-third of the tongue drains to which nodes?", "answer": "Superior deep cervical lymph nodes. Maini: 'posterior one-third... goes to superior deep cervical lymph nodes.'", "tip": "Deep cervical chain, high up."},
+  {"term": "[Palate & Oral Floor] When the palatoglossus contracts, it draws the tongue and soft palate together. Which opening does this close during chewing?", "answer": "The oropharyngeal isthmus. Maini: palatoglossus closes the oropharyngeal isthmus so food is not swallowed before being chewed.", "tip": "The gateway from mouth to oropharynx."},
+  {"term": "[Palate & Oral Floor] The palatoglossus muscle and its overlying mucosa form which arch on each side of the oropharyngeal isthmus?", "answer": "The palatoglossal arch. Maini: the palatoglossus 'forms this palatoglossal arch on two sides.'", "tip": "Named for the two structures it links (palate + tongue)."},
+  {"term": "[Palate & Oral Floor] The lingual frenulum is a midline mucosal fold that connects:", "answer": "The inferior surface of the tongue to the floor of the mouth. Maini: the lingual frenulum connects the (posterior/inferior) surface of the tongue with the floor of the mouth.", "tip": "Tethers the underside of the tongue to the floor."},
+  {"term": "[Salivary Glands] Of the three pairs of major salivary glands, which is the LARGEST?", "answer": "The parotid gland. Maini: 'Parotid glands are the largest.'", "tip": "The gland that swells in mumps."},
+  {"term": "[Salivary Glands] According to Maini, which salivary gland contributes the GREATEST proportion (~60%) of total salivary secretion?", "answer": "The submandibular gland. Maini: the submandibular glands are 'responsible for 60% of the total salivary secretion.'", "tip": "Biggest producer, though not the biggest gland."},
+  {"term": "[Salivary Glands] The parotid gland receives its PARASYMPATHETIC (secretomotor) supply from which cranial nerve?", "answer": "The glossopharyngeal nerve (CN IX). Maini: parotid parasympathetics come from CN IX ('P is parotid, 9 is a mirror image of P').", "tip": "P \u2194 9."},
+  {"term": "[Salivary Glands] In the parotid parasympathetic pathway, the fibers synapse in which ganglion before traveling to the gland?", "answer": "The otic ganglion (then via the auriculotemporal nerve). Maini: CN IX \u2192 tympanic branch \u2192 tympanic plexus \u2192 lesser petrosal \u2192 OTIC ganglion (synapse) \u2192 auriculotemporal nerve \u2192 parotid.", "tip": "Lesser petrosal \u2192 this ganglion \u2192 auriculotemporal."},
+  {"term": "[Salivary Glands] The preganglionic parasympathetic neurons for the PAROTID gland are located in which brainstem nucleus?", "answer": "The inferior salivatory nucleus (medulla). Maini: parotid preganglionics are in the inferior salivatory nucleus of the medulla (CN IX is lower).", "tip": "CN IX is lower \u2192 INFERIOR nucleus."},
+  {"term": "[Salivary Glands] The submandibular and sublingual glands get parasympathetic fibers from the facial nerve via the chorda tympani. In which ganglion do these fibers synapse?", "answer": "The submandibular ganglion (fibers ride on the lingual nerve to reach it). Maini: chorda tympani fibers 'ride on the lingual nerve' to the submandibular ganglion, then supply the two glands.", "tip": "Chorda tympani \u2192 lingual nerve \u2192 this ganglion."},
+  {"term": "[Salivary Glands] The preganglionic parasympathetic neurons for the SUBMANDIBULAR and SUBLINGUAL glands are located in which nucleus?", "answer": "The superior salivatory nucleus (pons). Maini: these are in the superior salivatory nucleus of the pons (CN VII exits higher).", "tip": "CN VII is higher \u2192 SUPERIOR nucleus."},
+  {"term": "[Salivary Glands] Maini explains how SYMPATHETIC postganglionic fibers reach all three salivary glands. After synapsing in the superior cervical ganglion, how do they travel to the glands?", "answer": "They form a plexus on the external carotid artery (ECA plexus) and 'piggyback' along its branches. Maini: 'they ride along the blood vessels... ECA plexus' \u2014 postganglionic sympathetics hitchhike on the external carotid artery.", "tip": "Nerves hitchhiking on arteries (ECA plexus)."},
+  {"term": "[Salivary Glands] Maini mentions small serous glands on the superior surface of the tongue that secrete lingual (salivary) lipase. What are they called?", "answer": "Von Ebner glands. Maini: 'there are Ebner's glands... on the superior surface of tongue... they secrete salivary lipase.'", "tip": "Named 'Ebner'; secrete lipase on the tongue."},
+  {"term": "[Tongue Clinical] Maini distinguishes several 'dys-' terms. Which specifically means a DISORDER OF ARTICULATION (e.g., from a cerebellar disorder or oral/tongue pathology), with language itself intact?", "answer": "Dysarthria. Maini: dysarthria is 'a disorder of articulation' \u2014 the words come out poorly, but there is nothing wrong with language/speech itself.", "tip": "'-arthria' = articulation of speech sounds."},
+  {"term": "[Tongue Clinical] Which term means DIFFICULTY SWALLOWING?", "answer": "Dysphagia. Maini: 'dysphagia... difficulty swallowing.'", "tip": "'-phagia' = eating/swallowing."},
+  {"term": "[Tongue Clinical] Maini says DYSPHONIA is unrelated to the tongue and instead reflects pathology of which structure?", "answer": "The larynx (laryngeal pathology changing the voice). Maini: dysphonia 'is related to larynx... there is going to be change in the voice.'", "tip": "'-phonia' = voice \u2192 voice box (larynx)."},
+  {"term": "[Tongue Clinical] A hard, sore lesion on the tongue seen in SYPHILIS is called a:", "answer": "Chancre. Maini describes the chancre as the hard syphilitic sore on the tongue.", "tip": "The hard primary lesion of syphilis."},
+  {"term": "[Tongue Clinical] Maini says a canker sore (aphthous ulcer) tends to form when the immune system is low and heals faster with which vitamin (important for collagen synthesis)?", "answer": "Vitamin C. Maini: canker sores 'heal very fast' with vitamin supplements 'especially rich in vitamin C,' which aids collagen synthesis.", "tip": "Cofactor for collagen synthesis."},
+  {"term": "[Tongue Clinical] Maini notes that tongue/oral cancer was very common in the region where she trained, due to which habit?", "answer": "Tobacco chewing. Maini: 'tobacco chewing causes oral cancer... we have seen a number of cases with tongue cancer.'", "tip": "Smokeless tobacco held in the mouth."},
+];
+
+
+const LS_KEY = "ga_0202_m10_nose_mouth_rapid_recall_v1";
+let deck = [], quizIdx = 0, viewIdx = 0;
+let got = 0, missed = 0, missedTerms = [], shuffleOn = false, revealed = false;
+let answered = {};
+function loadState(){try{const s=JSON.parse(localStorage.getItem(LS_KEY));if(s&&s.deck){deck=s.deck;quizIdx=s.quizIdx||0;viewIdx=s.viewIdx||s.idx||0;got=s.got;missed=s.missed;missedTerms=s.missedTerms||[];shuffleOn=s.shuffleOn||false;answered=s.answered||{};if(shuffleOn)document.getElementById("btnShuffle").classList.add("active");return true;}}catch(e){}return false;}
+function saveState(){localStorage.setItem(LS_KEY,JSON.stringify({deck,quizIdx,viewIdx,got,missed,missedTerms,shuffleOn,answered}));}
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startDrill(mode){if(mode==='missed'&&missedTerms.length>0){deck=missedTerms.map(t=>BANK.findIndex(b=>b.term===t)).filter(i=>i>=0);}else{deck=BANK.map((_,i)=>i);}if(shuffleOn)shuffleArr(deck);quizIdx=0;viewIdx=0;got=0;missed=0;missedTerms=[];answered={};document.getElementById("summaryArea").style.display="none";document.getElementById("cardArea").style.display="block";showCard();saveState();}
+function showCard(){if(viewIdx>=deck.length){showSummary();return;}const item=BANK[deck[viewIdx]];const isBrowse=viewIdx<quizIdx;document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnRedoBack").style.display=viewIdx>0?"inline-block":"none";document.getElementById("browseLabel").style.display="none";revealed=false;if(isBrowse){document.getElementById("browseLabel").style.display="block";doReveal();document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="inline-block";document.getElementById("btnRedo").style.display="inline-block";}updateScores();}
+function doReveal(){document.getElementById("answerText").classList.add("show");if(BANK[deck[viewIdx]].tip)document.getElementById("profTip").classList.add("show");document.getElementById("btnReveal").style.display="none";if(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)){document.getElementById("btnGot").style.display="inline-block";document.getElementById("btnMissed").style.display="inline-block";}revealed=true;}
+function grade(correct){const isRedo=viewIdx<quizIdx&&answered[viewIdx]===undefined;if(viewIdx<quizIdx&&!isRedo)return;answered[viewIdx]=correct?'got':'missed';if(correct){got++;}else{missed++;missedTerms.push(BANK[deck[viewIdx]].term);}if(isRedo){viewIdx=quizIdx;}else{quizIdx=viewIdx+1;viewIdx=quizIdx;}showCard();saveState();}
+function goBack(){if(viewIdx>0){viewIdx--;showCard();saveState();}}
+function resumeQuiz(){viewIdx=quizIdx;showCard();saveState();}
+function redoBack(){if(viewIdx<=0)return;viewIdx--;if(viewIdx<quizIdx){const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];}document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";const item=BANK[deck[viewIdx]];document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";revealed=false;updateScores();saveState();}
+function redoPrev(){if(viewIdx>=quizIdx)return;const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";revealed=false;updateScores();saveState();}
+function skip(){if(viewIdx>=quizIdx){deck.push(deck[viewIdx]);deck.splice(viewIdx,1);quizIdx=viewIdx;showCard();saveState();}}
+function updateScores(){const remain=deck.length-quizIdx;document.getElementById("gotCount").textContent=got+" Got It";document.getElementById("missedCount").textContent=missed+" Missed";document.getElementById("remainCount").textContent=remain+" Left";const pct=deck.length>0?((got+missed)/deck.length)*100:0;document.getElementById("progressFill").style.width=pct+"%";}
+function showSummary(){document.getElementById("cardArea").style.display="none";document.getElementById("summaryArea").style.display="block";const total=got+missed;const pct=total>0?Math.round((got/total)*100):0;const el=document.getElementById("finalScore");el.textContent=pct+"%";el.className="final-score "+(pct>=85?"great":pct>=65?"ok":"rough");document.getElementById("finalMsg").textContent=got+" of "+total+" — "+(pct>=90?"All terms locked in.":pct>=75?"Solid. Hit the missed ones again.":"Keep drilling. Re-do the missed cards.");document.getElementById("progressFill").style.width="100%";const listBox=document.getElementById("missedListBox"),ul=document.getElementById("missedListUl"),rd=document.getElementById("btnRedrill");if(missedTerms.length>0){listBox.style.display="block";rd.style.display="inline-block";ul.innerHTML=missedTerms.map(t=>"<li>"+t+"</li>").join("");}else{listBox.style.display="none";rd.style.display="none";}updateScores();}
+function toggleShuffle(){shuffleOn=!shuffleOn;document.getElementById("btnShuffle").classList.toggle("active",shuffleOn);saveState();}
+function toggleIndex(){const ov=document.getElementById("indexOverlay");if(ov.style.display==="flex"){ov.style.display="none";return;}ov.style.display="flex";renderIndex();}
+function renderIndex(){const g=document.getElementById("indexGrid");g.innerHTML="";for(let i=0;i<deck.length;i++){const item=BANK[deck[i]];const d=document.createElement("div");d.className="index-chip";let status="";if(i<quizIdx){if(answered[i]==='got'){d.classList.add("chip-got");status="Got It";}else if(answered[i]==='missed'){d.classList.add("chip-missed");status="Missed";}}else if(i===quizIdx){d.classList.add("chip-current");status="Current";}d.innerHTML='<span><span class="chip-num">'+(i+1)+'.</span> '+item.term+'</span><span class="chip-status">'+status+'</span>';d.onclick=(function(idx){return function(){viewIdx=idx;document.getElementById("indexOverlay").style.display="none";showCard();saveState();};})(i);g.appendChild(d);}}
+document.addEventListener("keydown",e=>{if(document.getElementById("indexOverlay").style.display==="flex"){if(e.key==="Escape"||e.key==="i"||e.key==="I")toggleIndex();return;}if(e.key===" "||e.code==="Space"){e.preventDefault();if(!revealed)doReveal();}if(e.key==="g"||e.key==="G"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(true);}if(e.key==="m"||e.key==="M"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(false);}if(e.key==="s"||e.key==="S"){if(!revealed)skip();}if(e.key==="b"||e.key==="B"){goBack();}if(e.key==="d"||e.key==="D"){redoBack();}if(e.key==="r"||e.key==="R"){if(viewIdx<quizIdx)redoPrev();}if(e.key==="i"||e.key==="I"){toggleIndex();}if(e.key==="Enter"&&viewIdx<quizIdx){resumeQuiz();}});
+if(!loadState()||quizIdx>=deck.length){startDrill('all');}else{showCard();}
+</script>
+
+
+
+
+<div style="margin:30px auto;padding:14px;border-top:1px solid #334155;color:#94a3b8;font-size:.8rem;text-align:center;max-width:780px">DC Study Supply — Built by Dr. David Gramling, PHD</div>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying FAB 101 with Dr. Bui at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    // Auto-detect bg luminance: body first, fall back to html element if transparent
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body>
+</html>

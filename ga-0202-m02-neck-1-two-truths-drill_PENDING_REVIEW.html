@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>GA 0202 M02 - The Neck (part 1) - Two Truths</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;padding:16px}
+.wrap{max-width:780px;margin:0 auto}
+.hdr{text-align:center;margin-bottom:16px}
+.hdr h1{font-size:clamp(20px,4vw,28px);color:#5fc28b}
+.hdr .sub{color:#94a3b8;font-size:13px;margin-top:4px}
+.hdr .voicebanner{display:inline-block;margin-top:8px;padding:6px 12px;background:#0f1626;color:#93c5fd;border:1px solid #1e3a5f;border-radius:8px;font-size:11.5px;line-height:1.5;max-width:640px}
+.hdr .pending{display:inline-block;margin-top:6px;padding:2px 10px;background:#3a2a0a;color:#fbbf24;border:1px solid #b45309;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.03em}
+.scorebar{display:flex;justify-content:space-around;background:#0f1626;padding:10px;border-radius:10px;margin-bottom:14px;font-size:13px}
+.scorebar .k{color:#94a3b8}.scorebar .v{color:#fff;font-weight:700;font-size:16px}
+.scorebar .v.ok{color:#5fc28b}.scorebar .v.bad{color:#ff8888}
+.card{background:#101725;padding:20px;border-radius:12px;margin-bottom:14px}
+.tag{display:inline-block;padding:3px 10px;background:#1e3a5f;color:#5fc28b;border-radius:6px;font-size:12px;font-weight:700;margin-bottom:10px}
+.q-prompt{font-size:15px;color:#cbd5e1;margin-bottom:14px}
+.q-prompt b{color:#fbbf24}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:14px 16px;background:#0a0e1a;border:2px solid #334155;border-radius:10px;cursor:pointer;transition:all .15s;line-height:1.55;color:#cbd5e1}
+.opt:hover{border-color:#5fc28b;background:#0f1626}
+.opt .n{display:inline-block;width:24px;height:24px;border-radius:50%;background:#1e3a5f;color:#5fc28b;text-align:center;font-weight:700;margin-right:10px;line-height:24px;font-size:13px}
+.opt.picked-true{border-color:#5fc28b;background:#0f2a1a;color:#86efac}
+.opt.picked-true .n{background:#5fc28b;color:#0a0e1a}
+.opt.picked-lie{border-color:#86efac;background:#0a2a14;color:#86efac;font-weight:600}
+.opt.picked-lie .n{background:#22c55e;color:#0a0e1a}
+.opt.picked-lie::after{content:" ✓ THE LIE";color:#86efac;font-weight:700}
+.opt.was-true{border-color:#475569;background:#0f1626;color:#94a3b8}
+.opt.was-true::before{content:"✓ TRUE — ";color:#5fc28b;font-weight:700}
+.opt.was-lie-missed{border-color:#ff8888;background:#2a0a0a;color:#fca5a5}
+.opt.was-lie-missed::before{content:"✗ THIS WAS THE LIE — ";color:#ff8888;font-weight:700}
+.exp{margin-top:14px;padding:12px 16px;background:#0a2a14;border-left:3px solid #5fc28b;border-radius:0 8px 8px 0;color:#86efac;font-size:13px;line-height:1.6;display:none}
+.exp.bad{background:#2a0a0a;border-color:#ff8888;color:#fca5a5}
+.btn-row{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.btn{padding:11px 24px;border:2px solid #5fc28b;background:transparent;color:#5fc28b;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+.btn:hover{background:#5fc28b;color:#0a0e1a}
+.btn.primary{background:#5fc28b;color:#0a0e1a}
+.btn.primary:hover{background:#86efac}
+.summary{display:none;background:#101725;padding:30px;border-radius:12px;text-align:center}
+.summary h2{color:#5fc28b;margin-bottom:14px}
+.summary .pct{font-size:48px;font-weight:900;margin:14px 0}
+.summary .pct.great{color:#5fc28b}.summary .pct.ok{color:#fbbf24}.summary .pct.bad{color:#ff8888}
+.footer{text-align:center;padding:24px;color:#546e7a;font-size:.85em;border-top:1px solid #1e3a5f;margin-top:40px}
+@media(max-width:600px){.opt{padding:12px;font-size:14px}}
+</style>
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+</head><body>
+<a id="fab201-back-to-hub" href="ga-0202-m02-neck-1-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:100001;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">&larr; Back to Neck (part 1) Hub</a>
+<div class="wrap">
+<div class="hdr"><h1>🎯 Two Truths and a Lie</h1><div class="sub">GA 0202 · The Neck (part 1) · Dr. Maini · Pick the LIE</div><div class="voicebanner">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div><div class="pending">PENDING REVIEW</div></div>
+<div class="scorebar">
+  <div><div class="k">Question</div><div class="v" id="qNum">1 / 40</div></div>
+  <div><div class="k">Correct</div><div class="v ok" id="okN">0</div></div>
+  <div><div class="k">Wrong</div><div class="v bad" id="badN">0</div></div>
+  <div><div class="k">Streak</div><div class="v" id="strk">0</div></div>
+</div>
+<div class="card" id="card">
+  <div class="tag" id="tag">Topic</div>
+  <div class="q-prompt"><b>Two are true, one is the LIE.</b> Click the lie.</div>
+  <div class="opts" id="opts"></div>
+  <div class="exp" id="exp"></div>
+  <div class="btn-row">
+    <button class="btn" id="retryBtn" onclick="retry()" style="display:none;background:#7c3aed;color:#fff">↻ Retry this one</button>
+    <button class="btn primary" id="nextBtn" onclick="next()" style="display:none">Next ▶</button>
+    <button class="btn" id="restartBtn" onclick="confirmRestart()" style="background:#1e293b;color:#94a3b8;border:1px solid #334155;font-size:0.78rem">↺ Restart drill</button>
+    <button class="btn" onclick="if(confirm('Restart from Q1?'))init()">↻ Restart</button>
+  </div>
+</div>
+<div class="summary" id="summary">
+  <h2>Done!</h2>
+  <div class="pct" id="pct">0%</div>
+  <div id="msg"></div>
+  <button class="btn primary" onclick="init()" style="margin-top:20px">↻ Restart</button>
+</div>
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD</div>
+</div>
+<script>
+const BANK=[
+{n:1,topic:"Posterior Triangle",opts:["The posterior triangle is bounded by the sternocleidomastoid anteriorly, the trapezius posteriorly, and the clavicle as its base.","The spinal accessory nerve (CN XI) runs within the posterior triangle.","The inferior belly of the omohyoid divides the posterior triangle into the occipital and carotid triangles."],lie:2,exp:"The inferior belly of omohyoid splits the posterior triangle into the OCCIPITAL and SUPRACLAVICULAR (subclavian) triangles. The carotid triangle is a subdivision of the ANTERIOR triangle, not the posterior."},
+{n:2,topic:"Scalene Relationships",opts:["The trunks of the brachial plexus lie posterior to the anterior scalene muscle.","The subclavian vein passes posterior to the anterior scalene, directly behind the subclavian artery.","The subclavian artery passes posterior to the anterior scalene muscle."],lie:1,exp:"The subclavian VEIN passes ANTERIOR to the anterior scalene. It is the subclavian ARTERY (along with the brachial plexus) that lies posterior to the muscle."},
+{n:3,topic:"Brachial Plexus",opts:["The brachial plexus is formed from the ventral rami of C1 through C4.","The trunks of the brachial plexus emerge between the anterior and middle scalene muscles.","The brachial plexus is formed from the ventral rami of C5 through T1."],lie:0,exp:"C1 through C4 form the CERVICAL plexus. The brachial plexus is formed from the ventral rami of C5 through T1."},
+{n:4,topic:"Cervical Plexus",opts:["The cervical plexus is formed from the ventral rami of C1 through C4.","Within the carotid sheath the cervical plexus is related to the internal jugular vein.","The phrenic nerve is one of the four superficial (cutaneous) branches of the cervical plexus."],lie:2,exp:"The phrenic is a MUSCULAR branch of the cervical plexus. The four superficial (cutaneous) branches are the greater auricular, lesser occipital, transverse cervical, and supraclavicular nerves."},
+{n:5,topic:"Cutaneous Branches",opts:["The greater auricular nerve passes upward toward the auricle (ear).","The supraclavicular nerve divides into two named groups: medial and lateral.","The four superficial branches emerge from the nerve point of the neck (Erb's point) at the midpoint of the posterior border of the SCM."],lie:1,exp:"The supraclavicular nerve divides into THREE groups: medial, intermediate, and lateral. The intermediate group is the one that is easy to forget."},
+{n:6,topic:"Phrenic Nerve",opts:["The phrenic nerve has a root value of C5, C6, C7.","The phrenic nerve is a muscular branch of the cervical plexus.","The phrenic nerve's root value is C3, C4, C5 ('C3, 4, 5 keep you alive')."],lie:0,exp:"The phrenic nerve is C3 through C5, not C5 through C7. C5 through C7 are brachial plexus levels."},
+{n:7,topic:"Ansa Cervicalis",opts:["The superior root of the ansa cervicalis carries C1 fibers traveling with the hypoglossal nerve (CN XII).","The inferior root of the ansa cervicalis is made up mainly of C2 and C3 fibers.","The ansa cervicalis supplies motor branches to all of the suprahyoid muscles."],lie:2,exp:"The ansa cervicalis supplies most of the INFRAhyoid (strap) muscles. The suprahyoids have varied supply (V3, CN VII, and C1 via CN XII), not the ansa."},
+{n:8,topic:"Ansa Cervicalis",opts:["The inferior root of the ansa cervicalis carries the C1 fibers, while the superior root is C2 and C3.","Thyrohyoid is the one infrahyoid muscle NOT supplied by the ansa cervicalis.","The hypoglossal nerve exits the skull through the hypoglossal canal."],lie:0,exp:"The roots are reversed: the SUPERIOR root carries the C1 fibers (via CN XII), and the INFERIOR root is mainly C2 and C3."},
+{n:9,topic:"Anterior Triangle",opts:["The anterior triangle is bounded by the midline of the neck, the anterior border of the SCM, and the lower margin of the mandible.","The anterior triangle is subdivided into four smaller triangles by the bellies of the mylohyoid and geniohyoid.","The carotid triangle is one of the four subdivisions of the anterior triangle."],lie:1,exp:"The anterior triangle is subdivided by the two bellies of the DIGASTRIC plus the superior belly of the OMOHYOID, not the mylohyoid and geniohyoid."},
+{n:10,topic:"Submental Triangle",opts:["The submental triangle is bounded by the midline medially, the anterior belly of digastric laterally, and the body of the hyoid at its base.","Contents of the submental triangle include the submental lymph nodes and the beginning of the anterior jugular vein.","The submandibular (salivary) gland is a principal content of the submental triangle."],lie:2,exp:"The submandibular gland is a content of the DIGASTRIC (submandibular) triangle, not the submental triangle."},
+{n:11,topic:"Digastric Triangle",opts:["A principal content of the digastric (submandibular) triangle is the common carotid bifurcation.","The digastric (submandibular) triangle is bounded by the two bellies of the digastric and the lower border of the mandible.","The submandibular salivary gland is a principal content of the digastric triangle."],lie:0,exp:"The common carotid bifurcation is a content of the CAROTID triangle. The digastric triangle's principal content is the submandibular gland."},
+{n:12,topic:"Carotid Triangle",opts:["The carotid triangle is named for the common carotid artery and its bifurcation lying within it.","The spinal accessory nerve (CN XI) is among the cranial nerves found in the carotid triangle.","Cranial nerves IX, X, and XII are found among the contents of the carotid triangle."],lie:1,exp:"The spinal accessory nerve (CN XI) is in the POSTERIOR triangle. The carotid triangle contains cranial nerves IX, X, and XII."},
+{n:13,topic:"Muscular Triangle",opts:["The muscular triangle contains the thyroid gland, larynx, trachea, and esophagus.","The sternohyoid and sternothyroid muscles lie in the muscular triangle.","The muscular triangle is so named because it contains the suprahyoid muscles."],lie:2,exp:"The muscular triangle is named for the INFRAhyoid (strap) muscles it contains. The suprahyoids are grouped around the digastric and submental region."},
+{n:14,topic:"Shared Triangle Boundaries",opts:["The inferior belly of the omohyoid forms the common boundary between the muscular and carotid triangles.","The anterior belly of the digastric forms the common boundary between the submental and digastric triangles.","The posterior belly of the digastric forms the common boundary between the carotid and digastric triangles."],lie:0,exp:"It is the SUPERIOR belly of the omohyoid that lies between the muscular and carotid triangles. The INFERIOR belly divides the posterior triangle."},
+{n:15,topic:"Carotid Sheath",opts:["The 'three musketeers' of the carotid sheath are the common carotid artery, the internal jugular vein, and the vagus nerve.","The nerve traveling within the carotid sheath is the spinal accessory nerve (CN XI).","After the common carotid bifurcates, the external carotid artery leaves the sheath while the internal carotid, IJV, and vagus remain."],lie:1,exp:"The nerve in the carotid sheath is the VAGUS (CN X), not the spinal accessory (CN XI)."},
+{n:16,topic:"Suprahyoid vs Infrahyoid",opts:["The suprahyoid muscles elevate the hyoid bone, which is important in swallowing.","The omohyoid is the only infrahyoid muscle with an attachment to the scapula.","The infrahyoid (strap) muscles act to elevate the hyoid bone."],lie:2,exp:"The infrahyoid muscles DEPRESS the hyoid bone (and larynx). Elevation of the hyoid is the SUPRAhyoid action."},
+{n:17,topic:"Digastric Attachments",opts:["The posterior belly of the digastric originates from the mastoid notch of the temporal bone.","The posterior belly of the digastric is supplied by the hypoglossal nerve (CN XII).","The anterior belly of the digastric inserts into the digastric fossa of the mandible."],lie:1,exp:"The posterior belly of the digastric is supplied by the FACIAL nerve (CN VII). CN XII does not supply the digastric."},
+{n:18,topic:"Digastric Innervation",opts:["The anterior belly of the digastric is supplied by the nerve to mylohyoid, a branch of the inferior alveolar nerve.","The posterior belly of the digastric is supplied by the facial nerve (CN VII).","The nerve to mylohyoid is a branch of the maxillary division of the trigeminal (V2)."],lie:2,exp:"The inferior alveolar nerve (the parent of the nerve to mylohyoid) arises from V3, the MANDIBULAR division of the trigeminal, not V2."},
+{n:19,topic:"Geniohyoid",opts:["The geniohyoid muscle receives its motor supply from the ansa cervicalis.","The geniohyoid originates from the genial tubercle of the mandible.","The geniohyoid lies superior to (on top of) the mylohyoid."],lie:0,exp:"The geniohyoid is supplied by C1 fibers carried by the hypoglossal nerve (CN XII), not the ansa cervicalis."},
+{n:20,topic:"Stylohyoid",opts:["The stylohyoid muscle originates from the styloid process of the temporal bone.","The stylohyoid muscle is innervated by the glossopharyngeal nerve (CN IX).","The stylohyoid is pierced by the intermediate tendon of the digastric."],lie:1,exp:"The stylohyoid is supplied by the FACIAL nerve (CN VII), like the posterior belly of digastric. CN IX supplies the stylopharyngeus."},
+{n:21,topic:"Mylohyoid",opts:["The mylohyoid muscle is innervated by the facial nerve (CN VII).","The mylohyoid arises from the mylohyoid line of the mandible and forms the floor of the oral cavity.","The anterior fibers of the mylohyoid meet in a midline fibrous (median) raphe."],lie:0,exp:"The mylohyoid is supplied by the nerve to mylohyoid (from V3), not the facial nerve. CN VII supplies the posterior belly of digastric and the stylohyoid."},
+{n:22,topic:"Omohyoid & Sternothyroid",opts:["The omohyoid is the only infrahyoid muscle with an attachment to the scapula (its inferior belly, from the superior border).","The sternothyroid inserts on the oblique line of the thyroid cartilage and therefore does not reach the hyoid.","The sternothyroid muscle acts to elevate the larynx."],lie:2,exp:"The sternothyroid DEPRESSES the larynx (an infrahyoid function). It does not elevate it."},
+{n:23,topic:"Thyrohyoid",opts:["The thyrohyoid runs from the oblique line of the thyroid cartilage to the body of the hyoid bone.","The sternohyoid is the one infrahyoid muscle supplied by C1 fibers via the hypoglossal nerve instead of the ansa cervicalis.","The sternohyoid and sternothyroid muscles are located in the muscular triangle."],lie:1,exp:"The THYROHYOID is the infrahyoid exception supplied by C1 via CN XII. The sternohyoid is supplied by the ansa cervicalis."},
+{n:24,topic:"Common Carotid Origins",opts:["The right common carotid artery arises directly from the aortic arch.","The left common carotid artery arises directly from the aortic arch.","The common carotid artery bifurcates at the superior border of the thyroid cartilage."],lie:0,exp:"The RIGHT common carotid arises from the brachiocephalic trunk. Only the LEFT common carotid arises directly from the aortic arch."},
+{n:25,topic:"ICA vs ECA",opts:["The common carotid bifurcates into the internal and external carotid arteries at the superior border of the thyroid cartilage.","The internal carotid artery gives no branches in the neck, whereas the external carotid does.","The internal carotid artery enters the skull through the jugular foramen."],lie:2,exp:"The internal carotid enters the skull through the CAROTID CANAL of the petrous temporal bone. The jugular foramen transmits the IJV and cranial nerves IX through XI."},
+{n:26,topic:"Carotid Sinus & Body",opts:["The carotid sinus is a slight dilatation at the beginning of the internal carotid artery.","The carotid sinus and carotid body are innervated by the vagus nerve (CN X).","The carotid body contains chemoreceptors that sense increased CO2, increased H+, and decreased O2."],lie:1,exp:"The carotid sinus and carotid body are innervated by the GLOSSOPHARYNGEAL nerve (CN IX). The aortic bodies, by contrast, use CN X."},
+{n:27,topic:"Carotid Sinus & Body",opts:["The carotid body primarily senses changes in blood pressure.","The carotid sinus contains baroreceptors that sense blood pressure through arterial stretch.","The carotid body contains chemoreceptors."],lie:0,exp:"The carotid BODY senses blood gases and pH (chemoreceptors). Blood PRESSURE is sensed by the baroreceptors of the carotid SINUS."},
+{n:28,topic:"External Carotid Branches",opts:["The two terminal branches of the external carotid are the superficial temporal and maxillary arteries.","The external carotid has eight branches: three anterior, three posterior, and two terminal.","The external carotid artery has ten branches: four anterior, four posterior, and two terminal."],lie:2,exp:"The external carotid has EIGHT branches (three anterior, three posterior, two terminal), not ten."},
+{n:29,topic:"External Carotid Branches",opts:["The three anterior branches of the external carotid are the superior thyroid, lingual, and facial arteries.","The two terminal branches of the external carotid are the facial and lingual arteries.","The three posterior branches of the external carotid are the ascending pharyngeal, occipital, and posterior auricular arteries."],lie:1,exp:"The terminal branches are the superficial temporal and maxillary arteries. The facial and lingual are ANTERIOR branches."},
+{n:30,topic:"Thyroid Arteries",opts:["The inferior thyroid artery is a branch of the external carotid artery, supplying the lower pole of the thyroid.","The superior thyroid artery is an anterior branch of the external carotid supplying the upper pole of the thyroid gland.","The lingual artery arises from the external carotid at the level of the tip of the greater horn of the hyoid bone."],lie:0,exp:"The INFERIOR thyroid artery is a branch of the thyrocervical trunk (from the subclavian), not the external carotid. The superior thyroid (from the ECA) supplies the upper pole."},
+{n:31,topic:"Superficial Temporal & Maxillary",opts:["The superficial temporal artery is palpable just in front of the tragus and runs with the auriculotemporal nerve.","The maxillary artery passes deep to the neck of the mandible to enter the infratemporal fossa.","The transverse facial artery is a branch of the facial artery."],lie:2,exp:"Despite its name, the transverse facial artery is a branch of the SUPERFICIAL TEMPORAL artery, not the facial artery. Maini flags this as a classic trap."},
+{n:32,topic:"Subclavian Artery",opts:["The right subclavian artery arises from the brachiocephalic trunk, while the left arises from the aortic arch.","The subclavian artery passes anterior to the anterior scalene muscle.","The anterior scalene divides the subclavian artery into three parts: part 1 medial, part 2 deep, part 3 lateral."],lie:1,exp:"The subclavian ARTERY passes POSTERIOR (behind) the anterior scalene. It is the subclavian VEIN that passes anterior to the muscle."},
+{n:33,topic:"Subclavian Branches",opts:["The costocervical trunk arises from the first part of the subclavian artery.","The first part of the subclavian artery gives the vertebral artery, internal thoracic artery, and thyrocervical trunk.","The vertebral artery enters the skull through the foramen magnum."],lie:0,exp:"The costocervical trunk arises from the SECOND part of the subclavian. Part 1 gives the vertebral, internal thoracic, and thyrocervical trunk."},
+{n:34,topic:"Subclavian Trunks",opts:["The thyrocervical trunk gives the inferior thyroid, transverse cervical, and suprascapular arteries.","The costocervical trunk divides into the deep cervical and superior intercostal arteries.","The vertebral artery ascends through the intervertebral foramina to reach the brain."],lie:2,exp:"The vertebral artery ascends through the TRANSVERSE foramina of the cervical vertebrae (then the foramen magnum), not the intervertebral foramina."},
+{n:35,topic:"Root of the Neck",opts:["The transverse cervical and suprascapular arteries cross anterior to the anterior scalene muscle.","The third part of the subclavian artery reliably gives off the costocervical trunk.","In thoracic outlet (scalene) syndrome, the subclavian artery and the brachial plexus may be compressed together."],lie:1,exp:"The third part of the subclavian usually gives NO branch (occasionally a dorsal scapular). The costocervical trunk arises from the second part."},
+{n:36,topic:"Subclavian Vein",opts:["The subclavian vein unites with the external jugular vein to form the brachiocephalic vein.","The subclavian vein is the continuation of the axillary vein at the outer border of the first rib.","The subclavian vein passes anterior to the anterior scalene muscle."],lie:0,exp:"The subclavian vein unites with the INTERNAL jugular vein to form the brachiocephalic vein."},
+{n:37,topic:"Internal Jugular Vein",opts:["The internal jugular vein begins at the jugular foramen as the continuation of the sigmoid sinus.","The internal jugular vein drains the brain, face, and neck.","Within the carotid sheath the internal jugular vein runs with the external carotid artery and the hypoglossal nerve."],lie:2,exp:"In the carotid sheath the IJV runs with the COMMON carotid artery and the VAGUS nerve, not the external carotid and hypoglossal."},
+{n:38,topic:"Neck Veins",opts:["The external jugular vein is superficial and has essentially a single tributary, the anterior jugular vein.","The inferior thyroid vein drains into the internal jugular vein.","The superior and middle thyroid veins drain into the internal jugular vein."],lie:1,exp:"The INFERIOR thyroid vein drains into the BRACHIOCEPHALIC vein, unlike the superior and middle thyroid veins (which drain into the IJV)."},
+{n:39,topic:"IJV Tributaries",opts:["The anterior jugular vein is a tributary of the internal jugular vein.","The inferior petrosal sinus is a tributary of the internal jugular vein.","The common facial vein drains into the internal jugular vein."],lie:0,exp:"The anterior jugular vein is a tributary of the EXTERNAL jugular vein. IJV tributaries include the inferior petrosal sinus, facial, lingual, pharyngeal, occipital, and superior/middle thyroid veins."},
+{n:40,topic:"Lymphatics & Landmarks",opts:["The lymphatics of the head and neck form the right and left jugular lymph trunks.","The lesser supraclavicular fossa lies between the sternal and clavicular heads of the sternocleidomastoid.","On palpation, a painful, tender, mobile lymph node is the finding most worrisome for cancer or lymphoma."],lie:2,exp:"A painless, firm-to-hard, FIXED, MATTED node is the more concerning finding for malignancy or lymphoma. A painful, tender, mobile node usually indicates infection or inflammation."}
+];
+let order=[],idx=0,ok=0,bad=0,strk=0,bestStrk=0,answered=false;
+let scoredThisRound=false;  // ensures retry doesn't double-count score
+function init(){
+  order=BANK.map((_,i)=>i);
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  idx=0;ok=0;bad=0;strk=0;bestStrk=0;answered=false;
+  document.getElementById('summary').style.display='none';
+  document.getElementById('card').style.display='block';
+  upd();show();
+}
+function show(){
+  answered=false;
+  scoredThisRound=false;
+  const q=BANK[order[idx]];
+  document.getElementById('qNum').textContent=(idx+1)+' / '+BANK.length;
+  document.getElementById('tag').textContent=q.topic;
+  const o=document.getElementById('opts');o.innerHTML='';
+  q.opts.forEach((s,i)=>{
+    const d=document.createElement('div');d.className='opt';d.dataset.i=i;
+    d.innerHTML='<span class="n">'+(i+1)+'</span>'+s;
+    d.onclick=()=>pick(i);
+    o.appendChild(d);
+  });
+  document.getElementById('exp').style.display='none';
+  document.getElementById('exp').classList.remove('bad');
+  document.getElementById('nextBtn').style.display='none';
+}
+function pick(i){
+  if(answered)return;answered=true;
+  const q=BANK[order[idx]];const opts=document.querySelectorAll('.opt');
+  const correct=(i===q.lie);
+  if(!scoredThisRound){
+    if(correct){ok++;strk++;if(strk>bestStrk)bestStrk=strk;}else{bad++;strk=0;}
+    scoredThisRound=true;
+  }
+  opts.forEach((el,n)=>{
+    el.style.cursor='default';el.onclick=null;
+    if(n===q.lie){el.classList.add(correct?'picked-lie':'was-lie-missed');}
+    else if(n===i){el.classList.add('picked-true');}
+    else{el.classList.add('was-true');}
+  });
+  const exp=document.getElementById('exp');
+  exp.textContent=q.exp;exp.style.display='block';
+  if(!correct)exp.classList.add('bad');
+  document.getElementById('nextBtn').style.display='inline-block';
+  document.getElementById('retryBtn').style.display=correct?'none':'inline-block';
+  upd();
+}
+function retry(){
+  // Reset answered state and option styles in place
+  answered=false;
+  scoredThisRound=true;  // already scored — don't re-count
+  const opts=document.querySelectorAll('.opt');
+  opts.forEach((el,n)=>{
+    el.classList.remove('picked-lie','was-lie-missed','picked-true','was-true');
+    el.style.cursor='pointer';
+    el.onclick=()=>pick(n);
+  });
+  document.getElementById('exp').style.display='none';
+  document.getElementById('exp').classList.remove('bad');
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('retryBtn').style.display='none';
+}
+function confirmRestart(){
+  if(idx>0||ok>0||bad>0){
+    if(!confirm('Restart drill from the beginning? Current progress ('+ok+' correct, '+bad+' missed) will be cleared.'))return;
+  }
+  init();
+}
+function next(){
+  idx++;
+  if(idx>=BANK.length){end();return;}
+  show();upd();
+}
+function upd(){
+  document.getElementById('qNum').textContent=(idx+1)+' / '+BANK.length;
+  document.getElementById('okN').textContent=ok;
+  document.getElementById('badN').textContent=bad;
+  document.getElementById('strk').textContent=strk;
+}
+function end(){
+  document.getElementById('card').style.display='none';
+  document.getElementById('summary').style.display='block';
+  const tot=ok+bad;const pct=tot?Math.round(ok/tot*100):0;
+  const p=document.getElementById('pct');p.textContent=pct+'%';
+  p.className='pct '+(pct>=85?'great':pct>=70?'ok':'bad');
+  document.getElementById('msg').innerHTML='You got <b>'+ok+'</b> of <b>'+tot+'</b> right · best streak <b>'+bestStrk+'</b>';
+}
+init();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body></html>

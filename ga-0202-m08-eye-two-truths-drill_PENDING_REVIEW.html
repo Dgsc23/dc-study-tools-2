@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>GA 0202 M08 - The Eye & Orbit - Two Truths</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0e1a;color:#e0e0e0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;min-height:100vh;padding:16px}
+.wrap{max-width:780px;margin:0 auto}
+.hdr{text-align:center;margin-bottom:16px}
+.hdr h1{font-size:clamp(20px,4vw,28px);color:#5fc28b}
+.hdr .sub{color:#94a3b8;font-size:13px;margin-top:4px}
+.hdr .voicebar{display:block;margin:8px auto 4px;max-width:600px;padding:6px 12px;background:#0f1626;border:1px solid #1e3a5f;border-radius:8px;color:#93c5fd;font-size:12px;line-height:1.45}
+.hdr .pending{display:inline-block;margin-top:6px;padding:2px 10px;background:#3a2a0a;color:#fbbf24;border:1px solid #b45309;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:.03em}
+.scorebar{display:flex;justify-content:space-around;background:#0f1626;padding:10px;border-radius:10px;margin-bottom:14px;font-size:13px}
+.scorebar .k{color:#94a3b8}.scorebar .v{color:#fff;font-weight:700;font-size:16px}
+.scorebar .v.ok{color:#5fc28b}.scorebar .v.bad{color:#ff8888}
+.card{background:#101725;padding:20px;border-radius:12px;margin-bottom:14px}
+.tag{display:inline-block;padding:3px 10px;background:#1e3a5f;color:#5fc28b;border-radius:6px;font-size:12px;font-weight:700;margin-bottom:10px}
+.q-prompt{font-size:15px;color:#cbd5e1;margin-bottom:14px}
+.q-prompt b{color:#fbbf24}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{padding:14px 16px;background:#0a0e1a;border:2px solid #334155;border-radius:10px;cursor:pointer;transition:all .15s;line-height:1.55;color:#cbd5e1}
+.opt:hover{border-color:#5fc28b;background:#0f1626}
+.opt .n{display:inline-block;width:24px;height:24px;border-radius:50%;background:#1e3a5f;color:#5fc28b;text-align:center;font-weight:700;margin-right:10px;line-height:24px;font-size:13px}
+.opt.picked-true{border-color:#5fc28b;background:#0f2a1a;color:#86efac}
+.opt.picked-true .n{background:#5fc28b;color:#0a0e1a}
+.opt.picked-lie{border-color:#86efac;background:#0a2a14;color:#86efac;font-weight:600}
+.opt.picked-lie .n{background:#22c55e;color:#0a0e1a}
+.opt.picked-lie::after{content:" ✓ THE LIE";color:#86efac;font-weight:700}
+.opt.was-true{border-color:#475569;background:#0f1626;color:#94a3b8}
+.opt.was-true::before{content:"✓ TRUE — ";color:#5fc28b;font-weight:700}
+.opt.was-lie-missed{border-color:#ff8888;background:#2a0a0a;color:#fca5a5}
+.opt.was-lie-missed::before{content:"✗ THIS WAS THE LIE — ";color:#ff8888;font-weight:700}
+.exp{margin-top:14px;padding:12px 16px;background:#0a2a14;border-left:3px solid #5fc28b;border-radius:0 8px 8px 0;color:#86efac;font-size:13px;line-height:1.6;display:none}
+.exp.bad{background:#2a0a0a;border-color:#ff8888;color:#fca5a5}
+.btn-row{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.btn{padding:11px 24px;border:2px solid #5fc28b;background:transparent;color:#5fc28b;border-radius:8px;font-weight:700;cursor:pointer;font-size:14px}
+.btn:hover{background:#5fc28b;color:#0a0e1a}
+.btn.primary{background:#5fc28b;color:#0a0e1a}
+.btn.primary:hover{background:#86efac}
+.summary{display:none;background:#101725;padding:30px;border-radius:12px;text-align:center}
+.summary h2{color:#5fc28b;margin-bottom:14px}
+.summary .pct{font-size:48px;font-weight:900;margin:14px 0}
+.summary .pct.great{color:#5fc28b}.summary .pct.ok{color:#fbbf24}.summary .pct.bad{color:#ff8888}
+.footer{text-align:center;padding:24px;color:#546e7a;font-size:.85em;border-top:1px solid #1e3a5f;margin-top:40px}
+@media(max-width:600px){.opt{padding:12px;font-size:14px}}
+</style>
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+</head><body>
+<a id="ga0202-back-to-hub" href="ga-0202-m08-eye-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:100001;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">&larr; Back to M08 Hub</a>
+<div class="wrap">
+<div class="hdr"><h1>🎯 Two Truths and a Lie</h1><div class="voicebar">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div><div class="sub">GA 0202 · Module 08 · The Eye & Orbit · Dr. Maini · Pick the LIE</div><div class="pending">PENDING REVIEW</div></div>
+<div class="scorebar">
+  <div><div class="k">Question</div><div class="v" id="qNum">1 / 38</div></div>
+  <div><div class="k">Correct</div><div class="v ok" id="okN">0</div></div>
+  <div><div class="k">Wrong</div><div class="v bad" id="badN">0</div></div>
+  <div><div class="k">Streak</div><div class="v" id="strk">0</div></div>
+</div>
+<div class="card" id="card">
+  <div class="tag" id="tag">Topic</div>
+  <div class="q-prompt"><b>Two are true, one is the LIE.</b> Click the lie.</div>
+  <div class="opts" id="opts"></div>
+  <div class="exp" id="exp"></div>
+  <div class="btn-row">
+    <button class="btn" id="retryBtn" onclick="retry()" style="display:none;background:#7c3aed;color:#fff">↻ Retry this one</button>
+    <button class="btn primary" id="nextBtn" onclick="next()" style="display:none">Next ▶</button>
+    <button class="btn" id="restartBtn" onclick="confirmRestart()" style="background:#1e293b;color:#94a3b8;border:1px solid #334155;font-size:0.78rem">↺ Restart drill</button>
+    <button class="btn" onclick="if(confirm('Restart from Q1?'))init()">↻ Restart</button>
+  </div>
+</div>
+<div class="summary" id="summary">
+  <h2>Done!</h2>
+  <div class="pct" id="pct">0%</div>
+  <div id="msg"></div>
+  <button class="btn primary" onclick="init()" style="margin-top:20px">↻ Restart</button>
+</div>
+<div class="footer">DC Study Supply &mdash; Built by Dr. David Gramling, PHD</div>
+</div>
+<script>
+const BANK=[
+{n:1,topic:"Orbit - Bones & Walls",opts:["The floor of the orbit is formed mostly by the ethmoid bone.","The orbit is a quadrilateral pyramid whose apex points backward at the optic canal, where the optic nerve exits into the cranial cavity.","The margin (base) of the orbit is formed by three bones: the frontal, the maxilla, and the zygomatic."],lie:0,exp:"The floor of the orbit is formed mostly by the MAXILLA. The ethmoid, recognized by its air cells, is the main bone of the MEDIAL WALL, not the floor. (L19, osteology of the orbit)"},
+{n:2,topic:"Orbit - Bones & Walls",opts:["The ethmoid, recognized by its multiple air cells, is the most prominent bone of the medial wall.","The lateral wall of the orbit is formed by the lacrimal bone and the lesser wing of the sphenoid.","The roof of the orbit is formed by the orbital plate of the frontal bone and the lesser wing of the sphenoid."],lie:1,exp:"The lateral wall is formed by the frontal process of the ZYGOMATIC and the GREATER wing of the sphenoid. The lacrimal bone (the papery 'papyrus' bone) sits in the MEDIAL wall. (L19, walls of the orbit)"},
+{n:3,topic:"Orbit - Bones & Walls",opts:["The two medial walls of the orbits run parallel to each other, while the lateral walls, if extended back, meet at about a 90 degree angle.","The lateral (temporal) field of vision is the widest because nothing bony restricts it.","When you look straight ahead, the medial field of vision is restricted by the zygomatic bone."],lie:2,exp:"The medial field is restricted by the NASAL bone. The ZYGOMATIC bone restricts the INFERIOR field (and the brow restricts the superior field). (L19, orientation and fields of vision)"},
+{n:4,topic:"Fissures, Canals & Foramina",opts:["The optic canal lies between the greater and lesser wings of the sphenoid.","There are three doorways into the orbit: the superior orbital fissure, the inferior orbital fissure, and the optic canal.","The optic canal transmits the optic nerve and the ophthalmic artery."],lie:0,exp:"It is the SUPERIOR ORBITAL FISSURE that lies between the greater and lesser wings of the sphenoid. The optic canal is a hole within the LESSER wing of the sphenoid. (L19, doorways of the orbit)"},
+{n:5,topic:"Fissures, Canals & Foramina",opts:["The superior orbital fissure lies between the greater and lesser wings of the sphenoid.","The superior orbital fissure lies outside the cranial cavity and communicates with the pterygopalatine fossa.","The superior ophthalmic vein passes through the superior orbital fissure, which communicates with the middle cranial fossa."],lie:1,exp:"It is the INFERIOR orbital fissure that lies outside the cranial cavity and communicates with the pterygopalatine and infratemporal fossae. The SUPERIOR orbital fissure communicates with the middle cranial fossa. (L19, orbital fissures)"},
+{n:6,topic:"Fissures, Canals & Foramina",opts:["The inferior orbital fissure lies between the maxilla and the greater wing of the sphenoid.","The infraorbital artery enters the orbit through the inferior orbital fissure and finally exits onto the face through the infraorbital foramen.","The infraorbital artery is the terminal branch of the facial artery."],lie:2,exp:"The infraorbital artery is the terminal branch of the MAXILLARY artery, not the facial artery. It runs in the infraorbital groove and canal, then exits through the infraorbital foramen of the maxilla. (L19, infraorbital artery)"},
+{n:7,topic:"Eyelids & Lacrimal Apparatus",opts:["Tears drain in the order: puncta, then lacrimal sac, then lacrimal canaliculi, then nasolacrimal duct.","The lacrimal fossa in the medial wall of the orbit lodges the lacrimal (nasolacrimal) sac, not the lacrimal gland.","The nasolacrimal duct ultimately delivers tears into the inferior meatus of the nasal cavity."],lie:0,exp:"The canaliculi come BEFORE the sac. The true order is puncta, lacrimal canaliculi, lacrimal sac, nasolacrimal duct, then the nasal cavity. (L19/L20, tear drainage)"},
+{n:8,topic:"Eyelids & Lacrimal Apparatus",opts:["The sebaceous glands of the eyelashes at the lid margin are the glands of Zeis.","The tarsal (Meibomian) glands are sweat glands embedded in the conjunctiva.","The sweat glands at the lid margin are the glands of Moll."],lie:1,exp:"The tarsal (Meibomian) glands are SEBACEOUS glands embedded in the TARSAL PLATE; their oily secretion keeps the closed lids airtight. The marginal sweat glands are the glands of Moll. (L19, eyelid glands)"},
+{n:9,topic:"Eyelids & Lacrimal Apparatus",opts:["Inflammation of a marginal gland (of Zeis or Moll) produces an external hordeolum, or stye, at the lid margin.","A chalazion often needs minor surgical scooping because the tarsal glands have very narrow outlets.","A chalazion is a swelling right at the lid margin caused by inflamed glands of Zeis."],lie:2,exp:"A chalazion (internal hordeolum) sits on the BODY of the eyelid, not the margin, and comes from an inflamed TARSAL (Meibomian) gland. The marginal Zeis/Moll lesion is the stye. (L19, eyelid pathology)"},
+{n:10,topic:"Eyelids & Lacrimal Apparatus",opts:["The tiny pore at the summit of each lacrimal papilla that begins tear drainage is the lacrimal caruncle.","The plica semilunaris is a curved conjunctival fold forming the lateral boundary of the lacrimal lake.","The lacrimal caruncle is the small fleshy elevation in the center of the lacrimal lake that directs tears medially."],lie:0,exp:"The drainage pore at the summit of each papilla is the lacrimal PUNCTUM. The lacrimal caruncle is the fleshy central mound of the lacrimal lake and has no drainage role. (L19, lacrimal lake)"},
+{n:11,topic:"Eyelids & Lacrimal Apparatus",opts:["Inflammation of the lacrimal sac is called dacryocystitis.","Inflammation of the lacrimal gland is called dacryocystitis.","Total loss of lacrimal secretion (xerophthalmia) can cause corneal ulceration and even corneal blindness."],lie:1,exp:"Inflammation of the lacrimal GLAND is dacryoADENITIS (adeno = gland). DacryoCYSTitis is inflammation of the SAC (cyst = sac). (L20, lacrimal pathology)"},
+{n:12,topic:"Eyelids & Lacrimal Apparatus",opts:["From superficial to deep, the eyelid layers are skin, orbicularis oculi in superficial fascia, the LPS tendon, the tarsal plate, then the palpebral conjunctiva.","The orbicularis oculi is a muscle of facial expression that closes the eye.","The innermost layer of the eyelid is the bulbar conjunctiva."],lie:2,exp:"The innermost lining of the EYELID is the PALPEBRAL conjunctiva. The BULBAR conjunctiva is the reflection that covers the anterior surface of the eyeball, not the lid. (L19, layers of the eyelid)"},
+{n:13,topic:"Levator Palpebrae & Horner Syndrome",opts:["The main skeletal part of levator palpebrae superioris is supplied by the facial nerve.","Levator palpebrae superioris arises from the undersurface of the lesser wing of the sphenoid, just above the optic canal.","The smooth-muscle part of LPS, the superior tarsal muscle, is supplied by sympathetic fibers only."],lie:0,exp:"The skeletal part of LPS is supplied by the OCULOMOTOR nerve (CN III). The FACIAL nerve (CN VII) supplies orbicularis oculi, the muscle that CLOSES the eye. (L19, LPS innervation)"},
+{n:14,topic:"Levator Palpebrae & Horner Syndrome",opts:["A patient with sympathetic failure shows only partial ptosis, because the oculomotor-supplied skeletal LPS is still intact.","Horner syndrome features mydriasis, a dilated pupil, on the affected side.","A common cause of Horner syndrome is a Pancoast (apical lung) tumor compressing the cervical sympathetic chain."],lie:1,exp:"Horner syndrome produces MIOSIS (a CONSTRICTED pupil), not mydriasis, because sympathetic dilator input is lost. Its features are partial ptosis, miosis, anhidrosis, facial flushing, and enophthalmos. (L19, Horner syndrome)"},
+{n:15,topic:"Eyeball - Coats & Fascia",opts:["The outer fibrous coat is the opaque white sclera posteriorly (about five-sixths) and the transparent cornea anteriorly (about one-sixth).","The perforated posterior region of the sclera where the optic nerve pierces is the lamina cribrosa.","In jaundice, the cornea is the first place a yellow tint is noticed."],lie:2,exp:"Yellowing is noticed first in the SCLERA (once bilirubin rises above about 2 mg%) because the sclera is white. The cornea is transparent, so it does not reveal the color. (L20, sclera and jaundice)"},
+{n:16,topic:"Eyeball - Coats & Fascia",opts:["The circular fibers of the iris form the dilator pupillae and are controlled by the sympathetic system.","The middle vascular coat of the eyeball is made of the choroid, ciliary body, and iris.","The ciliary processes of the ciliary body secrete aqueous humor."],lie:0,exp:"The CIRCULAR iris fibers form the SPHINCTER pupillae and are PARASYMPATHETIC (they constrict the pupil). The DILATOR pupillae is made of RADIAL fibers under SYMPATHETIC control. (L20, iris muscles)"},
+{n:17,topic:"Eyeball - Coats & Fascia",opts:["Bulbar fascia (Tenon's capsule) is separated from the sclera by the episcleral space.","During enucleation of the eyeball, Tenon's capsule is removed entirely so the socket can heal flat.","Extensions of Tenon's capsule to the medial and lateral orbital walls are the medial and lateral check ligaments."],lie:1,exp:"Tenon's capsule is deliberately LEFT BEHIND during enucleation so an artificial eye can be seated and fixed inside it, not removed. (L20, Tenon's capsule)"},
+{n:18,topic:"Retina & Photoreceptors",opts:["The retinal pigmented layer's melanin absorbs stray light and is deficient in people with albinism.","Cones are concentrated at the fovea centralis of the macula, the point of maximum visual acuity.","Rods are stimulated by bright light and are responsible for color vision."],lie:2,exp:"RODS work in dim (night) light and cannot detect color. CONES are the bright-light, color-vision receptors, densely packed at the fovea. (L20, rods and cones)"},
+{n:19,topic:"Retina & Photoreceptors",opts:["Macular degeneration causes loss of peripheral vision while central vision is preserved.","The optic disc is the physiological blind spot because it has no rods or cones.","The optic nerve is formed by the axons of the retinal ganglion cells."],lie:0,exp:"Macular degeneration destroys CENTRAL vision while PERIPHERAL vision is retained, because the macula and fovea serve central acuity. The statement reverses it. (L20, macula)"},
+{n:20,topic:"Aqueous Humor & Chambers",opts:["Aqueous humor is secreted by the ciliary processes into the posterior chamber.","From the posterior chamber, aqueous humor flows directly into the vitreous body, which drains it into the retinal veins.","The canal of Schlemm (sinus venosus sclerae) lies at the iridocorneal angle, between the iris and cornea."],lie:1,exp:"Aqueous flows from the posterior chamber through the PUPIL into the ANTERIOR chamber, then drains through the canal of Schlemm into venous blood. It never passes into the vitreous body. (L20, aqueous circulation)"},
+{n:21,topic:"Aqueous Humor & Chambers",opts:["The anterior chamber of the eye lies between the cornea and the iris.","The vitreous body is a transparent gel that maintains the shape of the eyeball.","Blockage of the canal of Schlemm lowers intraocular pressure, causing glaucoma."],lie:2,exp:"Blocked drainage RAISES intraocular pressure, and that rise is what causes glaucoma (which can damage the retina and cause blindness). It does not lower the pressure. (L20, glaucoma)"},
+{n:22,topic:"Refraction & Refractive Errors",opts:["The lens is avascular and takes its anterior nutrition from tears, while the cornea is richly vascular.","Entering light passes through the refractive media in order: cornea, aqueous humor, lens, then vitreous humor.","The cornea is largely responsible for refracting the light that enters the eye."],lie:0,exp:"It is the CORNEA that is avascular and is nourished anteriorly by tears (and takes oxygen from air). The statement swaps the cornea and lens. (L20, cornea and refraction)"},
+{n:23,topic:"Refraction & Refractive Errors",opts:["In hyperopia (farsightedness) the image focuses behind the retina and is corrected with convex lenses.","In myopia the image focuses behind the retina and is corrected with convex lenses.","Astigmatism is due to an irregular curvature of the cornea and is corrected with cylindrical lenses."],lie:1,exp:"In MYOPIA the image focuses IN FRONT of the retina and needs CONCAVE lenses. Focusing behind the retina with convex correction describes HYPEROPIA. (L20, refractive errors)"},
+{n:24,topic:"Refraction & Refractive Errors",opts:["Presbyopia is the age-related (after about 40) loss of the ability to focus on near objects.","A cataract is opacity (clouding) of the lens due to aging.","Presbyopia is caused by clouding (opacity) of the lens."],lie:2,exp:"Presbyopia is a loss of near-focusing (accommodation) with age, not a clouding of the lens. Lens OPACITY is a CATARACT. (L20, presbyopia and cataract)"},
+{n:25,topic:"Extraocular Muscles",opts:["The oculomotor nerve supplies all six of the extraocular muscles.","The four recti of the eye arise from a common tendinous ring around the optic canal.","By the mnemonic SO4, LR6, the superior oblique is supplied by the trochlear nerve and the lateral rectus by the abducent nerve."],lie:0,exp:"The oculomotor nerve (CN III) supplies the superior rectus, inferior rectus, medial rectus, and inferior oblique (plus LPS), but NOT all six. The superior oblique is trochlear (IV) and the lateral rectus is abducent (VI). (L21, extraocular innervation)"},
+{n:26,topic:"Extraocular Muscles",opts:["The superior rectus moves the eye up and in (elevation with adduction).","The superior oblique moves the eye up and out (elevation with abduction).","The inferior rectus moves the eye down and in (depression with adduction)."],lie:1,exp:"The SUPERIOR OBLIQUE moves the eye DOWN and OUT (depression with abduction). Up and out is the INFERIOR oblique. (Maini: O for oblique, O for out.) (L20, muscle actions)"},
+{n:27,topic:"Extraocular Muscles",opts:["The inferior oblique is the only extraocular muscle that originates from the floor of the orbit.","The tendon of the superior oblique passes through the trochlea, a fibrocartilaginous pulley, before inserting on the globe.","The trochlea is a bony pulley that redirects the tendon of the inferior oblique."],lie:2,exp:"The trochlea is a FIBROCARTILAGINOUS pulley for the SUPERIOR oblique tendon. The inferior oblique has no trochlea. (L20, superior oblique and trochlea)"},
+{n:28,topic:"Extraocular Muscles",opts:["Extortion of the eyeball is produced by the superior rectus and the inferior rectus.","Intorsion of the eyeball is produced by the two superior muscles, the superior rectus and superior oblique.","The extraocular muscles develop from occipital myotomes and therefore carry GSE fibers."],lie:0,exp:"Extortion is produced by the two INFERIOR muscles, the inferior rectus and inferior oblique (Maini: 'inferior people extort'). The superior rectus is an intorter, not an extorter. (L20, torsion)"},
+{n:29,topic:"Clinical Testing of Eye Muscles",opts:["To isolate the superior rectus in the H-test, the patient abducts the eye (looks out) and then looks up.","To test the superior oblique, the patient abducts the eye (looks out) and looks up.","As a rule, the recti are tested with the eye abducted and the obliques with the eye adducted."],lie:1,exp:"The obliques are tested in ADDUCTION. To test the superior oblique the patient ADDUCTS (looks in) and looks DOWN, not abducts and up. (L21, clinical testing)"},
+{n:30,topic:"Cranial Nerves of the Orbit",opts:["The optic nerve carries SSA (special somatic afferent) fibers, reflecting that the eye develops from ectoderm.","The oculomotor nerve enters the orbit through the superior orbital fissure and divides into superior and inferior divisions.","The trochlear nerve (CN IV) supplies the lateral rectus."],lie:2,exp:"The trochlear nerve (CN IV) supplies the SUPERIOR OBLIQUE only (SO4). The LATERAL RECTUS is supplied by the ABDUCENT nerve (CN VI, LR6). (L21, cranial nerves of the orbit)"},
+{n:31,topic:"Cranial Nerves of the Orbit",opts:["The trigeminal ganglion contains the cell bodies of the motor (GSE) fibers of V1, V2, and V3.","The three branches of the ophthalmic nerve (V1) are the nasociliary, frontal, and lacrimal (NFL).","The frontal nerve gives the supraorbital and supratrochlear nerves."],lie:0,exp:"The trigeminal ganglion is a SENSORY ganglion holding the GSA (sensory) cell bodies of V1, V2, and V3, not motor fibers. (L21, trigeminal ganglion)"},
+{n:32,topic:"Cranial Nerves of the Orbit",opts:["The long ciliary nerves, branches of the nasociliary, carry sympathetic fibers to the dilator pupillae.","The nasociliary nerve is a branch of the maxillary nerve (V2).","The sensory root of the ciliary ganglion is derived from the nasociliary nerve."],lie:1,exp:"The nasociliary nerve is a branch of the OPHTHALMIC division (V1), one of the 'NFL' three branches, not of the maxillary nerve (V2). (L21, nasociliary nerve)"},
+{n:33,topic:"Arteries & Veins of the Orbit",opts:["The ophthalmic artery is a branch of the internal carotid artery.","The central artery of the retina runs within the substance of the optic nerve and enters the eye at the center of the optic disc.","The anterior ciliary artery enters the eyeball at the lamina cribrosa."],lie:2,exp:"The anterior ciliary artery enters at the CORNEOSCLERAL junction. The lamina cribrosa is the perforated posterior sclera where the OPTIC NERVE pierces, not an arterial entry point. (L21, arteries of the orbit)"},
+{n:34,topic:"Arteries & Veins of the Orbit",opts:["The inferior ophthalmic vein communicates through the superior orbital fissure with the pterygoid venous plexus.","The two ophthalmic veins, superior and inferior, ultimately drain into the cavernous sinus.","Anteriorly, the ophthalmic veins connect with the facial vein."],lie:0,exp:"The inferior ophthalmic vein reaches the pterygoid venous plexus through the INFERIOR orbital fissure, not the superior orbital fissure. (L21, veins of the orbit)"},
+{n:35,topic:"Ciliary Ganglion & Eye Autonomics",opts:["The ciliary ganglion is a parasympathetic ganglion lying on the lateral side of the optic nerve.","Sympathetic fibers synapse within the ciliary ganglion before continuing to the eyeball.","The parasympathetic root of the ciliary ganglion carries preganglionic fibers from the oculomotor nerve."],lie:1,exp:"Sympathetic fibers pass STRAIGHT THROUGH the ciliary ganglion without synapsing, because they already synapsed in the superior cervical ganglion. Only the parasympathetic fibers synapse in the ciliary ganglion. (L21, ciliary ganglion roots)"},
+{n:36,topic:"Ciliary Ganglion & Eye Autonomics",opts:["Postganglionic parasympathetic fibers leave the ciliary ganglion via the short ciliary nerves to reach the sphincter pupillae and the ciliary muscle.","The short ciliary nerves carry GSA, postganglionic sympathetic, and postganglionic parasympathetic fibers.","When the ciliary muscle contracts, it tightens the suspensory ligament and flattens the lens for near vision."],lie:2,exp:"Ciliary-muscle contraction SLACKENS the suspensory ligament, so the lens THICKENS (becomes more convex) for near focus. It does not tighten the ligament or flatten the lens. (L21, accommodation)"},
+{n:37,topic:"Reflexes - Light, Accommodation, Corneal",opts:["Shining a light into the right eye and seeing the LEFT pupil constrict is called the direct light reflex.","In the pupillary light reflex, the afferent limb is the optic nerve and the reflex center is the pretectal nucleus of the midbrain.","The efferent limb runs from the Edinger-Westphal nucleus via CN III, the ciliary ganglion, and the short ciliary nerves to the sphincter pupillae."],lie:0,exp:"Constriction of the OPPOSITE (unstimulated) pupil is the CONSENSUAL (indirect) reflex. The DIRECT reflex is constriction of the SAME eye the light entered. (L20, light reflex)"},
+{n:38,topic:"Reflexes - Light, Accommodation, Corneal",opts:["In the corneal reflex, the sensory limb is the ophthalmic division (V1) and the motor limb is the facial nerve (CN VII).","The accommodation reflex is mediated mainly by the sympathetic system via the abducent nerve.","Argyll Robertson pupil, where the light reflex is lost but accommodation is preserved, is classically seen in syphilis."],lie:1,exp:"The accommodation reflex is essentially PARASYMPATHETIC, driven by the OCULOMOTOR nerve (CN III) to the ciliary muscle and sphincter pupillae. It is not sympathetic and not via the abducent nerve. (L20, accommodation reflex)"}
+];
+let order=[],idx=0,ok=0,bad=0,strk=0,bestStrk=0,answered=false;
+let scoredThisRound=false;  // ensures retry doesn't double-count score
+function init(){
+  order=BANK.map((_,i)=>i);
+  for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]];}
+  idx=0;ok=0;bad=0;strk=0;bestStrk=0;answered=false;
+  document.getElementById('summary').style.display='none';
+  document.getElementById('card').style.display='block';
+  upd();show();
+}
+function show(){
+  answered=false;
+  scoredThisRound=false;
+  const q=BANK[order[idx]];
+  document.getElementById('qNum').textContent=(idx+1)+' / '+BANK.length;
+  document.getElementById('tag').textContent=q.topic;
+  const o=document.getElementById('opts');o.innerHTML='';
+  q.opts.forEach((s,i)=>{
+    const d=document.createElement('div');d.className='opt';d.dataset.i=i;
+    d.innerHTML='<span class="n">'+(i+1)+'</span>'+s;
+    d.onclick=()=>pick(i);
+    o.appendChild(d);
+  });
+  document.getElementById('exp').style.display='none';
+  document.getElementById('exp').classList.remove('bad');
+  document.getElementById('nextBtn').style.display='none';
+}
+function pick(i){
+  if(answered)return;answered=true;
+  const q=BANK[order[idx]];const opts=document.querySelectorAll('.opt');
+  const correct=(i===q.lie);
+  if(!scoredThisRound){
+    if(correct){ok++;strk++;if(strk>bestStrk)bestStrk=strk;}else{bad++;strk=0;}
+    scoredThisRound=true;
+  }
+  opts.forEach((el,n)=>{
+    el.style.cursor='default';el.onclick=null;
+    if(n===q.lie){el.classList.add(correct?'picked-lie':'was-lie-missed');}
+    else if(n===i){el.classList.add('picked-true');}
+    else{el.classList.add('was-true');}
+  });
+  const exp=document.getElementById('exp');
+  exp.textContent=q.exp;exp.style.display='block';
+  if(!correct)exp.classList.add('bad');
+  document.getElementById('nextBtn').style.display='inline-block';
+  document.getElementById('retryBtn').style.display=correct?'none':'inline-block';
+  upd();
+}
+function retry(){
+  // Reset answered state and option styles in place
+  answered=false;
+  scoredThisRound=true;  // already scored — don't re-count
+  const opts=document.querySelectorAll('.opt');
+  opts.forEach((el,n)=>{
+    el.classList.remove('picked-lie','was-lie-missed','picked-true','was-true');
+    el.style.cursor='pointer';
+    el.onclick=()=>pick(n);
+  });
+  document.getElementById('exp').style.display='none';
+  document.getElementById('exp').classList.remove('bad');
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('retryBtn').style.display='none';
+}
+function confirmRestart(){
+  if(idx>0||ok>0||bad>0){
+    if(!confirm('Restart drill from the beginning? Current progress ('+ok+' correct, '+bad+' missed) will be cleared.'))return;
+  }
+  init();
+}
+function next(){
+  idx++;
+  if(idx>=BANK.length){end();return;}
+  show();upd();
+}
+function upd(){
+  document.getElementById('qNum').textContent=(idx+1)+' / '+BANK.length;
+  document.getElementById('okN').textContent=ok;
+  document.getElementById('badN').textContent=bad;
+  document.getElementById('strk').textContent=strk;
+}
+function end(){
+  document.getElementById('card').style.display='none';
+  document.getElementById('summary').style.display='block';
+  const tot=ok+bad;const pct=tot?Math.round(ok/tot*100):0;
+  const p=document.getElementById('pct');p.textContent=pct+'%';
+  p.className='pct '+(pct>=85?'great':pct>=70?'ok':'bad');
+  document.getElementById('msg').innerHTML='You got <b>'+ok+'</b> of <b>'+tot+'</b> right · best streak <b>'+bestStrk+'</b>';
+}
+init();
+</script>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (Gross Anatomy, head & neck) with Dr. Seema Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body></html>

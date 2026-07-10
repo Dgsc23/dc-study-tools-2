@@ -1,0 +1,2764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script id="ga0202-audio-url-fixer-early">
+(function(){
+  if (location.protocol === "file:") return;
+  var URLS = {'fab-201-m02-shoulder-forearm-L04.mp3': 'https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L04.mp3', 'ga-0202-m01-skull-lectures-L01.mp3': 'https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L04.mp3', 'ga-0202-m01-skull-lectures-L02.mp3': 'https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L05.mp3', 'ga-0202-m01-skull-ztm-analogies.mp3': 'https://dgsc23.github.io/dc-study-audio/ga-0202-m01-skull-ztm-analogies.mp3', 'ga-0202-m01-skull-vss-walkthrough.mp3': 'https://dgsc23.github.io/dc-study-audio/ga-0202-m01-skull-vss-walkthrough.mp3', 'ga-0202-m01-skull-ztm-v2.mp3': 'https://dgsc23.github.io/dc-study-audio/ga-0202-m01-skull-ztm-v2.mp3', 'ga-0202-m01-skull-ztm-v2-part1.mp3': 'https://dgsc23.github.io/dc-study-audio/ga-0202-m01-skull-ztm-v2-part1.mp3', 'ga-0202-m01-skull-ztm-v2-part2.mp3': 'https://dgsc23.github.io/dc-study-audio/ga-0202-m01-skull-ztm-v2-part2.mp3', 'ga-0202-m01-skull-progressive-chain.mp3': 'https://dgsc23.github.io/dc-study-audio/ga-0202-m01-skull-progressive-chain.mp3', 'ga-0202-m01-skull-story.mp3': 'https://dgsc23.github.io/dc-study-audio/ga-0202-m01-skull-story.mp3', 'ga-0202-m01-skull-mustknows-v2.mp3': 'https://dgsc23.github.io/dc-study-audio/ga-0202-m01-skull-mustknows-v2.mp3'};
+  function swap(){
+    document.querySelectorAll("audio source").forEach(function(s){
+      var src = s.getAttribute("src") || "";
+      var fname = src.split("/").pop();
+      if (URLS[fname]) {
+        s.setAttribute("src", URLS[fname]);
+        var a = s.parentElement;
+        if (a && a.tagName === "AUDIO") { try { a.load(); } catch(e){} }
+      }
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", swap);
+  else swap();
+  setTimeout(swap, 500);
+})();
+</script>
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · The Eye & Orbit — Clinical Cases & Must-Knows (33Q · Maini)</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;padding:12px}
+.container{max-width:780px;margin:0 auto}
+h1{text-align:center;font-size:1.4rem;margin-bottom:4px;color:#60a5fa}
+.subtitle{text-align:center;color:#94a3b8;font-size:.85rem;margin-bottom:12px}
+.stats{display:flex;justify-content:space-between;background:#1e293b;padding:10px 16px;border-radius:12px;margin-bottom:12px;flex-wrap:wrap;gap:6px;align-items:center}
+.stat{text-align:center}
+.stat-val{font-size:1.3rem;font-weight:700;color:#60a5fa}
+.stat-label{font-size:.65rem;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
+.stats .restart-sm{padding:5px 14px;background:transparent;border:1px solid #991b1b;color:#f87171;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer}
+.stats .restart-sm:hover{background:#450a0a}
+.progress-track{width:100%;height:6px;background:#1e293b;border-radius:4px;margin-bottom:12px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#4ade80,#60a5fa);transition:width .4s;border-radius:4px}
+.btn-nav-toggle{display:block;width:100%;margin-bottom:6px;padding:8px;background:#1e293b;border:2px solid #475569;color:#94a3b8;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;text-align:center}
+.btn-nav-toggle:hover{border-color:#60a5fa;color:#60a5fa}
+.nav-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin-bottom:10px;padding:8px;background:#1e293b;border-radius:10px;border:1px solid #334155}
+.nav-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:#334155;color:#64748b;border-radius:5px;font-size:.7rem;font-weight:700;cursor:pointer;border:2px solid transparent}
+.nav-cell:hover{border-color:#60a5fa;background:#172554;color:#60a5fa}
+.nav-cell.nc-correct{background:#052e16;color:#4ade80;border-color:#166534}
+.nav-cell.nc-wrong{background:#450a0a;color:#f87171;border-color:#991b1b}
+.nav-cell.nc-current{border-color:#60a5fa;background:#172554;color:#60a5fa;box-shadow:0 0 6px rgba(96,165,250,.3)}
+.nav-cell.nc-review{border-color:#818cf8;background:#312e81;color:#a5b4fc}
+.jump-bar{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-bottom:10px}
+.jump-btn{padding:5px 12px;background:#1e293b;border:1px solid #475569;color:#94a3b8;border-radius:7px;font-size:.75rem;font-weight:600;cursor:pointer}
+.jump-btn:hover{border-color:#60a5fa;color:#60a5fa}.jump-btn.jb-correct{border-color:#166534;color:#4ade80;background:#052e16}
+.jump-btn.jb-wrong{border-color:#991b1b;color:#f87171;background:#450a0a}.jump-btn.jb-current{border-color:#60a5fa;color:#60a5fa;background:#172554}
+.instructions{background:#1e293b;border:1px solid #334155;border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:.82rem;color:#94a3b8;line-height:1.6;display:none}
+.instructions h3{color:#60a5fa;font-size:.9rem;margin-bottom:8px}
+.instructions ul{margin-left:18px}
+.instructions li{margin-bottom:4px}
+.instructions .key{color:#4ade80;font-weight:600}
+.card{background:#1e293b;border:2px solid #334155;border-radius:14px;padding:24px 20px;margin-bottom:12px}
+.cat-badge{display:inline-block;padding:3px 10px;background:#312e81;color:#a5b4fc;border-radius:6px;font-size:11px;font-weight:600;margin-bottom:10px}
+.q-text{font-size:1.1rem;font-weight:600;line-height:1.5;margin-bottom:16px;color:#f1f5f9}
+.opt-btn{display:block;width:100%;text-align:left;padding:12px 16px;margin-bottom:8px;background:#0f172a;border:2px solid #334155;border-radius:10px;color:#cbd5e1;font-size:.95rem;cursor:pointer;transition:all .15s;line-height:1.5}
+.opt-btn:hover:not(.disabled){border-color:#60a5fa;background:#172554}
+.opt-btn.disabled{cursor:default}
+.opt-btn.picked-correct{border-color:#166534;background:#052e16;color:#4ade80}
+.opt-btn.picked-wrong{border-color:#991b1b;background:#450a0a;color:#f87171}
+.opt-btn.show-correct{border-color:#166534;background:#052e16;color:#4ade80}
+.opt-btn .letter{font-weight:700;margin-right:8px;color:#94a3b8}
+.opt-btn.picked-correct .letter,.opt-btn.show-correct .letter{color:#4ade80}
+.opt-btn.picked-wrong .letter{color:#f87171}
+.rationale{margin-top:6px;font-size:.8rem;color:#94a3b8;line-height:1.5;display:none}
+.source-line{margin-top:14px;padding:10px 14px;background:#0f172a;border:1px solid #334155;border-radius:10px;font-size:.82rem;color:#94a3b8;line-height:1.5;display:none}
+.source-line span{color:#60a5fa;font-weight:600}
+.quote-line{margin-top:10px;padding:12px 16px;background:#0f172a;border-left:3px solid #f59e0b;border-radius:0 10px 10px 0;font-size:.85rem;color:#cbd5e1;line-height:1.7;font-style:italic;display:none}
+.prof-tip{margin-top:10px;padding:12px 16px;background:#1a0a0a;border-left:3px solid #ef4444;border-radius:0 10px 10px 0;font-size:.85rem;color:#fca5a5;line-height:1.7;font-style:italic;display:none}
+.prof-tip .tip-label{color:#ef4444;font-weight:700;font-style:normal;font-size:.78rem}
+.obj-tag{margin-top:10px;padding:8px 14px;background:#1e1b4b;border:1px solid #4338ca;border-radius:8px;font-size:.8rem;color:#a5b4fc;font-weight:600;display:none}
+.obj-tag::before{content:"\1F4CB  Study Guide: ";color:#818cf8}
+.btn-hint{padding:8px 20px;background:#1e293b;border:2px solid #f59e0b;color:#f59e0b;border-radius:12px;font-size:.85rem;font-weight:600;cursor:pointer;display:block;margin:0 auto 12px}
+.btn-hint:hover{background:#451a03;color:#fbbf24}
+.hint-text{display:none;text-align:center;color:#fbbf24;font-size:.82rem;margin-bottom:12px;font-style:italic}
+.btn-group{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.btn-prev{padding:12px 24px;background:#1e293b;border:2px solid #60a5fa;color:#60a5fa;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer}
+.btn-prev:hover:not(:disabled){background:#172554}
+.btn-prev:disabled{opacity:.3;cursor:default;border-color:#475569;color:#475569}
+.btn-next{padding:12px 28px;background:#1e40af;color:#93c5fd;border:none;border-radius:10px;font-size:.95rem;font-weight:600;cursor:pointer;display:none}
+.btn-next:hover{background:#1d4ed8}
+.browse-banner{text-align:center;padding:8px 14px;background:#312e81;border:1px solid #818cf8;border-radius:10px;margin-bottom:10px;color:#a5b4fc;font-size:.82rem;font-weight:600}
+.summary{display:none;text-align:center;padding:30px 16px;max-width:780px;margin:0 auto}
+.summary h2{font-size:24px;color:#60a5fa;margin-bottom:8px}
+.summary .pct{font-size:48px;font-weight:800;margin:12px 0}
+.summary .pct.great{color:#4ade80}.summary .pct.ok{color:#fbbf24}.summary .pct.rough{color:#f87171}
+.summary .detail{color:#94a3b8;font-size:.85rem;margin:8px 0}
+.cat-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:13px}
+.cat-table th{text-align:left;padding:6px 10px;background:#1e293b;color:#60a5fa;border-bottom:1px solid #334155}
+.cat-table td{padding:6px 10px;border-bottom:1px solid #1e293b}
+.restart-btn{margin-top:16px;padding:12px 28px;background:#1e40af;color:#93c5fd;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.restart-btn:hover{background:#1d4ed8}
+.review-btn{margin-top:10px;padding:12px 28px;background:transparent;border:2px solid #ef4444;color:#f87171;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
+.review-btn:hover{background:#450a0a}
+@media(max-width:600px){body{padding:8px}.card{padding:16px}.q-text{font-size:1rem}.opt-btn{padding:10px 14px;font-size:.9rem}}
+
+.follow-toggle{display:flex;gap:8px;justify-content:center;margin-bottom:10px;flex-wrap:wrap}
+.follow-btn,.reask-btn{padding:6px 16px;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;border:2px solid #475569;background:#1e293b;color:#94a3b8;transition:all .2s}
+.follow-btn.active{border-color:#f59e0b;color:#fbbf24;background:#451a03}
+.reask-btn.active{border-color:#ef4444;color:#fff;background:#dc2626;font-size:1rem;padding:10px 24px;animation:reaskBtnPulse 1s ease-in-out infinite;box-shadow:0 0 16px rgba(239,68,68,.6)}
+@keyframes reaskBtnPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.reask-banner{display:none;text-align:center;padding:18px 20px;background:linear-gradient(135deg,#7f1d1d,#991b1b);border:3px solid #ef4444;border-radius:14px;margin-bottom:14px;color:#fff;font-size:1.15rem;font-weight:800;letter-spacing:.5px;animation:reaskPulse 1.2s ease-in-out infinite}
+@keyframes reaskPulse{0%,100%{box-shadow:0 0 8px rgba(239,68,68,.4),inset 0 0 6px rgba(239,68,68,.15)}50%{box-shadow:0 0 28px rgba(239,68,68,.8),inset 0 0 12px rgba(239,68,68,.25)}}
+.reask-banner button{margin-left:14px;padding:10px 22px;background:#ef4444;color:#fff;border:none;border-radius:10px;font-weight:800;cursor:pointer;font-size:1rem;text-transform:uppercase;letter-spacing:.5px}
+.reask-banner button:hover{background:#dc2626;transform:scale(1.05)}
+.card.reask-glow{border:3px solid #ef4444!important;box-shadow:0 0 20px rgba(239,68,68,.5),inset 0 0 8px rgba(239,68,68,.1)!important;animation:cardReaskPulse 1.5s ease-in-out infinite}
+@keyframes cardReaskPulse{0%,100%{box-shadow:0 0 12px rgba(239,68,68,.3),inset 0 0 4px rgba(239,68,68,.08)}50%{box-shadow:0 0 30px rgba(239,68,68,.7),inset 0 0 12px rgba(239,68,68,.15)}}
+.reask-card-badge{display:block;text-align:center;padding:10px 16px;margin:-8px -8px 14px -8px;background:linear-gradient(135deg,#7f1d1d,#991b1b);border-radius:10px 10px 0 0;color:#fff;font-size:1.1rem;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.audio-bar{position:sticky;top:0;z-index:100;background:linear-gradient(135deg,#1e293b,#0f172a);border:2px solid #3b82f6;border-radius:0 0 14px 14px;padding:10px 16px;margin:-12px -12px 14px -12px;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.audio-bar audio{width:100%;height:36px;border-radius:8px}
+.audio-bar .audio-info{display:flex;flex-direction:column;align-items:center;margin-top:8px;gap:8px}
+.audio-bar .timestamp-badge{background:#1e40af;color:#93c5fd;padding:4px 12px;border-radius:8px;font-size:.85rem;font-weight:700;white-space:nowrap}
+.skip-btns{display:flex;gap:6px;align-items:center;justify-content:center;flex-wrap:wrap}
+.btn-skip{padding:5px 10px;background:#334155;color:#cbd5e1;border:1px solid #475569;border-radius:6px;font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.btn-skip:hover{background:#475569;color:#fff}
+.btn-play-here{padding:8px 20px;background:#059669;color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap}
+.audio-modes{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-play-here:hover{background:#047857}
+.audio-auto-label{color:#94a3b8;font-size:.78rem;display:flex;align-items:center;gap:4px}
+.audio-auto-label input{width:16px;height:16px}
+
+/* Speed presets */
+.speed-block{margin-top:8px;padding-top:6px;border-top:1px solid rgba(100,116,139,.25)}
+.speed-top{display:flex;align-items:center;gap:6px;justify-content:center;flex-wrap:wrap}
+.speed-label{color:#94a3b8;font-size:.72rem;font-weight:700}
+.speed-val{background:#1e293b;color:#60a5fa;padding:2px 10px;border-radius:6px;font-size:.8rem;font-weight:800;min-width:54px;text-align:center;display:inline-block;border:1px solid #334155}
+.btn-speed-pm{padding:3px 10px;background:#0f172a;color:#94a3b8;border:1px solid #334155;border-radius:6px;font-size:.7rem;font-weight:700;cursor:pointer;min-width:42px}
+.btn-speed-pm:hover{background:#1e293b;color:#cbd5e1}
+.speed-presets{display:flex;gap:3px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.btn-speed-preset{padding:3px 8px;background:#1e293b;color:#cbd5e1;border:1px solid #334155;border-radius:6px;font-size:.7rem;font-weight:700;cursor:pointer;min-width:36px}
+.btn-speed-preset:hover{background:#334155}
+.btn-speed-preset.active{background:#3b82f6;color:#fff;border-color:#60a5fa}
+
+/* Transcript panel */
+.transcript-toggle{margin-top:8px;display:flex;justify-content:center}
+.btn-transcript{padding:5px 14px;background:#1e293b;color:#94a3b8;border:1px solid #334155;border-radius:6px;font-size:.75rem;font-weight:700;cursor:pointer}
+.btn-transcript:hover{background:#334155;color:#cbd5e1}
+.btn-transcript.active{background:#1e40af;color:#bfdbfe;border-color:#3b82f6}
+.transcript-box{margin-top:8px;padding:10px 14px;background:#0f172a;border:1px solid #334155;border-radius:8px;color:#cbd5e1;font-size:.82rem;line-height:1.5;max-height:160px;overflow-y:auto;display:none}
+.transcript-box.show{display:block}
+.transcript-box strong{color:#60a5fa;font-size:.78rem;letter-spacing:.5px;text-transform:uppercase}
+.transcript-box .t-highlight{color:#fbbf24;font-weight:700;background:rgba(251,191,36,.08);padding:1px 4px;border-radius:3px}
+</style>
+
+<style id="audio-bar-minimize-css">
+/* audio-bar minimize/expand */
+.audio-bar { position: relative; }
+.audio-bar.collapsed { padding: 4px 8px !important; min-height: 0 !important; }
+.audio-bar.collapsed .part-selector,
+.audio-bar.collapsed audio,
+.audio-bar.collapsed .skip-btns,
+.audio-bar.collapsed .audio-modes,
+.audio-bar.collapsed .speed-block,
+.audio-bar.collapsed .transcript-highlight-panel,
+.audio-bar.collapsed .audio-info > *:not(.timestamp-badge):not(.btn-minimize-audio) {
+  display: none !important;
+}
+.audio-bar.collapsed .audio-info {
+  margin: 0 !important; gap: 6px !important; padding: 0 !important;
+  display: flex; align-items: center; justify-content: flex-start;
+}
+.btn-minimize-audio {
+  position: absolute; top: 4px; right: 8px;
+  background: rgba(255,255,255,0.08); color: #cbd5e1;
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 4px;
+  width: 28px; height: 24px; cursor: pointer; font-size: 13px; line-height: 1;
+  z-index: 10; padding: 0;
+}
+.btn-minimize-audio:hover { background: rgba(255,255,255,0.18); color: #fff; }
+.audio-bar.collapsed .btn-minimize-audio {
+  position: static; margin-left: 8px;
+}
+</style>
+
+
+<style id="ga0202-cleanup-v9">
+/* Hide legacy FAB Lecture Final hub buttons (we have our own fab201-back-to-hub) */
+.fab-back-to-hub-btn,
+.sh-fab,
+.sh-back-to-start-fab,
+button[onclick*="fabBackToHub"],
+button[onclick*="shBackToStart"] { display: none !important; }
+/* Make sure draw button + AI button don't overlap */
+.fab-stack { bottom: 90px !important; right: 24px !important; z-index: 9999 !important; }
+.fab-stack button { pointer-events: auto !important; }
+#draw-btn { z-index: 10000 !important; }
+.draw-toolbar { z-index: 10001 !important; bottom: 158px !important; right: 90px !important; }
+.draw-canvas { z-index: 9990 !important; }
+#ai-btn, #ai-aug-btn, #ai-modal { display: none !important; }
+</style>
+<script id="ga0202-cleanup-v9-js">
+// Override legacy redirect functions to point to OUR hub instead
+window.fabBackToHub = function() { window.location.href = 'ga-0202-m08-eye-hub_PENDING_REVIEW.html'; };
+window.shBackToStart = function() { window.location.href = 'ga-0202-m08-eye-hub_PENDING_REVIEW.html'; };
+</script>
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+<style id="hide-audio-panel-mc-only">
+.static-audio-bar { display: none !important; }
+#static-audio-bar { display: none !important; }
+</style>
+</head>
+<body>
+
+<a id="fab201-back-to-hub" href="ga-0202-m08-eye-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:100001;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to Eye Hub</a>
+<style id="static-audio-panel-css">
+.static-audio-bar { background: linear-gradient(135deg,#1e293b,#0f172a); border:2px solid #3b82f6; border-radius:0 0 14px 14px; padding:10px 16px; margin:0 0 14px; box-shadow:0 4px 16px rgba(0,0,0,.5); z-index:100; }
+.static-audio-bar audio { width:100%; height:36px; border-radius:8px; }
+.static-audio-bar .audio-info { display:flex; flex-direction:column; align-items:center; margin-top:8px; gap:8px; }
+.static-audio-bar .timestamp-badge { background:#1e40af; color:#93c5fd; padding:4px 12px; border-radius:8px; font-size:.85rem; font-weight:700; white-space:nowrap; }
+.static-audio-bar .skip-btns { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
+.static-audio-bar .btn-skip { padding:5px 10px; background:#334155; color:#cbd5e1; border:1px solid #475569; border-radius:6px; font-size:.75rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+.static-audio-bar .btn-skip:hover { background:#475569; color:#fff; }
+.static-audio-bar .btn-play-here { padding:5px 14px; background:#059669; color:#fff; border:1px solid #10b981; border-radius:6px; font-size:.78rem; font-weight:700; cursor:pointer; white-space:nowrap; }
+.static-audio-bar .btn-play-here:hover { background:#047857; }
+.static-audio-bar .audio-modes { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; font-size:.75rem; color:#cbd5e1; }
+.static-audio-bar .audio-auto-label { display:inline-flex; align-items:center; gap:4px; cursor:pointer; }
+.static-audio-bar .speed-block { display:flex; flex-direction:column; gap:6px; align-items:center; padding:6px; background:rgba(15,23,42,0.4); border-radius:8px; width:100%; max-width:520px; }
+.static-audio-bar .speed-top { display:flex; align-items:center; gap:8px; }
+.static-audio-bar .speed-label { color:#94a3b8; font-size:.75rem; font-weight:700; }
+.static-audio-bar .speed-val { color:#22d3ee; font-weight:800; font-size:.92rem; padding:2px 8px; background:#0f172a; border-radius:6px; min-width:54px; text-align:center; }
+.static-audio-bar .btn-speed-pm { padding:3px 8px; background:#334155; color:#cbd5e1; border:1px solid #475569; border-radius:5px; font-size:.7rem; font-weight:700; cursor:pointer; }
+.static-audio-bar .btn-speed-pm:hover { background:#475569; }
+.static-audio-bar .speed-presets { display:flex; gap:4px; flex-wrap:wrap; justify-content:center; }
+.static-audio-bar .btn-speed-preset { padding:3px 8px; background:#1e293b; color:#94a3b8; border:1px solid #334155; border-radius:5px; font-size:.72rem; font-weight:600; cursor:pointer; }
+.static-audio-bar .btn-speed-preset:hover { background:#334155; color:#fff; }
+.static-audio-bar .btn-speed-preset.active { background:#22d3ee; color:#0f172a; border-color:#67e8f9; }
+.static-audio-bar .transcript-toggle { display:flex; justify-content:center; }
+.static-audio-bar .btn-transcript { padding:5px 14px; background:#312e81; color:#a5b4fc; border:1px solid #4338ca; border-radius:6px; font-size:.78rem; font-weight:700; cursor:pointer; }
+.static-audio-bar .btn-transcript:hover { background:#3730a3; color:#c7d2fe; }
+.static-audio-bar .btn-transcript.active { background:#4338ca; color:#fff; }
+.static-audio-bar .transcript-box { display:none; max-width:100%; max-height:200px; overflow-y:auto; padding:10px; background:#0f172a; border:1px solid #334155; border-radius:8px; font-size:.78rem; color:#cbd5e1; line-height:1.5; }
+.static-audio-bar .transcript-box.show { display:block; }
+.static-audio-bar .t-highlight { background:rgba(34,211,238,0.15); color:#67e8f9; padding:1px 4px; border-radius:3px; font-weight:600; }
+</style>
+<div class="static-audio-bar" id="static-audio-bar">
+<audio id="mk-audio-orig" controls preload="none"><source src="https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L04.mp3" type="audio/mpeg">Audio not available</audio>
+<div class="audio-info">
+<span class="timestamp-badge" id="ts-badge">⏱ --:--</span>
+<div class="skip-btns">
+<button class="btn-skip" onclick="skipAudio(-30)" title="Back 30s">⏪ 30</button>
+<button class="btn-skip" onclick="skipAudio(-10)" title="Back 10s">⏪ 10</button>
+<button class="btn-play-here" onclick="playFromHere()">▶ Play From Here</button>
+<button class="btn-skip" onclick="skipAudio(10)" title="Forward 10s">10 ⏩</button>
+<button class="btn-skip" onclick="skipAudio(30)" title="Forward 30s">30 ⏩</button>
+</div>
+<div class="audio-modes">
+<label class="audio-auto-label"><input type="radio" name="amode" value="seek" onchange="setAudioMode('seek')"> Seek per Q</label>
+<label class="audio-auto-label"><input type="radio" name="amode" value="continuous" checked onchange="setAudioMode('continuous')"> Continuous play</label>
+<label class="audio-auto-label"><input type="radio" name="amode" value="off" onchange="setAudioMode('off')"> Audio off</label>
+</div>
+<div class="speed-block">
+<div class="speed-top">
+<span class="speed-label">Speed</span>
+<button class="btn-speed-pm" onclick="fabSetSpeed(fabCurrentSpeed - 0.05)">&minus;.05</button>
+<span class="speed-val" id="speed-display">1.00x</span>
+<button class="btn-speed-pm" onclick="fabSetSpeed(fabCurrentSpeed + 0.05)">+.05</button>
+</div>
+<div class="speed-presets">
+<button class="btn-speed-preset" onclick="fabSetSpeed(0.5)">0.5x</button>
+<button class="btn-speed-preset" onclick="fabSetSpeed(0.75)">0.75x</button>
+<button class="btn-speed-preset" onclick="fabSetSpeed(0.9)">0.9x</button>
+<button class="btn-speed-preset active" onclick="fabSetSpeed(1.0)">1x</button>
+<button class="btn-speed-preset" onclick="fabSetSpeed(1.1)">1.1x</button>
+<button class="btn-speed-preset" onclick="fabSetSpeed(1.25)">1.25x</button>
+<button class="btn-speed-preset" onclick="fabSetSpeed(1.5)">1.5x</button>
+<button class="btn-speed-preset" onclick="fabSetSpeed(2.0)">2x</button>
+</div>
+</div>
+<div class="transcript-toggle">
+<button class="btn-transcript" id="btn-transcript" onclick="fabToggleTranscript()">📜 Transcript</button>
+</div>
+<div class="transcript-box" id="transcript-box"></div>
+</div>
+</div>
+
+
+<div class="container" id="app"></div>
+<script>
+const BANK=[
+{q:"A 62-year-old smoker has a tumor at the apex of the right lung. On the right he shows partial drooping of the upper lid, a constricted pupil, no sweating, and facial flushing. What is the underlying lesion?",o:["A third (oculomotor) nerve palsy on the right", "An optic nerve compression on the right", "Compression of the cervical sympathetic chain on the right", "A facial (seventh) nerve palsy on the right"],c:2,cat:"Horner Syndrome",r:["A CN III palsy gives a COMPLETE ptosis, a DILATED pupil, and a down-and-out eye, not miosis with anhidrosis.", "The optic nerve is purely sensory (vision); damaging it causes blindness, not ptosis, miosis, anhidrosis, and flushing.", "Correct. Dr. Maini calls this Horner syndrome from sympathetic failure on one side; a Pancoast (lung apex) tumor compresses the cervical sympathetic chain, so its ascending fibers never reach the face.", "CN VII controls the muscles of facial expression; it does not carry the sympathetic fibers to the pupil, sweat glands, and vessels."],source:"Dr. Maini - Lecture 19 (The Orbit and Its Contents), ~44:00-45:00",quote:"Horner syndrome is when there is sympathetic failure on one side of the face. A very common cause is a Pancoast tumor of the lung apex compressing the cervical sympathetic chain.",obj:"Horner Syndrome",hint:"The tumor sits on the lung apex and squeezes the sympathetic chain heading up to the head and eye."},
+{q:"Dr. Maini lists the features of Horner syndrome. Which of the following is NOT one of them?",o:["Mydriasis (a dilated pupil)", "Partial ptosis", "Anhidrosis (loss of sweating on that side)", "Enophthalmos (a sunken eyeball)"],c:0,cat:"Horner Syndrome",r:["Correct. Horner shows MIOSIS (constriction) because the sympathetic dilator fails; a dilated pupil would require intact sympathetics, so mydriasis is NOT a feature.", "Partial ptosis IS a feature, from loss of the sympathetic superior tarsal (Muller) muscle.", "Anhidrosis IS a feature; the sympathetic supply to the facial sweat glands is lost.", "Enophthalmos IS the fifth (poorly explained) feature Dr. Maini lists, the opposite of exophthalmos."],source:"Dr. Maini - Lecture 19, ~41:00-46:00",quote:"These five belong to Horner syndrome: partial ptosis, miosis, anhidrosis, flushing of the face, and enophthalmos.",obj:"Horner Syndrome",hint:"Sympathetics DILATE the pupil; if they fail, the pupil does the opposite."},
+{q:"In Horner syndrome the ptosis is only PARTIAL, not complete. Loss of which muscle produces this partial droop of the upper lid?",o:["Orbicularis oculi", "The skeletal (main) part of levator palpebrae superioris", "Inferior tarsal muscle", "Superior tarsal (Muller) muscle"],c:3,cat:"Horner Syndrome",r:["Orbicularis oculi CLOSES the eye (CN VII); its weakness prevents lid closure, it does not cause drooping.", "The skeletal part of levator palpebrae superioris runs on CN III and stays intact in Horner, which is exactly why the ptosis is only partial.", "The inferior tarsal muscle relates to the lower lid; the drooping upper lid is due to the superior tarsal muscle.", "Correct. The superior tarsal (Muller) muscle is the smooth, sympathetically driven slip of the upper lid; losing its sympathetic supply gives partial ptosis while the CN III part still lifts the lid."],source:"Dr. Maini - Lecture 19, ~38:00-41:00",quote:"Part of levator palpebrae superioris is smooth muscle, the superior tarsal muscle, supplied only by sympathetic fibers. Sympathetic failure gives partial ptosis because the skeletal part on the third nerve is intact.",obj:"Superior Tarsal (Muller) Muscle",hint:"The tiny smooth-muscle slip of the upper-lid elevator rides on the sympathetics."},
+{q:"A patient has complete drooping of one upper lid. When the lid is lifted, the eye sits deviated down-and-out with a fixed, dilated pupil. Which nerve is damaged?",o:["Trochlear nerve (CN IV)", "Oculomotor nerve (CN III)", "Abducens nerve (CN VI)", "Ophthalmic nerve (V1)"],c:1,cat:"Oculomotor (CN III) Palsy",r:["CN IV supplies only the superior oblique; its palsy gives vertical diplopia with no ptosis and no pupil change.", "Correct. CN III supplies levator palpebrae (ptosis), the superior, inferior, and medial recti plus inferior oblique (so the spared lateral rectus and superior oblique pull the eye down-and-out), and the parasympathetic to sphincter pupillae (dilated pupil).", "CN VI supplies only lateral rectus; its palsy leaves the eye turned IN, with no ptosis and a normal pupil.", "V1 is purely sensory; it produces no ptosis, no eye deviation, and no pupil change."],source:"Dr. Maini - Lecture 21 (Testing of Eye Muscles, Nerves, Ciliary Ganglion), ~13:00-15:00",quote:"Oculomotor nerve supplies most of the extraocular muscles: levator palpebrae superioris, medial rectus, superior rectus, inferior rectus, and inferior oblique.",obj:"Oculomotor Nerve Functions",hint:"One nerve runs the lid, most eye movements, AND pupil constriction; lose it and the eye drifts down-and-out with a blown pupil."},
+{q:"In a complete oculomotor (CN III) palsy the eyeball rests 'down and out.' Which two still-innervated muscles produce that resting position?",o:["Superior rectus and medial rectus", "Inferior rectus and inferior oblique", "Lateral rectus and inferior rectus", "Lateral rectus and superior oblique"],c:3,cat:"Oculomotor (CN III) Palsy",r:["Both superior rectus and medial rectus are CN III muscles, so both are paralyzed in the palsy.", "Both inferior rectus and inferior oblique are CN III muscles and are paralyzed.", "Inferior rectus is CN III (paralyzed); only the lateral rectus is spared here, not both.", "Correct. Lateral rectus (CN VI, abducts) and superior oblique (CN IV, down-and-out) are the only spared muscles, so their unopposed pull sets the eye down and out. Recall SO4, LR6, all others by CN III."],source:"Dr. Maini - Lecture 20 (The Orbit, contd), ~1:21:00 and Lecture 21, ~15:00",quote:"SO4, LR6, all others by third nerve.",obj:"Extraocular Muscle Innervation",hint:"Only the muscles run by CN IV and CN VI survive a CN III palsy."},
+{q:"A patient's right eye cannot move laterally past the midline and sits turned inward at rest, with horizontal double vision that worsens looking to the right. Which nerve or muscle is affected?",o:["CN VI (abducens) supplying lateral rectus", "CN III (oculomotor) supplying medial rectus", "CN IV (trochlear) supplying superior oblique", "CN II (optic nerve)"],c:0,cat:"Trochlear and Abducens Palsy",r:["Correct. Lateral rectus (CN VI) abducts the eye; its palsy leaves the eye adducted (turned in) and unable to move out, giving horizontal diplopia worse on gaze toward that side.", "Medial rectus adducts; if it failed the eye would drift OUT, not in.", "Superior oblique (CN IV) moves the eye down-and-out; its palsy gives VERTICAL diplopia, classically going down stairs, not a failure of abduction.", "The optic nerve carries vision (CN II); it does not move the eye."],source:"Dr. Maini - Lecture 21, ~24:00 and Lecture 20, ~1:21:00",quote:"Abducens, lateral rectus, LR6.",obj:"Abducens Nerve / Lateral Rectus",hint:"The muscle that pulls the eye OUTWARD has failed, so the eye sits pulled in."},
+{q:"A patient reports vertical double vision and difficulty walking DOWN stairs; the affected eye cannot look down well when it is turned in (adducted). Which muscle and nerve are involved?",o:["Inferior oblique / CN III", "Superior rectus / CN III", "Superior oblique / CN IV", "Lateral rectus / CN VI"],c:2,cat:"Trochlear and Abducens Palsy",r:["Inferior oblique elevates and turns the eye up-and-out; its palsy impairs UPgaze in adduction, not downgaze.", "Superior rectus elevates the eye; its palsy impairs upgaze, not descending stairs.", "Correct. The superior oblique (trochlear, CN IV) turns the eye down and out; when the eye is adducted it acts as a depressor, so its palsy impairs downgaze in adduction (trouble on stairs) with vertical diplopia.", "Lateral rectus produces horizontal abduction, not the vertical downgaze deficit described."],source:"Dr. Maini - Lecture 20, ~1:25:00-1:26:00 and Lecture 21, ~06:00",quote:"Superior oblique passes through the trochlea and rotates the eyeball down and laterally, down and out.",obj:"Superior Oblique / Trochlear Nerve",hint:"The muscle that threads the pulley (trochlea) aims the eye down-and-out."},
+{q:"To clinically ISOLATE the right superior rectus on the H-test, which way do you ask the patient to look?",o:["In (adduct) and down", "In (adduct) and up", "Out (abduct) and down", "Out (abduct) and up"],c:3,cat:"Extraocular Muscle Testing",r:["In-and-down is the testing position for the superior oblique, not the superior rectus.", "In-and-up is the muscle's ACTION (up-and-in), but you cannot isolate it that way.", "Out-and-down isolates the inferior rectus.", "Correct. With the eye abducted by lateral rectus, the superior rectus becomes a pure elevator, so you ask the patient to look out and up. Testing the recti starts with abduction."],source:"Dr. Maini - Lecture 21, ~00:30-05:00",quote:"For testing you ask the patient to look laterally, abduct, and look up. That is the testing of superior rectus.",obj:"Clinical Testing of Extraocular Muscles",hint:"Testing the recti = abduct first; elevation/depression stays the same as the action."},
+{q:"On the H-test, to isolate the inferior oblique you ask the patient to look which way?",o:["Out and up", "In (adduct) and up", "Out and down", "In (adduct) and down"],c:1,cat:"Extraocular Muscle Testing",r:["Out-and-up isolates the superior rectus.", "Correct. To test the obliques you adduct the eye first; the inferior oblique still elevates, so the patient looks in and up.", "Out-and-down isolates the inferior rectus.", "In-and-down isolates the superior oblique."],source:"Dr. Maini - Lecture 21, ~03:00-06:00",quote:"For inferior oblique testing you ask the patient to look medial and up. To test the obliques you ask the patient to adduct, medially rotate.",obj:"Clinical Testing of Extraocular Muscles",hint:"Obliques = adduct first; the inferior oblique still elevates."},
+{q:"Shine light in the RIGHT eye: neither pupil constricts. Shine light in the LEFT eye: both pupils constrict. Which structure is damaged?",o:["Right optic nerve (CN II, the afferent limb)", "Right oculomotor nerve (CN III, the efferent limb)", "Left optic nerve (CN II)", "Left oculomotor nerve (CN III)"],c:0,cat:"Pupillary Light Reflex",r:["Correct. A dead afferent (right optic nerve) means light in the right eye reaches no center, so neither pupil reacts; yet the right pupil still constricts when the left eye is lit, because its CN III is intact.", "A right CN III lesion would abolish the RIGHT pupil's constriction to any light, but the left pupil would still react when the right eye is lit.", "The left optic nerve is intact, since light in the left eye constricts both pupils.", "The left CN III is intact, since the left pupil constricts when the left eye is lit."],source:"Dr. Maini - Lecture 20, ~1:06:00-1:07:00",quote:"If the optic nerve of the right eye is not functioning and you shine light in the right eye, you get constriction in neither eye.",obj:"Light Reflex - Afferent Defect",hint:"A blind (afferent) eye cannot SEND the signal, so its light triggers nothing; the other eye still drives both pupils."},
+{q:"Whichever eye you illuminate, the right pupil constricts but the left pupil NEVER constricts (the left eye still sees normally). Which nerve is damaged?",o:["Right optic nerve (CN II)", "Left optic nerve (CN II)", "Pretectal nucleus bilaterally", "Left oculomotor nerve (CN III)"],c:3,cat:"Pupillary Light Reflex",r:["The right optic nerve is intact, since lighting the right eye works.", "If the left optic nerve were out, lighting the left eye would fail to constrict either pupil, but lighting the right eye would still constrict both.", "Bilateral pretectal loss would abolish ALL responses, not just the left pupil.", "Correct. The left CN III (efferent) cannot drive the left sphincter pupillae, so the left pupil never constricts regardless of which eye is lit; the left eye's vision (afferent) is intact."],source:"Dr. Maini - Lecture 20, ~1:07:00-1:08:00",quote:"If the third nerve of the left eye is gone, there will be constriction in the right eye but no constriction in the left eye.",obj:"Light Reflex - Efferent Defect",hint:"A dead motor nerve means that pupil can never move, no matter which eye you light."},
+{q:"In the pupillary light reflex, which pathway carries the MOTOR (efferent) response that constricts the pupil?",o:["Optic nerve to the lateral geniculate body", "Sympathetic from T1 to the superior cervical ganglion to dilator pupillae", "Oculomotor (parasympathetic) to the ciliary ganglion, then short ciliary nerves to sphincter pupillae", "Ophthalmic nerve to the trigeminal ganglion to sphincter pupillae"],c:2,cat:"Pupillary Light Reflex",r:["The optic nerve is the afferent (sensory) limb, and the lateral geniculate is for conscious vision, not the reflex motor limb.", "That sympathetic pathway DILATES the pupil, the opposite of the light reflex.", "Correct. From Edinger-Westphal, CN III preganglionic parasympathetics reach the ciliary ganglion, then short ciliary nerves drive the sphincter pupillae to constrict the pupil.", "V1 and the trigeminal ganglion are sensory (the corneal-reflex afferent), not the pupilloconstrictor motor path."],source:"Dr. Maini - Lecture 20, ~1:03:00-1:06:00",quote:"From the Edinger-Westphal nucleus, through oculomotor nerve, ciliary ganglion, short ciliary nerve, pupilloconstrictor muscle, the response is pupillary constriction.",obj:"Light Reflex Pathway",hint:"Constriction is parasympathetic: think CN III and the ciliary ganglion."},
+{q:"A patient shifts gaze from a far object to a near one. Which set of changes is the accommodation (near) response?",o:["Divergence, dilation, and lens flattening", "Convergence, constriction, and increased lens convexity", "Convergence, dilation, and lens flattening", "Divergence, constriction, and increased lens convexity"],c:1,cat:"Accommodation and Near Reflex",r:["Divergence, dilation, and a flat lens are the FAR-vision settings, not the near response.", "Correct. The three C's of accommodation are convergence (medial recti), pupillary constriction, and increased convexity of the lens for near focus.", "The eyes converge (not diverge) and the pupil constricts (not dilates) for near vision.", "The eyes converge, not diverge, when focusing on a near target."],source:"Dr. Maini - Lecture 20, ~1:09:00-1:13:00",quote:"There are three changes: convergence of the eyeball, pupillary constriction, and increased convexity of the lens.",obj:"Accommodation Reflex",hint:"Three C's for close-up focusing: converge, constrict, convex."},
+{q:"When the ciliary muscle contracts to focus on a near object, what happens to the suspensory ligament and the lens?",o:["The ligament tightens and the lens flattens", "The ligament tightens and the lens thickens", "The ligament relaxes and the lens flattens", "The ligament relaxes and the lens thickens (becomes more convex)"],c:3,cat:"Accommodation and Near Reflex",r:["A tight ligament and flat lens is the RESTING (far-vision) state when the ciliary muscle is relaxed.", "A tight ligament would flatten, not thicken, the lens.", "A relaxed ligament lets the lens thicken, not flatten.", "Correct. Ciliary contraction slackens the suspensory ligament, letting the elastic lens round up (thicken and become more convex) for near focus."],source:"Dr. Maini - Lecture 21, ~26:00-27:00 and Lecture 20, ~1:10:00-1:12:00",quote:"When it contracts it reduces the tension on the suspensory ligament of the lens, and then the lens thickens.",obj:"Ciliary Muscle / Accommodation",hint:"Contracting the ring loosens the guy-wires, so the lens can bulge."},
+{q:"A patient's small pupils constrict briskly when focusing on a near target but do NOT constrict to light. What is this, and its classic cause?",o:["Argyll Robertson pupil; syphilis", "Horner syndrome; Pancoast tumor", "Oculomotor palsy; aneurysm", "Adie tonic pupil; a viral cause"],c:0,cat:"Accommodation and Near Reflex",r:["Correct. Argyll Robertson pupil is light-near dissociation: the light reflex is lost but accommodation is preserved, classically from syphilis, as Dr. Maini describes.", "Horner gives miosis with ptosis and anhidrosis, not selective loss of the light reflex with preserved accommodation.", "A CN III palsy gives a dilated, unreactive pupil with ptosis and a down-and-out eye, not a small pupil that accommodates.", "Dr. Maini names Argyll Robertson (syphilis) for this light-near dissociation, not an Adie tonic pupil."],source:"Dr. Maini - Lecture 20, ~1:15:00-1:16:00",quote:"Argyll Robertson pupil is a condition where light reflex is lost but accommodation reflex is preserved. It is seen in syphilis.",obj:"Argyll Robertson Pupil",hint:"Accommodates but does not react to light: a classic syphilis sign."},
+{q:"Trace the correct drainage path of tears from the eye surface to the nose.",o:["Nasolacrimal duct, then lacrimal sac, then punctum, then canaliculi", "Canaliculi, then punctum, then lacrimal lake, then nasal cavity", "Lacrimal punctum, then canaliculi, then lacrimal sac, then nasolacrimal duct, then inferior meatus", "Lacrimal gland, then punctum, then nasolacrimal duct, then superior meatus"],c:2,cat:"Lacrimal and Eyelid Adnexa",r:["This reverses the flow; drainage goes toward the nose, not back to the punctum.", "The punctum is the INLET, so it comes before the canaliculi, not after.", "Correct. Tears enter the punctum on each papilla, run through the canaliculi to the lacrimal sac, then the nasolacrimal duct empties into the inferior meatus of the nose.", "The nasolacrimal duct opens into the INFERIOR meatus, not the superior, and the canaliculi and sac are skipped here."],source:"Dr. Maini - Lecture 19, ~27:00-30:00 and Lecture 20, ~06:00",quote:"Through the lacrimal punctum, tears are drained by two lacrimal canals to the sac, and through the nasolacrimal duct into the inferior meatus of the nasal cavity.",obj:"Lacrimal Apparatus / Tear Drainage",hint:"Start at the tiny pore (punctum) and finish under the inferior turbinate."},
+{q:"After an untreated conjunctivitis, a patient develops a red, painful swelling at the MEDIAL angle of the eye with watering. Which structure is inflamed?",o:["Lacrimal gland (dacryoadenitis)", "Lacrimal sac (dacryocystitis)", "Meibomian gland (chalazion)", "Ciliary body"],c:1,cat:"Lacrimal and Eyelid Adnexa",r:["Dacryoadenitis inflames the lacrimal GLAND (superolateral, under the frontal bone) and is often autoimmune, not a medial-angle swelling.", "Correct. The lacrimal SAC sits at the medial angle; infection/blockage there is dacryocystitis, with pain and tearing at the inner corner.", "A chalazion is a lump ON the eyelid from a blocked Meibomian gland, not a medial-angle sac swelling.", "The ciliary body is inside the eye and secretes aqueous humor; it is unrelated to a medial-angle swelling."],source:"Dr. Maini - Lecture 20, ~06:00-09:00",quote:"Dacryocystitis is inflammation of the lacrimal sac, with severe pain at the location of the lacrimal sac.",obj:"Dacryocystitis",hint:"'Cyst' means sac; the sac lives at the inner corner of the eye."},
+{q:"A patient with no tear secretion develops corneal drying and ulcers. Why is the cornea so vulnerable, and what normally nourishes it?",o:["It is highly vascular; supplied by the central retinal artery", "It is nourished only by the choroid", "It makes its own aqueous humor for nutrition", "It is avascular; nourished by the tear film in front and aqueous humor behind"],c:3,cat:"Lacrimal and Eyelid Adnexa",r:["The cornea is AVASCULAR (transparent); the central retinal artery supplies the retina, not the cornea.", "The choroid nourishes the outer retina, not the cornea.", "Aqueous humor is made by the ciliary processes, not the cornea.", "Correct. Being avascular, the cornea depends on the tear film anteriorly and aqueous humor posteriorly (plus atmospheric oxygen); losing tears (xerophthalmia) causes drying and ulceration."],source:"Dr. Maini - Lecture 19, ~28:00-31:00 and Lecture 20, ~24:00-25:00",quote:"Cornea is avascular; it gets its nutrition from the lacrimal fluid anteriorly and aqueous humor posteriorly.",obj:"Cornea Nutrition / Xerophthalmia",hint:"No blood vessels means it lives off the tears in front and the fluid behind."},
+{q:"A firm lump WITHIN the eyelid (not at the lash margin) needs a minor surgical scoop to remove. Which gland is involved and what is the lesion called?",o:["Gland of Zeis; external hordeolum (stye)", "Meibomian (tarsal) gland; chalazion (internal hordeolum)", "Gland of Moll; stye", "Lacrimal gland; dacryoadenitis"],c:1,cat:"Lacrimal and Eyelid Adnexa",r:["The gland of Zeis is a sebaceous gland at the lash margin; its inflammation gives an EXTERNAL hordeolum (stye) at the margin, which drains on its own.", "Correct. A blocked/inflamed Meibomian (tarsal) gland deep in the tarsal plate gives a chalazion (internal hordeolum) ON the lid, which often needs surgical removal because of its narrow outlet.", "The gland of Moll is a sweat gland at the margin; it also gives a marginal stye, not a lump within the lid.", "The lacrimal gland is superolateral in the orbit, not within the eyelid margin."],source:"Dr. Maini - Lecture 19, ~22:00-25:00 and Lecture 20, ~13:00-14:00",quote:"If the tarsal (Meibomian) glands get inflamed you get an internal hordeolum or chalazion on the eyelid, not at the margin.",obj:"Hordeolum vs Chalazion",hint:"Deep in the tarsal plate = Meibomian = chalazion, seen on the lid, not the margin."},
+{q:"A patient has raised intraocular pressure with headache and blurred vision. Blockage of which drainage structure produces this glaucoma?",o:["The nasolacrimal duct", "The central retinal vein", "The canal of Schlemm (sinus venosus sclerae) at the iridocorneal angle", "The ciliary processes"],c:2,cat:"Glaucoma and Aqueous Humor",r:["The nasolacrimal duct drains TEARS to the nose; it has nothing to do with intraocular pressure.", "Central retinal vein occlusion causes retinal hemorrhages, not the aqueous-outflow glaucoma described.", "Correct. Aqueous humor drains at the iridocorneal angle into the canal of Schlemm; blocking it backs up aqueous and raises intraocular pressure, causing glaucoma.", "The ciliary processes MAKE aqueous humor; blocking production would lower, not raise, the pressure."],source:"Dr. Maini - Lecture 20, ~49:00-52:00",quote:"If the canal of Schlemm is blocked there will be accumulation of aqueous humor that increases intraocular tension, leading to glaucoma.",obj:"Aqueous Drainage / Glaucoma",hint:"The angle between iris and cornea houses the drain; block it and pressure climbs."},
+{q:"Where is aqueous humor produced, and what is its normal flow before it drains?",o:["Ciliary processes, then posterior chamber, then through the pupil to the anterior chamber, then the canal of Schlemm", "Lacrimal gland, then anterior chamber, then vitreous, then the canal of Schlemm", "Ciliary processes, then vitreous chamber, then the retina", "Iris, then posterior chamber, then the optic disc"],c:0,cat:"Glaucoma and Aqueous Humor",r:["Correct. The ciliary processes secrete aqueous into the posterior chamber; it flows through the pupil into the anterior chamber and drains via the canal of Schlemm.", "The lacrimal gland makes TEARS, not aqueous, and aqueous does not enter the vitreous.", "The vitreous chamber holds the gel-like vitreous body, not circulating aqueous humor.", "The iris does not secrete aqueous, and aqueous does not drain at the optic disc."],source:"Dr. Maini - Lecture 20, ~47:00-50:00",quote:"Aqueous humor is formed by the ciliary processes, secreted into the posterior chamber, flows through the pupil into the anterior chamber, and drains into the sinus venosus sclerae.",obj:"Aqueous Humor Circulation",hint:"Made behind the iris, flows through the pupil, drains at the angle."},
+{q:"A young patient's eyeball is longer than normal and images focus IN FRONT of the retina. What is the refractive error and how is it corrected?",o:["Hyperopia; corrected with a convex lens", "Myopia; corrected with a concave lens", "Astigmatism; corrected with a cylindrical lens", "Presbyopia; corrected with reading glasses"],c:1,cat:"Sclera, Cornea and Refraction",r:["Hyperopia is a SHORT eyeball with the focus BEHIND the retina, corrected with a convex lens.", "Correct. Myopia (short-sightedness) has a long eyeball with the focus in front of the retina and is corrected with a concave (diverging) lens.", "Astigmatism is an irregular corneal curvature, corrected with a cylindrical lens, not a long eyeball.", "Presbyopia is age-related loss of near focus after about 40, not the long-eyeball error described."],source:"Dr. Maini - Lecture 20, ~1:00:00-1:02:00 and ~1:17:00",quote:"Myopia, light rays are focused in front of the retina. To correct myopia you wear concave glasses.",obj:"Refractive Errors",hint:"Long eye, near-sighted, needs a concave (minus) lens."},
+{q:"In the corneal (blink) reflex, which nerves form the sensory (afferent) and motor (efferent) limbs?",o:["Afferent CN II; efferent CN III", "Afferent V1 (trigeminal); efferent CN VII (facial)", "Afferent CN VII; efferent V1", "Afferent V1; efferent CN III"],c:1,cat:"Sclera, Cornea and Refraction",r:["CN II (vision) and CN III are not the blink-reflex limbs.", "Correct. The ophthalmic division of the trigeminal (V1) senses the corneal touch, and the facial nerve (VII) fires orbicularis oculi to close the lids.", "This reverses the limbs; V1 is sensory and VII is motor.", "The motor limb is CN VII (orbicularis oculi), not CN III."],source:"Dr. Maini - Lecture 20, ~1:16:00-1:17:00 and ~26:00-27:00",quote:"Sensory division is the fifth nerve, motor division is the seventh nerve; orbicularis oculi contracts and you close your eyes.",obj:"Corneal Reflex",hint:"Feel it with V, blink with VII."},
+{q:"You suspect jaundice in a patient. According to Dr. Maini, which part of the eye shows the yellow discoloration FIRST, and why?",o:["The cornea, because it is transparent", "The iris, because it is pigmented", "The retina, because it is vascular", "The sclera, because it is white and bilirubin is noticed there first"],c:3,cat:"Sclera, Cornea and Refraction",r:["The cornea is transparent and avascular; discoloration is not first noticed there.", "The iris's own pigment masks any yellowing.", "The retina is internal and is not inspected for jaundice on external exam.", "Correct. The white sclera makes deposited bilirubin visible first (scleral icterus) once levels exceed about 2 mg percent, so it is the first place jaundice is noticed."],source:"Dr. Maini - Lecture 20, ~22:00-23:00",quote:"Sclera is the first one to appear yellow; bilirubin is noticed here first because it is very white.",obj:"Sclera / Jaundice",hint:"Look at the white of the eye for the first sign of yellow."},
+{q:"Fundoscopy shows swelling of the optic disc (papilledema). What does this most directly indicate?",o:["Glaucoma from raised intraocular pressure", "Raised intracranial pressure", "Age-related macular degeneration", "Retinal detachment"],c:1,cat:"Retina and Optic Disc",r:["Glaucoma is raised INTRAocular pressure; it is not the disc swelling of raised intracranial pressure.", "Correct. Papilledema (optic disc edema) reflects raised INTRAcranial pressure from a space-occupying lesion, hemorrhage, or CSF buildup transmitted along the optic nerve sheath.", "Macular degeneration affects the macula (central vision), not the optic disc.", "Retinal detachment separates the neural retina; it is not disc edema."],source:"Dr. Maini - Lecture 20, ~57:00-1:00:00",quote:"Papilledema is edema of the optic disc; it indicates increased intracranial tension.",obj:"Papilledema",hint:"A swollen disc points to pressure inside the SKULL, not inside the eye."},
+{q:"An elderly patient loses the CENTER of faces and print but keeps peripheral vision. Which retinal structure has degenerated?",o:["The optic disc (blind spot)", "The ora serrata", "The macula lutea / fovea centralis", "The lamina cribrosa"],c:2,cat:"Retina and Optic Disc",r:["The optic disc is already the blind spot (no photoreceptors); its problems are papilledema or cupping, not loss of central detail.", "The ora serrata is the serrated anterior margin of the retina; it is not the point of acute central vision.", "Correct. The macula lutea, with its cone-rich fovea centralis, gives acute central vision; its degeneration loses the center while peripheral (rod) vision persists.", "The lamina cribrosa is the sieve-like scleral opening for the optic nerve, not a photoreceptor zone."],source:"Dr. Maini - Lecture 20, ~43:00-45:00",quote:"When there is macular degeneration, central vision is lost and peripheral vision is retained.",obj:"Macula / Fovea Centralis",hint:"The cone-packed central pit is the casualty when the center of the image drops out."},
+{q:"A patient can make out shapes in a dim room but cannot tell colors until the lights come on. Which photoreceptors are working in the dark?",o:["Rods, which work in dim light but give no color", "Cones, concentrated at the fovea", "Bipolar cells", "Ganglion cells"],c:0,cat:"Retina and Optic Disc",r:["Correct. Rods are stimulated by minimal light (night vision) but cannot appreciate color, so in the dark you see shapes without color.", "Cones need bright light and provide color vision (concentrated at the fovea centralis), so they underperform in the dark.", "Bipolar cells relay signals between photoreceptors and ganglion cells; they are not light-catching photoreceptors.", "Ganglion cells' axons form the optic nerve; they are not photoreceptors."],source:"Dr. Maini - Lecture 20, ~38:00-39:00 and Lecture 19, ~16:00-17:00",quote:"Rods are stimulated by very minimum light; they help you see in dim surroundings but cannot appreciate colors.",obj:"Rods vs Cones",hint:"Dim-light, no-color receptors are the rod-shaped ones."},
+{q:"An infection in the facial 'danger area' spreads to the cavernous sinus. Which venous connection allows this backward spread from the face?",o:["The nasolacrimal duct", "The superior ophthalmic vein, which links the facial vein to the cavernous sinus", "The central retinal artery", "The canal of Schlemm"],c:1,cat:"Orbital Vessels and Cavernous Sinus",r:["The nasolacrimal duct carries tears, not blood, so it cannot spread a venous infection.", "Correct. The superior ophthalmic vein drains directly into the cavernous sinus and connects anteriorly with the facial vein, so a facial infection can track backward into the cavernous sinus.", "The central retinal artery is arterial and supplies the retina; it is not the venous route to the cavernous sinus.", "The canal of Schlemm drains aqueous humor, not facial venous blood."],source:"Dr. Maini - Lecture 21, ~12:00-13:00",quote:"Superior ophthalmic vein drains directly into the cavernous sinus; anteriorly both ophthalmic veins connect with the facial vein.",obj:"Orbital Veins / Cavernous Sinus",hint:"The ophthalmic veins bridge the facial vein to the cavernous sinus."},
+{q:"Sudden, painless, total blindness in one eye follows occlusion of a small end-artery running inside the optic nerve. Which artery is it, and what is its parent vessel?",o:["Lacrimal artery, from the external carotid", "Infraorbital artery, from the maxillary", "Anterior ciliary artery, from the facial", "Central retinal artery, from the ophthalmic artery (internal carotid)"],c:3,cat:"Orbital Vessels and Cavernous Sinus",r:["The lacrimal artery is actually a branch of the ophthalmic artery (internal carotid), not the external carotid, and it supplies the lacrimal gland.", "The infraorbital artery (from the maxillary) supplies the face below the orbit, not the retina.", "The anterior ciliary artery arises from the ophthalmic system, not the facial, and enters at the corneoscleral junction.", "Correct. The central retinal artery is a branch of the ophthalmic artery (from the internal carotid); it runs in the optic nerve to the center of the optic disc, and as an end artery its occlusion causes sudden blindness."],source:"Dr. Maini - Lecture 21, ~10:00-11:00",quote:"Ophthalmic artery is a branch of the internal carotid; the central retinal artery runs in the substance of the optic nerve to enter the eye at the center of the optic disc.",obj:"Central Retinal Artery",hint:"The retina's lifeline is an end-branch of the ophthalmic artery off the internal carotid."},
+{q:"Which structures pass through the OPTIC CANAL, as opposed to the superior orbital fissure?",o:["The optic nerve (CN II) and the ophthalmic artery", "CN III, IV, VI and the superior ophthalmic vein", "The maxillary nerve (V2) and the infraorbital vessels", "All three branches of V1 (lacrimal, frontal, nasociliary)"],c:0,cat:"Orbital Walls and Fissures",r:["Correct. The optic canal, in the lesser wing of the sphenoid, transmits the optic nerve (CN II) and the ophthalmic artery.", "CN III, IV, VI and the superior ophthalmic vein pass through the SUPERIOR ORBITAL FISSURE, not the optic canal.", "V2 and the infraorbital vessels run through the inferior orbital fissure region, not the optic canal.", "The V1 branches (lacrimal, frontal, nasociliary) pass through the superior orbital fissure."],source:"Dr. Maini - Lecture 19, ~11:00-14:00",quote:"Optic canal is part of the lesser wing of the sphenoid, for the optic nerve and ophthalmic artery.",obj:"Orbital Openings",hint:"Only two things thread the optic canal: the nerve of sight and its companion artery."},
+{q:"A blow to the eye fractures the orbital FLOOR and the contents herniate into the sinus below (a blowout fracture). Which bone forms most of the floor, and which sinus is entered?",o:["Ethmoid; the ethmoid air cells", "Maxilla; the maxillary sinus", "Frontal; the frontal sinus", "Sphenoid; the sphenoid sinus"],c:1,cat:"Orbital Walls and Fissures",r:["The ethmoid forms most of the MEDIAL wall (with its air cells), not the floor.", "Correct. The orbital floor is mostly the maxilla, so a blowout fracture drops the contents into the maxillary sinus beneath.", "The frontal bone forms the ROOF, and the frontal sinus lies above the orbit.", "The sphenoid contributes to the posterior wall and apex, not the main floor."],source:"Dr. Maini - Lecture 19, ~05:00-07:00",quote:"In the floor, mostly it is the maxillary bone that forms the floor.",obj:"Orbital Floor",hint:"The floor is the maxilla, so a blowout drops into the maxillary sinus."},
+{q:"In the ciliary ganglion, which fibers actually SYNAPSE, and what do their postganglionic fibers innervate?",o:["Sympathetic fibers; dilator pupillae", "Sensory fibers from the nasociliary nerve; the cornea", "Parasympathetic fibers from CN III; sphincter pupillae and ciliary muscle", "All three roots synapse there"],c:2,cat:"Ciliary Ganglion and Autonomics",r:["Sympathetic fibers (from the superior cervical ganglion) only PASS THROUGH the ciliary ganglion without synapsing, en route to dilator pupillae.", "Sensory (nasociliary, V1) fibers merely pass through the ganglion without synapsing.", "Correct. Only the parasympathetic (preganglionic, from CN III) fibers synapse in the ciliary ganglion; their postganglionics run in short ciliary nerves to sphincter pupillae and ciliary muscle.", "Only the parasympathetic root synapses; the sympathetic and sensory roots pass straight through."],source:"Dr. Maini - Lecture 21, ~25:00-30:00",quote:"Oculomotor nerve gives preganglionic parasympathetic fibers that synapse in the ciliary ganglion; postganglionic fibers pass through short ciliary nerves to the sphincter pupillae and ciliary muscle.",obj:"Ciliary Ganglion",hint:"Only the parasympathetic root changes trains here; sympathetic and sensory ride straight through."},
+{q:"Which cranial nerve carries the PARASYMPATHETIC secretomotor fibers to the lacrimal gland (relayed in the pterygopalatine ganglion)?",o:["Facial nerve (CN VII), via the greater petrosal nerve", "Oculomotor nerve (CN III)", "Trigeminal V1 (the lacrimal nerve)", "Glossopharyngeal nerve (CN IX)"],c:0,cat:"Ciliary Ganglion and Autonomics",r:["Correct. Facial nerve parasympathetics travel via the greater petrosal nerve to the nerve of the pterygoid canal, synapse in the pterygopalatine ganglion, and reach the lacrimal gland as secretomotor fibers.", "CN III parasympathetics go to the CILIARY ganglion (pupil and lens), not the lacrimal gland.", "The lacrimal nerve (V1) is sensory and only carries hitch-hiking secretomotor fibers to the gland; it is not the parasympathetic source.", "CN IX parasympathetics supply the parotid gland via the otic ganglion, not the lacrimal gland."],source:"Dr. Maini - Lecture 20, ~09:00-12:00",quote:"The lacrimal gland gets its parasympathetic innervation from the seventh nerve, the facial nerve, through the greater petrosal nerve, to the pterygopalatine ganglion.",obj:"Lacrimal Gland Autonomics",hint:"Tears are a facial-nerve (VII) job, routed through the pterygopalatine ganglion."}
+];
+
+const CAT_NAMES=["Horner Syndrome", "Oculomotor (CN III) Palsy", "Trochlear and Abducens Palsy", "Extraocular Muscle Testing", "Pupillary Light Reflex", "Accommodation and Near Reflex", "Lacrimal and Eyelid Adnexa", "Glaucoma and Aqueous Humor", "Sclera, Cornea and Refraction", "Retina and Optic Disc", "Orbital Vessels and Cavernous Sinus", "Orbital Walls and Fissures", "Ciliary Ganglion and Autonomics"];
+const LS_KEY="ga0202_m08_eye_clinical_cases";
+BANK.forEach(function(q,i){q._bankId=i;});
+let idx=0,score=0,attempts=0,reaskQueue=[];
+let catStats={};CAT_NAMES.forEach(function(c){catStats[c]={c:0,t:0};});
+let questions=[];let answerMap={};let answerHistory=[];let browseIdx=-1;let navOpen=false;let jumpOpen=false;let instrOpen=false;let reviewList=null;
+function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function saveState(){try{localStorage.setItem(LS_KEY,JSON.stringify({idx,score,attempts,reaskQueue:reaskQueue.map(function(q){return q._bankId;}),questions:questions.map(function(q){return{_bankId:q._bankId,_isReask:q._isReask||false};}),answerMap,answerHistory,navOpen,jumpOpen}));}catch(e){}}
+function loadState(){try{let s=JSON.parse(localStorage.getItem(LS_KEY));if(!s||!s.questions)return false;idx=s.idx||0;score=s.score||0;attempts=s.attempts||0;answerMap=s.answerMap||{};answerHistory=s.answerHistory||[];navOpen=false;jumpOpen=false;questions=s.questions.map(function(ref){let q=Object.assign({},BANK[ref._bankId]);if(ref._isReask)q._isReask=true;return q;});reaskQueue=(s.reaskQueue||[]).map(function(id){return Object.assign({},BANK[id],{_isReask:true});});CAT_NAMES.forEach(function(c){catStats[c]={c:0,t:0};});for(let k in answerMap){let m=answerMap[k];let q=BANK[k];if(!catStats[q.cat])catStats[q.cat]={c:0,t:0};catStats[q.cat].t++;if(m.isCorrect)catStats[q.cat].c++;}return true;}catch(e){return false;}}
+function init(){if(!loadState()){questions=shuffle(BANK.slice());idx=0;score=0;attempts=0;reaskQueue=[];answerMap={};answerHistory=[];}render();}
+function renderNav(){if(!navOpen)return'';let html='<div class="nav-grid">';for(let i=0;i<BANK.length;i++){let cls='nav-cell';let activeList=reviewList||answerHistory;if(browseIdx>=0&&activeList[browseIdx]===i)cls+=' nc-review';else if(browseIdx===-1&&idx<questions.length&&questions[idx]._bankId===i)cls+=' nc-current';else if(i in answerMap)cls+=answerMap[i].isCorrect?' nc-correct':' nc-wrong';html+='<div class="'+cls+'" onclick="navJump('+i+')">'+(i+1)+'</div>';}return html+'</div>';}
+function renderJumpBar(){if(!jumpOpen)return'';let step=BANK.length>=40?10:BANK.length>=20?5:3;let html='<div class="jump-bar">';for(let m=1;m<=BANK.length;m+=step){let bankId=m-1;let cls='jump-btn';if(bankId in answerMap)cls+=answerMap[bankId].isCorrect?' jb-correct':' jb-wrong';html+='<div class="'+cls+'" onclick="navJump('+bankId+')">Q'+m+'</div>';}return html+'</div>';}
+function navJump(bankId){if(bankId in answerMap){let activeList=reviewList||answerHistory;let pos=activeList.indexOf(bankId);if(pos!==-1){browseIdx=pos;renderHistoryItem();}else if(!reviewList){let p2=answerHistory.indexOf(bankId);if(p2!==-1){browseIdx=p2;reviewList=null;renderHistoryItem();}}}else{browseIdx=-1;reviewList=null;for(let i=0;i<questions.length;i++){if(questions[i]._bankId===bankId&&!questions[i]._isReask){idx=i;render();return;}}}}
+function toggleNav(){navOpen=!navOpen;if(browseIdx>=0)renderHistoryItem();else render();}
+function toggleJump(){jumpOpen=!jumpOpen;if(browseIdx>=0)renderHistoryItem();else render();}
+function renderHistoryItem(){let activeList=reviewList||answerHistory;let bankId=activeList[browseIdx];let info=answerMap[bankId];let q=BANK[bankId];let uniqueAnswered=Object.keys(answerMap).length;let optHTML='';q.o.forEach(function(opt,i){let cls='opt-btn disabled';if(i===info.correct)cls+=' show-correct';if(i===info.picked&&!info.isCorrect)cls+=' picked-wrong';else if(i===info.picked&&info.isCorrect)cls+=' picked-correct';let letter=String.fromCharCode(65+i);optHTML+='<button class="'+cls+'"><span class="letter">'+letter+'.</span> '+opt+'<div class="rationale" style="display:block">'+q.r[i]+'</div></button>';});let prevDisabled=browseIdx<=0?' disabled':'';let nextDisabled=browseIdx>=activeList.length-1?' disabled':'';document.getElementById('app').innerHTML='<h1>👁️ GA 0202 · Module 8 — The Eye & Orbit · Clinical Cases & Must-Knows</h1><p class="subtitle">Dr. Maini — applied eye and orbit vignettes: Horner and CN III/IV/VI palsies, pupillary and accommodation reflexes, lacrimal apparatus, glaucoma and refractive errors</p><div style="text-align:center;font-size:.72rem;color:#93c5fd;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:6px 10px;margin:2px auto 12px;max-width:620px;line-height:1.45">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div><div class="stats"><div class="stat"><div class="stat-val">'+attempts+'</div><div class="stat-label">Attempts</div></div><div class="stat"><div class="stat-val">'+score+'</div><div class="stat-label">Correct</div></div><div class="stat"><div class="stat-val">'+(attempts?Math.round(score/attempts*100):0)+'%</div><div class="stat-label">Accuracy</div></div><div class="stat"><div class="stat-val">'+reaskQueue.length+'</div><div class="stat-label">Re-ask</div></div><button onclick="confirmRestart()" class="restart-sm">&#8635; Restart</button></div><button class="btn-nav-toggle" onclick="toggleNav()">'+(navOpen?'\u25bc Hide Navigator':'\u25b6 Question Navigator ('+uniqueAnswered+'/'+BANK.length+')')+'</button>'+renderNav()+'<button class="btn-nav-toggle" onclick="toggleJump()">'+(jumpOpen?'\u25bc Hide Jump Bar':'\u25b6 Jump to Question')+'</button>'+renderJumpBar()+'<div class="browse-banner">\ud83d\udcdd Reviewing '+(reviewList?'missed ':'')+'answer '+(browseIdx+1)+' of '+activeList.length+'</div><div class="card"><span class="cat-badge">'+q.cat+'</span><div class="q-text">Q'+(BANK.indexOf(q)+1)+': '+q.q+'</div>'+optHTML+'<div class="source-line" style="display:block"><span>Source:</span> '+q.source+'</div>'+(q.quote?'<div class="quote-line" style="display:block">'+q.quote+'</div>':'')+(q.profTip?'<div class="prof-tip" style="display:block"><span class="tip-label">Professor:</span> '+q.profTip+'</div>':'')+(q.obj?'<div class="obj-tag" style="display:block">'+q.obj+'</div>':'')+'<div class="btn-group"><button class="btn-prev" onclick="prevBrowse()"'+prevDisabled+'>\u2190 Previous</button><button class="btn-next" onclick="returnToQuiz()" style="display:inline-block">Return to Quiz</button><button class="btn-prev" onclick="nextBrowse()"'+nextDisabled+'>Next \u2192</button></div></div>';}
+function prevBrowse(){if(browseIdx>0){browseIdx--;renderHistoryItem();}}
+function nextBrowse(){let activeList=reviewList||answerHistory;if(browseIdx<activeList.length-1){browseIdx++;renderHistoryItem();}}
+function returnToQuiz(){browseIdx=-1;reviewList=null;render();}
+function render(){let app=document.getElementById('app');while(idx<questions.length&&!questions[idx]._isReask&&questions[idx]._bankId in answerMap){idx++;}if(idx>=questions.length&&reaskQueue.length===0)return showSummary();if(reaskQueue.length>0&&(idx>=questions.length||(idx>0&&idx%3===0))){questions.splice(idx,0,reaskQueue.shift());}if(idx>=questions.length)return showSummary();let q=questions[idx];let uniqueAnswered=Object.keys(answerMap).length;let pct=Math.min(100,Math.round((uniqueAnswered/BANK.length)*100));let optHTML='';q.o.forEach(function(opt,i){let letter=String.fromCharCode(65+i);optHTML+='<button class="opt-btn" id="ob'+i+'" onclick="pick('+i+')"><span class="letter">'+letter+'.</span> '+opt+'<div class="rationale" id="rat'+i+'">'+q.r[i]+'</div></button>';});app.innerHTML='<h1>👁️ GA 0202 · Module 8 — The Eye & Orbit · Clinical Cases & Must-Knows</h1><p class="subtitle">Dr. Maini — applied eye and orbit vignettes: Horner and CN III/IV/VI palsies, pupillary and accommodation reflexes, lacrimal apparatus, glaucoma and refractive errors</p><div style="text-align:center;font-size:.72rem;color:#93c5fd;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:6px 10px;margin:2px auto 12px;max-width:620px;line-height:1.45">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div><div class="stats"><div class="stat"><div class="stat-val">'+attempts+'</div><div class="stat-label">Attempts</div></div><div class="stat"><div class="stat-val">'+score+'</div><div class="stat-label">Correct</div></div><div class="stat"><div class="stat-val">'+(attempts?Math.round(score/attempts*100):0)+'%</div><div class="stat-label">Accuracy</div></div><div class="stat"><div class="stat-val">'+reaskQueue.length+'</div><div class="stat-label">Re-ask</div></div><button onclick="confirmRestart()" class="restart-sm">&#8635; Restart</button></div><button class="btn-nav-toggle" onclick="toggleNav()">'+(navOpen?'\u25bc Hide Navigator':'\u25b6 Question Navigator ('+uniqueAnswered+'/'+BANK.length+')')+'</button>'+renderNav()+'<button class="btn-nav-toggle" onclick="toggleJump()">'+(jumpOpen?'\u25bc Hide Jump Bar':'\u25b6 Jump to Question')+'</button>'+renderJumpBar()+'<button class="btn-nav-toggle" onclick="toggleInstr()" style="border-color:#334155">'+(instrOpen?'\u25bc Hide Instructions':'\u25b6 How This Drill Works')+'</button>'+(instrOpen?'<div class="instructions" style="display:block"><h3>How This Drill Works</h3><ul><li>Answer each question by clicking A/B/C/D</li><li><span class="key">Re-ask system</span>: Missed questions come back later so you must <strong>get it right twice</strong></li><li><span class="key">Question Navigator</span>: Click any cell to jump to or review that question</li><li><span class="key">Jump to Question</span>: Quick milestone markers</li><li><span class="key">Previous button</span>: Browse back through answered questions</li><li>Every answer reveals: rationale, source, Dr. Maini quote, professor tip, and <strong>study guide item</strong></li><li>Progress is <strong>auto-saved</strong></li><li>At the end: category breakdown + <strong>Review Only Missed</strong></li></ul></div>':'')+'<div class="progress-track"><div class="progress-fill" style="width:'+pct+'%"></div></div><div class="card"><span class="cat-badge">'+q.cat+(q._isReask?' \ud83d\udd01 RE-ASK':'')+'</span><div class="q-text">Q'+(idx+1)+' of '+questions.length+': '+q.q+'</div>'+(q.hint?'<button class="btn-hint" onclick="this.nextElementSibling.style.display=\'block\';this.style.display=\'none\'">\ud83d\udca1 Show Hint</button><div class="hint-text" style="display:none">\ud83d\udca1 '+q.hint+'</div>':'')+optHTML+'<div class="source-line" id="srcLine"><span>Source:</span> '+q.source+'</div>'+(q.quote?'<div class="quote-line" id="quoteLine">'+q.quote+'</div>':'')+(q.profTip?'<div class="prof-tip" id="tipLine"><span class="tip-label">Professor:</span> '+q.profTip+'</div>':'')+(q.obj?'<div class="obj-tag" id="objTag">'+q.obj+'</div>':'')+'<div class="btn-group" id="btnGroup"><button class="btn-prev" onclick="prevAnswer()"'+(answerHistory.length===0?' disabled':'')+'>\u2190 Previous</button><button class="btn-next" id="btnNext" onclick="nextQ()">Next Question \u2192</button></div></div>';}
+function pick(i){let q=questions[idx];let opts=document.querySelectorAll('.opt-btn');if(opts[0]&&opts[0].classList.contains('disabled'))return;opts.forEach(function(o){o.classList.add('disabled');o.onclick=null;});let correct=q.c;let isCorrect=i===correct;opts[i].classList.add(isCorrect?'picked-correct':'picked-wrong');if(!isCorrect)opts[correct].classList.add('show-correct');attempts++;if(!catStats[q.cat])catStats[q.cat]={c:0,t:0};catStats[q.cat].t++;if(isCorrect){score++;catStats[q.cat].c++;}else{reaskQueue.push(Object.assign({},q,{_isReask:true}));}if(q._bankId!==undefined){if(!(q._bankId in answerMap)){answerMap[q._bankId]={picked:i,correct:correct,isCorrect:isCorrect,attempts:1,everWrong:!isCorrect};}else{let m=answerMap[q._bankId];m.picked=i;m.isCorrect=isCorrect;m.attempts++;if(!isCorrect)m.everWrong=true;}}if(!answerHistory.includes(q._bankId))answerHistory.push(q._bankId);for(let j=0;j<q.o.length;j++){let r=document.getElementById('rat'+j);if(r)r.style.display='block';}let sl=document.getElementById('srcLine');if(sl)sl.style.display='block';let ql=document.getElementById('quoteLine');if(ql)ql.style.display='block';let tl=document.getElementById('tipLine');if(tl)tl.style.display='block';let ot=document.getElementById('objTag');if(ot)ot.style.display='block';let nb=document.getElementById('btnNext');if(nb)nb.style.display='inline-block';saveState();}
+function nextQ(){idx++;render();saveState();}
+function prevAnswer(){if(answerHistory.length===0)return;browseIdx=answerHistory.length-1;renderHistoryItem();}
+function showSummary(){let app=document.getElementById('app');let uniqueAnswered=Object.keys(answerMap).length;let mastered=0;let everWrongCount=0;for(let k in answerMap){if(answerMap[k].isCorrect)mastered++;if(answerMap[k].everWrong)everWrongCount++;}let pct=uniqueAnswered>0?Math.round(mastered/uniqueAnswered*100):0;let cls=pct>=85?'great':pct>=65?'ok':'rough';let catHTML='<table class="cat-table"><tr><th>Study Guide Item</th><th>Score</th></tr>';for(let cat of CAT_NAMES){if(catStats[cat]&&catStats[cat].t>0)catHTML+='<tr><td>'+cat+'</td><td>'+catStats[cat].c+'/'+catStats[cat].t+'</td></tr>';}catHTML+='</table>';app.innerHTML='<h1>👁️ GA 0202 · Module 8 — The Eye & Orbit · Clinical Cases & Must-Knows</h1><p class="subtitle">Dr. Maini — applied eye and orbit vignettes: Horner and CN III/IV/VI palsies, pupillary and accommodation reflexes, lacrimal apparatus, glaucoma and refractive errors</p><div style="text-align:center;font-size:.72rem;color:#93c5fd;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:6px 10px;margin:2px auto 12px;max-width:620px;line-height:1.45">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div><div class="summary" style="display:block"><h2>Quiz Complete!</h2><div class="pct '+cls+'">'+pct+'%</div><p style="color:#94a3b8">'+mastered+' of '+uniqueAnswered+' mastered on latest attempt</p><p class="detail">Attempts: '+attempts+' | Ever missed: '+everWrongCount+' | Re-asked: '+(attempts-uniqueAnswered)+'</p>'+catHTML+(everWrongCount>0?'<button class="review-btn" onclick="reviewMissed()">Review Only Missed ('+everWrongCount+')</button>':'')+'<br><button class="restart-btn" onclick="restart()">Restart Drill</button></div>';}
+function reviewMissed(){let missed=answerHistory.filter(function(id){return answerMap[id]&&answerMap[id].everWrong;});if(missed.length===0)return;reviewList=missed;browseIdx=0;renderHistoryItem();}
+function restart(){questions=shuffle(BANK.slice());idx=0;score=0;attempts=0;reaskQueue=[];answerMap={};answerHistory=[];browseIdx=-1;reviewList=null;CAT_NAMES.forEach(function(c){catStats[c]={c:0,t:0};});render();saveState();}
+function confirmRestart(){if(confirm('Restart the drill? All progress will be lost.'))restart();}
+function toggleInstr(){instrOpen=!instrOpen;if(browseIdx>=0)renderHistoryItem();else render();}
+init();
+</script>
+
+<script>
+const TIMESTAMPS=[];
+var audioAutoPlay=true;
+
+// Follow-along mode
+var _origShuffle=shuffle;
+var followMode=true;
+var reaskMode=true;
+shuffle=function(a){return followMode?a:_origShuffle(a);};
+
+// ── Persistent audio bar: survives every render() + renderHistoryItem() call ──
+var _audioBar=null;
+function _buildAudioBar(){
+  var ab=document.createElement('div');
+  ab.id='audio-bar';
+  ab.className='audio-bar';
+  ab.innerHTML='<audio id="mk-audio" controls preload="none"><source src="https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L04.mp3" type="audio/mpeg">Audio not found. Place MP3 in same folder.</audio>'
+    +'<div class="audio-info">'
+    +'<span class="timestamp-badge" id="ts-badge">⏱ --:--</span>'
+    +'<div class="skip-btns">'
+    +'<button class="btn-skip" onclick="skipAudio(-30)" title="Back 30s">⏪ 30</button>'
+    +'<button class="btn-skip" onclick="skipAudio(-10)" title="Back 10s">⏪ 10</button>'
+    +'<button class="btn-play-here" onclick="playFromHere()">▶ Play From Here</button>'
+    +'<button class="btn-skip" onclick="skipAudio(10)" title="Forward 10s">10 ⏩</button>'
+    +'<button class="btn-skip" onclick="skipAudio(30)" title="Forward 30s">30 ⏩</button>'
+    +'</div>'
+    +'<div class="audio-modes">'
+    +'<label class="audio-auto-label"><input type="radio" name="amode" value="seek" onchange="setAudioMode(\'seek\')"> Seek per Q</label>'
+    +'<label class="audio-auto-label"><input type="radio" name="amode" value="continuous" checked onchange="setAudioMode(\'continuous\')"> Continuous play</label>'
+    +'<label class="audio-auto-label"><input type="radio" name="amode" value="off" onchange="setAudioMode(\'off\')"> Audio off</label>'
+    +'</div>'
+      +'<div class=\"speed-block\"><div class=\"speed-top\"><span class=\"speed-label\">Speed</span><button class=\"btn-speed-pm\" onclick=\"fabSetSpeed(fabCurrentSpeed - 0.05)\">&minus;.05</button><span class=\"speed-val\" id=\"speed-display\">1.00x</span><button class=\"btn-speed-pm\" onclick=\"fabSetSpeed(fabCurrentSpeed + 0.05)\">+.05</button></div><div class=\"speed-presets\"><button class=\"btn-speed-preset\" onclick=\"fabSetSpeed(0.5)\">0.5x</button><button class=\"btn-speed-preset\" onclick=\"fabSetSpeed(0.75)\">0.75x</button><button class=\"btn-speed-preset\" onclick=\"fabSetSpeed(0.9)\">0.9x</button><button class=\"btn-speed-preset active\" onclick=\"fabSetSpeed(1.0)\">1x</button><button class=\"btn-speed-preset\" onclick=\"fabSetSpeed(1.1)\">1.1x</button><button class=\"btn-speed-preset\" onclick=\"fabSetSpeed(1.25)\">1.25x</button><button class=\"btn-speed-preset\" onclick=\"fabSetSpeed(1.5)\">1.5x</button><button class=\"btn-speed-preset\" onclick=\"fabSetSpeed(2.0)\">2x</button></div></div><div class=\"transcript-toggle\"><button class=\"btn-transcript\" id=\"btn-transcript\" onclick=\"fabToggleTranscript()\">\ud83d\udcdc Transcript</button></div><div class=\"transcript-box\" id=\"transcript-box\"></div>'
+    +'</div>';
+  return ab;
+}
+
+function _ensureAudioAttached(){
+  var app=document.getElementById('app');
+  if(!app)return;
+  if(!_audioBar)_audioBar=_buildAudioBar();
+  var card=app.querySelector('.card');
+  if(card&&_audioBar.parentNode!==card.parentNode){
+    card.parentNode.insertBefore(_audioBar,card);
+  } else if(!card&&_audioBar.parentNode!==app){
+    // Summary screen — attach at top so audio keeps playing
+    app.insertBefore(_audioBar,app.firstChild);
+  }
+  updateTimestampBadge();
+}
+
+// Override render to preserve audio across wipes
+var _origRender=render;
+render=function(){
+  if(_audioBar&&_audioBar.parentNode){_audioBar.parentNode.removeChild(_audioBar);}
+  _origRender();
+  _ensureAudioAttached();
+
+  // Toggle bar + re-ask banner (stateful — rebuild if missing)
+  var app=document.getElementById('app');
+  if(!document.getElementById('mk-toggle-bar')){
+    var bar=document.createElement('div');
+    bar.id='mk-toggle-bar';
+    bar.className='follow-toggle';
+    bar.innerHTML='<button class="follow-btn'+(followMode?' active':'')+'" onclick="setFollowMode(true)">🔊 Follow Audio Order</button>'
+      +'<button class="follow-btn'+(!followMode?' active':'')+'" onclick="setFollowMode(false)">🔀 Shuffle Mode</button>'
+      +'<button class="reask-btn'+(reaskMode?' active':'')+'" onclick="toggleReask()">🚨 Re-Ask Missed</button>';
+    var banner=document.createElement('div');
+    banner.id='reask-banner';
+    banner.className='reask-banner';
+    var firstChild=app.firstChild;
+    if(firstChild&&firstChild.nextSibling){
+      app.insertBefore(banner,firstChild.nextSibling);
+      app.insertBefore(bar,firstChild.nextSibling);
+    }
+  }
+  buildReaskBar();
+
+  // Re-ask card glow
+  var card=document.querySelector('.card');
+  if(card){
+    var isReask=idx<questions.length&&questions[idx]&&questions[idx]._isReask;
+    if(isReask){
+      card.classList.add('reask-glow');
+      if(!card.querySelector('.reask-card-badge')){
+        var badge=document.createElement('div');
+        badge.className='reask-card-badge';
+        badge.textContent='🔁 RE-ASK — You missed this one. Get it right!';
+        card.insertBefore(badge,card.firstChild);
+      }
+    } else {
+      card.classList.remove('reask-glow');
+    }
+  }
+};
+
+// Override renderHistoryItem so Previous still shows the audio panel
+var _origRenderHistory=renderHistoryItem;
+renderHistoryItem=function(){
+  if(_audioBar&&_audioBar.parentNode){_audioBar.parentNode.removeChild(_audioBar);}
+  _origRenderHistory();
+  _ensureAudioAttached();
+};
+
+// Override showSummary so audio panel survives end-of-drill screen too
+var _origShowSummary=showSummary;
+showSummary=function(){
+  if(_audioBar&&_audioBar.parentNode){_audioBar.parentNode.removeChild(_audioBar);}
+  _origShowSummary();
+  _ensureAudioAttached();
+};
+
+function updateTimestampBadge(){
+  var badge=document.getElementById('ts-badge');
+  if(!badge)return;
+  if(idx<questions.length&&questions[idx]){
+    var bankId=questions[idx]._bankId;
+    if(bankId!==undefined&&TIMESTAMPS[bankId]!==undefined){
+      var ts=TIMESTAMPS[bankId];
+      var m=Math.floor(ts/60);
+      var s=Math.floor(ts%60);
+      badge.textContent='⏱ '+m+':'+(s<10?'0':'')+s;
+    } else {
+      badge.textContent='⏱ --:--';
+    }
+  }
+}
+
+var audioMode='continuous';
+
+function playFromHere(){
+  var audio=document.getElementById('mk-audio');
+  if(!audio||idx>=questions.length)return;
+  var bankId=questions[idx]._bankId;
+  if(bankId===undefined||TIMESTAMPS[bankId]===undefined)return;
+  var seekTo;if(TIMESTAMPS[bankId]===undefined||TIMESTAMPS[bankId]<=0){var f=null;for(var di=1;di<TIMESTAMPS.length;di++){var hi=bankId+di,lo=bankId-di;if(TIMESTAMPS[hi]>0){f=TIMESTAMPS[hi];break;}if(TIMESTAMPS[lo]>0){f=TIMESTAMPS[lo];break;}}if(f===null)return;seekTo=Math.max(0,f-2);}else{seekTo=Math.max(0,TIMESTAMPS[bankId]-2);}
+  // FAB M01 lectures.mp3 split: L01 (0-4800s, 80min) / L02 (4800-10817s, 100min) / L03 (10817-18943s, 135min).
+  // Swap audio source if needed BEFORE seeking, since each lecture file is its own duration.
+  var L01='https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L04.mp3';
+  var L02='https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L05.mp3';
+  var L03='https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L06.mp3';
+  var s=audio.querySelector('source');
+  var part=seekTo<4800?'L01':(seekTo<10817?'L02':'L03');
+  var targetURL=part==='L01'?L01:(part==='L02'?L02:L03);
+  var targetSec=part==='L01'?seekTo:(part==='L02'?(seekTo-4800):(seekTo-10817));
+  var hasL01=s&&/-L01\.mp3/.test(s.src);
+  var hasL02=s&&/-L02\.mp3/.test(s.src);
+  var hasL03=s&&/-L03\.mp3/.test(s.src);
+  var currentMatches=(part==='L01'&&hasL01)||(part==='L02'&&hasL02)||(part==='L03'&&hasL03);
+  if(s&&!currentMatches){
+    s.src=targetURL;audio.load();
+    audio.addEventListener('loadedmetadata',function once(){
+      audio.currentTime=targetSec;audio.play();
+      audio.removeEventListener('loadedmetadata',once);
+    });
+    return;
+  }
+  audio.currentTime=targetSec;audio.play();
+}
+
+function skipAudio(sec){
+  var audio=document.getElementById('mk-audio');
+  if(!audio)return;
+  audio.currentTime=Math.max(0,audio.currentTime+sec);
+  if(audio.paused)audio.play();
+}
+
+function setAudioMode(mode){
+  audioMode=mode;
+  audioAutoPlay=(mode==='seek');
+}
+
+// Override nextQ to respect audio mode (continuous = don't touch audio)
+var _origNextQ=nextQ;
+nextQ=function(){
+  _origNextQ();
+  if(audioMode==='seek'){
+    setTimeout(function(){playFromHere();},300);
+  }
+  // continuous = let audio keep playing
+  // off = do nothing
+};
+
+function setFollowMode(on){
+  followMode=on;
+  document.querySelectorAll('.follow-btn').forEach(function(b,i){b.classList.toggle('active',i===0?on:!on);});
+  if(Object.keys(answerMap).length===0){
+    questions=BANK.slice();idx=0;render();saveState();
+  }
+}
+
+function toggleReask(){
+  reaskMode=!reaskMode;
+  document.querySelectorAll('.reask-btn').forEach(function(b){b.classList.toggle('active',reaskMode);});
+  buildReaskBar();
+}
+
+function buildReaskBar(){
+  var bar=document.getElementById('reask-banner');
+  if(!bar)return;
+  var missed=[];
+  if(typeof answerMap!=='undefined'){
+    for(var k in answerMap){if(answerMap.hasOwnProperty(k)&&!answerMap[k].isCorrect)missed.push(k);}
+  }
+  if(reaskMode&&missed.length>0){
+    bar.style.display='block';
+    bar.innerHTML='⚠️ '+missed.length+' MISSED — <button onclick="drillMissed()">DRILL MISSED NOW</button>';
+  } else {
+    bar.style.display='none';
+  }
+}
+
+function drillMissed(){
+  var missed=[];
+  for(var k in answerMap){if(answerMap.hasOwnProperty(k)&&!answerMap[k].isCorrect)missed.push(parseInt(k));}
+  if(missed.length===0)return;
+  questions=missed.map(function(id){return BANK[id];});
+  for(var i=questions.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=questions[i];questions[i]=questions[j];questions[j]=t;}
+  idx=0;score=0;attempts=0;answerMap={};answerHistory=[];
+  render();
+}
+
+// Initial boot — run once to attach audio bar
+questions=BANK.slice();idx=0;render();
+
+// ── FAB unified speed control ──
+var fabCurrentSpeed = 1.0;
+function fabSetSpeed(val) {
+  val = Math.round(val * 100) / 100;
+  if (val < 0.25) val = 0.25;
+  if (val > 3.0) val = 3.0;
+  fabCurrentSpeed = val;
+  document.querySelectorAll('audio').forEach(function(a){ a.playbackRate = val; });
+  var d = document.getElementById('speed-display');
+  if (d) d.textContent = val.toFixed(2) + 'x';
+  document.querySelectorAll('.btn-speed-preset').forEach(function(b){
+    var pv = parseFloat(b.textContent);
+    b.classList.toggle('active', Math.abs(pv - val) < 0.001);
+  });
+}
+// Re-apply rate whenever any audio element plays
+(function(){
+  var _origPlay = HTMLMediaElement.prototype.play;
+  HTMLMediaElement.prototype.play = function(){
+    if (this.tagName === 'AUDIO') this.playbackRate = fabCurrentSpeed;
+    return _origPlay.apply(this, arguments);
+  };
+})();
+
+
+var fabTranscriptOn = false;
+function fabToggleTranscript() {
+  fabTranscriptOn = !fabTranscriptOn;
+  var box = document.getElementById('transcript-box');
+  var btn = document.getElementById('btn-transcript');
+  if (box) box.classList.toggle('show', fabTranscriptOn);
+  if (btn) btn.classList.toggle('active', fabTranscriptOn);
+  if (fabTranscriptOn) fabUpdateTranscript();
+}
+function fabUpdateTranscript() {
+  if (!fabTranscriptOn) return;
+  var box = document.getElementById('transcript-box');
+  if (!box) return;
+  if (typeof idx !== 'number' || typeof questions === 'undefined' || idx >= questions.length) {
+    box.innerHTML = '<em>Drill complete.</em>';
+    return;
+  }
+  var q = questions[idx];
+  var cat = q.cat || '';
+  var lines = fabTranscript[cat] || [];
+  if (!lines.length) {
+    box.innerHTML = '<em>No transcript lines for ' + cat + '.</em>';
+    return;
+  }
+  var quote = (q.quote || '').toLowerCase().replace(/[^a-z0-9 ]/g, '');
+  var quoteWords = quote.split(' ').filter(function(w){ return w.length > 3; });
+  var html = '<strong>' + cat + '</strong><br>';
+  for (var i = 0; i < lines.length; i++) {
+    var lineLow = lines[i].toLowerCase().replace(/[^a-z0-9 ]/g, '');
+    var hits = 0;
+    for (var w = 0; w < quoteWords.length; w++) {
+      if (lineLow.indexOf(quoteWords[w]) !== -1) hits++;
+    }
+    var match = quoteWords.length > 0 && hits >= Math.ceil(quoteWords.length * 0.4);
+    if (match) html += '<span class="t-highlight">\u25b6 ' + lines[i] + '</span><br>';
+    else html += lines[i] + '<br>';
+  }
+  box.innerHTML = html;
+}
+// Hook transcript update into render + renderHistoryItem
+(function(){
+  var _r = render;
+  render = function(){ var rv = _r.apply(this, arguments); fabUpdateTranscript(); return rv; };
+  var _rh = renderHistoryItem;
+  renderHistoryItem = function(){ var rv = _rh.apply(this, arguments); fabUpdateTranscript(); return rv; };
+})();
+
+</script>
+
+
+<script id="audio-bar-minimize-js">
+(function(){
+  var LS_KEY_MIN = 'fab_audio_bar_collapsed';
+  function applyState(ab){
+    var collapsed = localStorage.getItem(LS_KEY_MIN) === '1';
+    if (collapsed) ab.classList.add('collapsed'); else ab.classList.remove('collapsed');
+    var btn = ab.querySelector('.btn-minimize-audio');
+    if (btn) btn.textContent = collapsed ? '▸' : '▾';
+    if (btn) btn.title = collapsed ? 'Expand audio bar' : 'Minimize audio bar';
+  }
+  function attachButton(ab){
+    if (ab.querySelector('.btn-minimize-audio')) return;
+    var btn = document.createElement('button');
+    btn.className = 'btn-minimize-audio';
+    btn.type = 'button';
+    btn.onclick = function(){
+      var now = ab.classList.toggle('collapsed');
+      localStorage.setItem(LS_KEY_MIN, now ? '1' : '0');
+      btn.textContent = now ? '▸' : '▾';
+      btn.title = now ? 'Expand audio bar' : 'Minimize audio bar';
+    };
+    ab.appendChild(btn);
+    applyState(ab);
+  }
+  // Poll until audio-bar appears, attach, then keep watching in case it gets re-rendered
+  var tries = 0;
+  var iv = setInterval(function(){
+    var ab = document.getElementById('audio-bar');
+    if (ab) {
+      attachButton(ab);
+      applyState(ab);
+    }
+    tries++;
+    if (tries > 1200) clearInterval(iv); // ~2 min safety cap
+  }, 100);
+})();
+</script>
+<!-- fab-back-to-hub-v5 -->
+<style>
+.fab-back-to-hub-btn {
+    position: fixed; top: 10px; left: 10px; z-index: 99999;
+    width: 44px; height: 44px; border-radius: 50%;
+    padding: 0;
+    background: linear-gradient(135deg,#0891b2,#06b6d4);
+    color: #fff; border: 2px solid #67e8f9;
+    font-size: 20px; line-height: 1;
+    font-family: system-ui,-apple-system,"Segoe UI",sans-serif;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(6,182,212,0.5);
+    display: flex; align-items: center; justify-content: center;
+}
+.fab-back-to-hub-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 14px rgba(6,182,212,0.7); }
+.fab-back-to-hub-btn:active { transform: scale(0.92); }
+@media (max-width: 600px) {
+    .fab-back-to-hub-btn {
+        top: 56px; left: 10px;
+        width: 40px; height: 40px; font-size: 18px;
+    }
+}
+.fab-in-iframe .fab-back-to-hub-btn { display: none !important; }
+@supports (padding: env(safe-area-inset-bottom)) {
+    body { padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 80px); }
+    /* Lift the AI Tutor stethoscope well above iOS Safari's bottom share bar.
+       96px buffer (was 56px) handles every iOS toolbar state we've seen. */
+    .fab-ai-btn { bottom: calc(24px + env(safe-area-inset-bottom, 0px) + 96px) !important; }
+}
+</style>
+<button class="fab-back-to-hub-btn" onclick="fabBackToHub()" title="Return to the Study Hub" aria-label="Return to the Study Hub">📚</button>
+<script>
+(function(){
+    try { if(window.top !== window.self){ document.documentElement.classList.add('fab-in-iframe'); document.body && document.body.classList.add('fab-in-iframe'); } } catch(e) { document.documentElement.classList.add('fab-in-iframe'); }
+})();
+function fabBackToHub(){
+    if(window.opener && !window.opener.closed){
+        try {
+            window.opener.focus();
+            // Reopen the Study Hub on the opener so user lands there directly
+            // instead of seeing the DDD's main view and having to click Study Hub again.
+            if(typeof window.opener.openStudyHub === 'function'){
+                window.opener.openStudyHub();
+            } else {
+                try { window.opener.location.hash = '#studyhub'; } catch(e2){}
+            }
+        } catch(e) {}
+        window.close();
+        return;
+    }
+    window.location.href = 'fab-final-drag-drop-draw.html#studyhub';
+}
+</script>
+
+
+<script id="ga0202-m01-transcript-loader">
+var fabTranscriptLines = ``.split(/\r?\n/).filter(function(l){ return l.trim().length > 0; });
+window.fabTranscriptOn = false;
+function fabFetchTranscript(cb){ cb(); }
+function fabParseTimestamp(line){
+    var m = line.match(/^\[(\d+):(\d+)\]/);
+    if (!m) return null;
+    return parseInt(m[1],10) * 60 + parseInt(m[2],10);
+}
+function fabUpdateTranscript(){
+    if (!window.fabTranscriptOn) return;
+    var box = document.getElementById('transcript-box');
+    if (!box) return;
+    fabFetchTranscript(function(){
+        if (!fabTranscriptLines || !fabTranscriptLines.length){
+            box.innerHTML = '<em style="color:#f87171">Transcript file not found.</em>';
+            return;
+        }
+        if (typeof idx !== 'number' || typeof BANK === 'undefined' || idx >= BANK.length){
+            box.innerHTML = '<em>Drill complete.</em>';
+            return;
+        }
+        var q = BANK[idx];
+        var srcMatch = (q.source || '').match(/(\d+):(\d+)/);
+        var targetSec = srcMatch ? parseInt(srcMatch[1],10)*60 + parseInt(srcMatch[2],10) : 0;
+        // Use TIMESTAMPS array if available (more accurate)
+        if (typeof TIMESTAMPS !== 'undefined' && TIMESTAMPS[idx] !== undefined) {
+            targetSec = Math.round(TIMESTAMPS[idx]);
+        }
+        var bestIdx = 0;
+        for (var i = 0; i < fabTranscriptLines.length; i++){
+            var ts = fabParseTimestamp(fabTranscriptLines[i]);
+            if (ts === null) continue;
+            if (ts <= targetSec) bestIdx = i; else break;
+        }
+        var startIdx = Math.max(0, bestIdx - 2);
+        var endIdx = Math.min(fabTranscriptLines.length, bestIdx + 6);
+        var srcLabel = (q.source || '').split('@').pop().trim();
+        var html = '<strong>Audio @ ' + srcLabel + ' &middot; ' + (q.cat||'') + '</strong><br>';
+        for (var j = startIdx; j < endIdx; j++){
+            var line = fabTranscriptLines[j];
+            var safe = line.replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            if (j === bestIdx) html += '<span class="t-highlight">&#9654; ' + safe + '</span><br>';
+            else html += safe + '<br>';
+        }
+        box.innerHTML = html;
+    });
+}
+function fabToggleTranscript(){
+    var box = document.getElementById('transcript-box');
+    var btn = document.getElementById('btn-transcript');
+    if (!box) return;
+    window.fabTranscriptOn = !window.fabTranscriptOn;
+    if (window.fabTranscriptOn){
+        box.classList.add('show');
+        if (btn) btn.classList.add('active');
+        fabUpdateTranscript();
+    } else {
+        box.classList.remove('show');
+        if (btn) btn.classList.remove('active');
+    }
+}
+</script>
+
+
+<div style="margin:30px auto;padding:14px;border-top:1px solid #334155;color:#94a3b8;font-size:.8rem;text-align:center;max-width:780px">DC Study Supply — Built by Dr. David Gramling, PHD</div>
+
+<!-- SLIDE_LINK_INJECT_v1_START -->
+<style id="slide-link-css">
+.slide-btn-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.btn-slide{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#0f172a;border:1.5px solid #14b8a6;color:#5eead4;border-radius:9px;font-size:.82rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .15s;line-height:1.2}
+.btn-slide:hover{background:#042f2e;color:#99f6e4;border-color:#2dd4bf;transform:translateY(-1px)}
+.btn-slide:active{transform:translateY(0)}
+</style>
+<script id="slide-link-injector">
+(function(){
+  var SLIDE_REFS = {};
+  var DECK_FOLDER = {"c":"the_shoulder_complex","a":"the_axilla_and_arm"};
+  var DECK_LABEL  = {"c":"Shoulder Complex","a":"Axilla & Arm"};
+  var DECK_BASE   = {"c":"ppt","a":"ppt"};
+  function pad2(n){return n<10?'0'+n:''+n;}
+  function injectSlideBtns(bid){
+    if (bid == null) return;
+    var refs = SLIDE_REFS[bid];
+    if (!refs || !refs.length) return;
+    var card = document.querySelector('.card');
+    if (!card) return;
+    var existing = card.querySelector('.slide-btn-row');
+    if (existing) existing.remove();
+    var qText = card.querySelector('.q-text');
+    if (!qText) return;
+    var row = document.createElement('div');
+    row.className = 'slide-btn-row';
+    refs.forEach(function(r){
+      var a = document.createElement('a');
+      a.className = 'btn-slide';
+      var _slideSrc = 'image-viewers/fab201/m02/img/' + DECK_BASE[r.d] + '/' + DECK_FOLDER[r.d] + '/p' + pad2(r.s) + '.jpg';
+      var _slideLabel = 'Slide ' + r.s + ' (' + DECK_LABEL[r.d] + ')';
+      a.href = _slideSrc;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      (function(src, label){
+        a.addEventListener('click', function(e){
+          if (typeof lbFrameOpen === 'function') {
+            e.preventDefault();
+            lbFrameOpen(src, label);
+          }
+        });
+      })(_slideSrc, _slideLabel);
+      a.textContent = '\uD83E\uDE7B View Slide ' + r.s + ' (' + DECK_LABEL[r.d] + ')';
+      row.appendChild(a);
+    });
+    qText.parentNode.insertBefore(row, qText.nextSibling);
+  }
+  function activeBid(){
+    if (typeof questions !== 'undefined' && typeof idx !== 'undefined' && questions[idx]) return questions[idx]._bankId;
+    return null;
+  }
+  function historyBid(){
+    var al = (typeof reviewList !== 'undefined' && reviewList) || (typeof answerHistory !== 'undefined' ? answerHistory : []);
+    if (typeof browseIdx === 'undefined' || browseIdx < 0) return null;
+    return al[browseIdx];
+  }
+  if (typeof render === 'function'){
+    var _r = render;
+    render = function(){ var rv = _r.apply(this, arguments); injectSlideBtns(activeBid()); return rv; };
+  }
+  if (typeof renderHistoryItem === 'function'){
+    var _rh = renderHistoryItem;
+    renderHistoryItem = function(){ var rv = _rh.apply(this, arguments); injectSlideBtns(historyBid()); return rv; };
+  }
+  injectSlideBtns(activeBid());
+})();
+</script>
+<!-- SLIDE_LINK_INJECT_v1_END -->
+<!-- WATCH_BUI_INJECT_v2_START -->
+<style id="watch-bui-css">.watch-btn-row{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.btn-watch{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:#0f172a;border:1.5px solid #ef4444;color:#fca5a5;border-radius:9px;font-size:.82rem;font-weight:700;cursor:pointer;text-decoration:none;transition:all .15s;line-height:1.2}.btn-watch:hover{background:#2a0a0a;color:#fecaca;border-color:#f87171;transform:translateY(-1px)}</style>
+<script id="watch-bui-injector">(function(){return;
+var L04_ID="TBD_M02_L04_DRIVE_ID";
+var L05_ID="TBD_M02_L05_DRIVE_ID";
+var L06_ID="TBD_M02_L06_DRIVE_ID";
+var L01_END=5986;
+var L02_END=11963;
+function videoUrl(ts){if(ts==null||isNaN(ts)||ts<=0)return null;var viewer,sec;if(ts<L01_END){viewer='fab-201-m02-shoulder-forearm-l04-frame-viewer.html';sec=Math.floor(ts);}else if(ts<L02_END){viewer='fab-201-m02-shoulder-forearm-l05-frame-viewer.html';sec=Math.floor(ts-L01_END);}else{viewer='fab-201-m02-shoulder-forearm-l06-frame-viewer.html';sec=Math.floor(ts-L02_END);}return viewer+"?ts="+sec;}
+function fmt(ts){if(ts==null||isNaN(ts))return "";var m=Math.floor(ts/60),s=Math.floor(ts%60);return m+":"+(s<10?"0":"")+s;}
+function injectBtn(bid){if(bid==null||typeof TIMESTAMPS==="undefined")return;var ts=TIMESTAMPS[bid];var url=videoUrl(ts);if(!url)return;var card=document.querySelector(".card");if(!card)return;var existing=card.querySelector(".watch-btn-row");if(existing)existing.remove();var qText=card.querySelector(".q-text");if(!qText)return;var slideRow=card.querySelector(".slide-btn-row");var anchor=slideRow||qText;var row=document.createElement("div");row.className="watch-btn-row";var a=document.createElement("a");a.className="btn-watch";a.href=url;a.target="_blank";a.rel="noopener";a.textContent="\uD83C\uDFAC Watch Bui @ "+fmt(ts);row.appendChild(a);anchor.parentNode.insertBefore(row,anchor.nextSibling);}
+function activeBid(){if(typeof questions!=="undefined"&&typeof idx!=="undefined"&&questions[idx])return questions[idx]._bankId;return null;}
+if(typeof render==="function"){var _r=render;render=function(){var rv=_r.apply(this,arguments);injectBtn(activeBid());return rv;};}
+injectBtn(activeBid());
+})();</script>
+<!-- WATCH_BUI_INJECT_v2_END -->
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "FAB201"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (Gross Anatomy, head and neck) with Dr. Seema Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+
+<script id="static-audio-bar-repositioner">
+(function(){
+  function moveBarIntoApp(){
+    var bar = document.getElementById('static-audio-bar');
+    var app = document.getElementById('app');
+    if(!bar || !app) return;
+    var card = app.querySelector('.card');
+    if(card){
+      if(card.previousElementSibling !== bar){
+        app.insertBefore(bar, card);
+      }
+    }
+    // Remove the dynamic GA-style audio bar (#audio-bar) if it sneaks in —
+    // it's a duplicate of our static panel from the legacy _ensureAudioAttached
+    // mechanism that we replaced with the static-panel pattern in Phase 0f.3.
+    var dynBar = document.getElementById('audio-bar');
+    if(dynBar && dynBar !== bar){
+      dynBar.remove();
+    }
+  }
+  if(typeof render === 'function'){
+    var _origRender = render;
+    render = function(){
+      var rv = _origRender.apply(this, arguments);
+      moveBarIntoApp();
+      return rv;
+    };
+  }
+  if(typeof renderHistoryItem === 'function'){
+    var _origRenderHistory = renderHistoryItem;
+    renderHistoryItem = function(){
+      var rv = _origRenderHistory.apply(this, arguments);
+      moveBarIntoApp();
+      return rv;
+    };
+  }
+  if(typeof showSummary === 'function'){
+    var _origShowSummary = showSummary;
+    showSummary = function(){
+      var rv = _origShowSummary.apply(this, arguments);
+      moveBarIntoApp();
+      return rv;
+    };
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', moveBarIntoApp);
+  } else {
+    moveBarIntoApp();
+  }
+})();
+</script>
+
+<!-- EVERYTHING_MODAL_v1_START -->
+<style id="everything-modal-css">
+#everythingModal{position:fixed;inset:0;background:rgba(2,6,23,0.95);z-index:9999;overflow-y:auto;padding:20px;font-family:-apple-system,system-ui,sans-serif}
+#everythingModal .em-card{max-width:760px;margin:30px auto;background:#0f172a;border:2px solid #22d3ee;border-radius:14px;padding:26px;color:#e2e8f0;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+#everythingModal h2{margin:0 0 6px 0;color:#22d3ee;font-size:1.4rem}
+#everythingModal .em-sub{color:#94a3b8;font-size:.88rem;margin-bottom:18px}
+#everythingModal h3{color:#fbbf24;font-size:.95rem;margin:16px 0 8px 0}
+#everythingModal .em-presets{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+#everythingModal .em-presets button{background:#1e293b;color:#e2e8f0;border:1px solid #334155;padding:7px 14px;border-radius:18px;cursor:pointer;font-size:.82rem;transition:all .15s}
+#everythingModal .em-presets button:hover{background:#22d3ee;color:#0f172a;border-color:#22d3ee}
+#everythingModal .em-cats{display:grid;grid-template-columns:1fr 1fr;gap:7px 14px;margin-bottom:14px;max-height:420px;overflow-y:auto}
+#everythingModal .em-cat-row{display:flex;align-items:center;gap:10px;padding:7px 9px;border-radius:6px;background:#1e293b;cursor:pointer}
+#everythingModal .em-cat-row:hover{background:#334155}
+#everythingModal .em-cat-row input{width:17px;height:17px;cursor:pointer;accent-color:#22d3ee}
+#everythingModal .em-cat-row label{flex:1;cursor:pointer;font-size:.82rem;color:#cbd5e1}
+#everythingModal .em-cat-row .em-count{color:#64748b;font-size:.72rem;font-variant-numeric:tabular-nums}
+#everythingModal .em-size-row{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+#everythingModal .em-size-row input[type=range]{flex:1;accent-color:#22d3ee}
+#everythingModal .em-size-row .em-val{background:#22d3ee;color:#0f172a;padding:4px 12px;border-radius:6px;font-weight:700;min-width:55px;text-align:center}
+#everythingModal .em-info{background:#1e293b;padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:.83rem;color:#94a3b8}
+#everythingModal .em-info b{color:#22d3ee}
+#everythingModal .em-start{display:block;width:100%;background:linear-gradient(135deg,#22d3ee,#0891b2);color:#0f172a;border:none;padding:13px;border-radius:10px;font-size:1.05rem;font-weight:700;cursor:pointer;margin-top:8px;box-shadow:0 4px 14px rgba(34,211,238,.3)}
+#everythingModal .em-start:hover{transform:translateY(-1px)}
+#everythingModal .em-start:disabled{opacity:.4;cursor:not-allowed}
+#emReopenBtn{position:fixed;top:14px;right:14px;z-index:100;background:#22d3ee;color:#0f172a;border:none;padding:7px 13px;border-radius:18px;font-weight:700;cursor:pointer;font-size:.78rem;display:none;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+#emReopenBtn:hover{background:#67e8f9}
+@media (max-width:600px){#everythingModal .em-cats{grid-template-columns:1fr;max-height:300px}}
+</style>
+<script id="everything-modal-injector">
+(function(){
+  var TOPIC_GROUPS = {"palsies":["Oculomotor","Trochlear","Abducens"],"reflexes":["Reflex","Accommodation"],"autonomics":["Horner","Ciliary","Autonomic"],"eyeball":["Sclera","Cornea","Retina","Optic","Glaucoma","Aqueous"],"orbit":["Orbital","Fissure","Vessel","Cavernous"],"adnexa":["Lacrimal","Eyelid"],"muscles":["Muscle","Testing"]};
+  var FULL_BANK = null;
+  var selectedCats = {};
+  var catCounts = {};
+  var initialized = false;
+
+  function captureBank(){
+    if (typeof BANK === 'undefined' || !BANK || !BANK.length) return false;
+    if (FULL_BANK) return true;
+    FULL_BANK = BANK.slice();
+    return true;
+  }
+
+  function buildModal(){
+    if (!captureBank()) return;
+    var html = '<div class="em-card">'
+      + '<h2>👁️ Clinical Cases Mixer — GA 0202 · The Eye &amp; Orbit</h2>'
+      + '<div class="em-sub">Pick which clinical topics to drill, set a size, go. Reopen filter any time.</div>'
+      + '<div class="em-briefing" style="background:rgba(34,211,238,0.08);border-left:3px solid #22d3ee;padding:10px 14px;margin:10px 0 14px;border-radius:0 6px 6px 0;color:#a5f3fc;font-size:13px;line-height:1.55">'
+      +   '<b style="color:#67e8f9">📖 What this is:</b> Custom-mix of the applied board-style eye &amp; orbit vignettes (Dr. Maini, The Orbit and Its Contents, lectures 19-21). Pick presets (Nerve Palsies, Reflexes, Autonomics, etc.) or toggle individual topics. Set how many Qs you want, then hit start. <b>Tip:</b> 10 Qs = quick warm-up · pick All for a full sweep.'
+      + '</div>'
+      + '<h3>⚡ Presets</h3>'
+      + '<div class="em-presets">'
+      +   '<button onclick="emPreset(\'all\')">✅ All</button>'
+      +   '<button onclick="emPreset(\'palsies\')">🧠 Nerve Palsies (III/IV/VI)</button>'
+      +   '<button onclick="emPreset(\'reflexes\')">💡 Reflexes</button>'
+      +   '<button onclick="emPreset(\'autonomics\')">⚡ Horner + Autonomics</button>'
+      +   '<button onclick="emPreset(\'muscles\')">💪 Muscle Testing</button>'
+      +   '<button onclick="emPreset(\'eyeball\')">🔵 Eyeball + Retina</button>'
+      +   '<button onclick="emPreset(\'orbit\')">🦴 Orbit + Vessels</button>'
+      +   '<button onclick="emPreset(\'adnexa\')">💧 Lacrimal + Lids</button>'
+      +   '<button onclick="emPreset(\'clear\')">✖️ Clear</button>'
+      + '</div>'
+      + '<h3>📚 Topics (toggle individually)</h3>'
+      + '<div class="em-cats" id="emCatList"></div>'
+      + '<h3>📊 Number of Questions</h3>'
+      + '<div class="em-size-row">'
+      +   '<input type="range" id="emSizeSlider" min="5" max="30" value="20" oninput="emUpdSize()">'
+      +   '<div class="em-val" id="emSizeVal">20</div>'
+      + '</div>'
+      + '<div class="em-info"><b>Available:</b> <span id="emAvail">30</span> Qs match your selection</div>'
+      + '<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px">'
+      +   '<button class="em-start" id="emStartBtn" onclick="emStart()" style="flex:1;min-width:160px">▶️ Start Drill</button>'
+      + '</div>'
+      + '</div>';
+    var modal = document.createElement('div');
+    modal.id = 'everythingModal';
+    modal.innerHTML = html;
+    document.body.appendChild(modal);
+    var btn = document.createElement('button');
+    btn.id = 'emReopenBtn';
+    btn.textContent = '⚙️ Filter Topics';
+    btn.onclick = emReopen;
+    document.body.appendChild(btn);
+    catCounts = {};
+    FULL_BANK.forEach(function(q){ if (q && q.cat) catCounts[q.cat] = (catCounts[q.cat]||0)+1; });
+    var cats = Object.keys(catCounts).sort();
+    var list = document.getElementById('emCatList');
+    list.innerHTML = '';
+    cats.forEach(function(cat){
+      selectedCats[cat] = true;
+      var safe = cat.replace(/'/g, "&apos;").replace(/"/g, "&quot;");
+      var id = 'em_cat_' + cat.replace(/[^a-z0-9]/gi, '_');
+      var row = document.createElement('div');
+      row.className = 'em-cat-row';
+      row.innerHTML = '<input type="checkbox" id="' + id + '" checked onchange="emToggleCat(this,\''+cat.replace(/'/g, "\\\'")+'\')">'
+                    + '<label for="' + id + '">' + safe + '</label>'
+                    + '<span class="em-count">' + catCounts[cat] + '</span>';
+      list.appendChild(row);
+    });
+    emUpdAvail();
+  }
+
+  window.emToggleCat = function(box, cat){
+    selectedCats[cat] = box.checked;
+    emUpdAvail();
+  };
+  window.emPreset = function(kind){
+    var allCats = Object.keys(catCounts);
+    allCats.forEach(function(cat){
+      var on = false;
+      if (kind === 'all') on = true;
+      else if (kind === 'clear') on = false;
+      else if (TOPIC_GROUPS[kind]) {
+        on = TOPIC_GROUPS[kind].some(function(sub){ return cat.toLowerCase().indexOf(sub.toLowerCase()) >= 0; });
+      }
+      selectedCats[cat] = on;
+      var id = 'em_cat_' + cat.replace(/[^a-z0-9]/gi, '_');
+      var box = document.getElementById(id);
+      if (box) box.checked = on;
+    });
+    emUpdAvail();
+  };
+  window.emUpdSize = function(){
+    document.getElementById('emSizeVal').textContent = document.getElementById('emSizeSlider').value;
+  };
+  function emUpdAvail(){
+    var n = 0;
+    FULL_BANK.forEach(function(q){ if (selectedCats[q.cat]) n++; });
+    document.getElementById('emAvail').textContent = n;
+    var slider = document.getElementById('emSizeSlider');
+    slider.max = Math.max(5, n);
+    if (parseInt(slider.value) > n) slider.value = Math.max(5, n);
+    emUpdSize();
+    document.getElementById('emStartBtn').disabled = (n === 0);
+  }
+  window.emStart = function(){
+    var size = parseInt(document.getElementById('emSizeSlider').value);
+    var pool = FULL_BANK.filter(function(q){ return selectedCats[q.cat]; });
+    for (var i = pool.length - 1; i > 0; i--){ var j = Math.floor(Math.random()*(i+1)); var t = pool[i]; pool[i]=pool[j]; pool[j]=t; }
+    var picked = pool.slice(0, Math.min(size, pool.length));
+    BANK.length = 0;
+    picked.forEach(function(q){ BANK.push(q); });
+    BANK.forEach(function(q,i){ q._bankId = i; });
+    if (typeof catStats !== 'undefined') { catStats = {}; }
+    try { if (typeof LS_KEY === 'string') localStorage.removeItem(LS_KEY); } catch(e){}
+    document.getElementById('everythingModal').style.display = 'none';
+    document.getElementById('emReopenBtn').style.display = 'block';
+    if (typeof idx !== 'undefined') idx = 0;
+    if (typeof score !== 'undefined') score = 0;
+    if (typeof attempts !== 'undefined') attempts = 0;
+    if (typeof reaskQueue !== 'undefined') reaskQueue.length = 0;
+    if (typeof questions !== 'undefined') questions.length = 0;
+    if (typeof answerMap !== 'undefined') { for (var k in answerMap) delete answerMap[k]; }
+    if (typeof answerHistory !== 'undefined') answerHistory.length = 0;
+    if (typeof browseIdx !== 'undefined') browseIdx = -1;
+    if (typeof reviewList !== 'undefined') reviewList = null;
+    if (typeof init === 'function') init();
+  };
+  function emReopen(){
+    document.getElementById('everythingModal').style.display = 'block';
+  }
+
+  function tryInit(){
+    if (initialized) return;
+    if (!captureBank()) { setTimeout(tryInit, 100); return; }
+    initialized = true;
+    buildModal();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tryInit);
+  else tryInit();
+})();
+</script>
+<!-- EVERYTHING_MODAL_v1_END -->
+
+<style id="search-and-jump-css">
+.search-bar{margin:8px 0 12px 0;position:relative;width:100%;box-sizing:border-box}
+.search-input-wrap{display:flex;gap:6px;align-items:center;background:#1e293b;border:2px solid #475569;border-radius:10px;padding:6px 10px;transition:border-color .15s,box-shadow .15s}
+.search-input-wrap.focused{border-color:#3b82f6;box-shadow:0 0 12px rgba(59,130,246,.35)}
+.search-input{flex:1;background:transparent;border:none;outline:none;color:#e2e8f0;font-size:.95rem;padding:6px 4px;font-family:inherit}
+.search-input::placeholder{color:#64748b}
+.search-clear{background:transparent;border:none;color:#94a3b8;cursor:pointer;font-size:1.1rem;padding:0 6px;line-height:1}
+.search-clear:hover{color:#fff}
+.search-icon{color:#3b82f6;font-size:1rem;line-height:1}
+.search-results{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;max-height:60vh;overflow-y:auto;background:#0f172a;border:2px solid #475569;border-radius:10px;z-index:50;box-shadow:0 12px 32px rgba(0,0,0,.45)}
+.search-results.open{display:block}
+.search-result{padding:10px 14px;border-bottom:1px solid #1e293b;cursor:pointer;color:#cbd5e1;font-size:.86rem;line-height:1.4}
+.search-result:last-child{border-bottom:none}
+.search-result:hover,.search-result.kbd{background:#1e293b;color:#fff}
+.search-result .sr-num{display:inline-block;min-width:50px;color:#3b82f6;font-weight:700;margin-right:6px}
+.search-result .sr-cat{display:inline-block;color:#94a3b8;font-size:.74rem;background:#1e293b;border:1px solid #334155;border-radius:6px;padding:2px 6px;margin-right:6px;vertical-align:middle}
+.search-result mark{background:rgba(252,211,77,.3);color:#fde68a;border-radius:3px;padding:0 2px}
+.search-empty{padding:14px;color:#64748b;text-align:center;font-style:italic;font-size:.86rem}
+.search-hint{padding:8px 14px;color:#475569;font-size:.74rem;text-align:right;border-top:1px solid #1e293b;font-style:italic}
+@media (max-width:600px){
+  .search-results{max-height:50vh}
+  .search-result{font-size:.82rem;padding:9px 11px}
+  .search-result .sr-cat{display:none}
+  .search-input{font-size:.92rem}
+}
+</style>
+<script id="search-and-jump-js">
+(function(){
+  var _searchBar=null,_searchTimer=null,_searchKbdIdx=-1,_lastResults=[],_lastQuery='';
+
+  function _esc(s){
+    return (s==null?'':String(s)).replace(/[<>&"']/g,function(c){
+      return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function _buildSearchBar(){
+    var wrap=document.createElement('div');
+    wrap.id='search-bar';
+    wrap.className='search-bar';
+    wrap.innerHTML=''
+      +'<div class="search-input-wrap" id="search-input-wrap">'
+      +  '<span class="search-icon">🔍</span>'
+      +  '<input type="text" id="search-input" class="search-input" placeholder="Search questions, topics, sources... (↑/↓ + Enter)" autocomplete="off" spellcheck="false">'
+      +  '<button class="search-clear" id="search-clear" type="button" title="Clear (Esc)">✕</button>'
+      +'</div>'
+      +'<div class="search-results" id="search-results"></div>';
+    return wrap;
+  }
+
+  function _ensureSearchAttached(){
+    var app=document.getElementById('app');
+    if(!app)return;
+    if(!_searchBar){
+      _searchBar=_buildSearchBar();
+      _wireSearchHandlers();
+    }
+    var card=app.querySelector('.card');
+    if(card){
+      if(_searchBar.parentNode!==card.parentNode){
+        card.parentNode.insertBefore(_searchBar,card);
+      }
+    } else {
+      // No card (e.g. summary screen) — detach
+      if(_searchBar.parentNode)_searchBar.parentNode.removeChild(_searchBar);
+    }
+  }
+
+  function _highlight(text,query){
+    if(!text)return '';
+    if(!query)return _esc(text);
+    var qLow=query.toLowerCase();
+    var tLow=String(text).toLowerCase();
+    var i=tLow.indexOf(qLow);
+    if(i===-1)return _esc(text);
+    var end=i+query.length;
+    return _esc(text.substring(0,i))+'<mark>'+_esc(text.substring(i,end))+'</mark>'+_esc(text.substring(end));
+  }
+
+  function _searchBank(query){
+    var q=(query||'').toLowerCase().trim();
+    if(!q||typeof BANK==='undefined')return [];
+    var results=[];
+    for(var i=0;i<BANK.length;i++){
+      var item=BANK[i];
+      var qText=(item.q||'').toLowerCase();
+      var cat=(item.cat||'').toLowerCase();
+      var src=(item.source||'').toLowerCase();
+      var quote=(item.quote||'').toLowerCase();
+      var tip=(item.profTip||'').toLowerCase();
+      if(qText.indexOf(q)>=0||cat.indexOf(q)>=0||src.indexOf(q)>=0||quote.indexOf(q)>=0||tip.indexOf(q)>=0){
+        results.push({_bankId:i,q:item.q,cat:item.cat});
+        if(results.length>=10)break;
+      }
+    }
+    return results;
+  }
+
+  function _renderSearchResults(query){
+    var ul=document.getElementById('search-results');
+    if(!ul)return;
+    _lastQuery=query;
+    if(!query.trim()){
+      ul.classList.remove('open');
+      ul.innerHTML='';
+      _lastResults=[];_searchKbdIdx=-1;
+      return;
+    }
+    var matches=_searchBank(query);
+    _lastResults=matches;
+    _searchKbdIdx=-1;
+    if(matches.length===0){
+      ul.innerHTML='<div class="search-empty">No matches for "'+_esc(query)+'"</div>';
+      ul.classList.add('open');
+      return;
+    }
+    var html='';
+    for(var i=0;i<matches.length;i++){
+      var m=matches[i];
+      var stem=(m.q||'');
+      var truncStem=stem.length>110?stem.substring(0,110)+'…':stem;
+      html+='<div class="search-result" data-bank-id="'+m._bankId+'" data-idx="'+i+'">'
+        +'<span class="sr-num">Q'+(m._bankId+1)+'</span>'
+        +'<span class="sr-cat">'+_esc(m.cat||'')+'</span>'
+        +_highlight(truncStem,query)
+        +'</div>';
+    }
+    if(matches.length===10){
+      html+='<div class="search-hint">Showing top 10 — refine to narrow</div>';
+    }
+    ul.innerHTML=html;
+    ul.classList.add('open');
+    var nodes=ul.querySelectorAll('.search-result');
+    nodes.forEach(function(node){
+      node.addEventListener('mousedown',function(e){
+        // mousedown so it fires before input blur clears state
+        e.preventDefault();
+        var bankId=parseInt(node.getAttribute('data-bank-id'),10);
+        _doJump(bankId);
+      });
+    });
+  }
+
+  function _doJump(bankId){
+    if(typeof navJump!=='function')return;
+    var inp=document.getElementById('search-input');
+    var ul=document.getElementById('search-results');
+    if(inp)inp.value='';
+    if(ul){ul.classList.remove('open');ul.innerHTML='';}
+    _lastResults=[];_searchKbdIdx=-1;_lastQuery='';
+    navJump(bankId);
+    // Scroll to top of card after jump so user sees the question
+    setTimeout(function(){
+      var card=document.querySelector('.card');
+      if(card&&card.scrollIntoView)card.scrollIntoView({behavior:'smooth',block:'start'});
+    },80);
+  }
+
+  function _highlightKbd(){
+    var ul=document.getElementById('search-results');
+    if(!ul)return;
+    var nodes=ul.querySelectorAll('.search-result');
+    nodes.forEach(function(n,i){n.classList.toggle('kbd',i===_searchKbdIdx);});
+    if(_searchKbdIdx>=0&&nodes[_searchKbdIdx]){
+      nodes[_searchKbdIdx].scrollIntoView({block:'nearest'});
+    }
+  }
+
+  function _wireSearchHandlers(){
+    var inp=_searchBar.querySelector('#search-input');
+    var wrap=_searchBar.querySelector('#search-input-wrap');
+    var clr=_searchBar.querySelector('#search-clear');
+    inp.addEventListener('focus',function(){
+      wrap.classList.add('focused');
+      if(_lastQuery&&_lastResults.length>0){
+        var ul=document.getElementById('search-results');
+        if(ul)ul.classList.add('open');
+      }
+    });
+    inp.addEventListener('blur',function(){
+      setTimeout(function(){wrap.classList.remove('focused');},150);
+    });
+    inp.addEventListener('input',function(){
+      if(_searchTimer)clearTimeout(_searchTimer);
+      var v=inp.value;
+      _searchTimer=setTimeout(function(){_renderSearchResults(v);},200);
+    });
+    inp.addEventListener('keydown',function(e){
+      var ul=document.getElementById('search-results');
+      if(e.key==='Escape'){
+        if(inp.value){
+          inp.value='';
+          if(ul){ul.classList.remove('open');ul.innerHTML='';}
+          _lastResults=[];_searchKbdIdx=-1;_lastQuery='';
+        } else {
+          inp.blur();
+        }
+      } else if(e.key==='ArrowDown'){
+        if(_lastResults.length===0)return;
+        e.preventDefault();
+        _searchKbdIdx=Math.min(_lastResults.length-1,_searchKbdIdx+1);
+        _highlightKbd();
+      } else if(e.key==='ArrowUp'){
+        if(_lastResults.length===0)return;
+        e.preventDefault();
+        _searchKbdIdx=Math.max(-1,_searchKbdIdx-1);
+        _highlightKbd();
+      } else if(e.key==='Enter'){
+        if(_lastResults.length===0)return;
+        e.preventDefault();
+        var pick=_searchKbdIdx>=0?_lastResults[_searchKbdIdx]:_lastResults[0];
+        if(pick)_doJump(pick._bankId);
+      }
+    });
+    clr.addEventListener('click',function(){
+      inp.value='';
+      var ul=document.getElementById('search-results');
+      if(ul){ul.classList.remove('open');ul.innerHTML='';}
+      _lastResults=[];_searchKbdIdx=-1;_lastQuery='';
+      inp.focus();
+    });
+    document.addEventListener('click',function(e){
+      if(!_searchBar)return;
+      if(!_searchBar.contains(e.target)){
+        var ul=document.getElementById('search-results');
+        if(ul)ul.classList.remove('open');
+      }
+    });
+    // Global "/" keybind to focus search (matches GitHub-style search UX)
+    document.addEventListener('keydown',function(e){
+      if(e.key==='/'&&document.activeElement!==inp){
+        var tag=(document.activeElement&&document.activeElement.tagName||'').toLowerCase();
+        if(tag==='input'||tag==='textarea')return;
+        e.preventDefault();
+        inp.focus();
+      }
+    });
+  }
+
+  function _wrapRender(){
+    if(typeof render!=='function')return;
+    var origR=render;
+    render=function(){
+      if(_searchBar&&_searchBar.parentNode)_searchBar.parentNode.removeChild(_searchBar);
+      origR();
+      _ensureSearchAttached();
+    };
+    if(typeof renderHistoryItem==='function'){
+      var origH=renderHistoryItem;
+      renderHistoryItem=function(){
+        if(_searchBar&&_searchBar.parentNode)_searchBar.parentNode.removeChild(_searchBar);
+        origH();
+        _ensureSearchAttached();
+      };
+    }
+    if(typeof showSummary==='function'){
+      var origS=showSummary;
+      showSummary=function(){
+        if(_searchBar&&_searchBar.parentNode)_searchBar.parentNode.removeChild(_searchBar);
+        origS();
+        // intentionally no re-attach on summary
+      };
+    }
+  }
+
+  function _bootSearch(){
+    _wrapRender();
+    _ensureSearchAttached();
+  }
+
+  // Wait until other render overrides (audio bar etc.) finish wiring
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(_bootSearch,100);
+  } else {
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(_bootSearch,100);});
+  }
+})();
+</script>
+
+<!-- SLIDE_LIGHTBOX_v1_START -->
+<style id="slide-lightbox-css">
+/* === Frame draw lightbox (V8-style, mirrors VSS pattern) === */
+.thumb { position: relative; }
+.thumb-annotate-btn { position: absolute; top: 6px; right: 6px; background: rgba(245,158,11,0.95); color: #0f172a; border: none; width: 28px; height: 28px; border-radius: 50%; font-size: 14px; cursor: pointer; box-shadow: 0 2px 6px rgba(0,0,0,0.5); z-index: 5; font-weight: 700; }
+.thumb-annotate-btn:hover { background: #fcd34d; transform: scale(1.1); }
+#lb-frame { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 20000; align-items: center; justify-content: center; flex-direction: row; padding: 14px; gap: 14px; }
+#lb-frame.open { display: flex; }
+.lb-frame-stack { position: relative; max-width: 78vw; max-height: 92vh; display: inline-block; user-select: none; -webkit-user-select: none; flex-shrink: 1; }
+.lb-frame-stack img#lb-frame-img { max-width: 78vw; max-height: 92vh; display: block; border-radius: 8px; position: relative; z-index: 1; pointer-events: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
+.lb-frame-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; border-radius: 8px; z-index: 2; touch-action: none; }
+.lb-frame-canvas.draw-active { pointer-events: auto; cursor: crosshair; }
+.lb-frame-toolbar { display: flex; flex-direction: column; gap: 8px; padding: 14px 12px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; align-items: stretch; max-height: 92vh; min-width: 170px; max-width: 200px; overflow-y: auto; box-shadow: 0 4px 16px rgba(0,0,0,0.5); position: relative; }
+.lb-frame-toolbar button { padding: 8px 12px; background: #0b1220; border: 1px solid #475569; color: #e2e8f0; border-radius: 6px; font-size: 0.82rem; cursor: pointer; text-align: left; }
+.lb-frame-toolbar button:hover { background: #1e293b; }
+.lb-frame-toolbar button.active { border-color: #22d3ee; color: #22d3ee; background: #0a2a32; }
+.lb-frame-toolbar .lb-frame-color-row { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
+.lb-frame-toolbar .lb-frame-color-row button { width: 100%; height: 26px; padding: 0; border-radius: 4px; }
+.lb-frame-toolbar #lb-frame-draw-toggle { font-size: 0.92rem; padding: 12px 14px; font-weight: 700; text-align: center; background: linear-gradient(135deg, #22d3ee, #0891b2); color: #0f172a; border: 2px solid #67e8f9; box-shadow: 0 0 0 2px rgba(34,211,238,0.25), 0 2px 8px rgba(34,211,238,0.4); }
+.lb-frame-toolbar #lb-frame-draw-toggle:hover { background: linear-gradient(135deg, #67e8f9, #22d3ee); }
+.lb-frame-toolbar #lb-frame-draw-toggle.active { background: linear-gradient(135deg, #f59e0b, #ea580c); border-color: #fcd34d; color: #0f172a; box-shadow: 0 0 0 2px rgba(245,158,11,0.45), 0 2px 8px rgba(234,88,12,0.5); }
+.lb-frame-toolbar .lb-frame-save { background: #22c55e !important; color: #0f172a !important; font-weight: 700; text-align: center; padding: 10px 12px !important; }
+.lb-frame-toolbar .lb-frame-save:hover { background: #4ade80 !important; }
+.lb-frame-toolbar .lb-frame-clear { color: #ef4444 !important; text-align: center; }
+.lb-frame-toolbar .lb-frame-close { background: #7f1d1d !important; color: #fecaca !important; font-weight: 700; text-align: center; }
+.lb-frame-toolbar .lb-frame-cap { color: #94a3b8; font-size: 11px; padding: 0 4px; text-align: center; word-wrap: break-word; }
+.lb-frame-toolbar .lb-frame-section-label { color: #64748b; font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; padding: 4px 0 0; text-align: center; }
+@media (max-width: 900px) { #lb-frame { flex-direction: column; padding: 8px; gap: 8px; } .lb-frame-stack { max-width: 96vw; max-height: 60vh; } .lb-frame-stack img#lb-frame-img { max-width: 96vw; max-height: 60vh; } .lb-frame-toolbar { flex-direction: row; flex-wrap: wrap; min-width: 0; max-width: 96vw; max-height: none; } .lb-frame-toolbar button { text-align: center; } .lb-frame-toolbar #lb-frame-draw-toggle { width: 100%; } }
+</style>
+<!-- Frame draw lightbox -->
+<div id="lb-frame">
+  <div class="lb-frame-stack">
+    <img id="lb-frame-img" src="" alt="">
+    <canvas id="lb-frame-canvas" class="lb-frame-canvas"></canvas>
+  </div>
+  <div class="lb-frame-toolbar">
+    <span class="lb-frame-cap" id="lb-frame-cap">—</span>
+    <button id="lb-frame-draw-toggle" onclick="lbFrameToggleDraw()">🎨 Tap to Draw</button>
+    <div class="lb-frame-section-label">Tool</div>
+    <button id="lb-frame-tool-pen" class="active" onclick="lbFrameSetTool('pen')">✏️ Pen</button>
+    <button id="lb-frame-tool-hl" onclick="lbFrameSetTool('hl')">🟡 Highlighter</button>
+    <button id="lb-frame-tool-er" onclick="lbFrameSetTool('er')">🧽 Eraser</button>
+    <div class="lb-frame-section-label">Size <span id="lb-frame-size-val" style="color:#22d3ee;font-weight:700">5px</span></div>
+    <input type="range" id="lb-frame-size-slider" min="1" max="60" value="5" oninput="lbFrameSetSize(this.value)" style="width:100%;accent-color:#22d3ee;cursor:pointer">
+    <div class="lb-frame-section-label">Opacity <span id="lb-frame-opacity-val" style="color:#22d3ee;font-weight:700">85%</span></div>
+    <input type="range" id="lb-frame-opacity-slider" min="0" max="100" value="85" oninput="lbFrameSetOpacity(this.value)" style="width:100%;accent-color:#22d3ee;cursor:pointer">
+    <div class="lb-frame-section-label">Color</div>
+    <div class="lb-frame-color-row">
+      <button style="background:#fbbf24" onclick="lbFrameSetColor('#fbbf24')"></button>
+      <button style="background:#ef4444" onclick="lbFrameSetColor('#ef4444')"></button>
+      <button style="background:#22c55e" onclick="lbFrameSetColor('#22c55e')"></button>
+      <button style="background:#3b82f6" onclick="lbFrameSetColor('#3b82f6')"></button>
+      <button style="background:#a78bfa" onclick="lbFrameSetColor('#a78bfa')"></button>
+      <button style="background:#fff" onclick="lbFrameSetColor('#ffffff')"></button>
+    </div>
+    <div class="lb-frame-section-label">Image <span id="lb-frame-img-opacity-val" style="color:#22d3ee;font-weight:700">100%</span></div>
+    <input type="range" id="lb-frame-img-opacity-slider" min="0" max="100" value="100" oninput="lbFrameSetImgOpacity(this.value)" style="width:100%;accent-color:#22d3ee;cursor:pointer">
+    <button id="lb-frame-bw-toggle" onclick="lbFrameToggleBW()" style="font-size:0.78rem;padding:6px 8px">⬜ B&amp;W</button>
+    <div class="lb-frame-section-label">Background</div>
+    <div class="lb-frame-color-row">
+      <button title="Black" style="background:#0a0e1a;border:1px solid #475569" onclick="lbFrameSetBgColor('#0a0e1a')"></button>
+      <button title="White" style="background:#ffffff" onclick="lbFrameSetBgColor('#ffffff')"></button>
+      <button title="Cream" style="background:#fef3c7" onclick="lbFrameSetBgColor('#fef3c7')"></button>
+      <button title="Grey" style="background:#9ca3af" onclick="lbFrameSetBgColor('#9ca3af')"></button>
+      <button title="Slate Blue" style="background:#1e3a8a" onclick="lbFrameSetBgColor('#1e3a8a')"></button>
+      <button title="Forest Green" style="background:#064e3b" onclick="lbFrameSetBgColor('#064e3b')"></button>
+    </div>
+    <div class="lb-frame-section-label">Actions</div>
+    <div style="display:flex;gap:6px">
+      <button onclick="lbFrameUndo()" title="Undo (Ctrl+Z)" style="flex:1;text-align:center">↶ Undo</button>
+      <button onclick="lbFrameRedo()" title="Redo (Ctrl+Y)" style="flex:1;text-align:center">↷ Redo</button>
+    </div>
+    <button class="lb-frame-clear" onclick="lbFrameClear()">🗑️ Clear strokes</button>
+    <button class="lb-frame-save" onclick="lbFrameSave()">💾 Save PNG</button>
+    <button class="lb-frame-close" onclick="lbFrameClose()">✕ Close</button>
+  </div>
+</div>
+<script>
+(function(){
+  var lbFrameDrawing = false, lbFrameLastX = 0, lbFrameLastY = 0;
+  var lbFrameColor = '#fbbf24';
+  var lbFrameTool = 'pen';
+  var lbFrameAlphas = {pen: 0.85, hl: 0.30, er: 1.0};
+  var lbFrameSizes = {pen: 5, hl: 26, er: 36};
+  var lbFrameBgColor = '';   // '' = default lightbox bg
+  var lbFrameUndoStack = []; // snapshots of canvas state
+  var lbFrameRedoStack = [];
+  var LB_FRAME_HISTORY_MAX = 30;
+  var lbFrameSrc = '', lbFrameLabel = '';
+
+  window.lbFrameOpen = function(src, label){
+    lbFrameSrc = src; lbFrameLabel = label || '';
+    var lb = document.getElementById('lb-frame');
+    var img = document.getElementById('lb-frame-img');
+    var canvas = document.getElementById('lb-frame-canvas');
+    document.getElementById('lb-frame-cap').textContent = label;
+    if (canvas) canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+    img.onload = function(){ lbFrameSyncCanvas(true); lbFrameApplyImgFilter(); };
+    img.src = src;
+    lb.classList.add('open');
+    lbFrameApplyImgFilter();
+    // Reset history + bg for new frame
+    lbFrameUndoStack = [];
+    lbFrameRedoStack = [];
+    lbFrameBgColor = '';
+    lb.style.background = '';  // restore default lightbox bg
+    setTimeout(function(){ lbFrameSyncCanvas(true); }, 100);
+    setTimeout(function(){ lbFrameSyncCanvas(true); }, 400);
+  };
+  window.lbFrameClose = function(){
+    var lb = document.getElementById('lb-frame');
+    lb.classList.remove('open');
+    var c = document.getElementById('lb-frame-canvas');
+    if (c) { c.classList.remove('draw-active'); c.style.pointerEvents = 'none'; c.style.cursor = ''; }
+    var btn = document.getElementById('lb-frame-draw-toggle');
+    if (btn) { btn.classList.remove('active'); btn.textContent = '🎨 Draw OFF'; }
+  };
+  function lbFrameSyncCanvas(forceClear){
+    var img = document.getElementById('lb-frame-img');
+    var canvas = document.getElementById('lb-frame-canvas');
+    if (!img || !canvas) return;
+    var w = img.naturalWidth || img.clientWidth || 1280;
+    var h = img.naturalHeight || img.clientHeight || 720;
+    var sizeChanged = (canvas.width !== w || canvas.height !== h);
+    if (sizeChanged) { canvas.width = w; canvas.height = h; }
+    if (sizeChanged || forceClear) {
+      canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);
+    }
+  }
+  window.lbFrameToggleDraw = function(){
+    var c = document.getElementById('lb-frame-canvas');
+    if (!c) return;
+    lbFrameSyncCanvas();
+    var active = c.classList.toggle('draw-active');
+    c.style.pointerEvents = active ? 'auto' : 'none';
+    c.style.cursor = active ? 'crosshair' : '';
+    c.style.touchAction = 'none';
+    var btn = document.getElementById('lb-frame-draw-toggle');
+    btn.classList.toggle('active', active);
+    btn.textContent = active ? '✏️ Drawing — tap to stop' : '🎨 Tap to Draw';
+  };
+  window.lbFrameSetColor = function(c){ lbFrameColor = c; };
+  window.lbFrameSetTool = function(t){
+    lbFrameTool = t;
+    document.querySelectorAll('.lb-frame-toolbar button[id^="lb-frame-tool-"]').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('lb-frame-tool-' + t).classList.add('active');
+    // Update sliders to show current tool's settings
+    var sizeSlider = document.getElementById('lb-frame-size-slider');
+    var opacSlider = document.getElementById('lb-frame-opacity-slider');
+    if (sizeSlider) { sizeSlider.value = lbFrameSizes[t]; document.getElementById('lb-frame-size-val').textContent = lbFrameSizes[t] + 'px'; }
+    if (opacSlider) { var op = Math.round(lbFrameAlphas[t]*100); opacSlider.value = op; document.getElementById('lb-frame-opacity-val').textContent = op + '%'; }
+  };
+  window.lbFrameSetSize = function(v){
+    lbFrameSizes[lbFrameTool] = parseInt(v, 10);
+    document.getElementById('lb-frame-size-val').textContent = v + 'px';
+  };
+  window.lbFrameSetOpacity = function(v){
+    lbFrameAlphas[lbFrameTool] = parseInt(v, 10) / 100;
+    document.getElementById('lb-frame-opacity-val').textContent = v + '%';
+  };
+  var lbFrameImgOpacity = 1.0;
+  var lbFrameBW = false;
+  function lbFrameApplyImgFilter(){
+    var img = document.getElementById('lb-frame-img');
+    if (!img) return;
+    var filter = '';
+    if (lbFrameBW) filter += 'grayscale(1) ';
+    img.style.filter = filter.trim();
+    img.style.opacity = lbFrameImgOpacity;
+  }
+  window.lbFrameSetImgOpacity = function(v){
+    lbFrameImgOpacity = parseInt(v, 10) / 100;
+    document.getElementById('lb-frame-img-opacity-val').textContent = v + '%';
+    lbFrameApplyImgFilter();
+  };
+  window.lbFrameToggleBW = function(){
+    lbFrameBW = !lbFrameBW;
+    var btn = document.getElementById('lb-frame-bw-toggle');
+    btn.textContent = lbFrameBW ? '◾ Color' : '⬜ B&W';
+    btn.classList.toggle('active', lbFrameBW);
+    lbFrameApplyImgFilter();
+  };
+  window.lbFrameSetBgColor = function(c){
+    lbFrameBgColor = c;
+    var lb = document.getElementById('lb-frame');
+    if (lb) lb.style.background = c;
+  };
+  function lbFrameSnapshot(){
+    var canvas = document.getElementById('lb-frame-canvas');
+    if (!canvas || !canvas.width) return;
+    try {
+      lbFrameUndoStack.push(canvas.toDataURL('image/png'));
+      if (lbFrameUndoStack.length > LB_FRAME_HISTORY_MAX) lbFrameUndoStack.shift();
+      lbFrameRedoStack = []; // new stroke invalidates redo
+    } catch(e) {}
+  }
+  function lbFrameRestore(dataURL){
+    var canvas = document.getElementById('lb-frame-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    img.onload = function(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.drawImage(img, 0, 0);
+    };
+    img.src = dataURL;
+  }
+  window.lbFrameUndo = function(){
+    if (lbFrameUndoStack.length === 0) return;
+    var canvas = document.getElementById('lb-frame-canvas');
+    try { lbFrameRedoStack.push(canvas.toDataURL('image/png')); } catch(e) {}
+    var prev = lbFrameUndoStack.pop();
+    if (prev) lbFrameRestore(prev);
+    else { canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height); }
+  };
+  window.lbFrameRedo = function(){
+    if (lbFrameRedoStack.length === 0) return;
+    var canvas = document.getElementById('lb-frame-canvas');
+    try { lbFrameUndoStack.push(canvas.toDataURL('image/png')); } catch(e) {}
+    var next = lbFrameRedoStack.pop();
+    if (next) lbFrameRestore(next);
+  };
+  window.lbFrameClear = function(){
+    var c = document.getElementById('lb-frame-canvas');
+    if (!c) return;
+    lbFrameSnapshot();  // allow undo of the clear
+    c.getContext('2d').clearRect(0,0,c.width,c.height);
+  };
+  window.lbFrameSave = function(){
+    // Use the existing in-DOM img (already loaded, no CORS re-fetch needed)
+    var img = document.getElementById('lb-frame-img');
+    var canvas = document.getElementById('lb-frame-canvas');
+    if (!img || !img.complete || !img.naturalWidth) {
+      alert('Frame image not loaded yet — wait a sec and try again.');
+      return;
+    }
+    var out = document.createElement('canvas');
+    out.width = canvas.width; out.height = canvas.height;
+    var octx = out.getContext('2d');
+    function paintWatermarkAndExport(){
+      octx.save();
+      octx.fillStyle = 'rgba(60,60,60,0.65)';
+      octx.font = '600 13px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif';
+      octx.textBaseline = 'bottom';
+      octx.fillText('DC Study Supply — Dr. David Gramling, PHD', 14, out.height - 10);
+      octx.restore();
+      var fname = 'fab-201-m01-frame-' + (lbFrameLabel.replace(/[^a-z0-9_-]/gi,'_') || 'annotated') + '.png';
+      // Try toBlob first
+      var didBlob = false;
+      try {
+        out.toBlob(function(blob){
+          if (!blob) { tryDataURL(); return; }
+          didBlob = true;
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url; a.download = fname;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }, 'image/png');
+        // toBlob is async; if it threw synchronously we'd be in catch
+      } catch(e) {
+        tryDataURL();
+      }
+      function tryDataURL(){
+        try {
+          var dataURL = out.toDataURL('image/png');
+          var a = document.createElement('a');
+          a.href = dataURL; a.download = fname;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        } catch(e2) {
+          alert('Save failed (CORS): the browser blocked exporting the image because it was loaded cross-origin. This works on the live GitHub Pages URL but may fail when opened directly from disk (file://). Try the live URL: dgsc23.github.io/dc-study-tools/');
+        }
+      }
+    }
+    try {
+      // 1. Paint background color first (if user picked one) — visible when image is transparent
+      if (lbFrameBgColor) {
+        octx.fillStyle = lbFrameBgColor;
+        octx.fillRect(0, 0, out.width, out.height);
+      }
+      // 2. Draw image with current opacity + B&W filter
+      octx.save();
+      octx.globalAlpha = lbFrameImgOpacity;
+      if (lbFrameBW) octx.filter = 'grayscale(1)';
+      octx.drawImage(img, 0, 0, out.width, out.height);
+      octx.restore();
+      // 3. Draw user's strokes (canvas) at full opacity over the image
+      octx.drawImage(canvas, 0, 0, out.width, out.height);
+      paintWatermarkAndExport();
+    } catch(e) {
+      // drawImage tainted the canvas — happens only with CORS-restricted images
+      alert('Save blocked by browser CORS rule. This usually means the file was opened from disk (file://) instead of the live URL. Try the live URL: dgsc23.github.io/dc-study-tools/');
+    }
+  };
+
+  // Mouse + touch handlers (mirrors VSS pattern post-fix)
+  var lbFrameCanvas = document.getElementById('lb-frame-canvas');
+  if (lbFrameCanvas) {
+    function lbFrameGetPos(e){
+      var rect = lbFrameCanvas.getBoundingClientRect();
+      var t = (e.touches && e.touches.length) ? e.touches[0] : e;
+      var rw = rect.width || 1, rh = rect.height || 1;
+      var cw = lbFrameCanvas.width || rw, ch = lbFrameCanvas.height || rh;
+      var sx = cw / rw, sy = ch / rh;
+      return [(t.clientX - rect.left) * sx, (t.clientY - rect.top) * sy];
+    }
+    function lbFrameDown(e){
+      if (!lbFrameCanvas.classList.contains('draw-active')) return;
+      e.preventDefault();
+      lbFrameSnapshot();  // save state BEFORE this stroke for undo
+      lbFrameDrawing = true;
+      var p = lbFrameGetPos(e);
+      lbFrameLastX = p[0]; lbFrameLastY = p[1];
+    }
+    function lbFrameMove(e){
+      if (!lbFrameDrawing || !lbFrameCanvas.classList.contains('draw-active')) return;
+      e.preventDefault();
+      var p = lbFrameGetPos(e);
+      var ctx = lbFrameCanvas.getContext('2d');
+      ctx.strokeStyle = lbFrameColor;
+      ctx.lineWidth = lbFrameSizes[lbFrameTool] || 5;
+      ctx.globalAlpha = lbFrameAlphas[lbFrameTool] != null ? lbFrameAlphas[lbFrameTool] : (lbFrameTool === 'er' ? 1 : 0.85);
+      ctx.globalCompositeOperation = lbFrameTool === 'er' ? 'destination-out' : 'source-over';
+      ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath(); ctx.moveTo(lbFrameLastX, lbFrameLastY); ctx.lineTo(p[0], p[1]); ctx.stroke();
+      lbFrameLastX = p[0]; lbFrameLastY = p[1];
+    }
+    function lbFrameUp(){ lbFrameDrawing = false; }
+    lbFrameCanvas.addEventListener('mousedown', lbFrameDown);
+    lbFrameCanvas.addEventListener('mousemove', lbFrameMove);
+    lbFrameCanvas.addEventListener('mouseup', lbFrameUp);
+    lbFrameCanvas.addEventListener('mouseleave', lbFrameUp);
+    window.addEventListener('mouseup', lbFrameUp);
+    lbFrameCanvas.addEventListener('touchstart', lbFrameDown, {passive: false});
+    lbFrameCanvas.addEventListener('touchmove', lbFrameMove, {passive: false});
+    lbFrameCanvas.addEventListener('touchend', lbFrameUp);
+  }
+})();
+</script>
+<!-- SLIDE_LIGHTBOX_v1_END -->
+
+<!-- mc-to-frame-pip-drill-v2 -->
+
+<style id="mc-to-frame-pip-drill-css">
+.btn-frame-pip{padding:6px 14px;background:linear-gradient(135deg,#7c3aed,#a78bfa);color:#fff;border:1.5px solid #c4b5fd;border-radius:7px;font-weight:700;font-size:.78rem;cursor:pointer;margin-left:8px;white-space:nowrap;letter-spacing:.3px;box-shadow:0 2px 6px rgba(124,58,237,.4)}
+.btn-frame-pip:hover{background:linear-gradient(135deg,#6d28d9,#8b5cf6);transform:translateY(-1px)}
+@media (max-width:600px){.btn-frame-pip{padding:5px 10px;font-size:.72rem}}
+</style>
+<script id="mc-to-frame-pip-drill-js">
+(function(){
+  // Lecture routing config — generic across number of lectures so this same code
+  // works for GA (2 lectures, 1 boundary) and FAB (3 lectures, 2 boundaries) and
+  // any future module. Boundaries are combined-audio split timestamps in seconds.
+  // viewers[i] is the URL for lecture i (after boundaries[i-1], up to boundaries[i]).
+  var LECTURE_CFG={
+  "boundaries": [4800, 10817],
+  "viewers": [
+    "fab-201-m02-shoulder-forearm-l04-frame-viewer.html",
+    "fab-201-m02-shoulder-forearm-l05-frame-viewer.html",
+    "fab-201-m02-shoulder-forearm-l06-frame-viewer.html"
+  ]
+};
+
+  function resolveLecture(combinedTs){
+    var boundaries=LECTURE_CFG.boundaries;
+    var viewers=LECTURE_CFG.viewers;
+    var prev=0;
+    for(var i=0;i<boundaries.length;i++){
+      if(combinedTs<=boundaries[i]){
+        return {idx:i,viewer:viewers[i],relTs:combinedTs-prev};
+      }
+      prev=boundaries[i];
+    }
+    var last=boundaries.length;
+    return {idx:last,viewer:viewers[last],relTs:combinedTs-prev};
+  }
+
+  window.openFrameViewerForCurrentQ=function(){
+    if(typeof questions==='undefined'||typeof idx==='undefined'||typeof TIMESTAMPS==='undefined')return;
+    var q=questions[idx];
+    if(!q)return;
+    var bankId=q._bankId;
+    if(bankId==null||bankId>=TIMESTAMPS.length)return;
+    var ts=TIMESTAMPS[bankId];
+    if(!isFinite(ts)||ts<=0)return;
+    var routed=resolveLecture(ts);
+    if(!routed.viewer)return;
+    var url=routed.viewer+'?ts='+routed.relTs.toFixed(1);
+    window.open(url,'_blank','noopener,noreferrer');
+  };
+
+  // Inject the button into the audio bar's audio-info section AFTER it's built
+  function injectButton(){
+    var bar=document.getElementById('audio-bar');
+    if(!bar)return false;
+    if(bar.querySelector('.btn-frame-pip'))return true;
+    var info=bar.querySelector('.audio-info');
+    if(!info)return false;
+    var btn=document.createElement('button');
+    btn.className='btn-frame-pip';
+    btn.type='button';
+    btn.innerHTML='🎞️ Frames + PiP';
+    btn.title='Open Frame Viewer at this Q\'s timestamp — draw on the slide while video PiP plays';
+    btn.onclick=function(e){e.preventDefault();openFrameViewerForCurrentQ();};
+    info.appendChild(btn);
+    return true;
+  }
+
+  // Audio bar is rebuilt on every render(); inject after each rebuild.
+  function watchAndInject(){
+    if(injectButton())return;
+    // Audio bar not built yet — observe app for changes
+    var app=document.getElementById('app');
+    if(!app)return;
+    var mo=new MutationObserver(function(){
+      if(injectButton())mo.disconnect();
+    });
+    mo.observe(app,{childList:true,subtree:true});
+  }
+
+  // Re-inject on every audio-bar attachment (after render() wipes #app)
+  setInterval(injectButton,1500);
+
+  if(document.readyState==='complete'||document.readyState==='interactive'){
+    setTimeout(watchAndInject,500);
+  } else {
+    document.addEventListener('DOMContentLoaded',function(){setTimeout(watchAndInject,500);});
+  }
+})();
+</script>
+
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<style id="pill-rebuild-deploy-fab-lightbox-css">
+/* ============================================================ */
+/* PILL REBUILD DEPLOY — verbatim from sandbox test-floating-pill */
+/* Surface: pill-rebuild-deploy-fab-lightbox                                              */
+/* ============================================================ */
+
+/* Toolbar floats to bottom-right when body has float-toolbar-mode class.
+   Conditioned on the toolbar's visibility-trigger class (.show/.active) when
+   the surface uses one, so we don't force display:flex on a hidden toolbar.
+   NOTE: bottom/right are NOT !important so the JS visualViewport handler can
+   override them at zoom > 1.05 (Bug fix 2026-05-10: prior !important blocked
+   JS overrides → toolbar drifted off-screen when zoomed in).
+   z-index: 99999 sits above the frame viewer's #lb-frame overlay (z 20000)
+   (Bug fix 2026-05-10: prior z 10000 < lightbox 20000 → toolbar invisible). */
+body.float-toolbar-mode .lb-frame-toolbar {
+    position: fixed !important;
+    top: auto !important; left: auto !important;
+    bottom: 14px;
+    right: 14px;
+    z-index: 99999;
+    /* max-height leaves room for top-bar UI on each surface so the toolbar's
+       top edge doesn't reach into elements like the frame viewer's Exit
+       Annotate Mode banner (z 21000 at top:14, ~40px tall). Per-surface
+       top_clearance lives in the SURFACES config. */
+    max-height: calc(100vh - 28px - 14px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex !important;
+    flex-direction: column;
+    gap: 4px;
+    /* Quick-win 2026-05-10: tighter padding so the toolbar claims less
+       horizontal space ("in the way" feedback). Overrides the surface's
+       baseline padding (slides 8px, frame viewer 14px 12px, VSS/AG 10px). */
+    padding: 6px 6px !important;
+}
+
+/* Expand/collapse button — first child of the toolbar.
+   Quick-win iteration 2026-05-10: bumped from 36x36 dark-purple to a
+   prominent 48x34 cyan pill so it can't be missed alongside the cyan
+   "Video / Flip / Pause" annotate-mode controls. Brighter contrast,
+   slightly larger tap target, distinct color from the toolbar so users
+   can spot the minimize action quickly. */
+body.float-toolbar-mode #ftExpandBtn {
+    min-width: 48px;
+    height: 34px;
+    border-radius: 17px;
+    border: 1.5px solid #67e8f9;
+    background: linear-gradient(135deg, #22d3ee, #0891b2);
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 0 0 2px rgba(34,211,238,0.3);
+    padding: 0 12px;
+    line-height: 30px;
+    text-align: center;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    margin: 0 0 6px 0;
+    align-self: flex-end;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    letter-spacing: 0.5px;
+}
+body.float-toolbar-mode #ftExpandBtn:hover {
+    background: linear-gradient(135deg, #67e8f9, #22d3ee);
+}
+body.float-toolbar-mode #ftExpandBtn:active { transform: scale(0.92); }
+
+/* When collapsed, the button becomes the pill itself — keep cyan, slightly
+   larger square shape so it's still findable when the toolbar shrinks to
+   just this button. */
+body.float-toolbar-mode .lb-frame-toolbar.collapsed #ftExpandBtn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    padding: 0;
+    font-size: 22px;
+    line-height: 44px;
+}
+
+/* Collapsed state: hide all toolbar children except the expand button.
+   The .collapsed class is added BY us only when the toolbar is visible, so
+   no trigger qualifier needed here — collapsed implies visible. */
+body.float-toolbar-mode .lb-frame-toolbar.collapsed {
+    padding: 0 !important;
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    max-height: none !important;
+    max-width: none !important;
+    width: auto !important;
+}
+body.float-toolbar-mode .lb-frame-toolbar.collapsed > *:not(#ftExpandBtn) { display: none !important; }
+
+/* Draw/scroll toggle — bottom-left, separate element appended to body.
+   z-index: 99999 matches the toolbar (above frame viewer's lightbox overlay). */
+body.float-toolbar-mode #floatingToggle {
+    display: none;
+    position: fixed;
+    bottom: 14px;
+    left: 14px;
+    z-index: 99999;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 2px solid #9b59b6;
+    cursor: pointer;
+    font-size: 16px; font-weight: 700;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+    transition: background .15s, color .15s, border-color .15s;
+    text-align: center;
+    line-height: 36px;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+body.float-toolbar-mode #floatingToggle.visible { display: block; }
+body.float-toolbar-mode #floatingToggle.draw-mode { background: #9b59b6; color: #fff; }
+body.float-toolbar-mode #floatingToggle.scroll-mode { background: #2d1b4e; color: #c9a0dc; border-color: #7b4ea3; }
+body.float-toolbar-mode #floatingToggle:active { transform: scale(0.9); }
+</style>
+<script id="pill-rebuild-deploy-fab-lightbox-js">
+(function() {
+    "use strict";
+    var TB_SEL    = '.lb-frame-toolbar';
+    var TB_TRIG   = null;
+    var CANVAS_SEL = '#lb-frame-canvas';
+    var BODY_CLASS = 'float-toolbar-mode';
+    var LS_KEY    = 'pillFabLightboxCollapsed';
+    var TOP_CLEARANCE = 28;
+
+    function tb()     { return document.querySelector(TB_SEL); }
+    function fb()     { return document.getElementById('floatingToggle'); }
+    function canvas() { return document.querySelector(CANVAS_SEL); }
+
+    function tbVisible() {
+        var t = tb(); if (!t) return false;
+        // Use getBoundingClientRect rather than offsetParent. Reason: per spec,
+        // offsetParent returns null for any element with `position: fixed` —
+        // and my pill CSS makes the toolbar position:fixed. So offsetParent
+        // would ALWAYS be null on a floating toolbar (whether visible or not),
+        // which would break the visibility check and cause updateFloatingPos
+        // to return early, breaking zoom-tracking. Bug caught 2026-05-10 after
+        // David reported the toolbar didn't follow zoom on the frame viewer.
+        // getBoundingClientRect returns a zero rect when the element OR any
+        // ancestor has display:none, but a non-zero rect when rendered,
+        // regardless of position:fixed/relative/static.
+        var rect = t.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+    }
+
+    // ---- expand / collapse ----
+    function ensureExpandBtn() {
+        var t = tb(); if (!t) return;
+        if (document.getElementById('ftExpandBtn')) return;
+        var btn = document.createElement('button');
+        btn.id = 'ftExpandBtn';
+        btn.type = 'button';
+        btn.title = 'Collapse / expand toolbar';
+        btn.setAttribute('aria-label', 'Collapse toolbar');
+        var startCollapsed = false;
+        try { startCollapsed = localStorage.getItem(LS_KEY) === '1'; } catch (e) {}
+        if (startCollapsed) t.classList.add('collapsed');
+        btn.innerHTML = startCollapsed ? '&#9998;' : '&#10005;';
+        btn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            var collapsed = t.classList.toggle('collapsed');
+            btn.innerHTML = collapsed ? '&#9998;' : '&#10005;';
+            btn.setAttribute('aria-label', collapsed ? 'Expand toolbar' : 'Collapse toolbar');
+            try { localStorage.setItem(LS_KEY, collapsed ? '1' : '0'); } catch (e2) {}
+            requestAnimationFrame(updateFloatingPos);
+        });
+        if (t.firstChild) t.insertBefore(btn, t.firstChild); else t.appendChild(btn);
+    }
+
+    // ---- draw / scroll toggle ----
+    var touchDrawMode = true;
+    function ensureDrawScrollToggle() {
+        if (document.getElementById('floatingToggle')) return;
+        var btn = document.createElement('button');
+        btn.id = 'floatingToggle';
+        btn.type = 'button';
+        btn.className = 'draw-mode';
+        btn.title = 'Touch = draw — tap to switch to scroll';
+        btn.setAttribute('aria-label', 'Toggle draw / scroll mode');
+        btn.innerHTML = '&#9998;';
+        btn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            touchDrawMode = !touchDrawMode;
+            var c = canvas();
+            btn.className = (btn.classList.contains('visible') ? 'visible ' : '') +
+                            (touchDrawMode ? 'draw-mode' : 'scroll-mode');
+            btn.innerHTML = touchDrawMode ? '&#9998;' : '&#9995;';
+            btn.title = touchDrawMode
+                ? 'Touch = draw — tap to switch to scroll'
+                : 'Touch = scroll — tap to switch to draw';
+            if (c) {
+                c.style.touchAction = touchDrawMode ? 'none' : 'auto';
+                c.style.pointerEvents = touchDrawMode ? '' : 'none';
+            }
+            requestAnimationFrame(updateFloatingPos);
+        });
+        document.body.appendChild(btn);
+    }
+
+    function syncToggleVisibility() {
+        var b = fb(); if (!b) return;
+        if (tbVisible()) b.classList.add('visible');
+        else b.classList.remove('visible');
+    }
+
+    // ---- visual viewport zoom positioning ----
+    // Toolbar bottom-right anchored: left = vv.right - margin - w*sc,  top = vv.bottom - margin - h*sc
+    // Toggle  bottom-left  anchored: left = vv.left + margin,           top = vv.bottom - margin - h*sc
+    // Both use transformOrigin: top left + scale(1/vv.scale).
+    function updateFloatingPos() {
+        var t = tb();
+        var b = fb();
+        var tShown = t && tbVisible();
+        var bShown = b && b.classList.contains('visible');
+        if (!tShown && !bShown) return;
+        if (!window.visualViewport) return;
+        var vv = window.visualViewport;
+        var margin = 14;
+        // Snap-back at default zoom — drop inline overrides so CSS rules
+        // (max-height + position) take over cleanly.
+        if (vv.scale <= 1.05) {
+            if (t) {
+                t.style.transform = ''; t.style.transformOrigin = '';
+                t.style.left = ''; t.style.top = '';
+                t.style.right = ''; t.style.bottom = '';
+                t.style.maxHeight = '';
+            }
+            if (b) {
+                b.style.transform = ''; b.style.transformOrigin = '';
+                b.style.left = ''; b.style.top = '';
+                b.style.right = ''; b.style.bottom = '';
+            }
+            return;
+        }
+        var sc = 1 / vv.scale;
+        if (tShown) {
+            // Dynamically clamp toolbar's layout max-height so its VISUAL
+            // height fits in the visible viewport with top_clearance + bottom
+            // margin. Without this, at heavy zoom (4x+) the toolbar overflows
+            // off-screen because CSS `max-height: calc(100vh - Npx)` uses
+            // LAYOUT vh, which stays large when zoomed in.
+            var maxVisualH = vv.height - TOP_CLEARANCE - margin;
+            if (maxVisualH < 60) maxVisualH = 60;  // sanity floor
+            var maxLayoutH = maxVisualH / sc;
+            t.style.maxHeight = maxLayoutH + 'px';
+            // Re-measure AFTER clamping max-height so th reflects the new
+            // clamped layout box.
+            var tw = t.offsetWidth || 60;
+            var th = t.offsetHeight || 200;
+            t.style.right = 'auto';
+            t.style.bottom = 'auto';
+            t.style.left = (vv.offsetLeft + vv.width  - margin - tw * sc) + 'px';
+            t.style.top  = (vv.offsetTop  + vv.height - margin - th * sc) + 'px';
+            t.style.transform = 'scale(' + sc + ')';
+            t.style.transformOrigin = 'top left';
+        }
+        if (bShown) {
+            var bh = b.offsetHeight || 40;
+            b.style.right = 'auto';
+            b.style.bottom = 'auto';
+            b.style.left = (vv.offsetLeft + margin) + 'px';
+            b.style.top  = (vv.offsetTop + vv.height - margin - bh * sc) + 'px';
+            b.style.transform = 'scale(' + sc + ')';
+            b.style.transformOrigin = 'top left';
+        }
+    }
+
+    function init() {
+        document.body.classList.add(BODY_CLASS);
+        var t = tb();
+        if (!t) { setTimeout(init, 200); return; }
+        ensureExpandBtn();
+        ensureDrawScrollToggle();
+        syncToggleVisibility();
+        // Watch class changes that affect toolbar visibility. THREE targets
+        // because different surfaces trigger visibility via different
+        // elements:
+        //   - toolbar itself (.show on slides, .active on VSS/AG)
+        //   - toolbar's parent (#lb-frame.open on frame viewers — the
+        //     toolbar's own class doesn't change when the lightbox opens)
+        //   - document.body (body.annotate-mode on frame viewers — covers
+        //     the gap if a future surface scopes visibility on body class)
+        // Without the parent + body observers, the frame viewer's toggle
+        // stayed hidden because syncToggleVisibility never re-ran after
+        // init() — caught 2026-05-10 when David reported the toggle
+        // missing on the frame viewer after bugfix #3.
+        var mo = new MutationObserver(function(muts) {
+            for (var i = 0; i < muts.length; i++) {
+                if (muts[i].attributeName === 'class') {
+                    syncToggleVisibility();
+                    requestAnimationFrame(updateFloatingPos);
+                    break;
+                }
+            }
+        });
+        mo.observe(t, { attributes: true, attributeFilter: ['class'] });
+        if (t.parentElement) {
+            mo.observe(t.parentElement, { attributes: true, attributeFilter: ['class'] });
+        }
+        mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+        if (window.visualViewport) {
+            window.visualViewport.addEventListener('scroll', updateFloatingPos);
+            window.visualViewport.addEventListener('resize', updateFloatingPos);
+        }
+        window.addEventListener('scroll', updateFloatingPos, { passive: true });
+        window.addEventListener('resize', updateFloatingPos);
+        requestAnimationFrame(updateFloatingPos);
+    }
+
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        setTimeout(init, 200);
+    } else {
+        document.addEventListener('DOMContentLoaded', function() { setTimeout(init, 200); });
+    }
+})();
+</script>
+
+<style id="lb-frame-back-btn-css">
+#lb-frame-back-btn {
+    position: fixed;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100002;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: #fff;
+    border: 2px solid #34d399;
+    border-radius: 14px;
+    font-size: 1.02rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 18px rgba(16, 185, 129, 0.55), 0 0 0 3px rgba(52, 211, 153, 0.3);
+    display: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    letter-spacing: 0.4px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    white-space: nowrap;
+}
+#lb-frame-back-btn:hover {
+    background: linear-gradient(135deg, #047857, #059669);
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 6px 22px rgba(16, 185, 129, 0.7), 0 0 0 3px rgba(52, 211, 153, 0.4);
+}
+#lb-frame-back-btn:active {
+    transform: translateX(-50%) translateY(0);
+}
+/* Hide the page hub button when lightbox is open so users don't click it
+   by accident thinking it closes the lightbox. */
+body.lb-frame-active #fab201-back-to-hub,
+body.lb-frame-active .fab-back-to-hub-btn,
+body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
+    display: none !important;
+}
+@media (max-width: 600px) {
+    #lb-frame-back-btn {
+        top: 10px;
+        padding: 10px 18px;
+        font-size: 0.92rem;
+    }
+}
+</style>
+
+<button id="lb-frame-back-btn" type="button" onclick="if(typeof lbFrameClose==='function')lbFrameClose();">&larr; Back to Quiz</button>
+
+<script id="lb-frame-back-btn-js">
+(function(){
+  function syncVisibility(){
+    var lb = document.getElementById('lb-frame');
+    var btn = document.getElementById('lb-frame-back-btn');
+    if (!lb || !btn) return;
+    var isOpen = lb.classList.contains('open');
+    btn.style.display = isOpen ? 'block' : 'none';
+    document.body.classList.toggle('lb-frame-active', isOpen);
+  }
+  function attach(){
+    syncVisibility();
+    var lb = document.getElementById('lb-frame');
+    if (!lb) return;
+    var obs = new MutationObserver(syncVisibility);
+    obs.observe(lb, {attributes: true, attributeFilter: ['class']});
+  }
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(attach, 200);
+  } else {
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(attach, 200); });
+  }
+  // Escape key closes
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') {
+      var lb = document.getElementById('lb-frame');
+      if (lb && lb.classList.contains('open') && typeof lbFrameClose === 'function') {
+        lbFrameClose();
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

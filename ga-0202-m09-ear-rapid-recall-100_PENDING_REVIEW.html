@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · The Ear · Rapid Recall</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.header { text-align: center; padding: 24px 16px 12px; width: 100%; max-width: 700px; }
+.header h1 { font-size: 22px; color: #60a5fa; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; color: #94a3b8; }
+.score-bar { display: flex; gap: 16px; justify-content: center; padding: 10px; font-size: 14px; font-weight: 600; }
+.score-bar .got { color: #4ade80; } .score-bar .missed { color: #f87171; } .score-bar .remain { color: #94a3b8; }
+.progress-track { width: 100%; max-width: 700px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #60a5fa); transition: width 0.4s ease; border-radius: 3px; }
+.card-container { width: 100%; max-width: 700px; padding: 0 16px; flex: 1; }
+.card { background: #1e293b; border: 2px solid #334155; border-radius: 16px; padding: 32px 28px; text-align: center; min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: border-color 0.3s; }
+.card:hover { border-color: #475569; }
+.card-number { font-size: 12px; color: #64748b; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.term { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; line-height: 1.3; }
+.answer { font-size: 15px; line-height: 1.7; color: #cbd5e1; max-width: 600px; padding: 16px 20px; background: #0f172a; border-radius: 10px; border-left: 4px solid #3b82f6; text-align: left; display: none; margin-bottom: 16px; }
+.answer.show { display: block; animation: fadeIn 0.3s ease; }
+.prof-tip { font-size: 13px; color: #fbbf24; margin-top: 8px; font-style: italic; display: none; text-align: left; max-width: 600px; padding: 10px 16px; background: #1a0a0a; border-left: 3px solid #ef4444; border-radius: 0 10px 10px 0; }
+.prof-tip.show { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 12px 28px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn:active { transform: scale(0.96); }
+.btn-reveal { background: #3b82f6; color: white; } .btn-reveal:hover { background: #2563eb; }
+.btn-got { background: #166534; color: #4ade80; display: none; } .btn-got:hover { background: #15803d; }
+.btn-missed { background: #7f1d1d; color: #f87171; display: none; } .btn-missed:hover { background: #991b1b; }
+.btn-back { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-back:hover { background: #475569; }
+.btn-skip { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-skip:hover { background: #475569; }
+.btn-continue { background: #1e40af; color: #93c5fd; display: none; } .btn-continue:hover { background: #1d4ed8; }
+.btn-redo { background: #7c3aed; color: #c4b5fd; display: none; } .btn-redo:hover { background: #6d28d9; }
+.btn-redoback { background: #7c3aed; color: #c4b5fd; padding: 10px 20px; font-size: 13px; } .btn-redoback:hover { background: #6d28d9; }
+.browse-label { font-size: 11px; color: #f59e0b; margin-bottom: 8px; display: none; }
+.controls { padding: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.ctrl-btn { padding: 8px 16px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.ctrl-btn:hover { background: #334155; color: #e2e8f0; } .ctrl-btn.active { border-color: #3b82f6; color: #60a5fa; }
+.summary { display: none; text-align: center; padding: 40px 20px; width: 100%; max-width: 700px; }
+.summary h2 { font-size: 28px; color: #60a5fa; margin-bottom: 20px; }
+.summary .final-score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.summary .final-score.great { color: #4ade80; } .summary .final-score.ok { color: #fbbf24; } .summary .final-score.rough { color: #f87171; }
+.missed-list { text-align: left; max-width: 500px; margin: 20px auto; background: #1e293b; border-radius: 12px; padding: 16px 20px; }
+.missed-list h3 { color: #f87171; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.missed-list li { color: #cbd5e1; padding: 6px 0; border-bottom: 1px solid #334155; font-size: 14px; list-style: none; } .missed-list li:last-child { border: none; }
+.kb-hint { font-size: 11px; color: #475569; text-align: center; padding: 8px; }
+.index-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.95); z-index: 100; flex-direction: column; align-items: center; padding: 20px; overflow-y: auto; }
+.index-overlay h2 { color: #60a5fa; font-size: 20px; margin-bottom: 16px; }
+.index-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; } .index-close:hover { color: #e2e8f0; }
+.index-grid { max-width: 700px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.index-chip { padding: 10px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; cursor: pointer; font-size: 13px; color: #cbd5e1; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.index-chip:hover { background: #334155; border-color: #60a5fa; }
+.index-chip .chip-num { color: #64748b; font-size: 11px; min-width: 30px; }
+.chip-got { border-left: 3px solid #4ade80; } .chip-got .chip-status { color: #4ade80; }
+.chip-missed { border-left: 3px solid #f87171; } .chip-missed .chip-status { color: #f87171; }
+.chip-current { border-left: 3px solid #60a5fa; background: #1e3a5f; } .chip-current .chip-status { color: #60a5fa; }
+.chip-status { font-size: 11px; min-width: 50px; text-align: right; }
+</style>
+
+
+
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+
+<style id="ga0202-cleanup-v9">
+/* Hide legacy FAB Lecture Final hub buttons (we have our own ga0202-back-to-hub) */
+.fab-back-to-hub-btn,
+.sh-fab,
+.sh-back-to-start-fab,
+button[onclick*="fabBackToHub"],
+button[onclick*="shBackToStart"] { display: none !important; }
+/* Make sure draw button + AI button don't overlap */
+.fab-stack { bottom: 90px !important; right: 24px !important; z-index: 9999 !important; }
+.fab-stack button { pointer-events: auto !important; }
+#draw-btn { z-index: 10000 !important; }
+.draw-toolbar { z-index: 10001 !important; bottom: 158px !important; right: 90px !important; }
+.draw-canvas { z-index: 9990 !important; }
+#ai-btn, #ai-aug-btn, #ai-modal { display: none !important; }
+</style>
+<script id="ga0202-cleanup-v9-js">
+// Override legacy redirect functions to point to OUR hub instead
+window.fabBackToHub = function() { window.location.href = 'ga-0202-m09-ear-hub_PENDING_REVIEW.html'; };
+window.shBackToStart = function() { window.location.href = 'ga-0202-m09-ear-hub_PENDING_REVIEW.html'; };
+</script>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="ga-0202-m09-ear-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to Ear Hub</a>
+
+<div class="header">
+  <h1>⚡ GA 0202 · The Ear · Rapid Recall</h1>
+  <div class="subtitle">Dr. Maini · The Ear (Lecture 22) — 100 Cards | See prompt. Say it. Reveal to check.</div>
+</div>
+<div class="score-bar">
+  <span class="got" id="gotCount">0 Got It</span>
+  <span class="missed" id="missedCount">0 Missed</span>
+  <span class="remain" id="remainCount">0 Left</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="card-container" id="cardArea">
+  <div class="card">
+    <div class="browse-label" id="browseLabel">BROWSING — already answered</div>
+    <div class="card-number" id="cardNum"></div>
+    <div class="term" id="termText"></div>
+    <div class="answer" id="answerText"></div>
+    <div class="prof-tip" id="profTip"></div>
+    <div class="btn-row">
+      <button class="btn btn-reveal" id="btnReveal" onclick="doReveal()">Reveal Answer</button>
+      <button class="btn btn-got" id="btnGot" onclick="grade(true)">Got It</button>
+      <button class="btn btn-missed" id="btnMissed" onclick="grade(false)">Missed It</button>
+      <button class="btn btn-continue" id="btnContinue" onclick="resumeQuiz()">Continue &rarr;</button>
+      <button class="btn btn-redo" id="btnRedo" onclick="redoPrev()">Redo</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" id="btnBack" onclick="goBack()">&larr; Back</button>
+      <button class="btn btn-redoback" id="btnRedoBack" onclick="redoBack()">Redo Back</button>
+      <button class="btn btn-skip" onclick="skip()">Skip</button>
+    </div>
+  </div>
+</div>
+<div class="summary" id="summaryArea">
+  <h2>Drill Complete</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="finalMsg" style="color:#94a3b8;margin-bottom:20px;"></p>
+  <div class="missed-list" id="missedListBox" style="display:none;"><h3>Review These</h3><ul id="missedListUl"></ul></div>
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-reveal" onclick="startDrill('all')">Restart All</button>
+    <button class="btn btn-missed" id="btnRedrill" style="display:inline-block;" onclick="startDrill('missed')">Re-Drill Missed</button>
+  </div>
+</div>
+<div class="controls">
+  <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">Shuffle</button>
+  <button class="ctrl-btn" onclick="toggleIndex()">Card Index</button>
+  <button class="ctrl-btn" onclick="startDrill('all')">Reset</button>
+</div>
+<div class="kb-hint">Space = Reveal | G = Got It | M = Missed | S = Skip | B = Back | D = Redo Back | R = Redo | I = Index</div>
+<div class="index-overlay" id="indexOverlay">
+  <button class="index-close" onclick="toggleIndex()">&times;</button>
+  <h2>Card Index</h2>
+  <div class="index-grid" id="indexGrid"></div>
+</div>
+<script>
+const BANK = [{"term": "[Ear Regions] The ear is divided into external, middle, and internal parts. Which part houses the auditory receptors that convert sound-wave vibrations into action potentials?", "answer": "The INTERNAL (inner) ear. Maini: 'Internal ear is the place where your receptors are located... those vibrations reach there and are converted into action potentials,' which travel to the temporal lobe.", "tip": "The receptors are deeply protected in the inner ear — the external and middle ear only conduct vibrations to them."}, {"term": "[Ear Regions] What is the primary role of the external and middle ear?", "answer": "To act as a CONDUIT (conducting passage) that transmits sound-wave vibrations structure-to-structure until they reach the internal ear.", "tip": "No receptors live in the external or middle ear — they are pure sound-conducting apparatus."}, {"term": "[External Ear] What are the THREE parts of the external ear?", "answer": "The auricle (pinna), the external acoustic meatus, and the tympanic membrane.", "tip": ""}, {"term": "[External Ear] The auricle (pinna) is supported by what type of cartilage?", "answer": "A single piece of ELASTIC cartilage. Maini: 'If you remove the skin and connective tissue, you will find a single piece of elastic cartilage.'", "tip": "Elastic cartilage is full of elastin — distort it and it springs back to shape."}, {"term": "[External Ear] Besides the auricle, what other structure did Maini name as an example of elastic cartilage?", "answer": "The epiglottis.", "tip": ""}, {"term": "[External Ear] Which part of the auricle contains skin and soft tissue but NO cartilage, and is very vascular?", "answer": "The earlobe (lobule).", "tip": "Maini's aside: the lobule's function is 'to wear your diamonds.'"}, {"term": "[External Ear] The auricular arteries — superficial temporal, posterior auricular, and occipital — are all branches of which vessel?", "answer": "The external carotid artery (ECA).", "tip": ""}, {"term": "[External Ear] The great auricular nerve, a sensory nerve to the auricle, is a branch of which plexus?", "answer": "The cervical plexus (it travels with the external jugular vein).", "tip": "Lesser occipital + great auricular = cervical plexus branches; auriculotemporal = V3."}, {"term": "[External Ear] The auriculotemporal nerve, which helps supply the auricle and external acoustic meatus, is a branch of which nerve?", "answer": "The mandibular division of the trigeminal nerve (V3).", "tip": "Recall from the infratemporal fossa: auriculotemporal is pierced by the middle meningeal artery."}, {"term": "[External Ear] Which nerve provides MOTOR supply to the (rudimentary) auricular muscles?", "answer": "The facial nerve (CN VII).", "tip": "The auricular muscles (superior, anterior, posterior) are non-functional in humans."}, {"term": "[External Acoustic Meatus] Maini calls the external acoustic meatus a 'sinuous' (S-shaped) tube. About how long is it?", "answer": "About 2.5 cm.", "tip": ""}, {"term": "[External Acoustic Meatus] How is the external acoustic meatus supported along its length?", "answer": "The lateral one-third by elastic cartilage; the medial two-thirds by the temporal bone.", "tip": ""}, {"term": "[External Acoustic Meatus] Which nerve carries GSA fibers from the external acoustic meatus, so that cleaning the ear can trigger a throat/cough sensation?", "answer": "The auricular branch of the vagus nerve (CN X).", "tip": "Vagal stimulation during ear-cleaning refers sensation to the throat."}, {"term": "[Auricle Parts] What is the name of the outer, curved ridge of the auricle?", "answer": "The helix. The antihelix runs roughly parallel to it.", "tip": "Maini said she has seen board questions on the parts of the auricle."}, {"term": "[Auricle Parts] The boat-shaped fossa between the helix and the antihelix is called the:", "answer": "Scapha.", "tip": "Scapha literally means 'boat' — like the scaphoid ('boat-shaped') bone."}, {"term": "[Auricle Parts] Which auricular projection lies immediately ANTERIOR to the external acoustic meatus?", "answer": "The tragus. Opposite it is the antitragus.", "tip": ""}, {"term": "[Auricle Parts] The intertragic notch lies between which two structures?", "answer": "The tragus and the antitragus.", "tip": "Maini's joke: nature made the notch 'to hold your AirPods.'"}, {"term": "[Tympanic Membrane] How does Maini describe the tympanic membrane?", "answer": "A thin, semi-transparent, oval, pearly-gray fibrous membrane (the eardrum).", "tip": ""}, {"term": "[Tympanic Membrane] What covers the tympanic membrane externally and internally?", "answer": "Externally thin skin, internally mucous membrane, with a core of dense fibrous tissue.", "tip": ""}, {"term": "[Tympanic Membrane] The central depression of the tympanic membrane, where the malleus handle attaches, is called the:", "answer": "Umbo.", "tip": "Umbo means 'umbrella' — the membrane is not flat but slightly drawn inward."}, {"term": "[Tympanic Membrane] On otoscopy, at what clock position does the cone of light appear in each ear?", "answer": "RIGHT ear = 5 o'clock; LEFT ear = 7 o'clock. Maini: 'In the right ear, 5 o'clock. In the left ear, 7 o'clock.'", "tip": "Maini explicitly said 'this can appear as a question in your exam.'"}, {"term": "[Tympanic Membrane] For clinical examination, the tympanic membrane is divided into how many quadrants?", "answer": "Four: anterosuperior, posterosuperior, anteroinferior, posteroinferior.", "tip": ""}, {"term": "[Tympanic Membrane] The small, lax SUPERIOR portion of the tympanic membrane is called the:", "answer": "Pars flaccida (the larger, tense inferior portion is the pars tensa).", "tip": ""}, {"term": "[Tympanic Membrane] Puncturing the POSTEROSUPERIOR quadrant of the tympanic membrane risks damaging which structure lying just behind it?", "answer": "The chorda tympani.", "tip": "This is why the posterosuperior quadrant is avoided for incisions."}, {"term": "[Tympanic Membrane] Which quadrant is the PREFERRED site for a myringotomy, and why?", "answer": "The POSTEROINFERIOR quadrant — no important structure lies behind it.", "tip": "Contrast with posterosuperior (chorda tympani) — a classic paired exam trap."}, {"term": "[Tympanic Membrane] The sensory supply of the tympanic membrane differs by surface. Which nerve supplies the INTERNAL (medial) surface?", "answer": "The glossopharyngeal nerve (CN IX). (The external surface is supplied by auriculotemporal V3 + the auricular branch of vagus.)", "tip": ""}, {"term": "[Embryology] From which embryonic structure does the TYMPANIC MEMBRANE develop?", "answer": "The first pharyngeal membrane.", "tip": "Cleft invaginates + pouch evaginates — they meet at the tympanic membrane."}, {"term": "[Embryology] The MIDDLE EAR (tympanic cavity) develops from which embryonic structure?", "answer": "The first pharyngeal pouch.", "tip": ""}, {"term": "[Embryology] The EXTERNAL ACOUSTIC MEATUS develops from which embryonic structure?", "answer": "The first pharyngeal cleft (groove).", "tip": ""}, {"term": "[Middle Ear] The tympanic cavity (middle ear) lies within which part of the temporal bone?", "answer": "The petrous portion.", "tip": ""}, {"term": "[Middle Ear] Posteriorly, the middle ear cavity communicates with the mastoid antrum through which opening?", "answer": "The aditus (ad antrum).", "tip": ""}, {"term": "[Middle Ear] Maini notes the mastoid process is not solid but contains air cells. Why is this clinically important?", "answer": "Middle-ear infection can spread into the mastoid air cells, causing mastoiditis.", "tip": "Mastoidectomy is a common ENT procedure for this."}, {"term": "[Middle Ear] What forms the ROOF of the tympanic cavity?", "answer": "The tegmen tympani (a plate of temporal bone).", "tip": ""}, {"term": "[Middle Ear] What forms the FLOOR of the tympanic cavity?", "answer": "The roof of the jugular fossa.", "tip": ""}, {"term": "[Middle Ear] The incomplete ANTERIOR wall of the tympanic cavity contains which two openings?", "answer": "The opening of the pharyngotympanic (auditory) tube and the opening for the tensor tympani muscle.", "tip": ""}, {"term": "[Middle Ear] The MEDIAL wall of the middle ear bulges as the promontory. What forms the promontory?", "answer": "The base (basal turn) of the cochlea.", "tip": ""}, {"term": "[Middle Ear] Which two windows are found on the MEDIAL wall of the middle ear?", "answer": "The oval window (fenestra vestibuli) and the round window (fenestra cochlea).", "tip": "The stapes footplate sits in the oval window; the round window is the pressure-relief window."}, {"term": "[Middle Ear] The bony facial canal (housing the facial nerve) forms part of which walls of the tympanic cavity?", "answer": "The medial and posterior walls.", "tip": ""}, {"term": "[Middle Ear] The pyramid (pyramidal eminence) on the posterior wall is the attachment for which muscle?", "answer": "The stapedius.", "tip": ""}, {"term": "[Ossicles] Name the three auditory ossicles in order from the tympanic membrane inward.", "answer": "Malleus, incus, stapes (M-I-S).", "tip": "They are the tiniest bones in the body; the sequence is TM → malleus → incus → stapes → oval window."}, {"term": "[Ossicles] Which ossicle is the LARGEST and resembles a hammer?", "answer": "The malleus (with head, neck, and handle/manubrium).", "tip": ""}, {"term": "[Ossicles] The handle of the malleus (manubrium) is attached to which structure?", "answer": "The tympanic membrane.", "tip": ""}, {"term": "[Ossicles] Which ossicle resembles an anvil and has a body with long and short processes?", "answer": "The incus.", "tip": ""}, {"term": "[Ossicles] Which ossicle resembles a stirrup, with a head, neck, two crura, and a footplate?", "answer": "The stapes.", "tip": ""}, {"term": "[Ossicles] The incudomalleolar joint (between malleus and incus) is what type of joint?", "answer": "A saddle joint.", "tip": ""}, {"term": "[Ossicles] The incudostapedial joint (between incus and stapes) is what type of joint?", "answer": "A ball-and-socket joint.", "tip": ""}, {"term": "[Middle Ear Muscles] The tensor tympani develops from which pharyngeal arch and is innervated by which nerve?", "answer": "The FIRST arch; the mandibular nerve (V3, via the nerve to medial pterygoid).", "tip": ""}, {"term": "[Middle Ear Muscles] Where does the tensor tympani originate?", "answer": "From the cartilaginous portion of the auditory (pharyngotympanic) tube.", "tip": ""}, {"term": "[Middle Ear Muscles] What is the ACTION of the tensor tympani?", "answer": "It draws the tympanic membrane MEDIALLY, tensing it to lessen sound transmission.", "tip": "Reflex contraction in loud surroundings protects the inner ear."}, {"term": "[Middle Ear Muscles] The stapedius inserts onto which structure, and which nerve supplies it?", "answer": "The neck of the stapes; the facial nerve (CN VII).", "tip": "It originates from the pyramid on the posterior wall."}, {"term": "[Middle Ear Muscles] What is the ACTION of the stapedius?", "answer": "It dampens vibrations by pulling the head of the stapes POSTERIORLY, protecting the receptors from loud noise.", "tip": ""}, {"term": "[Middle Ear Muscles] Maini calls the reflex contraction of tensor tympani + stapedius in loud surroundings the:", "answer": "Auditory (acoustic) reflex — a protective reflex.", "tip": ""}, {"term": "[Middle Ear Muscles] Loss of stapedius function (e.g., facial nerve injury) produces which symptom?", "answer": "Hyperacusis — abnormal sensitivity to ordinary sounds.", "tip": ""}, {"term": "[Auditory Tube] The auditory tube is known by which THREE names Maini emphasizes?", "answer": "Auditory tube = pharyngotympanic tube = eustachian tube.", "tip": "Maini: say both/all names in your head when you read it."}, {"term": "[Auditory Tube] The auditory tube connects the middle ear to which region?", "answer": "The nasopharynx.", "tip": ""}, {"term": "[Auditory Tube] What is the MAIN function of the auditory tube?", "answer": "To equalize air pressure on the two sides of the tympanic membrane. Maini: 'Auditory tube has got nothing to do with hearing... it's for pressure equalization.'", "tip": "Do NOT confuse it with the external acoustic meatus — the tube is for pressure, not sound."}, {"term": "[Auditory Tube] What lymphoid collection sits at the pharyngeal (nasopharyngeal) opening of the auditory tube?", "answer": "The tubal tonsil.", "tip": ""}, {"term": "[Auditory Tube] During airplane takeoff/landing, how is pressure across the tympanic membrane restored?", "answer": "By yawning or a Valsalva maneuver, forcing air through the auditory tube to equalize pressure.", "tip": ""}, {"term": "[Inner Ear] The internal ear (labyrinth) is composed of which two parts?", "answer": "A bony labyrinth and a membranous labyrinth.", "tip": ""}, {"term": "[Inner Ear] Which fluid lies BETWEEN the bony and membranous labyrinths (outside the membranous labyrinth)?", "answer": "Perilymph.", "tip": "Peri = around/outside the membranous labyrinth."}, {"term": "[Inner Ear] Which fluid FILLS the membranous labyrinth (inside it)?", "answer": "Endolymph.", "tip": "Endo = inside the membranous labyrinth."}, {"term": "[Inner Ear] The BONY labyrinth is composed of which three parts?", "answer": "The cochlea, the vestibule, and the three semicircular canals.", "tip": ""}, {"term": "[Inner Ear] Which membranous sacs lie WITHIN the bony vestibule?", "answer": "The utricle and the saccule.", "tip": ""}, {"term": "[Cochlea] The cochlea coils about two and a half turns around a central bony core called the:", "answer": "Modiolus.", "tip": "The spiral ganglion sits inside the modiolus."}, {"term": "[Cochlea] The cochlear canal is divided into three compartments by which two membranes?", "answer": "The vestibular membrane and the basilar membrane.", "tip": ""}, {"term": "[Cochlea] Which cochlear compartment is the MIDDLE one, filled with endolymph, also called the scala media?", "answer": "The cochlear duct.", "tip": ""}, {"term": "[Cochlea] The scala vestibuli and scala tympani are both filled with which fluid?", "answer": "Perilymph.", "tip": ""}, {"term": "[Cochlea] The organ of Corti (spiral organ) is mounted on which membrane?", "answer": "The basilar membrane.", "tip": ""}, {"term": "[Cochlea] The auditory receptor cells of the organ of Corti are called:", "answer": "Hair cells.", "tip": ""}, {"term": "[Cochlea] The gelatinous membrane in which the cilia of the cochlear hair cells are embedded is the:", "answer": "Tectorial membrane.", "tip": ""}, {"term": "[Cochlea] The apical point where the scala vestibuli and scala tympani are continuous is called the:", "answer": "Helicotrema.", "tip": ""}, {"term": "[Cochlea] The round window (fenestra cochlea), marking the end of the scala tympani, is closed by the:", "answer": "Secondary tympanic membrane.", "tip": ""}, {"term": "[Cochlea] The vestibulocochlear nerve (CN VIII) has two divisions. Which one is concerned with HEARING?", "answer": "The cochlear division. (The vestibular division serves balance.)", "tip": ""}, {"term": "[Cochlea] Low-frequency (low-pitch) sounds stimulate the basilar membrane in which region?", "answer": "Near the apex, close to the helicotrema.", "tip": "High frequencies stimulate the base near the oval window — tonotopic mapping."}, {"term": "[Sound Pathway] Trace the route of vibration once sound reaches the tympanic membrane.", "answer": "Tympanic membrane → malleus → incus → stapes → footplate at the oval window → perilymph of the inner ear.", "tip": ""}, {"term": "[Sound Pathway] What is the immediate mechanical event that triggers an action potential in the cochlear hair cells?", "answer": "Bending/distortion of the hair-cell cilia against the fixed tectorial membrane as the basilar membrane vibrates.", "tip": ""}, {"term": "[Vestibule] The bony vestibule (~5 mm) contains which two membranous sacs?", "answer": "The utricle and the saccule.", "tip": ""}, {"term": "[Vestibule] Which is the larger sac, the utricle or the saccule?", "answer": "The utricle is the LARGER sac; the saccule is the smaller.", "tip": ""}, {"term": "[Vestibule] The maculae of the utricle and saccule are chiefly concerned with which type of sensation?", "answer": "Static equilibrium and linear acceleration/deceleration.", "tip": "Maculae = static + linear motion; cristae = rotational motion."}, {"term": "[Vestibule] The sensory spot on the utricle or saccule is the macula. What gelatinous membrane covers it?", "answer": "The otolithic membrane, containing otoliths (tiny calcium-carbonate stones).", "tip": ""}, {"term": "[Vestibule] Macula UTRICULI is oriented horizontally and macula SACCULI vertically. What does macula sacculi best detect?", "answer": "Vertical linear acceleration/deceleration — e.g., riding in an elevator.", "tip": ""}, {"term": "[Semicircular Canals] How many semicircular canals are in each ear, and how are they oriented to one another?", "answer": "Three, oriented at right angles (90 degrees) to one another.", "tip": ""}, {"term": "[Semicircular Canals] The semicircular ducts (and their cristae) sense which type of motion?", "answer": "Angular / rotational acceleration — dynamic equilibrium.", "tip": ""}, {"term": "[Semicircular Canals] To NAME the semicircular canals, you orient them to which reference surface?", "answer": "The posterior surface of the petrous portion of the temporal bone.", "tip": "Maini flagged this as a board-style question."}, {"term": "[Semicircular Canals] Relative to the posterior petrous surface, how is the ANTERIOR semicircular canal oriented?", "answer": "At a right angle to that surface.", "tip": ""}, {"term": "[Semicircular Canals] Relative to the same petrous surface, how is the POSTERIOR semicircular canal oriented?", "answer": "Along the long axis of (in line with) that surface.", "tip": ""}, {"term": "[Semicircular Canals] How is the LATERAL semicircular canal oriented?", "answer": "Horizontally.", "tip": ""}, {"term": "[Semicircular Canals] Each semicircular duct has a dilated end. What is it called?", "answer": "The ampulla.", "tip": ""}, {"term": "[Semicircular Canals] Inside each ampulla is the sensory organ for dynamic (rotational) equilibrium. What is it called?", "answer": "The crista ampullaris.", "tip": ""}, {"term": "[Semicircular Canals] The hair cells of the crista ampullaris are embedded in which gelatinous structure?", "answer": "The cupula.", "tip": ""}, {"term": "[Semicircular Canals] Which membranous structures lie within the bony semicircular canals?", "answer": "The semicircular ducts.", "tip": ""}, {"term": "[Summary] Match each of the three inner-ear sensory organs to its gelatinous membrane.", "answer": "Organ of Corti → tectorial membrane; macula (utricle/saccule) → otolithic membrane; crista ampullaris → cupula.", "tip": "A favorite matching-style exam question — lock in all three pairs."}, {"term": "[Nerves & Vessels] The internal acoustic meatus opens on which surface of the temporal bone?", "answer": "The posteromedial part of the petrous portion.", "tip": ""}, {"term": "[Nerves & Vessels] Which structures pass through the internal acoustic meatus?", "answer": "Cranial nerves VII and VIII, plus the labyrinthine artery and vein.", "tip": ""}, {"term": "[Nerves & Vessels] The tympanic branch of CN IX enters the middle ear and forms a plexus over the promontory. Name the plexus and the nerve that leaves it.", "answer": "The tympanic plexus; the lesser petrosal nerve exits it toward the otic ganglion (destined for the parotid gland).", "tip": "The nerve only 'passes through' — it has no true function in the tympanic cavity."}, {"term": "[Nerves & Vessels] The facial nerve reaches the middle-ear region by entering which passage?", "answer": "The internal acoustic meatus, then running in the bony facial canal.", "tip": ""}, {"term": "[Tests] Maini groups Weber's test and Rinne's test as tests of what function?", "answer": "Hearing.", "tip": ""}, {"term": "[Tests] In the caloric test, the ear is irrigated with warm and cold water. What function does it assess?", "answer": "Vestibular (labyrinth / semicircular canal) function. Maini: 'caloric test is for the test of vestibular function.'", "tip": "Weber/Rinne = hearing; caloric = balance/vestibular."}, {"term": "[Clinical] What is a myringotomy performed to treat?", "answer": "Draining a fluid/pus collection in the middle ear (e.g., from pharyngeal infection via the auditory tube) to prevent tympanic membrane rupture.", "tip": ""}, {"term": "[Clinical] Why does a SPONTANEOUS tympanic membrane rupture heal worse than a surgical myringotomy?", "answer": "A spontaneous rupture has serrated (irregular) margins and may not heal properly.", "tip": "A clean surgical incision heals without a scar."}];
+
+
+const LS_KEY = "ga_0202_m09_ear_rapid_recall_v1";
+let deck = [], quizIdx = 0, viewIdx = 0;
+let got = 0, missed = 0, missedTerms = [], shuffleOn = false, revealed = false;
+let answered = {};
+function loadState(){try{const s=JSON.parse(localStorage.getItem(LS_KEY));if(s&&s.deck){deck=s.deck;quizIdx=s.quizIdx||0;viewIdx=s.viewIdx||s.idx||0;got=s.got;missed=s.missed;missedTerms=s.missedTerms||[];shuffleOn=s.shuffleOn||false;answered=s.answered||{};if(shuffleOn)document.getElementById("btnShuffle").classList.add("active");return true;}}catch(e){}return false;}
+function saveState(){localStorage.setItem(LS_KEY,JSON.stringify({deck,quizIdx,viewIdx,got,missed,missedTerms,shuffleOn,answered}));}
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startDrill(mode){if(mode==='missed'&&missedTerms.length>0){deck=missedTerms.map(t=>BANK.findIndex(b=>b.term===t)).filter(i=>i>=0);}else{deck=BANK.map((_,i)=>i);}if(shuffleOn)shuffleArr(deck);quizIdx=0;viewIdx=0;got=0;missed=0;missedTerms=[];answered={};document.getElementById("summaryArea").style.display="none";document.getElementById("cardArea").style.display="block";showCard();saveState();}
+function showCard(){if(viewIdx>=deck.length){showSummary();return;}const item=BANK[deck[viewIdx]];const isBrowse=viewIdx<quizIdx;document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnRedoBack").style.display=viewIdx>0?"inline-block":"none";document.getElementById("browseLabel").style.display="none";revealed=false;if(isBrowse){document.getElementById("browseLabel").style.display="block";doReveal();document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="inline-block";document.getElementById("btnRedo").style.display="inline-block";}updateScores();}
+function doReveal(){document.getElementById("answerText").classList.add("show");if(BANK[deck[viewIdx]].tip)document.getElementById("profTip").classList.add("show");document.getElementById("btnReveal").style.display="none";if(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)){document.getElementById("btnGot").style.display="inline-block";document.getElementById("btnMissed").style.display="inline-block";}revealed=true;}
+function grade(correct){const isRedo=viewIdx<quizIdx&&answered[viewIdx]===undefined;if(viewIdx<quizIdx&&!isRedo)return;answered[viewIdx]=correct?'got':'missed';if(correct){got++;}else{missed++;missedTerms.push(BANK[deck[viewIdx]].term);}if(isRedo){viewIdx=quizIdx;}else{quizIdx=viewIdx+1;viewIdx=quizIdx;}showCard();saveState();}
+function goBack(){if(viewIdx>0){viewIdx--;showCard();saveState();}}
+function resumeQuiz(){viewIdx=quizIdx;showCard();saveState();}
+function redoBack(){if(viewIdx<=0)return;viewIdx--;if(viewIdx<quizIdx){const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];}document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";const item=BANK[deck[viewIdx]];document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";revealed=false;updateScores();saveState();}
+function redoPrev(){if(viewIdx>=quizIdx)return;const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";revealed=false;updateScores();saveState();}
+function skip(){if(viewIdx>=quizIdx){deck.push(deck[viewIdx]);deck.splice(viewIdx,1);quizIdx=viewIdx;showCard();saveState();}}
+function updateScores(){const remain=deck.length-quizIdx;document.getElementById("gotCount").textContent=got+" Got It";document.getElementById("missedCount").textContent=missed+" Missed";document.getElementById("remainCount").textContent=remain+" Left";const pct=deck.length>0?((got+missed)/deck.length)*100:0;document.getElementById("progressFill").style.width=pct+"%";}
+function showSummary(){document.getElementById("cardArea").style.display="none";document.getElementById("summaryArea").style.display="block";const total=got+missed;const pct=total>0?Math.round((got/total)*100):0;const el=document.getElementById("finalScore");el.textContent=pct+"%";el.className="final-score "+(pct>=85?"great":pct>=65?"ok":"rough");document.getElementById("finalMsg").textContent=got+" of "+total+" — "+(pct>=90?"All terms locked in.":pct>=75?"Solid. Hit the missed ones again.":"Keep drilling. Re-do the missed cards.");document.getElementById("progressFill").style.width="100%";const listBox=document.getElementById("missedListBox"),ul=document.getElementById("missedListUl"),rd=document.getElementById("btnRedrill");if(missedTerms.length>0){listBox.style.display="block";rd.style.display="inline-block";ul.innerHTML=missedTerms.map(t=>"<li>"+t+"</li>").join("");}else{listBox.style.display="none";rd.style.display="none";}updateScores();}
+function toggleShuffle(){shuffleOn=!shuffleOn;document.getElementById("btnShuffle").classList.toggle("active",shuffleOn);saveState();}
+function toggleIndex(){const ov=document.getElementById("indexOverlay");if(ov.style.display==="flex"){ov.style.display="none";return;}ov.style.display="flex";renderIndex();}
+function renderIndex(){const g=document.getElementById("indexGrid");g.innerHTML="";for(let i=0;i<deck.length;i++){const item=BANK[deck[i]];const d=document.createElement("div");d.className="index-chip";let status="";if(i<quizIdx){if(answered[i]==='got'){d.classList.add("chip-got");status="Got It";}else if(answered[i]==='missed'){d.classList.add("chip-missed");status="Missed";}}else if(i===quizIdx){d.classList.add("chip-current");status="Current";}d.innerHTML='<span><span class="chip-num">'+(i+1)+'.</span> '+item.term+'</span><span class="chip-status">'+status+'</span>';d.onclick=(function(idx){return function(){viewIdx=idx;document.getElementById("indexOverlay").style.display="none";showCard();saveState();};})(i);g.appendChild(d);}}
+document.addEventListener("keydown",e=>{if(document.getElementById("indexOverlay").style.display==="flex"){if(e.key==="Escape"||e.key==="i"||e.key==="I")toggleIndex();return;}if(e.key===" "||e.code==="Space"){e.preventDefault();if(!revealed)doReveal();}if(e.key==="g"||e.key==="G"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(true);}if(e.key==="m"||e.key==="M"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(false);}if(e.key==="s"||e.key==="S"){if(!revealed)skip();}if(e.key==="b"||e.key==="B"){goBack();}if(e.key==="d"||e.key==="D"){redoBack();}if(e.key==="r"||e.key==="R"){if(viewIdx<quizIdx)redoPrev();}if(e.key==="i"||e.key==="I"){toggleIndex();}if(e.key==="Enter"&&viewIdx<quizIdx){resumeQuiz();}});
+if(!loadState()||quizIdx>=deck.length){startDrill('all');}else{showCard();}
+</script>
+
+
+
+
+<div style="margin:30px auto;padding:14px;border-top:1px solid #334155;color:#94a3b8;font-size:.8rem;text-align:center;max-width:780px">DC Study Supply — Built by Dr. David Gramling, PHD</div>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (Anatomy) with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    // Auto-detect bg luminance: body first, fall back to html element if transparent
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body>
+</html>

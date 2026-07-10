@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · The Brain · Rapid Recall</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.header { text-align: center; padding: 24px 16px 12px; width: 100%; max-width: 700px; }
+.header h1 { font-size: 22px; color: #60a5fa; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; color: #94a3b8; }
+.score-bar { display: flex; gap: 16px; justify-content: center; padding: 10px; font-size: 14px; font-weight: 600; }
+.score-bar .got { color: #4ade80; } .score-bar .missed { color: #f87171; } .score-bar .remain { color: #94a3b8; }
+.progress-track { width: 100%; max-width: 700px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #60a5fa); transition: width 0.4s ease; border-radius: 3px; }
+.card-container { width: 100%; max-width: 700px; padding: 0 16px; flex: 1; }
+.card { background: #1e293b; border: 2px solid #334155; border-radius: 16px; padding: 32px 28px; text-align: center; min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: border-color 0.3s; }
+.card:hover { border-color: #475569; }
+.card-number { font-size: 12px; color: #64748b; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.term { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; line-height: 1.3; }
+.answer { font-size: 15px; line-height: 1.7; color: #cbd5e1; max-width: 600px; padding: 16px 20px; background: #0f172a; border-radius: 10px; border-left: 4px solid #3b82f6; text-align: left; display: none; margin-bottom: 16px; }
+.answer.show { display: block; animation: fadeIn 0.3s ease; }
+.prof-tip { font-size: 13px; color: #fbbf24; margin-top: 8px; font-style: italic; display: none; text-align: left; max-width: 600px; padding: 10px 16px; background: #1a0a0a; border-left: 3px solid #ef4444; border-radius: 0 10px 10px 0; }
+.prof-tip.show { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 12px 28px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn:active { transform: scale(0.96); }
+.btn-reveal { background: #3b82f6; color: white; } .btn-reveal:hover { background: #2563eb; }
+.btn-got { background: #166534; color: #4ade80; display: none; } .btn-got:hover { background: #15803d; }
+.btn-missed { background: #7f1d1d; color: #f87171; display: none; } .btn-missed:hover { background: #991b1b; }
+.btn-back { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-back:hover { background: #475569; }
+.btn-skip { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-skip:hover { background: #475569; }
+.btn-continue { background: #1e40af; color: #93c5fd; display: none; } .btn-continue:hover { background: #1d4ed8; }
+.btn-redo { background: #7c3aed; color: #c4b5fd; display: none; } .btn-redo:hover { background: #6d28d9; }
+.btn-redoback { background: #7c3aed; color: #c4b5fd; padding: 10px 20px; font-size: 13px; } .btn-redoback:hover { background: #6d28d9; }
+.browse-label { font-size: 11px; color: #f59e0b; margin-bottom: 8px; display: none; }
+.controls { padding: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.ctrl-btn { padding: 8px 16px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.ctrl-btn:hover { background: #334155; color: #e2e8f0; } .ctrl-btn.active { border-color: #3b82f6; color: #60a5fa; }
+.summary { display: none; text-align: center; padding: 40px 20px; width: 100%; max-width: 700px; }
+.summary h2 { font-size: 28px; color: #60a5fa; margin-bottom: 20px; }
+.summary .final-score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.summary .final-score.great { color: #4ade80; } .summary .final-score.ok { color: #fbbf24; } .summary .final-score.rough { color: #f87171; }
+.missed-list { text-align: left; max-width: 500px; margin: 20px auto; background: #1e293b; border-radius: 12px; padding: 16px 20px; }
+.missed-list h3 { color: #f87171; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.missed-list li { color: #cbd5e1; padding: 6px 0; border-bottom: 1px solid #334155; font-size: 14px; list-style: none; } .missed-list li:last-child { border: none; }
+.kb-hint { font-size: 11px; color: #475569; text-align: center; padding: 8px; }
+.index-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.95); z-index: 100; flex-direction: column; align-items: center; padding: 20px; overflow-y: auto; }
+.index-overlay h2 { color: #60a5fa; font-size: 20px; margin-bottom: 16px; }
+.index-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; } .index-close:hover { color: #e2e8f0; }
+.index-grid { max-width: 700px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.index-chip { padding: 10px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; cursor: pointer; font-size: 13px; color: #cbd5e1; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.index-chip:hover { background: #334155; border-color: #60a5fa; }
+.index-chip .chip-num { color: #64748b; font-size: 11px; min-width: 30px; }
+.chip-got { border-left: 3px solid #4ade80; } .chip-got .chip-status { color: #4ade80; }
+.chip-missed { border-left: 3px solid #f87171; } .chip-missed .chip-status { color: #f87171; }
+.chip-current { border-left: 3px solid #60a5fa; background: #1e3a5f; } .chip-current .chip-status { color: #60a5fa; }
+.chip-status { font-size: 11px; min-width: 50px; text-align: right; }
+</style>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="ga-0202-m07-brain-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to M07 Hub</a>
+
+<div class="header">
+  <h1>⚡ GA 0202 · The Brain · Rapid Recall</h1>
+  <div class="subtitle">Dr. Maini · The Brain (L16–L17) — <span id="cardTotal"></span> Cards | See prompt. Say it. Reveal to check.</div>
+</div>
+<div class="score-bar">
+  <span class="got" id="gotCount">0 Got It</span>
+  <span class="missed" id="missedCount">0 Missed</span>
+  <span class="remain" id="remainCount">0 Left</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="card-container" id="cardArea">
+  <div class="card">
+    <div class="browse-label" id="browseLabel">BROWSING — already answered</div>
+    <div class="card-number" id="cardNum"></div>
+    <div class="term" id="termText"></div>
+    <div class="answer" id="answerText"></div>
+    <div class="prof-tip" id="profTip"></div>
+    <div class="btn-row">
+      <button class="btn btn-reveal" id="btnReveal" onclick="doReveal()">Reveal Answer</button>
+      <button class="btn btn-got" id="btnGot" onclick="grade(true)">Got It</button>
+      <button class="btn btn-missed" id="btnMissed" onclick="grade(false)">Missed It</button>
+      <button class="btn btn-continue" id="btnContinue" onclick="resumeQuiz()">Continue &rarr;</button>
+      <button class="btn btn-redo" id="btnRedo" onclick="redoPrev()">Redo</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" id="btnBack" onclick="goBack()">&larr; Back</button>
+      <button class="btn btn-redoback" id="btnRedoBack" onclick="redoBack()">Redo Back</button>
+      <button class="btn btn-skip" onclick="skip()">Skip</button>
+    </div>
+  </div>
+</div>
+<div class="summary" id="summaryArea">
+  <h2>Drill Complete</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="finalMsg" style="color:#94a3b8;margin-bottom:20px;"></p>
+  <div class="missed-list" id="missedListBox" style="display:none;"><h3>Review These</h3><ul id="missedListUl"></ul></div>
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-reveal" onclick="startDrill('all')">Restart All</button>
+    <button class="btn btn-missed" id="btnRedrill" style="display:inline-block;" onclick="startDrill('missed')">Re-Drill Missed</button>
+  </div>
+</div>
+<div class="controls">
+  <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">Shuffle</button>
+  <button class="ctrl-btn" onclick="toggleIndex()">Card Index</button>
+  <button class="ctrl-btn" onclick="startDrill('all')">Reset</button>
+</div>
+<div class="kb-hint">Space = Reveal | G = Got It | M = Missed | S = Skip | B = Back | D = Redo Back | R = Redo | I = Index</div>
+<div class="index-overlay" id="indexOverlay">
+  <button class="index-close" onclick="toggleIndex()">&times;</button>
+  <h2>Card Index</h2>
+  <div class="index-grid" id="indexGrid"></div>
+</div>
+<script>
+const BANK = [
+  {term: "[Overview] When a brain is lifted intact from the skull, which single part masks essentially all underlying structures except the brainstem?", answer: "The CEREBRUM — the largest part, so large it covers almost everything but the brainstem. Maini: 'Cerebrum is so large that it covers almost all the parts of the brain except for brain stem.'", tip: "Cerebrum = largest, executive, seat of higher functions; the brainstem is the one part it does NOT cover."},
+  {term: "[Overview] Which division of the brain does Maini call the 'connecting part' — mostly ascending/descending pathways linking the lower brain to the cerebrum?", answer: "The DIENCEPHALON. It is the deep connecting part (thalamus, hypothalamus, etc.), hidden by the cerebrum.", tip: "Diencephalon = the relay/connecting hub between the brainstem below and the cerebrum above."},
+  {term: "[Overview] Name the three parts of the brainstem from superior to inferior.", answer: "MIDBRAIN, PONS, MEDULLA OBLONGATA (superior → inferior).", tip: "Top-to-bottom: Mid → Pons → Medulla. The brainstem is NOT covered by the cerebrum."},
+  {term: "[Overview] Maini calls the cerebellum the 'small brain.' What is its chief function?", answer: "COORDINATION of movements. Maini: 'Cerebellum ... is the seat of coordination of your movements.'", tip: "Cerebellum sits under the occipital lobe; it fine-tunes/coordinates movement (does not initiate it)."},
+  {term: "[Overview] The medulla oblongata is directly continuous with which structure below the foramen magnum?", answer: "The SPINAL CORD.", tip: "Medulla → (foramen magnum) → spinal cord — the brain becomes the cord here."},
+  {term: "[Cortex] What is the name of the deep fissure that divides the left cerebral hemisphere from the right?", answer: "The LONGITUDINAL FISSURE.", tip: "Longitudinal fissure = the midline cleft between the two hemispheres."},
+  {term: "[Cortex] Which dural fold sits lodged within the longitudinal fissure between the two hemispheres?", answer: "The FALX CEREBRI.", tip: "Falx cerebri = the sickle-shaped dural partition dipping into the longitudinal fissure."},
+  {term: "[Cortex] The band of fibers connecting the two cerebral hemispheres is called?", answer: "The CORPUS CALLOSUM.", tip: "Corpus callosum = the great commissure joining the two hemispheres."},
+  {term: "[Cortex] In the cerebrum, where is the gray matter (neuron cell bodies) and where is the white matter?", answer: "GRAY matter is in the peripheral CORTEX; WHITE matter (myelinated fibers) fills the interior.", tip: "Cerebrum: gray outside (cortex), white inside — the reverse of the spinal cord."},
+  {term: "[Cortex] What is the CORRECT term for the islands of gray matter buried inside the cerebral white matter?", answer: "BASAL NUCLEI (not basal ganglia). Maini: 'Nuclei is the best terminology, basal ganglia is not the right terminology.'", tip: "Maini insists on 'basal nuclei' — count on her testing the correct term."},
+  {term: "[Cortex] Why is 'basal ganglia' technically an incorrect name for the deep gray masses?", answer: "Because a GANGLION is a group of cell bodies located OUTSIDE the central nervous system — these are inside the CNS, so they are nuclei.", tip: "Ganglion = cell bodies OUTSIDE the CNS; nucleus = cell bodies INSIDE the CNS."},
+  {term: "[Cortex] Name the three basal nuclei of the cerebrum.", answer: "CAUDATE nucleus, PUTAMEN, and GLOBUS PALLIDUS.", tip: "Caudate + putamen + globus pallidus. (Putamen + globus pallidus = lentiform nucleus.)"},
+  {term: "[Cortex] The lentiform nucleus is the combination of which two structures?", answer: "The PUTAMEN and the GLOBUS PALLIDUS.", tip: "Lentiform ('lens-shaped') = putamen + globus pallidus. Add the caudate and you get the corpus striatum."},
+  {term: "[Cortex] Parkinsonism — slowness, sluggish movement, and a resting tremor — is the classic disorder of which structures?", answer: "The BASAL NUCLEI. A RESTING tremor is the hallmark of basal-nuclear dysfunction.", tip: "Basal nuclei = RESTING tremor (Parkinsonism). Contrast with the cerebellum's INTENTION tremor."},
+  {term: "[Cortex] How does Maini distinguish a sulcus (fissure) from a gyrus?", answer: "A SULCUS/fissure is a GROOVE; a GYRUS is a raised RIDGE.", tip: "Sulcus = valley/groove; gyrus = hill/ridge."},
+  {term: "[Lobes] Into how many lobes is each cerebral hemisphere divided, and which is the hidden deep one?", answer: "FIVE lobes; the INSULA is the deep 5th lobe (buried in the lateral fissure).", tip: "Frontal, parietal, temporal, occipital + the hidden INSULA (5th)."},
+  {term: "[Lobes] Which sulcus separates the frontal lobe from the parietal lobe?", answer: "The CENTRAL SULCUS.", tip: "Central sulcus = frontal/parietal border; the precentral & postcentral gyri flank it."},
+  {term: "[Lobes] The lateral sulcus (lateral fissure) forms the boundary between which lobes?", answer: "It separates the TEMPORAL lobe (below) from the FRONTAL and PARIETAL lobes (above).", tip: "Retract the lateral fissure and you expose the insula deep within it."},
+  {term: "[Lobes] With no deep sulcus on the lateral surface, how do you demarcate the occipital lobe?", answer: "Draw a hypothetical LINE from the PREOCCIPITAL NOTCH to the superior end of the PARIETO-OCCIPITAL SULCUS.", tip: "Occipital lobe boundary on the lateral surface is an imaginary line, not a real sulcus."},
+  {term: "[Lobes] The primary MOTOR cortex is located in which lobe?", answer: "The FRONTAL lobe (in the precentral gyrus).", tip: "Motor = FRONTAL (precentral gyrus), just anterior to the central sulcus."},
+  {term: "[Lobes] The primary SENSORY (somesthetic) cortex is located in which lobe?", answer: "The PARIETAL lobe (in the postcentral gyrus).", tip: "Sensory = PARIETAL (postcentral gyrus), just posterior to the central sulcus."},
+  {term: "[Lobes] The primary VISUAL cortex is located in which lobe?", answer: "The OCCIPITAL lobe.", tip: "Vision = occipital (around the calcarine sulcus)."},
+  {term: "[Lobes] The primary AUDITORY cortex — and the primary OLFACTORY cortex — are located in which lobe?", answer: "The TEMPORAL lobe.", tip: "Hearing AND smell map to the temporal lobe."},
+  {term: "[Lobes] The primary GUSTATORY (taste) cortex is located where?", answer: "The INSULA (the deep 5th lobe).", tip: "Taste = insula. The insula also handles emotion and visceral sensation."},
+  {term: "[Lobes] What does Maini note about the prefrontal cortex (reasoning/judgment) and its development?", answer: "It is not developed until about 16–17 years and keeps developing until about 25 years.", tip: "Prefrontal cortex (judgment/reasoning) fully matures around age 25 — the last area to develop."},
+  {term: "[Lobes] How is the insula exposed, and what special functions does Maini assign it?", answer: "Retract the LATERAL FISSURE to expose it. It houses the GUSTATORY (taste) cortex plus EMOTION and VISCERAL sensation.", tip: "Insula = taste + emotion + visceral sensation, hidden deep to the lateral fissure."},
+  {term: "[Motor/Sensory] The PRECENTRAL gyrus (immediately anterior to the central sulcus) corresponds to which functional cortex?", answer: "The PRIMARY MOTOR cortex.", tip: "PRE-central = motor. Think 'motor comes before (anterior) the central sulcus.'"},
+  {term: "[Motor/Sensory] The POSTCENTRAL gyrus (immediately posterior to the central sulcus) is which functional cortex?", answer: "The PRIMARY SENSORY (somesthetic) cortex.", tip: "POST-central = sensory. It perceives general sensations — pain, touch, temperature."},
+  {term: "[Motor/Sensory] The motor system is a TWO-neuron pathway. Where are the two neurons for a limb muscle?", answer: "Upper motor neuron in the PRECENTRAL GYRUS; lower (alpha) motor neuron in the ANTERIOR/VENTRAL HORN of the spinal cord.", tip: "Motor = 2 neurons: cortex (UMN) → anterior horn (LMN) → muscle."},
+  {term: "[Motor/Sensory] The sensory system is a FOUR-neuron pathway. List the four neuron locations in order.", answer: "GANGLION (dorsal root) → MEDULLA → THALAMUS → POSTCENTRAL GYRUS.", tip: "Sensory = 4 neurons: ganglion → medulla → thalamus → cortex."},
+  {term: "[Motor/Sensory] On the motor/sensory homunculus, which body regions get the LARGEST cortical representation?", answer: "Regions needing fine coordination or with dense receptors — the FACE, HANDS, and TONGUE.", tip: "Homunculus is distorted: big hands/face/tongue, tiny trunk — representation tracks control & receptor density."},
+  {term: "[Motor/Sensory] The postcentral gyrus perceives which category of sensation?", answer: "GENERAL sensations — PAIN, TOUCH, and TEMPERATURE.", tip: "Postcentral (somesthetic) = general sensation, not special senses."},
+  {term: "[Motor/Sensory] Just anterior to the precentral motor cortex is an area responsible for what function?", answer: "EYE MOVEMENTS — the frontal eye field.", tip: "Frontal eye field sits just in front of the primary motor cortex; it drives conjugate eye movement."},
+  {term: "[Gyri] Maini divides the inferior frontal gyrus into which three named parts?", answer: "Pars ORBITALIS, pars TRIANGULARIS, and pars OPERCULARIS.", tip: "The triangularis + opercularis region is where Broca's motor speech area lives."},
+  {term: "[Gyri] The two temporal sulci divide the temporal lobe into which three gyri?", answer: "SUPERIOR, MIDDLE, and INFERIOR temporal gyri.", tip: "Temporal lobe = 3 stacked gyri (superior/middle/inferior)."},
+  {term: "[Gyri] Which sulcus divides the parietal lobe (behind the postcentral gyrus) into superior and inferior parietal lobules?", answer: "The INTRAPARIETAL SULCUS.", tip: "Intraparietal sulcus splits the parietal lobe into superior & inferior lobules."},
+  {term: "[Gyri] Which gyrus wraps around the distal (posterior) end of the lateral fissure?", answer: "The SUPRAMARGINAL gyrus.", tip: "Supramarginal gyrus caps the posterior end of the lateral fissure (inferior parietal lobule)."},
+  {term: "[Gyri] The frontal lobe anterior to the motor cortex is divided by two sulci into how many gyri, and which?", answer: "THREE gyri — SUPERIOR, MIDDLE, and INFERIOR frontal gyri.", tip: "Two sulci → three frontal gyri (superior/middle/inferior)."},
+  {term: "[Speech] Where is Broca's area located, and what is its function?", answer: "In the FRONTAL lobe (inferior frontal gyrus); it is the MOTOR (expressive) speech area.", tip: "Broca = frontal = motor/expressive speech ('Broca = Broken speech output')."},
+  {term: "[Speech] Where is Wernicke's area located, and what is its function?", answer: "In the POSTERIOR TEMPORAL lobe; it is the SENSORY speech area for COMPREHENSION.", tip: "Wernicke = posterior temporal = comprehension/understanding."},
+  {term: "[Speech] A patient understands everything but is short of words and cannot produce fluent speech. Which aphasia?", answer: "BROCA'S aphasia (motor/expressive aphasia).", tip: "Broca's aphasia: comprehension intact, output broken — the frontal motor speech lesion."},
+  {term: "[Speech] A patient speaks fluently in meaningless 'word salad' and cannot comprehend. Which aphasia?", answer: "WERNICKE'S aphasia (sensory/receptive aphasia). Maini: they 'speak too much, there'll be word salad.'", tip: "Wernicke's aphasia: fluent but meaningless 'word salad' with no comprehension."},
+  {term: "[Basal Nuclei] Which is NOT a basal nucleus — caudate, globus pallidus, putamen, or thalamus?", answer: "The THALAMUS is NOT a basal nucleus — it is part of the diencephalon.", tip: "Trap: thalamus is diencephalon, not a basal nucleus. The three nuclei are caudate/putamen/globus pallidus."},
+  {term: "[Basal Nuclei] The INTERNAL capsule is located between which two structures?", answer: "Between the CAUDATE nucleus and the GLOBUS PALLIDUS (medially, next to the thalamus); it is L-shaped.", tip: "Internal capsule threads between caudate and lentiform, hugging the thalamus."},
+  {term: "[Basal Nuclei] Which tract passes through the internal capsule, and what results from a lesion there?", answer: "The CORTICOSPINAL (motor) tract passes through; a lesion causes CONTRALATERAL PARALYSIS.", tip: "Internal capsule = clinically critical: motor fibers funnel through it, so a small lesion → opposite-side paralysis."},
+  {term: "[Basal Nuclei] The EXTERNAL capsule lies between which two structures?", answer: "Between the PUTAMEN (lentiform nucleus) and the CLAUSTRUM.", tip: "External capsule = putamen ↔ claustrum."},
+  {term: "[Basal Nuclei] The EXTREME capsule lies between which two structures?", answer: "Between the CLAUSTRUM and the INSULAR gray matter.", tip: "Order moving outward: putamen → external capsule → claustrum → extreme capsule → insula."},
+  {term: "[Basal Nuclei] What is the narrow strip of gray matter lying between the external and extreme capsules?", answer: "The CLAUSTRUM.", tip: "Claustrum = thin gray sheet sandwiched between the external and extreme capsules."},
+  {term: "[Medial Surface] What does Maini call the posterior end of the corpus callosum?", answer: "The SPLENIUM.", tip: "Corpus callosum runs rostrum → genu → body → SPLENIUM (posterior end)."},
+  {term: "[Medial Surface] Just inferior to the corpus callosum is a thin membrane that, when scraped, opens into the lateral ventricle. What is it?", answer: "The SEPTUM PELLUCIDUM.", tip: "Septum pellucidum = the thin midline membrane roofing the lateral ventricle."},
+  {term: "[Medial Surface] Which medial/occipital gyrus is named for its SHAPE (not for any tongue function)?", answer: "The LINGUAL gyrus.", tip: "Lingual gyrus is 'tongue-shaped' — named for shape only, near the visual cortex."},
+  {term: "[Medial Surface] Which gyrus lies between the calcarine sulcus and the parieto-occipital sulcus?", answer: "The CUNEUS.", tip: "Cuneus ('wedge') sits between the calcarine and parieto-occipital sulci in the occipital lobe."},
+  {term: "[Medial Surface] The fornix is a part of which system?", answer: "The LIMBIC system.", tip: "Fornix = the main output tract of the hippocampus, part of the limbic system."},
+  {term: "[Medial Surface] Which four structures does Maini group as the limbic cortex/system on the inferior surface?", answer: "The UNCUS, PARAHIPPOCAMPAL gyrus, ISTHMUS, and CINGULATE gyrus.", tip: "Limbic ring: uncus + parahippocampal + isthmus + cingulate — emotion & memory."},
+  {term: "[Medial Surface] The isthmus is a band of fibers that connects which two gyri?", answer: "The PARAHIPPOCAMPAL gyrus and the CINGULATE gyrus.", tip: "Isthmus = the narrow bridge linking parahippocampal ↔ cingulate, completing the limbic ring."},
+  {term: "[Diencephalon] What is the chief function of the thalamus (Maini's 'London Heathrow' analogy)?", answer: "It is the RELAY CENTER for essentially all ASCENDING sensations on their way to the cortex. Maini: 'Thalamus is a relay center for all your sensations, which are ascending.'", tip: "Thalamus = London Heathrow: the layover every sensation passes through en route to the cortex."},
+  {term: "[Diencephalon] Which single sensation BYPASSES the thalamus entirely?", answer: "SMELL (olfaction).", tip: "Only smell skips the thalamic relay — olfaction goes straight to the cortex."},
+  {term: "[Diencephalon] Give the three names for the button-like structure connecting the two thalami across the third ventricle.", answer: "INTERTHALAMIC ADHESION, MASSA INTERMEDIA, and INTERMEDIATE MASS (three names, one structure).", tip: "Interthalamic adhesion = massa intermedia = intermediate mass — it crosses the 3rd ventricle."},
+  {term: "[Diencephalon] Name a key function Maini attributes to the hypothalamus.", answer: "BODY TEMPERATURE regulation — the body's THERMOSTAT (also autonomic and endocrine control).", tip: "Hypothalamus = thermostat + autonomic + endocrine master-regulator."},
+  {term: "[Diencephalon] The pineal gland secretes which hormone, and what does it regulate?", answer: "MELATONIN, which regulates the SLEEP–WAKEFULNESS cycle.", tip: "Pineal → melatonin → circadian sleep–wake rhythm."},
+  {term: "[Diencephalon] What is the optic chiasma, and why is its proximity to the pituitary clinically important?", answer: "It is the CROSSING point of the two optic nerves; a PITUITARY tumor (adenoma) can compress it, causing visual disturbance (bitemporal hemianopsia).", tip: "Optic chiasma sits right above the pituitary — a pituitary tumor pushes up and clips vision."},
+  {term: "[Diencephalon] What is 'corpora arenacea,' seen in the pineal gland after about age 40?", answer: "A NORMAL calcareous (calcium) accumulation in the pineal gland — 'brain sand.'", tip: "Corpora arenacea = normal pineal calcification after ~40 (a handy radiographic midline marker)."},
+  {term: "[Brainstem] The posterior midbrain shows four bulges. What is this region called, and what are the four bulges?", answer: "The CORPORA QUADRIGEMINA — two SUPERIOR and two INFERIOR colliculi.", tip: "Corpora quadrigemina = 'four bodies': 2 superior + 2 inferior colliculi on the back of the midbrain."},
+  {term: "[Brainstem] To which pathways does Maini assign the superior vs inferior colliculi?", answer: "SUPERIOR colliculi = VISUAL pathway; INFERIOR colliculi = AUDITORY pathway.", tip: "Superior = Sight; Inferior = 'ear'ing (auditory). S over hearing."},
+  {term: "[Brainstem] Which structure passes through the midbrain (connecting 3rd and 4th ventricles)?", answer: "The CEREBRAL AQUEDUCT.", tip: "Cerebral aqueduct (of Sylvius) runs through the midbrain; blockage → hydrocephalus."},
+  {term: "[Brainstem] In which part of the brain is the RED NUCLEUS located?", answer: "The MIDBRAIN.", tip: "Red nucleus = midbrain motor relay; the substantia nigra sits just above it."},
+  {term: "[Brainstem] In the midbrain cross-section, where does the substantia nigra lie relative to the red nucleus?", answer: "It lies ON TOP of the red nucleus — like the 'EYEBROWS' above the 'eyes.'", tip: "Maini's picture: substantia nigra = eyebrows, red nucleus = eyes."},
+  {term: "[Brainstem] What is the periaqueductal gray?", answer: "The GRAY MATTER surrounding the CEREBRAL AQUEDUCT in the midbrain.", tip: "Periaqueductal gray wraps the aqueduct — a key node in descending pain modulation."},
+  {term: "[Brainstem] The pyramids on the anterior medulla are formed by which pathway (the reason it's the 'pyramidal tract')?", answer: "The CORTICOSPINAL pathway. Maini: 'corticospinal pathway is also called as pyramidal tract.'", tip: "Anterior medullary pyramids = corticospinal fibers = the pyramidal (motor) tract."},
+  {term: "[Brainstem] What is the clinical significance of the pyramidal DECUSSATION in the lower medulla?", answer: "The corticospinal fibers CROSS to the opposite side, so a lesion on one side causes PARALYSIS on the OTHER (contralateral) side.", tip: "Pyramidal decussation is why the left brain controls the right body."},
+  {term: "[Brainstem] Lateral to the pyramids, what is the rounded bulge on the medulla called?", answer: "The OLIVE.", tip: "Olive = oval bulge just lateral to the pyramids (contains the inferior olivary nucleus)."},
+  {term: "[Brainstem] Where is the reticular formation (reticular activating system) and what does it do?", answer: "A network of gray and white matter in the MEDULLA and PONS that keeps you AWAKE and ALERT.", tip: "Reticular formation = the brain's arousal/consciousness switch, spanning medulla + pons."},
+  {term: "[Brainstem] Which two sensory-associated nuclei sit on the posterior medulla?", answer: "The NUCLEUS GRACILIS and the NUCLEUS CUNEATUS.", tip: "Gracilis (medial, lower body) + cuneatus (lateral, upper body) = dorsal column relay nuclei."},
+  {term: "[Brainstem] List the components that make up the midbrain.", answer: "CEREBRAL PEDUNCLES, CORPORA QUADRIGEMINA, RED NUCLEUS, and SUBSTANTIA NIGRA.", tip: "Midbrain = peduncles + corpora quadrigemina + red nucleus + substantia nigra."},
+  {term: "[Brainstem] What is the depression between the two cerebral peduncles, from which CN III emerges?", answer: "The INTERPEDUNCULAR FOSSA.", tip: "Interpeduncular fossa = the notch between the peduncles; the oculomotor nerve (CN III) exits here."},
+  {term: "[Cranial Nerves] Where does the oculomotor nerve (CN III) emerge?", answer: "From the INTERPEDUNCULAR FOSSA of the MIDBRAIN.", tip: "CN III → interpeduncular fossa (midbrain, between the peduncles)."},
+  {term: "[Cranial Nerves] What makes the trochlear nerve (CN IV) unique in its site of emergence?", answer: "It is the ONLY cranial nerve that emerges from the DORSAL (posterior) aspect of the brainstem, just below the INFERIOR COLLICULUS.", tip: "CN IV = the only nerve leaving the BACK of the brainstem — also the thinnest, longest intracranial course."},
+  {term: "[Cranial Nerves] The trigeminal nerve (CN V) emerges as a very thick nerve from which part of the brainstem?", answer: "The SIDE of the PONS.", tip: "CN V = big nerve off the lateral pons (thick sensory root + thin motor root)."},
+  {term: "[Cranial Nerves] The thin MOTOR division of the trigeminal (CN V) supplies which muscles?", answer: "The muscles of MASTICATION, plus TENSOR TYMPANI, TENSOR VELI PALATINI, MYLOHYOID, and the ANTERIOR BELLY of DIGASTRIC.", tip: "CN V motor = chewing muscles + 4 'tensor-team' extras (tympani, veli palatini, mylohyoid, ant. digastric)."},
+  {term: "[Cranial Nerves] Where does the abducens nerve (CN VI) emerge, and which eye muscle does it supply?", answer: "From the middle of the PONTOMEDULLARY SULCUS; it supplies the LATERAL RECTUS (abducts the eye).", tip: "CN VI = pontomedullary junction → lateral rectus (LR6)."},
+  {term: "[Cranial Nerves] CN IX, X, and XI ('three close friends') emerge from which sulcus and exit through which foramen?", answer: "They emerge from the POST-OLIVARY SULCUS and exit through the JUGULAR FORAMEN.", tip: "IX/X/XI = post-olivary sulcus in, jugular foramen out — the 'three friends' travel together."},
+  {term: "[Cranial Nerves] Where does the hypoglossal nerve (CN XII) emerge, and what is its function?", answer: "From the PRE-OLIVARY SULCUS; it is MOTOR to the TONGUE muscles.", tip: "CN XII = pre-olivary sulcus (in FRONT of the olive) → tongue movement."},
+  {term: "[Cranial Nerves] Which three structures pass together through the internal acoustic meatus?", answer: "The FACIAL nerve (VII), the VESTIBULOCOCHLEAR nerve (VIII), and the LABYRINTHINE ARTERY.", tip: "Internal acoustic meatus = CN VII + CN VIII + labyrinthine artery, traveling as a trio."},
+  {term: "[Cranial Nerves] There is no discrete olfactory nerve — on the base of the brain, the olfactory tract and bulb represent which cranial nerve?", answer: "Cranial nerve I (the OLFACTORY nerve).", tip: "CN I = olfactory bulb + tract on the base of the frontal lobe (no visible 'nerve' trunk)."},
+  {term: "[Cerebellum] What is the branching tree-like arrangement of gray/white matter in a sagittal cerebellar section called?", answer: "The ARBOR VITAE ('tree of life').", tip: "Arbor vitae = the fern/tree pattern of cerebellar white matter."},
+  {term: "[Cerebellum] What is the vermis of the cerebellum?", answer: "A WORM-like midline band of tissue CONNECTING the two cerebellar hemispheres.", tip: "Vermis ('worm') = the midline strip joining the cerebellar hemispheres."},
+  {term: "[Cerebellum] The numerous folds of the cerebellar surface get a special name instead of sulci/gyri. What are they called?", answer: "FOLIA ('leaves').", tip: "Cerebellum has FOLIA (leaves), not gyri — giving its finely-layered look."},
+  {term: "[Cerebellum] What type of tremor is the hallmark of cerebellar dysfunction?", answer: "An INTENTION tremor (worsens as the hand approaches a target).", tip: "Cerebellum = INTENTION tremor; basal nuclei = RESTING tremor — don't swap them."},
+  {term: "[Cerebellum] A patient overshoots on finger-to-nose, has slurred (dysarthric) speech, and reduced muscle tone. Which structure is dysfunctional?", answer: "The CEREBELLUM.", tip: "Overshoot (dysmetria) + dysarthria + hypotonia = classic cerebellar signs."},
+  {term: "[Cerebellum] How does the cerebellum refine a movement over time?", answer: "It COMPARES the PLANNED movement (a copy from the motor cortex) with the PERFORMED movement (feedback via the SPINOCEREBELLAR tract) and CORRECTS the error.", tip: "Cerebellum = error-correcting comparator: intended vs actual, corrected on the fly."},
+  {term: "[Ventricles] The lateral ventricle has which three horns, and in which lobes do they lie?", answer: "ANTERIOR horn (frontal lobe), POSTERIOR horn (occipital lobe), and INFERIOR horn (temporal lobe).", tip: "Lateral ventricle horns follow the lobes: anterior=frontal, posterior=occipital, inferior=temporal."},
+  {term: "[Ventricles] Where is the third ventricle located?", answer: "It is a SLIT-like cavity BETWEEN the two THALAMI.", tip: "3rd ventricle = the midline slit between the thalami (crossed by the interthalamic adhesion)."},
+  {term: "[Ventricles] Which foramen connects each lateral ventricle to the third ventricle?", answer: "The INTERVENTRICULAR FORAMEN (of Monro).", tip: "Interventricular foramen = lateral ventricle → 3rd ventricle gateway."},
+  {term: "[Ventricles] The cerebral aqueduct connects which two ventricles, and passes through which part of the brain?", answer: "It connects the THIRD and FOURTH ventricles and passes through the MIDBRAIN.", tip: "Cerebral aqueduct = 3rd → 4th ventricle, running through the midbrain."},
+  {term: "[Ventricles] The 4th ventricle is a diamond-shaped cavity. What forms its anterior and posterior boundaries?", answer: "ANTERIORLY the PONS and MEDULLA; POSTERIORLY the CEREBELLUM.", tip: "4th ventricle sits in the 'diamond' between the pons/medulla (front) and cerebellum (back)."},
+  {term: "[Ventricles] CSF escapes the 4th ventricle into the subarachnoid space through which foramina?", answer: "Two LATERAL foramina of LUSCHKA and one MEDIAN foramen of MAGENDIE.", tip: "Exit the 4th ventricle: 2 Luschka (lateral) + 1 Magendie (median). 'Magendie = Median.'"},
+  {term: "[Ventricles] What is the function of the choroid plexus found in each ventricle?", answer: "SECRETION of cerebrospinal fluid (CSF).", tip: "Choroid plexus = the CSF factory inside the ventricles."},
+  {term: "[Ventricles] CSF is absorbed by which structures, and into which sinus?", answer: "The ARACHNOID GRANULATIONS, draining into the SUPERIOR SAGITTAL SINUS.", tip: "Arachnoid granulations = the one-way drains returning CSF to venous blood (superior sagittal sinus)."},
+  {term: "[Ventricles] Trace the full CSF circulation pathway (Maini's flowchart).", answer: "Lateral ventricles → interventricular foramina → 3rd ventricle → cerebral aqueduct → 4th ventricle → subarachnoid space → arachnoid granulations → superior sagittal sinus.", tip: "Memorize the chain end-to-end: lateral → IVF → 3rd → aqueduct → 4th → subarachnoid → granulations → SSS."},
+  {term: "[Ventricles] Meningitis can cause hydrocephalus/raised ICP by blocking which structures?", answer: "The ARACHNOID GRANULATIONS — so CSF is still SECRETED but not ABSORBED.", tip: "Block the drains (granulations) and CSF backs up → communicating hydrocephalus / raised ICP."},
+  {term: "[Blood Supply] The brain has a DUAL arterial supply. Which two arterial systems supply it?", answer: "The INTERNAL CAROTID arteries and the VERTEBRAL arteries.", tip: "Front = internal carotids (anterior circulation); back = vertebrals (posterior circulation)."},
+  {term: "[Blood Supply] The brain is what fraction of body weight, yet receives what fraction of cardiac output?", answer: "About 2% of body WEIGHT, but receives about 15% of CARDIAC OUTPUT.", tip: "~2% weight but ~15% of output — the brain is a huge energy consumer with no fuel reserve."},
+  {term: "[Blood Supply] List the four parts of the internal carotid artery in order.", answer: "CERVICAL, PETROUS, CAVERNOUS, and CEREBRAL.", tip: "ICA parts: Cervical → Petrous → Cavernous → Cerebral (bottom to top)."},
+  {term: "[Blood Supply] After giving off the ophthalmic artery, the ICA ends by dividing into which two terminal branches?", answer: "The ANTERIOR CEREBRAL and MIDDLE CEREBRAL arteries.", tip: "ICA terminal split = anterior cerebral + middle cerebral arteries."},
+  {term: "[Blood Supply] Which surface of the brain does the ANTERIOR cerebral artery mainly supply?", answer: "The MEDIAL surface of the FRONTAL and PARIETAL lobes (plus the anterior corpus callosum).", tip: "ACA = medial frontal & parietal — why an ACA stroke hits the contralateral LEG (leg is on the medial homunculus)."},
+  {term: "[Blood Supply] Which regions does the MIDDLE cerebral artery supply, and why is it clinically important?", answer: "The INSULA and LATERAL surface of the frontal, parietal, and temporal lobes (and posterior internal capsule); it is the artery MOST OFTEN obstructed in atherosclerotic stroke.", tip: "MCA = lateral cortex + insula = the commonest stroke artery (face/arm > leg deficits)."},
+  {term: "[Blood Supply] The two vertebral arteries unite to form which single artery?", answer: "The BASILAR artery.", tip: "Two vertebrals join at the pontomedullary junction → one basilar artery."},
+  {term: "[Blood Supply] The vertebral artery is a branch of which artery?", answer: "The SUBCLAVIAN artery (its first part).", tip: "Vertebral artery = 1st branch of the subclavian, ascending through the transverse foramina."},
+  {term: "[Blood Supply] At the superior end of the pons, the basilar artery ends by dividing into which two arteries?", answer: "The two POSTERIOR CEREBRAL arteries.", tip: "Basilar terminates as the paired posterior cerebral arteries at the top of the pons."},
+  {term: "[Blood Supply] The labyrinthine artery supplies what, and travels through which passage?", answer: "The INTERNAL EAR (labyrinth); it passes through the INTERNAL ACOUSTIC MEATUS with CN VII and VIII.", tip: "Labyrinthine artery rides with CN VII & VIII through the internal acoustic meatus to the inner ear."},
+  {term: "[Blood Supply] Which artery ultimately (originally) delivers blood to the occipital lobe?", answer: "The VERTEBRAL arteries (via the basilar → posterior cerebral arteries).", tip: "Occipital (visual) cortex is posterior-circulation territory — traces back to the vertebrals."},
+  {term: "[Circle of Willis] Which arteries form the Circle of Willis?", answer: "The POSTERIOR CEREBRAL, POSTERIOR COMMUNICATING, INTERNAL CAROTID, ANTERIOR CEREBRAL, and ANTERIOR COMMUNICATING arteries.", tip: "Circle = PCA + P-comm + ICA + ACA + A-comm (with one anterior communicating linking the two ACAs)."},
+  {term: "[Circle of Willis] Where is the Circle of Willis located?", answer: "At the BASE of the brain, encircling the OPTIC CHIASMA, INFUNDIBULUM, and MAMMILLARY BODIES.", tip: "Circle of Willis rings the optic chiasma/infundibulum/mammillary bodies on the brain's underside."},
+  {term: "[Circle of Willis] What is the functional purpose of the anastomosis formed by the Circle of Willis?", answer: "If one feeding artery is BLOCKED, the circle provides an ALTERNATE (collateral) route of blood to the ischemic region.", tip: "Circle of Willis = built-in detour: collateral flow protects against a single-vessel blockage."},
+  {term: "[Clinical] What is the typical cause and nature of an epidural (extradural) hematoma?", answer: "An ARTERIAL bleed from a torn MIDDLE MENINGEAL ARTERY, often after a blow to the PTERION in the temporal region (fast onset).", tip: "Epidural = arterial, middle meningeal artery, pterion, RAPID — the classic 'lucid interval then collapse.'"},
+  {term: "[Clinical] How does Maini characterize a subdural hematoma, and in whom is it common?", answer: "A VENOUS bleed from BRIDGING VEINS, common in the ELDERLY (brain atrophy), developing SLOWLY over days to weeks/months.", tip: "Subdural = venous bridging veins, elderly, SLOW — the opposite tempo of an epidural."},
+  {term: "[Clinical] What is the typical nature of a subarachnoid hemorrhage?", answer: "Mostly ARTERIAL, commonly from rupture of an ANEURYSM; it may block the arachnoid granulations and raise intracranial pressure.", tip: "Subarachnoid = arterial aneurysm rupture ('worst headache of my life'); can clog CSF drainage."},
+  {term: "[Clinical] Tracing venous drainage: the sigmoid sinus becomes which vessel, exiting through which foramen?", answer: "The INTERNAL JUGULAR VEIN, exiting through the JUGULAR FORAMEN.", tip: "Sigmoid sinus → internal jugular vein at the jugular foramen — the brain's main venous exit."},
+  {term: "[Clinical] Rupture of the internal carotid artery within the cavernous sinus produces which characteristic sign?", answer: "PULSATILE EXOPHTHALMOS (a pulsating, protruding eye).", tip: "Carotid-cavernous fistula → pulsatile exophthalmos — arterial pressure transmitted to the orbit."},
+  {term: "[Clinical] Why do cerebral veins have no valves?", answer: "Because venous PRESSURE in the head is very LOW — even NEGATIVE above the heart — so valves are unnecessary.", tip: "Low/negative intracranial venous pressure means gravity already drains the head; no valves needed."},
+  {term: "[Development] From which germ layer does the neural tube (and thus the entire CNS) develop?", answer: "The ECTODERM.", tip: "Neural tube = ectoderm → the whole brain and spinal cord."},
+  {term: "[Development] The telencephalon and diencephalon give rise to which structures, respectively?", answer: "TELENCEPHALON → the CEREBRAL HEMISPHERES; DIENCEPHALON → the THALAMI, HYPOTHALAMUS, INFUNDIBULUM, PINEAL GLAND, and MAMMILLARY BODIES.", tip: "Forebrain (prosencephalon) = telencephalon (hemispheres) + diencephalon (thalamic structures)."},
+  {term: "[Development] The metencephalon and myelencephalon of the hindbrain give rise to which structures, respectively?", answer: "METENCEPHALON → the PONS and CEREBELLUM; MYELENCEPHALON → the MEDULLA (and spinal cord).", tip: "Hindbrain (rhombencephalon): metencephalon = pons+cerebellum; myelencephalon = medulla."}
+];
+
+
+const LS_KEY = "ga_0202_m07_brain_rapid_recall_v1";
+let deck = [], quizIdx = 0, viewIdx = 0;
+let got = 0, missed = 0, missedTerms = [], shuffleOn = false, revealed = false;
+let answered = {};
+function loadState(){try{const s=JSON.parse(localStorage.getItem(LS_KEY));if(s&&s.deck){deck=s.deck;quizIdx=s.quizIdx||0;viewIdx=s.viewIdx||s.idx||0;got=s.got;missed=s.missed;missedTerms=s.missedTerms||[];shuffleOn=s.shuffleOn||false;answered=s.answered||{};if(shuffleOn)document.getElementById("btnShuffle").classList.add("active");return true;}}catch(e){}return false;}
+function saveState(){localStorage.setItem(LS_KEY,JSON.stringify({deck,quizIdx,viewIdx,got,missed,missedTerms,shuffleOn,answered}));}
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startDrill(mode){if(mode==='missed'&&missedTerms.length>0){deck=missedTerms.map(t=>BANK.findIndex(b=>b.term===t)).filter(i=>i>=0);}else{deck=BANK.map((_,i)=>i);}if(shuffleOn)shuffleArr(deck);quizIdx=0;viewIdx=0;got=0;missed=0;missedTerms=[];answered={};document.getElementById("summaryArea").style.display="none";document.getElementById("cardArea").style.display="block";showCard();saveState();}
+function showCard(){if(viewIdx>=deck.length){showSummary();return;}const item=BANK[deck[viewIdx]];const isBrowse=viewIdx<quizIdx;document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnRedoBack").style.display=viewIdx>0?"inline-block":"none";document.getElementById("browseLabel").style.display="none";revealed=false;if(isBrowse){document.getElementById("browseLabel").style.display="block";doReveal();document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="inline-block";document.getElementById("btnRedo").style.display="inline-block";}updateScores();}
+function doReveal(){document.getElementById("answerText").classList.add("show");if(BANK[deck[viewIdx]].tip)document.getElementById("profTip").classList.add("show");document.getElementById("btnReveal").style.display="none";if(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)){document.getElementById("btnGot").style.display="inline-block";document.getElementById("btnMissed").style.display="inline-block";}revealed=true;}
+function grade(correct){const isRedo=viewIdx<quizIdx&&answered[viewIdx]===undefined;if(viewIdx<quizIdx&&!isRedo)return;answered[viewIdx]=correct?'got':'missed';if(correct){got++;}else{missed++;missedTerms.push(BANK[deck[viewIdx]].term);}if(isRedo){viewIdx=quizIdx;}else{quizIdx=viewIdx+1;viewIdx=quizIdx;}showCard();saveState();}
+function goBack(){if(viewIdx>0){viewIdx--;showCard();saveState();}}
+function resumeQuiz(){viewIdx=quizIdx;showCard();saveState();}
+function redoBack(){if(viewIdx<=0)return;viewIdx--;if(viewIdx<quizIdx){const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];}document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";const item=BANK[deck[viewIdx]];document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";revealed=false;updateScores();saveState();}
+function redoPrev(){if(viewIdx>=quizIdx)return;const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";revealed=false;updateScores();saveState();}
+function skip(){if(viewIdx>=quizIdx){deck.push(deck[viewIdx]);deck.splice(viewIdx,1);quizIdx=viewIdx;showCard();saveState();}}
+function updateScores(){const remain=deck.length-quizIdx;document.getElementById("gotCount").textContent=got+" Got It";document.getElementById("missedCount").textContent=missed+" Missed";document.getElementById("remainCount").textContent=remain+" Left";const pct=deck.length>0?((got+missed)/deck.length)*100:0;document.getElementById("progressFill").style.width=pct+"%";}
+function showSummary(){document.getElementById("cardArea").style.display="none";document.getElementById("summaryArea").style.display="block";const total=got+missed;const pct=total>0?Math.round((got/total)*100):0;const el=document.getElementById("finalScore");el.textContent=pct+"%";el.className="final-score "+(pct>=85?"great":pct>=65?"ok":"rough");document.getElementById("finalMsg").textContent=got+" of "+total+" — "+(pct>=90?"All facts locked in.":pct>=75?"Solid. Hit the missed ones again.":"Keep drilling. Re-do the missed cards.");document.getElementById("progressFill").style.width="100%";const listBox=document.getElementById("missedListBox"),ul=document.getElementById("missedListUl"),rd=document.getElementById("btnRedrill");if(missedTerms.length>0){listBox.style.display="block";rd.style.display="inline-block";ul.innerHTML=missedTerms.map(t=>"<li>"+t+"</li>").join("");}else{listBox.style.display="none";rd.style.display="none";}updateScores();}
+function toggleShuffle(){shuffleOn=!shuffleOn;document.getElementById("btnShuffle").classList.toggle("active",shuffleOn);saveState();}
+function toggleIndex(){const ov=document.getElementById("indexOverlay");if(ov.style.display==="flex"){ov.style.display="none";return;}ov.style.display="flex";renderIndex();}
+function renderIndex(){const g=document.getElementById("indexGrid");g.innerHTML="";for(let i=0;i<deck.length;i++){const item=BANK[deck[i]];const d=document.createElement("div");d.className="index-chip";let status="";if(i<quizIdx){if(answered[i]==='got'){d.classList.add("chip-got");status="Got It";}else if(answered[i]==='missed'){d.classList.add("chip-missed");status="Missed";}}else if(i===quizIdx){d.classList.add("chip-current");status="Current";}d.innerHTML='<span><span class="chip-num">'+(i+1)+'.</span> '+item.term+'</span><span class="chip-status">'+status+'</span>';d.onclick=(function(idx){return function(){viewIdx=idx;document.getElementById("indexOverlay").style.display="none";showCard();saveState();};})(i);g.appendChild(d);}}
+document.addEventListener("keydown",e=>{if(document.getElementById("indexOverlay").style.display==="flex"){if(e.key==="Escape"||e.key==="i"||e.key==="I")toggleIndex();return;}if(e.key===" "||e.code==="Space"){e.preventDefault();if(!revealed)doReveal();}if(e.key==="g"||e.key==="G"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(true);}if(e.key==="m"||e.key==="M"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(false);}if(e.key==="s"||e.key==="S"){if(!revealed)skip();}if(e.key==="b"||e.key==="B"){goBack();}if(e.key==="d"||e.key==="D"){redoBack();}if(e.key==="r"||e.key==="R"){if(viewIdx<quizIdx)redoPrev();}if(e.key==="i"||e.key==="I"){toggleIndex();}if(e.key==="Enter"&&viewIdx<quizIdx){resumeQuiz();}});
+document.getElementById("cardTotal").textContent=BANK.length;
+if(!loadState()||quizIdx>=deck.length){startDrill('all');}else{showCard();}
+</script>
+
+<div style="margin:30px auto;padding:14px;border-top:1px solid #334155;color:#94a3b8;font-size:.8rem;text-align:center;max-width:780px">DC Study Supply — Built by Dr. David Gramling, PHD</div>
+
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

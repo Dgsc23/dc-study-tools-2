@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 &middot; The Neck (Part 1) - Rapid Recall</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.header { text-align: center; padding: 50px 16px 12px; width: 100%; max-width: 700px; }
+.header h1 { font-size: 22px; color: #60a5fa; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; color: #94a3b8; }
+.score-bar { display: flex; gap: 16px; justify-content: center; padding: 10px; font-size: 14px; font-weight: 600; }
+.score-bar .got { color: #4ade80; } .score-bar .missed { color: #f87171; } .score-bar .remain { color: #94a3b8; }
+.progress-track { width: 100%; max-width: 700px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #60a5fa); transition: width 0.4s ease; border-radius: 3px; }
+.card-container { width: 100%; max-width: 700px; padding: 0 16px; flex: 1; }
+.card { background: #1e293b; border: 2px solid #334155; border-radius: 16px; padding: 32px 28px; text-align: center; min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: border-color 0.3s; }
+.card:hover { border-color: #475569; }
+.card-number { font-size: 12px; color: #64748b; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.term { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; line-height: 1.3; }
+.answer { font-size: 15px; line-height: 1.7; color: #cbd5e1; max-width: 600px; padding: 16px 20px; background: #0f172a; border-radius: 10px; border-left: 4px solid #3b82f6; text-align: left; display: none; margin-bottom: 16px; }
+.answer.show { display: block; animation: fadeIn 0.3s ease; }
+.prof-tip { font-size: 13px; color: #fbbf24; margin-top: 8px; font-style: italic; display: none; text-align: left; max-width: 600px; padding: 10px 16px; background: #1a0a0a; border-left: 3px solid #ef4444; border-radius: 0 10px 10px 0; }
+.prof-tip.show { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 12px 28px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn:active { transform: scale(0.96); }
+.btn-reveal { background: #3b82f6; color: white; } .btn-reveal:hover { background: #2563eb; }
+.btn-got { background: #166534; color: #4ade80; display: none; } .btn-got:hover { background: #15803d; }
+.btn-missed { background: #7f1d1d; color: #f87171; display: none; } .btn-missed:hover { background: #991b1b; }
+.btn-back { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-back:hover { background: #475569; }
+.btn-skip { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-skip:hover { background: #475569; }
+.btn-continue { background: #1e40af; color: #93c5fd; display: none; } .btn-continue:hover { background: #1d4ed8; }
+.btn-redo { background: #7c3aed; color: #c4b5fd; display: none; } .btn-redo:hover { background: #6d28d9; }
+.btn-redoback { background: #7c3aed; color: #c4b5fd; padding: 10px 20px; font-size: 13px; } .btn-redoback:hover { background: #6d28d9; }
+.browse-label { font-size: 11px; color: #f59e0b; margin-bottom: 8px; display: none; }
+.controls { padding: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.ctrl-btn { padding: 8px 16px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.ctrl-btn:hover { background: #334155; color: #e2e8f0; } .ctrl-btn.active { border-color: #3b82f6; color: #60a5fa; }
+.summary { display: none; text-align: center; padding: 40px 20px; width: 100%; max-width: 700px; }
+.summary h2 { font-size: 28px; color: #60a5fa; margin-bottom: 20px; }
+.summary .final-score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.summary .final-score.great { color: #4ade80; } .summary .final-score.ok { color: #fbbf24; } .summary .final-score.rough { color: #f87171; }
+.missed-list { text-align: left; max-width: 500px; margin: 20px auto; background: #1e293b; border-radius: 12px; padding: 16px 20px; }
+.missed-list h3 { color: #f87171; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.missed-list li { color: #cbd5e1; padding: 6px 0; border-bottom: 1px solid #334155; font-size: 14px; list-style: none; } .missed-list li:last-child { border: none; }
+.kb-hint { font-size: 11px; color: #475569; text-align: center; padding: 8px; }
+.index-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.95); z-index: 100; flex-direction: column; align-items: center; padding: 20px; overflow-y: auto; }
+.index-overlay h2 { color: #60a5fa; font-size: 20px; margin-bottom: 16px; }
+.index-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; } .index-close:hover { color: #e2e8f0; }
+.index-grid { max-width: 700px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.index-chip { padding: 10px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; cursor: pointer; font-size: 13px; color: #cbd5e1; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.index-chip:hover { background: #334155; border-color: #60a5fa; }
+.index-chip .chip-num { color: #64748b; font-size: 11px; min-width: 30px; }
+.chip-got { border-left: 3px solid #4ade80; } .chip-got .chip-status { color: #4ade80; }
+.chip-missed { border-left: 3px solid #f87171; } .chip-missed .chip-status { color: #f87171; }
+.chip-current { border-left: 3px solid #60a5fa; background: #1e3a5f; } .chip-current .chip-status { color: #60a5fa; }
+.chip-status { font-size: 11px; min-width: 50px; text-align: right; }
+</style>
+
+
+
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+
+<style id="ga0202-cleanup-v9">
+/* Hide legacy FAB Lecture Final hub buttons (we have our own ga0202-back-to-hub) */
+.fab-back-to-hub-btn,
+.sh-fab,
+.sh-back-to-start-fab,
+button[onclick*="fabBackToHub"],
+button[onclick*="shBackToStart"] { display: none !important; }
+/* Make sure draw button + AI button don't overlap */
+.fab-stack { bottom: 90px !important; right: 24px !important; z-index: 9999 !important; }
+.fab-stack button { pointer-events: auto !important; }
+#draw-btn { z-index: 10000 !important; }
+.draw-toolbar { z-index: 10001 !important; bottom: 158px !important; right: 90px !important; }
+.draw-canvas { z-index: 9990 !important; }
+#ai-btn, #ai-aug-btn, #ai-modal { display: none !important; }
+</style>
+<script id="ga0202-cleanup-v9-js">
+// Override legacy redirect functions to point to OUR hub instead
+window.fabBackToHub = function() { window.location.href = 'ga-0202-m02-neck-1-hub_PENDING_REVIEW.html'; };
+window.shBackToStart = function() { window.location.href = 'ga-0202-m02-neck-1-hub_PENDING_REVIEW.html'; };
+</script>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="ga-0202-m02-neck-1-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to Neck (Part 1) Hub</a>
+
+<div style="position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:9001;padding:5px 14px;background:linear-gradient(135deg,#78350f,#b45309);color:#fde68a;border:1px solid #f59e0b;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:0.5px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;box-shadow:0 3px 10px rgba(0,0,0,0.4);pointer-events:none;">⏳ PENDING REVIEW</div>
+<div class="header">
+  <h1>⚡ GA 0202 &middot; The Neck (Part 1) - Rapid Recall</h1>
+  <div class="subtitle">Dr. Maini &middot; Cervical Triangles, Vessels &amp; Muscles - 106 Cards | See prompt. Say it. Reveal to check.</div>
+  <div class="edge-voice-banner" style="margin:8px auto 0;max-width:640px;font-size:12px;color:#a5b4fc;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.35);border-radius:8px;padding:7px 12px;line-height:1.5;">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+</div>
+<div class="score-bar">
+  <span class="got" id="gotCount">0 Got It</span>
+  <span class="missed" id="missedCount">0 Missed</span>
+  <span class="remain" id="remainCount">0 Left</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="card-container" id="cardArea">
+  <div class="card">
+    <div class="browse-label" id="browseLabel">BROWSING — already answered</div>
+    <div class="card-number" id="cardNum"></div>
+    <div class="term" id="termText"></div>
+    <div class="answer" id="answerText"></div>
+    <div class="prof-tip" id="profTip"></div>
+    <div class="btn-row">
+      <button class="btn btn-reveal" id="btnReveal" onclick="doReveal()">Reveal Answer</button>
+      <button class="btn btn-got" id="btnGot" onclick="grade(true)">Got It</button>
+      <button class="btn btn-missed" id="btnMissed" onclick="grade(false)">Missed It</button>
+      <button class="btn btn-continue" id="btnContinue" onclick="resumeQuiz()">Continue &rarr;</button>
+      <button class="btn btn-redo" id="btnRedo" onclick="redoPrev()">Redo</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" id="btnBack" onclick="goBack()">&larr; Back</button>
+      <button class="btn btn-redoback" id="btnRedoBack" onclick="redoBack()">Redo Back</button>
+      <button class="btn btn-skip" onclick="skip()">Skip</button>
+    </div>
+  </div>
+</div>
+<div class="summary" id="summaryArea">
+  <h2>Drill Complete</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="finalMsg" style="color:#94a3b8;margin-bottom:20px;"></p>
+  <div class="missed-list" id="missedListBox" style="display:none;"><h3>Review These</h3><ul id="missedListUl"></ul></div>
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-reveal" onclick="startDrill('all')">Restart All</button>
+    <button class="btn btn-missed" id="btnRedrill" style="display:inline-block;" onclick="startDrill('missed')">Re-Drill Missed</button>
+  </div>
+</div>
+<div class="controls">
+  <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">Shuffle</button>
+  <button class="ctrl-btn" onclick="toggleIndex()">Card Index</button>
+  <button class="ctrl-btn" onclick="startDrill('all')">Reset</button>
+</div>
+<div class="kb-hint">Space = Reveal | G = Got It | M = Missed | S = Skip | B = Back | D = Redo Back | R = Redo | I = Index</div>
+<div class="index-overlay" id="indexOverlay">
+  <button class="index-close" onclick="toggleIndex()">&times;</button>
+  <h2>Card Index</h2>
+  <div class="index-grid" id="indexGrid"></div>
+</div>
+<script>
+const BANK = [{"term": "[Posterior Triangle] Which structure lies POSTERIOR to the anterior scalene muscle?", "answer": "Brachial plexus. Maini flags this as a quiz item: the brachial plexus (its trunks) lies posterior to the anterior scalene. Maini: 'In your quiz I'm going to ask which structure is anterior or posterior to anterior scalene. Brachial plexus is posterior.'", "tip": "Plexus and the main subclavian artery hide behind it; the vein and its two little arteries sit in front."}, {"term": "[Posterior Triangle] The trunks of the brachial plexus emerge between which two muscles?", "answer": "Anterior and middle scalene. The trunks leave the interscalene interval, between the anterior and middle scalene. Maini: 'Brachial plexus, the trunks, they leave between anterior and middle scalene.'", "tip": "The 'interscalene' gate is between the front and middle scalene."}, {"term": "[Posterior Triangle] The brachial plexus is formed from the ventral rami of which spinal nerves?", "answer": "C5 through T1. Maini: the plexus is formed from the ventral rami C5-T1. Maini: 'It's formed from the ventral rami of C5 to T1.'", "tip": "Five roots: C5, 6, 7, 8, and T1."}, {"term": "[Posterior Triangle] What are the boundaries of the posterior triangle of the neck?", "answer": "Sternocleidomastoid anteriorly, trapezius posteriorly, clavicle as the base. These are the three borders Maini lists for the posterior triangle. Maini: 'Sternocleidomastoid, trapezius, clavicle... that is your posterior triangle.'", "tip": "SCM in front, trapezius behind, clavicle underneath."}, {"term": "[Posterior Triangle] The inferior belly of the omohyoid divides the posterior triangle into which two smaller triangles?", "answer": "Occipital triangle and supraclavicular (subclavian) triangle. The inferior belly of omohyoid splits it into the larger occipital and the smaller supraclavicular/subclavian triangle. Maini: 'Inferior belly of omohyoid divides posterior triangle into occipital and supraclavicular, or subclavian.'", "tip": "Omohyoid's lower belly is the divider; occipital is the big one on top."}, {"term": "[Posterior Triangle] In which triangle of the neck is the spinal accessory nerve (CN XI) found?", "answer": "Posterior triangle. Maini confirms the spinal accessory nerve runs in the posterior triangle. Maini: 'Which triangle will you find spinal accessory nerve? Posterior.'", "tip": "CN XI crosses the roof of the posterior triangle."}, {"term": "[Cervical Plexus] The cervical plexus is formed from the ventral rami of which spinal nerves?", "answer": "C1 through C4. The cervical plexus is formed from the ventral rami of C1-C4. Maini: 'It's formed from the ventral rami, C1 to C4 spinal nerve.'", "tip": "Upper four cervical rami."}, {"term": "[Cervical Plexus] The cervical plexus is related to which vein within the carotid sheath?", "answer": "Internal jugular vein. Maini: the plexus is related to the internal jugular vein within the carotid sheath. Maini: 'The plexus is related to internal jugular vein within the carotid sheath.'", "tip": "Same vein that rides in the carotid sheath."}, {"term": "[Cervical Plexus] The cervical plexus has four cutaneous branches plus muscular ones. Which listed nerve is MUSCULAR (not cutaneous): greater auricular, phrenic, lesser occipital, or transverse cervical?", "answer": "Phrenic nerve. It is the EXCEPTION. The phrenic is a MUSCULAR branch of the cervical plexus, not a cutaneous one. Maini: 'Superficial branches: lesser occipital, greater auricular, transverse cervical, supraclavicular.'", "tip": "Four cutaneous ones emerge at the nerve point; phrenic is motor (to the diaphragm)."}, {"term": "[Cervical Plexus] Which cutaneous branch of the cervical plexus passes upward toward the auricle (ear)?", "answer": "Greater auricular nerve. Maini: it goes toward the auricle - the ear. Maini: 'Great auricular, going towards the auricle means your ear.'", "tip": "'Auricular' = auricle = ear."}, {"term": "[Cervical Plexus] The four superficial cervical plexus branches all emerge from a common point at the middle of the posterior border of the sternocleidomastoid. What is this point called?", "answer": "Nerve point of the neck (Erb's point). Maini calls it the nerve point of the neck, at the midpoint of the posterior border of the SCM. Maini: 'The midpoint of the posterior part of sternocleidomastoid... nerve point of the neck.'", "tip": "One point at the mid-posterior border of SCM launches all four cutaneous nerves."}, {"term": "[Cervical Plexus] The supraclavicular nerve divides into how many named groups?", "answer": "Three - medial, intermediate, and lateral. Maini: it branches into medial, intermediate, and lateral supraclavicular groups. Maini: 'Lateral supraclavicular, medial supraclavicular, and intermediate.'", "tip": "Medial / intermediate / lateral - three fans over the clavicle."}, {"term": "[Cervical Plexus] What is the root value of the phrenic nerve, a muscular branch of the cervical plexus?", "answer": "C3, C4, C5. Maini's mnemonic: 'C3, 4, 5 keep you alive.' Maini: 'Phrenic nerve... root value? 3, 4, 5, to keep you alive. It's a branch of cervical plexus.'", "tip": "'3, 4, 5 keep the diaphragm alive.'"}, {"term": "[Cervical Plexus] Sternocleidomastoid and trapezius receive their motor supply from the spinal accessory nerve, but which additional cervical fibers join it to reach these muscles?", "answer": "C2, C3, C4 fibers. Maini: C2-C4 fibers join the spinal accessory and are distributed to SCM and trapezius. Maini: 'C2, C3, C4 fibers join spinal accessory nerve and are distributed to SCM and trapezius.'", "tip": "CN XI does the driving; C2-C4 ride along."}, {"term": "[Ansa Cervicalis] The ansa cervicalis supplies motor branches to which muscle group?", "answer": "Most of the infrahyoid muscles. Maini: the ansa cervicalis gives branches to most of the infrahyoid muscles. Maini: 'Ansa cervicalis gives off branches to most of the infrahyoid muscles.'", "tip": "'Ansa' = loop that runs the strap (infrahyoid) muscles."}, {"term": "[Ansa Cervicalis] The superior root of the ansa cervicalis carries fibers from which spinal nerve, traveling with which cranial nerve?", "answer": "C1 fibers, carried by the hypoglossal nerve (CN XII). C1 fibers join the hypoglossal, then leave it to form the superior root. Maini: 'Superior root is a branch from C1 that joins the hypoglossal nerve and then separates from it.'", "tip": "C1 hitchhikes on CN XII, then jumps off as the superior root."}, {"term": "[Ansa Cervicalis] The inferior root of the ansa cervicalis is made up mainly of fibers from which spinal nerves?", "answer": "C2 and C3. Maini: the inferior root is descending fibers mostly from C2 and C3 (some C4). Maini: 'Inferior root is descending cervical fibers from C2 and C3. Some C4 also join, but mostly C2 and C3.'", "tip": "Superior root = C1; inferior root = C2 + C3."}, {"term": "[Ansa Cervicalis] Which infrahyoid muscle does NOT receive its innervation from the ansa cervicalis?", "answer": "Thyrohyoid. Thyrohyoid is the exception - it is supplied by C1 fibers carried by the hypoglossal nerve. Maini: 'Thyrohyoid is THE muscle with a different nerve supply - C1 fibers through the 12th nerve.'", "tip": "Three straps ride the ansa; thyroHyoid ('TH') is the odd one on C1/XII."}, {"term": "[Ansa Cervicalis] Through which opening does the hypoglossal nerve (which carries the C1 fibers for the ansa) exit the skull?", "answer": "Hypoglossal canal. Maini: the hypoglossal nerve emerges from the hypoglossal canal. Maini: 'Hypoglossal nerve emerges from the hypoglossal canal.'", "tip": "Hypoglossal nerve -> hypoglossal canal (name matches)."}, {"term": "[Anterior Triangle & Subdivisions] What are the boundaries of the anterior triangle of the neck?", "answer": "Midline of the neck, anterior border of SCM, and lower margin of the mandible. Anterior = midline, posterior = anterior border of SCM, superior = lower margin of mandible. Maini: 'Anterior triangle bounded by mandible, midline, and SCM.'", "tip": "Midline in front, SCM behind, mandible on top."}, {"term": "[Anterior Triangle & Subdivisions] The anterior triangle is subdivided into four smaller triangles using the bellies of which two muscles?", "answer": "Digastric and omohyoid. The two bellies of digastric plus the superior belly of omohyoid carve the anterior triangle into four. Maini: 'We are going to use both the bellies of digastric... and omohyoid to divide anterior triangle into four.'", "tip": "Digastric (2 bellies) + omohyoid do the carving."}, {"term": "[Anterior Triangle & Subdivisions] Name the four subdivisions of the anterior triangle of the neck.", "answer": "The four subdivisions are submental, digastric (submandibular), carotid, and muscular. Maini: 'Divide it into submental, digastric, carotid, and muscular.'", "tip": "Submental, digastric, carotid, muscular."}, {"term": "[Anterior Triangle & Subdivisions] What are the boundaries of the submental triangle?", "answer": "Midline medially, anterior belly of digastric laterally, body of the hyoid at the base. These are the three borders of the small submental triangle. Maini: 'Medial is midline, lateral is anterior belly of digastric, inferior is the body of the hyoid bone.'", "tip": "The only unpaired midline triangle, capped by the hyoid."}, {"term": "[Anterior Triangle & Subdivisions] What are the contents of the submental triangle?", "answer": "Maini lists these as the few structures in the submental triangle. Maini: 'There are lymph nodes, submental lymph nodes, and beginning of anterior jugular vein.'", "tip": "Little triangle, little contents: nodes + start of anterior jugular vein."}, {"term": "[Anterior Triangle & Subdivisions] What are the boundaries of the digastric (submandibular) triangle?", "answer": "Anterior belly of digastric, posterior belly of digastric, and lower border of the mandible. The two digastric bellies plus the mandible bound this triangle. Maini: 'Anterior belly of digastric, lateral is posterior belly of digastric, superior is lower border of mandible.'", "tip": "Both bellies of digastric + the jaw line."}, {"term": "[Anterior Triangle & Subdivisions] Which salivary gland is a principal content of the digastric (submandibular) triangle?", "answer": "Submandibular gland. Maini names the submandibular (salivary) gland as a content of this triangle. Maini: 'Contents are submandibular gland, which is a salivary gland.'", "tip": "SUBmandibular gland in the SUBmandibular triangle."}, {"term": "[Anterior Triangle & Subdivisions] The carotid triangle is named for the presence of which structure?", "answer": "The common carotid artery and its bifurcation. Maini: it is named for the common carotid artery and its bifurcation lying within it. Maini: 'This is carotid triangle because of the common carotid artery with its bifurcation located within this triangle.'", "tip": "Named for the carotid that forks inside it."}, {"term": "[Anterior Triangle & Subdivisions] What are the boundaries of the carotid triangle?", "answer": "Posterior belly of digastric superiorly, anterior border of SCM posteriorly, superior belly of omohyoid anteroinferiorly. These are the three borders Maini gives for the carotid triangle. Maini: 'Superior is posterior belly of digastric, posterior is SCM, anterior is superior belly of omohyoid.'", "tip": "Posterior belly of digastric on top, SCM behind, omohyoid in front."}, {"term": "[Anterior Triangle & Subdivisions] Which set of cranial nerves is found among the contents of the carotid triangle?", "answer": "CN IX, CN X, and CN XII. Maini lists the 9th, 10th and 12th cranial nerves in the carotid triangle. Maini: '9, 10, 12 cranial nerves, deep cervical lymph nodes... located within the carotid triangle.'", "tip": "9, 10, 12 live in the carotid triangle."}, {"term": "[Anterior Triangle & Subdivisions] The muscular triangle is so named because it contains which muscle group?", "answer": "The infrahyoid (strap) muscles. Maini: the infrahyoid muscles are found here, giving it the name muscular triangle. Maini: 'All the infrahyoid muscles are found in this triangle. That's why it's called muscular triangle.'", "tip": "Muscular triangle = home of the strap muscles."}, {"term": "[Anterior Triangle & Subdivisions] What are the contents of the muscular triangle?", "answer": "Maini lists the thyroid gland, larynx, trachea, esophagus and recurrent laryngeal nerve here, plus sternohyoid/sternothyroid. Maini: 'Sternohyoid and sternothyroid... thyroid gland, larynx, trachea, esophagus, and recurrent laryngeal nerve within this triangle.'", "tip": "Straps + midline viscera (thyroid, larynx, trachea, esophagus)."}, {"term": "[Triangle Common Boundaries] Which muscle forms the common boundary between the submental and digastric triangles?", "answer": "Anterior belly of digastric. The anterior belly of digastric is shared between the submental (lateral border) and digastric (medial border) triangles. Maini: 'Which muscle acts as a common boundary between submental and digastric triangle? Anterior belly of digastric.'", "tip": "Anterior belly = wall between submental and digastric."}, {"term": "[Triangle Common Boundaries] Which muscle forms the common boundary between the carotid and digastric triangles?", "answer": "Posterior belly of digastric. The posterior belly of digastric is the shared border between the carotid and digastric triangles. Maini: 'Which muscle forms a common boundary between carotid triangle and digastric triangle? Posterior belly of digastric.'", "tip": "Posterior belly = wall between carotid and digastric."}, {"term": "[Triangle Common Boundaries] Which muscle forms the common boundary between the muscular and carotid triangles?", "answer": "Superior belly of omohyoid. The superior belly of omohyoid is the shared border between the muscular and carotid triangles. Maini: 'Which muscle forms a common boundary between muscular triangle and carotid triangle? Superior belly of omohyoid.'", "tip": "Superior belly of omohyoid = wall between muscular and carotid."}, {"term": "[Carotid Sheath Contents] Which three structures - the 'three musketeers' - travel together inside the carotid sheath?", "answer": "Common carotid artery, internal jugular vein, and vagus nerve. Maini's 'three musketeers': the carotid artery, IJV, and vagus nerve wrapped in the carotid sheath. Maini: 'Common carotid artery, internal jugular vein, and vagus... wrapped in a common sheath, the three musketeers.'", "tip": "Artery + vein + vagus = the sheath trio."}, {"term": "[Carotid Sheath Contents] After the common carotid artery bifurcates, which structure LEAVES the carotid sheath?", "answer": "External carotid artery. The external carotid leaves the sheath; the internal carotid, IJV and vagus remain. Maini: 'External carotid leaves the sheath; internal carotid, internal jugular vein and vagus stay.'", "tip": "The branch-giving external carotid heads out of the bundle."}, {"term": "[Suprahyoid Muscles] What is the shared action of the suprahyoid muscles?", "answer": "They elevate the hyoid bone (important in swallowing). The suprahyoids elevate the hyoid, which lifts and closes the larynx during swallowing. Maini: 'All the muscles which elevate the hyoid bone, they are suprahyoid muscles.'", "tip": "supra = above; they pull the hyoid UP."}, {"term": "[Suprahyoid Muscles] The posterior belly of the digastric originates from which bony landmark?", "answer": "Mastoid notch (medial surface of the mastoid process) of the temporal bone. Maini: the posterior belly arises from the mastoid/digastric notch on the temporal bone. Maini: 'Originates by posterior belly from the medial surface of the mastoid process... the digastric notch.'", "tip": "Posterior belly grabs the mastoid (temporal bone)."}, {"term": "[Suprahyoid Muscles] Which muscle is she describing: 'originates from the temporal bone of the skull' (at the mastoid notch)?", "answer": "Digastric (posterior belly). Maini flags this as a quiz item - the digastric posterior belly arises from the temporal bone. Maini: 'Which muscle originates from temporal bone of the skull? Digastric - because the mastoid notch is on the temporal bone.'", "tip": "Mastoid notch = temporal bone = digastric."}, {"term": "[Suprahyoid Muscles] The anterior belly of the digastric inserts onto which structure?", "answer": "Digastric fossa of the mandible. The anterior belly inserts into the digastric fossa on the inside of the mandible. Maini: 'Insertion by the anterior belly, it is inserted onto the digastric fossa of the mandible.'", "tip": "Anterior belly -> digastric fossa of the jaw."}, {"term": "[Suprahyoid Muscles] The digastric is a 'composite' muscle with two nerves. Which nerve supplies its POSTERIOR belly?", "answer": "Facial nerve (CN VII). The posterior belly of digastric is supplied by the facial nerve. Maini: 'Posterior belly by facial nerve, the 7th nerve.'", "tip": "Posterior belly + stylohyoid share the Facial nerve ('F')."}, {"term": "[Suprahyoid Muscles] Which nerve supplies the ANTERIOR belly of the digastric?", "answer": "Nerve to mylohyoid (a branch of the inferior alveolar, from V3). The anterior belly is supplied by the nerve to mylohyoid, from the inferior alveolar branch of V3. Maini: 'Anterior belly by nerve to mylohyoid.'", "tip": "Anterior belly rides the trigeminal (V3 -> inferior alveolar -> nerve to mylohyoid)."}, {"term": "[Suprahyoid Muscles] The nerve to mylohyoid is a branch of the inferior alveolar nerve, which itself is a branch of which cranial nerve division?", "answer": "Mandibular division of the trigeminal (V3). Inferior alveolar -> V3 (mandibular) -> trigeminal (CN V). Maini: 'Nerve to mylohyoid, branch of inferior alveolar, which is a branch of mandibular - V3.'", "tip": "Trigeminal -> V3 -> inferior alveolar -> nerve to mylohyoid."}, {"term": "[Suprahyoid Muscles] The nerve to mylohyoid supplies which TWO muscles?", "answer": "Anterior belly of digastric and mylohyoid. Maini: the nerve to mylohyoid supplies the anterior belly of digastric and the mylohyoid. Maini: 'Two muscles: anterior belly of digastric and mylohyoid.'", "tip": "Its name gives one; the anterior belly of digastric is the other."}, {"term": "[Suprahyoid Muscles] The stylohyoid muscle originates from which bony landmark?", "answer": "Styloid process of the temporal bone. The name says it: stylohyoid arises from the styloid process. Maini: 'Stylohyoid... originates from styloid process of temporal bone.'", "tip": "STYLO-hyoid from the STYLOID process."}, {"term": "[Suprahyoid Muscles] The stylohyoid muscle is pierced by which structure?", "answer": "The intermediate tendon of the digastric. The digastric's intermediate tendon passes through a 'buttonhole' in the stylohyoid. Maini: 'This muscle is pierced by the intermediate tendon of digastric muscle.'", "tip": "Digastric's tendon threads through split stylohyoid."}, {"term": "[Suprahyoid Muscles] Which nerve innervates the stylohyoid muscle?", "answer": "Facial nerve (CN VII). Stylohyoid, like the posterior belly of digastric, is supplied by the facial nerve. Maini: 'Stylohyoid is also innervated by facial nerve... posterior belly of digastric and stylohyoid, an F for facial.'", "tip": "Two neighbors on the Facial nerve: posterior belly of digastric + stylohyoid."}, {"term": "[Suprahyoid Muscles] The mylohyoid muscle originates from which line, and what structure does it help form?", "answer": "Mylohyoid line of the mandible; it forms the floor of the oral cavity. Mylohyoid arises from the mylohyoid line and forms the muscular floor of the mouth. Maini: 'Mylohyoid... a very large fan-shaped muscle... forms the bulk of the floor of the oral cavity.'", "tip": "MYLOhyoid from the MYLOhyoid LINE, forming the mouth's floor."}, {"term": "[Suprahyoid Muscles] The anterior fibers of the mylohyoid insert onto which midline structure?", "answer": "The fibrous (median) raphe running from the symphysis menti to the hyoid. The anterior fibers meet in a midline fibrous raphe; posterior fibers reach the hyoid body. Maini: 'Anterior fibers insert onto a fibrous raphe which extends from symphysis menti to the body of the hyoid bone.'", "tip": "The two mylohyoids meet at a midline seam (raphe)."}, {"term": "[Suprahyoid Muscles] The geniohyoid muscle originates from which landmark of the mandible?", "answer": "Genial tubercle (inferior mental spine). Geniohyoid arises from the genial tubercle / inferior mental spine of the mandible. Maini: 'Geniohyoid originates from genial tubercle of the mandible.'", "tip": "GENIO-hyoid from the GENIAL tubercle."}, {"term": "[Suprahyoid Muscles] What is the positional relationship of the geniohyoid to the mylohyoid?", "answer": "Geniohyoid lies superior to (on top of) the mylohyoid. Maini: geniohyoid sits on top of mylohyoid - you must cut through mylohyoid to reach it from below. Maini: 'It's lying on top of mylohyoid. You cannot see it from below unless you dissect mylohyoid.'", "tip": "Geniohyoid rides ON TOP of the mylohyoid floor."}, {"term": "[Suprahyoid Muscles] Which nerve supplies the geniohyoid muscle?", "answer": "C1 fibers carried by the hypoglossal nerve (CN XII). Geniohyoid is supplied by C1 fibers travelling with the hypoglossal nerve. Maini: 'Geniohyoid: a branch from the anterior ramus of C1 carried along with the hypoglossal nerve.'", "tip": "Geniohyoid (and thyrohyoid) = C1 hitchhiking on CN XII."}, {"term": "[Suprahyoid Muscles] The nerves to the digastric develop with the muscle from the pharyngeal arches, so they carry which functional fiber type?", "answer": "SVE (special visceral efferent) fibers. Muscles from the pharyngeal arches are innervated by SVE fibers, as Maini emphasized. Maini: 'These muscles originate from pharyngeal arches... innervated by SVE fibers, not GSE.'", "tip": "Pharyngeal-arch muscles -> Special Visceral Efferent."}, {"term": "[Infrahyoid Muscles] What is the shared action of the infrahyoid (strap) muscles?", "answer": "They depress the hyoid bone. The infrahyoid muscles depress the hyoid (and larynx). Maini: 'Because it is infrahyoid, it depresses the hyoid bone.'", "tip": "infra = below; they pull the hyoid DOWN."}, {"term": "[Infrahyoid Muscles] Which infrahyoid muscle uniquely has an attachment to the scapula?", "answer": "Omohyoid (inferior belly, from the superior border of the scapula). Omohyoid is the only infrahyoid attaching to the scapula ('omo' = shoulder). Maini: 'This is the only muscle in the infrahyoid group that originates from scapula.'", "tip": "OMO = shoulder; omohyoid reaches the scapula."}, {"term": "[Infrahyoid Muscles] The intermediate tendon of the omohyoid is held in position by a fascial sling attached to which bones?", "answer": "The clavicle and first rib. A loop of deep fascia slings the omohyoid tendon to the clavicle and first rib. Maini: 'A loop of deep fascia slings the tendon to the clavicle and first rib.'", "tip": "Fascial loop ties the tendon down to clavicle + first rib."}, {"term": "[Infrahyoid Muscles] The sternothyroid muscle inserts onto which structure (and therefore does not reach the hyoid)?", "answer": "The oblique line of the thyroid cartilage. Sternothyroid inserts on the oblique line of the thyroid cartilage, stopping short of the hyoid. Maini: 'Sternothyroid is inserted onto the oblique line of thyroid cartilage... only up to the thyroid cartilage.'", "tip": "sterno-THYROID stops at the thyroid cartilage's oblique line."}, {"term": "[Infrahyoid Muscles] What is the action of the sternothyroid muscle?", "answer": "It depresses the larynx. Because it attaches to the thyroid cartilage, sternothyroid depresses the larynx. Maini: 'This muscle depresses the larynx, because it is attached only till the thyroid cartilage.'", "tip": "Anchored to the thyroid cartilage -> pulls the larynx down."}, {"term": "[Infrahyoid Muscles] The thyrohyoid muscle runs between which two structures?", "answer": "From the oblique line of the thyroid cartilage to the body of the hyoid bone. Thyrohyoid is a short muscle from the thyroid cartilage's oblique line to the hyoid. Maini: 'Thyrohyoid originates from oblique line of the thyroid cartilage and goes to the hyoid bone.'", "tip": "THYRO-HYOID = thyroid cartilage to hyoid."}, {"term": "[Infrahyoid Muscles] Which infrahyoid muscle has a unique nerve supply (NOT the ansa cervicalis)?", "answer": "Thyrohyoid - supplied by C1 fibers carried by the hypoglossal nerve (CN XII). Thyrohyoid ('TH') is the exception, supplied by C1 via CN XII like geniohyoid. Maini: 'Thyrohyoid is THE muscle with a different nerve supply - C1 fibers through the 12th nerve.'", "tip": "Remember 'TH' = thyrohyoid = the exception (C1/XII)."}, {"term": "[Infrahyoid Muscles] In which subdivision of the anterior triangle are the sternohyoid and sternothyroid muscles located?", "answer": "Muscular triangle. Maini: these strap muscles lie in the muscular triangle. Maini: 'Which part of the anterior triangle? Muscular triangle.'", "tip": "Straps live in the MUSCULAR triangle."}, {"term": "[Common & Internal Carotid] The RIGHT common carotid artery arises from which vessel?", "answer": "The brachiocephalic trunk. The right common carotid is a branch of the brachiocephalic trunk. Maini: 'Right common carotid artery, it's a branch of brachiocephalic.'", "tip": "Right = off the brachiocephalic trunk."}, {"term": "[Common & Internal Carotid] The LEFT common carotid artery arises directly from which structure?", "answer": "The aortic arch. The left common carotid arises directly from the aortic arch. Maini: 'Left common carotid artery originates directly from the aortic arch.'", "tip": "Left = straight off the arch."}, {"term": "[Common & Internal Carotid] At what level does the common carotid artery bifurcate into external and internal carotid arteries?", "answer": "At the superior border of the thyroid cartilage. Both common carotids divide at the superior border of the thyroid cartilage. Maini: 'They divide into external and internal carotid at the superior border of the thyroid cartilage.'", "tip": "Fork at the top edge of the thyroid CARTILAGE."}, {"term": "[Common & Internal Carotid] How can you distinguish the internal carotid artery (ICA) from the external carotid artery (ECA) in the neck?", "answer": "The ECA gives off branches in the neck; the ICA gives no branches in the neck. The branch-giver is the ECA; the branchless one is the ICA. Maini: 'ECA is the only artery that gives off branches in the neck; internal carotid gives no branches.'", "tip": "Branches in the neck = external; no branches = internal."}, {"term": "[Common & Internal Carotid] Through which opening does the internal carotid artery enter the skull?", "answer": "The carotid canal in the petrous part of the temporal bone. The ICA enters via the carotid canal of the petrous temporal bone to supply the brain. Maini: 'It enters the skull through carotid canal in the petrous portion of temporal bone.'", "tip": "Internal CAROTID -> CAROTID canal."}, {"term": "[Carotid Sinus & Body] The carotid sinus, a localized dilatation, is found at which location?", "answer": "At the beginning of the internal carotid artery (at the bifurcation). The carotid sinus is a slight dilatation at the origin of the ICA. Maini: 'A localized dilatation, the carotid sinus, right at the beginning of the internal carotid artery.'", "tip": "A bulge at the START of the internal carotid."}, {"term": "[Carotid Sinus & Body] The carotid sinus contains which type of receptor?", "answer": "Baroreceptors (pressure/stretch receptors). The carotid sinus houses baroreceptors that sense blood pressure via arterial stretch. Maini: 'This sinus contains baroreceptors. Baro means pressure.'", "tip": "BARO = pressure; the sinus is the pressure sensor."}, {"term": "[Carotid Sinus & Body] Which cranial nerve carries impulses from the carotid sinus and carotid body?", "answer": "Glossopharyngeal nerve (CN IX). Both the carotid sinus and carotid body are innervated by the glossopharyngeal (9th) nerve. Maini: 'Which nerve is carrying impulses from baroreceptors? 9th nerve, glossopharyngeal.'", "tip": "Carotid sinus + body = the 9th nerve's job."}, {"term": "[Carotid Sinus & Body] The carotid body contains chemoreceptors that primarily sense which changes in the blood?", "answer": "Increased CO2, increased H+, and decreased O2. The carotid body chemoreceptors detect a rise in CO2/H+ and a fall in O2. Maini: 'Chemoreceptors sense increase in CO2, hydrogen ion concentration, and decrease in oxygen.'", "tip": "Body = chemistry: CO2 up, H+ up, O2 down."}, {"term": "[External Carotid Branches] How many branches does the external carotid artery have, and how are they grouped?", "answer": "Eight total: 3 anterior, 3 posterior, and 2 terminal. The ECA has 8 branches - three anterior, three posterior, two terminal. Maini: '3 anterior, 3 posterior, and 2 terminal branches - 8 branches in total.'", "tip": "3 + 3 + 2 = 8."}, {"term": "[External Carotid Branches] What are the three ANTERIOR branches of the external carotid artery?", "answer": "The anterior branches are superior thyroid, lingual, and facial. Maini: 'The first anterior branch is superior thyroid, second is lingual, third is facial.'", "tip": "Front three: Superior thyroid, Lingual, Facial."}, {"term": "[External Carotid Branches] What are the three POSTERIOR branches of the external carotid artery?", "answer": "The posterior branches are ascending pharyngeal, occipital, and posterior auricular. Maini: 'Ascending pharyngeal, occipital, and posterior auricular.'", "tip": "Back three: Ascending pharyngeal, Occipital, Posterior auricular."}, {"term": "[External Carotid Branches] What are the two TERMINAL branches of the external carotid artery?", "answer": "Superficial temporal and maxillary. The ECA ends by dividing into the superficial temporal and maxillary arteries. Maini: 'It ends by dividing into two terminal branches: superficial temporal and maxillary.'", "tip": "The ECA ends as superficial temporal + maxillary."}, {"term": "[External Carotid Branches] Which anterior branch of the external carotid descends to supply the upper pole of the thyroid gland?", "answer": "Superior thyroid artery. The superior thyroid artery is the first anterior ECA branch and reaches the upper pole of the thyroid. Maini: 'Superior thyroid descends and ends at the upper pole of thyroid gland... a branch of external carotid.'", "tip": "SUPERIOR thyroid artery -> UPPER pole (from the ECA)."}, {"term": "[External Carotid Branches] The lingual artery arises from the external carotid at the level of which landmark?", "answer": "The tip of the greater horn of the hyoid bone. Maini locates the lingual artery's origin at the tip of the greater horn of the hyoid. Maini: 'Lingual arises from external carotid at the tip of the greater horn of the hyoid bone.'", "tip": "Lingual springs off near the greater horn of the hyoid."}, {"term": "[External Carotid Branches] The superficial temporal artery can be palpated where, and which nerve accompanies it?", "answer": "In front of the tragus/auricle, accompanied by the auriculotemporal nerve. It is palpable just anterior to the tragus and runs with the auriculotemporal nerve. Maini: 'Superficial temporal arises in front of the auricle... accompanied by auriculotemporal nerve.'", "tip": "Feel it in front of the tragus; auriculotemporal nerve rides along."}, {"term": "[External Carotid Branches] The transverse facial artery is a branch of which artery (a classic point of confusion)?", "answer": "Superficial temporal artery. Maini flags the trap: transverse facial is a branch of the superficial temporal, NOT the facial artery. Maini: 'Everybody confuses it as a branch of facial. No, it's a branch of superficial temporal.'", "tip": "Name says 'facial,' but it's a superficial TEMPORAL branch."}, {"term": "[External Carotid Branches] The maxillary artery passes deep to the neck of the mandible to enter which region?", "answer": "The infratemporal fossa. The maxillary artery runs medial/deep to the mandibular neck into the infratemporal fossa. Maini: 'Maxillary passes anteriorly and medially to the neck of the mandible, entering infratemporal fossa.'", "tip": "Maxillary dives deep to the jaw into the infratemporal fossa."}, {"term": "[Subclavian Artery] The RIGHT subclavian artery arises from which vessel?", "answer": "The brachiocephalic trunk. The right subclavian arises from the brachiocephalic trunk (the left arises from the aortic arch). Maini: 'Right subclavian arises from the brachiocephalic; left one from aortic arch.'", "tip": "Right subclavian = off the brachiocephalic trunk."}, {"term": "[Subclavian Artery] What is the relationship of the subclavian artery to the anterior scalene muscle?", "answer": "The subclavian artery passes POSTERIOR to the anterior scalene. Maini stresses the subclavian artery lies behind the anterior scalene. Maini: 'Subclavian artery, the main one, is located posterior to anterior scalene.'", "tip": "Artery = behind; vein = in front of the anterior scalene."}, {"term": "[Subclavian Artery] The anterior scalene muscle divides the subclavian artery into how many parts, and how are they positioned?", "answer": "Three parts: part 1 medial, part 2 posterior/deep, part 3 lateral to the muscle. Part 1 is medial, part 2 lies behind (deep to) the muscle, part 3 is lateral. Maini: 'Part 1 medial, part 2 deep, part 3 lateral to anterior scalene.'", "tip": "Medial (1), deep/behind (2), lateral (3) to the anterior scalene."}, {"term": "[Subclavian Artery] Which three branches arise from the FIRST part of the subclavian artery?", "answer": "Vertebral artery, internal thoracic artery, and thyrocervical trunk. Part 1 gives the vertebral, internal thoracic, and thyrocervical trunk. Maini: 'Part 1 gives off vertebral, internal thoracic, and thyrocervical trunk.'", "tip": "VIT: Vertebral, Internal thoracic, Thyrocervical trunk."}, {"term": "[Subclavian Artery] The vertebral artery ascends through which structures to reach the brain?", "answer": "The transverse foramina of the cervical vertebrae, then the foramen magnum. It passes up the transverse foramina and enters the skull via the foramen magnum. Maini: 'Vertebral artery passes through transverse foramina of all seven cervical vertebrae and enters through foramen magnum.'", "tip": "Up the transverse foramina -> foramen magnum -> posterior brain."}, {"term": "[Subclavian Artery] The thyrocervical trunk gives rise to which three branches?", "answer": "Inferior thyroid, transverse cervical, and suprascapular arteries. Thyrocervical trunk = inferior thyroid + transverse cervical + suprascapular. Maini: 'Thyrocervical trunk: inferior thyroid, transverse cervical, and suprascapular.'", "tip": "Thyro (inferior thyroid) + cervical (transverse cervical) + suprascapular."}, {"term": "[Subclavian Artery] The inferior thyroid artery is a branch of which vessel?", "answer": "The thyrocervical trunk (from the subclavian artery). The inferior thyroid arises from the thyrocervical trunk, a branch of the subclavian. Maini: 'Inferior thyroid artery is a branch of the thyrocervical trunk, which is a branch of subclavian.'", "tip": "Inferior thyroid = thyrocervical trunk = subclavian."}, {"term": "[Subclavian Artery] Which branch arises from the SECOND part of the subclavian artery?", "answer": "The costocervical trunk. Part 2 gives off the costocervical trunk. Maini: 'Second part gives off costocervical trunk.'", "tip": "Part 2 = the single costocervical trunk."}, {"term": "[Subclavian Artery] The costocervical trunk divides into which two branches?", "answer": "Deep cervical and superior intercostal arteries. The costocervical trunk splits into the deep cervical and superior intercostal arteries. Maini: 'Costocervical divides into deep cervical and superior intercostal.'", "tip": "Costo (superior intercostal) + cervical (deep cervical)."}, {"term": "[Subclavian Artery] The THIRD part of the subclavian artery usually gives which branch?", "answer": "Usually no branch (occasionally a dorsal scapular artery). Part 3 typically gives no branch, though it may occasionally give the dorsal scapular. Maini: 'Part 3 usually does not give any branch, but occasionally may give a dorsal scapular.'", "tip": "Part 3 is usually branch-free."}, {"term": "[Subclavian Artery] While the subclavian artery lies posterior to the anterior scalene, which two arteries lie ANTERIOR to that muscle?", "answer": "Transverse cervical and suprascapular arteries. These two thyrocervical branches cross anterior to the anterior scalene. Maini: 'Transverse cervical and suprascapular are lying anterior to the anterior scalene muscle.'", "tip": "Transverse cervical + suprascapular skate in FRONT of the anterior scalene."}, {"term": "[Subclavian Artery] In thoracic outlet (scalene) syndrome, which structures may be compressed together?", "answer": "The subclavian artery and the brachial plexus. Because both lie posterior to the anterior scalene, they can be compressed together. Maini: 'In scalene syndrome, this artery may get compressed along with brachial plexus.'", "tip": "Both hide behind the anterior scalene, so both get squeezed."}, {"term": "[Neck Veins & Drainage] What is the relationship of the subclavian VEIN to the anterior scalene muscle?", "answer": "It passes ANTERIOR to the anterior scalene. The subclavian vein runs in front of the anterior scalene (opposite the artery). Maini: 'Subclavian vein passes anterior to anterior scalene muscle.'", "tip": "Vein in FRONT, artery BEHIND the anterior scalene."}, {"term": "[Neck Veins & Drainage] The subclavian vein is a continuation of which vein?", "answer": "The axillary vein (at the outer border of the first rib). The axillary vein becomes the subclavian vein at the outer border of the first rib. Maini: 'Subclavian vein is the continuation of axillary vein... at the outer border of the first rib.'", "tip": "Axillary vein -> (first rib) -> subclavian vein."}, {"term": "[Neck Veins & Drainage] The subclavian vein unites with which vein to form the brachiocephalic vein?", "answer": "The internal jugular vein. Subclavian + internal jugular veins unite to form the brachiocephalic vein. Maini: 'Subclavian and internal jugular vein join together to form brachiocephalic.'", "tip": "Subclavian + IJV = brachiocephalic (-> SVC)."}, {"term": "[Neck Veins & Drainage] The internal jugular vein begins at the jugular foramen as a continuation of which dural venous sinus?", "answer": "The sigmoid sinus. The IJV is the continuation of the sigmoid sinus at the jugular foramen. Maini: 'Which sinus continues as internal jugular vein? Sigmoid sinus.'", "tip": "Sigmoid sinus exits the jugular foramen as the IJV."}, {"term": "[Neck Veins & Drainage] The internal jugular vein descends within the carotid sheath alongside which two structures?", "answer": "The common carotid artery and the vagus nerve. In the carotid sheath the IJV runs with the common carotid artery and vagus nerve. Maini: 'It descends in the neck within the carotid sheath along with common carotid and vagus.'", "tip": "IJV + common carotid + vagus = three musketeers."}, {"term": "[Neck Veins & Drainage] The internal jugular vein receives blood primarily from which regions?", "answer": "The brain, face, and neck. The IJV is the main vein draining the brain, face, and neck. Maini: 'Internal jugular vein receives blood from brain, face, and neck.'", "tip": "The big drain for brain + face + neck."}, {"term": "[Neck Veins & Drainage] The external jugular vein is superficial and has essentially a single tributary. Which is it?", "answer": "The anterior jugular vein. Being superficial, the EJV's one tributary Maini names is the anterior jugular vein. Maini: 'External jugular... there's just one tributary, anterior jugular, which is also superficial.'", "tip": "Superficial EJV -> single superficial tributary (anterior jugular)."}, {"term": "[Neck Veins & Drainage] Into which vein do the SUPERIOR and MIDDLE thyroid veins drain?", "answer": "The internal jugular vein. Superior and middle thyroid veins drain into the IJV. Maini: 'Superior thyroid and middle thyroid veins drain into internal jugular.'", "tip": "Superior + middle thyroid -> IJV."}, {"term": "[Neck Veins & Drainage] Into which vein does the INFERIOR thyroid vein drain (unlike the superior and middle thyroid veins)?", "answer": "The brachiocephalic vein. The inferior thyroid vein drains into the brachiocephalic vein on each side. Maini: 'Inferior thyroid vein drains into brachiocephalic on each side.'", "tip": "Inferior thyroid vein is the odd one -> brachiocephalic."}, {"term": "[Neck Veins & Drainage] Which dural venous sinus drains into (is a tributary of) the internal jugular vein?", "answer": "Maini lists the inferior petrosal sinus among the IJV's tributaries (with occipital, pharyngeal, lingual, facial, and superior/middle thyroid veins). Maini: 'Tributaries of internal jugular: inferior petrosal sinus, occipital, pharyngeal, lingual, facial, superior and middle thyroid.'", "tip": "Inferior petrosal sinus is the one dural sinus that drains INTO the IJV."}, {"term": "[Lymphatics & Landmarks] Lymphatic vessels of the head and neck ultimately join to form which trunks?", "answer": "The right and left jugular trunks. Head-and-neck lymphatics form the right and left jugular lymph trunks. Maini: 'Lymphatic vessels... join to form left and right jugular trunks.'", "tip": "Head/neck lymph -> jugular trunks."}, {"term": "[Lymphatics & Landmarks] The jugular lymph trunks drain into which structures?", "answer": "The right lymphatic duct (right side), thoracic duct (left side), or directly into the brachiocephalic veins. Maini gives exactly these drainage options for the jugular trunks. Maini: 'Drain into right lymphatic duct on the right, thoracic duct on the left, sometimes directly into brachiocephalic veins.'", "tip": "Right = right lymphatic duct; left = thoracic duct."}, {"term": "[Lymphatics & Landmarks] On palpation, which lymph node finding is MORE worrisome (e.g., for cancer or lymphoma)?", "answer": "A painless, firm-to-hard, fixed, matted node. Maini: painless, firm, fixed, matted nodes are more concerning for malignancy/lymphoma. Maini: 'Painless lymph nodes, firm to solid, fixed, sometimes matted... more worrisome, might be cancer or lymphoma.'", "tip": "Painless + hard + fixed + matted = red flag."}, {"term": "[Lymphatics & Landmarks] The lesser supraclavicular fossa is the surface depression located between which structures?", "answer": "The two heads (sternal and clavicular) of the sternocleidomastoid. The lesser supraclavicular fossa lies between the SCM's sternal and clavicular heads. Maini: 'The lesser supraclavicular fossa is between the two heads of sternocleidomastoid.'", "tip": "Between the two SCM heads (sternal + clavicular)."}, {"term": "[Lymphatics & Landmarks] The greater supraclavicular fossa (between trapezius and the posterior SCM) coincides with which triangle, whose contents include the subclavian vessels?", "answer": "The supraclavicular (subclavian) triangle. The greater supraclavicular fossa overlies the supraclavicular/subclavian triangle, where the subclavian vessels lie. Maini: 'Greater supraclavicular fossa coincides with the supraclavicular / subclavian triangle... you find subclavian blood vessels.'", "tip": "Greater fossa = supraclavicular triangle = subclavian vessels."}];
+
+
+const LS_KEY = "ga_0202_m02_neck1_rapid_recall_v1";
+let deck = [], quizIdx = 0, viewIdx = 0;
+let got = 0, missed = 0, missedTerms = [], shuffleOn = false, revealed = false;
+let answered = {};
+function loadState(){try{const s=JSON.parse(localStorage.getItem(LS_KEY));if(s&&s.deck){deck=s.deck;quizIdx=s.quizIdx||0;viewIdx=s.viewIdx||s.idx||0;got=s.got;missed=s.missed;missedTerms=s.missedTerms||[];shuffleOn=s.shuffleOn||false;answered=s.answered||{};if(shuffleOn)document.getElementById("btnShuffle").classList.add("active");return true;}}catch(e){}return false;}
+function saveState(){localStorage.setItem(LS_KEY,JSON.stringify({deck,quizIdx,viewIdx,got,missed,missedTerms,shuffleOn,answered}));}
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startDrill(mode){if(mode==='missed'&&missedTerms.length>0){deck=missedTerms.map(t=>BANK.findIndex(b=>b.term===t)).filter(i=>i>=0);}else{deck=BANK.map((_,i)=>i);}if(shuffleOn)shuffleArr(deck);quizIdx=0;viewIdx=0;got=0;missed=0;missedTerms=[];answered={};document.getElementById("summaryArea").style.display="none";document.getElementById("cardArea").style.display="block";showCard();saveState();}
+function showCard(){if(viewIdx>=deck.length){showSummary();return;}const item=BANK[deck[viewIdx]];const isBrowse=viewIdx<quizIdx;document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnRedoBack").style.display=viewIdx>0?"inline-block":"none";document.getElementById("browseLabel").style.display="none";revealed=false;if(isBrowse){document.getElementById("browseLabel").style.display="block";doReveal();document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="inline-block";document.getElementById("btnRedo").style.display="inline-block";}updateScores();}
+function doReveal(){document.getElementById("answerText").classList.add("show");if(BANK[deck[viewIdx]].tip)document.getElementById("profTip").classList.add("show");document.getElementById("btnReveal").style.display="none";if(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)){document.getElementById("btnGot").style.display="inline-block";document.getElementById("btnMissed").style.display="inline-block";}revealed=true;}
+function grade(correct){const isRedo=viewIdx<quizIdx&&answered[viewIdx]===undefined;if(viewIdx<quizIdx&&!isRedo)return;answered[viewIdx]=correct?'got':'missed';if(correct){got++;}else{missed++;missedTerms.push(BANK[deck[viewIdx]].term);}if(isRedo){viewIdx=quizIdx;}else{quizIdx=viewIdx+1;viewIdx=quizIdx;}showCard();saveState();}
+function goBack(){if(viewIdx>0){viewIdx--;showCard();saveState();}}
+function resumeQuiz(){viewIdx=quizIdx;showCard();saveState();}
+function redoBack(){if(viewIdx<=0)return;viewIdx--;if(viewIdx<quizIdx){const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];}document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";const item=BANK[deck[viewIdx]];document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";revealed=false;updateScores();saveState();}
+function redoPrev(){if(viewIdx>=quizIdx)return;const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";revealed=false;updateScores();saveState();}
+function skip(){if(viewIdx>=quizIdx){deck.push(deck[viewIdx]);deck.splice(viewIdx,1);quizIdx=viewIdx;showCard();saveState();}}
+function updateScores(){const remain=deck.length-quizIdx;document.getElementById("gotCount").textContent=got+" Got It";document.getElementById("missedCount").textContent=missed+" Missed";document.getElementById("remainCount").textContent=remain+" Left";const pct=deck.length>0?((got+missed)/deck.length)*100:0;document.getElementById("progressFill").style.width=pct+"%";}
+function showSummary(){document.getElementById("cardArea").style.display="none";document.getElementById("summaryArea").style.display="block";const total=got+missed;const pct=total>0?Math.round((got/total)*100):0;const el=document.getElementById("finalScore");el.textContent=pct+"%";el.className="final-score "+(pct>=85?"great":pct>=65?"ok":"rough");document.getElementById("finalMsg").textContent=got+" of "+total+" — "+(pct>=90?"All terms locked in.":pct>=75?"Solid. Hit the missed ones again.":"Keep drilling. Re-do the missed cards.");document.getElementById("progressFill").style.width="100%";const listBox=document.getElementById("missedListBox"),ul=document.getElementById("missedListUl"),rd=document.getElementById("btnRedrill");if(missedTerms.length>0){listBox.style.display="block";rd.style.display="inline-block";ul.innerHTML=missedTerms.map(t=>"<li>"+t+"</li>").join("");}else{listBox.style.display="none";rd.style.display="none";}updateScores();}
+function toggleShuffle(){shuffleOn=!shuffleOn;document.getElementById("btnShuffle").classList.toggle("active",shuffleOn);saveState();}
+function toggleIndex(){const ov=document.getElementById("indexOverlay");if(ov.style.display==="flex"){ov.style.display="none";return;}ov.style.display="flex";renderIndex();}
+function renderIndex(){const g=document.getElementById("indexGrid");g.innerHTML="";for(let i=0;i<deck.length;i++){const item=BANK[deck[i]];const d=document.createElement("div");d.className="index-chip";let status="";if(i<quizIdx){if(answered[i]==='got'){d.classList.add("chip-got");status="Got It";}else if(answered[i]==='missed'){d.classList.add("chip-missed");status="Missed";}}else if(i===quizIdx){d.classList.add("chip-current");status="Current";}d.innerHTML='<span><span class="chip-num">'+(i+1)+'.</span> '+item.term+'</span><span class="chip-status">'+status+'</span>';d.onclick=(function(idx){return function(){viewIdx=idx;document.getElementById("indexOverlay").style.display="none";showCard();saveState();};})(i);g.appendChild(d);}}
+document.addEventListener("keydown",e=>{if(document.getElementById("indexOverlay").style.display==="flex"){if(e.key==="Escape"||e.key==="i"||e.key==="I")toggleIndex();return;}if(e.key===" "||e.code==="Space"){e.preventDefault();if(!revealed)doReveal();}if(e.key==="g"||e.key==="G"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(true);}if(e.key==="m"||e.key==="M"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(false);}if(e.key==="s"||e.key==="S"){if(!revealed)skip();}if(e.key==="b"||e.key==="B"){goBack();}if(e.key==="d"||e.key==="D"){redoBack();}if(e.key==="r"||e.key==="R"){if(viewIdx<quizIdx)redoPrev();}if(e.key==="i"||e.key==="I"){toggleIndex();}if(e.key==="Enter"&&viewIdx<quizIdx){resumeQuiz();}});
+if(!loadState()||quizIdx>=deck.length){startDrill('all');}else{showCard();}
+</script>
+
+
+
+
+<div style="margin:30px auto;padding:14px;border-top:1px solid #334155;color:#94a3b8;font-size:.8rem;text-align:center;max-width:780px">DC Study Supply — Built by Dr. David Gramling, PHD</div>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    // Auto-detect bg luminance: body first, fall back to html element if transparent
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body>
+</html>

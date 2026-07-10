@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · The Skull · Rapid Recall</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.header { text-align: center; padding: 24px 16px 12px; width: 100%; max-width: 700px; }
+.header h1 { font-size: 22px; color: #60a5fa; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; color: #94a3b8; }
+.score-bar { display: flex; gap: 16px; justify-content: center; padding: 10px; font-size: 14px; font-weight: 600; }
+.score-bar .got { color: #4ade80; } .score-bar .missed { color: #f87171; } .score-bar .remain { color: #94a3b8; }
+.progress-track { width: 100%; max-width: 700px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #60a5fa); transition: width 0.4s ease; border-radius: 3px; }
+.card-container { width: 100%; max-width: 700px; padding: 0 16px; flex: 1; }
+.card { background: #1e293b; border: 2px solid #334155; border-radius: 16px; padding: 32px 28px; text-align: center; min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: border-color 0.3s; }
+.card:hover { border-color: #475569; }
+.card-number { font-size: 12px; color: #64748b; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.term { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; line-height: 1.3; }
+.answer { font-size: 15px; line-height: 1.7; color: #cbd5e1; max-width: 600px; padding: 16px 20px; background: #0f172a; border-radius: 10px; border-left: 4px solid #3b82f6; text-align: left; display: none; margin-bottom: 16px; }
+.answer.show { display: block; animation: fadeIn 0.3s ease; }
+.prof-tip { font-size: 13px; color: #fbbf24; margin-top: 8px; font-style: italic; display: none; text-align: left; max-width: 600px; padding: 10px 16px; background: #1a0a0a; border-left: 3px solid #ef4444; border-radius: 0 10px 10px 0; }
+.prof-tip.show { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 12px 28px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn:active { transform: scale(0.96); }
+.btn-reveal { background: #3b82f6; color: white; } .btn-reveal:hover { background: #2563eb; }
+.btn-got { background: #166534; color: #4ade80; display: none; } .btn-got:hover { background: #15803d; }
+.btn-missed { background: #7f1d1d; color: #f87171; display: none; } .btn-missed:hover { background: #991b1b; }
+.btn-back { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-back:hover { background: #475569; }
+.btn-skip { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-skip:hover { background: #475569; }
+.btn-continue { background: #1e40af; color: #93c5fd; display: none; } .btn-continue:hover { background: #1d4ed8; }
+.btn-redo { background: #7c3aed; color: #c4b5fd; display: none; } .btn-redo:hover { background: #6d28d9; }
+.btn-redoback { background: #7c3aed; color: #c4b5fd; padding: 10px 20px; font-size: 13px; } .btn-redoback:hover { background: #6d28d9; }
+.browse-label { font-size: 11px; color: #f59e0b; margin-bottom: 8px; display: none; }
+.controls { padding: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.ctrl-btn { padding: 8px 16px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.ctrl-btn:hover { background: #334155; color: #e2e8f0; } .ctrl-btn.active { border-color: #3b82f6; color: #60a5fa; }
+.summary { display: none; text-align: center; padding: 40px 20px; width: 100%; max-width: 700px; }
+.summary h2 { font-size: 28px; color: #60a5fa; margin-bottom: 20px; }
+.summary .final-score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.summary .final-score.great { color: #4ade80; } .summary .final-score.ok { color: #fbbf24; } .summary .final-score.rough { color: #f87171; }
+.missed-list { text-align: left; max-width: 500px; margin: 20px auto; background: #1e293b; border-radius: 12px; padding: 16px 20px; }
+.missed-list h3 { color: #f87171; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.missed-list li { color: #cbd5e1; padding: 6px 0; border-bottom: 1px solid #334155; font-size: 14px; list-style: none; } .missed-list li:last-child { border: none; }
+.kb-hint { font-size: 11px; color: #475569; text-align: center; padding: 8px; }
+.index-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.95); z-index: 100; flex-direction: column; align-items: center; padding: 20px; overflow-y: auto; }
+.index-overlay h2 { color: #60a5fa; font-size: 20px; margin-bottom: 16px; }
+.index-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; } .index-close:hover { color: #e2e8f0; }
+.index-grid { max-width: 700px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.index-chip { padding: 10px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; cursor: pointer; font-size: 13px; color: #cbd5e1; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.index-chip:hover { background: #334155; border-color: #60a5fa; }
+.index-chip .chip-num { color: #64748b; font-size: 11px; min-width: 30px; }
+.chip-got { border-left: 3px solid #4ade80; } .chip-got .chip-status { color: #4ade80; }
+.chip-missed { border-left: 3px solid #f87171; } .chip-missed .chip-status { color: #f87171; }
+.chip-current { border-left: 3px solid #60a5fa; background: #1e3a5f; } .chip-current .chip-status { color: #60a5fa; }
+.chip-status { font-size: 11px; min-width: 50px; text-align: right; }
+</style>
+
+
+
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+
+<style id="ga0202-cleanup-v9">
+/* Hide legacy FAB Lecture Final hub buttons (we have our own ga0202-back-to-hub) */
+.fab-back-to-hub-btn,
+.sh-fab,
+.sh-back-to-start-fab,
+button[onclick*="fabBackToHub"],
+button[onclick*="shBackToStart"] { display: none !important; }
+/* Make sure draw button + AI button don't overlap */
+.fab-stack { bottom: 90px !important; right: 24px !important; z-index: 9999 !important; }
+.fab-stack button { pointer-events: auto !important; }
+#draw-btn { z-index: 10000 !important; }
+.draw-toolbar { z-index: 10001 !important; bottom: 158px !important; right: 90px !important; }
+.draw-canvas { z-index: 9990 !important; }
+#ai-btn, #ai-aug-btn, #ai-modal { display: none !important; }
+</style>
+<script id="ga0202-cleanup-v9-js">
+// Override legacy redirect functions to point to OUR hub instead
+window.fabBackToHub = function() { window.location.href = 'ga-0202-m01-skull-hub_PENDING_REVIEW.html'; };
+window.shBackToStart = function() { window.location.href = 'ga-0202-m01-skull-hub_PENDING_REVIEW.html'; };
+</script>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="ga-0202-m01-skull-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to Skull Hub</a>
+
+<div class="header">
+  <h1>⚡ GA 0202 · The Skull · Rapid Recall</h1>
+  <div class="subtitle">Dr. Maini · Osteology of the Skull (L01–L02) — 120 Cards | See prompt. Say it. Reveal to check.</div>
+</div>
+<div class="score-bar">
+  <span class="got" id="gotCount">0 Got It</span>
+  <span class="missed" id="missedCount">0 Missed</span>
+  <span class="remain" id="remainCount">0 Left</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="card-container" id="cardArea">
+  <div class="card">
+    <div class="browse-label" id="browseLabel">BROWSING — already answered</div>
+    <div class="card-number" id="cardNum"></div>
+    <div class="term" id="termText"></div>
+    <div class="answer" id="answerText"></div>
+    <div class="prof-tip" id="profTip"></div>
+    <div class="btn-row">
+      <button class="btn btn-reveal" id="btnReveal" onclick="doReveal()">Reveal Answer</button>
+      <button class="btn btn-got" id="btnGot" onclick="grade(true)">Got It</button>
+      <button class="btn btn-missed" id="btnMissed" onclick="grade(false)">Missed It</button>
+      <button class="btn btn-continue" id="btnContinue" onclick="resumeQuiz()">Continue &rarr;</button>
+      <button class="btn btn-redo" id="btnRedo" onclick="redoPrev()">Redo</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" id="btnBack" onclick="goBack()">&larr; Back</button>
+      <button class="btn btn-redoback" id="btnRedoBack" onclick="redoBack()">Redo Back</button>
+      <button class="btn btn-skip" onclick="skip()">Skip</button>
+    </div>
+  </div>
+</div>
+<div class="summary" id="summaryArea">
+  <h2>Drill Complete</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="finalMsg" style="color:#94a3b8;margin-bottom:20px;"></p>
+  <div class="missed-list" id="missedListBox" style="display:none;"><h3>Review These</h3><ul id="missedListUl"></ul></div>
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-reveal" onclick="startDrill('all')">Restart All</button>
+    <button class="btn btn-missed" id="btnRedrill" style="display:inline-block;" onclick="startDrill('missed')">Re-Drill Missed</button>
+  </div>
+</div>
+<div class="controls">
+  <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">Shuffle</button>
+  <button class="ctrl-btn" onclick="toggleIndex()">Card Index</button>
+  <button class="ctrl-btn" onclick="startDrill('all')">Reset</button>
+</div>
+<div class="kb-hint">Space = Reveal | G = Got It | M = Missed | S = Skip | B = Back | D = Redo Back | R = Redo | I = Index</div>
+<div class="index-overlay" id="indexOverlay">
+  <button class="index-close" onclick="toggleIndex()">&times;</button>
+  <h2>Card Index</h2>
+  <div class="index-grid" id="indexGrid"></div>
+</div>
+<script>
+const BANK = [
+  {term: "[Skull Divisions] The bones that surround and enclose the brain form which group?", answer: "The neurocranium (cranial bones). Maini calls the bones surrounding the brain the neurocranium.", tip: "Its counterpart is the viscerocranium (the facial skeleton) — don't swap them."},
+  {term: "[Skull Divisions] The facial bones that support the visceral organs of the head (nasal & oral cavities) are collectively called?", answer: "The viscerocranium (visceral cranium). Maini names the facial bones this because they support the visceral organs of the head and neck.", tip: ""},
+  {term: "[Skull Divisions] Which upper-jaw bone is a FACIAL (viscerocranium) bone, NOT a cranial bone?", answer: "The maxilla. It is a facial bone of the viscerocranium, not one of the neurocranium bones.", tip: "Classic 'which is NOT a cranial bone' trap on Maini's list."},
+  {term: "[Skull Divisions] Two deep bones still count as CRANIAL bones even though they sit 'inside' — which pair (one bat-shaped)?", answer: "The ethmoid and sphenoid. Maini stresses that although they are deep/internal, both are cranial (neurocranium) bones.", tip: ""},
+  {term: "[Facial Bones] Which facial bone forms the prominence of the cheek?", answer: "The zygomatic bone — Maini's 'cheekbone.'", tip: ""},
+  {term: "[Nasal Septum] The bony nasal septum is formed by which two structures (upper vs lower)?", answer: "Upper part = the perpendicular plate of the ethmoid; lower (posteroinferior) part = the vomer.", tip: "Maini trap: the LOWER septum is the VOMER, not the ethmoid."},
+  {term: "[Facial Bones] Maini highlights the lacrimal bone because it is?", answer: "A very small bone located in the medial wall of the orbit.", tip: ""},
+  {term: "[Facial Bones] The two nasal bones form which structure?", answer: "The bridge of the nose.", tip: ""},
+  {term: "[Sphenoid] Which bone does Maini describe as 'bat-shaped'?", answer: "The sphenoid — she says it 'looks like a bat.'", tip: ""},
+  {term: "[Hard Palate] The hard palate is maxilla anteriorly and which bone posteriorly?", answer: "The palatine bone. Anterior two-thirds = maxilla; posterior one-third = palatine bone.", tip: ""},
+  {term: "[Nasal Conchae] Which nasal concha is a separate, independent bone — and which conchae are part of the ethmoid?", answer: "The INFERIOR nasal concha is a separate bone in its own right; the SUPERIOR and MIDDLE conchae are parts of the ethmoid.", tip: "Maini's 'none of the above' trap hinges on the inferior concha being its own bone."},
+  {term: "[Sutures] How does Maini characterize skull sutures as joints?", answer: "Fibrous joints — the most stable and least mobile joints in the body; they ossify with age.", tip: ""},
+  {term: "[Sutures] How are cranial sutures named?", answer: "After the two articulating bones they lie between (e.g., frontonasal, zygomaticomaxillary).", tip: ""},
+  {term: "[Sutures] The suture between the two parietal bones is the?", answer: "Sagittal suture (connects the right and left parietal bones).", tip: ""},
+  {term: "[Sutures] The coronal suture lies between which two bones?", answer: "The frontal bone and the parietal bones.", tip: ""},
+  {term: "[Sutures] The lambdoid suture (resembles Greek letter lambda) connects which bones?", answer: "The parietal and occipital bones.", tip: ""},
+  {term: "[Sutures] The squamous suture connects which two bones?", answer: "The temporal and parietal bones.", tip: ""},
+  {term: "[Sutures] The occipitomastoid (temporo-occipital) suture lies between which two bones?", answer: "The occipital and temporal bones (the mastoid is part of the temporal bone).", tip: ""},
+  {term: "[Sutures] The cruciform (cross-shaped) suture of the hard palate unites which three sutures?", answer: "The intermaxillary, palatomaxillary, and interpalatine sutures.", tip: ""},
+  {term: "[Sutures] A metopic suture in an adult skull is a remnant of what?", answer: "The frontal (interfrontal) suture. The two frontal-bone halves normally fuse, usually by about age 8.", tip: ""},
+  {term: "[Sutures] The suture between the nasal bone and the frontal bone is the?", answer: "Frontonasal suture.", tip: ""},
+  {term: "[Landmark] Nasion is the meeting point of which two sutures?", answer: "The internasal and frontonasal sutures.", tip: ""},
+  {term: "[Landmark] Bregma is the meeting point of which two sutures?", answer: "The coronal and sagittal sutures.", tip: "Future site of the diamond-shaped anterior fontanelle."},
+  {term: "[Landmark] Lambda is the meeting point of which two sutures?", answer: "The sagittal and lambdoid sutures.", tip: "Future site of the triangular posterior fontanelle."},
+  {term: "[Landmark] Pterion — how many bones meet there, and which are they?", answer: "Four bones: frontal, parietal, temporal, and sphenoid (greater wing).", tip: ""},
+  {term: "[Landmark] Which artery lies deep to pterion, and what hemorrhage does a pterion fracture cause?", answer: "The middle meningeal artery lies deep to pterion; a fracture there can rupture it and produce an EPIDURAL (extradural) hemorrhage.", tip: "Pterion is the thinnest part of the lateral skull — a favorite clinical correlation."},
+  {term: "[Landmark] Asterion marks the meeting of which three sutures?", answer: "The squamous, lambdoid, and occipitomastoid sutures.", tip: ""},
+  {term: "[Landmark] Vertex is best described as?", answer: "The highest point of the skull, lying slightly posterior to bregma.", tip: ""},
+  {term: "[Landmark] Inion is another name for which landmark?", answer: "The external occipital protuberance (EOP).", tip: ""},
+  {term: "[Landmark] Gonion refers to which structure?", answer: "The angle of the mandible.", tip: ""},
+  {term: "[Landmark] Glabella is part of which bone, and what is the glabellar tap sign?", answer: "Glabella (between the superciliary arches) is part of the FRONTAL bone. The glabellar tap sign = persistent blinking despite instruction not to blink, which can indicate Parkinsonism.", tip: "The glabellar tap must be correlated clinically — never used alone."},
+  {term: "[Landmark] Why does Maini emphasize points such as nasion, pterion, and asterion?", answer: "Several sutures meet at each, making them fragile, fracture-prone points — a blow there can fracture the bones.", tip: ""},
+  {term: "[Ant/Lat View] The supraorbital foramen (or notch) transmits which structures?", answer: "The supraorbital nerve, artery, and vein (all of the same name).", tip: ""},
+  {term: "[Ant/Lat View] The infraorbital foramen is a feature of which bone?", answer: "The maxilla.", tip: "Commonly asked exam point."},
+  {term: "[Ant/Lat View] The anterior nasal aperture is also called the ____ aperture because of its shape.", answer: "The piriform (pear-shaped) aperture.", tip: ""},
+  {term: "[Ant/Lat View] The anterior nasal spine forms at the midline meeting of which bones?", answer: "The two maxillary bones.", tip: ""},
+  {term: "[Ant/Lat View] The frontal eminences are prominent because they mark what?", answer: "The primary ossification centers of the (membranous) frontal bone.", tip: ""},
+  {term: "[Ant/Lat View] The zygomatic arch is formed by the union of which two processes?", answer: "The temporal process of the zygomatic bone + the zygomatic process of the temporal bone.", tip: "Maini's image: the two processes 'shake hands' to form the arch."},
+  {term: "[Ant/Lat View] The superior and inferior temporal lines belong to which bone?", answer: "The PARIETAL bone (they give attachment to temporalis).", tip: "Common trap — despite the name, the temporal lines are on the parietal bone, not the temporal bone."},
+  {term: "[Ant/Lat View] The external acoustic (auditory) meatus is part of which bone?", answer: "The temporal bone.", tip: ""},
+  {term: "[Ant/Lat View] The styloid process projects from which bone?", answer: "The temporal bone.", tip: ""},
+  {term: "[Ant/Lat View] The mental foramen, which transmits the mental nerve, lies on which bone?", answer: "The mandible.", tip: ""},
+  {term: "[Post/Sup View] The mastoid process, felt behind the ear, is part of which bone?", answer: "The temporal bone.", tip: ""},
+  {term: "[Post/Sup View] The nuchal lines of the occipital bone serve as attachment sites for what?", answer: "The muscles of the neck.", tip: ""},
+  {term: "[Post/Sup View] What is the function of emissary veins (which pass through the parietal emissary foramina)?", answer: "They connect the extracranial veins with the intracranial veins.", tip: ""},
+  {term: "[Post/Sup View] Wormian (sutural) bones are?", answer: "Accessory bones that ossify within the suture lines.", tip: ""},
+  {term: "[Post/Sup View] On the internal surface of the calvaria, the midline groove (sulcus) houses which structure?", answer: "The superior sagittal sinus.", tip: ""},
+  {term: "[Post/Sup View] The small pits flanking the sagittal sulcus on the inner calvaria are impressions for what?", answer: "Arachnoid granulations.", tip: ""},
+  {term: "[Base/Foramina] What passes through the foramen magnum?", answer: "The junction of the medulla oblongata with the spinal cord.", tip: ""},
+  {term: "[Base/Foramina] The carotid canal transmits which structure?", answer: "The internal carotid artery.", tip: ""},
+  {term: "[Base/Foramina] The jugular foramen (which transmits the internal jugular vein) is formed between which two bones?", answer: "The temporal and occipital bones.", tip: ""},
+  {term: "[Base/Foramina] Foramen ovale, foramen rotundum, and foramen spinosum are all part of which bone?", answer: "The sphenoid bone.", tip: ""},
+  {term: "[Base/Foramina] Foramen lacerum is unusual because it is formed by which three bones?", answer: "The sphenoid, temporal, and occipital bones.", tip: ""},
+  {term: "[Base/Foramina] Foramen spinosum takes its name from being adjacent to which structure?", answer: "The spine of the sphenoid.", tip: ""},
+  {term: "[Base/Foramina] The facial nerve exits the skull through which foramen, and where is it located?", answer: "The stylomastoid foramen, located between the styloid and mastoid processes.", tip: ""},
+  {term: "[Base/Foramina] The occipital condyles articulate with which vertebra?", answer: "The atlas (C1).", tip: ""},
+  {term: "[Base/Foramina] The incisive foramen lies within which structure, just behind the incisor teeth?", answer: "The incisive fossa.", tip: ""},
+  {term: "[Base/Foramina] The greater and lesser palatine foramina transmit what?", answer: "The palatine artery, vein, and nerve (of the same name).", tip: ""},
+  {term: "[Base/Foramina] The pharyngeal tubercle is located on which structure?", answer: "The basilar (basi-occipital) part of the occipital bone.", tip: ""},
+  {term: "[Base/Foramina] The pterygoid hamulus is a small hook-like process of which bone?", answer: "The sphenoid (the medial plate of its pterygoid process).", tip: ""},
+  {term: "[Base/Foramina] The condylar process of the mandible articulates in which fossa (forming the TMJ)?", answer: "The mandibular (articular) fossa of the temporal bone.", tip: ""},
+  {term: "[Base/Foramina] The digastric (mastoid) notch, just medial to the mastoid process, gives attachment to which muscle?", answer: "The digastric muscle.", tip: ""},
+  {term: "[Base/Foramina] TRAP: what opening lies next to the jugular foramen — in the INFERIOR view vs the INTERNAL base of skull?", answer: "Inferior view: the carotid canal is the opening next to the jugular foramen. Internal base of skull: the internal acoustic meatus is the opening beside it.", tip: "Students confuse these — the view you're looking at decides the answer."},
+  {term: "[Base/Foramina] Why is the hypoglossal canal NOT seen in the inferior view of the skull?", answer: "It lies within the thick wall of the foramen magnum, so it is hidden from the inferior view.", tip: ""},
+  {term: "[Fossae] The interior base of the skull is divided into how many cranial fossae?", answer: "Three: anterior, middle, and posterior cranial fossae.", tip: ""},
+  {term: "[Fossae] The floor of the anterior cranial fossa is formed by the orbital plate of the frontal bone, the cribriform plate of the ethmoid, and what?", answer: "The lesser wing of the sphenoid.", tip: ""},
+  {term: "[Fossae] The cribriform plate of the ethmoid transmits which structures?", answer: "Fascicles of the olfactory nerve (CN I), passing from the nasal cavity to the brain.", tip: ""},
+  {term: "[Fossae] The crista galli is a midline ridge belonging to which bone?", answer: "The ethmoid (the ridge in the center of its cribriform plate — compared to a rooster's comb).", tip: ""},
+  {term: "[Fossae] Maini describes the foramen cecum as what?", answer: "A blind foramen — 'cecum' means blind — through which no structure passes.", tip: ""},
+  {term: "[Fossae] The sella turcica, which houses the pituitary gland, is part of which bone?", answer: "The body of the sphenoid.", tip: ""},
+  {term: "[Fossae] Name the three parts of the sella turcica from anterior to posterior.", answer: "Tuberculum sellae (anterior), hypophyseal fossa (middle), dorsum sellae (posterior).", tip: ""},
+  {term: "[Fossae] The chiasmatic (prechiasmatic) sulcus is named for its relationship to which structure?", answer: "The optic chiasma.", tip: ""},
+  {term: "[Fossae] The carotid sulcus, on the side of the body of the sphenoid, lodges which vessel?", answer: "The internal carotid artery.", tip: ""},
+  {term: "[Fossae] The superior orbital fissure lies between which two parts of the sphenoid?", answer: "Between the greater and lesser wings of the sphenoid.", tip: ""},
+  {term: "[Fossae] Maini's arch of four middle-fossa openings runs anterior to posterior as: superior orbital fissure → foramen rotundum → foramen ovale → ?", answer: "Foramen spinosum. The full arch is SOF → rotundum → ovale → spinosum.", tip: ""},
+  {term: "[Fossae] Of that four-opening arch, which one is NOT seen in the inferior view of the skull?", answer: "Foramen rotundum. Ovale and spinosum ARE seen in the inferior view, but rotundum is not.", tip: ""},
+  {term: "[Fossae] The optic canal transmits the optic nerve and is part of which bone?", answer: "The sphenoid bone.", tip: ""},
+  {term: "[Fossae] The posterior boundary of the middle cranial fossa is formed mainly by what?", answer: "The crest of the petrous part of the temporal bone (with the dorsum sellae).", tip: ""},
+  {term: "[Fossae] The clivus is the sloping internal surface of which structure?", answer: "The basilar part of the occipital bone.", tip: ""},
+  {term: "[Fossae] In the posterior cranial fossa, the S-shaped groove is for which venous sinus?", answer: "The sigmoid sinus.", tip: "The groove along the top ridge of the petrous temporal bone is for the superior petrosal sinus."},
+  {term: "[Fossae] The internal acoustic meatus leads to which region?", answer: "The internal ear.", tip: ""},
+  {term: "[Sphenoid] The sphenoid has a lesser wing, a greater wing, and which large downward-projecting process?", answer: "The pterygoid process.", tip: ""},
+  {term: "[Sphenoid] The pterygoid process of the sphenoid has which two plates?", answer: "The medial and lateral pterygoid plates.", tip: ""},
+  {term: "[Sphenoid] The sphenoid sinus sits just below the sella turcica — what is its clinical significance?", answer: "It allows a trans-sphenoidal (trans-nasal) surgical approach to the pituitary gland without opening the skull.", tip: "Because the sella turcica sits directly on the sphenoid sinus, surgeons reach a pituitary tumor through the nose."},
+  {term: "[Temporal] Maini calls the dense, irregular part of the temporal bone that houses the internal ear the?", answer: "The petrous part (cartilage-ossified, hard, and irregular).", tip: ""},
+  {term: "[Sinuses] Which FOUR bones contain paranasal air sinuses?", answer: "The frontal, maxillary, ethmoid, and sphenoid bones.", tip: ""},
+  {term: "[Sinuses] Besides lightening the skull, what do the paranasal sinuses do?", answer: "They add resonance to the voice.", tip: ""},
+  {term: "[Sinuses] How do the mastoid air cells differ from the paranasal sinuses?", answer: "The mastoid air cells do NOT communicate with any other cavity (a closed system), unlike the paranasal sinuses that open into the nose.", tip: ""},
+  {term: "[Sinuses] On an X-ray, how does an air-filled sinus (e.g., the frontal sinus) appear?", answer: "Black (radiolucent) — air appears black on X-ray.", tip: ""},
+  {term: "[Development] Flat bones of the skull (e.g., frontal, parietal) form by which type of ossification?", answer: "Intramembranous (membranous) ossification — they develop from membranes.", tip: ""},
+  {term: "[Development] Irregular bones and the base of the skull form mainly by which type of ossification?", answer: "Endochondral (cartilaginous) ossification.", tip: ""},
+  {term: "[Development] The viscerocranium (facial skeleton) is derived mainly from what?", answer: "The first two pharyngeal arches.", tip: "The chondrocranium (base) is derived partly from neural crest and partly from occipital somites."},
+  {term: "[Development] Why is the base of the skull petrous (dense) and tough?", answer: "Because it must support and protect the delicate brain.", tip: ""},
+  {term: "[Development] Why do the fibrous sutures of the calvaria remain unfused in infancy?", answer: "To allow growth and expansion of the brain during infancy and childhood.", tip: ""},
+  {term: "[Development] The two frontal-bone halves normally fuse into a single bone by about what age?", answer: "By the end of the 8th year.", tip: ""},
+  {term: "[Development] The capacity of the calvaria keeps increasing until about what age?", answer: "About 16 years of age, when the brain has grown to size.", tip: ""},
+  {term: "[Fontanelles] The anterior fontanelle — what shape, which future landmark, and when does it close?", answer: "Diamond-shaped; the future site of bregma; normally closes by about 18 months.", tip: "It is the last fontanelle to close, so it is the one a pediatrician most commonly palpates."},
+  {term: "[Fontanelles] The posterior fontanelle — what shape and which future landmark?", answer: "Triangular in shape; the future site of lambda.", tip: ""},
+  {term: "[Fontanelles] The anterolateral fontanelle is the future site of which landmark?", answer: "Pterion.", tip: ""},
+  {term: "[Fontanelles] The posterolateral (mastoid) fontanelle is the future site of which landmark?", answer: "Asterion.", tip: ""},
+  {term: "[Fontanelles] A sunken (depressed) anterior fontanelle in an infant most suggests what?", answer: "Dehydration (e.g., from diarrhea or vomiting).", tip: ""},
+  {term: "[Fontanelles] A bulging anterior fontanelle suggests what?", answer: "Raised intracranial pressure (e.g., hydrocephalus or a tumor).", tip: ""},
+  {term: "[Fontanelles] Failure of a fontanelle to close on schedule may indicate which deficiency?", answer: "Rickets — a vitamin D or calcium deficiency (indicating slow bone growth).", tip: ""},
+  {term: "[Anomalies] Molding of the calvaria during vaginal delivery is possible because?", answer: "The not-yet-fused cranial bones can slightly overlap to ease the head through the birth canal, then return to position.", tip: ""},
+  {term: "[Anomalies] Premature fusion of the SAGITTAL suture produces a long, narrow, boat-shaped head called?", answer: "Scaphocephaly ('scapha' = boat).", tip: ""},
+  {term: "[Anomalies] Premature closure of the coronal or lambdoid suture on ONE side only produces an asymmetric head called?", answer: "Plagiocephaly (an irregular, asymmetric head).", tip: ""},
+  {term: "[Anomalies] Oxycephaly (turricephaly) results from premature closure of which suture?", answer: "The coronal suture.", tip: ""},
+  {term: "[Anomalies] Acrania is a condition in which?", answer: "The cranial (skull-cap) bones fail to form, leaving the brain exposed on the outside.", tip: ""},
+  {term: "[Anomalies] Microcephaly (an abnormally small head) results from what?", answer: "Abnormal development of the CNS (brain); such patients are usually severely intellectually impaired.", tip: ""},
+  {term: "[Mandible] Maini divides the mandible into which three main parts?", answer: "The body, the ramus, and the angle.", tip: ""},
+  {term: "[Mandible] Which process of the mandible takes part in the TMJ, and what are its two parts?", answer: "The condylar process forms the TMJ; it is divided into a head (covered by articular cartilage) and a neck.", tip: ""},
+  {term: "[Mandible] The pterygoid fovea, a small pit on the neck of the condylar process, gives attachment to which muscle?", answer: "The lateral pterygoid muscle.", tip: ""},
+  {term: "[Mandible] The mandibular foramen transmits which nerve?", answer: "The inferior alveolar nerve.", tip: ""},
+  {term: "[Mandible] The lingula, a tongue-shaped process flanking the mandibular foramen, is a landmark for what?", answer: "Anesthetizing the inferior alveolar nerve (a dental nerve block for lower-jaw extractions).", tip: ""},
+  {term: "[Mandible] The inferior alveolar nerve exits the mental foramen and is then renamed the?", answer: "The mental nerve (sensory to the lower lip and chin).", tip: ""},
+  {term: "[Mandible] The mylohyoid line gives attachment to the mylohyoid muscle, which forms what?", answer: "The floor of the oral cavity (the mylohyoid forms the bulk of it).", tip: "The mylohyoid groove nearby lodges the mylohyoid nerve."},
+  {term: "[Mandible] Which glands sit in the sublingual and submandibular fossae of the mandible?", answer: "The sublingual fossa (above the mylohyoid line) lodges the sublingual salivary gland; the submandibular fossa (below it) lodges the submandibular salivary gland.", tip: ""},
+  {term: "[Mandible] The mental spine (genial tubercle) and the digastric fossa are found where, and what attaches at the digastric fossa?", answer: "Both are on the INTERNAL surface at the midline: the mental spine (genial tubercle) is in the midline, and the digastric fossa on each side of it gives attachment to the anterior belly of the digastric muscle.", tip: ""},
+  {term: "[Mandible] Which TWO skull bones possess an alveolar arch that holds teeth?", answer: "The maxilla and the mandible.", tip: ""},
+  {term: "[Mandible] The mental protuberance is best described as?", answer: "The central elevated prominence of the chin (on the external surface of the mandible).", tip: ""}
+];
+
+
+const LS_KEY = "ga_0202_m01_skull_rapid_recall_v1";
+let deck = [], quizIdx = 0, viewIdx = 0;
+let got = 0, missed = 0, missedTerms = [], shuffleOn = false, revealed = false;
+let answered = {};
+function loadState(){try{const s=JSON.parse(localStorage.getItem(LS_KEY));if(s&&s.deck){deck=s.deck;quizIdx=s.quizIdx||0;viewIdx=s.viewIdx||s.idx||0;got=s.got;missed=s.missed;missedTerms=s.missedTerms||[];shuffleOn=s.shuffleOn||false;answered=s.answered||{};if(shuffleOn)document.getElementById("btnShuffle").classList.add("active");return true;}}catch(e){}return false;}
+function saveState(){localStorage.setItem(LS_KEY,JSON.stringify({deck,quizIdx,viewIdx,got,missed,missedTerms,shuffleOn,answered}));}
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startDrill(mode){if(mode==='missed'&&missedTerms.length>0){deck=missedTerms.map(t=>BANK.findIndex(b=>b.term===t)).filter(i=>i>=0);}else{deck=BANK.map((_,i)=>i);}if(shuffleOn)shuffleArr(deck);quizIdx=0;viewIdx=0;got=0;missed=0;missedTerms=[];answered={};document.getElementById("summaryArea").style.display="none";document.getElementById("cardArea").style.display="block";showCard();saveState();}
+function showCard(){if(viewIdx>=deck.length){showSummary();return;}const item=BANK[deck[viewIdx]];const isBrowse=viewIdx<quizIdx;document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnRedoBack").style.display=viewIdx>0?"inline-block":"none";document.getElementById("browseLabel").style.display="none";revealed=false;if(isBrowse){document.getElementById("browseLabel").style.display="block";doReveal();document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="inline-block";document.getElementById("btnRedo").style.display="inline-block";}updateScores();}
+function doReveal(){document.getElementById("answerText").classList.add("show");if(BANK[deck[viewIdx]].tip)document.getElementById("profTip").classList.add("show");document.getElementById("btnReveal").style.display="none";if(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)){document.getElementById("btnGot").style.display="inline-block";document.getElementById("btnMissed").style.display="inline-block";}revealed=true;}
+function grade(correct){const isRedo=viewIdx<quizIdx&&answered[viewIdx]===undefined;if(viewIdx<quizIdx&&!isRedo)return;answered[viewIdx]=correct?'got':'missed';if(correct){got++;}else{missed++;missedTerms.push(BANK[deck[viewIdx]].term);}if(isRedo){viewIdx=quizIdx;}else{quizIdx=viewIdx+1;viewIdx=quizIdx;}showCard();saveState();}
+function goBack(){if(viewIdx>0){viewIdx--;showCard();saveState();}}
+function resumeQuiz(){viewIdx=quizIdx;showCard();saveState();}
+function redoBack(){if(viewIdx<=0)return;viewIdx--;if(viewIdx<quizIdx){const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];}document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";const item=BANK[deck[viewIdx]];document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";revealed=false;updateScores();saveState();}
+function redoPrev(){if(viewIdx>=quizIdx)return;const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";revealed=false;updateScores();saveState();}
+function skip(){if(viewIdx>=quizIdx){deck.push(deck[viewIdx]);deck.splice(viewIdx,1);quizIdx=viewIdx;showCard();saveState();}}
+function updateScores(){const remain=deck.length-quizIdx;document.getElementById("gotCount").textContent=got+" Got It";document.getElementById("missedCount").textContent=missed+" Missed";document.getElementById("remainCount").textContent=remain+" Left";const pct=deck.length>0?((got+missed)/deck.length)*100:0;document.getElementById("progressFill").style.width=pct+"%";}
+function showSummary(){document.getElementById("cardArea").style.display="none";document.getElementById("summaryArea").style.display="block";const total=got+missed;const pct=total>0?Math.round((got/total)*100):0;const el=document.getElementById("finalScore");el.textContent=pct+"%";el.className="final-score "+(pct>=85?"great":pct>=65?"ok":"rough");document.getElementById("finalMsg").textContent=got+" of "+total+" — "+(pct>=90?"All terms locked in.":pct>=75?"Solid. Hit the missed ones again.":"Keep drilling. Re-do the missed cards.");document.getElementById("progressFill").style.width="100%";const listBox=document.getElementById("missedListBox"),ul=document.getElementById("missedListUl"),rd=document.getElementById("btnRedrill");if(missedTerms.length>0){listBox.style.display="block";rd.style.display="inline-block";ul.innerHTML=missedTerms.map(t=>"<li>"+t+"</li>").join("");}else{listBox.style.display="none";rd.style.display="none";}updateScores();}
+function toggleShuffle(){shuffleOn=!shuffleOn;document.getElementById("btnShuffle").classList.toggle("active",shuffleOn);saveState();}
+function toggleIndex(){const ov=document.getElementById("indexOverlay");if(ov.style.display==="flex"){ov.style.display="none";return;}ov.style.display="flex";renderIndex();}
+function renderIndex(){const g=document.getElementById("indexGrid");g.innerHTML="";for(let i=0;i<deck.length;i++){const item=BANK[deck[i]];const d=document.createElement("div");d.className="index-chip";let status="";if(i<quizIdx){if(answered[i]==='got'){d.classList.add("chip-got");status="Got It";}else if(answered[i]==='missed'){d.classList.add("chip-missed");status="Missed";}}else if(i===quizIdx){d.classList.add("chip-current");status="Current";}d.innerHTML='<span><span class="chip-num">'+(i+1)+'.</span> '+item.term+'</span><span class="chip-status">'+status+'</span>';d.onclick=(function(idx){return function(){viewIdx=idx;document.getElementById("indexOverlay").style.display="none";showCard();saveState();};})(i);g.appendChild(d);}}
+document.addEventListener("keydown",e=>{if(document.getElementById("indexOverlay").style.display==="flex"){if(e.key==="Escape"||e.key==="i"||e.key==="I")toggleIndex();return;}if(e.key===" "||e.code==="Space"){e.preventDefault();if(!revealed)doReveal();}if(e.key==="g"||e.key==="G"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(true);}if(e.key==="m"||e.key==="M"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(false);}if(e.key==="s"||e.key==="S"){if(!revealed)skip();}if(e.key==="b"||e.key==="B"){goBack();}if(e.key==="d"||e.key==="D"){redoBack();}if(e.key==="r"||e.key==="R"){if(viewIdx<quizIdx)redoPrev();}if(e.key==="i"||e.key==="I"){toggleIndex();}if(e.key==="Enter"&&viewIdx<quizIdx){resumeQuiz();}});
+if(!loadState()||quizIdx>=deck.length){startDrill('all');}else{showCard();}
+</script>
+
+
+
+
+<div style="margin:30px auto;padding:14px;border-top:1px solid #334155;color:#94a3b8;font-size:.8rem;text-align:center;max-width:780px">DC Study Supply — Built by Dr. David Gramling, PHD</div>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (Gross Anatomy) with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    // Auto-detect bg luminance: body first, fall back to html element if transparent
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body>
+</html>
