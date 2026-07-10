@@ -4736,7 +4736,19 @@ body.lb-frame-active a[href*="-hub.html"][style*="position:fixed"] {
       var ret = origPick.apply(this, arguments);
 
       try {
-        var el = opts[i];
+        // Do NOT assume the argument is the DOM position. At least one engine
+        // shuffles the option buttons and paints by a data-orig attribute, so
+        // pick(origIdx) indexes the original bank, not the rendered order.
+        // Instead, find whichever option the engine just marked — correct by
+        // construction for every single-argument family.
+        //
+        // The engine also puts 'show-correct' on the right answer when you miss;
+        // that's a distinct class token, so it never matches 'correct' here.
+        var el = null;
+        var after = document.querySelectorAll(OPT_SEL);
+        for (var k = 0; k < after.length; k++) {
+          if (hasToken(after[k], OK_CLASSES) || hasToken(after[k], BAD_CLASSES)) { el = after[k]; break; }
+        }
         if (!alreadyAnswered && el && stem) {
           var isOk = hasToken(el, OK_CLASSES);
           var isBad = hasToken(el, BAD_CLASSES);
