@@ -25,7 +25,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GA 0202 · The Ear · Clinical Cases & Must-Knows (Maini)</title>
+<title>GA 0202 · The Pharynx · Clinical Cases &amp; Must-Knows</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh;padding:12px}
@@ -198,8 +198,8 @@ button[onclick*="shBackToStart"] { display: none !important; }
 </style>
 <script id="ga0202-cleanup-v9-js">
 // Override legacy redirect functions to point to OUR hub instead
-window.fabBackToHub = function() { window.location.href = 'ga-0202-m09-ear-hub_PENDING_REVIEW.html'; };
-window.shBackToStart = function() { window.location.href = 'ga-0202-m09-ear-hub_PENDING_REVIEW.html'; };
+window.fabBackToHub = function() { window.location.href = 'ga-0202-m12-pharynx-hub_PENDING_REVIEW.html'; };
+window.shBackToStart = function() { window.location.href = 'ga-0202-m12-pharynx-hub_PENDING_REVIEW.html'; };
 </script>
 
 <style id="fab-ai-companion-css">
@@ -344,14 +344,11 @@ window.shBackToStart = function() { window.location.href = 'ga-0202-m09-ear-hub_
 <style id="hide-audio-panel-mc-only">
 .static-audio-bar { display: none !important; }
 #static-audio-bar { display: none !important; }
-/* MC-only clinical drill: no audio companion — hide the dynamic audio bar + audio-order toggles (no ear lecture audio in this build) */
-.audio-bar { display: none !important; }
-.follow-toggle, #mk-toggle-bar { display: none !important; }
 </style>
 </head>
 <body>
 
-<a id="fab201-back-to-hub" href="ga-0202-m09-ear-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:100001;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to Ear Hub</a>
+<a id="fab201-back-to-hub" href="ga-0202-m12-pharynx-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:100001;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to Pharynx Hub</a>
 <style id="static-audio-panel-css">
 .static-audio-bar { background: linear-gradient(135deg,#1e293b,#0f172a); border:2px solid #3b82f6; border-radius:0 0 14px 14px; padding:10px 16px; margin:0 0 14px; box-shadow:0 4px 16px rgba(0,0,0,.5); z-index:100; }
 .static-audio-bar audio { width:100%; height:36px; border-radius:8px; }
@@ -383,7 +380,7 @@ window.shBackToStart = function() { window.location.href = 'ga-0202-m09-ear-hub_
 .static-audio-bar .t-highlight { background:rgba(34,211,238,0.15); color:#67e8f9; padding:1px 4px; border-radius:3px; font-weight:600; }
 </style>
 <div class="static-audio-bar" id="static-audio-bar">
-<audio id="mk-audio-orig" controls preload="none"><source src="https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L04.mp3" type="audio/mpeg">Audio not available</audio>
+<audio id="mk-audio-orig" controls preload="none">Audio not available</audio>
 <div class="audio-info">
 <span class="timestamp-badge" id="ts-badge">⏱ --:--</span>
 <div class="skip-btns">
@@ -426,9 +423,36 @@ window.shBackToStart = function() { window.location.href = 'ga-0202-m09-ear-hub_
 
 <div class="container" id="app"></div>
 <script>
-const BANK=[{"q": "During an otoscopic exam of a patient's RIGHT ear, you locate the cone of light, a normal reflex that radiates from the umbo. In the normal RIGHT ear, toward which clock position does the cone of light point?", "o": ["5 o'clock", "11 o'clock", "3 o'clock", "7 o'clock"], "c": 0, "cat": "Otoscopy & Tympanic Membrane", "r": ["Correct. In the right ear the cone of light radiates infero-anteriorly to about the 5 o'clock position (it sits at 7 o'clock in the left ear). Dr. Maini flagged this as a likely exam question.", "11 o'clock is superior; the cone of light points inferiorly and anteriorly, to 5 o'clock in the right ear.", "3 o'clock is not where the reflex sits; it points infero-anteriorly (5 o'clock right, 7 o'clock left).", "That is the LEFT-ear position. Dr. Maini teaches 7 o'clock for the left ear and 5 o'clock for the right."], "source": "Dr. Maini - The Ear, Lecture 22 (cone of light)", "quote": "In the right ear... 5 o'clock. In the left ear... 7 o'clock. This can appear as a question in your exam.", "obj": "Cone of light - right 5 o'clock, left 7 o'clock", "hint": "Right ear points toward 5; the left ear mirrors it at 7."}, {"q": "On otoscopy you inspect a healthy tympanic membrane. Which description matches Dr. Maini's account of the normal eardrum?", "o": ["A cartilaginous, triangular flap", "A thin, semi-transparent, oval, pearly-gray membrane", "An opaque, red, muscular membrane", "A thick, bony, white plate"], "c": 1, "cat": "Otoscopy & Tympanic Membrane", "r": ["It is oval and membranous, not a cartilaginous triangular flap.", "Correct. Dr. Maini describes it as a thin, semi-transparent, oval, pearly-gray fibrous membrane, skin externally and mucosa internally over a dense fibrous core.", "A healthy eardrum is not opaque or red; redness suggests infection. The normal membrane is pearly-gray and semi-transparent.", "The tympanic membrane is a thin fibrous membrane, not a bony plate."], "source": "Dr. Maini - The Ear, Lecture 22 (tympanic membrane)", "quote": "Semi-transparent, oval, fibrous, pearly gray membrane.", "obj": "Normal tympanic membrane - pearly-gray, semi-transparent, oval", "hint": "Pearly-gray and see-through, not red or bony."}, {"q": "The otoscope light centers on the umbo of the tympanic membrane, the point from which the cone of light radiates. What is the umbo?", "o": ["The reflected cone of light itself", "The fibrous ring at the rim of the membrane", "The central depression where the malleus handle attaches", "The lax superior part of the membrane"], "c": 2, "cat": "Otoscopy & Tympanic Membrane", "r": ["The cone of light radiates FROM the umbo; the umbo itself is the central dimple.", "The fibrous rim is the annulus, not the umbo.", "Correct. The umbo is the central depression of the eardrum, marking the tip of the malleus handle (manubrium); the cone of light spreads out from it.", "The lax superior part is the pars flaccida, not the umbo."], "source": "Dr. Maini - The Ear, Lecture 22 (umbo)", "quote": "It has a central depression called as ambo... and from that ambo, there is a cone of light.", "obj": "Umbo - central depression, malleus-handle attachment", "hint": "The central dimple the malleus tip pulls in; the light fans out from here."}, {"q": "A child with a chronic middle-ear effusion needs the fluid drained. The surgeon incises the eardrum and leaves a tiny ventilation tube. Which QUADRANT of the tympanic membrane is preferred, because no important structure lies behind it?", "o": ["Anterosuperior", "Posterosuperior", "Anteroinferior", "Posteroinferior"], "c": 3, "cat": "Myringotomy & TM Injury", "r": ["The anterosuperior quadrant is not the standard myringotomy site.", "The posterosuperior quadrant is specifically AVOIDED because the chorda tympani lies just behind it.", "The anteroinferior quadrant is not the preferred site Dr. Maini describes.", "Correct. The posteroinferior quadrant is preferred for myringotomy because no important structure lies posterior to it."], "source": "Dr. Maini - The Ear, Lecture 22 (myringotomy)", "quote": "You will create a tiny opening in the posterior inferior quadrant... you do not have any important structure posterior to that.", "obj": "Myringotomy - posteroinferior quadrant (safe)", "hint": "Down and back - the quadrant with nothing important behind it."}, {"q": "If an instrument instead punctured the POSTEROSUPERIOR quadrant of the tympanic membrane, which structure lying immediately behind that quadrant would be at risk?", "o": ["The auditory tube opening", "The stapedius muscle", "The facial nerve trunk", "The chorda tympani"], "c": 3, "cat": "Myringotomy & TM Injury", "r": ["The auditory tube opens on the anterior wall, not behind the posterosuperior quadrant.", "The stapedius sits on the pyramid of the posterior wall, not directly behind the posterosuperior eardrum.", "The facial nerve runs in its bony canal in the medial/posterior wall, not immediately behind this quadrant.", "Correct. Dr. Maini warns that the chorda tympani lies just posterior to the posterosuperior quadrant, so cutting there risks damaging it."], "source": "Dr. Maini - The Ear, Lecture 22 (posterosuperior quadrant)", "quote": "There are chances that you may damage cauda tympani... because cauda tympani is lying right posterior to posterior superior quadrant.", "obj": "Chorda tympani - risk in posterosuperior quadrant", "hint": "The nerve that hitchhikes across the eardrum sits behind the upper-back quadrant."}, {"q": "Dr. Maini prefers a controlled surgical myringotomy over letting a middle-ear collection burst the eardrum on its own. Compared with a clean surgical cut, a SPONTANEOUS tympanic membrane rupture:", "o": ["Heals faster and more completely", "Has serrated, irregular margins and may not heal properly", "Turns the pars tensa into pars flaccida", "Always destroys the auditory ossicles"], "c": 1, "cat": "Myringotomy & TM Injury", "r": ["It is the opposite: a spontaneous rupture heals WORSE than a clean surgical incision.", "Correct. A spontaneous rupture has serrated, irregular margins and may fail to heal properly, whereas a surgical myringotomy heals cleanly without a scar.", "A rupture does not convert the pars tensa into pars flaccida; those are fixed regional parts of the membrane.", "Ossicle destruction is not what Dr. Maini attributes to a spontaneous rupture."], "source": "Dr. Maini - The Ear, Lecture 22 (spontaneous rupture vs myringotomy)", "obj": "Spontaneous TM rupture - serrated margins, poor healing", "hint": "A ragged, torn edge heals worse than a clean cut."}, {"q": "A patient's tympanic membrane has become thickened and fibrosed after repeated infections. Dr. Maini says a ruptured, thickened, or fibrosed eardrum most directly produces:", "o": ["Vertigo", "Facial paralysis", "Hearing impairment", "Loss of taste"], "c": 2, "cat": "Myringotomy & TM Injury", "r": ["Vertigo arises from vestibular (inner-ear balance) problems, not a stiff eardrum.", "Facial paralysis reflects a facial nerve lesion, not a damaged eardrum.", "Correct. A drum that cannot vibrate properly (ruptured, thickened, or fibrosed) impairs sound conduction, so the patient cannot hear well.", "Taste is carried by the chorda tympani; it is not the consequence of a fibrosed eardrum."], "source": "Dr. Maini - The Ear, Lecture 22 (TM pathology)", "quote": "If your tympanic membrane is ruptured, or is thickened, or fibrosed... there is hearing impairment.", "obj": "Damaged eardrum - conductive hearing impairment", "hint": "A drum that will not vibrate cannot pass sound along."}, {"q": "A patient with untreated otitis media develops redness and tenderness behind the ear over the mastoid process. Dr. Maini explains this is possible because the mastoid is not solid bone but holds air cells communicating with the middle ear. What is this complication called?", "o": ["Mastoiditis", "Myringotomy", "Hyperacusis", "Otospongiosis"], "c": 0, "cat": "Middle-Ear Infection & Spread", "r": ["Correct. Middle-ear infection can spread posteriorly into the mastoid air cells, causing mastoiditis; Dr. Maini notes mastoidectomy is a common ENT procedure.", "Myringotomy is a treatment (draining the eardrum), not a complication.", "Hyperacusis is sound over-sensitivity from stapedius/facial nerve dysfunction, unrelated to mastoid spread.", "Otospongiosis was not the term Dr. Maini used for this infective spread into the mastoid."], "source": "Dr. Maini - The Ear, Lecture 22 (mastoiditis)", "quote": "If there is middle ear infection, it can also spread to mastoid process, causing mastoiditis.", "obj": "Mastoid air cells - mastoiditis risk", "hint": "Infection tracks back into the air cells of the bone behind the ear."}, {"q": "Through which opening does the middle-ear cavity communicate posteriorly with the mastoid antrum, providing the route by which infection can reach the mastoid?", "o": ["The internal acoustic meatus", "The oval window", "The auditory tube", "The aditus (ad antrum)"], "c": 3, "cat": "Middle-Ear Infection & Spread", "r": ["The internal acoustic meatus transmits CN VII and VIII, not a middle-ear-to-mastoid passage.", "The oval window is on the medial wall, occupied by the stapes footplate, not a route to the mastoid.", "The auditory tube runs anteriorly to the nasopharynx, not posteriorly to the mastoid.", "Correct. The aditus ad antrum is the posterior-wall opening connecting the middle ear to the mastoid antrum and its air cells."], "source": "Dr. Maini - The Ear, Lecture 22 (aditus)", "quote": "With mastoid air cells through... aditus.", "obj": "Aditus ad antrum - middle ear to mastoid", "hint": "The posterior doorway from the tympanic cavity into the mastoid."}, {"q": "Dr. Maini explains that a severe throat (pharyngeal) infection can travel to the middle ear and produce a collection of fluid or pus. Which structure provides this route from the nasopharynx to the middle ear?", "o": ["The internal acoustic meatus", "The auditory (pharyngotympanic) tube", "The aditus ad antrum", "The external acoustic meatus"], "c": 1, "cat": "Middle-Ear Infection & Spread", "r": ["The internal acoustic meatus carries nerves and vessels, not air or infection from the throat.", "Correct. The auditory (pharyngotympanic / eustachian) tube connects the nasopharynx to the middle ear, so pharyngeal infection can ascend along it.", "The aditus connects the middle ear to the mastoid, not to the nasopharynx.", "The external acoustic meatus is the outer canal to the eardrum; it does not connect the throat to the middle ear."], "source": "Dr. Maini - The Ear, Lecture 22 (auditory tube / infection spread)", "quote": "Your middle ear is connected to nasopharynx... if there is severe pharyngeal infection, it may travel to middle ear.", "obj": "Auditory tube - nasopharynx-to-middle-ear route", "hint": "The same tube that pops your ears also lets throat infection climb up."}, {"q": "During middle-ear surgery the operator must avoid the bony facial canal, which forms part of the medial and posterior walls of the tympanic cavity. Which nerve travels inside this canal?", "o": ["The trigeminal nerve (V)", "The vagus nerve (X)", "The facial nerve (VII)", "The glossopharyngeal nerve (IX)"], "c": 2, "cat": "Nerve Lesions & Reflexes", "r": ["The trigeminal (via auriculotemporal, V3) supplies the meatus and eardrum externally, not the facial canal.", "The vagus supplies the meatus via its auricular branch but does not run in the facial canal.", "Correct. The facial canal is the bony canal for the facial nerve (VII); it helps form the medial and posterior walls, so the nerve is vulnerable in middle-ear disease and surgery.", "The glossopharyngeal sends its tympanic branch to the promontory, but the bony facial canal houses the facial nerve."], "source": "Dr. Maini - The Ear, Lecture 22 (facial canal)", "quote": "Facial canal is a bony canal for the facial nerve.", "obj": "Facial canal (medial + posterior walls) - houses CN VII", "hint": "The canal is named for the nerve it protects."}, {"q": "A patient with a facial nerve lesion proximal to the branch supplying the stapedius complains that everyday sounds now seem uncomfortably loud. What is this symptom called?", "o": ["Hyperacusis", "Tinnitus", "Anosmia", "Vertigo"], "c": 0, "cat": "Nerve Lesions & Reflexes", "r": ["Correct. Without a working stapedius to damp the ossicular chain, ordinary sounds seem too loud, which Dr. Maini calls hyperacusis.", "Tinnitus is a phantom ringing, not the loudness intolerance of a paralyzed stapedius.", "Anosmia is loss of smell (CN I), unrelated to the stapedius.", "Vertigo is a spinning sensation from vestibular dysfunction, not loss of stapedius damping."], "source": "Dr. Maini - The Ear, Lecture 22 (hyperacusis)", "quote": "What happens if stapedius muscle is not functioning?... Hyperacusis.", "obj": "Hyperacusis - loss of stapedius (facial nerve) damping", "hint": "No sound-damping muscle means the volume knob is stuck up."}, {"q": "The stapedius dampens loud-sound vibrations by pulling the head of the stapes posteriorly. Which nerve supplies the stapedius, so that its injury can produce hyperacusis?", "o": ["The glossopharyngeal nerve (IX)", "The facial nerve (VII)", "The mandibular nerve (V3)", "The vagus nerve (X)"], "c": 1, "cat": "Nerve Lesions & Reflexes", "r": ["The glossopharyngeal supplies the tympanic plexus over the promontory, not the stapedius.", "Correct. The stapedius is supplied by the facial nerve (VII); a facial lesion proximal to its stapedial branch can cause hyperacusis.", "V3 supplies the tensor tympani (the other middle-ear muscle), not the stapedius.", "The vagus supplies the external meatus skin, not the stapedius."], "source": "Dr. Maini - The Ear, Lecture 22 (stapedius)", "quote": "Nerve supply is 7th nerve, we know that, right?", "obj": "Stapedius - facial nerve (VII)", "hint": "Same nerve whose lesion causes hyperacusis - the seventh."}, {"q": "In a very loud environment the tensor tympani and stapedius contract reflexively to shield the delicate inner-ear receptors. Dr. Maini calls this protective response the:", "o": ["Corneal reflex", "Gag reflex", "Vestibulo-ocular reflex", "Auditory (acoustic) reflex"], "c": 3, "cat": "Nerve Lesions & Reflexes", "r": ["The corneal reflex is a protective blink (V1 in, VII out), not a middle-ear muscle reflex.", "The gag reflex (IX and X) protects the airway, not the ear.", "The vestibulo-ocular reflex stabilizes gaze during head movement; it does not damp loud sound.", "Correct. The reflex contraction of tensor tympani and stapedius in loud surroundings is the auditory (acoustic) reflex, a protective mechanism."], "source": "Dr. Maini - The Ear, Lecture 22 (auditory reflex)", "quote": "This is a protective reflex. This is called as auditory reflex.", "obj": "Auditory reflex - tensor tympani + stapedius protect the inner ear", "hint": "Two tiny muscles clamp down when the noise gets dangerous."}, {"q": "While cleaning her ear canal with a cotton swab, a patient suddenly feels an irritating sensation and an urge to cough in her throat. Stimulation of which nerve, carrying GSA fibers from the external acoustic meatus, explains this ear-to-throat reflex?", "o": ["The auricular branch of the vagus (X)", "The glossopharyngeal nerve (IX)", "The auriculotemporal branch of V3", "The chorda tympani"], "c": 0, "cat": "Nerve Lesions & Reflexes", "r": ["Correct. The auricular branch of the vagus carries GSA fibers from the meatus; stimulating it during ear cleaning provokes a throat/cough sensation through the vagus.", "The glossopharyngeal supplies the internal surface of the eardrum, not the vagal ear-cough reflex.", "The auriculotemporal nerve (V3) also supplies the meatus, but the throat/cough sensation is a vagal phenomenon.", "The chorda tympani carries taste and secretomotor fibers, not the meatal sensation that triggers coughing."], "source": "Dr. Maini - The Ear, Lecture 22 (vagal supply of meatus)", "quote": "Auricular branch of vagus nerve carries GSA fibers from your external acoustic meters... you get this irritating sensation in your throat... because of the vagus nerve.", "obj": "Auricular branch of vagus - ear-cough (Arnold) reflex", "hint": "The wandering nerve links your ear canal to your throat."}, {"q": "A reflex draws the tympanic membrane medially, tensing it to lessen sound transmission during loud noise. Which muscle performs this action, and which nerve supplies it?", "o": ["Salpingopharyngeus; vagus (X)", "Stapedius; facial nerve (VII)", "Tensor tympani; mandibular nerve (V3)", "Tensor veli palatini; V3"], "c": 2, "cat": "Nerve Lesions & Reflexes", "r": ["Salpingopharyngeus is a pharyngeal muscle (vagus), unrelated to eardrum tension.", "The stapedius (CN VII) also damps sound, but it pulls the STAPES posteriorly; it does not draw the eardrum medially.", "Correct. The tensor tympani draws the tympanic membrane medially to tense it and lessen sound transmission; it is a first-arch muscle supplied by V3 (nerve to medial pterygoid).", "Tensor veli palatini is a palate/tube muscle (also V3), but it does not tense the eardrum."], "source": "Dr. Maini - The Ear, Lecture 22 (tensor tympani)", "quote": "It draws the tympanic membrane medially... increasing its tension, thus lessening the sound transmission.", "obj": "Tensor tympani - tenses TM medially, nerve V3", "hint": "The one that pulls the DRUM (not the stapes) inward, on the trigeminal."}, {"q": "A slow-growing tumor within the internal acoustic meatus gradually compresses the two cranial nerves passing through it, producing progressive hearing loss and facial weakness. Which two cranial nerves travel through the internal acoustic meatus?", "o": ["CN V and VI", "CN IX and X", "CN VII and VIII", "CN III and IV"], "c": 2, "cat": "Nerve Lesions & Reflexes", "r": ["CN V and VI do not run through the internal acoustic meatus.", "CN IX and X exit through the jugular foramen, not the internal acoustic meatus.", "Correct. The internal acoustic meatus transmits CN VII (facial) and CN VIII (vestibulocochlear) plus the labyrinthine vessels, so a mass here causes hearing loss with facial weakness.", "CN III and IV run to the orbit via the superior orbital fissure, not the internal acoustic meatus."], "source": "Dr. Maini - The Ear, Lecture 23 (internal acoustic meatus)", "obj": "Internal acoustic meatus - transmits CN VII and VIII", "hint": "The facial and vestibulocochlear nerves share this canal."}, {"q": "As a passenger's plane climbs, cabin pressure falls, the eardrum bulges outward, and hearing muffles until she yawns or performs a Valsalva maneuver. How does this restore normal hearing, per Dr. Maini?", "o": ["Extra cerumen seals the canal", "The stapedius stiffens the eardrum", "Endolymph drains through the round window", "Air is forced through the auditory tube to equalize pressure across the eardrum"], "c": 3, "cat": "Auditory Tube & Pressure", "r": ["Cerumen is protective wax; it plays no role in pressure equalization.", "The stapedius damps loud sound; it does not equalize air pressure.", "The round window transmits pressure waves in perilymph; it does not drain endolymph to fix cabin-pressure effects.", "Correct. Yawning or Valsalva pushes air through the auditory tube into the middle ear, equalizing pressure on the two sides of the eardrum so it can vibrate freely again."], "source": "Dr. Maini - The Ear, Lecture 22 (pressure equalization)", "quote": "When you yawn, air is pushed through this auditory tube into the middle ear cavity... the air pressure is equalized.", "obj": "Auditory tube - Valsalva/yawn equalizes middle-ear pressure", "hint": "Popping your ears sends air up the tube to balance the drum."}, {"q": "After a prolonged bout of flu, a patient develops a nasal twang in her voice because secretions have blocked the auditory tube. The auditory tube normally connects the middle ear to which region?", "o": ["The nasopharynx", "The internal acoustic meatus", "The oropharynx", "The mastoid antrum"], "c": 0, "cat": "Auditory Tube & Pressure", "r": ["Correct. The auditory tube connects the middle ear to the nasopharynx; when flu secretions block it, pressure cannot equalize and the voice takes on a nasal twang.", "The internal acoustic meatus transmits nerves and vessels, not the auditory tube.", "The tube opens into the nasopharynx (above the soft palate), not the oropharynx.", "The mastoid antrum connects to the middle ear via the aditus, not via the auditory tube."], "source": "Dr. Maini - The Ear, Lecture 22 (auditory tube blockage)", "quote": "Secretions, they enter this tube, and they block this tube, and we have that nasal twang in the voice.", "obj": "Auditory tube - middle ear to nasopharynx; block gives nasal twang", "hint": "It opens where the nose meets the throat, above the palate."}, {"q": "Dr. Maini repeatedly warns students not to confuse the auditory tube with which other structure, since one equalizes pressure while the other conducts sound?", "o": ["The cochlear duct", "The external acoustic meatus", "The mastoid antrum", "The facial canal"], "c": 1, "cat": "Auditory Tube & Pressure", "r": ["The cochlear duct is an inner-ear structure, not the one students confuse with the auditory tube.", "Correct. Students often confuse the auditory (pharyngotympanic) tube with the external acoustic meatus; the tube equalizes pressure while the meatus conducts sound to the eardrum.", "The mastoid antrum is a posterior air space, not the structure confused with the auditory tube.", "The facial canal houses the facial nerve; it is not the classic auditory-tube mix-up."], "source": "Dr. Maini - The Ear, Lecture 22 (common confusion)", "quote": "Sometimes students, they confuse auditory tube with external acoustic meters.", "obj": "Auditory tube vs external acoustic meatus", "hint": "One is the outer canal to the drum; do not mix it with the pressure tube."}, {"q": "Trace a sound vibration from the eardrum to the inner-ear fluid. Which sequence is correct, per Dr. Maini?", "o": ["Oval window -> stapes -> incus -> malleus -> tympanic membrane", "Tympanic membrane -> incus -> malleus -> stapes -> round window", "Tympanic membrane -> stapes -> incus -> malleus -> round window", "Tympanic membrane -> malleus -> incus -> stapes -> footplate at the oval window -> perilymph"], "c": 3, "cat": "Ossicles & Sound Conduction", "r": ["This is the pathway backward; sound enters at the eardrum, not the oval window.", "The order is malleus then incus then stapes; the incus is not attached to the eardrum, and the chain ends at the OVAL, not the round, window.", "This reverses the ossicle order and ends at the wrong window; the malleus, not the stapes, is attached to the eardrum.", "Correct. Vibration passes eardrum -> malleus -> incus -> stapes -> stapes footplate in the oval window -> perilymph of the inner ear."], "source": "Dr. Maini - The Ear, Lecture 22 (conduction pathway)", "quote": "Those vibrations are transmitted to malleus, incus, stapis, footplate of stapis, inner ear.", "obj": "Conduction chain - eardrum to oval window to perilymph", "hint": "Hammer, anvil, stirrup - in that order - then the oval window."}, {"q": "The footplate of the stapes sits in a window on the medial wall and pushes on the inner-ear fluid; if it could not move, sound could not reach the perilymph. Which window does the stapes footplate occupy?", "o": ["The aqueduct of the vestibule", "The oval window (fenestra vestibuli)", "The helicotrema", "The round window (fenestra cochlea)"], "c": 1, "cat": "Ossicles & Sound Conduction", "r": ["The aqueduct of the vestibule carries the endolymphatic duct; it is not the stapes window.", "Correct. The stapes footplate sits in the oval window (fenestra vestibuli), the gateway that transmits ossicular vibration into the perilymph. If it were fixed, conduction would fail (conductive hearing loss).", "The helicotrema is the apical link between the scala vestibuli and scala tympani, not a middle-ear window.", "The round window is closed by the secondary tympanic membrane, not the stapes footplate."], "source": "Dr. Maini - The Ear, Lecture 22 (oval window)", "quote": "The footplate of stapis... it is located within the oval window.", "obj": "Oval window - occupied by the stapes footplate", "hint": "The stirrup's baseplate plugs the oval-shaped window."}, {"q": "After the stapes drives pressure waves through the perilymph and over the helicotrema, the waves finally dissipate at a second, membrane-covered window. Which window, closed by the secondary tympanic membrane, is this?", "o": ["The aditus ad antrum", "The internal acoustic meatus", "The round window (fenestra cochlea)", "The oval window (fenestra vestibuli)"], "c": 2, "cat": "Ossicles & Sound Conduction", "r": ["The aditus connects to the mastoid; it has no role in perilymph pressure.", "The internal acoustic meatus carries nerves and vessels, not perilymph pressure relief.", "Correct. The round window (fenestra cochlea), closed by the secondary tympanic membrane, bulges to relieve the pressure waves at the end of the scala tympani.", "The oval window is the ENTRY point (the stapes footplate), not where the waves dissipate."], "source": "Dr. Maini - The Ear, Lecture 23 (round window)", "obj": "Round window - secondary tympanic membrane, pressure relief", "hint": "The round window flexes to let the fluid wave escape."}, {"q": "Which auditory ossicle has its handle (manubrium) attached to the tympanic membrane, so that eardrum vibrations reach it first?", "o": ["The malleus", "The stapes", "The incus", "The lenticular ossicle"], "c": 0, "cat": "Ossicles & Sound Conduction", "r": ["Correct. The malleus (hammer) is the largest ossicle; its manubrium is attached to the tympanic membrane, so it vibrates first.", "The stapes (stirrup) is the innermost ossicle; its footplate sits in the oval window, not on the eardrum.", "The incus (anvil) sits between the malleus and stapes; it is not attached to the eardrum.", "There is no separate lenticular ossicle; the lenticular process is a small part of the incus."], "source": "Dr. Maini - The Ear, Lecture 22 (malleus)", "quote": "Malleus is attached to tympanic membrane.", "obj": "Malleus manubrium - attached to the eardrum", "hint": "The hammer touches the drum."}, {"q": "A patient's outer and middle ear are structurally intact, yet Dr. Maini stresses that hearing ultimately depends on receptors elsewhere. Where are the receptors that convert sound-wave vibrations into action potentials located?", "o": ["On the ossicles of the middle ear", "On the tympanic membrane", "In the internal (inner) ear", "Within the external acoustic meatus"], "c": 2, "cat": "Inner Ear & Balance", "r": ["The ossicles conduct vibration but contain no receptors.", "The tympanic membrane transmits vibration; it holds no receptors.", "Correct. The auditory receptors sit protected within the internal ear; the external and middle ear are only a conducting apparatus.", "The external acoustic meatus channels sound to the eardrum but has no auditory receptors."], "source": "Dr. Maini - The Ear, Lecture 22 (ear regions)", "quote": "Internal ear is the place where your receptors are located.", "obj": "Auditory receptors - in the internal ear", "hint": "The outer and middle ear only pass the vibration along; the sensor is deepest."}, {"q": "A patient reports a spinning sensation brought on by rotational head movements. Which inner-ear structures, and their sensory organ, detect this angular (rotational) acceleration?", "o": ["The round window, via hair cells", "The utricle and saccule, via the macula", "The cochlear duct, via the organ of Corti", "The semicircular ducts, via the crista ampullaris"], "c": 3, "cat": "Inner Ear & Balance", "r": ["The round window is a pressure-relief membrane, not a balance receptor.", "The utricle and saccule (maculae) sense static position and linear acceleration, not rotation.", "The cochlear duct and organ of Corti serve HEARING, not rotational balance.", "Correct. The three semicircular ducts sense angular/rotational acceleration; the receptor organ in each ampulla is the crista ampullaris (dynamic equilibrium)."], "source": "Dr. Maini - The Ear, Lecture 23 (semicircular ducts)", "obj": "Semicircular ducts + crista ampullaris - rotational (dynamic) equilibrium", "hint": "Three loops at right angles, each with a ridge sensor for spinning."}, {"q": "In an elevator that suddenly accelerates upward, which inner-ear receptors sense this linear (vertical) motion and the head's static position?", "o": ["The maculae of the utricle and saccule", "The spiral ganglion in the modiolus", "The crista ampullaris of the semicircular ducts", "The organ of Corti in the cochlear duct"], "c": 0, "cat": "Inner Ear & Balance", "r": ["Correct. The maculae of the utricle and saccule (with their otolithic membranes) detect static head position and linear acceleration, such as an elevator's vertical motion.", "The spiral ganglion houses hearing neurons, not equilibrium receptors.", "The crista ampullaris senses rotational (angular) motion, not straight-line acceleration.", "The organ of Corti is for hearing, not balance."], "source": "Dr. Maini - The Ear, Lecture 23 (utricle and saccule)", "obj": "Maculae (utricle/saccule) - static equilibrium + linear acceleration", "hint": "Straight-line motion and tilt are sensed by the two little sacs, not the loops."}, {"q": "To assess a dizzy patient's balance apparatus, a clinician irrigates the ear canal with warm and then cold water and watches the response. What is this test, and what does it assess?", "o": ["Rinne's test - air versus bone conduction", "The caloric test - vestibular (semicircular canal) function", "The auditory reflex - middle-ear muscles", "Weber's test - cochlear hearing"], "c": 1, "cat": "Hearing & Vestibular Tests", "r": ["Rinne's test compares air and bone conduction of SOUND; it is a hearing test, not a balance test.", "Correct. The caloric test (warm/cold water irrigation) assesses vestibular / semicircular-canal function, useful in a dizzy patient.", "The auditory reflex is protective middle-ear muscle contraction, not a bedside balance test.", "Weber's test assesses hearing (cochlear/conduction), not the vestibular system."], "source": "Dr. Maini - The Ear, Lecture 30 (caloric test)", "obj": "Caloric test - vestibular function", "hint": "Warm and cold water in the ear probes balance, not hearing."}, {"q": "A patient presents with a hearing complaint. Which pair of tests, grouped by Dr. Maini as tests of HEARING (not balance), would be appropriate?", "o": ["Weber's test and Rinne's test", "The anterior and posterior drawer tests", "The corneal and gag reflexes", "The caloric test and head-thrust test"], "c": 0, "cat": "Hearing & Vestibular Tests", "r": ["Correct. Weber's and Rinne's tests are the tuning-fork tests of hearing that Dr. Maini groups together.", "The drawer tests are knee-ligament tests, unrelated to the ear.", "The corneal and gag reflexes test cranial-nerve protective reflexes, not hearing.", "The caloric and head-thrust tests assess the vestibular (balance) system, not hearing."], "source": "Dr. Maini - The Ear, Lecture 30 (hearing tests)", "obj": "Weber + Rinne - hearing tests (vs caloric for balance)", "hint": "Tuning-fork tests check hearing; water irrigation checks balance."}, {"q": "Dr. Maini notes she has seen board questions on the parts of the auricle. On the auricle, the boat-shaped fossa lying between the helix and the antihelix is called the:", "o": ["The triangular fossa", "The concha", "The scapha", "The tragus"], "c": 2, "cat": "External Ear Must-Knows", "r": ["The triangular fossa lies between the two crura of the antihelix, not between the helix and antihelix.", "The concha is the deep hollow leading into the meatus, not the groove between helix and antihelix.", "Correct. The scapha is the boat-shaped fossa between the helix and antihelix (scapha meaning boat).", "The tragus is the projection anterior to the meatus, not a fossa."], "source": "Dr. Maini - The Ear, Lecture 22 (parts of the auricle)", "quote": "The fossa between helix and antihelix is called a scapha... Scafa means a boat.", "obj": "Scapha - boat-shaped fossa between helix and antihelix", "hint": "Boat-shaped groove - scapha means boat."}, {"q": "To straighten the ear canal during otoscopy, you gently move the auricle. Which auricular projection lies immediately ANTERIOR to the opening of the external acoustic meatus?", "o": ["The helix", "The tragus", "The antitragus", "The lobule"], "c": 1, "cat": "External Ear Must-Knows", "r": ["The helix is the outer curved rim of the auricle, not the projection at the canal opening.", "Correct. The tragus is the small projection just anterior to the external acoustic meatus; you can palpate it in front of the canal.", "The antitragus lies opposite the tragus, separated from it by the intertragic notch.", "The lobule (earlobe) is the soft inferior part, not anterior to the meatus."], "source": "Dr. Maini - The Ear, Lecture 22 (tragus)", "quote": "Anterior to your external meatus, that is called as tragus.", "obj": "Tragus - projection anterior to the meatus", "hint": "The little flap you press to plug your ear sits in front of the canal."}, {"q": "A patient sustains a laceration to the auricle. Deep to the skin, the auricle is supported by a single piece of which cartilage - the same elastic type Dr. Maini says is found in the epiglottis?", "o": ["Fibrocartilage", "Calcified cartilage", "Hyaline cartilage", "Elastic cartilage"], "c": 3, "cat": "External Ear Must-Knows", "r": ["Fibrocartilage is found in intervertebral discs and menisci, not the auricle.", "There is no calcified cartilage forming the normal auricle.", "Hyaline cartilage forms the costal cartilages and much of the larynx, but the auricle is elastic cartilage.", "Correct. The auricle is a single piece of elastic cartilage (rich in elastin, so it springs back to shape); Dr. Maini gives the epiglottis as another elastic-cartilage example."], "source": "Dr. Maini - The Ear, Lecture 22 (auricle cartilage)", "quote": "A single piece of elastic cartilage... Any other example of elastic cartilage... epiglottis.", "obj": "Auricle - single elastic cartilage (like the epiglottis)", "hint": "It bends and springs back - the same springy cartilage as the epiglottis."}];
-const CAT_NAMES=["Otoscopy & Tympanic Membrane", "Myringotomy & TM Injury", "Middle-Ear Infection & Spread", "Nerve Lesions & Reflexes", "Auditory Tube & Pressure", "Ossicles & Sound Conduction", "Inner Ear & Balance", "Hearing & Vestibular Tests", "External Ear Must-Knows"];
-const LS_KEY="ga0202_m09_ear_clinical_cases";
+const BANK=[
+{q:"A 5-year-old is a chronic mouth-breather with a flat face and a small, recessed lower jaw (adenoid facies). Enlargement of which structure best explains this picture?",o:["The pharyngeal tonsil (adenoid)","The palatine tonsil","The lingual tonsil","The tubal tonsil"],c:0,cat:"Adenoids & Nasopharynx",r:["Correct. Sitting in the roof of the nasopharynx, an enlarged pharyngeal tonsil (adenoid) blocks the posterior choanae, forcing mouth breathing and producing adenoid facies.","Palatine-tonsil enlargement causes throat/tonsillar symptoms, not nasal obstruction with adenoid facies.","The lingual tonsil sits low on the tongue root and does not block the posterior nasal apertures.","The tubal tonsils surround the auditory-tube opening and do not cause choanal obstruction."],source:"L27 · Adenoids — clinical",quote:"[Maini] “the child becomes a mouth breather... this typical face, which is called adenoid facies.”",obj:"Adenoids / adenoid facies",hint:"It is the single tonsil in the roof of the nasopharynx, right behind the nose."},
+{q:"Maini stresses recognizing enlarged adenoids EARLY (before about age 5-6) so the facial changes can normalize. Why is early treatment able to reverse adenoid facies?",o:["Antibiotics reverse the bone changes only in young children","The pharyngeal tonsil stops growing after age 6","The facial bones and paranasal sinuses keep developing until puberty","The mandible can only be surgically corrected in childhood"],c:2,cat:"Adenoids & Nasopharynx",r:["Reversal is due to continued facial-bone growth, not antibiotics.","Tonsil growth is not the reason; ongoing facial development is.","Correct. Because the facial bones and paranasal sinuses keep developing until puberty, relieving the obstruction early lets the face grow normally.","Adenoidectomy removes the tonsil; the mandible is not replaced surgically."],source:"L27 · Adenoidectomy timing",quote:"[Maini] “facial bones and paranasal sinuses keep developing till the age of puberty, so if this condition is identified early... these faces can go back to normal.”",obj:"Adenoidectomy timing"},
+{q:"A child swallows a sharp fishbone that lodges in a shallow, pear-shaped depression on each side of the laryngeal inlet. Where is it stuck?",o:["The vallecula","The pharyngeal recess","The tonsillar fossa","The piriform fossa"],c:3,cat:"Piriform Fossa & Foreign Body",r:["The valleculae lie between the tongue and the epiglottis, not beside the laryngeal inlet.","The pharyngeal recess is a nasopharyngeal pocket behind the torus tubarius.","The tonsillar fossa holds the palatine tonsil in the oropharynx.","Correct. The piriform fossa is the shallow, pear-shaped recess on each side of the laryngeal inlet where sharp foreign bodies classically lodge."],source:"L27 · Piriform fossa — clinical",quote:"[Maini] “some foreign bodies, like a fishbone... may get lodged in this fossa.”",hint:"'Piriform' means pear-shaped, and it flanks the laryngeal inlet."},
+{q:"While removing a fishbone from the piriform fossa, a clinician must avoid the nerve lying just deep to the mucous membrane there. Which nerve is it?",o:["Internal laryngeal nerve","Recurrent laryngeal nerve","External laryngeal nerve","Hypoglossal nerve"],c:0,cat:"Piriform Fossa & Foreign Body",r:["Correct. The internal laryngeal nerve runs very superficially beneath the piriform-fossa mucosa, so a lodged foreign body (or its removal) can injure it.","The recurrent laryngeal nerve supplies the larynx below the vocal folds and does not lie in the piriform-fossa mucosa.","The external laryngeal nerve is motor to cricothyroid, not the superficial nerve of this fossa.","The hypoglossal nerve is motor to the tongue, unrelated to the piriform fossa."],source:"L27 · Piriform fossa — internal laryngeal nerve",quote:"[Maini] “lying right under the mucous membrane of the piriform fossa, we have internal laryngeal nerve.”",hint:"It is the SENSORY nerve to the larynx above the vocal folds."},
+{q:"A lodged foreign body damages the internal laryngeal nerve in the piriform fossa. What is the expected consequence?",o:["Hoarseness of the voice only","Loss of the gag reflex, with aspiration and aspiration pneumonitis","Complete mechanical obstruction of the airway","Loss of taste from the anterior tongue"],c:1,cat:"Laryngeal Nerve & Gag Reflex",r:["Hoarseness reflects motor (recurrent laryngeal) injury; this nerve is sensory.","Correct. The internal laryngeal nerve is sensory above the vocal folds, so its loss abolishes the gag reflex; material is then aspirated, causing aspiration pneumonitis.","The injury impairs protective sensation, not the mechanical patency of the airway.","Taste is carried by CN VII/IX, not the internal laryngeal nerve."],source:"L27 · Internal laryngeal nerve — injury",quote:"[Maini] “there'll be loss of gag reflex... and there'll be aspiration pneumonitis.”",obj:"Internal laryngeal nerve injury",hint:"Sensation above the vocal folds drives the gag reflex."},
+{q:"Maini defines the lung problem that follows loss of laryngeal sensation. Aspiration pneumonitis is...",o:["A mechanical blockage of the esophagus by food","Infection of the middle ear via the auditory tube","Inflammation of the tonsils","Lung inflammation from material aspirated from the digestive tract into the respiratory tract"],c:3,cat:"Laryngeal Nerve & Gag Reflex",r:["It is a lung inflammation, not an esophageal blockage.","That would be otitis media, not aspiration pneumonitis.","That is tonsillitis, unrelated.","Correct. When protective sensation/gag is lost, ingested material enters the airway and inflames the lungs."],source:"L27 · Aspiration pneumonitis",quote:"[Maini] “aspiration pneumonitis means there is inflammation of the lungs secondary to things which get aspirated from the digestive tract into the respiratory tract.”"},
+{q:"After a retropharyngeal abscess heals with fibrosis, a patient develops dysphagia because the pharynx can no longer glide. Which space has been obliterated?",o:["The pharyngeal recess","The piriform fossa","The retropharyngeal space","The tonsillar fossa"],c:2,cat:"Swallowing & Retropharyngeal Space",r:["The pharyngeal recess is a nasopharyngeal pocket, unrelated to gliding.","The piriform fossa traps foreign bodies; it is not the gliding plane.","Correct. The retropharyngeal (loose areolar) space normally lets the pharynx glide; fibrosis obliterates it, fixing the pharynx to the spine and causing dysphagia.","The tonsillar fossa holds the palatine tonsil."],source:"L27 · Retropharyngeal space — clinical",quote:"[Maini] “there can be obliteration of this space... that can lead to dysphagia, difficult swallowing, because pharynx will become fixed to the structures of the spine.”",obj:"Retropharyngeal space / dysphagia",hint:"It is the loose-tissue plane between the pharynx and the vertebral column."},
+{q:"The loose areolar tissue of the retropharyngeal space serves what function during swallowing?",o:["It anchors the pharynx rigidly to the cervical spine","It lets the pharynx elevate and depress (glide) freely during swallowing","It cushions the spinal cord","It stores lymph draining from the tonsils"],c:1,cat:"Swallowing & Retropharyngeal Space",r:["It permits movement rather than fixing the pharynx.","Correct. The loose areolar tissue lets the pharynx move up and down easily during deglutition.","It relates to pharyngeal gliding, not spinal-cord protection.","It is a gliding plane, not a lymph reservoir."],source:"L27 · Retropharyngeal space — function",quote:"[Maini] “this loose tissue permits elevation and depression of pharynx during deglutition.”"},
+{q:"An elderly patient 'eats air' and belches constantly (aerophagia). Loss of tone in which muscle, the upper esophageal sphincter, explains this?",o:["Thyropharyngeus","Cricopharyngeus","Superior constrictor","Palatopharyngeus"],c:1,cat:"Upper Esophageal Sphincter",r:["Thyropharyngeus is the upper part of the inferior constrictor and forms a raphe; the sphincter is cricopharyngeus.","Correct. The cricopharyngeus encircles the pharyngoesophageal junction as the upper esophageal sphincter; when it loses tone with age, inhaled air passes into the gut (aerophagia).","The superior constrictor lies high in the pharynx and is not the esophageal sphincter.","Palatopharyngeus is a longitudinal elevator, not the sphincter."],source:"L27 · Aerophagia",quote:"[Maini] “during old age, this muscle, upper esophageal sphincter, it loses its tone... that is aerophagia.”",obj:"Cricopharyngeus / UES / aerophagia",hint:"It is the lower part of the inferior constrictor, encircling the pharyngoesophageal junction."},
+{q:"At rest (between swallows), what does the cricopharyngeus normally do?",o:["Keeps the esophagus open so air can escape","Contracts only during swallowing","Relaxes to let saliva pool in the esophagus","Stays tonically contracted, keeping the esophagus closed except during swallowing"],c:3,cat:"Upper Esophageal Sphincter",r:["It keeps the esophagus closed, not open; a lax (open) sphincter is the aged, pathological state.","It is tonically contracted at rest and relaxes for swallowing, the reverse of this.","It keeps the inlet closed rather than letting contents pool.","Correct. Its resting tone seals the esophageal inlet except when a bolus passes."],source:"L27 · UES resting tone",quote:"[Maini] “this sphincter, it keeps esophagus collapsed all the time... except for when you're swallowing.”"},
+{q:"A lesion of the glossopharyngeal nerve (CN IX) would weaken which single pharyngeal muscle, the only one NOT supplied by the vagus?",o:["Superior constrictor","Salpingopharyngeus","Stylopharyngeus","Palatopharyngeus"],c:2,cat:"Pharyngeal Muscles & Innervation",r:["The superior constrictor is supplied by the pharyngeal branch of the vagus.","Salpingopharyngeus is vagus-supplied.","Correct. Stylopharyngeus, a 3rd-arch muscle, is the lone exception, supplied by CN IX.","Palatopharyngeus is vagus-supplied like the other muscles."],source:"L27 · Innervation exception",profTip:"Maini's memory hook: 'stylopharyngeus is so stylish it has its own nerve' (CN IX, from the 3rd arch).",hint:"Its origin (the styloid process) is a 3rd pharyngeal-arch derivative."},
+{q:"Because they arise from the 4th and 6th pharyngeal arches, the three constrictors get their motor supply from which nerve, so that its injury weakens swallowing?",o:["Facial nerve (CN VII)","Hypoglossal nerve (CN XII)","Glossopharyngeal nerve (CN IX)","Vagus nerve (CN X), pharyngeal branch"],c:3,cat:"Pharyngeal Muscles & Innervation",r:["CN VII supplies facial-expression muscles, not the constrictors.","CN XII is motor to the tongue muscles.","CN IX supplies only stylopharyngeus among the pharyngeal muscles.","Correct. The pharyngeal branch of the vagus (via the pharyngeal plexus) supplies the constrictors; its injury impairs swallowing."],source:"L27 · Pharyngeal innervation",hint:"4th and 6th arches point to the cranial nerve that supplies most of the pharynx."},
+{q:"Maini flagged this as 'a good question for me.' Which muscle is NOT attached to the oblique line of the thyroid cartilage?",o:["Inferior constrictor","Sternothyroid","Sternohyoid","Thyrohyoid"],c:2,cat:"Pharyngeal Muscles & Innervation",r:["The inferior constrictor DOES arise from the oblique line.","Sternothyroid DOES attach to the oblique line.","Correct. Sternohyoid attaches to the manubrium and hyoid, not the oblique line. The three that DO attach are the inferior constrictor, sternothyroid, and thyrohyoid.","Thyrohyoid DOES attach to the oblique line."],source:"L27 · Oblique line — exam question",profTip:"Maini: the three muscles on the oblique line of the thyroid cartilage are the inferior constrictor, sternothyroid, and thyrohyoid."},
+{q:"A dissector at the pterygomandibular raphe sees buccinator attaching to its anterior side. Which pharyngeal muscle attaches to its posterior side?",o:["Superior constrictor","Middle constrictor","Inferior constrictor","Stylopharyngeus"],c:0,cat:"Pharyngeal Muscles & Innervation",r:["Correct. The superior constrictor attaches to the posterior side of the pterygomandibular raphe, with buccinator anterior.","The middle constrictor arises from the hyoid bone and stylohyoid ligament, not this raphe.","The inferior constrictor arises from the thyroid oblique line and cricoid cartilage.","Stylopharyngeus descends from the styloid process, not this raphe."],source:"L27 · Buccinator relationship",profTip:"Maini: buccinator is attached anteriorly and the superior constrictor posteriorly to the pterygomandibular raphe."},
+{q:"A patient has a peritonsillar abscess ('quinsy'). Which tonsil, and in which location, is involved?",o:["The pharyngeal tonsil in the nasopharyngeal roof","The palatine tonsil in the tonsillar fossa (between the palatoglossal and palatopharyngeal folds)","The lingual tonsil on the tongue root","The tubal tonsil around the auditory-tube opening"],c:1,cat:"Tonsils & Lymphoid Ring",r:["The pharyngeal tonsil, when enlarged, gives adenoids, not quinsy.","Correct. Quinsy is a peritonsillar abscess of the palatine tonsil, which sits in the tonsillar fossa between the two palatine arches.","The lingual tonsil lies on the tongue root and is not the quinsy site.","The tubal tonsils surround the auditory-tube opening."],source:"L27 · Tonsillar fossa / palatine tonsil",hint:"The fossa lies between the palatoglossal and palatopharyngeal folds."},
+{q:"Four named tonsils ring the pharyngeal inlets. Which is the SINGLE (unpaired) tonsil sitting in the roof of the nasopharynx?",o:["Pharyngeal tonsil","Palatine tonsil","Tubal tonsil","Lingual tonsil"],c:0,cat:"Tonsils & Lymphoid Ring",r:["Correct. The pharyngeal tonsil is the single tonsil in the nasopharyngeal roof (enlarged = adenoids).","The palatine tonsils are paired, in the oropharyngeal tonsillar fossa.","The tubal tonsils are paired, around the auditory-tube openings.","The lingual tonsil is single but sits on the tongue root, not the nasopharyngeal roof."],source:"L27 · Tonsils — number/location",hint:"Maini stresses only ONE of these sits in the roof behind the nose."},
+{q:"A biopsy of the pharyngeal lining shows stratified squamous non-keratinized epithelium. Why is a MULTI-layered lining needed here?",o:["To allow gas diffusion","To secrete digestive enzymes","To withstand abrasion from the food bolus during swallowing","To absorb nutrients"],c:2,cat:"Pharyngeal Wall & Epithelium",r:["Gas diffusion needs thin single layers (e.g., alveoli), not the pharynx.","The lining is protective, not enzyme-secreting.","Correct. Multiple layers resist wear from the passing bolus; single layers are reserved for diffusion/absorption sites.","Absorption calls for a single layer; the pharynx needs protection instead."],source:"L27 · Stratified epithelium rationale",quote:"[Maini] “these sites are prone to abrasions, because when you're swallowing, the bolus causes damage to the superficial layers.”"},
+{q:"Which tough submucosal fibrous sheet of the pharyngeal wall is so strong that it blends with the periosteum of the skull-base bones?",o:["Buccopharyngeal fascia","Pharyngeal raphe","Pretracheal fascia","Pharyngobasilar fascia"],c:3,cat:"Pharyngeal Wall & Epithelium",r:["The buccopharyngeal fascia is the OUTERMOST covering, external to the muscles.","The raphe is a midline muscle seam, not the submucosal sheet.","Pretracheal fascia invests the thyroid gland and trachea.","Correct. The pharyngobasilar fascia is the submucous layer that merges with the periosteum of the skull-base bones."],source:"L27 · Pharyngobasilar fascia",hint:"It sits between the mucosa and the muscular layer."},
+{q:"On imaging, the pharynx ends and becomes the esophagus at the lower border of the cricoid cartilage. Which vertebral level is this?",o:["C3","C4","C6","T1"],c:2,cat:"Boundaries & Levels",r:["C3 supports the oropharynx/laryngopharynx region but is not the lowest level.","C4 is within the laryngopharynx's support, not its inferior limit.","Correct. The lower border of the cricoid, the pharynx's lowest point (shared with the larynx), lies at C6.","The esophagus continues below into the thorax; the pharynx itself ends at C6, not T1."],source:"L27 · Inferior limit of pharynx",quote:"[Maini] “the lowest vertebral level for both larynx and laryngopharynx is the lower border of the cricoid cartilage, or C6.”"},
+{q:"A retropharyngeal mass behind the nasopharynx would press it against which bony support of its posterior wall?",o:["The anterior arch of the atlas (C1)","The body of C2 (axis)","The basilar part of the occipital bone","The dens of the axis"],c:0,cat:"Boundaries & Levels",r:["Correct. Maini names the anterior arch of the atlas as the posterior support of the nasopharynx.","The body of C2 supports the oropharynx posteriorly, one level lower.","The basiocciput supports the ROOF of the nasopharynx, not its posterior wall.","The dens is the 'long process' behind it, but the wall support is the anterior arch of C1."],source:"L27 · Nasopharynx — posterior wall",hint:"It is the most anterior part of the first cervical vertebra."},
+{q:"The auditory (pharyngotympanic) tube opens on the lateral wall of the nasopharynx and runs to which cavity?",o:["The sphenoid sinus","The middle ear (tympanic cavity)","The inner ear (cochlea)","The orbit"],c:1,cat:"Auditory Tube",r:["The sphenoid sinus drains into the nasal cavity, not via the auditory tube.","Correct. The pharyngotympanic/auditory tube links the nasopharynx to the middle ear (opening on the middle ear's anterior wall).","The inner ear is not connected to the pharynx by this tube.","The orbit communicates with the nose via the nasolacrimal duct, not the auditory tube."],source:"L27 · Auditory tube",hint:"It equalizes pressure across the eardrum."},
+{q:"An enlarged pharyngeal tonsil in a child most DIRECTLY produces which effect?",o:["Hoarseness of the voice","Loss of the gag reflex","Difficulty opening the jaw","Nasal (choanal) obstruction, making the child a mouth-breather"],c:3,cat:"Adenoids & Nasopharynx",r:["Voice change is a laryngeal issue, not caused by the nasopharyngeal tonsil.","The gag reflex depends on the internal laryngeal/glossopharyngeal nerves, not tonsil size.","The pharyngeal tonsil does not restrict jaw opening.","Correct. Sitting in the roof, an enlarged pharyngeal tonsil blocks the posterior nasal apertures (choanae), forcing mouth breathing."],source:"L27 · Adenoids — clinical"},
+{q:"Which muscle underlies the palatopharyngeal arch (the posterior pillar of the tonsillar fossa) and helps elevate the pharynx during swallowing?",o:["Stylopharyngeus","Palatopharyngeus","Salpingopharyngeus","Superior constrictor"],c:1,cat:"Longitudinal Muscles & Folds",r:["Stylopharyngeus descends from the styloid process and does not form this arch.","Correct. Palatopharyngeus arises from the hard palate/palatine aponeurosis and forms the palatopharyngeal arch, the posterior boundary of the tonsillar fossa.","Salpingopharyngeus lies under the salpingopharyngeal fold in the nasopharynx.","The superior constrictor is a circular wall muscle, not a longitudinal arch."],source:"L27 · Palatopharyngeus — arch"},
+{q:"In the lateral wall of the nasopharynx, the salpingopharyngeal fold (descending from the torus tubarius) overlies which muscle?",o:["Palatopharyngeus","Superior constrictor","Salpingopharyngeus","Stylopharyngeus"],c:2,cat:"Longitudinal Muscles & Folds",r:["Palatopharyngeus underlies the palatopharyngeal arch of the oropharynx.","The superior constrictor is a circular wall muscle, not the fold's muscle.","Correct. The salpingopharyngeus muscle lies beneath the salpingopharyngeal fold of the same name.","Stylopharyngeus descends from the styloid process, not under this fold."],source:"L27 · Salpingopharyngeal fold",profTip:"Maini: 'salpingo-' means tube; salpingopharyngeus runs from the auditory-tube cartilage down into the pharynx."},
+{q:"The internal laryngeal nerve (injured in the piriform fossa) carries sensation to the larynx in which zone, explaining why its loss abolishes the gag reflex?",o:["Above the vocal folds (the upper half of the larynx)","Below the vocal folds","Only the vocal folds themselves","Only the trachea"],c:0,cat:"Laryngeal Nerve & Gag Reflex",r:["Correct. The internal laryngeal nerve is sensory to the larynx above the vocal folds, so its loss removes the protective (gag) sensation.","Below the folds is supplied by the recurrent laryngeal nerve.","Its territory is the mucosa above the folds, not the folds alone.","The trachea is not its territory."],source:"L27 · Internal laryngeal nerve — sensory",hint:"The vocal folds split the larynx into upper and lower halves."},
+{q:"Stylopharyngeus is supplied by CN IX (not the vagus) because it develops from which pharyngeal arch?",o:["2nd arch","3rd arch","4th arch","6th arch"],c:1,cat:"Pharyngeal Muscles & Innervation",r:["The 2nd arch (CN VII) supplies the muscles of facial expression.","Correct. Stylopharyngeus is the 3rd-arch muscle, so it uniquely takes the glossopharyngeal nerve (CN IX).","The 4th arch contributes to constrictors supplied by the vagus.","The 6th arch contributes to laryngeal muscles supplied by the vagus."],source:"L27 · Stylopharyngeus innervation"}
+];
+const CAT_NAMES=["Adenoids & Nasopharynx","Piriform Fossa & Foreign Body","Laryngeal Nerve & Gag Reflex","Swallowing & Retropharyngeal Space","Upper Esophageal Sphincter","Pharyngeal Muscles & Innervation","Longitudinal Muscles & Folds","Tonsils & Lymphoid Ring","Pharyngeal Wall & Epithelium","Boundaries & Levels","Auditory Tube"];
+const LS_KEY="ga0202_m12_pharynx_clinical_cases";
 BANK.forEach(function(q,i){q._bankId=i;});
 let idx=0,score=0,attempts=0,reaskQueue=[];
 let catStats={};CAT_NAMES.forEach(function(c){catStats[c]={c:0,t:0};});
@@ -442,15 +466,15 @@ function renderJumpBar(){if(!jumpOpen)return'';let step=BANK.length>=40?10:BANK.
 function navJump(bankId){if(bankId in answerMap){let activeList=reviewList||answerHistory;let pos=activeList.indexOf(bankId);if(pos!==-1){browseIdx=pos;renderHistoryItem();}else if(!reviewList){let p2=answerHistory.indexOf(bankId);if(p2!==-1){browseIdx=p2;reviewList=null;renderHistoryItem();}}}else{browseIdx=-1;reviewList=null;for(let i=0;i<questions.length;i++){if(questions[i]._bankId===bankId&&!questions[i]._isReask){idx=i;render();return;}}}}
 function toggleNav(){navOpen=!navOpen;if(browseIdx>=0)renderHistoryItem();else render();}
 function toggleJump(){jumpOpen=!jumpOpen;if(browseIdx>=0)renderHistoryItem();else render();}
-function renderHistoryItem(){let activeList=reviewList||answerHistory;let bankId=activeList[browseIdx];let info=answerMap[bankId];let q=BANK[bankId];let uniqueAnswered=Object.keys(answerMap).length;let optHTML='';q.o.forEach(function(opt,i){let cls='opt-btn disabled';if(i===info.correct)cls+=' show-correct';if(i===info.picked&&!info.isCorrect)cls+=' picked-wrong';else if(i===info.picked&&info.isCorrect)cls+=' picked-correct';let letter=String.fromCharCode(65+i);optHTML+='<button class="'+cls+'"><span class="letter">'+letter+'.</span> '+opt+'<div class="rationale" style="display:block">'+q.r[i]+'</div></button>';});let prevDisabled=browseIdx<=0?' disabled':'';let nextDisabled=browseIdx>=activeList.length-1?' disabled':'';document.getElementById('app').innerHTML='<h1>🩺 GA 0202 · The Ear · Clinical Cases &amp; Must-Knows</h1><p class="subtitle">Dr. Maini · applied board-style vignettes: otoscopy &amp; the eardrum, myringotomy, ear infection &amp; spread, nerve lesions &amp; reflexes, the auditory tube, sound conduction &amp; balance</p><div class="stats"><div class="stat"><div class="stat-val">'+attempts+'</div><div class="stat-label">Attempts</div></div><div class="stat"><div class="stat-val">'+score+'</div><div class="stat-label">Correct</div></div><div class="stat"><div class="stat-val">'+(attempts?Math.round(score/attempts*100):0)+'%</div><div class="stat-label">Accuracy</div></div><div class="stat"><div class="stat-val">'+reaskQueue.length+'</div><div class="stat-label">Re-ask</div></div><button onclick="confirmRestart()" class="restart-sm">&#8635; Restart</button></div><button class="btn-nav-toggle" onclick="toggleNav()">'+(navOpen?'\u25bc Hide Navigator':'\u25b6 Question Navigator ('+uniqueAnswered+'/'+BANK.length+')')+'</button>'+renderNav()+'<button class="btn-nav-toggle" onclick="toggleJump()">'+(jumpOpen?'\u25bc Hide Jump Bar':'\u25b6 Jump to Question')+'</button>'+renderJumpBar()+'<div class="browse-banner">\ud83d\udcdd Reviewing '+(reviewList?'missed ':'')+'answer '+(browseIdx+1)+' of '+activeList.length+'</div><div class="card"><span class="cat-badge">'+q.cat+'</span><div class="q-text">Q'+(BANK.indexOf(q)+1)+': '+q.q+'</div>'+optHTML+'<div class="source-line" style="display:block"><span>Source:</span> '+q.source+'</div>'+(q.quote?'<div class="quote-line" style="display:block">'+q.quote+'</div>':'')+(q.profTip?'<div class="prof-tip" style="display:block"><span class="tip-label">Professor:</span> '+q.profTip+'</div>':'')+(q.obj?'<div class="obj-tag" style="display:block">'+q.obj+'</div>':'')+'<div class="btn-group"><button class="btn-prev" onclick="prevBrowse()"'+prevDisabled+'>\u2190 Previous</button><button class="btn-next" onclick="returnToQuiz()" style="display:inline-block">Return to Quiz</button><button class="btn-prev" onclick="nextBrowse()"'+nextDisabled+'>Next \u2192</button></div></div>';}
+function renderHistoryItem(){let activeList=reviewList||answerHistory;let bankId=activeList[browseIdx];let info=answerMap[bankId];let q=BANK[bankId];let uniqueAnswered=Object.keys(answerMap).length;let optHTML='';q.o.forEach(function(opt,i){let cls='opt-btn disabled';if(i===info.correct)cls+=' show-correct';if(i===info.picked&&!info.isCorrect)cls+=' picked-wrong';else if(i===info.picked&&info.isCorrect)cls+=' picked-correct';let letter=String.fromCharCode(65+i);optHTML+='<button class="'+cls+'"><span class="letter">'+letter+'.</span> '+opt+'<div class="rationale" style="display:block">'+q.r[i]+'</div></button>';});let prevDisabled=browseIdx<=0?' disabled':'';let nextDisabled=browseIdx>=activeList.length-1?' disabled':'';document.getElementById('app').innerHTML='<h1>📋 GA 0202 · The Pharynx · Clinical Cases &amp; Must-Knows</h1><p class="edge-banner" style="text-align:center;font-size:.72rem;color:#94a3b8;margin:-2px 0 8px;line-height:1.4">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p><p class="subtitle">Dr. Maini, head &amp; neck: applied pharynx vignettes on lesions, nerve injuries &amp; which structure is affected</p><div class="stats"><div class="stat"><div class="stat-val">'+attempts+'</div><div class="stat-label">Attempts</div></div><div class="stat"><div class="stat-val">'+score+'</div><div class="stat-label">Correct</div></div><div class="stat"><div class="stat-val">'+(attempts?Math.round(score/attempts*100):0)+'%</div><div class="stat-label">Accuracy</div></div><div class="stat"><div class="stat-val">'+reaskQueue.length+'</div><div class="stat-label">Re-ask</div></div><button onclick="confirmRestart()" class="restart-sm">&#8635; Restart</button></div><button class="btn-nav-toggle" onclick="toggleNav()">'+(navOpen?'\u25bc Hide Navigator':'\u25b6 Question Navigator ('+uniqueAnswered+'/'+BANK.length+')')+'</button>'+renderNav()+'<button class="btn-nav-toggle" onclick="toggleJump()">'+(jumpOpen?'\u25bc Hide Jump Bar':'\u25b6 Jump to Question')+'</button>'+renderJumpBar()+'<div class="browse-banner">\ud83d\udcdd Reviewing '+(reviewList?'missed ':'')+'answer '+(browseIdx+1)+' of '+activeList.length+'</div><div class="card"><span class="cat-badge">'+q.cat+'</span><div class="q-text">Q'+(BANK.indexOf(q)+1)+': '+q.q+'</div>'+optHTML+'<div class="source-line" style="display:block"><span>Source:</span> '+q.source+'</div>'+(q.quote?'<div class="quote-line" style="display:block">'+q.quote+'</div>':'')+(q.profTip?'<div class="prof-tip" style="display:block"><span class="tip-label">Professor:</span> '+q.profTip+'</div>':'')+(q.obj?'<div class="obj-tag" style="display:block">'+q.obj+'</div>':'')+'<div class="btn-group"><button class="btn-prev" onclick="prevBrowse()"'+prevDisabled+'>\u2190 Previous</button><button class="btn-next" onclick="returnToQuiz()" style="display:inline-block">Return to Quiz</button><button class="btn-prev" onclick="nextBrowse()"'+nextDisabled+'>Next \u2192</button></div></div>';}
 function prevBrowse(){if(browseIdx>0){browseIdx--;renderHistoryItem();}}
 function nextBrowse(){let activeList=reviewList||answerHistory;if(browseIdx<activeList.length-1){browseIdx++;renderHistoryItem();}}
 function returnToQuiz(){browseIdx=-1;reviewList=null;render();}
-function render(){let app=document.getElementById('app');while(idx<questions.length&&!questions[idx]._isReask&&questions[idx]._bankId in answerMap){idx++;}if(idx>=questions.length&&reaskQueue.length===0)return showSummary();if(reaskQueue.length>0&&(idx>=questions.length||(idx>0&&idx%3===0))){questions.splice(idx,0,reaskQueue.shift());}if(idx>=questions.length)return showSummary();let q=questions[idx];let uniqueAnswered=Object.keys(answerMap).length;let pct=Math.min(100,Math.round((uniqueAnswered/BANK.length)*100));let optHTML='';q.o.forEach(function(opt,i){let letter=String.fromCharCode(65+i);optHTML+='<button class="opt-btn" id="ob'+i+'" onclick="pick('+i+')"><span class="letter">'+letter+'.</span> '+opt+'<div class="rationale" id="rat'+i+'">'+q.r[i]+'</div></button>';});app.innerHTML='<h1>🩺 GA 0202 · The Ear · Clinical Cases &amp; Must-Knows</h1><p class="subtitle">Dr. Maini · applied board-style vignettes: otoscopy &amp; the eardrum, myringotomy, ear infection &amp; spread, nerve lesions &amp; reflexes, the auditory tube, sound conduction &amp; balance</p><div class="stats"><div class="stat"><div class="stat-val">'+attempts+'</div><div class="stat-label">Attempts</div></div><div class="stat"><div class="stat-val">'+score+'</div><div class="stat-label">Correct</div></div><div class="stat"><div class="stat-val">'+(attempts?Math.round(score/attempts*100):0)+'%</div><div class="stat-label">Accuracy</div></div><div class="stat"><div class="stat-val">'+reaskQueue.length+'</div><div class="stat-label">Re-ask</div></div><button onclick="confirmRestart()" class="restart-sm">&#8635; Restart</button></div><button class="btn-nav-toggle" onclick="toggleNav()">'+(navOpen?'\u25bc Hide Navigator':'\u25b6 Question Navigator ('+uniqueAnswered+'/'+BANK.length+')')+'</button>'+renderNav()+'<button class="btn-nav-toggle" onclick="toggleJump()">'+(jumpOpen?'\u25bc Hide Jump Bar':'\u25b6 Jump to Question')+'</button>'+renderJumpBar()+'<button class="btn-nav-toggle" onclick="toggleInstr()" style="border-color:#334155">'+(instrOpen?'\u25bc Hide Instructions':'\u25b6 How This Drill Works')+'</button>'+(instrOpen?'<div class="instructions" style="display:block"><h3>How This Drill Works</h3><ul><li>Answer each question by clicking A/B/C/D</li><li><span class="key">Re-ask system</span>: Missed questions come back later so you must <strong>get it right twice</strong></li><li><span class="key">Question Navigator</span>: Click any cell to jump to or review that question</li><li><span class="key">Jump to Question</span>: Quick milestone markers</li><li><span class="key">Previous button</span>: Browse back through answered questions</li><li>Every answer reveals: rationale, source, Dr. Maini quote, professor tip, and <strong>study guide item</strong></li><li>Progress is <strong>auto-saved</strong></li><li>At the end: category breakdown + <strong>Review Only Missed</strong></li></ul></div>':'')+'<div class="progress-track"><div class="progress-fill" style="width:'+pct+'%"></div></div><div class="card"><span class="cat-badge">'+q.cat+(q._isReask?' \ud83d\udd01 RE-ASK':'')+'</span><div class="q-text">Q'+(idx+1)+' of '+questions.length+': '+q.q+'</div>'+(q.hint?'<button class="btn-hint" onclick="this.nextElementSibling.style.display=\'block\';this.style.display=\'none\'">\ud83d\udca1 Show Hint</button><div class="hint-text" style="display:none">\ud83d\udca1 '+q.hint+'</div>':'')+optHTML+'<div class="source-line" id="srcLine"><span>Source:</span> '+q.source+'</div>'+(q.quote?'<div class="quote-line" id="quoteLine">'+q.quote+'</div>':'')+(q.profTip?'<div class="prof-tip" id="tipLine"><span class="tip-label">Professor:</span> '+q.profTip+'</div>':'')+(q.obj?'<div class="obj-tag" id="objTag">'+q.obj+'</div>':'')+'<div class="btn-group" id="btnGroup"><button class="btn-prev" onclick="prevAnswer()"'+(answerHistory.length===0?' disabled':'')+'>\u2190 Previous</button><button class="btn-next" id="btnNext" onclick="nextQ()">Next Question \u2192</button></div></div>';}
+function render(){let app=document.getElementById('app');while(idx<questions.length&&!questions[idx]._isReask&&questions[idx]._bankId in answerMap){idx++;}if(idx>=questions.length&&reaskQueue.length===0)return showSummary();if(reaskQueue.length>0&&(idx>=questions.length||(idx>0&&idx%3===0))){questions.splice(idx,0,reaskQueue.shift());}if(idx>=questions.length)return showSummary();let q=questions[idx];let uniqueAnswered=Object.keys(answerMap).length;let pct=Math.min(100,Math.round((uniqueAnswered/BANK.length)*100));let optHTML='';q.o.forEach(function(opt,i){let letter=String.fromCharCode(65+i);optHTML+='<button class="opt-btn" id="ob'+i+'" onclick="pick('+i+')"><span class="letter">'+letter+'.</span> '+opt+'<div class="rationale" id="rat'+i+'">'+q.r[i]+'</div></button>';});app.innerHTML='<h1>📋 GA 0202 · The Pharynx · Clinical Cases &amp; Must-Knows</h1><p class="edge-banner" style="text-align:center;font-size:.72rem;color:#94a3b8;margin:-2px 0 8px;line-height:1.4">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p><p class="subtitle">Dr. Maini, head &amp; neck: applied pharynx vignettes on lesions, nerve injuries &amp; which structure is affected</p><div class="stats"><div class="stat"><div class="stat-val">'+attempts+'</div><div class="stat-label">Attempts</div></div><div class="stat"><div class="stat-val">'+score+'</div><div class="stat-label">Correct</div></div><div class="stat"><div class="stat-val">'+(attempts?Math.round(score/attempts*100):0)+'%</div><div class="stat-label">Accuracy</div></div><div class="stat"><div class="stat-val">'+reaskQueue.length+'</div><div class="stat-label">Re-ask</div></div><button onclick="confirmRestart()" class="restart-sm">&#8635; Restart</button></div><button class="btn-nav-toggle" onclick="toggleNav()">'+(navOpen?'\u25bc Hide Navigator':'\u25b6 Question Navigator ('+uniqueAnswered+'/'+BANK.length+')')+'</button>'+renderNav()+'<button class="btn-nav-toggle" onclick="toggleJump()">'+(jumpOpen?'\u25bc Hide Jump Bar':'\u25b6 Jump to Question')+'</button>'+renderJumpBar()+'<button class="btn-nav-toggle" onclick="toggleInstr()" style="border-color:#334155">'+(instrOpen?'\u25bc Hide Instructions':'\u25b6 How This Drill Works')+'</button>'+(instrOpen?'<div class="instructions" style="display:block"><h3>How This Drill Works</h3><ul><li>Answer each question by clicking A/B/C/D</li><li><span class="key">Re-ask system</span>: Missed questions come back later so you must <strong>get it right twice</strong></li><li><span class="key">Question Navigator</span>: Click any cell to jump to or review that question</li><li><span class="key">Jump to Question</span>: Quick milestone markers</li><li><span class="key">Previous button</span>: Browse back through answered questions</li><li>Every answer reveals: rationale, source, Dr. Maini quote, professor tip, and <strong>study guide item</strong></li><li>Progress is <strong>auto-saved</strong></li><li>At the end: category breakdown + <strong>Review Only Missed</strong></li></ul></div>':'')+'<div class="progress-track"><div class="progress-fill" style="width:'+pct+'%"></div></div><div class="card"><span class="cat-badge">'+q.cat+(q._isReask?' \ud83d\udd01 RE-ASK':'')+'</span><div class="q-text">Q'+(idx+1)+' of '+questions.length+': '+q.q+'</div>'+(q.hint?'<button class="btn-hint" onclick="this.nextElementSibling.style.display=\'block\';this.style.display=\'none\'">\ud83d\udca1 Show Hint</button><div class="hint-text" style="display:none">\ud83d\udca1 '+q.hint+'</div>':'')+optHTML+'<div class="source-line" id="srcLine"><span>Source:</span> '+q.source+'</div>'+(q.quote?'<div class="quote-line" id="quoteLine">'+q.quote+'</div>':'')+(q.profTip?'<div class="prof-tip" id="tipLine"><span class="tip-label">Professor:</span> '+q.profTip+'</div>':'')+(q.obj?'<div class="obj-tag" id="objTag">'+q.obj+'</div>':'')+'<div class="btn-group" id="btnGroup"><button class="btn-prev" onclick="prevAnswer()"'+(answerHistory.length===0?' disabled':'')+'>\u2190 Previous</button><button class="btn-next" id="btnNext" onclick="nextQ()">Next Question \u2192</button></div></div>';}
 function pick(i){let q=questions[idx];let opts=document.querySelectorAll('.opt-btn');if(opts[0]&&opts[0].classList.contains('disabled'))return;opts.forEach(function(o){o.classList.add('disabled');o.onclick=null;});let correct=q.c;let isCorrect=i===correct;opts[i].classList.add(isCorrect?'picked-correct':'picked-wrong');if(!isCorrect)opts[correct].classList.add('show-correct');attempts++;if(!catStats[q.cat])catStats[q.cat]={c:0,t:0};catStats[q.cat].t++;if(isCorrect){score++;catStats[q.cat].c++;}else{reaskQueue.push(Object.assign({},q,{_isReask:true}));}if(q._bankId!==undefined){if(!(q._bankId in answerMap)){answerMap[q._bankId]={picked:i,correct:correct,isCorrect:isCorrect,attempts:1,everWrong:!isCorrect};}else{let m=answerMap[q._bankId];m.picked=i;m.isCorrect=isCorrect;m.attempts++;if(!isCorrect)m.everWrong=true;}}if(!answerHistory.includes(q._bankId))answerHistory.push(q._bankId);for(let j=0;j<q.o.length;j++){let r=document.getElementById('rat'+j);if(r)r.style.display='block';}let sl=document.getElementById('srcLine');if(sl)sl.style.display='block';let ql=document.getElementById('quoteLine');if(ql)ql.style.display='block';let tl=document.getElementById('tipLine');if(tl)tl.style.display='block';let ot=document.getElementById('objTag');if(ot)ot.style.display='block';let nb=document.getElementById('btnNext');if(nb)nb.style.display='inline-block';saveState();}
 function nextQ(){idx++;render();saveState();}
 function prevAnswer(){if(answerHistory.length===0)return;browseIdx=answerHistory.length-1;renderHistoryItem();}
-function showSummary(){let app=document.getElementById('app');let uniqueAnswered=Object.keys(answerMap).length;let mastered=0;let everWrongCount=0;for(let k in answerMap){if(answerMap[k].isCorrect)mastered++;if(answerMap[k].everWrong)everWrongCount++;}let pct=uniqueAnswered>0?Math.round(mastered/uniqueAnswered*100):0;let cls=pct>=85?'great':pct>=65?'ok':'rough';let catHTML='<table class="cat-table"><tr><th>Study Guide Item</th><th>Score</th></tr>';for(let cat of CAT_NAMES){if(catStats[cat]&&catStats[cat].t>0)catHTML+='<tr><td>'+cat+'</td><td>'+catStats[cat].c+'/'+catStats[cat].t+'</td></tr>';}catHTML+='</table>';app.innerHTML='<h1>🩺 GA 0202 · The Ear · Clinical Cases &amp; Must-Knows</h1><p class="subtitle">Dr. Maini · applied board-style vignettes: otoscopy &amp; the eardrum, myringotomy, ear infection &amp; spread, nerve lesions &amp; reflexes, the auditory tube, sound conduction &amp; balance</p><div class="summary" style="display:block"><h2>Quiz Complete!</h2><div class="pct '+cls+'">'+pct+'%</div><p style="color:#94a3b8">'+mastered+' of '+uniqueAnswered+' mastered on latest attempt</p><p class="detail">Attempts: '+attempts+' | Ever missed: '+everWrongCount+' | Re-asked: '+(attempts-uniqueAnswered)+'</p>'+catHTML+(everWrongCount>0?'<button class="review-btn" onclick="reviewMissed()">Review Only Missed ('+everWrongCount+')</button>':'')+'<br><button class="restart-btn" onclick="restart()">Restart Drill</button></div>';}
+function showSummary(){let app=document.getElementById('app');let uniqueAnswered=Object.keys(answerMap).length;let mastered=0;let everWrongCount=0;for(let k in answerMap){if(answerMap[k].isCorrect)mastered++;if(answerMap[k].everWrong)everWrongCount++;}let pct=uniqueAnswered>0?Math.round(mastered/uniqueAnswered*100):0;let cls=pct>=85?'great':pct>=65?'ok':'rough';let catHTML='<table class="cat-table"><tr><th>Study Guide Item</th><th>Score</th></tr>';for(let cat of CAT_NAMES){if(catStats[cat]&&catStats[cat].t>0)catHTML+='<tr><td>'+cat+'</td><td>'+catStats[cat].c+'/'+catStats[cat].t+'</td></tr>';}catHTML+='</table>';app.innerHTML='<h1>📋 GA 0202 · The Pharynx · Clinical Cases &amp; Must-Knows</h1><p class="edge-banner" style="text-align:center;font-size:.72rem;color:#94a3b8;margin:-2px 0 8px;line-height:1.4">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</p><p class="subtitle">Dr. Maini, head &amp; neck: applied pharynx vignettes on lesions, nerve injuries &amp; which structure is affected</p><div class="summary" style="display:block"><h2>Quiz Complete!</h2><div class="pct '+cls+'">'+pct+'%</div><p style="color:#94a3b8">'+mastered+' of '+uniqueAnswered+' mastered on latest attempt</p><p class="detail">Attempts: '+attempts+' | Ever missed: '+everWrongCount+' | Re-asked: '+(attempts-uniqueAnswered)+'</p>'+catHTML+(everWrongCount>0?'<button class="review-btn" onclick="reviewMissed()">Review Only Missed ('+everWrongCount+')</button>':'')+'<br><button class="restart-btn" onclick="restart()">Restart Drill</button></div>';}
 function reviewMissed(){let missed=answerHistory.filter(function(id){return answerMap[id]&&answerMap[id].everWrong;});if(missed.length===0)return;reviewList=missed;browseIdx=0;renderHistoryItem();}
 function restart(){questions=shuffle(BANK.slice());idx=0;score=0;attempts=0;reaskQueue=[];answerMap={};answerHistory=[];browseIdx=-1;reviewList=null;CAT_NAMES.forEach(function(c){catStats[c]={c:0,t:0};});render();saveState();}
 function confirmRestart(){if(confirm('Restart the drill? All progress will be lost.'))restart();}
@@ -459,7 +483,7 @@ init();
 </script>
 
 <script>
-const TIMESTAMPS=[3060.0,3130.0,1713.0,855.0,3835.0,3900.0,1103.0,1592.0,1635.0,1380.0,300.0,351.0,1800.0,3719.0,1271.0,1298.0,650.0,678.0,56.0,480.0,236.0,213.0,1016.0,2400.0,2340.0,5160.0,4904.0,4674.0,4256.0,2156.0];
+const TIMESTAMPS=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 var audioAutoPlay=true;
 
 // Follow-along mode
@@ -474,7 +498,7 @@ function _buildAudioBar(){
   var ab=document.createElement('div');
   ab.id='audio-bar';
   ab.className='audio-bar';
-  ab.innerHTML='<audio id="mk-audio" controls preload="none"><source src="https://dgsc23.github.io/dc-study-audio/fab-201-m02-shoulder-forearm-L04.mp3" type="audio/mpeg">Audio not found. Place MP3 in same folder.</audio>'
+  ab.innerHTML='<audio id="mk-audio" controls preload="none">Audio not found. Place MP3 in same folder.</audio>'
     +'<div class="audio-info">'
     +'<span class="timestamp-badge" id="ts-badge">⏱ --:--</span>'
     +'<div class="skip-btns">'
@@ -849,7 +873,442 @@ function fabBackToHub(){
 
 
 <script id="ga0202-m01-transcript-loader">
-var fabTranscriptLines = `[Ear drill - no audio companion in this build]`.split(/\r?\n/).filter(function(l){ return l.trim().length > 0; });
+var fabTranscriptLines = `[0:00] I have started recording…
+[0:18] Alright, so let's learn about pharynx, everybody, okay?
+[0:31] We'll talk about parts and communications of fairings. Gore, what is that way?
+[0:38] Okay?
+[0:39] Layers of pharyngeal ball, we are going to talk about pharyngeal muscles, okay? Again, there is a group of muscles, longitudinal constrictor muscles, all right?
+[0:52] So the pharynx is a common chamber.
+[0:56] For the respiratory and digestive tract. So, if you look at this, image on the side, let me zoom in…
+[1:02] Right?
+[1:04] Starting from this point, Which is your base of skull, right?
+[1:12] To the lowermost level of the larynx.
+[1:16] Posterior to nasal cavity, this is nasal cavity, oral cavity, and larynx. So these three structures, they are, like.
+[1:25] So, period, middle, and inferior. Nasal cavity on the top, oral cavity in the middle, and then larynx, and
+[1:33] Posterior to these three structures, we have a common chamber called as pharynx. So it's like if you have three rooms and one common corridor for those three rooms. It's like that, okay? That is how pharynx is. And in this view, posterior wall of the pharynx is removed.
+[1:52] Okay? So that we can see inside the pharynx. This is the posterior view. You get that? So it's like, you know, if you…
+[2:00] So, pharynx is, like, like this. It doesn't have an anterior wall. It's continuous with the… those three rooms anteriorly. Make sense? Right?
+[2:17] Larynx is a common chamber. It is located posterior to nasal and oral cavities. It is continuous below into separated larynx.
+[2:27] esophagus, no?
+[2:29] Laryngopharynx, and then below that, this is esophagus. It is continuous with esophagus, inferiorly.
+[2:37] It's funnel-shaped, approximately 12 centimeters long.
+[2:41] Extends from the base of the skull.
+[2:44] Okay? To the lower border of cricoid cartilage.
+[2:49] Right? What else?
+[2:50] And that lower border of required cartilage.
+[2:54] Larynx, right? We studied larynx. Larynx also ends here, so that means this is your larynx, right?
+[3:02] And then pharynx is located like that.
+[3:05] Okay? Nasal cavity, oral cavity, and then,
+[3:09] Located posterior to larynx, you have pharynx. So this is where, so larynx and pharynx, they have
+[3:16] same inferior limit, which is lower border of cricoid cartilage, or C6 vertebra. That is the lowest vertebral level for both larynx and laryngopharynx. We'll talk about the parts of the pharynx.
+[3:31] Does that make sense? Right? Pharyngeal wall is almost entirely positive and lateral to its cavity, so it's like…
+[3:40] It's a C-shaped structure, not a complete tube.
+[3:43] posteriorly, though, right?
+[3:46] For the letter, it is broadly open through the nasal and oral cavity and larynx, as I already told you.
+[3:53] It has 3 parts, okay? There is nasopharynx.
+[4:01] Oropharynx, And then there is laryngopharynx.
+[4:12] Some writing art like that.
+[4:16] Okay? Nasopharynx communicates with nasal cavity anteriorly, as you can see, right?
+[4:23] Oropharynx communicates with oral cavity, Letting go pharynx?
+[4:28] communicates with larynx, right? And it is located posterior to larynx. It's like a slit-like…
+[4:35] Very, like, you know, it's like a pocket.
+[4:37] Very, very, very narrow space, right? That is laryngopharynx, it communicates with.
+[4:43] laryngeal cavity, anteriorly, alright? Through laryngeal inlet.
+[4:48] Now, this is larynx.
+[4:50] Epiglottis, laryngeal inlet, your vestibular folds, vocal folds, do you see that? Sagittal section of the larynx? Right? Posterior to larynx is laryngopharynx, right?
+[5:04] Now, let's first talk about… The characteristics are the features of nasopharynx. What do we mean by nasopharynx?
+[5:13] Now, nasopharynxes entirely.
+[5:16] Respiratory?
+[5:19] Its walls are relatively rigid and cannot be obliterated. Now, you will see… Paddings is…
+[5:27] Supported by the bony structures, almost all around, so it's not… it's rigid, it cannot be collapsed.
+[5:34] All right? It's not a regular tube-like structure, all right?
+[5:40] Nasopharynx extends from the base of the skull, this part here, okay, to the level of the soft palate. So.
+[5:48] To the level of… so this is your soft palate, this is uvula, in the center of the soft palate.
+[5:54] Right?
+[5:56] So this part is nasopharynx.
+[6:00] Supported roof is supported by the body of sphenoid bone.
+[6:07] Bacillar part of occipital bone. So, these two bones, they support
+[6:13] This is body of the sphenoid.
+[6:16] with sphenoid sinus in it. You recognize it?
+[6:20] Right?
+[6:21] And then there is basilar process of occipital bone.
+[6:31] Let me zoom it.
+[6:36] floor that is slopping, upper surface of the soft palate.
+[6:40] And then there is… I will zoom and we'll look at these, parts again, okay?
+[6:45] Pharyngeal isthamus is the opening in the floor.
+[6:49] between soft palate and posterior pharyngeal walls. So, let me erase this red line.
+[7:01] So it's not actual floor flow, okay? It's the isthamus. Isthmus,
+[7:08] Paryngeal isthamus is the opening, okay?
+[7:12] in the floor, Between the sloping surface of soft palate and posterior pharyngeal wall. So, this is isthamus.
+[7:20] Okay?
+[7:22] Posterior wall is supported by anterior Atlantic arch. What do we mean by that?
+[7:29] What is anterior Atlantic Arch?
+[7:38] anterior arch of atlas, C1, right? So, posterior to the nasopharynx, you have anterior arch of atlas, that is your C1 vertebra, right?
+[7:50] Lateral wall has pharyngeal opening of auditory tube.
+[7:54] Tubal elevation, salpingopharyngeal fold, and pharyngeal rhesus. Let me zoom this. Let me first erase everything, then we will.
+[8:06] Alright.
+[8:10] So let's first look at this image, right?
+[8:14] The rules… Of the nasal cavity supported by body of the sphenoid.
+[8:20] As well as basilar process, Of the occipital bone, right?
+[8:25] Posterior wall is supported by anterior Atlantic arch of… The Atlas, this one, right?
+[8:35] This is anterior Atlantic Arch, right?
+[8:44] And what is this long process?
+[8:48] What is this?
+[8:53] Yes, that is dense process of C2, right? Yeah?
+[9:01] This is Esthmus.
+[9:04] Isthmus is the opening in the floor between
+[9:08] Soft palate and posterior wall of the nasopharynx, right?
+[9:12] Floor is formed by the sloping surface of the soft palate. Now let's look at the lateral walls in the lower image, okay?
+[9:23] Now, this is lateral wall covered with the mucous membrane, right?
+[9:27] This here is the orifice of…
+[9:33] pharyngotympanic tube. What is the other name for pharyngeotympanic tube?
+[9:40] auditory tube. It connects nasopharynx with…
+[9:47] From nasopharynx, where does it go?
+[9:50] To middle ear, tympanic cavity.
+[9:53] Right? Which wall? Anterior or posterior?
+[9:56] anterior wall, right? So it goes like this, tube from the nasopharynx, it goes to the anterior wall, right?
+[10:03] this is the opening of pharyngotympanic tube, right? Now, this tube, it creates… a ridge.
+[10:11] this ridge here, That is created by…
+[10:15] The auditory tube, this ridge is called as torus.
+[10:19] Two barriers, okay?
+[10:30] To rest your barriers.
+[10:32] Or tubal torus. Taurus means a ridge.
+[10:35] Right? Like an elevation.
+[10:38] Alright?
+[10:39] And then there are tuberal tonsils.
+[10:44] Surrounding The opening of the pharyngotympanic tube, we have tubal tonsils.
+[10:51] All right.
+[10:54] And then there is pharyngeal recess. On the top.
+[11:00] of Taurus tuberus, we have this pocket.
+[11:04] Or a space, which is called as… pharyngeal rhesus.
+[11:10] Another very important structure we have in the nasopharynxes.
+[11:15] This large tonsil, which is called as
+[11:18] pharyngeal tonsil. So, we have a single tonsil.
+[11:23] In the roof of the nasopharynx.
+[11:26] Right? Do you remember that painful thing when you have a flu? I think all of us might have had that thing, like, you're not able to swallow when you have
+[11:36] pain at the top of your nasopharynx, right? This tonsil, when it gets inflamed.
+[11:43] Right? That is the cause. This is…
+[11:47] Single tonsil, okay? You have a single pharyngeal tonsil in the roof of nasopharynx. The other name for this tonsil, the common name, that is called as adenoids.
+[12:01] They… they say it's… it's not called adenoid, the… because when this tonsil gets inflamed, you know, it has this…
+[12:09] You know?
+[12:10] this follicles-like appearance, which they used to call, like, the doctors, on the clinical side, they would say, oh, this patient has adenoids. Adenoids is inflamed pharyngeal tonsil.
+[12:25] All right? Now, it's very common with younger children, right?
+[12:30] And, sometimes, like, some children, they have increased tendency to have inflammation of this tonsil.
+[12:38] And, because this is located right in the roof of nasopharynx, when it is constantly enlarged, this will cause nasal blockage.
+[12:47] Right? This tonsil, think about it. If it is inflamed and enlarged, like this, It is blocking the posterior
+[12:59] Nears. Go, Annie.
+[13:01] Right? And the child becomes a mouth breather.
+[13:05] Right? And then they have this typical, face, which is called as adenoid
+[13:14] Faces. I denied faces, let me pull out an image from the net. Just give me a minute.
+[13:22] Okay.
+[13:26] I think I hired yesterday.
+[13:31] Okay.
+[14:39] This is a typical, face, which is called as adenoid faces.
+[14:45] where the child is going to have, recessed lower jaw, like that, because they have to keep their mouth partially open, right? So their lower jaw, it does not develop properly. Mendible is smaller.
+[15:00] Right? And they have flat, face.
+[15:04] Right? And then they have this allergic shiner, and there is nasal crease.
+[15:10] And Denny Morgan lines under the eyes, because they're constantly
+[15:15] keeping their mouth partially open, and this gives them these typical features. That's why
+[15:21] this condition should be recognized early, and there should be, like, these tonsils should be removed. There's this procedure called as adenoidectomy, which is a very easy procedure, because
+[15:32] We have learned, right, paranasal sinuses and facial bones, they keep on developing till the age of puberty, so if this condition is identified early, like, before the age of 5 or 6 years, these phases, they can go back to the normal, right? But
+[15:47] Sometimes it's not even recognized, and this becomes the permanent face of the child, which is… Unfortunate, right?
+[15:56] Let's go back. So… What is adenoids? Paryngeal tonsil.
+[16:04] How many pharyngeal tonsils do we have? Just one.
+[16:08] Single.
+[16:10] Also, there is this fold.
+[16:13] Okay?
+[16:18] There is this fold in the lateral wall of…
+[16:22] The nasopharynx, which is called as selpingopharyngeal fold.
+[16:28] So, extending from the torus tuberus, there is this fold, which is called as selpingopharyngeal fold.
+[16:35] This fold here.
+[16:38] Selpingo means what?
+[16:40] What does the word self-hing, or self-hingo, or selfingo mean?
+[16:46] Do you guys remember fallopian tube, salpingitis, inflammation of the fallopian tube, right? So, salpinx word means a tube.
+[16:54] It's a… it's a fancy term for a tube, right? Selpingopharyngeal fold means it is extending downwards to the pharynx from your pharyngeotympanic tube.
+[17:06] Right? Selpingopharyngeal fold, you have a muscle with the same name underneath this fold. Okay, we'll be talking about that muscle. Selpingopharyngeal fold, this is a feature of
+[17:16] Lateral wall of nasopharynx.
+[17:22] Pharyngeal opening of auditory tube, tubal elevations, helping of pharyngeal fold, and pharyngeal recess.
+[17:30] And then, oropharynx. Let's talk about… Oropharynx. Now, oropharynx is the Middle part, extending from…
+[17:44] Oropharynx represents the digestive entrance of the chamber. It extends from the soft palate to upper border of epiglottis.
+[17:52] Okay? The superior border of epiglottis.
+[17:55] Rules?
+[17:57] is the undersurface of soft palate and pharyngeal isthmus. So this is the roof of oral cavity, undersurface of soft palate, and pharyngeal isthmus, right? The opening.
+[18:09] Floor is formed by positive… sorry, sorry. Posterior one-third of the tongue.
+[18:14] This part here?
+[18:17] Right? And the interval between the tongue and anterior surface of the epiglottis.
+[18:23] And within the oropharynx, you will find
+[18:26] Lingual concepts. So, let me zoom, sorry.
+[18:38] Alright, let's look at oropharynx. It extends from the soft palate and pharyngeal isthmus to superior border of epiglottis.
+[18:46] Right? Floor is formed by posterior one-third of the tongue.
+[18:51] Right?
+[18:53] In the oropharynx, we have… And also anterior border of epiglottis.
+[18:59] This is anterior border of, or anterior surface of epiglottis.
+[19:03] Right?
+[19:04] We have lingual tonsil, Attached to the root of the tongue. So, posterior.
+[19:11] To the root of the tongue, we have a single lingual tonsil also.
+[19:16] Right? One lingual tonsil, anterior surface of epiglottis. So this is your tongue.
+[19:25] And then we have… Epiglottis, like that.
+[19:29] Right?
+[19:33] What is this part called?
+[19:35] between the tongue and anterior surface of epiglottis. We have 3 folds which connect tongue with epiglottis. What do you call those folds?
+[19:45] Not vestibule. Vestibule is inside the larynx.
+[19:49] glossed over tongue, Gloss to epiglottic folds?
+[19:54] Median and two lateral glossary epiglottic folds, that red diagram, This is the same thing.
+[20:01] Right?
+[20:02] So, your tongue, and line right posterior to the tongue, we have epiglottis. So, this is anterior surface of the epiglottis, and then there is tongue. So, we have a space there.
+[20:12] That space, it is connect, it connects. Within that space, I'm in, you will find
+[20:18] Median and two lateral, glossoepiglottic folds and molecule, the spaces between those folds.
+[20:24] Right? Two molecular, right and left. Are we clear? Right?
+[20:30] And then, you also have a lingual tonsil, which is a single tonsil, lingual follicles of the lingual tonsil.
+[20:37] Is that clear?
+[20:39] Alright, now…
+[20:48] Anterior wall opens into the mouth through oropharyngeal isthamus.
+[20:52] Posterior wall is supported by body of C2 or axis.
+[20:57] Right?
+[20:58] Upper part of the body of C3.
+[21:01] and IVD in between. So, C2, and upper part of the C3, and C2, C3, IVD.
+[21:08] Lateral wall has palatoglossal fold, Palatopharyngeal fold like that.
+[21:17] What is located between these two folds?
+[21:25] So there is palatoglossal fold, and then there is palatopharyngeal fold.
+[21:32] On the lateral side of oral cavity.
+[21:37] There is a fossa between these two folds, which is called a tonsillar fossa.
+[21:43] What do we have in that fossil?
+[21:46] Palatine tonsil.
+[21:48] Nice wake up!
+[21:53] Right, so it's the same thing. It's the lateral wall of the oral cavity also, posterior part of the oral cavity. In the lateral wall of the oropharynx, we have palatoglossal fold, palatopharyngeal fold.
+[22:05] And palatine tonsils.
+[22:08] Between those two folds, right?
+[22:11] It's written here. Wow. Smart.
+[22:14] Right? Are we clear?
+[22:21] And then… There is the inferior part, that is, Laryngopharynx. This is laryngopharynx, so…
+[22:29] Posterior wall of the laryngopharynx is not seen in this. Laryngopharynx lies behind laryngeal inlet and posterior wall of the larynx. So.
+[22:40] This is posterior wall of the lens.
+[22:43] Okay?
+[22:44] It's a slit-like space, so this is your larynx.
+[22:49] Letting go pharynx lies posterior to this space. This is letting go pharynx.
+[22:56] Right?
+[22:57] It extends from upper border of epiglottis to lower border of cricoid cartilage.
+[23:03] Superiorly, it communicates with… Lumen of oropharynx. Inferiorly, it communicates with Lumen of isophagus.
+[23:15] All right.
+[23:16] Anterior wall. In the anterior wall.
+[23:21] What do you find in the anterior wall? Let me… Zoomed.
+[23:30] All right.
+[23:32] So, starting from this point to this point, we have laryngopharynx.
+[23:37] This is the anterior wall, because posterior wall is removed.
+[23:41] In the anterior wall, what do you find? What is this?
+[23:48] laryngeal inlet.
+[23:52] Thank you for reading.
+[23:54] What is this?
+[24:00] Is it in phaglotic space?
+[24:03] Of course not.
+[24:05] This is posterior wall of the larynx. Space is inside!
+[24:09] Spaces inside this. We are looking at the posterior wall of larynx. We are into the pharynx, not larynx.
+[24:17] Okay?
+[24:19] Do you get that? Does that make total sense now, right? So this is posterior wall of the larynx.
+[24:25] There is a special feature.
+[24:28] In this wall, in the posterior wall of the pharynx, there is this fossa.
+[24:34] Pear-shaped fossae on each side of the laryngeal inlet, these fossae.
+[24:41] Which is called as… Perform?
+[24:45] FOSA.
+[24:48] Now, this piriform fossa is a shallow.
+[24:51] depression on each side of laryngeal inlet, right?
+[24:54] And this is the site where, you know, foreign bodies… because this is slightly shallow. Some foreign bodies, like a fishbone, or sometimes a…
+[25:04] If children, they swallow something accidentally, and it is sharp, it may get, lodged in this fossa.
+[25:13] And, lying right under the mucous membrane of the piriform fossa, we have internal laryngeal nerve.
+[25:20] Internal laryngeal nerve is lying very superficial in this fossa.
+[25:26] Okay? What do you remember about internal laryngeal nerve from the morning class?
+[25:31] I know this is a… I shouldn't be doing that, but…
+[25:34] There's no other way to wake you guys up.
+[25:37] Where do we… GSA fibers for which part of the larynx? Good.
+[25:43] Aren't you happy I answered this much, Dr. Mani?
+[25:47] part of the larynx above vocal folds, right? I know it's not easy to remember everything, but upper half of the larynx, if you just keep in your brain
+[25:56] How are the two halves divided? Vocal folds?
+[25:59] Okay? So, internal laryngeal nerve, think about it. If it is… if it gets…
+[26:04] damaged, or if there is a lesion of internal laryngeal nerve because of a foreign body, there'll be loss of gag reflex, because internal laryngeal nerve is sensory to upper part of the larynx.
+[26:15] Right? So that sensory component is lost, and gag reflex is lost, and there is going to be aspiration.
+[26:22] Of the liquids, because your larynx is not going to sense anything, and
+[26:27] All that you eat might enter the larynx, And there'll be aspiration pneumonitis.
+[26:33] Right? Aspiration pneumonitis means there is inflammation of the lungs secondary to
+[26:40] Things which get aspirated from the digestive tract into the respiratory tract, right?
+[26:49] All right.
+[26:54] Okay, so that is laryngopharynx. Superiorly communicates with the lumen of the oropharynx, communicates with the lumen of esophagus.
+[27:04] Anterior wall is the inlet of the larynx, and mucous membrane covering the posterior aspect of the larynx.
+[27:11] Piriform fossa is a groove in the mucous membrane on each side of laryngeal inlet.
+[27:16] Posterior wall, which is not seen in this image, is supported by…
+[27:21] body of the C3, 4, 5, and 6, and it ends at the lower border of
+[27:26] C6 vertebra. That is the lowermost extent of the pharynx, alright?
+[27:32] Lateral wall is supported by thyroid cartilage and thyrohyoid membrane.
+[27:37] Alright? So with thyroid cartilages, it acts like an armor.
+[27:41] for the larynx, as well as laryngopharynx. Also, it extends, to some extent, all the way to the laryngopharynx.
+[27:48] Right?
+[27:51] Alright, these are the three parts of the pharynx. Now, let's talk about the wall, pharyngeal wall.
+[27:59] Paryngeal wall is lined by mucous membrane.
+[28:03] Which is continuous with all the chambers with which it communicates. That means
+[28:07] Nasopharynx communicate… I mean, the mucous membrane is continuous with the nasal cavity. Oropharynx, oral cavity, laryngopharynx,
+[28:16] paryingeal cavity. What kind of epithelial tissue do you think It's lining the pharynx.
+[28:25] What type of epithelial tissue?
+[28:31] Should it be layered, or should it be single-layered? Should it be multiple, multi-layered, or single-layered?
+[28:37] Why single lid?
+[28:38] What are the locations where, specifically, we need Single layer of cells.
+[28:47] The organs where you need, like, things to diffuse to the other side, or to be absorbed, or to be filtered.
+[28:55] Those are the locations we need single layers of cells, am I right?
+[29:00] On the other type of locations, where we have where the epithelial tissue is prone to get damaged due to aberrations.
+[29:08] Right? We have multiple layers of cells, and your pharynx and larynx and oral cavity and nasal cavity, these sites are prone to aberrations, because when you're swallowing, right, the bolus, it causes damage to the superficial lies. That is why there are… there is
+[29:27] Stratified squamous epithelial tissue that lines the pharynx, okay? Stratified squamous. Catinized or non-peratinized?
+[29:40] Get recognized Wonderful.
+[29:43] Okay, why keratinized?
+[29:48] You have keratinized squamous epithelium… stratified squamous epithelium only in the skin.
+[29:54] Keratin is found only in the skin. Wherever else you have certified squamous epithelium, there's no keratin in mucous membranes, because keratin makes the tissue tough, and you need that only in the skin.
+[30:08] Okay?
+[30:10] At other locations, wherever you have stratified squamous epithelium, it's non-keratinized. All the layers are live. They do not have keratin.
+[30:20] Is that clear? Right?
+[30:25] Next to mucosa, or mucosal membrane, we have
+[30:30] Submucosa, which is a strong fibrous sheet known as pharyngobacillar fascia.
+[30:38] This is a very strong fascia. Let me zoom this image to take a look at this.
+[30:45] This white-colored structure.
+[30:48] This is pharyngobasilar fascia.
+[30:51] And it merges with the periosteal lining of the bones of the base of the skull.
+[30:56] It's that strong, just like perioste, alright? Pharyngobascular fascia forms a submucous layer, alright?
+[31:04] And next to that, there are muscles, alright?
+[31:08] There are two layers of muscle, there are circular muscles, so you will see these muscles.
+[31:13] They're almost arranged Like, circularly.
+[31:17] What is the function of circular layers of muscles? Where are all the places we have circularly arranged muscles?
+[31:26] Constrictor function, right? Constrictor function. And longitudinal muscles are muscles which are… their fibers are arranged lengthwise.
+[31:34] they are for the movement of the structure, right? They can pull the structure up or down, depending upon the direction of the fibers, right? So we have the muscular layer, that is layer 3, alright?
+[31:50] So, pharyngeobacillar fascia blends with the periosteum of the base of the… bones of the base of the skull. It defines the limits of the pharyngeal wall.
+[31:59] in its upper portion. And then there is third layer. The muscular cord of the pharynx lies external to the fascia.
+[32:06] The muscles, they are in turn covered by the outermost layer, that is bucco, Paryngeal fascia.
+[32:14] The pharynx. So this is your pharynx.
+[32:18] And lying posterior to the pharynx, you have vertebral bodies, And then intervertebral discs, right?
+[32:26] Now, your pharynx is separated from the bones and muscles, okay?
+[32:31] So vertebral column and pharynx, they are…
+[32:35] Separated from each other by a loose areolar connective tissue.
+[32:41] in a space which is called as retropharyngeal space, or space of styles. So this space…
+[32:47] Between the vertebrae and prevertebral muscles, and pharynx.
+[32:53] This space is called as retropharyngeal space.
+[33:07] And this space is filled with loose areolar connective tissue.
+[33:12] Right? This space allows for free gliding movement of the pharynx during swallowing. When you're swallowing, your pharynx moves up and down.
+[33:21] Right? And because of this space, that movement becomes very easy.
+[33:26] Sometimes what happens is, because of inflammation, or because of tumors, or because of
+[33:32] some condition or fibrosis after an inflammation or an abscess heals, right? There can be obliteration of this space, and that becomes… that makes swallowing difficult.
+[33:45] That can lead to dysphagia, difficult swallowing, because pharynx will become fixed
+[33:51] to the structures of the spine, vertebral column, and surrounding muscles, right? It will not be able to glide up and down, and this will cause
+[34:01] Dysphagia, alright? Obliteration of space of styles. Styles with an I, okay?
+[34:07] This loose tissue permits elevation and depression of pharynx during deglutation. Are we clear?
+[34:13] Retropharyngeal space.
+[34:16] Let's talk about the muscles of the pharynx. Before that, all the pharyngeal muscles originate from… Which pharyngeal arch?
+[34:25] 4 and 6. That means they should be innervated by which nerve?
+[34:30] Vegas, right? But there is, again, one exception. Talk about that, right?
+[34:36] Before that.
+[34:37] there are three constrictors which make the external layer of muscles, right? Three constrictor means circularly arranged, or muscles which are transversely, the fibers, they're arranged transversely like that, okay?
+[34:50] Superior constrictor muscle originates from pterygoid hamillis, Pterigomandibular raphe?
+[34:57] myelohyoid line of… and side of the tongue. So, let's look at this.
+[35:03] So this is your superior constrictor. It originates from pterygoid hamillis.
+[35:10] Pterigomendibular raphe?
+[35:14] Myelohyoid line. Do you remember looking at myelohyoid line on the inside of the mandible? The line through which myelohyoid muscle is attached, and side of the tongue. So this muscle originates from all over around here, right?
+[35:31] This is superior constrictor. What is another muscle that is attached to pterygomandibular raphe, and that is, the fibers go like this, anteriorly.
+[35:42] The pterygo, mandibular raphe, anybody.
+[35:47] It's one of the muscles of facial expression, This is Vaccinator.
+[35:54] Okay? So buccinator is anterior, Right? Did you say that, Amir? Okay, good. And posterior is superior constrict.
+[36:04] Right?
+[36:05] Now, the insertion… Of superior constrictor is?
+[36:10] Paryngeal tubercle.
+[36:16] What is the location of pharyngeal tubercle?
+[36:21] Where is it located?
+[36:24] Of course. Where is it located?
+[36:27] Anybody else?
+[36:29] In the center of the basilar process of occipital bones. You guys remember? Now, imagine the base of the skull.
+[36:38] Right? The basilar process of occipital bone, right anterior to foramen magnum.
+[36:44] Right in the center of that, there is pharyngeal tubercle.
+[36:47] Remember now?
+[36:49] Right? If you do not remember, please go back to the pictures of skull in first module and find out, okay? That is where your superior constrictor is, inserted, right here, alright? So it goes like that.
+[37:00] All the way like that, okay?
+[37:02] But…
+[37:05] Insertion is pharyngeal tubercle, nerve supply is pharyngeal branch of vagus. Action is constricts the wall of the pharynx during swallowing, alright?
+[37:14] Middle constrictor originate from stylohyoid ligament, greater and lesser horns of hyoid bone.
+[37:21] inserted onto the pharyngeal raphe. Now.
+[37:24] These muscles, you know, from the right and left side, they form a midline, Very tough, fibrous,
+[37:33] structure. So, it's like an aponeurosis from the two sides, right? This is called as pharyngeal raphe.
+[37:47] So, inferior and middle constrictor, they are inserted onto this raffle in the middle, so they make a common fibrous tendinous insertion, right?
+[37:58] pharyngeal Rafi, Inferior constrictor originates from oblique line of thyroid cartilage and cricoid cartilage.
+[38:07] Oblique line of thyroid cartilage.
+[38:10] Right?
+[38:12] Insertion, cricopharyngeal part, and circles, pharyngeo…esophageal junction.
+[38:19] without forming a raphe. Now, This is middle constrictor.
+[38:32] Inferior pharyngeal constrictor?
+[38:35] It has two parts, okay? The upper part, That is called as thyropharyngeus.
+[38:46] And the lower part is called as CRICO, Pharyngeus.
+[38:54] G-E-O-U-S. Ricopharyngeus.
+[38:58] Right? Now, when you look at cricopharyngeus muscle.
+[39:02] It forms… it's a circular muscle.
+[39:05] It's attached to cricoid cartilage on both the sides. It's like, you know, do you remember puborectalis muscle from the last term?
+[39:13] Which was, like, a slink.
+[39:15] Around the anorectal junction.
+[39:18] trichopharyngeous muscle is like that. It originates from one side, and then it is attached to the other side, so it
+[39:25] It makes… it encircles paryingoesophageal junction.
+[39:31] So that means this muscle, this is your upper esophageal sphincter, okay? So this muscle here, inferior pharyngeal constrictor, lower part of inferior pharyngeal constrictor, that forms
+[39:45] Upper?
+[39:49] Esophageal sphincter.
+[39:54] This year, do you see that?
+[39:58] So that means…
+[40:00] This keeps the esophagus closed. This muscle, when it contracts, it closes the upper end of esophagus.
+[40:08] So this muscle, it keeps esophagus closed all the time.
+[40:12] Except for when you're swallowing.
+[40:15] Okay? Otherwise, this sphincter, it keeps esophagus collapsed all the time.
+[40:23] But what happens is, during old age, this muscle, upper esophageal sphincter, it loses its tone, Right?
+[40:30] And that is aerophagia. The air you are inhaling, it goes through the esophagus because this muscle has lost tone, so the air will go into the stomach, and there'll be a lot of errptations or burping. That is the reason why some old people, they complain of eruptations all the time.
+[40:48] Because they are… they are having this condition called as aerophagia. They are eating air all the time.
+[40:59] Make sense? So your cricopharyngeus muscle, which is a part of inferior constrictor, right?
+[41:07] Picopharyngeal part encircles, pharyngoesophagal junction without forming a raphe.
+[41:13] Superior part.
+[41:14] Thyropharyngis, it forms a graphic.
+[41:16] All right?
+[41:17] So, this forms upper, Esophagal, sphincter. UES.
+[41:24] Do you remember lower esophageal sphincter, GERD, right? Cardiac sphincter. So this one is upper.
+[41:32] Okay? Right
+[41:36] We'll talk about nerve supply.
+[41:39] Together, like, of all the muscles, okay?
+[41:42] So, these are 3 constrictors. Superior, Middle and inferior, right?
+[41:49] Thyropharynge part of inferior, it originates from oblique line of thyroid cartilage.
+[41:55] Okay? What other two muscles originate from oblique line of thyroid cartilage? What are the other two muscles attached to this?
+[42:02] And Mark.
+[42:05] Inferior constricor is one. What are the two muscles?
+[42:11] I don't hired and sterno Hired.
+[42:15] It tells others, you're telling your answer to the students so that they know that you knew, right? It's fine, yeah. Yeah. So there are three muscles now, attached to…
+[42:26] thyroid line of the thyroid cartilage, right? So this makes a good question for me. Which one of the following muscle is not attached to a bleak line of thyroid cartilage?
+[42:34] Right?
+[42:35] Inferior constrictor is attached.
+[42:38] Sternothyroid and thyrohyoid, alright?
+[42:42] Now, let's talk about the other three that make the internal layer, right? There is palatopharyngeus muscle.
+[42:51] Originate from hard palate and palatine eponeurosis. That's the same muscle that forms palatopharyngeal arch.
+[42:59] Right?
+[43:01] Inserted onto the lamina of the thyroid cartilage.
+[43:06] Selpingopharyngeus.
+[43:09] Selpingopharyngeus muscle originates from salpingo means what? Tube.
+[43:14] Right? So it originates from cartilaginous part of the auditory tube.
+[43:19] And it blends with palatopharyngeus muscle on the side. And third muscle, That is thylopharyngeus muscle.
+[43:27] Very easy to say, originates from styloid process.
+[43:30] And inserted onto the posterior and superior border of thyroid cartilage with palatopharyngees. So these three muscles, they kind of blend with each other, and they are inserted onto the thyroid cartilage itself.
+[43:43] Now about the innovation.
+[43:45] All the pharyngeal muscles are innervated by 10th nerve, except for
+[43:54] Styleopharyngeus muscle, which is innervated by… Glossopharyngeal nerve, which is your… 9th note.
+[44:05] Why is this muscle innervated by 9th nerve?
+[44:08] And not 10th.
+[44:10] I'll stop after that.
+[44:15] This is the only muscle?
+[44:17] Originating from?
+[44:19] Paringial large number.
+[44:22] Three, yes.
+[44:23] Three.
+[44:26] 9th nerve, 3rd arch.
+[44:29] So many 3s about 9th now, posterior 1 3rd, right? 3rd arch.
+[44:34] stylopharyngeus. So, how I remember this muscle was, stylopharyngeus muscle is so stylish, it has its own nerve.
+[44:43] Out of all the pharyngeal muscles, thylopharyngeus has a different innervation, ninth nerve.
+[44:49] Right?
+[44:51] Let's stop here. Did you all take attendance?
+[44:55] You didn't join.
+[44:58] You also missed?
+[45:00] Two of the only one. No answers, because you guys keep talking. You also keep talking.`.split(/\r?\n/).filter(function(l){ return l.trim().length > 0; });
 window.fabTranscriptOn = false;
 function fabFetchTranscript(cb){ cb(); }
 function fabParseTimestamp(line){
@@ -993,7 +1452,7 @@ var L01_END=5986;
 var L02_END=11963;
 function videoUrl(ts){if(ts==null||isNaN(ts)||ts<=0)return null;var viewer,sec;if(ts<L01_END){viewer='fab-201-m02-shoulder-forearm-l04-frame-viewer.html';sec=Math.floor(ts);}else if(ts<L02_END){viewer='fab-201-m02-shoulder-forearm-l05-frame-viewer.html';sec=Math.floor(ts-L01_END);}else{viewer='fab-201-m02-shoulder-forearm-l06-frame-viewer.html';sec=Math.floor(ts-L02_END);}return viewer+"?ts="+sec;}
 function fmt(ts){if(ts==null||isNaN(ts))return "";var m=Math.floor(ts/60),s=Math.floor(ts%60);return m+":"+(s<10?"0":"")+s;}
-function injectBtn(bid){if(bid==null||typeof TIMESTAMPS==="undefined")return;var ts=TIMESTAMPS[bid];var url=videoUrl(ts);if(!url)return;var card=document.querySelector(".card");if(!card)return;var existing=card.querySelector(".watch-btn-row");if(existing)existing.remove();var qText=card.querySelector(".q-text");if(!qText)return;var slideRow=card.querySelector(".slide-btn-row");var anchor=slideRow||qText;var row=document.createElement("div");row.className="watch-btn-row";var a=document.createElement("a");a.className="btn-watch";a.href=url;a.target="_blank";a.rel="noopener";a.textContent="\uD83C\uDFAC Watch Bui @ "+fmt(ts);row.appendChild(a);anchor.parentNode.insertBefore(row,anchor.nextSibling);}
+function injectBtn(bid){if(bid==null||typeof TIMESTAMPS==="undefined")return;var ts=TIMESTAMPS[bid];var url=videoUrl(ts);if(!url)return;var card=document.querySelector(".card");if(!card)return;var existing=card.querySelector(".watch-btn-row");if(existing)existing.remove();var qText=card.querySelector(".q-text");if(!qText)return;var slideRow=card.querySelector(".slide-btn-row");var anchor=slideRow||qText;var row=document.createElement("div");row.className="watch-btn-row";var a=document.createElement("a");a.className="btn-watch";a.href=url;a.target="_blank";a.rel="noopener";a.textContent="\uD83C\uDFAC Watch Maini @ "+fmt(ts);row.appendChild(a);anchor.parentNode.insertBefore(row,anchor.nextSibling);}
 function activeBid(){if(typeof questions!=="undefined"&&typeof idx!=="undefined"&&questions[idx])return questions[idx]._bankId;return null;}
 if(typeof render==="function"){var _r=render;render=function(){var rv=_r.apply(this,arguments);injectBtn(activeBid());return rv;};}
 injectBtn(activeBid());
@@ -1117,7 +1576,7 @@ injectBtn(activeBid());
       const rate = document.createElement('select');
       rate.className = 'fab-ai-tts-rate';
       rate.title = 'Reading speed';
-      ['0.8','1.0','1.2','1.5','2.0'].forEach(function(r){
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
         const o = document.createElement('option');
         o.value = r; o.textContent = r + 'x';
         if (r === '1.0') o.selected = true;
@@ -1262,7 +1721,7 @@ injectBtn(activeBid());
 
   function clipboardFallback(ctx, userQ) {
     const letter = (i) => String.fromCharCode(65 + i);
-    let prompt = "I'm studying GA 0202 (Gross Anatomy) with Dr. Maini at SCUHS. Drill question:\n\n";
+    let prompt = "I'm studying GA 0202 (Anatomy, Head & Neck) with Dr. Maini at SCUHS. Drill question:\n\n";
     prompt += 'Q: ' + ctx.question + '\n\n';
     if (ctx.options && ctx.options.length) {
       ctx.options.forEach((o, i) => {
@@ -1461,7 +1920,7 @@ injectBtn(activeBid());
 </style>
 <script id="everything-modal-injector">
 (function(){
-  var TOPIC_GROUPS = {"eardrum":["Otoscopy","Myringotomy"],"infection":["Infection","Auditory Tube"],"nerves":["Nerve"],"conduction":["Ossicles","Sound Conduction"],"balance":["Inner Ear","Balance"],"tests":["Tests"],"external":["External Ear"]};
+  var TOPIC_GROUPS = {"adenoids":["Adenoid","Nasophar"],"swallowing":["Swallow","Retro","Sphincter"],"foreignbody":["Piriform","Foreign"],"nerves":["Nerve","Innervation","Gag"],"muscles":["Muscle","Constrictor"],"tonsils":["Tonsil"],"wall":["Wall","Epitheli","Boundar","Level"],"tube":["Auditory","Tube"],"clinical":["Adenoid","Piriform","Gag","Retro","Sphincter","Foreign"]};
   var FULL_BANK = null;
   var selectedCats = {};
   var catCounts = {};
@@ -1477,31 +1936,33 @@ injectBtn(activeBid());
   function buildModal(){
     if (!captureBank()) return;
     var html = '<div class="em-card">'
-      + '<h2>🩺 GA 0202 · The Ear · Clinical Cases &amp; Must-Knows</h2>'
+      + '<h2>📋 Clinical Cases Drill — GA 0202 · The Pharynx</h2>'
       + '<div class="em-sub">Pick which topics to drill, set a size, go. Reopen filter any time.</div>'
       + '<div class="em-briefing" style="background:rgba(34,211,238,0.08);border-left:3px solid #22d3ee;padding:10px 14px;margin:10px 0 14px;border-radius:0 6px 6px 0;color:#a5f3fc;font-size:13px;line-height:1.55">'
-      +   '<b style="color:#67e8f9">📖 What this is:</b> Custom-mix MC drill built from the 32 clinical-vignette and must-know questions on the ear (Dr. Maini, The Ear, L22-L23). Pick presets (Otoscopy, Nerve Lesions, Auditory Tube, Balance, Tests, etc.) or toggle individual topics. Set how many Qs you want, then hit start. <b>Tip:</b> 10 Qs = quick warm-up · 32 = full sweep.'
+      +   '<b style="color:#67e8f9">📖 What this is:</b> Custom-mix MC drill built from the 26 applied pharynx clinical-vignette questions (Dr. Maini, Head &amp; Neck, Lecture 27: The Pharynx). Pick presets (Adenoids, Swallowing, Nerves, Muscles, etc.) or toggle individual topics. Set how many Qs you want, then hit start. <b>Tip:</b> 10 Qs = quick warm-up · 26 = full sweep.'
       + '</div>'
       + '<h3>⚡ Presets</h3>'
       + '<div class="em-presets">'
       +   '<button onclick="emPreset(\'all\')">✅ All</button>'
-      +   '<button onclick="emPreset(\'eardrum\')">🔦 Otoscopy + Eardrum</button>'
-      +   '<button onclick="emPreset(\'infection\')">🦠 Infection + Auditory Tube</button>'
-      +   '<button onclick="emPreset(\'nerves\')">🧠 Nerve Lesions + Reflexes</button>'
-      +   '<button onclick="emPreset(\'conduction\')">🔊 Ossicles + Conduction</button>'
-      +   '<button onclick="emPreset(\'balance\')">⚖️ Inner Ear + Balance</button>'
-      +   '<button onclick="emPreset(\'tests\')">🧪 Hearing + Vestibular Tests</button>'
-      +   '<button onclick="emPreset(\'external\')">👂 External Ear</button>'
+      +   '<button onclick="emPreset(\'adenoids\')">🫁 Adenoids + Nasopharynx</button>'
+      +   '<button onclick="emPreset(\'swallowing\')">🍽️ Swallowing + Sphincter</button>'
+      +   '<button onclick="emPreset(\'foreignbody\')">🦴 Foreign Body + Piriform</button>'
+      +   '<button onclick="emPreset(\'nerves\')">🧠 Nerves + Gag Reflex</button>'
+      +   '<button onclick="emPreset(\'muscles\')">💪 Muscles</button>'
+      +   '<button onclick="emPreset(\'tonsils\')">🎗️ Tonsils</button>'
+      +   '<button onclick="emPreset(\'wall\')">🧱 Wall + Boundaries</button>'
+      +   '<button onclick="emPreset(\'tube\')">👂 Auditory Tube</button>'
+      +   '<button onclick="emPreset(\'clinical\')">🔬 Clinical</button>'
       +   '<button onclick="emPreset(\'clear\')">✖️ Clear</button>'
       + '</div>'
       + '<h3>📚 Topics (toggle individually)</h3>'
       + '<div class="em-cats" id="emCatList"></div>'
       + '<h3>📊 Number of Questions</h3>'
       + '<div class="em-size-row">'
-      +   '<input type="range" id="emSizeSlider" min="5" max="32" value="20" oninput="emUpdSize()">'
-      +   '<div class="em-val" id="emSizeVal">20</div>'
+      +   '<input type="range" id="emSizeSlider" min="5" max="26" value="15" oninput="emUpdSize()">'
+      +   '<div class="em-val" id="emSizeVal">15</div>'
       + '</div>'
-      + '<div class="em-info"><b>Available:</b> <span id="emAvail">32</span> Qs match your selection</div>'
+      + '<div class="em-info"><b>Available:</b> <span id="emAvail">26</span> Qs match your selection</div>'
       + '<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:8px">'
       +   '<button class="em-start" id="emStartBtn" onclick="emStart()" style="flex:1;min-width:160px">▶️ Start Drill</button>'
       + '</div>'

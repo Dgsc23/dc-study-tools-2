@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GA 0202 · Cranial Nerves (part 1)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', -apple-system, sans-serif; background: #0f172a; color: #e2e8f0; min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+.header { text-align: center; padding: 56px 16px 12px; width: 100%; max-width: 700px; }
+.header h1 { font-size: 22px; color: #60a5fa; margin-bottom: 4px; }
+.header .subtitle { font-size: 13px; color: #94a3b8; }
+.score-bar { display: flex; gap: 16px; justify-content: center; padding: 10px; font-size: 14px; font-weight: 600; }
+.score-bar .got { color: #4ade80; } .score-bar .missed { color: #f87171; } .score-bar .remain { color: #94a3b8; }
+.progress-track { width: 100%; max-width: 700px; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-bottom: 16px; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #4ade80, #60a5fa); transition: width 0.4s ease; border-radius: 3px; }
+.card-container { width: 100%; max-width: 700px; padding: 0 16px; flex: 1; }
+.card { background: #1e293b; border: 2px solid #334155; border-radius: 16px; padding: 32px 28px; text-align: center; min-height: 260px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: border-color 0.3s; }
+.card:hover { border-color: #475569; }
+.card-number { font-size: 12px; color: #64748b; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+.term { font-size: 22px; font-weight: 700; color: #f1f5f9; margin-bottom: 24px; line-height: 1.3; }
+.answer { font-size: 15px; line-height: 1.7; color: #cbd5e1; max-width: 600px; padding: 16px 20px; background: #0f172a; border-radius: 10px; border-left: 4px solid #3b82f6; text-align: left; display: none; margin-bottom: 16px; }
+.answer.show { display: block; animation: fadeIn 0.3s ease; }
+.prof-tip { font-size: 13px; color: #fbbf24; margin-top: 8px; font-style: italic; display: none; text-align: left; max-width: 600px; padding: 10px 16px; background: #1a0a0a; border-left: 3px solid #ef4444; border-radius: 0 10px 10px 0; }
+.prof-tip.show { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; flex-wrap: wrap; }
+.btn { padding: 12px 28px; border: none; border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn:active { transform: scale(0.96); }
+.btn-reveal { background: #3b82f6; color: white; } .btn-reveal:hover { background: #2563eb; }
+.btn-got { background: #166534; color: #4ade80; display: none; } .btn-got:hover { background: #15803d; }
+.btn-missed { background: #7f1d1d; color: #f87171; display: none; } .btn-missed:hover { background: #991b1b; }
+.btn-back { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-back:hover { background: #475569; }
+.btn-skip { background: #334155; color: #94a3b8; padding: 10px 20px; font-size: 13px; } .btn-skip:hover { background: #475569; }
+.btn-continue { background: #1e40af; color: #93c5fd; display: none; } .btn-continue:hover { background: #1d4ed8; }
+.btn-redo { background: #7c3aed; color: #c4b5fd; display: none; } .btn-redo:hover { background: #6d28d9; }
+.btn-redoback { background: #7c3aed; color: #c4b5fd; padding: 10px 20px; font-size: 13px; } .btn-redoback:hover { background: #6d28d9; }
+.browse-label { font-size: 11px; color: #f59e0b; margin-bottom: 8px; display: none; }
+.controls { padding: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 12px; }
+.ctrl-btn { padding: 8px 16px; border: 1px solid #475569; background: #1e293b; color: #94a3b8; border-radius: 8px; font-size: 12px; cursor: pointer; transition: all 0.2s; }
+.ctrl-btn:hover { background: #334155; color: #e2e8f0; } .ctrl-btn.active { border-color: #3b82f6; color: #60a5fa; }
+.summary { display: none; text-align: center; padding: 40px 20px; width: 100%; max-width: 700px; }
+.summary h2 { font-size: 28px; color: #60a5fa; margin-bottom: 20px; }
+.summary .final-score { font-size: 48px; font-weight: 800; margin: 16px 0; }
+.summary .final-score.great { color: #4ade80; } .summary .final-score.ok { color: #fbbf24; } .summary .final-score.rough { color: #f87171; }
+.missed-list { text-align: left; max-width: 500px; margin: 20px auto; background: #1e293b; border-radius: 12px; padding: 16px 20px; }
+.missed-list h3 { color: #f87171; font-size: 14px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+.missed-list li { color: #cbd5e1; padding: 6px 0; border-bottom: 1px solid #334155; font-size: 14px; list-style: none; } .missed-list li:last-child { border: none; }
+.kb-hint { font-size: 11px; color: #475569; text-align: center; padding: 8px; }
+.index-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,23,42,0.95); z-index: 100; flex-direction: column; align-items: center; padding: 20px; overflow-y: auto; }
+.index-overlay h2 { color: #60a5fa; font-size: 20px; margin-bottom: 16px; }
+.index-close { position: absolute; top: 16px; right: 20px; background: none; border: none; color: #94a3b8; font-size: 24px; cursor: pointer; } .index-close:hover { color: #e2e8f0; }
+.index-grid { max-width: 700px; width: 100%; display: flex; flex-direction: column; gap: 4px; }
+.index-chip { padding: 10px 14px; background: #1e293b; border: 1px solid #334155; border-radius: 8px; cursor: pointer; font-size: 13px; color: #cbd5e1; transition: all 0.2s; display: flex; justify-content: space-between; align-items: center; }
+.index-chip:hover { background: #334155; border-color: #60a5fa; }
+.index-chip .chip-num { color: #64748b; font-size: 11px; min-width: 30px; }
+.chip-got { border-left: 3px solid #4ade80; } .chip-got .chip-status { color: #4ade80; }
+.chip-missed { border-left: 3px solid #f87171; } .chip-missed .chip-status { color: #f87171; }
+.chip-current { border-left: 3px solid #60a5fa; background: #1e3a5f; } .chip-current .chip-status { color: #60a5fa; }
+.chip-status { font-size: 11px; min-width: 50px; text-align: right; }
+</style>
+
+
+
+
+<style id="fab-ai-companion-css">
+.fab-ai-btn {
+  position: fixed; bottom: 24px; right: 24px; z-index: 9998;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; border-radius: 50%; width: 56px; height: 56px;
+  font-size: 26px; cursor: pointer; box-shadow: 0 4px 16px rgba(99,102,241,0.45);
+  transition: all 0.2s; display: flex; align-items: center; justify-content: center;
+  padding: 0;
+}
+.fab-ai-btn:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 8px 24px rgba(99,102,241,0.6); }
+.fab-ai-btn:active { transform: scale(0.95); }
+
+.fab-ai-panel {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(480px, 94vw);
+  background: #0f172a; border-left: 2px solid #334155;
+  box-shadow: -8px 0 32px rgba(0,0,0,0.5);
+  z-index: 9999; display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform 0.28s ease-out;
+}
+.fab-ai-panel.open { transform: translateX(0); }
+
+.fab-ai-header {
+  padding: 12px 16px; background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #fff; display: flex; align-items: center; gap: 8px;
+}
+.fab-ai-header h3 { font-size: 15px; font-weight: 700; margin: 0; flex: 1; }
+.fab-ai-hdr-btn {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 12px;
+  font-weight: 600;
+}
+.fab-ai-hdr-btn:hover { background: rgba(255,255,255,0.28); }
+.fab-ai-close {
+  background: rgba(255,255,255,0.15); color: #fff; border: none;
+  width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-size: 18px;
+  line-height: 1; padding: 0;
+}
+.fab-ai-close:hover { background: rgba(255,255,255,0.3); }
+
+.fab-ai-body {
+  flex: 1; overflow-y: auto; padding: 14px 16px;
+  color: #e2e8f0; font-size: 13px; line-height: 1.6;
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.fab-ai-qpreview {
+  padding: 8px 12px; background: rgba(129,140,248,0.08); border-left: 3px solid #818cf8;
+  border-radius: 6px; font-size: 12px; color: #94a3b8; max-height: 100px; overflow-y: auto;
+  flex-shrink: 0;
+}
+.fab-ai-qpreview b { color: #cbd5e1; }
+
+.fab-ai-suggestions {
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 4px 0;
+}
+.fab-ai-sug {
+  background: rgba(99,102,241,0.12); color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.35); border-radius: 14px;
+  padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 500;
+  transition: all .15s;
+}
+.fab-ai-sug:hover { background: rgba(99,102,241,0.25); color: #dbeafe; transform: translateY(-1px); }
+
+.fab-ai-msg { display: flex; gap: 6px; max-width: 100%; }
+.fab-ai-msg.user { justify-content: flex-end; }
+.fab-ai-bubble {
+  padding: 10px 14px; border-radius: 12px; font-size: 13px; line-height: 1.55;
+  max-width: 92%; word-wrap: break-word;
+}
+.fab-ai-msg.user .fab-ai-bubble {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  color: #fff; border-bottom-right-radius: 4px;
+}
+.fab-ai-msg.ai .fab-ai-bubble {
+  background: #1e293b; color: #e2e8f0; border-bottom-left-radius: 4px;
+  border: 1px solid #334155;
+}
+.fab-ai-msg.ai .fab-ai-bubble strong,
+.fab-ai-msg.ai .fab-ai-bubble b { color: #a5b4fc; }
+.fab-ai-msg.ai .fab-ai-bubble ul { margin: 6px 0; padding-left: 20px; }
+.fab-ai-msg.ai .fab-ai-bubble li { margin: 3px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p { margin: 0 0 8px 0; }
+.fab-ai-msg.ai .fab-ai-bubble p:last-child { margin-bottom: 0; }
+.fab-ai-msg.ai .fab-ai-bubble h3 { font-size: 13px; margin: 8px 0 4px 0; color: #c4b5fd; }
+.fab-ai-msg.ai .fab-ai-bubble code { background: #0f172a; padding: 1px 5px; border-radius: 3px; font-size: 11px; }
+
+.fab-ai-tts-row { display: flex; align-items: center; gap: 6px; margin-top: 6px; padding-top: 6px; border-top: 1px solid #334155; }
+.fab-ai-tts-btn {
+  background: rgba(129,140,248,0.15); color: #c4b5fd;
+  border: 1px solid rgba(129,140,248,0.35); border-radius: 14px;
+  padding: 3px 10px; font-size: 11px; cursor: pointer; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.fab-ai-tts-btn:hover { background: rgba(129,140,248,0.3); color: #ddd6fe; }
+.fab-ai-tts-btn.playing { background: rgba(239,68,68,0.18); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+.fab-ai-tts-rate {
+  background: #0f172a; color: #cbd5e1; border: 1px solid #334155;
+  border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;
+}
+
+.fab-ai-status {
+  padding: 10px 14px; background: rgba(99,102,241,0.12); border: 1px solid rgba(99,102,241,0.3);
+  border-radius: 8px; color: #a5b4fc; font-size: 12px;
+}
+.fab-ai-status.err { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.4); color: #fca5a5; }
+.fab-ai-loading { display: flex; align-items: center; gap: 8px; color: #94a3b8; padding: 4px 6px; font-size: 12px; }
+.fab-ai-spinner {
+  width: 12px; height: 12px; border: 2px solid #334155; border-top-color: #818cf8;
+  border-radius: 50%; animation: fab-ai-spin 0.8s linear infinite;
+}
+@keyframes fab-ai-spin { to { transform: rotate(360deg); } }
+
+.fab-ai-followup {
+  padding: 12px; background: #1e293b; border-top: 1px solid #334155;
+  display: flex; gap: 8px; align-items: flex-end;
+}
+.fab-ai-mini-close {
+  background: #334155; color: #94a3b8; border: 1px solid #475569;
+  width: 32px; height: 36px; border-radius: 8px; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-weight: 600;
+  flex-shrink: 0;
+}
+.fab-ai-mini-close:hover { background: #475569; color: #f87171; border-color: #ef4444; }
+.fab-ai-followup textarea {
+  flex: 1; background: #0f172a; color: #e2e8f0;
+  border: 1px solid #334155; border-radius: 8px;
+  padding: 8px 10px; font-size: 13px; font-family: inherit;
+  resize: none; min-height: 36px; max-height: 120px;
+}
+.fab-ai-followup textarea:focus { outline: none; border-color: #818cf8; }
+.fab-ai-followup button {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  border: none; padding: 0 14px; border-radius: 8px; font-weight: 600;
+  cursor: pointer; font-size: 13px; white-space: nowrap;
+}
+.fab-ai-followup button:hover { transform: translateY(-1px); }
+.fab-ai-followup button:disabled { opacity: 0.5; cursor: not-allowed; }
+</style>
+
+
+<style id="ga0202-cleanup-v9">
+/* Hide legacy FAB Lecture Final hub buttons (we have our own ga0202-back-to-hub) */
+.fab-back-to-hub-btn,
+.sh-fab,
+.sh-back-to-start-fab,
+button[onclick*="fabBackToHub"],
+button[onclick*="shBackToStart"] { display: none !important; }
+/* Make sure draw button + AI button don't overlap */
+.fab-stack { bottom: 90px !important; right: 24px !important; z-index: 9999 !important; }
+.fab-stack button { pointer-events: auto !important; }
+#draw-btn { z-index: 10000 !important; }
+.draw-toolbar { z-index: 10001 !important; bottom: 158px !important; right: 90px !important; }
+.draw-canvas { z-index: 9990 !important; }
+#ai-btn, #ai-aug-btn, #ai-modal { display: none !important; }
+</style>
+<script id="ga0202-cleanup-v9-js">
+// Override legacy redirect functions to point to OUR hub instead
+window.fabBackToHub = function() { window.location.href = 'ga-0202-m13-cranial-nerves-1-hub_PENDING_REVIEW.html'; };
+window.shBackToStart = function() { window.location.href = 'ga-0202-m13-cranial-nerves-1-hub_PENDING_REVIEW.html'; };
+</script>
+</head>
+<body>
+
+<a id="ga0202-back-to-hub" href="ga-0202-m13-cranial-nerves-1-hub_PENDING_REVIEW.html" style="position:fixed;top:14px;left:14px;z-index:9000;padding:8px 14px;background:linear-gradient(135deg,#0d3d2c,#065f46);color:#fff;text-decoration:none;border:1px solid #10b981;border-radius:10px;font-size:0.84rem;font-weight:600;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">← Back to Cranial Nerves Hub</a>
+<div id="pending-review-badge" style="position:fixed;top:14px;right:14px;z-index:9000;padding:6px 12px;background:linear-gradient(135deg,#78350f,#b45309);color:#fff;border:1px solid #f59e0b;border-radius:10px;font-size:0.72rem;font-weight:700;letter-spacing:0.5px;box-shadow:0 4px 12px rgba(0,0,0,0.4);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">⏳ PENDING REVIEW</div>
+
+<div class="header">
+  <h1>⚡ GA 0202 M13 - Cranial Nerves (Part 1) Rapid Recall</h1>
+  <div class="subtitle">Dr. Maini · Cranial Nerves I to III, Pharynx, Prevertebral &amp; Cervical Sympathetics · 100 Cards | See the prompt. Say it. Reveal to check.</div>
+  <div class="tts-banner" style="font-size:12px;color:#fbbf24;background:#1a1206;border:1px solid #b45309;border-radius:8px;padding:7px 12px;margin:10px auto 0;max-width:620px;line-height:1.5">🔊 Best voices in Microsoft Edge (it has the natural Ava / Emma / Andrew voices). Other browsers work but sound more robotic.</div>
+</div>
+<div class="score-bar">
+  <span class="got" id="gotCount">0 Got It</span>
+  <span class="missed" id="missedCount">0 Missed</span>
+  <span class="remain" id="remainCount">0 Left</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+<div class="card-container" id="cardArea">
+  <div class="card">
+    <div class="browse-label" id="browseLabel">BROWSING — already answered</div>
+    <div class="card-number" id="cardNum"></div>
+    <div class="term" id="termText"></div>
+    <div class="answer" id="answerText"></div>
+    <div class="prof-tip" id="profTip"></div>
+    <div class="btn-row">
+      <button class="btn btn-reveal" id="btnReveal" onclick="doReveal()">Reveal Answer</button>
+      <button class="btn btn-got" id="btnGot" onclick="grade(true)">Got It</button>
+      <button class="btn btn-missed" id="btnMissed" onclick="grade(false)">Missed It</button>
+      <button class="btn btn-continue" id="btnContinue" onclick="resumeQuiz()">Continue &rarr;</button>
+      <button class="btn btn-redo" id="btnRedo" onclick="redoPrev()">Redo</button>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-back" id="btnBack" onclick="goBack()">&larr; Back</button>
+      <button class="btn btn-redoback" id="btnRedoBack" onclick="redoBack()">Redo Back</button>
+      <button class="btn btn-skip" onclick="skip()">Skip</button>
+    </div>
+  </div>
+</div>
+<div class="summary" id="summaryArea">
+  <h2>Drill Complete</h2>
+  <div class="final-score" id="finalScore"></div>
+  <p id="finalMsg" style="color:#94a3b8;margin-bottom:20px;"></p>
+  <div class="missed-list" id="missedListBox" style="display:none;"><h3>Review These</h3><ul id="missedListUl"></ul></div>
+  <div class="btn-row" style="margin-top:24px;">
+    <button class="btn btn-reveal" onclick="startDrill('all')">Restart All</button>
+    <button class="btn btn-missed" id="btnRedrill" style="display:inline-block;" onclick="startDrill('missed')">Re-Drill Missed</button>
+  </div>
+</div>
+<div class="controls">
+  <button class="ctrl-btn" id="btnShuffle" onclick="toggleShuffle()">Shuffle</button>
+  <button class="ctrl-btn" onclick="toggleIndex()">Card Index</button>
+  <button class="ctrl-btn" onclick="startDrill('all')">Reset</button>
+</div>
+<div class="kb-hint">Space = Reveal | G = Got It | M = Missed | S = Skip | B = Back | D = Redo Back | R = Redo | I = Index</div>
+<div class="index-overlay" id="indexOverlay">
+  <button class="index-close" onclick="toggleIndex()">&times;</button>
+  <h2>Card Index</h2>
+  <div class="index-grid" id="indexGrid"></div>
+</div>
+<script>
+const BANK = [
+ {
+  "term": "[CN Overview] The pharyngeal plexus (the network on the side and back of the pharynx) is formed by which two cranial nerves?",
+  "answer": "Glossopharyngeal (IX) and vagus (X). Maini: the pharyngeal plexus is formed by the 9th and 10th nerves.",
+  "tip": "9 + 10 form the plexus."
+ },
+ {
+  "term": "[CN Overview] Every pharyngeal muscle is supplied by the vagus (X) EXCEPT one. Which muscle, and by which nerve?",
+  "answer": "Stylopharyngeus, supplied by the glossopharyngeal nerve (IX). All other pharyngeal muscles are vagus.",
+  "tip": "The lone 3rd-arch pharyngeal muscle breaks the vagus rule."
+ },
+ {
+  "term": "[CN Overview] What happens to the motor fibers of the CRANIAL part of the accessory nerve (XI)?",
+  "answer": "They join the vagus and are distributed as its motor (SVE) fibers to the pharyngeal, palatine, and laryngeal muscles. Only the spinal fibers leave as CN XI to trapezius and SCM.",
+  "tip": "The cranial XI fibers change party and ride the vagus."
+ },
+ {
+  "term": "[CN Overview] Which cranial nerves carry the motor impulses for the pharyngeal (reflex) stage of swallowing?",
+  "answer": "CN V, IX, X, and XII. Maini lists the 5th, 9th, 10th, and 12th nerves.",
+  "tip": "5, 9, 10, 12."
+ },
+ {
+  "term": "[CN Overview] Where is the reflex centre for the pharyngeal (involuntary) stage of swallowing?",
+  "answer": "The nucleus of the tractus solitarius, located in the medulla.",
+  "tip": "NTS, in the medulla."
+ },
+ {
+  "term": "[CN Overview] Which nerve supplies sensation to the NASOPHARYNX mucosa?",
+  "answer": "The maxillary nerve (V2), a branch of the trigeminal.",
+  "tip": "The same V2 that covers the posterior nasal cavity continues into the nasopharynx."
+ },
+ {
+  "term": "[CN Overview] Which nerve supplies sensation to the OROPHARYNX mucosa?",
+  "answer": "The glossopharyngeal nerve (IX).",
+  "tip": "It tracks with the posterior third of the tongue (also IX)."
+ },
+ {
+  "term": "[CN Overview] Which nerve supplies sensation around the entrance to the larynx (upper laryngopharynx)?",
+  "answer": "The internal laryngeal branch of the vagus.",
+  "tip": "Internal laryngeal = sensory above the vocal cords."
+ },
+ {
+  "term": "[CN Overview] The superior cervical ganglion sends cranial (sympathetic) branches to which cranial nerves?",
+  "answer": "CN IX, X, and XII.",
+  "tip": "9, 10, 12 - the neighbours near the jugular foramen."
+ },
+ {
+  "term": "[CN I - Olfactory] What functional fiber type is the olfactory nerve (CN I)?",
+  "answer": "SVA (special visceral afferent), carrying the special sense of smell.",
+  "tip": "A chemical special sense = SVA."
+ },
+ {
+  "term": "[CN I - Olfactory] Where are the olfactory receptor neurons located?",
+  "answer": "In the olfactory epithelium near the roof of the nasal cavity.",
+  "tip": "High up in the nose - the roof."
+ },
+ {
+  "term": "[CN I - Olfactory] What is on the apical border of an olfactory neuron, and what class of receptor is it?",
+  "answer": "Multiple cilia; it is a chemoreceptor (stimulated by dissolved odorant chemicals).",
+  "tip": "Chemicals dissolve in mucus and stimulate the ciliated chemoreceptors."
+ },
+ {
+  "term": "[CN I - Olfactory] What is the function of the basal cells of the olfactory epithelium?",
+  "answer": "They act as stem cells that divide to replace worn-out olfactory receptors.",
+  "tip": "Basal = the regeneration reservoir."
+ },
+ {
+  "term": "[CN I - Olfactory] Through which bony opening do the olfactory fascicles pass to reach the olfactory bulb?",
+  "answer": "The foramina of the cribriform plate of the ethmoid bone.",
+  "tip": "The sieve-like plate of the ethmoid."
+ },
+ {
+  "term": "[CN I - Olfactory] In the olfactory bulb, the receptor axons synapse with which cells?",
+  "answer": "Mitral cells and association neurons.",
+  "tip": "The second-order cells of smell are the mitral cells."
+ },
+ {
+  "term": "[CN I - Olfactory] Where does the olfactory tract end?",
+  "answer": "In the primary olfactory cortex of the temporal lobe.",
+  "tip": "Smell goes to the temporal lobe (not obligately relayed through the thalamus)."
+ },
+ {
+  "term": "[CN I - Olfactory] Is there a single olfactory nerve trunk?",
+  "answer": "No. It is multiple fascicles of axonal processes that pierce the cribriform plate.",
+  "tip": "Many little bundles, not one trunk."
+ },
+ {
+  "term": "[CN I - Olfactory] What is anosmia, and can it recover?",
+  "answer": "Loss of smell (from lost olfactory fibers, aging, trauma, or inflammation such as COVID). Yes - olfactory neurons can regenerate.",
+  "tip": "An- (without) + osmia (smell)."
+ },
+ {
+  "term": "[CN I - Olfactory] Smelling something that is not actually present (an olfactory hallucination) is called?",
+  "answer": "Phantosmia.",
+  "tip": "A phantom smell = phantosmia."
+ },
+ {
+  "term": "[CN I - Olfactory] Losing awareness of a smell after continuous exposure is called?",
+  "answer": "Olfactory adaptation - the continuously stimulated receptors stop responding.",
+  "tip": "Same smell, tuned out over time."
+ },
+ {
+  "term": "[CN II - Optic] What fiber type is the optic nerve, and why?",
+  "answer": "SSA (special somatic afferent), because the eye develops from ectoderm, making the input somatic rather than visceral.",
+  "tip": "Eye from ectoderm = somatic = SSA."
+ },
+ {
+  "term": "[CN II - Optic] The optic nerve is made of the axons of which cells? (board favorite)",
+  "answer": "The ganglion cells of the retina - NOT the rods and cones.",
+  "tip": "Rods/cones to bipolar to ganglion, and the ganglion axons form the optic nerve."
+ },
+ {
+  "term": "[CN II - Optic] Cones: what is their function and location?",
+  "answer": "Colour vision; concentrated in the central retina.",
+  "tip": "Cones = colour, central."
+ },
+ {
+  "term": "[CN II - Optic] Rods: what are their key properties?",
+  "answer": "Respond to very little light, more numerous peripherally, no colour vision, and use a photopigment derived from vitamin A.",
+  "tip": "Dim light, peripheral, vitamin A."
+ },
+ {
+  "term": "[CN II - Optic] Why does dark adaptation take about 20 minutes?",
+  "answer": "The rods must resynthesize the photopigment that bright light had exhausted.",
+  "tip": "Rebuilding the bleached rod pigment takes about 20 min."
+ },
+ {
+  "term": "[CN II - Optic] What is the retinal signal pathway to the optic nerve?",
+  "answer": "Rods and cones project onto bipolar cells, which project onto ganglion cells, whose axons form the optic nerve.",
+  "tip": "Photoreceptor, bipolar, ganglion."
+ },
+ {
+  "term": "[CN II - Optic] The optic nerve leaves the orbit through which opening, in which bone?",
+  "answer": "The optic canal, which is part of the sphenoid bone.",
+  "tip": "Optic canal = sphenoid."
+ },
+ {
+  "term": "[CN II - Optic] At the optic chiasma, which fibers cross to the other side?",
+  "answer": "Only the NASAL retinal fibers cross; the temporal retinal fibers stay uncrossed.",
+  "tip": "Nasal crosses, temporal stays."
+ },
+ {
+  "term": "[CN II - Optic] How do the visual fields map onto the retina?",
+  "answer": "The temporal (lateral) field projects onto the NASAL retina, and the nasal field projects onto the TEMPORAL retina.",
+  "tip": "The optics flip it: temporal field lands on nasal retina."
+ },
+ {
+  "term": "[CN II - Optic] What does a complete lesion of ONE optic nerve cause?",
+  "answer": "Total loss of vision in that eye (monocular blindness).",
+  "tip": "One nerve out = that whole eye is blind."
+ },
+ {
+  "term": "[CN II - Optic] A lesion AT the optic chiasma causes which field defect, and what is its commonest cause?",
+  "answer": "Bitemporal hemianopia (loss of both temporal fields). The commonest cause is a pituitary adenoma.",
+  "tip": "Crossing (nasal) fibers gone = both temporal fields lost."
+ },
+ {
+  "term": "[CN II - Optic] Why does a pituitary adenoma classically cause the chiasmal (bitemporal) defect?",
+  "answer": "The pituitary gland sits right next to the chiasma, so an expanding tumour compresses the crossing (nasal) fibers.",
+  "tip": "The gland sits under the chiasma."
+ },
+ {
+  "term": "[CN II - Optic] A lesion of the LEFT optic tract (behind the chiasma) causes?",
+  "answer": "Loss of the opposite (right) field of vision in both eyes - a homonymous defect. The patient turns to compensate.",
+  "tip": "A tract lesion gives contralateral homonymous loss."
+ },
+ {
+  "term": "[CN II - Optic] Beyond the midbrain, the visual pathway continues as what, before reaching the occipital lobe?",
+  "answer": "The optic radiation.",
+  "tip": "Radiation runs on to the occipital lobe."
+ },
+ {
+  "term": "[CN III - Oculomotor] Besides somatic motor fibers, what autonomic component does CN III carry?",
+  "answer": "Preganglionic parasympathetic (GVE) fibers.",
+  "tip": "Motor to eye muscles + preganglionic parasympathetic."
+ },
+ {
+  "term": "[CN III - Oculomotor] From where does the oculomotor nerve emerge?",
+  "answer": "From the anterior surface of the midbrain, at the interpeduncular fossa.",
+  "tip": "Between the cerebral peduncles = interpeduncular fossa."
+ },
+ {
+  "term": "[CN III - Oculomotor] The oculomotor nerve splits into superior and inferior divisions and enters the orbit through?",
+  "answer": "The superior orbital fissure.",
+  "tip": "Superior orbital fissure - shared with IV, V1, and VI."
+ },
+ {
+  "term": "[CN III - Oculomotor] Which extrinsic (extraocular) muscles does CN III supply?",
+  "answer": "Superior rectus, inferior rectus, medial rectus, inferior oblique, and levator palpebrae superioris.",
+  "tip": "All eye muscles except LR and SO, plus the levator (LPS)."
+ },
+ {
+  "term": "[CN III - Oculomotor] Which two extraocular muscles are NOT supplied by CN III?",
+  "answer": "Lateral rectus (CN VI) and superior oblique (CN IV).",
+  "tip": "LR6, SO4 - the classic exceptions."
+ },
+ {
+  "term": "[CN III - Oculomotor] Which intrinsic (intraocular) muscles does CN III supply via its parasympathetic fibers?",
+  "answer": "The ciliary muscle and the sphincter (constrictor) pupillae.",
+  "tip": "Parasympathetic = constrict the pupil + focus the lens."
+ },
+ {
+  "term": "[CN III - Oculomotor] In a complete third nerve palsy, which way is the eye deviated, and why?",
+  "answer": "Down and out, because the surviving superior oblique (CN IV) and lateral rectus (CN VI) remain intact and pull it there.",
+  "tip": "The survivors SO + LR pull it down and out."
+ },
+ {
+  "term": "[CN III - Oculomotor] What lid sign appears in third nerve palsy, and which muscle causes it?",
+  "answer": "Ptosis (drooping upper lid), from paralysis of the levator palpebrae superioris.",
+  "tip": "Levator down = lid drops."
+ },
+ {
+  "term": "[CN III - Oculomotor] What happens to the pupil in third nerve palsy, and what is the term?",
+  "answer": "The pupil dilates (mydriasis), because the parasympathetic sphincter pupillae is lost.",
+  "tip": "Sphincter gone = big pupil = mydriasis."
+ },
+ {
+  "term": "[CN III - Oculomotor] Why is accommodation lost in third nerve palsy?",
+  "answer": "Paralysis of the ciliary muscle, so the lens cannot become more convex for near focus.",
+  "tip": "No ciliary pull = the lens stays flat."
+ },
+ {
+  "term": "[CN III - Oculomotor] Right CN III is lost. What happens to the light reflexes?",
+  "answer": "No DIRECT reflex in the right eye, but the CONSENSUAL (indirect) reflex in the left eye is intact because its CN III still works.",
+  "tip": "The bad eye's efferent limb fails; the good eye's III still fires."
+ },
+ {
+  "term": "[CN III - Oculomotor] In the accommodation (near) reflex, convergence is produced by which muscle and nerve?",
+  "answer": "The medial rectus (an oculomotor, CN III, muscle).",
+  "tip": "Eyes cross inward = the medial recti = CN III."
+ },
+ {
+  "term": "[CN III - Oculomotor] In accommodation, what happens to the lens, and by which muscle?",
+  "answer": "The ciliary muscle contracts and the lens becomes more convex (rounder) for near focus.",
+  "tip": "Ciliary contracts, zonules slacken, the lens fattens."
+ },
+ {
+  "term": "[Horner vs CN III] What pupil finding indicates HORNER syndrome?",
+  "answer": "Miosis (a constricted pupil), from sympathetic failure leaving the dilator pupillae unopposed.",
+  "tip": "Sympathetic out = dilator fails = small pupil."
+ },
+ {
+  "term": "[Horner vs CN III] What pupil finding points to THIRD NERVE PALSY rather than Horner?",
+  "answer": "Mydriasis (a dilated pupil), from loss of the parasympathetic sphincter pupillae.",
+  "tip": "Parasympathetic out = sphincter fails = big pupil."
+ },
+ {
+  "term": "[Horner vs CN III] Which ONE sign is shared by both Horner syndrome and third nerve palsy?",
+  "answer": "Ptosis - mild in Horner (superior tarsal muscle) and more marked in CN III palsy (levator palpebrae superioris).",
+  "tip": "Both droop the lid, for different muscle reasons."
+ },
+ {
+  "term": "[Horner vs CN III] KEY TRAP: why is there NO squint (strabismus) in Horner syndrome?",
+  "answer": "Because sympathetic fibers innervate NONE of the extraocular muscles, so a sympathetic lesion cannot misalign the globe.",
+  "tip": "Sympathetic is not an eye-mover, so no squint in Horner."
+ },
+ {
+  "term": "[Horner vs CN III] Mechanistically, which muscle loses innervation to cause the Horner miosis, and from which system?",
+  "answer": "The dilator pupillae, which is sympathetic. Its loss leaves the pupil constricted.",
+  "tip": "Sympathetic dilator fails = miosis."
+ },
+ {
+  "term": "[Horner vs CN III] Beyond miosis and mild ptosis, what other features mark Horner syndrome?",
+  "answer": "Anhidrosis (loss of sweating) and flushing of the face on the affected side.",
+  "tip": "Sympathetic loss to the face = dry, flushed skin."
+ },
+ {
+  "term": "[Horner vs CN III] Ptosis + a small (constricted) pupil + NO squint + facial anhidrosis = which diagnosis?",
+  "answer": "Horner syndrome.",
+  "tip": "Small pupil + dry face + no squint = Horner."
+ },
+ {
+  "term": "[Horner vs CN III] Ptosis + a dilated pupil + a down-and-out eye + squint = which diagnosis, and what is the single best distinguisher?",
+  "answer": "Third nerve palsy. The best single distinguisher is the dilated pupil (mydriasis) - the pupil is the best thing to look at.",
+  "tip": "Big pupil + squint + down-and-out = CN III palsy."
+ },
+ {
+  "term": "[Prevertebral] How many prevertebral muscles are there, and what are they?",
+  "answer": "Four: longus capitis, longus colli, rectus capitis anterior, and rectus capitis lateralis.",
+  "tip": "Two longus + two rectus capitis = four."
+ },
+ {
+  "term": "[Prevertebral] Longus capitis attaches SUPERIORLY to what?",
+  "answer": "The inferior surface of the basilar part of the occipital bone.",
+  "tip": "Capitis reaches the head (basilar occiput)."
+ },
+ {
+  "term": "[Prevertebral] Longus capitis attaches INFERIORLY to what?",
+  "answer": "The anterior tubercles of the transverse processes of C3 to C6.",
+  "tip": "Anterior tubercles, C3 to C6."
+ },
+ {
+  "term": "[Prevertebral] What is the nerve supply of longus capitis?",
+  "answer": "Branches of the ventral rami of C1 to C3.",
+  "tip": "C1 to C3 ventral rami."
+ },
+ {
+  "term": "[Prevertebral] What are the three parts of longus colli?",
+  "answer": "Superior oblique, vertical (intermediate), and inferior oblique.",
+  "tip": "Two obliques + one vertical."
+ },
+ {
+  "term": "[Prevertebral] The INFERIOR OBLIQUE part of longus colli runs between which attachments?",
+  "answer": "From the bodies of T1 to T3 up to the anterior tubercles of the transverse processes of C5 to C7.",
+  "tip": "Bodies (T1-T3) to transverse processes (C5-C7)."
+ },
+ {
+  "term": "[Prevertebral] The SUPERIOR OBLIQUE part of longus colli runs between which attachments?",
+  "answer": "From the anterior tubercles of the transverse processes of C3 to C5 up to the anterior tubercle of the atlas.",
+  "tip": "Transverse processes (C3-C5) to the atlas."
+ },
+ {
+  "term": "[Prevertebral] The VERTICAL (intermediate) part of longus colli runs between which attachments?",
+  "answer": "From the bodies of C5 to C7 and T1 to T3 up to the bodies of C2 to C4 (body to body).",
+  "tip": "Bodies to bodies."
+ },
+ {
+  "term": "[Prevertebral] What are the actions of longus colli?",
+  "answer": "It flexes the neck; the oblique parts add ipsilateral lateral flexion, and the inferior oblique rotates the neck to the opposite side.",
+  "tip": "Flex + ipsilateral side-bend + contralateral rotate."
+ },
+ {
+  "term": "[Prevertebral] Rectus capitis ANTERIOR attaches SUPERIORLY to what?",
+  "answer": "The basilar part of the occipital bone, anterior to the occipital condyle.",
+  "tip": "Anterior = basilar part."
+ },
+ {
+  "term": "[Prevertebral] Rectus capitis anterior attaches INFERIORLY to what?",
+  "answer": "The anterior aspect of the lateral mass of the atlas and the root of its transverse process.",
+  "tip": "Atlas lateral mass up to the basilar occiput."
+ },
+ {
+  "term": "[Prevertebral] Rectus capitis LATERALIS attaches SUPERIORLY to what (the key contrast with rectus capitis anterior)?",
+  "answer": "The jugular process of the occipital bone (whereas the anterior one attaches to the basilar part).",
+  "tip": "Lateralis = Jugular process."
+ },
+ {
+  "term": "[Prevertebral] Rectus capitis lateralis attaches INFERIORLY to what, and what is its action?",
+  "answer": "The upper surface of the transverse process of the atlas; it produces ipsilateral lateral flexion of the head.",
+  "tip": "Atlas transverse process to jugular process; it side-bends the head."
+ },
+ {
+  "term": "[Cervical Sympathetics] How many ganglia make up the cervical sympathetic trunk?",
+  "answer": "Three: superior, middle, and inferior cervical ganglia.",
+  "tip": "Superior, middle, inferior = three."
+ },
+ {
+  "term": "[Cervical Sympathetics] What type of neuron cell bodies do the cervical sympathetic ganglia contain?",
+  "answer": "Postganglionic sympathetic neurons.",
+  "tip": "Chain ganglia hold postganglionic sympathetic cell bodies."
+ },
+ {
+  "term": "[Cervical Sympathetics] From which spinal cord levels do the preganglionic fibers that end in the cervical ganglia arise?",
+  "answer": "The lateral horn of T1 to T2. The fibers ascend within the sympathetic chain.",
+  "tip": "There is no cervical lateral horn, so they climb up from T1-T2."
+ },
+ {
+  "term": "[Cervical Sympathetics] What is the extent of the cervical sympathetic trunk?",
+  "answer": "From the neck of the first rib up to the base of the skull.",
+  "tip": "First rib to the skull base."
+ },
+ {
+  "term": "[Cervical Sympathetics] What is the chain's relation to the carotid arteries, and the clinical consequence?",
+  "answer": "It lies posterior to the common and internal carotid arteries, so a carotid aneurysm can compress the ganglia.",
+  "tip": "Behind the carotids - vulnerable to an aneurysm."
+ },
+ {
+  "term": "[Cervical Sympathetics] Between which two fascial layers is the sympathetic chain embedded?",
+  "answer": "Between the carotid sheath and the prevertebral fascia (with the vagus as its medial relation).",
+  "tip": "Sandwiched between the carotid sheath and prevertebral fascia."
+ },
+ {
+  "term": "[Cervical Sympathetics] About 99% of head and neck structures get their postganglionic sympathetic fibers from which ganglion?",
+  "answer": "The superior cervical ganglion.",
+  "tip": "Head and neck sympathetic supply = the superior cervical ganglion."
+ },
+ {
+  "term": "[Cervical Sympathetics] The superior cervical ganglion supplies gray rami communicantes to which spinal nerves?",
+  "answer": "C1 to C4.",
+  "tip": "Superior ganglion serves C1 to C4."
+ },
+ {
+  "term": "[Cervical Sympathetics] Which ganglia supply gray rami to C5-C6 and to C7-C8?",
+  "answer": "The middle cervical ganglion (C5-C6) and the inferior cervical ganglion (C7-C8).",
+  "tip": "Middle = 5,6; inferior = 7,8."
+ },
+ {
+  "term": "[Cervical Sympathetics] Gray rami carry sympathetic fibers to which THREE body-wall structures?",
+  "answer": "Sweat glands, arrector pili muscles, and blood vessels.",
+  "tip": "The three body-wall sympathetic targets."
+ },
+ {
+  "term": "[Cervical Sympathetics] Where is the SUPERIOR cervical ganglion, and what are its relations?",
+  "answer": "Opposite C2-C3, behind the internal carotid artery and anterior to the longus capitis muscle. It is the longest of the three.",
+  "tip": "Longest ganglion, at C2-C3, behind the ICA."
+ },
+ {
+  "term": "[Cervical Sympathetics] Why is cardiac pain referred to the neck and side of the head?",
+  "answer": "Visceral afferent (GVA / pain) fibers follow the cardiac sympathetic nerves back from the heart, which reach the cervical ganglia.",
+  "tip": "Pain afferents hitch a ride on the cardiac sympathetics."
+ },
+ {
+  "term": "[Cervical Sympathetics] Where is the MIDDLE cervical ganglion located?",
+  "answer": "Opposite the C6 vertebra, resting on top of the inferior thyroid artery.",
+  "tip": "C6, riding the inferior thyroid artery."
+ },
+ {
+  "term": "[Cervical Sympathetics] The INFERIOR cervical ganglion usually fuses with which ganglion, and to form what?",
+  "answer": "With the first thoracic (T1) ganglion, forming the stellate ganglion.",
+  "tip": "Inferior cervical + T1 = stellate."
+ },
+ {
+  "term": "[Cervical Sympathetics] Where is the inferior cervical ganglion, and which arteries get its arterial branches?",
+  "answer": "In the interval between the C7 transverse process and the neck of the first rib; its arterial branches go to the subclavian and vertebral arteries.",
+  "tip": "C7 to first rib; subclavian + vertebral arteries."
+ },
+ {
+  "term": "[Deep Cervical Fascia] What are the four layers of the deep cervical fascia?",
+  "answer": "The investing layer, the pretracheal layer, the prevertebral layer, and the carotid sheath.",
+  "tip": "Investing, pretracheal, prevertebral, carotid sheath."
+ },
+ {
+  "term": "[Deep Cervical Fascia] Which two muscles does the INVESTING layer enclose?",
+  "answer": "Sternocleidomastoid (anteriorly) and trapezius (posteriorly).",
+  "tip": "It wraps SCM + trapezius all around."
+ },
+ {
+  "term": "[Deep Cervical Fascia] The investing layer thickens between the styloid process and the angle of the mandible to form which ligament?",
+  "answer": "The stylomandibular ligament.",
+  "tip": "Styloid process to the angle of the mandible (the external one)."
+ },
+ {
+  "term": "[Deep Cervical Fascia] The investing layer forms the roof of which structures, and attaches posteriorly to what?",
+  "answer": "The roof of the anterior and posterior triangles of the neck; it attaches posteriorly to the ligamentum nuchae.",
+  "tip": "Roof of both neck triangles."
+ },
+ {
+  "term": "[Deep Cervical Fascia] Which structures does the PRETRACHEAL fascia enclose?",
+  "answer": "The thyroid gland and the infrahyoid (strap) muscles.",
+  "tip": "In front of the trachea, so thyroid + strap muscles."
+ },
+ {
+  "term": "[Deep Cervical Fascia] Inferiorly, the pretracheal fascia spreads into the thorax and merges with what?",
+  "answer": "The fibrous pericardium.",
+  "tip": "Down into the chest, blending with the fibrous pericardium."
+ },
+ {
+  "term": "[Deep Cervical Fascia] The prevertebral fascia encloses the prevertebral muscles and, inferiorly, blends with which ligament?",
+  "answer": "The anterior longitudinal ligament (ALL).",
+  "tip": "Down the front of the spine, blending with the ALL."
+ },
+ {
+  "term": "[Deep Cervical Fascia] Which three structures are enclosed by the CAROTID SHEATH?",
+  "answer": "The common/internal carotid artery, the internal jugular vein, and the vagus nerve.",
+  "tip": "Carotid + internal jugular vein + vagus."
+ },
+ {
+  "term": "[Pharynx] What are the three parts of the pharynx?",
+  "answer": "The nasopharynx, the oropharynx, and the laryngopharynx.",
+  "tip": "Naso- / oro- / laryngo-."
+ },
+ {
+  "term": "[Pharynx] Why is the piriform fossa clinically important?",
+  "answer": "The internal laryngeal nerve lies just under the mucosa there, so a sharp swallowed foreign body (e.g., a fish bone) lodged in it can injure the nerve.",
+  "tip": "A fish bone puts the internal laryngeal nerve at risk."
+ },
+ {
+  "term": "[Pharynx] The internal laryngeal nerve is a branch of which nerve, and what is its modality?",
+  "answer": "A branch of the vagus (via the superior laryngeal nerve); it is sensory to the larynx above the vocal cords.",
+  "tip": "Vagus to superior laryngeal to internal (sensory, above the cords)."
+ },
+ {
+  "term": "[Pharynx] Which tonsils make up Waldeyer's ring?",
+  "answer": "One pharyngeal tonsil, two tubal tonsils, two palatine tonsils, and one lingual tonsil.",
+  "tip": "1 pharyngeal, 2 tubal, 2 palatine, 1 lingual."
+ },
+ {
+  "term": "[Pharynx] The tonsils are which kind of lymphatic tissue, and what are the PRIMARY lymphatic tissues?",
+  "answer": "The tonsils are SECONDARY lymphatic tissue. The primary lymphatic tissues are the bone marrow and thymus.",
+  "tip": "Bone marrow + thymus = primary; tonsils = secondary."
+ },
+ {
+  "term": "[Pharynx] Which part of the inferior pharyngeal constrictor forms the upper esophageal sphincter?",
+  "answer": "Cricopharyngeus - it rings the upper esophageal opening and acts as the upper esophageal sphincter.",
+  "tip": "Cricopharyngeus = the UES ring."
+ },
+ {
+  "term": "[Pharynx] The stylopharyngeus originates from which pharyngeal arch?",
+  "answer": "The third pharyngeal arch (consistent with its CN IX innervation).",
+  "tip": "3rd arch, hence CN IX - the lone IX pharyngeal muscle."
+ },
+ {
+  "term": "[Pharynx] Where is the deglutition (swallowing) centre located?",
+  "answer": "In the pons and the medulla.",
+  "tip": "Pons + medulla run the swallow."
+ },
+ {
+  "term": "[Pharynx] Which swallowing stage is voluntary, and what controls primary peristalsis in the esophageal stage?",
+  "answer": "The oral (buccal) stage is voluntary. Primary peristalsis of the esophageal stage involves vagal fibers and the deglutition centre.",
+  "tip": "Only the mouth phase is voluntary."
+ }
+];
+
+
+const LS_KEY = "ga_0202_m13_cranial_nerves_1_rapid_recall_v1";
+let deck = [], quizIdx = 0, viewIdx = 0;
+let got = 0, missed = 0, missedTerms = [], shuffleOn = false, revealed = false;
+let answered = {};
+function loadState(){try{const s=JSON.parse(localStorage.getItem(LS_KEY));if(s&&s.deck){deck=s.deck;quizIdx=s.quizIdx||0;viewIdx=s.viewIdx||s.idx||0;got=s.got;missed=s.missed;missedTerms=s.missedTerms||[];shuffleOn=s.shuffleOn||false;answered=s.answered||{};if(shuffleOn)document.getElementById("btnShuffle").classList.add("active");return true;}}catch(e){}return false;}
+function saveState(){localStorage.setItem(LS_KEY,JSON.stringify({deck,quizIdx,viewIdx,got,missed,missedTerms,shuffleOn,answered}));}
+function shuffleArr(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startDrill(mode){if(mode==='missed'&&missedTerms.length>0){deck=missedTerms.map(t=>BANK.findIndex(b=>b.term===t)).filter(i=>i>=0);}else{deck=BANK.map((_,i)=>i);}if(shuffleOn)shuffleArr(deck);quizIdx=0;viewIdx=0;got=0;missed=0;missedTerms=[];answered={};document.getElementById("summaryArea").style.display="none";document.getElementById("cardArea").style.display="block";showCard();saveState();}
+function showCard(){if(viewIdx>=deck.length){showSummary();return;}const item=BANK[deck[viewIdx]];const isBrowse=viewIdx<quizIdx;document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnRedoBack").style.display=viewIdx>0?"inline-block":"none";document.getElementById("browseLabel").style.display="none";revealed=false;if(isBrowse){document.getElementById("browseLabel").style.display="block";doReveal();document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("btnContinue").style.display="inline-block";document.getElementById("btnRedo").style.display="inline-block";}updateScores();}
+function doReveal(){document.getElementById("answerText").classList.add("show");if(BANK[deck[viewIdx]].tip)document.getElementById("profTip").classList.add("show");document.getElementById("btnReveal").style.display="none";if(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)){document.getElementById("btnGot").style.display="inline-block";document.getElementById("btnMissed").style.display="inline-block";}revealed=true;}
+function grade(correct){const isRedo=viewIdx<quizIdx&&answered[viewIdx]===undefined;if(viewIdx<quizIdx&&!isRedo)return;answered[viewIdx]=correct?'got':'missed';if(correct){got++;}else{missed++;missedTerms.push(BANK[deck[viewIdx]].term);}if(isRedo){viewIdx=quizIdx;}else{quizIdx=viewIdx+1;viewIdx=quizIdx;}showCard();saveState();}
+function goBack(){if(viewIdx>0){viewIdx--;showCard();saveState();}}
+function resumeQuiz(){viewIdx=quizIdx;showCard();saveState();}
+function redoBack(){if(viewIdx<=0)return;viewIdx--;if(viewIdx<quizIdx){const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];}document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";const item=BANK[deck[viewIdx]];document.getElementById("cardNum").textContent=(viewIdx+1)+" of "+deck.length;document.getElementById("termText").innerHTML=item.term;document.getElementById("answerText").innerHTML=item.answer;document.getElementById("profTip").innerHTML=item.tip?"Prof Tip: "+item.tip:"";revealed=false;updateScores();saveState();}
+function redoPrev(){if(viewIdx>=quizIdx)return;const oldGrade=answered[viewIdx];if(oldGrade==='got'){got--;}else if(oldGrade==='missed'){missed--;const term=BANK[deck[viewIdx]].term;const ti=missedTerms.indexOf(term);if(ti>=0)missedTerms.splice(ti,1);}delete answered[viewIdx];document.getElementById("browseLabel").style.display="none";document.getElementById("btnContinue").style.display="none";document.getElementById("btnRedo").style.display="none";document.getElementById("btnGot").style.display="none";document.getElementById("btnMissed").style.display="none";document.getElementById("answerText").classList.remove("show");document.getElementById("profTip").classList.remove("show");document.getElementById("btnReveal").style.display="inline-block";revealed=false;updateScores();saveState();}
+function skip(){if(viewIdx>=quizIdx){deck.push(deck[viewIdx]);deck.splice(viewIdx,1);quizIdx=viewIdx;showCard();saveState();}}
+function updateScores(){const remain=deck.length-quizIdx;document.getElementById("gotCount").textContent=got+" Got It";document.getElementById("missedCount").textContent=missed+" Missed";document.getElementById("remainCount").textContent=remain+" Left";const pct=deck.length>0?((got+missed)/deck.length)*100:0;document.getElementById("progressFill").style.width=pct+"%";}
+function showSummary(){document.getElementById("cardArea").style.display="none";document.getElementById("summaryArea").style.display="block";const total=got+missed;const pct=total>0?Math.round((got/total)*100):0;const el=document.getElementById("finalScore");el.textContent=pct+"%";el.className="final-score "+(pct>=85?"great":pct>=65?"ok":"rough");document.getElementById("finalMsg").textContent=got+" of "+total+" — "+(pct>=90?"All terms locked in.":pct>=75?"Solid. Hit the missed ones again.":"Keep drilling. Re-do the missed cards.");document.getElementById("progressFill").style.width="100%";const listBox=document.getElementById("missedListBox"),ul=document.getElementById("missedListUl"),rd=document.getElementById("btnRedrill");if(missedTerms.length>0){listBox.style.display="block";rd.style.display="inline-block";ul.innerHTML=missedTerms.map(t=>"<li>"+t+"</li>").join("");}else{listBox.style.display="none";rd.style.display="none";}updateScores();}
+function toggleShuffle(){shuffleOn=!shuffleOn;document.getElementById("btnShuffle").classList.toggle("active",shuffleOn);saveState();}
+function toggleIndex(){const ov=document.getElementById("indexOverlay");if(ov.style.display==="flex"){ov.style.display="none";return;}ov.style.display="flex";renderIndex();}
+function renderIndex(){const g=document.getElementById("indexGrid");g.innerHTML="";for(let i=0;i<deck.length;i++){const item=BANK[deck[i]];const d=document.createElement("div");d.className="index-chip";let status="";if(i<quizIdx){if(answered[i]==='got'){d.classList.add("chip-got");status="Got It";}else if(answered[i]==='missed'){d.classList.add("chip-missed");status="Missed";}}else if(i===quizIdx){d.classList.add("chip-current");status="Current";}d.innerHTML='<span><span class="chip-num">'+(i+1)+'.</span> '+item.term+'</span><span class="chip-status">'+status+'</span>';d.onclick=(function(idx){return function(){viewIdx=idx;document.getElementById("indexOverlay").style.display="none";showCard();saveState();};})(i);g.appendChild(d);}}
+document.addEventListener("keydown",e=>{if(document.getElementById("indexOverlay").style.display==="flex"){if(e.key==="Escape"||e.key==="i"||e.key==="I")toggleIndex();return;}if(e.key===" "||e.code==="Space"){e.preventDefault();if(!revealed)doReveal();}if(e.key==="g"||e.key==="G"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(true);}if(e.key==="m"||e.key==="M"){if(revealed&&(viewIdx>=quizIdx||(viewIdx<quizIdx&&answered[viewIdx]===undefined)))grade(false);}if(e.key==="s"||e.key==="S"){if(!revealed)skip();}if(e.key==="b"||e.key==="B"){goBack();}if(e.key==="d"||e.key==="D"){redoBack();}if(e.key==="r"||e.key==="R"){if(viewIdx<quizIdx)redoPrev();}if(e.key==="i"||e.key==="I"){toggleIndex();}if(e.key==="Enter"&&viewIdx<quizIdx){resumeQuiz();}});
+if(!loadState()||quizIdx>=deck.length){startDrill('all');}else{showCard();}
+</script>
+
+
+
+
+<div style="margin:30px auto;padding:14px;border-top:1px solid #334155;color:#94a3b8;font-size:.8rem;text-align:center;max-width:780px">DC Study Supply — Built by Dr. David Gramling, PHD</div>
+
+<script id="fab-ai-companion-js">
+(function(){
+  const ENDPOINT = "https://fab-ai.dgync1.workers.dev";
+  const CLASS_NAME = "GA0202"; // e.g., "CP1" / "FAB101" / "GA0102" — empty = generic chiropractic tutor
+  let panel = null;
+  let history = []; // [{role:'user'|'model', content}]
+  let currentQKey = null; // to detect Q navigation
+
+  function readCurrentQ() {
+    const qText = (document.querySelector('.q-text')?.innerText || '').replace(/^Q\d+(\s+of\s+\d+)?:\s*/, '');
+    const optBtns = Array.from(document.querySelectorAll('.opt-btn'));
+    const options = optBtns.map(b => {
+      const clone = b.cloneNode(true);
+      clone.querySelectorAll('.rationale').forEach(r => r.remove());
+      clone.querySelectorAll('.letter').forEach(r => r.remove());
+      return clone.innerText.trim();
+    });
+    let picked = null, correct = null;
+    optBtns.forEach((b, i) => {
+      if (b.classList.contains('picked-correct') || b.classList.contains('picked-wrong')) picked = i;
+      if (b.classList.contains('picked-correct') || b.classList.contains('show-correct')) correct = i;
+    });
+    const profTip = document.querySelector('.prof-tip')?.innerText?.replace(/^Professor:\s*/i, '').trim() || '';
+    const source = document.querySelector('.source-line')?.innerText?.replace(/^Source:\s*/i, '').trim() || '';
+    const quote = document.querySelector('.quote-line')?.innerText?.trim() || '';
+    return { question: qText, options, picked, correct, profTip, source, quote };
+  }
+
+  function qKey(ctx){ return (ctx.question || '') + '|' + (ctx.options || []).join('|'); }
+
+  function mdToHtml(md){
+    let html = md
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|\n)### (.+)/g, '$1<h3>$2</h3>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/^\s*[-*]\s+(.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*?<\/li>(\s*<li>.*?<\/li>)*)/gs, '<ul>$1</ul>');
+    html = html.split(/\n{2,}/).map(p => {
+      if (p.trim().startsWith('<ul') || p.trim().startsWith('<h3')) return p;
+      if (p.trim() === '') return '';
+      return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+    }).join('');
+    return html;
+  }
+
+  function stripForTts(text){
+    // Remove markdown markers so TTS doesn't read them aloud
+    return text
+      .replace(/\*\*/g, '')
+      .replace(/`([^`]+)`/g, '$1')
+      .replace(/^\s*[-*]\s+/gm, '')
+      .replace(/^#+\s+/gm, '')
+      .replace(/\n{2,}/g, '. ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  let currentUtter = null;
+  function speakToggle(btn, rawText){
+    if (!window.speechSynthesis) {
+      alert('Your browser does not support text-to-speech.');
+      return;
+    }
+    if (window.speechSynthesis.speaking && currentUtter && btn.classList.contains('playing')) {
+      window.speechSynthesis.cancel();
+      document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+        b.classList.remove('playing');
+        b.innerHTML = '🔊 Read';
+      });
+      currentUtter = null;
+      return;
+    }
+    window.speechSynthesis.cancel();
+    document.querySelectorAll('.fab-ai-tts-btn.playing').forEach(b => {
+      b.classList.remove('playing');
+      b.innerHTML = '🔊 Read';
+    });
+    const u = new SpeechSynthesisUtterance(stripForTts(rawText));
+    const rateSel = btn.parentElement.querySelector('.fab-ai-tts-rate');
+    u.rate = parseFloat(rateSel && rateSel.value || '1.0');
+    /*ava-tts*/try{var _vs=(window.speechSynthesis&&window.speechSynthesis.getVoices())||[];var _av=_vs.find(function(v){return /microsoft.*ava.*natural/i.test(v.name);})||_vs.find(function(v){return /microsoft.*emma.*natural/i.test(v.name);})||_vs.find(function(v){return /google us english female/i.test(v.name);});if(_av){u.voice=_av;u.lang=_av.lang||'en-US';}}catch(e){}
+    u.onend = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    u.onerror = () => {
+      btn.classList.remove('playing');
+      btn.innerHTML = '🔊 Read';
+      currentUtter = null;
+    };
+    currentUtter = u;
+    btn.classList.add('playing');
+    btn.innerHTML = '⏹ Stop';
+    window.speechSynthesis.speak(u);
+  }
+
+  function appendMsg(role, text) {
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ' + role;
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    if (role === 'ai') {
+      bub.innerHTML = mdToHtml(text);
+      // Add TTS row
+      const row = document.createElement('div');
+      row.className = 'fab-ai-tts-row';
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-tts-btn';
+      btn.innerHTML = '🔊 Read';
+      btn.onclick = function(){ speakToggle(btn, text); };
+      const rate = document.createElement('select');
+      rate.className = 'fab-ai-tts-rate';
+      rate.title = 'Reading speed';
+      ['0.8','1.0','1.2','1.5','2.0','2.5','3.0'].forEach(function(r){
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r + 'x';
+        if (r === '1.0') o.selected = true;
+        rate.appendChild(o);
+      });
+      row.appendChild(btn);
+      row.appendChild(rate);
+      bub.appendChild(row);
+    } else {
+      bub.textContent = text;
+    }
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return bub;
+  }
+
+  function appendLoading(){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return null;
+    const wrap = document.createElement('div');
+    wrap.className = 'fab-ai-msg ai';
+    wrap.id = 'fabAiLoading';
+    const bub = document.createElement('div');
+    bub.className = 'fab-ai-bubble';
+    bub.innerHTML = '<div class="fab-ai-loading"><div class="fab-ai-spinner"></div> Thinking...</div>';
+    wrap.appendChild(bub);
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+    return wrap;
+  }
+
+  function removeLoading(){
+    const el = document.getElementById('fabAiLoading');
+    if (el) el.remove();
+  }
+
+  function appendStatus(text, isErr){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    const div = document.createElement('div');
+    div.className = 'fab-ai-status' + (isErr ? ' err' : '');
+    div.innerHTML = text;
+    body.appendChild(div);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function renderSuggestions(ctx){
+    const body = document.getElementById('fabAiBody');
+    if (!body) return;
+    // Q preview at top
+    if (ctx.question) {
+      const qp = document.createElement('div');
+      qp.className = 'fab-ai-qpreview';
+      qp.innerHTML = '<b>Q:</b> ' + ctx.question.substring(0, 240) + (ctx.question.length > 240 ? '...' : '');
+      body.appendChild(qp);
+    }
+    // Suggestion chips
+    const sug = document.createElement('div');
+    sug.className = 'fab-ai-suggestions';
+    const chips = [];
+    if (ctx.picked === null || ctx.picked === undefined) {
+      chips.push({ label: '💡 Give me a hint', q: 'Give me a hint for this question without revealing the answer.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the core concept this question is testing.' });
+    } else if (ctx.picked !== ctx.correct && ctx.picked !== null) {
+      chips.push({ label: '❌ Why did I miss this?', q: 'I picked the wrong answer. Walk me through why my pick is wrong and why the correct answer is right.' });
+      chips.push({ label: '🧠 Explain the concept', q: 'Explain the concept this question is testing in simpler terms.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    } else if (ctx.picked === ctx.correct) {
+      chips.push({ label: '✅ Why is this right?', q: 'Confirm why the correct answer is right and flag any trap distractors to watch for.' });
+      chips.push({ label: '🎯 Give me a mnemonic', q: 'Give me a memorable mnemonic for this topic.' });
+    }
+    chips.push({ label: '🌟 Use an analogy', q: 'Explain this with a dumbed-down analogy.' });
+    chips.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'fab-ai-sug';
+      btn.textContent = c.label;
+      btn.onclick = () => sendMessage(c.q);
+      sug.appendChild(btn);
+    });
+    body.appendChild(sug);
+  }
+
+  function clearChat(preserveCtx){
+    const body = document.getElementById('fabAiBody');
+    if (body) body.innerHTML = '';
+    history = [];
+    if (preserveCtx) {
+      const ctx = readCurrentQ();
+      renderSuggestions(ctx);
+    }
+  }
+
+  function openPanel() {
+    if (!panel) panel = buildPanel();
+    panel.classList.add('open');
+    const ctx = readCurrentQ();
+    const key = qKey(ctx);
+    if (key !== currentQKey) {
+      // Q changed — reset chat and show suggestions for new Q
+      currentQKey = key;
+      clearChat(true);
+    }
+  }
+
+  function buildPanel() {
+    const el = document.createElement('div');
+    el.className = 'fab-ai-panel';
+    el.innerHTML = '<div class="fab-ai-header">'
+      + '<h3>🩺 Study Tutor</h3>'
+      + '<button class="fab-ai-hdr-btn" onclick="fabAiClear()">Clear</button>'
+      + '<button class="fab-ai-close" onclick="fabAiClose()">×</button>'
+      + '</div>'
+      + '<div class="fab-ai-body" id="fabAiBody"></div>'
+      + '<div class="fab-ai-followup">'
+      + '<button class="fab-ai-mini-close" title="Close panel" onclick="fabAiClose()">×</button>'
+      + '<textarea id="fabAiFollowup" placeholder="Ask a question about this Q..." rows="1" onkeydown="if(event.keyCode===13&&!event.shiftKey){event.preventDefault();fabAiFollowupSend();}"></textarea>'
+      + '<button onclick="fabAiFollowupSend()">Send</button>'
+      + '</div>';
+    document.body.appendChild(el);
+    return el;
+  }
+
+  window.fabAiClose = function(){ if(panel) panel.classList.remove('open'); };
+  window.fabAiClear = function(){ clearChat(true); };
+
+  async function callWorker(payload) {
+    if (!ENDPOINT) return { clipboardFallback: true };
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+      return { reply: data.reply };
+    } catch (e) {
+      return { error: String(e.message || e) };
+    }
+  }
+
+  function clipboardFallback(ctx, userQ) {
+    const letter = (i) => String.fromCharCode(65 + i);
+    let prompt = "I'm studying GA 0202 (General Anatomy II, head & neck) with Dr. Maini at SCUHS. Drill question:\n\n";
+    prompt += 'Q: ' + ctx.question + '\n\n';
+    if (ctx.options && ctx.options.length) {
+      ctx.options.forEach((o, i) => {
+        const m = [];
+        if (i === ctx.picked) m.push('PICKED');
+        if (i === ctx.correct) m.push('CORRECT');
+        prompt += letter(i) + '. ' + o + (m.length ? ' ('+m.join(', ')+')' : '') + '\n';
+      });
+      prompt += '\n';
+    }
+    if (ctx.profTip) prompt += 'DRILL TIP: ' + ctx.profTip + '\n\n';
+    if (userQ) prompt += 'MY QUESTION: ' + userQ + '\n\n';
+    prompt += 'Explain using a dumbed-down analogy + mnemonic.';
+    navigator.clipboard.writeText(prompt).then(() => {
+      appendStatus('✓ Prompt copied to clipboard. Backend not configured yet — paste into your AI chat.');
+    }).catch(() => {
+      appendStatus('Could not copy. Please select manually.', true);
+    });
+  }
+
+  async function sendMessage(userText) {
+    const ctx = readCurrentQ();
+    currentQKey = qKey(ctx);
+    appendMsg('user', userText);
+    history.push({ role: 'user', content: userText });
+    appendLoading();
+
+    const payload = Object.assign({}, ctx, {
+      userQuestion: userText,
+      history: history.slice(-10), // last 10 turns for context
+      className: CLASS_NAME, // worker uses this to load class-specific knowledge
+    });
+    const result = await callWorker(payload);
+    removeLoading();
+    if (result.clipboardFallback) {
+      clipboardFallback(ctx, userText);
+      return;
+    }
+    if (result.error) {
+      appendStatus('Error: ' + result.error, true);
+      return;
+    }
+    appendMsg('ai', result.reply);
+    history.push({ role: 'model', content: result.reply });
+  }
+
+  window.fabAiFollowupSend = function() {
+    const ta = document.getElementById('fabAiFollowup');
+    const q = (ta && ta.value || '').trim();
+    if (!q) return;
+    ta.value = '';
+    sendMessage(q);
+  };
+
+  // Button install — opens panel, does NOT auto-call AI
+  function install() {
+    if (document.getElementById('fabAiBtn')) return;
+    const btn = document.createElement('button');
+    btn.className = 'fab-ai-btn';
+    btn.id = 'fabAiBtn';
+    btn.textContent = '🩺';
+    btn.title = 'Open AI Study Tutor';
+    btn.onclick = () => openPanel();
+    document.body.appendChild(btn);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', install);
+  } else {
+    install();
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<!-- DC Study Supply watermark v3 - faint whisper variant, auto-adapts color to bg luminance - personal view: visit set-personal-view.html -->
+<style>
+.dc-study-watermark {
+  position: fixed; bottom: 6px; right: 10px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.30);
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  z-index: 2147483647;
+  user-select: none;
+}
+.dc-study-watermark.dc-hidden { display: none !important; }
+</style>
+<div class="dc-study-watermark" id="dcStudyWatermark">DC Study Supply &mdash; Dr. David Gramling, PHD</div>
+<script>
+(function() {
+  try {
+    var wm = document.getElementById('dcStudyWatermark');
+    if (!wm) return;
+    if (localStorage.getItem('dcDavidView') === '1') {
+      wm.classList.add('dc-hidden');
+      return;
+    }
+    // Auto-detect bg luminance: body first, fall back to html element if transparent
+    function lumOf(el) {
+      var bg = window.getComputedStyle(el).backgroundColor || '';
+      var rgb = bg.match(/[\d.]+/g);
+      if (!rgb || rgb.length < 3) return null;
+      var a = rgb.length >= 4 ? +rgb[3] : 1;
+      if (a < 0.3) return null;
+      return (0.299 * +rgb[0] + 0.587 * +rgb[1] + 0.114 * +rgb[2]) / 255;
+    }
+    var lum = lumOf(document.body);
+    if (lum === null) lum = lumOf(document.documentElement);
+    if (lum !== null && lum < 0.5) {
+      wm.style.color = 'rgba(255, 255, 255, 0.30)';
+    }
+  } catch(e) {}
+})();
+</script>
+<!-- /DC Study Supply watermark -->
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "103b8d06e81040579d04d08fc593468f"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- DC Analytics Helper v1 --><script defer src="https://dc-study-analytics.dgync1.workers.dev/helper.js"></script><!-- /DC Analytics Helper -->
+</body>
+</html>
